@@ -315,7 +315,7 @@
       <workItem from="1448532445054" duration="200000" />
       <workItem from="1448533894166" duration="48000" />
       <workItem from="1448535162028" duration="1456000" />
-      <workItem from="1448588753108" duration="237000" />
+      <workItem from="1448588753108" duration="277000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1448532492570</created>
@@ -335,14 +335,20 @@
       <option name="project" value="LOCAL" />
       <updated>1448588861204</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="commit">
+      <created>1448589020182</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1448589020182</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1941000" />
+    <option name="totallyTimeSpent" value="1981000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="1924" height="1056" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
