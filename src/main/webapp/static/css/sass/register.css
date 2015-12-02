@@ -31,7 +31,7 @@ a:visited {
 .block, .figure a:link, .context a, .promptly, .ipone_next, .vault, .login_html {
   display: block; }
 
-.none, .aside2, .mistake, .anew60, .count {
+.none, .aside2, .mistake, .correct, .anew, .count {
   display: none; }
 
 .pointer, .anew, .anew60, .note {
@@ -103,7 +103,7 @@ a:visited {
 .fs28, .congratulation, .login_html {
   font-size: 28px; }
 
-.family, .h_title, .step_step li, .figure a:link, .aside1, .aside2, .input_box_l, .context a, .send_l, .anew, .anew60, .promptly, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .vault, .congratulation, .login_html, .leap, .login_title, .login_input, .forget, .log, .log_promptly, .promptly_register, .promptly_register a, .foot {
+.family, .h_title, .step_step li, .figure a:link, .aside1, .aside2, .input_box_l, .context a, .send_l, .anew, .anew60, .promptly, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .vault, .congratulation, .login_html, .leap, .login_title, .login_input, .forget, .log, .log_promptly, .promptly_register, .promptly_register a, pre {
   font-family: \5FAE\8F6F\96C5\9ED1; }
 
 .center, .header .center, .container-fluid .center {
@@ -113,7 +113,7 @@ a:visited {
 .left, .step_mark li, .step_step li, .figure .student:link, .aside1, .aside2, .section, .input_box_l, .input_box input, .mistake, .correct, .context a.prev, .verify_img, .verify, .send_l, .anew, .anew60, .ipone_box_l, .ipone_num, .verify_code, .note, .ipone_next, .skip, .invite_box_l, .vault, .register_succeed_l, .register_succeed_r, .congratulation, .login_html, .self_motion {
   float: left; }
 
-.right, .figure .teacher:link, .context a.next, .forget {
+.right, .figure .teacher:link, .context a.next, .count, .forget {
   float: right; }
 
 .text-center, .step_mark li, .figure a:link, .aside1, .aside2, .context a, .anew, .anew60, .note, .ipone_next, .vault, .login_title, .log, .foot {
@@ -122,7 +122,7 @@ a:visited {
 .text-left, .h_title {
   text-align: left; }
 
-.text-right, .input_box_l {
+.text-right, .input_box_l, .count {
   text-align: right; }
 
 .rel, .step, .login, .self_motion {
@@ -351,7 +351,8 @@ a:visited {
   background: url(../../images/register/note_click.png) no-repeat; }
 
 .count {
-  color: #e55348; }
+  color: #e55348;
+  padding-right: 16px; }
 
 .ipone_box_next {
   height: 58px;

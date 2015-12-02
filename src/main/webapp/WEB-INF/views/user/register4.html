@@ -67,6 +67,39 @@
 		<div class="foot"><pre>版权所有 © 2002-2014 上海市普陀区教育局 上海市普陀区现代教育技术中心</pre></div>
 		<div class="foot"><pre>地址：上海市普陀区大渡河路1688号 邮编：200333 电话：021-62601856</pre></div>
 	</footer>
+	<script text="text/javascript">
+		$(function(){
+			var time=5;
+			var timer=null;
+			$('.count').html(time+'秒后可重新获取');
+
+			function Movetime(){
+				clearInterval(timer);
+				timer=setInterval(function(){
+					if(time>1){
+						time--;
+						$('.count').html(time+'秒后可重新获取');
+					}else{
+						clearInterval(timer);
+						$('.count').hide();
+						$('.note').removeClass('click');
+						time=5;
+						$('.count').html(time+'秒后可重新获取');
+					};
+
+				},1000);
+
+			}
+
+			$(document).on('click','.note',function(){
+				$(this).addClass('click');
+				$('.count').show();
+				Movetime();
+
+			});
+		});
+
+	</script>
 </body>
 </html>
 

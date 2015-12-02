@@ -472,7 +472,7 @@ margin-top:11px;
 	@extend .left;
 	@extend .inspect;
 	background:url(../../images/register/correct.png) no-repeat center;
-	
+  @extend .none;
 }
 
 .context{
@@ -544,13 +544,13 @@ margin-right:25px;
 width:210px;
 @extend .input_lh;
 @extend .left;
-
-@extend .family;
+  @extend .family;
 @extend .fff;
 @extend .text-center;
 @extend .fs20;
 @extend .pointer;
 background:url(../../images/register/anew1.png) no-repeat;
+  @extend .none;
 }
 
 .anew:hover{
@@ -567,7 +567,7 @@ width:210px;
 color:#ec8558;
 @extend .fs20;
 @extend .pointer;
-@extend .none;
+
 background:url(../../images/register/anew60.png) no-repeat;
 }
 
@@ -648,14 +648,15 @@ color:#b5b9bc;
 background:url(../../images/register/note_click.png) no-repeat;
 }
 
-
-
 .count{
 @extend .input_lh;
 @extend .family;
 color:#e55348;
 @extend .fs20;
-@extend .none;
+  @extend .right;
+  @extend .text-right;
+padding-right:16px;
+  @extend .none;
 }
 
 .ipone_box_next{
@@ -896,9 +897,10 @@ color:#74bc41;
 	@extend .text-center;
 	@extend %mt15;
 	@extend .fc;
-	@extend .family;
-	@extend .fs16;
+  	@extend .fs16;
 
 }
 
-
+pre{
+  @extend .family;
+}
