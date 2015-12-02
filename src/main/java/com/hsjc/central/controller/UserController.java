@@ -1,5 +1,6 @@
 package com.hsjc.central.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hsjc.central.domain.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author : zga
@@ -54,5 +56,14 @@ public class UserController {
     public String index(Model model){
         model.addAttribute("username","yeyinzhu");
         return "index";
+    }
+
+    @RequestMapping("test")
+    @ResponseBody
+    public JSONObject test(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("flag","true");
+        jsonObject.put("message","Test Success!");
+        return jsonObject;
     }
 }

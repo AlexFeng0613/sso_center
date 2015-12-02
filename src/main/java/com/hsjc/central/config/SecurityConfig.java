@@ -19,9 +19,9 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
@@ -30,10 +30,134 @@ import java.util.Map;
 
 @Configuration
 public class SecurityConfig {
+	/**
+	 * ehcache
+	 * @return
+	 */
+	@Bean
+	public EhCacheManager ehCacheManager() {
+		EhCacheManager ehCacheManager = new EhCacheManager();
+		ehCacheManager.setCacheManagerConfigFile("classpath:ehcache.xml");
+		return ehCacheManager;
+	}
 
+	/**
+	 * 凭证匹配器
+	 * @return
+     */
+	@Bean
+	public HashedCredentialsMatcher HashedCredentialsMatcher(){
+		HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+		hashedCredentialsMatcher.setHashAlgorithmName("md5");
+		hashedCredentialsMatcher.setHashIterations(2);
+		hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
+		return hashedCredentialsMatcher;
+	}
+
+	/**
+	 * 安全管理器
+	 * @return
+	 */
+	@Bean
+	public DefaultWebSecurityManager securityManager() {
+		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+		securityManager.setRealm(myAuthRealm());
+		securityManager.setCacheManager(ehCacheManager());
+		securityManager.setSessionManager(defaultWebSessionManager());
+		securityManager.setRememberMeManager(rememberMeManager());
+		return securityManager;
+	}
+
+	/**
+	 * 自定义Realm
+	 * @return
+     */
+	@Bean
+	public MyAuthRealm myAuthRealm() {
+		MyAuthRealm myAuthRealm = new MyAuthRealm();
+		myAuthRealm.setCredentialsMatcher(HashedCredentialsMatcher());
+		myAuthRealm.setCachingEnabled(false);
+		return myAuthRealm;
+	}
+
+	/**
+	 * 配置shiro的过滤器工厂类
+	 * @return
+     */
+	@Bean
+	public ShiroFilterFactoryBean shiroFilter() {
+		Map<String,Filter> filtersMap = new HashMap<>();
+		filtersMap.put("authc", formAuthenticationFilter());
+
+		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+		shiroFilterFactoryBean.setSecurityManager(securityManager());
+		shiroFilterFactoryBean.setLoginUrl("/user/login.html");
+		shiroFilterFactoryBean.setFilters(filtersMap);
+
+		Map<String, String> filterChainDefinitionMap = new HashMap<String, String>();
+		filterChainDefinitionMap.put("/static/**", "anon");
+		filterChainDefinitionMap.put("/user/test.html", "anon");
+		filterChainDefinitionMap.put("/page/logout.html", "logout");
+		filterChainDefinitionMap.put("/user/login.html", "authc");
+		filterChainDefinitionMap.put("/**", "user");
+		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+		return shiroFilterFactoryBean;
+
+	}
+
+	@Bean
+	public FormAuthenticationFilter formAuthenticationFilter(){
+		FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationFilter();
+		formAuthenticationFilter.setUsernameParam("username");
+		formAuthenticationFilter.setPasswordParam("password");
+		formAuthenticationFilter.setRememberMeParam("rememberMe");
+		formAuthenticationFilter.setLoginUrl("/user/login.html");
+		return formAuthenticationFilter;
+	}
+
+	/**
+	 * 会话ID生成器
+	 * @return
+     */
 	@Bean
 	public JavaUuidSessionIdGenerator javaUuidSessionIdGenerator(){
 		return new JavaUuidSessionIdGenerator();
+	}
+
+	/**
+	 * 会话Cookie模板
+	 * @return
+     */
+	@Bean
+	public SimpleCookie sessionIdCookie() {
+		SimpleCookie simpleCookie = new SimpleCookie("sid");
+		simpleCookie.setHttpOnly(true);
+		simpleCookie.setMaxAge(-1);
+		return simpleCookie;
+	}
+
+	/**
+	 * 持久cookie设置
+	 * @return
+     */
+	@Bean
+	public SimpleCookie rememberMeCookie() {
+		SimpleCookie simpleCookie = new SimpleCookie("rm");
+		simpleCookie.setHttpOnly(true);
+		simpleCookie.setMaxAge(2592000);
+		return simpleCookie;
+	}
+
+	/**
+	 * rememberMe管理器
+	 * @return
+     */
+	@Bean
+	public RememberMeManager rememberMeManager() {
+		CookieRememberMeManager rememberMeManager = new CookieRememberMeManager();
+		rememberMeManager.setCipherKey(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));
+		rememberMeManager.setCookie(rememberMeCookie());
+		return rememberMeManager;
 	}
 
 	/**
@@ -58,7 +182,7 @@ public class SecurityConfig {
 	public QuartzSessionValidationScheduler quartzSessionValidationScheduler(){
 		QuartzSessionValidationScheduler quartzSessionValidationScheduler = new QuartzSessionValidationScheduler();
 		quartzSessionValidationScheduler.setSessionValidationInterval(1800000);
-		quartzSessionValidationScheduler.setSessionManager(DefaultWebSessionManager());
+		quartzSessionValidationScheduler.setSessionManager(defaultWebSessionManager());
 
 		return quartzSessionValidationScheduler;
 	}
@@ -69,18 +193,21 @@ public class SecurityConfig {
 	 * @return
      */
 	@Bean
-	public DefaultWebSessionManager DefaultWebSessionManager(){
+	public DefaultWebSessionManager defaultWebSessionManager(){
 		DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
 		defaultWebSessionManager.setGlobalSessionTimeout(1800000);
 		defaultWebSessionManager.setDeleteInvalidSessions(true);
 		defaultWebSessionManager.setSessionValidationSchedulerEnabled(true);
-		defaultWebSessionManager.setSessionValidationScheduler(quartzSessionValidationScheduler());
+		//defaultWebSessionManager.setSessionValidationScheduler(quartzSessionValidationScheduler());
 		defaultWebSessionManager.setSessionDAO(enterpriseCacheSessionDAO());
+		defaultWebSessionManager.setSessionIdCookieEnabled(true);
+		defaultWebSessionManager.setSessionIdCookie(sessionIdCookie());
 
 		return defaultWebSessionManager;
 	}
 
 	@Bean
+	@DependsOn({"lifecycleBeanPostProcessor"})
 	public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
 		DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
 		defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
@@ -88,121 +215,17 @@ public class SecurityConfig {
 		return defaultAdvisorAutoProxyCreator;
 	}
 
-	@Bean
-	public MyAuthRealm myAuthRealm(ApplicationContext applicationContext) {
-		MyAuthRealm myAuthRealm = new MyAuthRealm();
-		myAuthRealm.setAc(applicationContext);
-		myAuthRealm.setCredentialsMatcher(HashedCredentialsMatcher());
-		myAuthRealm.setCachingEnabled(true);
-		myAuthRealm.setAuthenticationCachingEnabled(true);
-		myAuthRealm.setAuthenticationCacheName("authenticationCache");
-		myAuthRealm.setAuthorizationCachingEnabled(true);
-		myAuthRealm.setAuthorizationCacheName("authorizationCache");
-
-		return myAuthRealm;
+	@Bean(name = "lifecycleBeanPostProcessor")
+	public LifecycleBeanPostProcessor LifecycleBeanPostProcessor(){
+		LifecycleBeanPostProcessor lifecycleBeanPostProcessor = new LifecycleBeanPostProcessor();
+		return lifecycleBeanPostProcessor;
 	}
 
 	@Bean
-	public EhCacheManager ehCacheManager(net.sf.ehcache.CacheManager cacheManager) {
-		EhCacheManager ehCacheManager = new EhCacheManager();
-		ehCacheManager.setCacheManager(cacheManager);
-		return ehCacheManager;
-	}
-
-	@Bean(destroyMethod = "shutdown")
-	public net.sf.ehcache.CacheManager cacheManager() {
-		return net.sf.ehcache.CacheManager.newInstance();
-	}
-
-	@Bean
-	public SimpleCookie sessionIdCookie() {
-		SimpleCookie simpleCookie = new SimpleCookie("sid");
-		simpleCookie.setHttpOnly(true);
-		simpleCookie.setMaxAge(-1);
-		return simpleCookie;
-	}
-
-	@Bean
-	public SimpleCookie rememberMeCookie() {
-		SimpleCookie simpleCookie = new SimpleCookie("rm");
-		simpleCookie.setHttpOnly(true);
-		simpleCookie.setMaxAge(2592000);
-		return simpleCookie;
-	}
-
-	@Bean
-	public RememberMeManager rememberMeManager(SimpleCookie rememberMeCookie) {
-		CookieRememberMeManager rememberMeManager = new CookieRememberMeManager();
-		rememberMeManager.setCipherKey(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));
-		rememberMeManager.setCookie(rememberMeCookie);
-		return rememberMeManager;
-	}
-
-	@Bean
-	public HashedCredentialsMatcher HashedCredentialsMatcher(){
-		HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-		hashedCredentialsMatcher.setHashAlgorithmName("md5");
-		hashedCredentialsMatcher.setHashIterations(2);
-		hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
-		return hashedCredentialsMatcher;
-	}
-
-	@Bean
-	public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-		return new LifecycleBeanPostProcessor();
-	}
-
-	/**
-	 * 凭证匹配器
-	 * @param myAuthRealm
-	 * @param ehCacheManager
-	 * @param rememberMeManager
-     * @return
-     */
-	@Bean
-	public DefaultWebSecurityManager securityManager(MyAuthRealm myAuthRealm, EhCacheManager ehCacheManager, RememberMeManager rememberMeManager) {
-		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-		securityManager.setRealm(myAuthRealm);
-		securityManager.setCacheManager(ehCacheManager);
-		securityManager.setRememberMeManager(rememberMeManager);
-		return securityManager;
-	}
-
-	@Bean
-	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(DefaultWebSecurityManager securityManager) {
+	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
 		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
 		return authorizationAttributeSourceAdvisor;
-	}
-
-	@Bean
-	public FormAuthenticationFilter formAuthenticationFilter(){
-		FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationFilter();
-		formAuthenticationFilter.setUsernameParam("username");
-		formAuthenticationFilter.setPasswordParam("password");
-		formAuthenticationFilter.setRememberMeParam("rememberMe");
-		formAuthenticationFilter.setLoginUrl("/user/login.html");
-		return formAuthenticationFilter;
-	}
-
-	@Bean
-	public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager) {
-		Map<String,Filter> filtersMap = new HashMap<>();
-		filtersMap.put("authc", formAuthenticationFilter());
-
-		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-		shiroFilterFactoryBean.setSecurityManager(securityManager);
-		shiroFilterFactoryBean.setLoginUrl("/user/login.html");
-		shiroFilterFactoryBean.setFilters(filtersMap);
-
-		Map<String, String> filterChainDefinitionMap = new HashMap<String, String>();
-		filterChainDefinitionMap.put("/static/**", "anon");
-		filterChainDefinitionMap.put("/page/logout.html", "logout");
-		filterChainDefinitionMap.put("/user/login.html", "authc");
-		filterChainDefinitionMap.put("/**", "user");
-		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-		return shiroFilterFactoryBean;
-
 	}
 
 	@Bean
