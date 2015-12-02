@@ -1,7 +1,8 @@
 package com.hsjc.central.service;
 
-import com.hsjc.central.domain.User;
-import com.hsjc.central.mapper.UserMapper;
+import com.hsjc.central.domain.UserMain;
+import com.hsjc.central.mapper.UserMainMapper;
+import com.hsjc.central.util.PasswordHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +13,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     @Autowired
-    private UserMapper userMapper;
+    private UserMainMapper userMainMapper;
 
-    public User findById(String userName){
+    @Autowired
+    private PasswordHelper passwordHelper;
 
-        System.out.println(userMapper == null);
-
-        User user = userMapper.selectByUserName(userName);
-        return user;
+    public UserMain findById(String userName){
+        UserMain userMain = userMainMapper.selectByUserName(userName);
+        return userMain;
     }
 }

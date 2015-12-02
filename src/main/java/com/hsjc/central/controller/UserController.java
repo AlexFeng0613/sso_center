@@ -1,7 +1,7 @@
 package com.hsjc.central.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hsjc.central.domain.User;
+import com.hsjc.central.domain.UserMain;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -42,23 +42,20 @@ public class UserController extends BaseController{
         }
 
         Subject subject = SecurityUtils.getSubject();
-        System.out.println(subject.getPrincipal());
 
-        User user = null;
+        UserMain userMain = (UserMain) subject.getPrincipal();
 
         Session session = subject.getSession(true);
         session.setTimeout(-1);
-        session.setAttribute("user", user);
+        session.setAttribute("user", userMain);
 
         return "redirect:index.html";
     }
 
     @RequestMapping("index")
     public String index(Model model){
-        User user = getCurrentUser();
-        model.addAttribute("user",user);
         model.addAttribute("username","yeyinzhu");
-        return "index";
+        return "user/index";
     }
 
     @RequestMapping("test")

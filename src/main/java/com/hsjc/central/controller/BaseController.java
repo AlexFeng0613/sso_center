@@ -1,6 +1,6 @@
 package com.hsjc.central.controller;
 
-import com.hsjc.central.domain.User;
+import com.hsjc.central.domain.UserMain;
 import org.apache.shiro.SecurityUtils;
 
 /**
@@ -9,8 +9,8 @@ import org.apache.shiro.SecurityUtils;
  */
 public class BaseController {
     //获取user对象
-    public static User getCurrentUser() {
-        User user = (User) SecurityUtils.getSubject().getPrincipal();
-        return user;
+    public static UserMain getCurrentUser() {
+        UserMain userMain = (UserMain) SecurityUtils.getSubject().getPrincipal();
+        return userMain;
     }
 }

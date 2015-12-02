@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
        <typeAliases>
-           <typeAlias type="com.hsjc.central.domain.User" alias="User"/>
+           <typeAlias type="com.hsjc.central.domain.UserMain" alias="User"/>
        </typeAliases>
        <mappers>
            <mapper resource="com/hsjc/central/mapper/UserMapper.xml"/>

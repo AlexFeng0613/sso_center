@@ -1,6 +1,6 @@
 package com.hsjc.central.authrealm;
 
-import com.hsjc.central.domain.User;
+import com.hsjc.central.domain.UserMain;
 import com.hsjc.central.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -36,33 +36,21 @@ public class MyAuthRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
         String userId = token.getUsername();
-        User user = userService.findById(userId);
-        if (user == null) {
+        UserMain userMain = userService.findById(userId);
+        if (userMain == null) {
             throw new UnknownAccountException("No account found for user[" + token.getUsername() + "]");
         }
 
-        return new SimpleAuthenticationInfo(user.getUsername(),user.getPassword(),
-                ByteSource.Util.bytes(user.getCredentialsSalt()),getName());
+        return new SimpleAuthenticationInfo(userMain, userMain.getPassword(),
+                ByteSource.Util.bytes(userMain.getCredentialsSalt()),getName());
     }
 
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        User user = (User) principalCollection.fromRealm(getName()).iterator().next();
+        UserMain userMain = (UserMain) principalCollection.fromRealm(getName()).iterator().next();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.addRole(getAdminType(user.getAdminType()));
+        info.addRole(userMain.getType());
         return info;
     }
-
-    private String getAdminType(int type) {
-        if (type ==1 ) {
-            return "Super";
-        } else if (type == 2) {
-            return "School";
-        } else if (type == 3) {
-            return "Normal";
-        }
-        return "None";
-    }
-
 }
