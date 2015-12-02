@@ -100,6 +100,7 @@ public class SecurityConfig {
 		Map<String, String> filterChainDefinitionMap = new HashMap<String, String>();
 		filterChainDefinitionMap.put("/static/**", "anon");
 		filterChainDefinitionMap.put("/user/test.html", "anon");
+		filterChainDefinitionMap.put("/page/**", "anon");
 		filterChainDefinitionMap.put("/page/logout.html", "logout");
 		filterChainDefinitionMap.put("/user/login.html", "authc");
 		filterChainDefinitionMap.put("/**", "user");
