@@ -3,7 +3,6 @@ package com.hsjc.central.config;
 
 import com.hsjc.central.authrealm.MyAuthRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
@@ -12,7 +11,6 @@ import org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -23,7 +21,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,12 +34,12 @@ public class SecurityConfig {
 	 * ehcache
 	 * @return
 	 */
-	@Bean
+	/*@Bean
 	public EhCacheManager ehCacheManager() {
 		EhCacheManager ehCacheManager = new EhCacheManager();
 		ehCacheManager.setCacheManagerConfigFile("classpath:ehcache.xml");
 		return ehCacheManager;
-	}
+	}*/
 
 	/**
 	 * 凭证匹配器
@@ -65,7 +62,7 @@ public class SecurityConfig {
 	public DefaultWebSecurityManager securityManager() {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(myAuthRealm());
-		securityManager.setCacheManager(ehCacheManager());
+		//securityManager.setCacheManager(ehCacheManager());
 		securityManager.setSessionManager(defaultWebSessionManager());
 		securityManager.setRememberMeManager(rememberMeManager());
 		return securityManager;
@@ -89,27 +86,27 @@ public class SecurityConfig {
      */
 	@Bean
 	public ShiroFilterFactoryBean shiroFilter() {
-		Map<String,Filter> filtersMap = new HashMap<>();
-		filtersMap.put("authc", formAuthenticationFilter());
+		//Map<String,Filter> filtersMap = new HashMap<>();
+		//filtersMap.put("authc", formAuthenticationFilter());
 
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager());
 		shiroFilterFactoryBean.setLoginUrl("/user/login.html");
-		shiroFilterFactoryBean.setFilters(filtersMap);
+		//shiroFilterFactoryBean.setFilters(filtersMap);
 
 		Map<String, String> filterChainDefinitionMap = new HashMap<String, String>();
 		filterChainDefinitionMap.put("/static/**", "anon");
 		filterChainDefinitionMap.put("/user/test.html", "anon");
 		filterChainDefinitionMap.put("/page/**", "anon");
 		filterChainDefinitionMap.put("/page/logout.html", "logout");
-		filterChainDefinitionMap.put("/user/login.html", "authc");
+		filterChainDefinitionMap.put("/user/login.html", "anon");
 		filterChainDefinitionMap.put("/**", "user");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;
 
 	}
 
-	@Bean
+	/*@Bean
 	public FormAuthenticationFilter formAuthenticationFilter(){
 		FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationFilter();
 		formAuthenticationFilter.setUsernameParam("username");
@@ -117,7 +114,7 @@ public class SecurityConfig {
 		formAuthenticationFilter.setRememberMeParam("rememberMe");
 		formAuthenticationFilter.setLoginUrl("/user/login.html");
 		return formAuthenticationFilter;
-	}
+	}*/
 
 	/**
 	 * 会话ID生成器
