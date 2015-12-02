@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 public class HttpUtil {
 
 	/**
-	 * »ñÈ¡Cookie·½·¨
-	 * @param request request¶ÔÏó
-	 * @param name CookieÃû³Æ
-	 * @return Öµ
+	 * è·å–Cookieæ–¹æ³•
+	 * @param request requestå¯¹è±¡
+	 * @param name Cookieåç§°
+	 * @return å€¼
 	 */
 	public static String getCookie(HttpServletRequest request, String name) {
 		Cookie[] cookies = request.getCookies();
@@ -31,33 +31,33 @@ public class HttpUtil {
 	}
 
 	/**
-	 * Ìí¼ÓCookie·½·¨
-	 * @param response response¶ÔÏó
-	 * @param name CookieÃû³Æ
-	 * @param value Öµ
+	 * æ·»åŠ Cookieæ–¹æ³•
+	 * @param response responseå¯¹è±¡
+	 * @param name Cookieåç§°
+	 * @param value å€¼
 	 */
 	public static void addCookie(HttpServletResponse response, String name, String value) {
 		addCookie(response, name, value, 1 * 365 * 24 * 60 * 60);
 	}
 
 	/**
-	 * Ìí¼ÓCookie·½·¨
-	 * @param response response¶ÔÏó
-	 * @param name CookieÃû³Æ
-	 * @param value Öµ
-	 * @param maxAge ×î³¤´æ»îÊ±¼ä£¨Ãë£©
+	 * æ·»åŠ Cookieæ–¹æ³•
+	 * @param response responseå¯¹è±¡
+	 * @param name Cookieåç§°
+	 * @param value å€¼
+	 * @param maxAge æœ€é•¿å­˜æ´»æ—¶é—´ï¼ˆç§’ï¼‰
 	 */
 	public static void addCookie(HttpServletResponse response, String name, String value, int maxAge) {
 		addCookie(response, name, value, maxAge, "/");
 	}
 
 	/**
-	 * Ìí¼ÓCookie·½·¨
-	 * @param response response¶ÔÏó
-	 * @param name CookieÃû³Æ
-	 * @param value Öµ
-	 * @param maxAge ×î³¤´æ»îÊ±¼ä£¨Ãë£©
-	 * @param path ´æ·ÅÂ·¾¶
+	 * æ·»åŠ Cookieæ–¹æ³•
+	 * @param response responseå¯¹è±¡
+	 * @param name Cookieåç§°
+	 * @param value å€¼
+	 * @param maxAge æœ€é•¿å­˜æ´»æ—¶é—´ï¼ˆç§’ï¼‰
+	 * @param path å­˜æ”¾è·¯å¾„
 	 */
 	public static void addCookie(HttpServletResponse response, String name, String value, int maxAge, String path) {
 		Cookie cookie = new Cookie(name, value);
@@ -76,7 +76,7 @@ public class HttpUtil {
 		}
 		ip = request.getHeader("X-Forwarded-For");
 		if (!StringUtils.isEmpty(ip) && !"unknown".equalsIgnoreCase(ip)) {
-			// ¶à´Î·´Ïò´úÀíºó»áÓĞ¶à¸öIPÖµ£¬µÚÒ»¸öÎªÕæÊµIP¡£
+			// å¤šæ¬¡åå‘ä»£ç†åä¼šæœ‰å¤šä¸ªIPå€¼ï¼Œç¬¬ä¸€ä¸ªä¸ºçœŸå®IPã€‚
 			int index = ip.indexOf(',');
 			if (index != -1) {
 				return ip.substring(0, index);
@@ -88,3 +88,4 @@ public class HttpUtil {
 		}
 	}
 }
+
