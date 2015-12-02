@@ -4,9 +4,27 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
        <typeAliases>
-           <typeAlias type="com.hsjc.central.domain.UserMain" alias="User"/>
+           <typeAlias type="com.hsjc.central.domain.UserMain" alias="UserMain"/>
+           <typeAlias type="com.hsjc.central.domain.UserStudent" alias="UserStudent"/>
+           <typeAlias type="com.hsjc.central.domain.UserTeacher" alias="UserTeacher"/>
+           <typeAlias type="com.hsjc.central.domain.SsoClientDetails" alias="SsoClientDetails"/>
+           <typeAlias type="com.hsjc.central.domain.TbEmailActivate" alias="TbEmailActivate"/>
+           <typeAlias type="com.hsjc.central.domain.TbEmailResetPwd" alias="TbEmailResetPwd"/>
+           <typeAlias type="com.hsjc.central.domain.TbEmailSend" alias="TbEmailSend"/>
+           <typeAlias type="com.hsjc.central.domain.TbSmsBindPhoneNum" alias="TbSmsBindPhoneNum"/>
+           <typeAlias type="com.hsjc.central.domain.TbSmsResetPasswd" alias="TbSmsResetPasswd"/>
+           <typeAlias type="com.hsjc.central.domain.TbSmsSend" alias="TbSmsSend"/>
        </typeAliases>
        <mappers>
-           <mapper resource="com/hsjc/central/mapper/UserMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/UserMainMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/SsoClientDetailsMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/TbEmailActivateMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/TbEmailResetPwdMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/TbEmailSendMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/TbSmsBindPhoneNumMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/TbSmsResetPasswdMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/TbSmsSendMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/UserStudentMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/UserTeacherMapper.xml"/>
        </mappers>
 </configuration>
