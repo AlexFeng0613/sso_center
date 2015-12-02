@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author : zga
- * @date : 2015/11/24
+ * @date : 2015-11-24
  */
 @Service
 public class UserService {
@@ -18,8 +18,8 @@ public class UserService {
     @Autowired
     private PasswordHelper passwordHelper;
 
-    public UserMain findById(String userName){
-        UserMain userMain = userMainMapper.selectByUserName(userName);
+    public UserMain findByEmail(String email){
+        UserMain userMain = userMainMapper.selectByEmail(email);
         return userMain;
     }
 }

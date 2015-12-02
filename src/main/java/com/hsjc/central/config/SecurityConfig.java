@@ -26,7 +26,7 @@ import java.util.Map;
 
 /**
  * @author : zga
- * @date : 15/11/24
+ * @date : 2015-11-24
  */
 @Configuration
 public class SecurityConfig {
@@ -91,15 +91,15 @@ public class SecurityConfig {
 
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager());
-		shiroFilterFactoryBean.setLoginUrl("/user/login.html");
+		shiroFilterFactoryBean.setLoginUrl("/page/login.html");
 		//shiroFilterFactoryBean.setFilters(filtersMap);
 
 		Map<String, String> filterChainDefinitionMap = new HashMap<String, String>();
 		filterChainDefinitionMap.put("/static/**", "anon");
-		filterChainDefinitionMap.put("/user/test.html", "anon");
 		filterChainDefinitionMap.put("/page/**", "anon");
 		filterChainDefinitionMap.put("/page/logout.html", "logout");
 		filterChainDefinitionMap.put("/user/login.html", "anon");
+		filterChainDefinitionMap.put("/code.html", "anon");
 		filterChainDefinitionMap.put("/**", "user");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;
@@ -232,7 +232,7 @@ public class SecurityConfig {
 	@Bean
 	public LogoutFilter logout() {
 		LogoutFilter logoutFilter = new LogoutFilter();
-		logoutFilter.setRedirectUrl("/user/login.html");
+		logoutFilter.setRedirectUrl("/page/login.html");
 		return logoutFilter;
 	}
 

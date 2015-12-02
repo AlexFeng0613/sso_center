@@ -9,7 +9,7 @@ import java.util.Set;
  * SpringMvc 
  * 把请求的所有参数封装到Map中,提供最常用的方法
  * @author : zga
- * @date : 15/11/24
+ * @date : 2015-11-24
  */
 public class FormMap<K, V> extends HashMap<K, V> implements Serializable  {
 

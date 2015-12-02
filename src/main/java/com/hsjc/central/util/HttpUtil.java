@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author : zga
- * @date : 2015/11/24
+ * @date : 2015-11-24
  */
 public class HttpUtil {
 

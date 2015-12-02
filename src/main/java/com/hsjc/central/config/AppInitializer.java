@@ -15,7 +15,7 @@ package com.hsjc.central.config;
 
 /**
  * @author : zga
- * @date : 15/11/24
+ * @date : 2015-11-24
  */
 public class AppInitializer implements WebApplicationInitializer {
 	@Override

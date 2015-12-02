@@ -7,7 +7,7 @@ import java.lang.annotation.*;
  * tableName = "表名"<br>
  * id = "表的主键"(如果是多个主建,默认为第一个)<br>
  * @author : zga
- * @date : 15/11/24
+ * @date : 2015-11-24
  */
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)

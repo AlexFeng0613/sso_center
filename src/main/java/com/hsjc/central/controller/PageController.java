@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author : zga
- * @date : 2015/11/24
+ * @date : 2015-11-24
  */
 @Controller
 @RequestMapping("/page")

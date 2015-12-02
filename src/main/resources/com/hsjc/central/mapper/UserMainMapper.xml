@@ -16,6 +16,7 @@
     <result column="invitateCode" jdbcType="VARCHAR" property="invitatecode" />
     <result column="email" jdbcType="VARCHAR" property="email" />
   </resultMap>
+
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbggenerated
@@ -23,6 +24,7 @@
     -->
     id, username, password, salt, phone, type, status, invitateCode, email
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated
@@ -34,8 +36,8 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByUserName" parameterType="java.lang.String" resultType="com.hsjc.central.domain.UserMain">
-    select username,password,salt from usermain where username = #{userName}
+  <select id="selectByEmail" parameterType="java.lang.String" resultType="com.hsjc.central.domain.UserMain">
+    select username,password,salt from usermain where email = #{email}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -46,6 +48,7 @@
     delete from usermain
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.hsjc.central.domain.UserMain">
     <!--
       WARNING - @mbggenerated
@@ -58,6 +61,7 @@
       #{salt,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{status,jdbcType=CHAR}, 
       #{invitatecode,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
   </insert>
+
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.UserMain">
     <!--
       WARNING - @mbggenerated
@@ -123,6 +127,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.UserMain">
     <!--
       WARNING - @mbggenerated
@@ -157,6 +162,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.UserMain">
     <!--
       WARNING - @mbggenerated

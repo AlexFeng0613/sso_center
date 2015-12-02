@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * @author : zga
- * @date : 2015/11/24
+ * @date : 2015-11-24
  */
 public class CentralStringUtils {
     /**

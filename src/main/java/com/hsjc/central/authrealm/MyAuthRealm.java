@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 
 /**
  * @author : zga
- * @date : 15/11/24
+ * @date : 2015-11-24
  */
 public class MyAuthRealm extends AuthorizingRealm {
 
@@ -35,8 +35,8 @@ public class MyAuthRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
-        String userId = token.getUsername();
-        UserMain userMain = userService.findById(userId);
+        String username = token.getUsername();
+        UserMain userMain = userService.findByEmail(username);
         if (userMain == null) {
             throw new UnknownAccountException("No account found for user[" + token.getUsername() + "]");
         }

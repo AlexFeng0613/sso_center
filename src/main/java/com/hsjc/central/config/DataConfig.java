@@ -20,7 +20,7 @@ import java.sql.SQLException;
 
 /**
  * @author : zga
- * @date : 15/11/24
+ * @date : 2015-11-24
  */
 @Configuration
 public class DataConfig {

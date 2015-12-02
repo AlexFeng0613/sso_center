@@ -5,7 +5,7 @@ import org.apache.shiro.SecurityUtils;
 
 /**
  * @author : zga
- * @date : 2015/12/2
+ * @date : 2015-12-2
  */
 public class BaseController {
     //获取user对象
