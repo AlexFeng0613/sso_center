@@ -220,7 +220,7 @@ position:absolute;
 }
 
 .step_mark li{
-	background:url(../images/progress1.png) no-repeat;
+ 	background:url(../../images/register/progress1.png) no-repeat;
 	width:48px;
 	height:48px;
 	@extend .left;
@@ -232,12 +232,12 @@ position:absolute;
 }
 
 .step_mark li.select{
-	background:url(../images/progress2.png) no-repeat;
+	background:url(../../images/register/progress2.png) no-repeat;
 	color:#fff;
 }
 
 .step_mark li.selected{
-	background:url(../images/progress3.png) no-repeat;
+	background:url(../../images/register/progress3.png) no-repeat;
 }
 
 .step_mark li.last{
@@ -340,23 +340,23 @@ text-decoration:none;
 	.student:link{
 		@extend .left;
 		
-		background:url(../images/student1.png) no-repeat center 8px;
+		background:url(../../images/register/student1.png) no-repeat center 8px;
 	}
 	.teacher:link{
 		@extend .right;
-		background:url(../images/teacher1.png) no-repeat center 8px;
+		background:url(../../images/register/teacher1.png) no-repeat center 8px;
 		
 	}
 }
 
 .figure{
 	.student:hover{
-		background:url(../images/student2.png) no-repeat center 8px;
+		background:url(../../images/register/student2.png) no-repeat center 8px;
 		color:#008acb;
 		text-decoration:none;
 	}
 	.teacher:hover{
-		background:url(../images/teacher2.png) no-repeat center 8px;
+		background:url(../../images/register/teacher2.png) no-repeat center 8px;
 		color:#008acb;
 		text-decoration:none;
 	}
@@ -364,12 +364,12 @@ text-decoration:none;
 
 .figure{
 	.student:active{
-		background:url(../images/student3.png) no-repeat center top;
+		background:url(../../images/register/student3.png) no-repeat center top;
 		color:#008acb;
 		text-decoration:none;
 	}
 	.teacher:active{
-		background:url(../images/teacher3.png) no-repeat center top;
+		background:url(../../images/register/teacher3.png) no-repeat center top;
 		color:#008acb;
 		text-decoration:none;
 	}
@@ -386,7 +386,7 @@ text-decoration:none;
 	width:344px;
 	height:250px;
 	border-right:1px solid #768089;
-	background:url(../images/student3.png) no-repeat center top;
+	background:url(../../images/register/student3.png) no-repeat center top;
 	color:#008acb;
 	@extend .family;
 	@extend .fs24;
@@ -401,7 +401,7 @@ text-decoration:none;
 	width:344px;
 	height:250px;
 	border-right:1px solid #768089;
-	background:url(../images/teacher3.png) no-repeat center top;
+	background:url(../../images/register/teacher3.png) no-repeat center top;
 	color:#008acb;
 	@extend .family;
 	@extend .fs24;
@@ -432,7 +432,7 @@ margin-right:30px;
 @extend .fc364;
 @extend .family;
 font-size:20px;
-background:url(../images/xi.png) no-repeat center;
+background:url(../../images/register/xi.png) no-repeat center;
 }
 
 .input_box input{
@@ -461,14 +461,14 @@ margin-top:11px;
 .mistake{
 	@extend .left;
 	@extend .inspect;
-	background:url(../images/mistake.png) no-repeat center;
+	background:url(../../images/register/mistake.png) no-repeat center;
 	@extend .none;
 }
 
 .correct{
 	@extend .left;
 	@extend .inspect;
-	background:url(../images/correct.png) no-repeat center;
+	background:url(../../images/register/correct.png) no-repeat center;
 	
 }
 
@@ -488,7 +488,7 @@ padding-bottom:100px;
 	@extend .fff;
 	@extend .fs20;
 	@extend .text-center;
-	background:url(../images/prev.gif) no-repeat center;
+	background:url(../../images/register/prev.gif) no-repeat center;
 	@extend .block;
  }
 }
@@ -497,7 +497,7 @@ padding-bottom:100px;
 
 .context{
 	a:hover{
-	background:url(../images/next.png) no-repeat center;
+	background:url(../../images/register/next.png) no-repeat center;
 	}
 }
 
@@ -516,7 +516,7 @@ padding-bottom:100px;
 	width:586px;
 	height:385px;
 	@extend .left;
-	background:url(../images/verify.png) no-repeat;
+	background:url(../../images/register/verify.png) no-repeat;
 }
 
 .verify{
@@ -547,11 +547,11 @@ width:210px;
 @extend .text-center;
 @extend .fs20;
 @extend .pointer;
-background:url(../images/anew1.png) no-repeat;
+background:url(../../images/register/anew1.png) no-repeat;
 }
 
 .anew:hover{
-background:url(../images/anew2.png) no-repeat;
+background:url(../../images/register/anew2.png) no-repeat;
 }
 
 
@@ -565,7 +565,7 @@ color:#ec8558;
 @extend .fs20;
 @extend .pointer;
 @extend .none;
-background:url(../images/anew60.png) no-repeat;
+background:url(../../images/register/anew60.png) no-repeat;
 }
 
 .promptly{
@@ -606,7 +606,7 @@ margin-right:30px;
 width:210px;
 @extend .input_lh;
 @extend .left;
-background:url(../images/ipone_num.png) no-repeat;
+background:url(../../images/register/ipone_num.png) no-repeat;
 border:none;
 @extend .indent;
 margin-right:20px;
@@ -619,7 +619,7 @@ color:#768089;
 width:140px;
 @extend .input_lh;
 @extend .left;
-background:url(../images/verify_code.png) no-repeat;
+background:url(../../images/register/verify_code.png) no-repeat;
 border:none;
 @extend .indent;
 margin-right:35px;
@@ -632,7 +632,7 @@ color:#768089;
 width:123px;
 @extend .input_lh;
 @extend .left;
-background:url(../images/note.png) no-repeat;
+background:url(../../images/register/note.png) no-repeat;
 @extend .pointer;
 @extend .family;
 @extend .fs20;
@@ -642,7 +642,7 @@ background:url(../images/note.png) no-repeat;
 
 .note.click{
 color:#b5b9bc;
-background:url(../images/note_click.png) no-repeat;
+background:url(../../images/register/note_click.png) no-repeat;
 }
 
 
@@ -666,7 +666,7 @@ width:216px;
 height:58px;
 line-height:58px;
 @extend .left;
-background:url(../images/ipone_next.png) no-repeat center;
+background:url(../../images/register/ipone_next.png) no-repeat center;
 margin-left:90px;
 @extend .fff;
 @extend .fs20;
@@ -677,7 +677,7 @@ margin-right:55px;
 }
 
 .ipone_next:hover{
-background:url(../images/next.png) no-repeat center;
+background:url(../../images/register/next.png) no-repeat center;
 }
 
 .skip{
@@ -716,7 +716,7 @@ margin-right:30px;
 width:216px;
 height:58px;
 line-height:58px;
-background:url(../images/vault.png) no-repeat center;
+background:url(../../images/register/vault.png) no-repeat center;
 @extend .text-center;
 @extend .block;
 @extend .left;
@@ -726,14 +726,14 @@ color:#74bc41;
 }
 
 .vault:hover{
-background:url(../images/next.png) no-repeat center;
+background:url(../../images/register/next.png) no-repeat center;
 @extend .fff;
 }
 
 .register_succeed_l{
 width:518px;
 height:327px;
-background:url(../images/register_succeed.png) no-repeat;
+background:url(../../images/register/register_succeed.png) no-repeat;
 @extend .left;
 }
 
@@ -780,7 +780,7 @@ margin-right:5px;
 .login{
 width:481px;
 height:356px;
-background:url(../images/login.png) no-repeat;
+background:url(../../images/register/login.png) no-repeat;
 margin:250px auto;
 @extend .rel;
 }
@@ -808,7 +808,7 @@ margin:0 auto 0;
 width:375px;
 height:48px;
 line-height:48px;
-background:url(../images/login_input.png) no-repeat;
+background:url(../../images/register/login_input.png) no-repeat;
 @extend .login_bottom;
 border:none;
 @extend .family;
@@ -827,7 +827,7 @@ height:16px;
 @extend .indent;
 height:16px;
 line-height:16px;
-background:url(../images/self_motion1.png) no-repeat left;
+background:url(../../images/register/self_motion1.png) no-repeat left;
 @extend .rel;
 }
 
@@ -840,7 +840,7 @@ opacity: 0;
 }
 
 .self_motion.check{
-background:url(../images/self_motion2.png) no-repeat left;
+background:url(../../images/register/self_motion2.png) no-repeat left;
 }
 
 .forget{
@@ -856,7 +856,7 @@ color: #74bc41;
 width:375px;
 height:48px;
 line-height:48px;
-background:url(../images/log.png) no-repeat;
+background:url(../../images/register/log.png) no-repeat;
 border:none;
 @extend .family;
 @extend .fff;

@@ -140,18 +140,18 @@ a:active {
   left: 20px; }
 
 .step_mark li {
-  background: url(../images/progress1.png) no-repeat;
+  background: url(../../images/register/progress1.png) no-repeat;
   width: 48px;
   height: 48px;
   line-height: 48px;
   font-size: 24px; }
 
 .step_mark li.select {
-  background: url(../images/progress2.png) no-repeat;
+  background: url(../../images/register/progress2.png) no-repeat;
   color: #fff; }
 
 .step_mark li.selected {
-  background: url(../images/progress3.png) no-repeat; }
+  background: url(../../images/register/progress3.png) no-repeat; }
 
 .step_step {
   left: 6px; }
@@ -197,25 +197,25 @@ a:active {
   text-decoration: none; }
 
 .figure .student:link {
-  background: url(../images/student1.png) no-repeat center 8px; }
+  background: url(../../images/register/student1.png) no-repeat center 8px; }
 .figure .teacher:link {
-  background: url(../images/teacher1.png) no-repeat center 8px; }
+  background: url(../../images/register/teacher1.png) no-repeat center 8px; }
 
 .figure .student:hover {
-  background: url(../images/student2.png) no-repeat center 8px;
+  background: url(../../images/register/student2.png) no-repeat center 8px;
   color: #008acb;
   text-decoration: none; }
 .figure .teacher:hover {
-  background: url(../images/teacher2.png) no-repeat center 8px;
+  background: url(../../images/register/teacher2.png) no-repeat center 8px;
   color: #008acb;
   text-decoration: none; }
 
 .figure .student:active {
-  background: url(../images/student3.png) no-repeat center top;
+  background: url(../../images/register/student3.png) no-repeat center top;
   color: #008acb;
   text-decoration: none; }
 .figure .teacher:active {
-  background: url(../images/teacher3.png) no-repeat center top;
+  background: url(../../images/register/teacher3.png) no-repeat center top;
   color: #008acb;
   text-decoration: none; }
 
@@ -223,7 +223,7 @@ a:active {
   width: 344px;
   height: 250px;
   border-right: 1px solid #768089;
-  background: url(../images/student3.png) no-repeat center top;
+  background: url(../../images/register/student3.png) no-repeat center top;
   color: #008acb;
   line-height: 470px; }
 
@@ -231,7 +231,7 @@ a:active {
   width: 344px;
   height: 250px;
   border-right: 1px solid #768089;
-  background: url(../images/teacher3.png) no-repeat center top;
+  background: url(../../images/register/teacher3.png) no-repeat center top;
   color: #008acb;
   line-height: 470px; }
 
@@ -245,7 +245,7 @@ a:active {
   line-height: 50px;
   margin-right: 30px;
   font-size: 20px;
-  background: url(../images/xi.png) no-repeat center; }
+  background: url(../../images/register/xi.png) no-repeat center; }
 
 .input_box input {
   height: 48px;
@@ -263,10 +263,10 @@ a:active {
   margin-top: 11px; }
 
 .mistake {
-  background: url(../images/mistake.png) no-repeat center; }
+  background: url(../../images/register/mistake.png) no-repeat center; }
 
 .correct {
-  background: url(../images/correct.png) no-repeat center; }
+  background: url(../../images/register/correct.png) no-repeat center; }
 
 .context {
   width: 450px;
@@ -278,15 +278,15 @@ a:active {
   width: 216px;
   height: 58px;
   line-height: 58px;
-  background: url(../images/prev.gif) no-repeat center; }
+  background: url(../../images/register/prev.gif) no-repeat center; }
 
 .context a:hover {
-  background: url(../images/next.png) no-repeat center; }
+  background: url(../../images/register/next.png) no-repeat center; }
 
 .verify_img {
   width: 586px;
   height: 385px;
-  background: url(../images/verify.png) no-repeat; }
+  background: url(../../images/register/verify.png) no-repeat; }
 
 .verify {
   width: 614px; }
@@ -300,15 +300,15 @@ a:active {
 
 .anew {
   width: 210px;
-  background: url(../images/anew1.png) no-repeat; }
+  background: url(../../images/register/anew1.png) no-repeat; }
 
 .anew:hover {
-  background: url(../images/anew2.png) no-repeat; }
+  background: url(../../images/register/anew2.png) no-repeat; }
 
 .anew60 {
   width: 210px;
   color: #ec8558;
-  background: url(../images/anew60.png) no-repeat; }
+  background: url(../../images/register/anew60.png) no-repeat; }
 
 .promptly {
   line-height: 44px;
@@ -326,25 +326,25 @@ a:active {
 
 .ipone_num {
   width: 210px;
-  background: url(../images/ipone_num.png) no-repeat;
+  background: url(../../images/register/ipone_num.png) no-repeat;
   border: none;
   margin-right: 20px;
   color: #768089; }
 
 .verify_code {
   width: 140px;
-  background: url(../images/verify_code.png) no-repeat;
+  background: url(../../images/register/verify_code.png) no-repeat;
   border: none;
   margin-right: 35px;
   color: #768089; }
 
 .note {
   width: 123px;
-  background: url(../images/note.png) no-repeat; }
+  background: url(../../images/register/note.png) no-repeat; }
 
 .note.click {
   color: #b5b9bc;
-  background: url(../images/note_click.png) no-repeat; }
+  background: url(../../images/register/note_click.png) no-repeat; }
 
 .count {
   color: #e55348; }
@@ -357,12 +357,12 @@ a:active {
   width: 216px;
   height: 58px;
   line-height: 58px;
-  background: url(../images/ipone_next.png) no-repeat center;
+  background: url(../../images/register/ipone_next.png) no-repeat center;
   margin-left: 90px;
   margin-right: 55px; }
 
 .ipone_next:hover {
-  background: url(../images/next.png) no-repeat center; }
+  background: url(../../images/register/next.png) no-repeat center; }
 
 .skip {
   height: 58px;
@@ -383,16 +383,16 @@ a:active {
   width: 216px;
   height: 58px;
   line-height: 58px;
-  background: url(../images/vault.png) no-repeat center;
+  background: url(../../images/register/vault.png) no-repeat center;
   color: #74bc41; }
 
 .vault:hover {
-  background: url(../images/next.png) no-repeat center; }
+  background: url(../../images/register/next.png) no-repeat center; }
 
 .register_succeed_l {
   width: 518px;
   height: 327px;
-  background: url(../images/register_succeed.png) no-repeat; }
+  background: url(../../images/register/register_succeed.png) no-repeat; }
 
 .register_succeed_r {
   width: 682px; }
@@ -412,7 +412,7 @@ a:active {
 .login {
   width: 481px;
   height: 356px;
-  background: url(../images/login.png) no-repeat;
+  background: url(../../images/register/login.png) no-repeat;
   margin: 250px auto; }
 
 .login_title {
@@ -432,7 +432,7 @@ a:active {
   width: 375px;
   height: 48px;
   line-height: 48px;
-  background: url(../images/login_input.png) no-repeat;
+  background: url(../../images/register/login_input.png) no-repeat;
   border: none;
   color: #b3b2b6; }
 
@@ -442,7 +442,7 @@ a:active {
 .self_motion {
   height: 16px;
   line-height: 16px;
-  background: url(../images/self_motion1.png) no-repeat left; }
+  background: url(../../images/register/self_motion1.png) no-repeat left; }
 
 .self_motion input {
   top: 0;
@@ -451,7 +451,7 @@ a:active {
   opacity: 0; }
 
 .self_motion.check {
-  background: url(../images/self_motion2.png) no-repeat left; }
+  background: url(../../images/register/self_motion2.png) no-repeat left; }
 
 .forget {
   height: 16px;
@@ -462,7 +462,7 @@ a:active {
   width: 375px;
   height: 48px;
   line-height: 48px;
-  background: url(../images/log.png) no-repeat;
+  background: url(../../images/register/log.png) no-repeat;
   border: none; }
 
 .log_promptly, .promptly_register, .promptly_register a {
