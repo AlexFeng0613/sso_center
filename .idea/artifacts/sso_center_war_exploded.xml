@@ -59,12 +59,10 @@
           <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.1.3.GA" />
           <element id="library" level="project" name="Maven: com.fasterxml:classmate:1.0.0" />
-          <element id="library" level="module" name="Maven: com.alibaba:jconsole:1.8.0" module-name="sso_center" />
-          <element id="library" level="module" name="Maven: com.alibaba:tools:1.8.0" module-name="sso_center" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/sso_center/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="D:\projects\sso_center\target/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="sso_center/web/Web" />
     </root>
