@@ -27,7 +27,10 @@ import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * @author : zga
+ * @date : 15/11/24
+ */
 @Configuration
 public class SecurityConfig {
 	/**

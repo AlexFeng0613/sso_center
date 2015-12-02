@@ -1,7 +1,8 @@
 package com.hsjc.central.constant;
 
 /**
- * Created by henry on 12/8/14.
+ * @author : zga
+ * @date : 15/11/24
  */
 public class TypeConstant {
 

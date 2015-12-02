@@ -5,7 +5,8 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 
 /**
- * Created by henry on 1/12/15.
+ * @author : zga
+ * @date : 15/11/24
  */
 public class FastJsonRedisSerializer<T> implements RedisSerializer<T> {
 

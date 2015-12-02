@@ -13,7 +13,8 @@ import org.springframework.context.ApplicationContext;
 import javax.annotation.Resource;
 
 /**
- * Created by 源 on 2014/12/25.
+ * @author : zga
+ * @date : 15/11/24
  */
 public class MyAuthRealm extends AuthorizingRealm {
 
