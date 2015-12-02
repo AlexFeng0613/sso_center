@@ -7,7 +7,7 @@ ul,ol{
 list-style:none;
 }
 
-a{
+a:link{
 	text-decoration:none;
 	outline:none;
 }
@@ -21,7 +21,10 @@ a:active{
 	text-decoration:none;
 	outline:none;
 }
-
+a:visited{
+  text-decoration:none;
+  outline:none;
+}
 
 $head_bg:#364049;
 $head_h:210px;
