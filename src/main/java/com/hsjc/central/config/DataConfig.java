@@ -3,7 +3,6 @@ package com.hsjc.central.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.hsjc.central.base.FastJsonRedisSerializer;
 import com.hsjc.central.constant.RedisConstant;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +16,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.util.StringUtils;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
@@ -28,7 +26,7 @@ import java.sql.SQLException;
 public class DataConfig {
 
 	@Bean
-	public DataSource dataSource(
+	public DruidDataSource dataSource(
 			@Value("${db.driver}") String driver,
 			@Value("${db.url}") String url,
 			@Value("${db.username}") String username,
@@ -73,24 +71,24 @@ public class DataConfig {
 		return dataSourceTransactionManager;
 	}
 
-	@Bean
-	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+	@Bean(name = "sqlSessionFactory")
+	public SqlSessionFactoryBean sqlSessionFactoryBean(@Value("${db.driver}") String driver,
+											   @Value("${db.url}") String url,
+											   @Value("${db.username}") String username,
+											   @Value("${db.password}") String password) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-		sqlSessionFactoryBean.setDataSource(dataSource);
-		sqlSessionFactoryBean.setTypeAliasesPackage("com.hello.model");
+		sqlSessionFactoryBean.setDataSource(dataSource(driver, url, username, password));
+		sqlSessionFactoryBean.setTypeAliasesPackage("com.hsjc.central.domain");
 		final Resource configLocation = new ClassPathResource("mybatis-config.xml");
 		sqlSessionFactoryBean.setConfigLocation(configLocation);
-		return sqlSessionFactoryBean.getObject();
+		return sqlSessionFactoryBean;
 	}
 
 	@Bean
-	public MapperScannerConfigurer mapperScannerConfigurer(@Value("${db.driver}") String driver,
-														   @Value("${db.url}") String url,
-														   @Value("${db.username}") String username,
-														   @Value("${db.password}") String password) throws Exception{
+	public MapperScannerConfigurer mapperScannerConfigurer() throws Exception{
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-		mapperScannerConfigurer.setBasePackage("com.hello.mapper");
-		mapperScannerConfigurer.setSqlSessionFactory(sqlSessionFactory(dataSource(driver, url, username, password)));
+		mapperScannerConfigurer.setBasePackage("com.hsjc.central.mapper");
+		mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
 		return mapperScannerConfigurer;
 	}
 

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/user/")
-public class UserController {
+public class UserController extends BaseController{
 
     @RequestMapping("save")
     public String save(){
@@ -33,16 +33,18 @@ public class UserController {
 
     @RequestMapping(value = "login",method = RequestMethod.POST)
     public String login(String username,String password){
-        Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken upToken = new UsernamePasswordToken(username, password, true);
         try{
-            subject.login(upToken);
+            SecurityUtils.getSubject().login(upToken);
         } catch (AuthenticationException e) {
             e.printStackTrace();
             return "/login";
         }
 
-        User user = (User) subject.getPrincipal();
+        Subject subject = SecurityUtils.getSubject();
+        System.out.println(subject.getPrincipal());
+
+        User user = null;
 
         Session session = subject.getSession(true);
         session.setTimeout(-1);
@@ -53,6 +55,8 @@ public class UserController {
 
     @RequestMapping("index")
     public String index(Model model){
+        User user = getCurrentUser();
+        model.addAttribute("user",user);
         model.addAttribute("username","yeyinzhu");
         return "index";
     }

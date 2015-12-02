@@ -26,4 +26,10 @@ public class PageController {
     public String registerPage(@PathVariable Integer num){
         return "user/register"+num;
     }
+
+    @RequestMapping("/login")
+    public String login(){
+        return "user/login";
+    }
+
 }
