@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="../sass/register.css" rel="stylesheet" type="text/css">
+	<link href="../sass/bootstrap.css" rel="stylesheet" type="text/css">
+	<script text="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+	<!--[if lt IE 9]>
+	<script text="text/javascript" src="../js/html5shiv.js"></script>
+	<![endif]-->
+	<script text="text/javascript" src="../js/placeholder.js"></script>
+	<script text="text/javascript" src="../js/bootstrap.min.js"></script>
+	<script text="text/javascript" src="../js/register.js"></script>
+	<style>
+		.progress_2{
+			width:220px;
+		}
+	</style>
+</head>
+<body>
+	<header class="header">
+		<div class="center">
+			<div class="h_title">完成注册只需6个简单的步骤</div>
+			<div class="step">
+				<div class="progress_1"></div>
+				<div class="progress_2"></div>
+				<ul class="step_mark">
+					<li class="selected"></li>
+					<li class="select">2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+					<li class="last">6</li>
+				</ul>
+				<ul class="step_step">
+					<li class="selected">选择角色</li>
+					<li class="selected">基本信息</li>
+					<li>邮箱验证</li>
+					<li>手机验证</li>
+					<li class="particularly">邀请码验证</li>
+					<li class="last">注册成功</li>
+				</ul>
+			</div>
+
+		</div>
+	</header>
+	<div class="container-fluid">
+		<div class="center">
+			<aside class="aside1">我是学生</aside>
+			<aside class="aside2">我是老师</aside>
+			<section class="section">
+				<div class="input_box">
+					<div class="input_box_l">用户名</div>
+					<input type="text" placeholder="20个以内字符,英文或数字" />
+					<div class="mistake"></div>
+					<div class="correct"></div>
+				</div>
+				<div class="input_box">
+					<div class="input_box_l">邮箱</div>
+					<input type="text" placeholder="用于绑定账号以及验证" />
+					<div class="mistake"></div>
+					<div class="correct"></div>
+				</div>
+				<div class="input_box">
+					<div class="input_box_l">密码</div>
+					<input type="password" placeholder="4~16个字符，区分大小写" />
+					<div class="mistake"></div>
+					<div class="correct"></div>
+				</div>
+				<div class="input_box">
+					<div class="input_box_l">确认密码</div>
+					<input type="password"  />
+					<div class="mistake"></div>
+					<div class="correct"></div>
+				</div>
+				<div class="input_box">
+					<div class="input_box_l">验证码</div>
+					<input type="text" style="width:170px;"/>
+				</div>
+				<div class="context">
+					<a href="register1.html" class="prev">上一步</a>
+					<a href="register3.html" class="next">下一步</a>
+				</div>
+
+			</section>
+		</div>
+	</div>
+	<footer class="footer">
+		<div class="foot"><pre>版权所有 © 2002-2014 上海市普陀区教育局 上海市普陀区现代教育技术中心</pre></div>
+		<div class="foot"><pre>地址：上海市普陀区大渡河路1688号 邮编：200333 电话：021-62601856</pre></div>
+	</footer>
+</body>
+</html>
+
