@@ -48,37 +48,38 @@
 	</header>
 	<div class="container-fluid">
 		<div class="center">
-			<aside class="aside1">我是学生</aside>
-			<aside class="aside2">我是老师</aside>
+			<aside class="aside1" th:if="${type eq 'student'}" style="display: block;">我是学生</aside>
+			<aside class="aside2" th:if="${type eq 'teacher'}" style="display: block;">我是老师</aside>
 			<section class="section">
-				<form class="regForm" action="http://localhost:8080/page/register/3.html" method="post">
+				<form class="regForm" action="/user/register.json" method="post">
+					<input type="hidden" th:value="${type}" name="type"/>
 					<div class="input_box">
 						<label><div class="input_box_l">用户名</div></label>
-						<input type="text" placeholder="请输入8到20位英文和数字" class="inputxt"/>
+						<input type="text" name="username" placeholder="请输入8到20位英文和数字" class="inputxt"/>
 						<div class="mistake"></div>
 						<div class="correct"></div>
 					</div>
 					<div class="input_box">
 						<div class="input_box_l">邮箱</div>
-						<input type="text" placeholder="用于绑定账号以及验证" class="inputxt"/>
+						<input type="text" name="email" placeholder="用于绑定账号以及验证" class="inputxt"/>
 						<div class="mistake"></div>
 						<div class="correct"></div>
 					</div>
 					<div class="input_box">
 						<div class="input_box_l" >密码</div>
-						<input type="password" placeholder="6~10个英文和数字,区分大小写" name="userpassword" class="inputxt"/>
+						<input type="password" placeholder="6~10个英文和数字,区分大小写" name="password" class="inputxt"/>
 						<div class="mistake"></div>
 						<div class="correct"></div>
 					</div>
 					<div class="input_box">
 						<div class="input_box_l">确认密码</div>
-						<input type="password"  name="userpassword2" class="inputxt"/>
+						<input type="password" placeholder="6~10个英文和数字,区分大小写"  name="password2" class="inputxt"/>
 						<div class="mistake"></div>
 						<div class="correct"></div>
 					</div>
 					<div class="input_box">
 						<div class="input_box_l">验证码</div>
-						<input type="text" style="width:170px;" class="inputxt" />
+						<input type="text" name="code" placeholder="请输入右侧验证码" style="width:170px;" class="inputxt"/>
 						<img id="vimg" src="/code.html"/>
 					</div>
 					<div class="context">
@@ -102,36 +103,66 @@
 				showAllError:true,
 				datatype:{
 					"s6-18":/^[\w\.\s]{6,18}$/,
-
-
 					"e":/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 				},
+				showAllError:true,
+				callback : function(form){
+					var check=confirm("您确定要提交表单吗？");
+					if(check){
+						var username = $('input[name="username"]').val();
+						var password = $('input[name="password"]').val();
+						var email = $('input[name="email"]').val();
+						var type = $('input[name="type"]').val();
+						var code = $('input[name="code"]').val();
 
-				showAllError:true
+						var data = {
+							'username' : username,
+							'password' : password,
+							'email' : email,
+							'type' : type,
+							'code' : code
+						}
+
+						$.ajax({
+							url : '/user/register.json',
+							type : 'POST',
+							data : JSON.stringify(data),
+							contentType: 'application/json',
+							dataType : 'json',
+							success : function(data){
+								if(data.success){
+									window.location.href = '/page/register/3.html?email=' + email;
+								}else {
+									if(data.message == '100002') alert('验证码错误');
+									if(data.message == '100004') alert('注册失败');
+								}
+							}
+						});
+					}
+					return false;
+				}
 			});
 
 			demo.tipmsg.w["s6-18"]="请输入8到20位英文和数字";
 
 			demo.addRule([{
-					ele:".inputxt:eq(0)",
-						datatype:"s6-18"
-					},	{
-						ele:".inputxt:eq(1)",
-						datatype:"e"
-					}, {
-						ele:".inputxt:eq(2)",
-						datatype:"s6-10"
-					},{
-						ele:".inputxt:eq(3)",
-						datatype:"*",
-						recheck:"userpassword"
-					},{
-						ele:".inputxt:eq(4)",
-						datatype:"*"
-
-					}
-
-					]);
+				ele:".inputxt:eq(0)",
+				datatype:"zh2-4"
+				},	{
+				ele:".inputxt:eq(1)",
+				datatype:"e"
+				}, {
+					ele:".inputxt:eq(2)",
+					datatype:"*6-10"
+				},{
+					ele:".inputxt:eq(3)",
+					datatype:"*",
+					recheck:"password"
+				},{
+					ele:".inputxt:eq(4)",
+					datatype:"*6"
+				}
+			]);
 
 			//验证码
 			$('#vimg').click(function(){
@@ -140,18 +171,6 @@
 				var timestamp = (new Date()).valueOf();
 				$(this).attr('src',"/code.html?timestamp=" + timestamp);
 			});
-
-			//下一步
-			/*$('.next').click(function(){
-				//1、验证
-
-				//2、注册、入库
-
-				//3、发送Email
-
-
-				window.location.href = "http://localhost:8080/page/register/3.html";
-			});*/
 		});
 	</script>
 </body>
