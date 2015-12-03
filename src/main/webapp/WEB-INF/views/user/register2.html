@@ -78,7 +78,7 @@
 					</div>
 					<div class="input_box">
 						<div class="input_box_l">验证码</div>
-						<input type="text" style="width:170px;"/>
+						<input type="text" style="width:170px;" class="inputxt" />
 						<img id="vimg" src="/code.html"/>
 					</div>
 					<div class="context">
@@ -114,10 +114,10 @@
 
 			demo.addRule([{
 					ele:".inputxt:eq(0)",
-					datatype:"s6-18"
+						datatype:"s6-18"
 					},	{
-					ele:".inputxt:eq(1)",
-					datatype:"e"
+						ele:".inputxt:eq(1)",
+						datatype:"e"
 					}, {
 						ele:".inputxt:eq(2)",
 						datatype:"s6-10"
@@ -125,6 +125,10 @@
 						ele:".inputxt:eq(3)",
 						datatype:"*",
 						recheck:"userpassword"
+					},{
+						ele:".inputxt:eq(4)",
+						datatype:"*"
+
 					}
 
 					]);
