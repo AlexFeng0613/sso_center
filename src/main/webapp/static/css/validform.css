@@ -15,7 +15,7 @@
     float:left;
 }
 .Validform_wrong{
-    color:red;
+    color:#ff0000;
     padding-left:35px;
     white-space:nowrap;
     background:url(../images/register/mistake.png) no-repeat left center;

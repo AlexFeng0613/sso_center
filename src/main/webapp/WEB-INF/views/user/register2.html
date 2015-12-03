@@ -54,7 +54,7 @@
 				<form class="regForm" action="http://localhost:8080/page/register/3.html" method="post">
 					<div class="input_box">
 						<label><div class="input_box_l">用户名</div></label>
-						<input type="text" placeholder="请输入2到4个中文字符" class="inputxt"/>
+						<input type="text" placeholder="请输入8到20位英文和数字" class="inputxt"/>
 						<div class="mistake"></div>
 						<div class="correct"></div>
 					</div>
@@ -66,7 +66,7 @@
 					</div>
 					<div class="input_box">
 						<div class="input_box_l" >密码</div>
-						<input type="password" placeholder="6~10个字符，区分大小写" name="userpassword" class="inputxt"/>
+						<input type="password" placeholder="6~10个英文和数字,区分大小写" name="userpassword" class="inputxt"/>
 						<div class="mistake"></div>
 						<div class="correct"></div>
 					</div>
@@ -78,7 +78,7 @@
 					</div>
 					<div class="input_box">
 						<div class="input_box_l">验证码</div>
-						<input type="text" style="width:170px;"/>
+						<input type="text" style="width:170px;" class="inputxt" />
 						<img id="vimg" src="/code.html"/>
 					</div>
 					<div class="context">
@@ -101,28 +101,34 @@
 				label:".label",
 				showAllError:true,
 				datatype:{
-					"zh1-6":/^[\u4E00-\u9FA5\uf900-\ufa2d]{1,6}$/,
+					"s6-18":/^[\w\.\s]{6,18}$/,
+
+
 					"e":/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 				},
 
 				showAllError:true
 			});
 
-			demo.tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
+			demo.tipmsg.w["s6-18"]="请输入8到20位英文和数字";
 
 			demo.addRule([{
 					ele:".inputxt:eq(0)",
-					datatype:"zh2-4"
+						datatype:"s6-18"
 					},	{
-					ele:".inputxt:eq(1)",
-					datatype:"e"
+						ele:".inputxt:eq(1)",
+						datatype:"e"
 					}, {
 						ele:".inputxt:eq(2)",
-						datatype:"*6-10"
+						datatype:"s6-10"
 					},{
 						ele:".inputxt:eq(3)",
 						datatype:"*",
 						recheck:"userpassword"
+					},{
+						ele:".inputxt:eq(4)",
+						datatype:"*"
+
 					}
 
 					]);
