@@ -8,11 +8,11 @@
 	<link th:href="@{/static/css/sass/bootstrap.css}" href="../../../static/css/sass/bootstrap.css" rel="stylesheet" type="text/css"/>
 	<link th:href="@{/static/css/validform.css}" href="../../../static/css/validform.css" rel="stylesheet" type="text/css"/>
 	<script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../../../static/scripts/jquery/jquery-1.11.3.min.js"></script>
+	<script text="text/javascript" th:src="@{/static/scripts/validform/Validform_v5.3.2_min.js}" src="../../../static/scripts/validform/Validform_v5.3.2_min.js"></script>
 	<script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../../static/scripts/ie/html5shiv.js"></script>
 	<script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
 	<script text="text/javascript" th:src="@{/static/scripts/bootstrap/bootstrap.min.js}" src="../../../static/scripts/bootstrap/bootstrap.min.js"></script>
 	<script text="text/javascript" th:src="@{/static/scripts/register.js}" src="../../../static/scripts/register.js"></script>
-	<script text="text/javascript" th:src="@{/static/scripts/validform/Validform_v5.3.2_min.js}" src="../../../static/scripts/validform/Validform_v5.3.2_min.js"></script>
 	<style>
 		.progress_2{
 			width:220px;
@@ -53,8 +53,8 @@
 			<form class="regForm">
 				<section class="section">
 					<div class="input_box">
-						<div class="input_box_l">用户名</div>
-						<input type="text" placeholder="20个以内字符,英文或数字" />
+						<label><div class="input_box_l">用户名</div></label>
+						<input type="text" placeholder="20个以内字符,英文或数字" class="inputxt"/>
 						<div class="mistake"></div>
 						<div class="correct"></div>
 					</div>
@@ -83,7 +83,7 @@
 					</div>
 					<div class="context">
 						<a href="http://localhost:8080/page/register/1.html" class="prev">上一步</a>
-						<a href="http://localhost:8080/page/register/3.html" class="next">下一步</a>
+						<a class="next">下一步</a>
 					</div>
 				</section>
 			</form>
@@ -96,11 +96,41 @@
 
 	<script type="text/javascript">
 		$(function(){
+			var demo = $(".regForm").Validform({
+				tiptype:3,
+				label:".label",
+				showAllError:true,
+				datatype:{
+					"zh1-6":/^[\u4E00-\u9FA5\uf900-\ufa2d]{1,6}$/
+				},
+				ajaxPost:true
+			});
+
+			demo.tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
+
+			demo.addRule([{
+				ele:".inputxt:eq(0)",
+				datatype:"zh2-4"
+			}]);
+
+			//验证码
 			$('#vimg').click(function(){
 				//时间戳
 				//为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
 				var timestamp = (new Date()).valueOf();
 				$(this).attr('src',"/code.html?timestamp=" + timestamp);
+			});
+
+			//下一步
+			$('.next').click(function(){
+				//1、验证
+
+				//2、注册、入库
+
+				//3、发送Email
+
+
+				window.location.href = "http://localhost:8080/page/register/3.html";
 			});
 		});
 	</script>

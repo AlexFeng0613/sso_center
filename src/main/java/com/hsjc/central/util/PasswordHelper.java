@@ -38,4 +38,16 @@ public class PasswordHelper {
 
         userMain.setPassword(newPassword);
     }
+
+    public void test(){
+        String salt = randomNumberGenerator.nextBytes().toHex();
+        String newPassword = new SimpleHash(algorithmName, "123456", ByteSource.Util.bytes("admin"+salt), hashIterations).toHex();
+
+        System.out.println("salt is >>" + salt);
+        System.out.println("newPassword is >>" + newPassword);
+    }
+
+    public static void main(String[] args) {
+        new PasswordHelper().test();
+    }
 }
