@@ -29,7 +29,7 @@ a:visited{
 $head_bg:#364049;
 $head_h:210px;
 $foot_bg:#f4f4f4;
-$foot_h:135px;
+$foot_h:130px;
 $progress_height:16px;
 $progress_width:1080px;
 
@@ -911,6 +911,7 @@ color:#74bc41;
 	background-color:$foot_bg;
 	height:$foot_h;
 	@extend .hidden;
+  background-color:#fff;
 }
 
 
