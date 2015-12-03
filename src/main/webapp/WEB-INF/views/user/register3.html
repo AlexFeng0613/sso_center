@@ -54,7 +54,8 @@
 					<div class="anew">重新发送</div>
 					<div class="anew60"></div>
 				</div>
-				<a href="http://localhost:8080/page/register/4.html" class="promptly">立即前往验证&gt;&gt;</a>
+				<input type="hidden" th:value="${email}" name="email"/>
+				<a href="#" class="promptly">立即前往验证&gt;&gt;</a>
 				<div class="hint">(邮箱激活链接24小时内有效)</div>
 			</section>
 		</div>
@@ -101,6 +102,18 @@
 					};
 
 				},1000);
+			});
+
+			//立即前往
+			$('.promptly').click(function(){
+				var email = $('input[name="email"]').val();
+				var sub = email.substring(email.indexOf("@"));
+				window.location.href = 'https://mail.'+ sub;
+			});
+
+			//重新发送
+			$('.anew').click(function(){
+
 			});
 		});
 	</script>

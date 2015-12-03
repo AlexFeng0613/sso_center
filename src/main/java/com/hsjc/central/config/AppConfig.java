@@ -1,5 +1,6 @@
 package com.hsjc.central.config;
 
+import com.hsjc.central.constant.MailConstant;
 import com.hsjc.central.constant.RedisConstant;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
@@ -36,6 +37,22 @@ public class AppConfig {
 			@Value("${redis.dictDatabase}") Integer DB_DICT
 	) {
 		RedisConstant.DB_DICT = DB_DICT;
+		return null;
+	}
+
+	@Bean
+	public MailConstant MailConstant(
+			@Value("${mail.host}") String MAIL_HOST,
+			@Value("${mail.port}") Integer MAIL_PORT,
+			@Value("${mail.username}") String MAIL_USERNAME,
+			@Value("${mail.password}") String MAIL_PASSWORD,
+			@Value("${mail.from}") String MAIL_FORM
+	){
+		MailConstant.MAIL_HOST = MAIL_HOST;
+		MailConstant.MAIL_PORT = MAIL_PORT;
+		MailConstant.MAIL_USERNAME = MAIL_USERNAME;
+		MailConstant.MAIL_PASSWORD = MAIL_PASSWORD;
+		MailConstant.MAIL_FROM = MAIL_FORM;
 		return null;
 	}
 

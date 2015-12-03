@@ -14,6 +14,7 @@
            <typeAlias type="com.hsjc.central.domain.TbSmsBindPhoneNum" alias="TbSmsBindPhoneNum"/>
            <typeAlias type="com.hsjc.central.domain.TbSmsResetPasswd" alias="TbSmsResetPasswd"/>
            <typeAlias type="com.hsjc.central.domain.TbSmsSend" alias="TbSmsSend"/>
+           <typeAlias type="com.hsjc.central.domain.UserTemp" alias="UserTemp"/>
        </typeAliases>
        <mappers>
            <mapper resource="com/hsjc/central/mapper/UserMainMapper.xml"/>
@@ -26,5 +27,6 @@
            <mapper resource="com/hsjc/central/mapper/TbSmsSendMapper.xml"/>
            <mapper resource="com/hsjc/central/mapper/UserStudentMapper.xml"/>
            <mapper resource="com/hsjc/central/mapper/UserTeacherMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/UserTempMapper.xml"/>
        </mappers>
 </configuration>

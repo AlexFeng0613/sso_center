@@ -41,6 +41,11 @@ public class SecurityConfig {
 		return ehCacheManager;
 	}*/
 
+	@Bean(destroyMethod = "shutdown")
+	public net.sf.ehcache.CacheManager cacheManager() {
+		return net.sf.ehcache.CacheManager.newInstance();
+	}
+
 	/**
 	 * 凭证匹配器
 	 * @return
@@ -99,6 +104,7 @@ public class SecurityConfig {
 		filterChainDefinitionMap.put("/page/**", "anon");
 		filterChainDefinitionMap.put("/page/logout.html", "logout");
 		filterChainDefinitionMap.put("/user/login.html", "anon");
+		filterChainDefinitionMap.put("/page/login.html", "anon");
 		filterChainDefinitionMap.put("/code.html", "anon");
 		filterChainDefinitionMap.put("/**", "user");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

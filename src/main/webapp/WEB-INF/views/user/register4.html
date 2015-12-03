@@ -47,6 +47,7 @@
 	<div class="container-fluid">
 		<div class="center">
 			<div class="ipone">
+				<input type="hidden" th:value="${email}"/>
 				<div class="ipone_box">
 					<div class="ipone_box_l">手机号</div>
 					<input type="text" class="ipone_num"/>
@@ -89,7 +90,6 @@
 					};
 
 				},1000);
-
 			}
 
 			$(document).on('click','.note',function(){

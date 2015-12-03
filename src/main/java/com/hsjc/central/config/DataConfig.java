@@ -110,6 +110,16 @@ public class DataConfig {
 		return factory;
 	}
 
+	@Bean
+	public RedisTemplate redisTemplate(
+			JedisConnectionFactory dictJedisConnectionFactory
+	) {
+		RedisTemplate redisTemplate = new RedisTemplate<>();
+		redisTemplate.setConnectionFactory(dictJedisConnectionFactory);
+
+		return redisTemplate;
+	}
+
 	private void fillRedisTemplateSerializers(RedisTemplate redisTemplate, Class redisClass) {
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
 		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
