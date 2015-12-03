@@ -83,7 +83,7 @@
 					</div>
 					<div class="context">
 						<a href="http://localhost:8080/page/register/1.html" class="prev">上一步</a>
-						<a class="next">下一步</a>
+						<a class="next" href="3.html">下一步</a>
 					</div>
 				</form>
 			</section>
@@ -121,7 +121,7 @@
 						datatype:"*6-10"
 					},{
 						ele:".inputxt:eq(3)",
-						datatype:"*6-10",
+						datatype:"*",
 						recheck:"userpassword"
 					}
 
@@ -136,7 +136,7 @@
 			});
 
 			//下一步
-			$('.next').click(function(){
+			/*$('.next').click(function(){
 				//1、验证
 
 				//2、注册、入库
@@ -145,7 +145,7 @@
 
 
 				window.location.href = "http://localhost:8080/page/register/3.html";
-			});
+			});*/
 		});
 	</script>
 </body>
