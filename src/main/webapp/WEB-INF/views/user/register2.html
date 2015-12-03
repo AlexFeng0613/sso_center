@@ -54,25 +54,25 @@
 				<form class="regForm">
 					<div class="input_box">
 						<label><div class="input_box_l">用户名</div></label>
-						<input type="text" placeholder="20个以内字符,英文或数字" class="inputxt"/>
+						<input type="text" placeholder="请输入2到4个中文字符" class="inputxt"/>
 						<div class="mistake"></div>
 						<div class="correct"></div>
 					</div>
 					<div class="input_box">
 						<div class="input_box_l">邮箱</div>
-						<input type="text" placeholder="用于绑定账号以及验证" />
+						<input type="text" placeholder="用于绑定账号以及验证" class="inputxt"/>
 						<div class="mistake"></div>
 						<div class="correct"></div>
 					</div>
 					<div class="input_box">
-						<div class="input_box_l">密码</div>
-						<input type="password" placeholder="4~16个字符，区分大小写" />
+						<div class="input_box_l" >密码</div>
+						<input type="password" placeholder="6~10个字符，区分大小写" name="userpassword" class="inputxt"/>
 						<div class="mistake"></div>
 						<div class="correct"></div>
 					</div>
 					<div class="input_box">
 						<div class="input_box_l">确认密码</div>
-						<input type="password"  />
+						<input type="password"  name="userpassword2" class="inputxt"/>
 						<div class="mistake"></div>
 						<div class="correct"></div>
 					</div>
@@ -101,17 +101,31 @@
 				label:".label",
 				showAllError:true,
 				datatype:{
-					"zh1-6":/^[\u4E00-\u9FA5\uf900-\ufa2d]{1,6}$/
+					"zh1-6":/^[\u4E00-\u9FA5\uf900-\ufa2d]{1,6}$/,
+					"e":/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 				},
+
 				ajaxPost:true
 			});
 
 			demo.tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
 
 			demo.addRule([{
-				ele:".inputxt:eq(0)",
-				datatype:"zh2-4"
-			}]);
+					ele:".inputxt:eq(0)",
+					datatype:"zh2-4"
+					},	{
+					ele:".inputxt:eq(1)",
+					datatype:"e"
+					}, {
+						ele:".inputxt:eq(2)",
+						datatype:"*6-10"
+					},{
+						ele:".inputxt:eq(3)",
+						datatype:"*6-10",
+						recheck:"userpassword"
+					}
+
+					]);
 
 			//验证码
 			$('#vimg').click(function(){

@@ -1,21 +1,25 @@
 .Validform_checktip{
     margin-left:8px;
-    line-height:20px;
-    height:20px;
+    line-height:48px;
+    height:48px;
     overflow:hidden;
     color:#999;
-    font-size:12px;
+    font-size: 20px;
+    float:left;
 }
 .Validform_right{
     color:#71b83d;
-    padding-left:20px;
-    background:url(../images/validform/right.png) no-repeat left center;
+    padding-left:35px;
+    white-space:nowrap;
+    background:url(../images/register/correct.png) no-repeat left center;
+    float:left;
 }
 .Validform_wrong{
     color:red;
-    padding-left:20px;
+    padding-left:35px;
     white-space:nowrap;
-    background:url(../images/validform/error.png) no-repeat left center;
+    background:url(../images/register/mistake.png) no-repeat left center;
+    float:left;
 }
 .Validform_loading{
     padding-left:20px;
