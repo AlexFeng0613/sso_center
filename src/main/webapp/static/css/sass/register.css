@@ -28,7 +28,7 @@ a:visited {
   height: 52px;
   line-height: 52px; }
 
-.block, .figure a:link, .context a, .promptly, .ipone_next, .vault, .login_html {
+.block, .figure a:link, .context a, .promptly, .ipone_next, .vault, .login_html, #vimg {
   display: block; }
 
 .none, .aside2, .mistake, .correct, .anew, .count {
@@ -110,7 +110,7 @@ a:visited {
   width: 1200px;
   margin: 0 auto; }
 
-.left, .step_mark li, .step_step li, .figure .student:link, .aside1, .aside2, .section, .input_box_l, .input_box input, .mistake, .correct, .context a.prev, .verify_img, .verify, .send_l, .anew, .anew60, .ipone_box_l, .ipone_num, .verify_code, .note, .ipone_next, .skip, .invite_box_l, .vault, .register_succeed_l, .register_succeed_r, .congratulation, .login_html, .self_motion {
+.left, .step_mark li, .step_step li, .figure .student:link, .aside1, .aside2, .section, .input_box_l, .input_box input, .mistake, .correct, .context a.prev, .verify_img, .verify, .send_l, .anew, .anew60, .ipone_box_l, .ipone_num, .verify_code, .note, .ipone_next, .skip, .invite_box_l, .vault, .register_succeed_l, .register_succeed_r, .congratulation, .login_html, .self_motion, #vimg {
   float: left; }
 
 .right, .figure .teacher:link, .context a.next, .count, .forget {
@@ -480,6 +480,9 @@ a:visited {
 
 .promptly_register a {
   color: #74bc41; }
+
+#vimg {
+  height: 48px; }
 
 .footer {
   background-color: #f4f4f4;

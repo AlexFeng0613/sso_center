@@ -1,4 +1,4 @@
-	$(function(){
+jQuery(document).ready(function($) {
 		var h=$(window).height()-$('.header').height()-$('.footer').height();
 		$('.container-fluid').css('min-height',h+'px');
 

@@ -423,6 +423,7 @@ text-decoration:none;
 	width:750px;
 	height:50px;
 	@extend %mb20;
+
 }
 
 .input_box_l{
@@ -885,6 +886,12 @@ color:#9b9a9d;
 .promptly_register a{
 color:#74bc41;
 @extend .log_promptly;
+}
+
+#vimg{
+  height:48px;
+  @extend .left;
+  @extend .block;
 }
 
 .footer{
