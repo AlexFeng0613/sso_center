@@ -88,10 +88,10 @@ a:visited {
 .fs16, .foot {
   font-size: 16px; }
 
-.fff, .context a, .anew, .note, .ipone_next, .vault:hover, .log {
+.fff, .context a, .context .next, .anew, .note, .ipone_next, .vault:hover, .log {
   color: #fff; }
 
-.fs20, .context a, .anew, .anew60, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .vault {
+.fs20, .context a, .context .next, .anew, .anew60, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .vault {
   font-size: 20px; }
 
 .fs24, .figure a:link, .aside1, .aside2 {
@@ -103,7 +103,7 @@ a:visited {
 .fs28, .congratulation, .login_html {
   font-size: 28px; }
 
-.family, .h_title, .step_step li, .figure a:link, .aside1, .aside2, .input_box_l, .context a, .send_l, .anew, .anew60, .promptly, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .vault, .congratulation, .login_html, .leap, .login_title, .login_input, .forget, .log, .log_promptly, .promptly_register, .promptly_register a, pre {
+.family, .h_title, .step_step li, .figure a:link, .aside1, .aside2, .input_box_l, .context a, .context .next, .send_l, .anew, .anew60, .promptly, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .vault, .congratulation, .login_html, .leap, .login_title, .login_input, .forget, .log, .log_promptly, .promptly_register, .promptly_register a, pre {
   font-family: \5FAE\8F6F\96C5\9ED1; }
 
 .center, .header .center, .container-fluid .center {
@@ -113,10 +113,10 @@ a:visited {
 .left, .step_mark li, .step_step li, .figure .student:link, .aside1, .aside2, .section, .input_box_l, .input_box input, .mistake, .correct, .context a.prev, .verify_img, .verify, .send_l, .anew, .anew60, .ipone_box_l, .ipone_num, .verify_code, .note, .ipone_next, .skip, .invite_box_l, .vault, .register_succeed_l, .register_succeed_r, .congratulation, .login_html, .self_motion, #vimg {
   float: left; }
 
-.right, .figure .teacher:link, .context a.next, .count, .forget {
+.right, .figure .teacher:link, .context .next, .count, .forget {
   float: right; }
 
-.text-center, .step_mark li, .figure a:link, .aside1, .aside2, .context a, .anew, .anew60, .note, .ipone_next, .vault, .login_title, .log, .foot {
+.text-center, .step_mark li, .figure a:link, .aside1, .aside2, .context a, .context .next, .anew, .anew60, .note, .ipone_next, .vault, .login_title, .log, .foot {
   text-align: center; }
 
 .text-left, .h_title {
@@ -285,6 +285,15 @@ a:visited {
   background: url(../../images/register/prev.gif) no-repeat center; }
 
 .context a:hover {
+  background: url(../../images/register/next.png) no-repeat center; }
+
+.context .next {
+  width: 216px;
+  height: 58px;
+  line-height: 58px;
+  background: url(../../images/register/prev.gif) no-repeat center;
+  border: none; }
+.context .next:hover {
   background: url(../../images/register/next.png) no-repeat center; }
 
 .verify_img {

@@ -511,11 +511,23 @@ padding-bottom:100px;
 		@extend .left;
 		
 	}
-	a.next{
+	.next{
 		@extend .right;
-		
+	  width:216px;
+	  height:58px;
+	  line-height:58px;
+	  @extend .family;
+	  @extend .fff;
+	  @extend .fs20;
+	  @extend .text-center;
+	  background:url(../../images/register/prev.gif) no-repeat center;
+	  border:none;
 	}
+  .next:hover{
+	background:url(../../images/register/next.png) no-repeat center;
+  }
 }
+
 
 .verify_img{
 	width:586px;
