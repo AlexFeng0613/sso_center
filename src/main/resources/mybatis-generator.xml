@@ -67,9 +67,27 @@
                enableUpdateByExample="false"/>
 
         <table tableName="tbsmssend" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>-->
+               enableUpdateByExample="false"/>
 
         <table tableName="userTemp" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>-->
+
+        <table tableName="tb3rdclients" domainObjectName="ThirdClients" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tborganization" domainObjectName="Organization" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tbrestactiontype" domainObjectName="Restactiontype" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tbrestfullog" domainObjectName="RestfulLog" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tbschoolinvite" domainObjectName="SchoolInvite" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tbsystemlog" domainObjectName="SystemLog" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>

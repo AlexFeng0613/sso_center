@@ -1,20 +1,40 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-</head>
-<body>
-    <h3>Login Page!!!</h3>
-
-    <form action="/user/login.html" method="post">
-        UserName:<input type="text" name="username"/><br/>
-        Password:<input type="password" name="password"/><br/>
-
-        <!--Remember Me:<input type="checkbox" name="rememberMe"/><br/>-->
-
-        <button>Submit</button>
-    </form>
-</body>
+	  xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv = "X-UA-Compatible" content = "IE=chrome" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link th:href="@{/static/css/sass/register.css}" href="../../static/css/sass/register.css" rel="stylesheet" type="text/css"/>
+		<link th:href="@{/static/css/sass/bootstrap.css}" href="../../static/css/sass/bootstrap.css" rel="stylesheet" type="text/css"/>
+		<script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../../static/scripts/jquery/jquery-1.11.3.min.js"></script>
+		<script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../static/scripts/ie/html5shiv.js"></script>
+		<script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../static/scripts/ie/placeholder.js"></script>
+		<script text="text/javascript" th:src="@{/static/scripts/bootstrap/bootstrap.min.js}" src="../../static/scripts/bootstrap/bootstrap.min.js"></script>
+		<script text="text/javascript" th:src="@{/static/scripts/register.js}" src="../../static/scripts/register.js"></script>
+	</head>
+	<body bgcolor="#5190bf">
+		<div class="login">
+			<div class="close"></div>
+			<summary class="login_title">账号登录</summary>
+			<form action="/user/login.html" method="post">
+				<div class="login_box">
+					<input type="text" class="login_input" name="username" placeholder="邮箱账号"/>
+					<input type="password" class="login_input" name="password" placeholder="密码"/>
+					<div class="login_password">
+						<div class="self_motion">自动登录
+							<input type="checkbox" />
+						</div>
+						<div class="self_motion">记住密码
+							<input type="checkbox" />
+						</div>
+						<a href="/page/register/1.html" class="forget">忘记密码？</a>
+					</div>
+					<input type="submit" class="log" value="登录"/>
+					<div class="promptly_register">没有密码？<a href="/page/register/1.html">立即注册》</a></div>
+				</div>
+			</form>
+		</div>
+	</body>
 </html>
+

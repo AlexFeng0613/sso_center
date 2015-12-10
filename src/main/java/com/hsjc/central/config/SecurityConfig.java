@@ -3,6 +3,7 @@ package com.hsjc.central.config;
 
 import com.hsjc.central.authrealm.MyAuthRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
@@ -34,12 +35,13 @@ public class SecurityConfig {
 	 * ehcache
 	 * @return
 	 */
-	/*@Bean
+
+	@Bean
 	public EhCacheManager ehCacheManager() {
 		EhCacheManager ehCacheManager = new EhCacheManager();
-		ehCacheManager.setCacheManagerConfigFile("classpath:ehcache.xml");
+		ehCacheManager.setCacheManager(cacheManager());
 		return ehCacheManager;
-	}*/
+	}
 
 	@Bean(destroyMethod = "shutdown")
 	public net.sf.ehcache.CacheManager cacheManager() {
@@ -51,7 +53,7 @@ public class SecurityConfig {
 	 * @return
      */
 	@Bean
-	public HashedCredentialsMatcher HashedCredentialsMatcher(){
+	public HashedCredentialsMatcher hashedCredentialsMatcher(){
 		HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
 		hashedCredentialsMatcher.setHashAlgorithmName("md5");
 		hashedCredentialsMatcher.setHashIterations(2);
@@ -67,7 +69,7 @@ public class SecurityConfig {
 	public DefaultWebSecurityManager securityManager() {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(myAuthRealm());
-		//securityManager.setCacheManager(ehCacheManager());
+		securityManager.setCacheManager(ehCacheManager());
 		securityManager.setSessionManager(defaultWebSessionManager());
 		securityManager.setRememberMeManager(rememberMeManager());
 		return securityManager;
@@ -80,7 +82,7 @@ public class SecurityConfig {
 	@Bean
 	public MyAuthRealm myAuthRealm() {
 		MyAuthRealm myAuthRealm = new MyAuthRealm();
-		myAuthRealm.setCredentialsMatcher(HashedCredentialsMatcher());
+		myAuthRealm.setCredentialsMatcher(hashedCredentialsMatcher());
 		myAuthRealm.setCachingEnabled(false);
 		return myAuthRealm;
 	}
@@ -91,36 +93,21 @@ public class SecurityConfig {
      */
 	@Bean
 	public ShiroFilterFactoryBean shiroFilter() {
-		//Map<String,Filter> filtersMap = new HashMap<>();
-		//filtersMap.put("authc", formAuthenticationFilter());
-
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager());
-		shiroFilterFactoryBean.setLoginUrl("/page/login.html");
-		//shiroFilterFactoryBean.setFilters(filtersMap);
+		shiroFilterFactoryBean.setLoginUrl("/user/login.html");
 
 		Map<String, String> filterChainDefinitionMap = new HashMap<String, String>();
 		filterChainDefinitionMap.put("/static/**", "anon");
-		filterChainDefinitionMap.put("/page/**", "anon");
+		filterChainDefinitionMap.put("/code.html", "anon");
+		filterChainDefinitionMap.put("/page/register/*.html", "anon");
 		filterChainDefinitionMap.put("/page/logout.html", "logout");
 		filterChainDefinitionMap.put("/user/login.html", "anon");
-		filterChainDefinitionMap.put("/page/login.html", "anon");
-		filterChainDefinitionMap.put("/code.html", "anon");
 		filterChainDefinitionMap.put("/**", "user");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;
 
 	}
-
-	/*@Bean
-	public FormAuthenticationFilter formAuthenticationFilter(){
-		FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationFilter();
-		formAuthenticationFilter.setUsernameParam("username");
-		formAuthenticationFilter.setPasswordParam("password");
-		formAuthenticationFilter.setRememberMeParam("rememberMe");
-		formAuthenticationFilter.setLoginUrl("/user/login.html");
-		return formAuthenticationFilter;
-	}*/
 
 	/**
 	 * 会话ID生成器
@@ -238,7 +225,7 @@ public class SecurityConfig {
 	@Bean
 	public LogoutFilter logout() {
 		LogoutFilter logoutFilter = new LogoutFilter();
-		logoutFilter.setRedirectUrl("/page/login.html");
+		logoutFilter.setRedirectUrl("/user/login.html");
 		return logoutFilter;
 	}
 

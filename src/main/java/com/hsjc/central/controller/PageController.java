@@ -1,6 +1,7 @@
 package com.hsjc.central.controller;
 
-import com.hsjc.central.constant.RedisConstant;
+import com.hsjc.central.service.ApiBaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,26 +13,48 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @date : 2015-11-24
  */
 @Controller
-@RequestMapping("/page")
+@RequestMapping("/page/")
 public class PageController {
 
-    @RequestMapping("/index")
+    @Autowired
+    private ApiBaseService apiBaseService;
+    /**
+     * @author : zga
+     * @date : 2015-12-04
+     * 用户主页
+     * @return
+     */
+    @RequestMapping("index")
     public String index(){
-        return "index";
+        return "/user/index";
     }
 
-    @RequestMapping("/logout")
+    /**
+     * @author : zga
+     * @date : 2015-12-04
+     * 退出登录
+     * @return
+     */
+    @RequestMapping("logout")
     public String logout(){
-        return "logout";
+        return "redirect:/user/login.html";
     }
 
-    @RequestMapping("/register/{num}")
+    /**
+     * @author : zga
+     * @date : 2015-12-04
+     * 注册页面
+     * @param num
+     * @param type
+     * @param email
+     * @param model
+     * @return
+     */
+    @RequestMapping("register/{num}")
     public String registerPage(@PathVariable Integer num,
                                @RequestParam(value = "type",required = false) String type,
                                @RequestParam(value = "email",required = false) String email,
                                Model model){
-        System.out.println("redis factory is >>"+RedisConstant.DB_DICT);
-
         switch (num){
             case 2:
                 model.addAttribute("type",type);
@@ -41,9 +64,13 @@ public class PageController {
                 break;
 
             case 4:
-                model.addAttribute("email", email);
+                try {
+                    String original = apiBaseService.getDesUtil().decrypt(email);
+                    model.addAttribute("email", original);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
-
             case 5:
                 break;
 
@@ -51,13 +78,6 @@ public class PageController {
                 break;
         }
 
-
-        return "user/register"+num;
+        return "/user/register"+num;
     }
-
-    @RequestMapping("/login")
-    public String login(){
-        return "/user/login";
-    }
-
 }

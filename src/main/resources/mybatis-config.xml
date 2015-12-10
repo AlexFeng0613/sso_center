@@ -8,12 +8,12 @@
            <typeAlias type="com.hsjc.central.domain.UserStudent" alias="UserStudent"/>
            <typeAlias type="com.hsjc.central.domain.UserTeacher" alias="UserTeacher"/>
            <typeAlias type="com.hsjc.central.domain.SsoClientDetails" alias="SsoClientDetails"/>
-           <typeAlias type="com.hsjc.central.domain.TbEmailActivate" alias="TbEmailActivate"/>
-           <typeAlias type="com.hsjc.central.domain.TbEmailResetPwd" alias="TbEmailResetPwd"/>
-           <typeAlias type="com.hsjc.central.domain.TbEmailSend" alias="TbEmailSend"/>
-           <typeAlias type="com.hsjc.central.domain.TbSmsBindPhoneNum" alias="TbSmsBindPhoneNum"/>
-           <typeAlias type="com.hsjc.central.domain.TbSmsResetPasswd" alias="TbSmsResetPasswd"/>
-           <typeAlias type="com.hsjc.central.domain.TbSmsSend" alias="TbSmsSend"/>
+           <typeAlias type="com.hsjc.central.domain.EmailActivate" alias="TbEmailActivate"/>
+           <typeAlias type="com.hsjc.central.domain.EmailResetPwd" alias="TbEmailResetPwd"/>
+           <typeAlias type="com.hsjc.central.domain.EmailSend" alias="TbEmailSend"/>
+           <typeAlias type="com.hsjc.central.domain.SmsBindPhoneNum" alias="TbSmsBindPhoneNum"/>
+           <typeAlias type="com.hsjc.central.domain.SmsResetPasswd" alias="TbSmsResetPasswd"/>
+           <typeAlias type="com.hsjc.central.domain.SmsSend" alias="TbSmsSend"/>
            <typeAlias type="com.hsjc.central.domain.UserTemp" alias="UserTemp"/>
        </typeAliases>
        <mappers>

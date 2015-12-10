@@ -1,7 +1,6 @@
 package com.hsjc.central.mapper;
 
 import com.hsjc.central.domain.UserMain;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * @author : zga
@@ -16,8 +15,7 @@ public interface UserMainMapper {
 
     UserMain selectByPrimaryKey(Integer id);
 
-
-    UserMain selectByEmail(@Param("email") String email);
+    UserMain selectByEmail(UserMain userMain);
 
     int updateByPrimaryKeySelective(UserMain record);
 

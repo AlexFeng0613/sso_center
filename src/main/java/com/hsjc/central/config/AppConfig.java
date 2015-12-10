@@ -1,5 +1,6 @@
 package com.hsjc.central.config;
 
+import com.hsjc.central.constant.Constant;
 import com.hsjc.central.constant.MailConstant;
 import com.hsjc.central.constant.RedisConstant;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,9 +35,11 @@ public class AppConfig {
 
 	@Bean
 	public RedisConstant redisConstant(
-			@Value("${redis.dictDatabase}") Integer DB_DICT
+			@Value("${redis.dictDatabase}") Integer DB_DICT,
+			@Value("${3rd.secretKey}") String secretKey
 	) {
 		RedisConstant.DB_DICT = DB_DICT;
+		Constant.secret_key = secretKey;
 		return null;
 	}
 

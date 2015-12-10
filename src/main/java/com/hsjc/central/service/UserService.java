@@ -14,6 +14,7 @@ import com.hsjc.central.util.PasswordHelper;
 import com.hsjc.central.util.SSOCenterStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 import java.util.Calendar;
@@ -45,7 +46,9 @@ public class UserService {
      * @return
      */
     public UserMain findByEmail(String email){
-        UserMain userMain = userMainMapper.selectByEmail(email);
+        UserMain paramUserMain = new UserMain();
+        paramUserMain.setEmail(email);
+        UserMain userMain = userMainMapper.selectByEmail(paramUserMain);
         return userMain;
     }
 
@@ -121,4 +124,23 @@ public class UserService {
 
         return result;
     }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-04
+     * 更新用户状态
+     * @param userTemp
+     * @return
+     */
+    public int activateEmail(UserTemp userTemp){
+        if(userTemp == null) return 0;
+
+        if(StringUtils.isEmpty(userTemp.getEmail())) return 0;
+
+        if(StringUtils.isEmpty(userTemp.getStatus())) userTemp.setStatus("activated");
+
+        return userTempMapper.updateStatusByEmial(userTemp);
+    }
+
+
 }

@@ -2,12 +2,7 @@ package com.hsjc.central.mapper;
 
 import com.hsjc.central.domain.SsoClientDetails;
 
-/**
- * @author : zga
- * @date : 2015-12-2
- */
-public interface SsoClientDetailsMapper {
-
+public interface ThirdClientsMapper {
     int deleteByPrimaryKey(Long id);
 
 

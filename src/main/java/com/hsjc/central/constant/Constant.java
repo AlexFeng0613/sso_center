@@ -17,4 +17,6 @@ public class Constant {
     public static final String SEND_MAIL_FAIL = "100005";
 
     public static final int REDIS_FETCH_TIME_OUT = 24 * 60 * 1000;
+
+    public static String secret_key;
 }

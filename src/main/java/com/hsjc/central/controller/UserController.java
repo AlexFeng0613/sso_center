@@ -3,6 +3,7 @@ package com.hsjc.central.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.central.domain.ActivateEmailMess;
 import com.hsjc.central.domain.UserMain;
+import com.hsjc.central.domain.UserTemp;
 import com.hsjc.central.service.ApiBaseService;
 import com.hsjc.central.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -12,7 +13,6 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -31,14 +31,21 @@ public class UserController extends BaseController{
     @Autowired
     private ApiBaseService apiBaseService;
 
-    @RequestMapping("save")
-    public String save(){
-        return "user/save";
+    /**
+     * @author : zga
+     * @date : 2015-12-04
+     * 登录页面
+     * @return
+     */
+    @RequestMapping(value = "login",method = RequestMethod.GET)
+    public String login(){
+        return "/login";
     }
 
     /**
      * @author:zga
      * @date:2015-12-02
+     * 用户登录
      * @param username
      * @param password
      * @return
@@ -50,7 +57,7 @@ public class UserController extends BaseController{
             SecurityUtils.getSubject().login(upToken);
         } catch (AuthenticationException e) {
             e.printStackTrace();
-            return "redirect:/page/login.html";
+            return "redirect:login.html";
         }
 
         Subject subject = SecurityUtils.getSubject();
@@ -61,13 +68,7 @@ public class UserController extends BaseController{
         session.setTimeout(-1);
         session.setAttribute("user", userMain);
 
-        return "redirect:index.html";
-    }
-
-    @RequestMapping("index")
-    public String index(Model model){
-        model.addAttribute("username","yeyinzhu");
-        return "user/index";
+        return "redirect:/page/index.html";
     }
 
     /**
@@ -96,6 +97,7 @@ public class UserController extends BaseController{
     public String activateEmail(@RequestParam("email")String email,
                                 @RequestParam("ticket")String ticket){
         try {
+            //验证email、ticket是否正确,ticket是否过期
             String originEmail = apiBaseService.getDesUtil().decrypt(email);
             Object obj = apiBaseService.fetchObject(originEmail, ActivateEmailMess.class);
 
@@ -111,6 +113,13 @@ public class UserController extends BaseController{
                 //比对不一致,返回错误页面
                 return "";
             }
+
+            //如果正确且没有过期,更新状态为activated
+            UserTemp userTemp = new UserTemp();
+            userTemp.setEmail(originEmail);
+            userTemp.setStatus("activated");
+            int num = userService.activateEmail(userTemp);
+            if(num < 1) return "";//激活失败,返回错误页面
         } catch (Exception e) {
             e.printStackTrace();
         }

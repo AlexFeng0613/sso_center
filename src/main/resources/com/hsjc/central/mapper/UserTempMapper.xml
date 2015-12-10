@@ -16,31 +16,29 @@
     id, username, password, salt, phone, type, status, invitateCode, email
   </sql>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from usertemp
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from usertemp
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-
-  <insert id="insert" parameterType="com.hsjc.central.domain.UserTemp">
+  <!--
+    @author : zga
+    @date : 2015-12-04
+    新增单个用户
+  -->
+  <insert id="insert" parameterType="UserTemp">
     insert into usertemp
     (username, password,salt,type, email)
     values (
-      #{userTemp.username},
-      #{userTemp.password},
-      #{userTemp.salt},
-      #{userTemp.type},
-      #{userTemp.email}
-      )
+    #{userTemp.username},
+    #{userTemp.password},
+    #{userTemp.salt},
+    #{userTemp.type},
+    #{userTemp.email}
+    )
   </insert>
 
-  <insert id="insertSelective" parameterType="com.hsjc.central.domain.UserTemp" >
+  <!--
+    @author : zga
+    @date : 2015-12-04
+    新增多个用户
+  -->
+  <insert id="insertSelective" parameterType="UserTemp" >
     insert into usertemp
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -73,76 +71,145 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id},
       </if>
       <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+        #{username},
       </if>
       <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+        #{password},
       </if>
       <if test="salt != null" >
-        #{salt,jdbcType=VARCHAR},
+        #{salt},
       </if>
       <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
+        #{phone},
       </if>
       <if test="type != null" >
-        #{type,jdbcType=CHAR},
+        #{type},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=CHAR},
+        #{status},
       </if>
       <if test="invitatecode != null" >
-        #{invitatecode,jdbcType=VARCHAR},
+        #{invitatecode},
       </if>
       <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
+        #{email},
       </if>
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.UserTemp" >
+  <!--
+    @author : zga
+    @date : 2015-12-04
+    通过id删除用户
+  -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from usertemp
+    where id = #{id}
+  </delete>
+
+  <!--
+    @author : zga
+    @date : 2015-12-04
+    根据id更新用户信息
+  -->
+  <update id="updateByPrimaryKeySelective" parameterType="UserTemp">
     update usertemp
     <set >
       <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+        username = #{username},
       </if>
       <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
+        password = #{password},
       </if>
       <if test="salt != null" >
-        salt = #{salt,jdbcType=VARCHAR},
+        salt = #{salt},
       </if>
       <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
+        phone = #{phone},
       </if>
       <if test="type != null" >
-        type = #{type,jdbcType=CHAR},
+        type = #{type},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=CHAR},
+        status = #{status},
       </if>
       <if test="invitatecode != null" >
-        invitateCode = #{invitatecode,jdbcType=VARCHAR},
+        invitateCode = #{invitatecode},
       </if>
       <if test="email != null" >
-        email = #{email,jdbcType=VARCHAR},
+        email = #{email},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.UserTemp" >
+  <!--
+    @author : zga
+    @date : 2015-12-04
+    根据email更新用户状态
+  -->
+  <update id="updateStatusByEmial" parameterType="UserTemp">
     update usertemp
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      salt = #{salt,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      type = #{type,jdbcType=CHAR},
-      status = #{status,jdbcType=CHAR},
-      invitateCode = #{invitatecode,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    <set>
+      <if test="status != null">
+        status = #{status}
+      </if>
+    </set>
+    where email = #{email}
   </update>
+
+  <!--
+    @author : zga
+    @date : 2015-12-04
+    新增单个用户
+  -->
+  <update id="updateByPrimaryKey" parameterType="UserTemp" >
+    update usertemp
+    set username = #{username},
+    password = #{password},
+    salt = #{salt},
+    phone = #{phone},
+    type = #{type},
+    status = #{status},
+    invitateCode = #{invitatecode},
+    email = #{email}
+    where id = #{id}
+  </update>
+
+  <!--
+    @author : zga
+    @date : 2015-12-04
+    根据id查询用户信息
+  -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from usertemp
+    where id = #{id}
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2015-12-04
+    根据username、phone、email查询用户
+  -->
+  <select id="selectByEmailOrUserNameOrPhone" resultMap="BaseResultMap" parameterType="UserTemp">
+    select
+    <include refid="Base_Column_List" />
+    from usertemp
+    where 1=1
+    <if test="userTemp.email != null" >
+      email = #{userTemp.email},
+    </if>
+    <if test="userTemp.phone != null" >
+      phone = #{userTemp.phone},
+    </if>
+    <if test="userTemp.username != null" >
+      username = #{userTemp.username},
+    </if>
+  </select>
+
 </mapper>
