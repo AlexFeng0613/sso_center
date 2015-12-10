@@ -17,7 +17,7 @@
   -->
   <insert id="insert" parameterType="com.hsjc.central.domain.UserTeacher">
     insert into userteacher (id, userId)
-    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR})
+    values (#{id}, #{userid})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.UserTeacher">
@@ -32,39 +32,39 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id},
       </if>
       <if test="userid != null">
-        #{userid,jdbcType=VARCHAR},
+        #{userid},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from userteacher
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.UserTeacher">
     update userteacher
     <set>
       <if test="userid != null">
-        userId = #{userid,jdbcType=VARCHAR},
+        userId = #{userid},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.UserTeacher">
     update userteacher
-    set userId = #{userid,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    set userId = #{userid}
+    where id = #{id}
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from userteacher
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id}
   </select>
 </mapper>

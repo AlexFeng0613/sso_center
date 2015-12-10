@@ -3,6 +3,8 @@ package com.hsjc.central.constant;
 /**
  * @author : zga
  * @date : 2015-12-03
+ *
+ * email 发送模板类
  */
 public class MailTemplate {
     public static final String MAIL_SEND_ACTIVATE_SUBJECT = "激活你的金课堂账号";

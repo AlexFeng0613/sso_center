@@ -31,9 +31,9 @@
     insert into tbemailsend (ID, Email, Subject,
       SendFlag, SendTime, byModule, 
       RequestKeyID, Content)
-    values (#{id,jdbcType=BIGINT}, #{email,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
-      #{sendflag,jdbcType=BIT}, #{sendtime,jdbcType=TIMESTAMP}, #{bymodule,jdbcType=VARCHAR}, 
-      #{requestkeyid,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR})
+    values (#{id}, #{email}, #{subject}, 
+      #{sendflag}, #{sendtime}, #{bymodule}, 
+      #{requestkeyid}, #{content})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.EmailSend">
@@ -66,86 +66,86 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=BIGINT},
+        #{id},
       </if>
       <if test="email != null">
-        #{email,jdbcType=VARCHAR},
+        #{email},
       </if>
       <if test="subject != null">
-        #{subject,jdbcType=VARCHAR},
+        #{subject},
       </if>
       <if test="sendflag != null">
-        #{sendflag,jdbcType=BIT},
+        #{sendflag},
       </if>
       <if test="sendtime != null">
-        #{sendtime,jdbcType=TIMESTAMP},
+        #{sendtime},
       </if>
       <if test="bymodule != null">
-        #{bymodule,jdbcType=VARCHAR},
+        #{bymodule},
       </if>
       <if test="requestkeyid != null">
-        #{requestkeyid,jdbcType=BIGINT},
+        #{requestkeyid},
       </if>
       <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
+        #{content},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tbemailsend
-    where ID = #{id,jdbcType=BIGINT}
+    where ID = #{id}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.EmailSend">
     update tbemailsend
     <set>
       <if test="email != null">
-        Email = #{email,jdbcType=VARCHAR},
+        Email = #{email},
       </if>
       <if test="subject != null">
-        Subject = #{subject,jdbcType=VARCHAR},
+        Subject = #{subject},
       </if>
       <if test="sendflag != null">
-        SendFlag = #{sendflag,jdbcType=BIT},
+        SendFlag = #{sendflag},
       </if>
       <if test="sendtime != null">
-        SendTime = #{sendtime,jdbcType=TIMESTAMP},
+        SendTime = #{sendtime},
       </if>
       <if test="bymodule != null">
-        byModule = #{bymodule,jdbcType=VARCHAR},
+        byModule = #{bymodule},
       </if>
       <if test="requestkeyid != null">
-        RequestKeyID = #{requestkeyid,jdbcType=BIGINT},
+        RequestKeyID = #{requestkeyid},
       </if>
       <if test="content != null">
-        Content = #{content,jdbcType=LONGVARCHAR},
+        Content = #{content},
       </if>
     </set>
-    where ID = #{id,jdbcType=BIGINT}
+    where ID = #{id}
   </update>
 
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hsjc.central.domain.EmailSend">
     update tbemailsend
-    set Email = #{email,jdbcType=VARCHAR},
-      Subject = #{subject,jdbcType=VARCHAR},
-      SendFlag = #{sendflag,jdbcType=BIT},
-      SendTime = #{sendtime,jdbcType=TIMESTAMP},
-      byModule = #{bymodule,jdbcType=VARCHAR},
-      RequestKeyID = #{requestkeyid,jdbcType=BIGINT},
-      Content = #{content,jdbcType=LONGVARCHAR}
-    where ID = #{id,jdbcType=BIGINT}
+    set Email = #{email},
+      Subject = #{subject},
+      SendFlag = #{sendflag},
+      SendTime = #{sendtime},
+      byModule = #{bymodule},
+      RequestKeyID = #{requestkeyid},
+      Content = #{content}
+    where ID = #{id}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.EmailSend">
     update tbemailsend
-    set Email = #{email,jdbcType=VARCHAR},
-      Subject = #{subject,jdbcType=VARCHAR},
-      SendFlag = #{sendflag,jdbcType=BIT},
-      SendTime = #{sendtime,jdbcType=TIMESTAMP},
-      byModule = #{bymodule,jdbcType=VARCHAR},
-      RequestKeyID = #{requestkeyid,jdbcType=BIGINT}
-    where ID = #{id,jdbcType=BIGINT}
+    set Email = #{email},
+      Subject = #{subject},
+      SendFlag = #{sendflag},
+      SendTime = #{sendtime},
+      byModule = #{bymodule},
+      RequestKeyID = #{requestkeyid}
+    where ID = #{id}
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
@@ -154,6 +154,6 @@
     ,
     <include refid="Blob_Column_List" />
     from tbemailsend
-    where ID = #{id,jdbcType=BIGINT}
+    where ID = #{id}
   </select>
 </mapper>

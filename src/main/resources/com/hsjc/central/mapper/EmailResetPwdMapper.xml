@@ -24,9 +24,9 @@
     insert into tbemailresetpwd (ID, UserID, CreateTime,
       UseTime, Code, State, 
       ValidSeconds)
-    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=BIGINT}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{usetime,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, 
-      #{validseconds,jdbcType=INTEGER})
+    values (#{id}, #{userid}, #{createtime}, 
+      #{usetime}, #{code}, #{state}, 
+      #{validseconds})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.EmailResetPwd">
@@ -56,74 +56,74 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id},
       </if>
       <if test="userid != null">
-        #{userid,jdbcType=BIGINT},
+        #{userid},
       </if>
       <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
+        #{createtime},
       </if>
       <if test="usetime != null">
-        #{usetime,jdbcType=TIMESTAMP},
+        #{usetime},
       </if>
       <if test="code != null">
-        #{code,jdbcType=VARCHAR},
+        #{code},
       </if>
       <if test="state != null">
-        #{state,jdbcType=CHAR},
+        #{state},
       </if>
       <if test="validseconds != null">
-        #{validseconds,jdbcType=INTEGER},
+        #{validseconds},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbemailresetpwd
-    where ID = #{id,jdbcType=INTEGER}
+    where ID = #{id}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.EmailResetPwd">
     update tbemailresetpwd
     <set>
       <if test="userid != null">
-        UserID = #{userid,jdbcType=BIGINT},
+        UserID = #{userid},
       </if>
       <if test="createtime != null">
-        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+        CreateTime = #{createtime},
       </if>
       <if test="usetime != null">
-        UseTime = #{usetime,jdbcType=TIMESTAMP},
+        UseTime = #{usetime},
       </if>
       <if test="code != null">
-        Code = #{code,jdbcType=VARCHAR},
+        Code = #{code},
       </if>
       <if test="state != null">
-        State = #{state,jdbcType=CHAR},
+        State = #{state},
       </if>
       <if test="validseconds != null">
-        ValidSeconds = #{validseconds,jdbcType=INTEGER},
+        ValidSeconds = #{validseconds},
       </if>
     </set>
-    where ID = #{id,jdbcType=INTEGER}
+    where ID = #{id}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.EmailResetPwd">
     update tbemailresetpwd
-    set UserID = #{userid,jdbcType=BIGINT},
-      CreateTime = #{createtime,jdbcType=TIMESTAMP},
-      UseTime = #{usetime,jdbcType=TIMESTAMP},
-      Code = #{code,jdbcType=VARCHAR},
-      State = #{state,jdbcType=CHAR},
-      ValidSeconds = #{validseconds,jdbcType=INTEGER}
-    where ID = #{id,jdbcType=INTEGER}
+    set UserID = #{userid},
+      CreateTime = #{createtime},
+      UseTime = #{usetime},
+      Code = #{code},
+      State = #{state},
+      ValidSeconds = #{validseconds}
+    where ID = #{id}
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tbemailresetpwd
-    where ID = #{id,jdbcType=INTEGER}
+    where ID = #{id}
   </select>
 </mapper>

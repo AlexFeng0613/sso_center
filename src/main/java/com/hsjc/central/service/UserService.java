@@ -9,7 +9,7 @@ import com.hsjc.central.domain.UserTemp;
 import com.hsjc.central.mapper.UserMainMapper;
 import com.hsjc.central.mapper.UserTempMapper;
 import com.hsjc.central.util.MailUtils;
-import com.hsjc.central.util.Md5;
+import com.hsjc.central.util.MD5;
 import com.hsjc.central.util.PasswordHelper;
 import com.hsjc.central.util.SSOCenterStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,8 @@ import java.util.Calendar;
 /**
  * @author : zga
  * @date : 2015-11-24
+ *
+ * 用户Service类
  */
 @Service
 public class UserService {
@@ -100,7 +102,7 @@ public class UserService {
             try {
                 ActivateEmailMess activateEmailMess = new ActivateEmailMess();
                 activateEmailMess.setEmail(apiBaseService.getDesUtil().encrypt(email));
-                activateEmailMess.setTicket(Md5.encode(Calendar.getInstance().getTime().toString()));
+                activateEmailMess.setTicket(MD5.encode(Calendar.getInstance().getTime().toString()));
 
                 apiBaseService.insertIntoRedis(email,activateEmailMess,ActivateEmailMess.class);
 

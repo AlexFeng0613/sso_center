@@ -2,6 +2,10 @@ package com.hsjc.central.mapper;
 
 import com.hsjc.central.domain.RestfulLog;
 
+/**
+ * @author : zga
+ * @date : 2015-12-10
+ */
 public interface RestfulLogMapper {
     int insert(RestfulLog record);
 

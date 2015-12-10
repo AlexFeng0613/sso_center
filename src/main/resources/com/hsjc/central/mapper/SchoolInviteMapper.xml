@@ -24,9 +24,9 @@
     insert into tbschoolinvite (inviteid, invitecode, schoolid, 
       byuserid, state, createtime, 
       usetime)
-    values (#{inviteid,jdbcType=BIGINT}, #{invitecode,jdbcType=VARCHAR}, #{schoolid,jdbcType=INTEGER}, 
-      #{byuserid,jdbcType=BIGINT}, #{state,jdbcType=CHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{usetime,jdbcType=TIMESTAMP})
+    values (#{inviteid}, #{invitecode}, #{schoolid}, 
+      #{byuserid}, #{state}, #{createtime}, 
+      #{usetime})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.SchoolInvite" >
@@ -56,74 +56,74 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="inviteid != null" >
-        #{inviteid,jdbcType=BIGINT},
+        #{inviteid},
       </if>
       <if test="invitecode != null" >
-        #{invitecode,jdbcType=VARCHAR},
+        #{invitecode},
       </if>
       <if test="schoolid != null" >
-        #{schoolid,jdbcType=INTEGER},
+        #{schoolid},
       </if>
       <if test="byuserid != null" >
-        #{byuserid,jdbcType=BIGINT},
+        #{byuserid},
       </if>
       <if test="state != null" >
-        #{state,jdbcType=CHAR},
+        #{state},
       </if>
       <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
+        #{createtime},
       </if>
       <if test="usetime != null" >
-        #{usetime,jdbcType=TIMESTAMP},
+        #{usetime},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tbschoolinvite
-    where inviteid = #{inviteid,jdbcType=BIGINT}
+    where inviteid = #{inviteid}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.SchoolInvite" >
     update tbschoolinvite
     <set >
       <if test="invitecode != null" >
-        invitecode = #{invitecode,jdbcType=VARCHAR},
+        invitecode = #{invitecode},
       </if>
       <if test="schoolid != null" >
-        schoolid = #{schoolid,jdbcType=INTEGER},
+        schoolid = #{schoolid},
       </if>
       <if test="byuserid != null" >
-        byuserid = #{byuserid,jdbcType=BIGINT},
+        byuserid = #{byuserid},
       </if>
       <if test="state != null" >
-        state = #{state,jdbcType=CHAR},
+        state = #{state},
       </if>
       <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
+        createtime = #{createtime},
       </if>
       <if test="usetime != null" >
-        usetime = #{usetime,jdbcType=TIMESTAMP},
+        usetime = #{usetime},
       </if>
     </set>
-    where inviteid = #{inviteid,jdbcType=BIGINT}
+    where inviteid = #{inviteid}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.SchoolInvite" >
     update tbschoolinvite
-    set invitecode = #{invitecode,jdbcType=VARCHAR},
-      schoolid = #{schoolid,jdbcType=INTEGER},
-      byuserid = #{byuserid,jdbcType=BIGINT},
-      state = #{state,jdbcType=CHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      usetime = #{usetime,jdbcType=TIMESTAMP}
-    where inviteid = #{inviteid,jdbcType=BIGINT}
+    set invitecode = #{invitecode},
+      schoolid = #{schoolid},
+      byuserid = #{byuserid},
+      state = #{state},
+      createtime = #{createtime},
+      usetime = #{usetime}
+    where inviteid = #{inviteid}
   </update>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from tbschoolinvite
-    where inviteid = #{inviteid,jdbcType=BIGINT}
+    where inviteid = #{inviteid}
   </select>
 </mapper>

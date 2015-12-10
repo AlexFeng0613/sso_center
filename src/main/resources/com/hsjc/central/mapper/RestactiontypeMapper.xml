@@ -20,8 +20,8 @@
   <insert id="insert" parameterType="com.hsjc.central.domain.Restactiontype" >
     insert into tbrestactiontype (id, actionid, actionname, 
       description)
-    values (#{id,jdbcType=BIGINT}, #{actionid,jdbcType=INTEGER}, #{actionname,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR})
+    values (#{id}, #{actionid}, #{actionname}, 
+      #{description})
   </insert>
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.Restactiontype" >
     insert into tbrestactiontype
@@ -41,53 +41,53 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=BIGINT},
+        #{id},
       </if>
       <if test="actionid != null" >
-        #{actionid,jdbcType=INTEGER},
+        #{actionid},
       </if>
       <if test="actionname != null" >
-        #{actionname,jdbcType=VARCHAR},
+        #{actionname},
       </if>
       <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
+        #{description},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tbrestactiontype
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.Restactiontype" >
     update tbrestactiontype
     <set >
       <if test="actionid != null" >
-        actionid = #{actionid,jdbcType=INTEGER},
+        actionid = #{actionid},
       </if>
       <if test="actionname != null" >
-        actionname = #{actionname,jdbcType=VARCHAR},
+        actionname = #{actionname},
       </if>
       <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
+        description = #{description},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.Restactiontype" >
     update tbrestactiontype
-    set actionid = #{actionid,jdbcType=INTEGER},
-      actionname = #{actionname,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+    set actionid = #{actionid},
+      actionname = #{actionname},
+      description = #{description}
+    where id = #{id}
   </update>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from tbrestactiontype
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </select>
 </mapper>

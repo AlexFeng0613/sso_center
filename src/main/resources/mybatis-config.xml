@@ -4,27 +4,39 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
        <typeAliases>
+
+           <typeAlias type="com.hsjc.central.domain.ActivateEmailMess" alias="ActivateEmailMess"/>
+           <typeAlias type="com.hsjc.central.domain.EmailActivate" alias="EmailActivate"/>
+           <typeAlias type="com.hsjc.central.domain.EmailResetPwd" alias="EmailResetPwd"/>
+           <typeAlias type="com.hsjc.central.domain.EmailSend" alias="EmailSend"/>
+           <typeAlias type="com.hsjc.central.domain.Organization" alias="Organization"/>
+           <typeAlias type="com.hsjc.central.domain.Restactiontype" alias="Restactiontype"/>
+           <typeAlias type="com.hsjc.central.domain.RestfulLog" alias="RestfulLog"/>
+           <typeAlias type="com.hsjc.central.domain.SchoolInvite" alias="SchoolInvite"/>
+           <typeAlias type="com.hsjc.central.domain.SmsBindPhoneNum" alias="SmsBindPhoneNum"/>
+           <typeAlias type="com.hsjc.central.domain.SmsResetPasswd" alias="SmsResetPasswd"/>
+           <typeAlias type="com.hsjc.central.domain.SmsSend" alias="SmsSend"/>
+           <typeAlias type="com.hsjc.central.domain.SystemLog" alias="SystemLog"/>
+           <typeAlias type="com.hsjc.central.domain.ThirdClients" alias="ThirdClients"/>
            <typeAlias type="com.hsjc.central.domain.UserMain" alias="UserMain"/>
            <typeAlias type="com.hsjc.central.domain.UserStudent" alias="UserStudent"/>
            <typeAlias type="com.hsjc.central.domain.UserTeacher" alias="UserTeacher"/>
-           <typeAlias type="com.hsjc.central.domain.SsoClientDetails" alias="SsoClientDetails"/>
-           <typeAlias type="com.hsjc.central.domain.EmailActivate" alias="TbEmailActivate"/>
-           <typeAlias type="com.hsjc.central.domain.EmailResetPwd" alias="TbEmailResetPwd"/>
-           <typeAlias type="com.hsjc.central.domain.EmailSend" alias="TbEmailSend"/>
-           <typeAlias type="com.hsjc.central.domain.SmsBindPhoneNum" alias="TbSmsBindPhoneNum"/>
-           <typeAlias type="com.hsjc.central.domain.SmsResetPasswd" alias="TbSmsResetPasswd"/>
-           <typeAlias type="com.hsjc.central.domain.SmsSend" alias="TbSmsSend"/>
            <typeAlias type="com.hsjc.central.domain.UserTemp" alias="UserTemp"/>
        </typeAliases>
        <mappers>
+           <mapper resource="com/hsjc/central/mapper/EmailActivateMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/EmailResetPwdMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/EmailSendMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/OrganizationMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/RestactiontypeMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/RestfulLogMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/SchoolInviteMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/SmsBindPhoneNumMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/SmsResetPasswdMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/SmsSendMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/SystemLogMapper.xml"/>
+           <mapper resource="com/hsjc/central/mapper/ThirdClientsMapper.xml"/>
            <mapper resource="com/hsjc/central/mapper/UserMainMapper.xml"/>
-           <mapper resource="com/hsjc/central/mapper/SsoClientDetailsMapper.xml"/>
-           <mapper resource="com/hsjc/central/mapper/TbEmailActivateMapper.xml"/>
-           <mapper resource="com/hsjc/central/mapper/TbEmailResetPwdMapper.xml"/>
-           <mapper resource="com/hsjc/central/mapper/TbEmailSendMapper.xml"/>
-           <mapper resource="com/hsjc/central/mapper/TbSmsBindPhoneNumMapper.xml"/>
-           <mapper resource="com/hsjc/central/mapper/TbSmsResetPasswdMapper.xml"/>
-           <mapper resource="com/hsjc/central/mapper/TbSmsSendMapper.xml"/>
            <mapper resource="com/hsjc/central/mapper/UserStudentMapper.xml"/>
            <mapper resource="com/hsjc/central/mapper/UserTeacherMapper.xml"/>
            <mapper resource="com/hsjc/central/mapper/UserTempMapper.xml"/>

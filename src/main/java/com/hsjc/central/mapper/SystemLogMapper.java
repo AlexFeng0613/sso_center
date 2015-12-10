@@ -2,6 +2,10 @@ package com.hsjc.central.mapper;
 
 import com.hsjc.central.domain.SystemLog;
 
+/**
+ * @author : zga
+ * @date : 2015-12-10
+ */
 public interface SystemLogMapper {
     int insert(SystemLog record);
 

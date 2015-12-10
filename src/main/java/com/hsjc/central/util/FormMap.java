@@ -6,10 +6,11 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * SpringMvc 
- * 把请求的所有参数封装到Map中,提供最常用的方法
  * @author : zga
  * @date : 2015-11-24
+ *
+ * SpringMvc
+ * 把请求的所有参数封装到Map中,提供最常用的方法
  */
 public class FormMap<K, V> extends HashMap<K, V> implements Serializable  {
 

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author : zga
  * @date : 2015-11-24
+ *
+ * Http 工具类
  */
 public class HttpUtil {
 

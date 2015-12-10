@@ -15,7 +15,7 @@ public class ThirdClients {
 
     private String ssoPassword;
 
-    private String 3rdPassword;
+    private String thirdPassword;
 
     public Long getId() {
         return id;
@@ -73,11 +73,11 @@ public class ThirdClients {
         this.ssoPassword = ssoPassword == null ? null : ssoPassword.trim();
     }
 
-    public String get3rdPassword() {
-        return 3rdPassword;
+    public String getThirdPassword() {
+        return thirdPassword;
     }
 
-    public void set3rdPassword(String 3rdPassword) {
-        this.3rdPassword = 3rdPassword == null ? null : 3rdPassword.trim();
+    public void setThirdPassword(String thirdPassword) {
+        this.thirdPassword = thirdPassword;
     }
 }

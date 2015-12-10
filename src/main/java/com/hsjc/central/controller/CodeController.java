@@ -16,6 +16,8 @@ import java.util.Random;
 /**
  * @author : zga
  * @date : 2015-12-2
+ *
+ * 验证码生成类
  */
 @Controller
 public class CodeController {

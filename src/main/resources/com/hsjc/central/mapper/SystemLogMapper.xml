@@ -23,8 +23,8 @@
     insert into tbsystemlog (syslogid, userid, logintime, 
       logintype, loginip, createdate
       )
-    values (#{syslogid,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{logintime,jdbcType=TIMESTAMP}, 
-      #{logintype,jdbcType=VARCHAR}, #{loginip,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}
+    values (#{syslogid}, #{userid}, #{logintime}, 
+      #{logintype}, #{loginip}, #{createdate}
       )
   </insert>
 
@@ -52,66 +52,66 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="syslogid != null" >
-        #{syslogid,jdbcType=BIGINT},
+        #{syslogid},
       </if>
       <if test="userid != null" >
-        #{userid,jdbcType=BIGINT},
+        #{userid},
       </if>
       <if test="logintime != null" >
-        #{logintime,jdbcType=TIMESTAMP},
+        #{logintime},
       </if>
       <if test="logintype != null" >
-        #{logintype,jdbcType=VARCHAR},
+        #{logintype},
       </if>
       <if test="loginip != null" >
-        #{loginip,jdbcType=VARCHAR},
+        #{loginip},
       </if>
       <if test="createdate != null" >
-        #{createdate,jdbcType=TIMESTAMP},
+        #{createdate},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tbsystemlog
-    where syslogid = #{syslogid,jdbcType=BIGINT}
+    where syslogid = #{syslogid}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.SystemLog" >
     update tbsystemlog
     <set >
       <if test="userid != null" >
-        userid = #{userid,jdbcType=BIGINT},
+        userid = #{userid},
       </if>
       <if test="logintime != null" >
-        logintime = #{logintime,jdbcType=TIMESTAMP},
+        logintime = #{logintime},
       </if>
       <if test="logintype != null" >
-        logintype = #{logintype,jdbcType=VARCHAR},
+        logintype = #{logintype},
       </if>
       <if test="loginip != null" >
-        loginip = #{loginip,jdbcType=VARCHAR},
+        loginip = #{loginip},
       </if>
       <if test="createdate != null" >
-        createdate = #{createdate,jdbcType=TIMESTAMP},
+        createdate = #{createdate},
       </if>
     </set>
-    where syslogid = #{syslogid,jdbcType=BIGINT}
+    where syslogid = #{syslogid}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.SystemLog" >
     update tbsystemlog
-    set userid = #{userid,jdbcType=BIGINT},
-      logintime = #{logintime,jdbcType=TIMESTAMP},
-      logintype = #{logintype,jdbcType=VARCHAR},
-      loginip = #{loginip,jdbcType=VARCHAR},
-      createdate = #{createdate,jdbcType=TIMESTAMP}
-    where syslogid = #{syslogid,jdbcType=BIGINT}
+    set userid = #{userid},
+      logintime = #{logintime},
+      logintype = #{logintype},
+      loginip = #{loginip},
+      createdate = #{createdate}
+    where syslogid = #{syslogid}
   </update>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from tbsystemlog
-    where syslogid = #{syslogid,jdbcType=BIGINT}
+    where syslogid = #{syslogid}
   </select>
 </mapper>

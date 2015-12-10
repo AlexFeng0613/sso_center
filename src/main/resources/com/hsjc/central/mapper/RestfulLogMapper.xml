@@ -23,8 +23,8 @@
     insert into tbrestfullog (restlogid, userid, actionid, 
       respcode, description, actiontime
       )
-    values (#{restlogid,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{actionid,jdbcType=INTEGER}, 
-      #{respcode,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{actiontime,jdbcType=TIMESTAMP}
+    values (#{restlogid}, #{userid}, #{actionid}, 
+      #{respcode}, #{description}, #{actiontime}
       )
   </insert>
 
@@ -52,67 +52,67 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="restlogid != null" >
-        #{restlogid,jdbcType=BIGINT},
+        #{restlogid},
       </if>
       <if test="userid != null" >
-        #{userid,jdbcType=BIGINT},
+        #{userid},
       </if>
       <if test="actionid != null" >
-        #{actionid,jdbcType=INTEGER},
+        #{actionid},
       </if>
       <if test="respcode != null" >
-        #{respcode,jdbcType=INTEGER},
+        #{respcode},
       </if>
       <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
+        #{description},
       </if>
       <if test="actiontime != null" >
-        #{actiontime,jdbcType=TIMESTAMP},
+        #{actiontime},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tbrestfullog
-    where restlogid = #{restlogid,jdbcType=BIGINT}
+    where restlogid = #{restlogid}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.RestfulLog" >
     update tbrestfullog
     <set >
       <if test="userid != null" >
-        userid = #{userid,jdbcType=BIGINT},
+        userid = #{userid},
       </if>
       <if test="actionid != null" >
-        actionid = #{actionid,jdbcType=INTEGER},
+        actionid = #{actionid},
       </if>
       <if test="respcode != null" >
-        respcode = #{respcode,jdbcType=INTEGER},
+        respcode = #{respcode},
       </if>
       <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
+        description = #{description},
       </if>
       <if test="actiontime != null" >
-        actiontime = #{actiontime,jdbcType=TIMESTAMP},
+        actiontime = #{actiontime},
       </if>
     </set>
-    where restlogid = #{restlogid,jdbcType=BIGINT}
+    where restlogid = #{restlogid}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.RestfulLog" >
     update tbrestfullog
-    set userid = #{userid,jdbcType=BIGINT},
-      actionid = #{actionid,jdbcType=INTEGER},
-      respcode = #{respcode,jdbcType=INTEGER},
-      description = #{description,jdbcType=VARCHAR},
-      actiontime = #{actiontime,jdbcType=TIMESTAMP}
-    where restlogid = #{restlogid,jdbcType=BIGINT}
+    set userid = #{userid},
+      actionid = #{actionid},
+      respcode = #{respcode},
+      description = #{description},
+      actiontime = #{actiontime}
+    where restlogid = #{restlogid}
   </update>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from tbrestfullog
-    where restlogid = #{restlogid,jdbcType=BIGINT}
+    where restlogid = #{restlogid}
   </select>
 </mapper>

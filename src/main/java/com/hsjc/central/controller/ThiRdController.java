@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @author : zga
  * @date : 2015-12-10
+ *
  * 第三方相关控制类
  */
 @Controller

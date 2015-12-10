@@ -24,9 +24,9 @@
     insert into tbemailactivate (ActivateID, UserID, CreateTime,
       ActiveTime, ActivateKey, State, 
       ValidSeconds)
-    values (#{activateid,jdbcType=INTEGER}, #{userid,jdbcType=BIGINT}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{activetime,jdbcType=TIMESTAMP}, #{activatekey,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, 
-      #{validseconds,jdbcType=INTEGER})
+    values (#{activateid}, #{userid,jdbcType=BIGINT}, #{createtime}, 
+      #{activetime}, #{activatekey}, #{state}, 
+      #{validseconds})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.EmailActivate">
@@ -56,32 +56,32 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="activateid != null">
-        #{activateid,jdbcType=INTEGER},
+        #{activateid},
       </if>
       <if test="userid != null">
         #{userid,jdbcType=BIGINT},
       </if>
       <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
+        #{createtime},
       </if>
       <if test="activetime != null">
-        #{activetime,jdbcType=TIMESTAMP},
+        #{activetime},
       </if>
       <if test="activatekey != null">
-        #{activatekey,jdbcType=VARCHAR},
+        #{activatekey},
       </if>
       <if test="state != null">
-        #{state,jdbcType=CHAR},
+        #{state},
       </if>
       <if test="validseconds != null">
-        #{validseconds,jdbcType=INTEGER},
+        #{validseconds},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbemailactivate
-    where ActivateID = #{activateid,jdbcType=INTEGER}
+    where ActivateID = #{activateid}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.EmailActivate">
@@ -91,39 +91,39 @@
         UserID = #{userid,jdbcType=BIGINT},
       </if>
       <if test="createtime != null">
-        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+        CreateTime = #{createtime},
       </if>
       <if test="activetime != null">
-        ActiveTime = #{activetime,jdbcType=TIMESTAMP},
+        ActiveTime = #{activetime},
       </if>
       <if test="activatekey != null">
-        ActivateKey = #{activatekey,jdbcType=VARCHAR},
+        ActivateKey = #{activatekey},
       </if>
       <if test="state != null">
-        State = #{state,jdbcType=CHAR},
+        State = #{state},
       </if>
       <if test="validseconds != null">
-        ValidSeconds = #{validseconds,jdbcType=INTEGER},
+        ValidSeconds = #{validseconds},
       </if>
     </set>
-    where ActivateID = #{activateid,jdbcType=INTEGER}
+    where ActivateID = #{activateid}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.EmailActivate">
     update tbemailactivate
     set UserID = #{userid,jdbcType=BIGINT},
-      CreateTime = #{createtime,jdbcType=TIMESTAMP},
-      ActiveTime = #{activetime,jdbcType=TIMESTAMP},
-      ActivateKey = #{activatekey,jdbcType=VARCHAR},
-      State = #{state,jdbcType=CHAR},
-      ValidSeconds = #{validseconds,jdbcType=INTEGER}
-    where ActivateID = #{activateid,jdbcType=INTEGER}
+      CreateTime = #{createtime},
+      ActiveTime = #{activetime},
+      ActivateKey = #{activatekey},
+      State = #{state},
+      ValidSeconds = #{validseconds}
+    where ActivateID = #{activateid}
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tbemailactivate
-    where ActivateID = #{activateid,jdbcType=INTEGER}
+    where ActivateID = #{activateid}
   </select>
 </mapper>

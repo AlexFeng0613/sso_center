@@ -7,6 +7,7 @@ import java.security.Security;
 /**
  * @author : zga
  * @date : 2015-12-03
+ *
  * Des加密工具类
  */
 public class DesUtils {
@@ -193,7 +194,7 @@ public class DesUtils {
 
 
 
-			String res = Md5.encode(uid+Md5.encode(secret_key)+dataStr);
+			String res = MD5.encode(uid+ MD5.encode(secret_key)+dataStr);
 			System.out.println(res);
 		}
 	    catch (Exception e) {

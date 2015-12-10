@@ -24,9 +24,9 @@
     insert into tborganization (id, organizationid, organizationname, 
       parentid, status, createtime, 
       isdelete)
-    values (#{id,jdbcType=BIGINT}, #{organizationid,jdbcType=INTEGER}, #{organizationname,jdbcType=VARCHAR}, 
-      #{parentid,jdbcType=BIGINT}, #{status,jdbcType=CHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{isdelete,jdbcType=INTEGER})
+    values (#{id}, #{organizationid}, #{organizationname}, 
+      #{parentid}, #{status}, #{createtime}, 
+      #{isdelete})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.Organization" >
@@ -56,74 +56,74 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=BIGINT},
+        #{id},
       </if>
       <if test="organizationid != null" >
-        #{organizationid,jdbcType=INTEGER},
+        #{organizationid},
       </if>
       <if test="organizationname != null" >
-        #{organizationname,jdbcType=VARCHAR},
+        #{organizationname},
       </if>
       <if test="parentid != null" >
-        #{parentid,jdbcType=BIGINT},
+        #{parentid},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=CHAR},
+        #{status},
       </if>
       <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
+        #{createtime},
       </if>
       <if test="isdelete != null" >
-        #{isdelete,jdbcType=INTEGER},
+        #{isdelete},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tborganization
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.Organization" >
     update tborganization
     <set >
       <if test="organizationid != null" >
-        organizationid = #{organizationid,jdbcType=INTEGER},
+        organizationid = #{organizationid},
       </if>
       <if test="organizationname != null" >
-        organizationname = #{organizationname,jdbcType=VARCHAR},
+        organizationname = #{organizationname},
       </if>
       <if test="parentid != null" >
-        parentid = #{parentid,jdbcType=BIGINT},
+        parentid = #{parentid},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=CHAR},
+        status = #{status},
       </if>
       <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
+        createtime = #{createtime},
       </if>
       <if test="isdelete != null" >
-        isdelete = #{isdelete,jdbcType=INTEGER},
+        isdelete = #{isdelete},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.Organization" >
     update tborganization
-    set organizationid = #{organizationid,jdbcType=INTEGER},
-      organizationname = #{organizationname,jdbcType=VARCHAR},
-      parentid = #{parentid,jdbcType=BIGINT},
-      status = #{status,jdbcType=CHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      isdelete = #{isdelete,jdbcType=INTEGER}
-    where id = #{id,jdbcType=BIGINT}
+    set organizationid = #{organizationid},
+      organizationname = #{organizationname},
+      parentid = #{parentid},
+      status = #{status},
+      createtime = #{createtime},
+      isdelete = #{isdelete}
+    where id = #{id}
   </update>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from tborganization
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </select>
 </mapper>

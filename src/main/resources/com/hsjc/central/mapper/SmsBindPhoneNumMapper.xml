@@ -19,7 +19,7 @@
   <insert id="insert" parameterType="com.hsjc.central.domain.SmsBindPhoneNum">
     insert into tbsmsbindphonenum (BindID, AuthID, UserID
       )
-    values (#{bindid,jdbcType=INTEGER}, #{authid,jdbcType=INTEGER}, #{userid,jdbcType=BIGINT}
+    values (#{bindid}, #{authid}, #{userid}
       )
   </insert>
 
@@ -38,46 +38,46 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="bindid != null">
-        #{bindid,jdbcType=INTEGER},
+        #{bindid},
       </if>
       <if test="authid != null">
-        #{authid,jdbcType=INTEGER},
+        #{authid},
       </if>
       <if test="userid != null">
-        #{userid,jdbcType=BIGINT},
+        #{userid},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbsmsbindphonenum
-    where BindID = #{bindid,jdbcType=INTEGER}
+    where BindID = #{bindid}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.SmsBindPhoneNum">
     update tbsmsbindphonenum
     <set>
       <if test="authid != null">
-        AuthID = #{authid,jdbcType=INTEGER},
+        AuthID = #{authid},
       </if>
       <if test="userid != null">
-        UserID = #{userid,jdbcType=BIGINT},
+        UserID = #{userid},
       </if>
     </set>
-    where BindID = #{bindid,jdbcType=INTEGER}
+    where BindID = #{bindid}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.SmsBindPhoneNum">
     update tbsmsbindphonenum
-    set AuthID = #{authid,jdbcType=INTEGER},
-      UserID = #{userid,jdbcType=BIGINT}
-    where BindID = #{bindid,jdbcType=INTEGER}
+    set AuthID = #{authid},
+      UserID = #{userid}
+    where BindID = #{bindid}
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tbsmsbindphonenum
-    where BindID = #{bindid,jdbcType=INTEGER}
+    where BindID = #{bindid}
   </select>
 </mapper>

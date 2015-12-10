@@ -2,6 +2,10 @@ package com.hsjc.central.mapper;
 
 import com.hsjc.central.domain.Restactiontype;
 
+/**
+ * @author : zga
+ * @date : 2015-12-10
+ */
 public interface RestactiontypeMapper {
     int insert(Restactiontype record);
 

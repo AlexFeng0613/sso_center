@@ -7,10 +7,10 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
- * Redis操作类，封装了 缓存、队列、计数 等相关方法
- *
  * @author : zga
  * @date : 2015-11-24
+ *
+ * Redis操作类，封装了 缓存、队列、计数 等相关方法
  */
 public class RedisHelper {
 

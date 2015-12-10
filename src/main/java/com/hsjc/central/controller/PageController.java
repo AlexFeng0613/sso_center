@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @author : zga
  * @date : 2015-11-24
+ *
+ * 页面跳转控制类
  */
 @Controller
 @RequestMapping("/page/")

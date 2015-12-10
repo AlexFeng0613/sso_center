@@ -21,8 +21,8 @@
   <insert id="insert" parameterType="com.hsjc.central.domain.SmsResetPasswd">
     insert into tbsmsresetpasswd (ResetID, AuthID, UserID,
       NewPwdPlain, NewPwdCrypt)
-    values (#{resetid,jdbcType=INTEGER}, #{authid,jdbcType=INTEGER}, #{userid,jdbcType=BIGINT}, 
-      #{newpwdplain,jdbcType=VARCHAR}, #{newpwdcrypt,jdbcType=VARCHAR})
+    values (#{resetid}, #{authid}, #{userid}, 
+      #{newpwdplain}, #{newpwdcrypt})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.SmsResetPasswd">
@@ -46,60 +46,60 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="resetid != null">
-        #{resetid,jdbcType=INTEGER},
+        #{resetid},
       </if>
       <if test="authid != null">
-        #{authid,jdbcType=INTEGER},
+        #{authid},
       </if>
       <if test="userid != null">
-        #{userid,jdbcType=BIGINT},
+        #{userid},
       </if>
       <if test="newpwdplain != null">
-        #{newpwdplain,jdbcType=VARCHAR},
+        #{newpwdplain},
       </if>
       <if test="newpwdcrypt != null">
-        #{newpwdcrypt,jdbcType=VARCHAR},
+        #{newpwdcrypt},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbsmsresetpasswd
-    where ResetID = #{resetid,jdbcType=INTEGER}
+    where ResetID = #{resetid}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.SmsResetPasswd">
     update tbsmsresetpasswd
     <set>
       <if test="authid != null">
-        AuthID = #{authid,jdbcType=INTEGER},
+        AuthID = #{authid},
       </if>
       <if test="userid != null">
-        UserID = #{userid,jdbcType=BIGINT},
+        UserID = #{userid},
       </if>
       <if test="newpwdplain != null">
-        NewPwdPlain = #{newpwdplain,jdbcType=VARCHAR},
+        NewPwdPlain = #{newpwdplain},
       </if>
       <if test="newpwdcrypt != null">
-        NewPwdCrypt = #{newpwdcrypt,jdbcType=VARCHAR},
+        NewPwdCrypt = #{newpwdcrypt},
       </if>
     </set>
-    where ResetID = #{resetid,jdbcType=INTEGER}
+    where ResetID = #{resetid}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.SmsResetPasswd">
     update tbsmsresetpasswd
-    set AuthID = #{authid,jdbcType=INTEGER},
-      UserID = #{userid,jdbcType=BIGINT},
-      NewPwdPlain = #{newpwdplain,jdbcType=VARCHAR},
-      NewPwdCrypt = #{newpwdcrypt,jdbcType=VARCHAR}
-    where ResetID = #{resetid,jdbcType=INTEGER}
+    set AuthID = #{authid},
+      UserID = #{userid},
+      NewPwdPlain = #{newpwdplain},
+      NewPwdCrypt = #{newpwdcrypt}
+    where ResetID = #{resetid}
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tbsmsresetpasswd
-    where ResetID = #{resetid,jdbcType=INTEGER}
+    where ResetID = #{resetid}
   </select>
 </mapper>

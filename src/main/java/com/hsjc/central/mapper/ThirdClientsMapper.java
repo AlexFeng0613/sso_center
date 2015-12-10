@@ -2,6 +2,10 @@ package com.hsjc.central.mapper;
 
 import com.hsjc.central.domain.ThirdClients;
 
+/**
+ * @author : zga
+ * @date : 2015-12-10
+ */
 public interface ThirdClientsMapper {
     int insert(ThirdClients record);
 

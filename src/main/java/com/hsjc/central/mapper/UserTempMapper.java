@@ -2,6 +2,10 @@ package com.hsjc.central.mapper;
 
 import com.hsjc.central.domain.UserTemp;
 
+/**
+ * @author : zga
+ * @date : 2015-12-10
+ */
 public interface UserTempMapper {
     int insert(UserTemp record);
 

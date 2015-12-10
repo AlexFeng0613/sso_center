@@ -9,12 +9,12 @@
     <result column="contactorPhone" property="contactorphone" jdbcType="VARCHAR" />
     <result column="briefName" property="briefname" jdbcType="VARCHAR" />
     <result column="sso_password" property="ssoPassword" jdbcType="VARCHAR" />
-    <result column="3rd_password" property="3rdPassword" jdbcType="VARCHAR" />
+    <result column="third_password" property="thirdPassword" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, client_id, client_secret, contactorName, contactorPhone, briefName, sso_password, 
-    3rd_password
+    third_password
   </sql>
 
   <!--
@@ -25,10 +25,10 @@
   <insert id="insert" parameterType="com.hsjc.central.domain.ThirdClients" >
     insert into tb3rdclients (id, client_id, client_secret, 
       contactorName, contactorPhone, briefName, 
-      sso_password, 3rd_password)
-    values (#{id,jdbcType=BIGINT}, #{clientId,jdbcType=VARCHAR}, #{clientSecret,jdbcType=VARCHAR}, 
-      #{contactorname,jdbcType=VARCHAR}, #{contactorphone,jdbcType=VARCHAR}, #{briefname,jdbcType=VARCHAR}, 
-      #{ssoPassword,jdbcType=VARCHAR}, #{3rdPassword,jdbcType=VARCHAR})
+      sso_password, third_password)
+    values (#{id}, #{clientId}, #{clientSecret}, 
+      #{contactorname}, #{contactorphone}, #{briefname}, 
+      #{ssoPassword}, #{3rdPassword})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.ThirdClients" >
@@ -56,86 +56,86 @@
         sso_password,
       </if>
       <if test="3rdPassword != null" >
-        3rd_password,
+        third_password,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=BIGINT},
+        #{id},
       </if>
       <if test="clientId != null" >
-        #{clientId,jdbcType=VARCHAR},
+        #{clientId},
       </if>
       <if test="clientSecret != null" >
-        #{clientSecret,jdbcType=VARCHAR},
+        #{clientSecret},
       </if>
       <if test="contactorname != null" >
-        #{contactorname,jdbcType=VARCHAR},
+        #{contactorname},
       </if>
       <if test="contactorphone != null" >
-        #{contactorphone,jdbcType=VARCHAR},
+        #{contactorphone},
       </if>
       <if test="briefname != null" >
-        #{briefname,jdbcType=VARCHAR},
+        #{briefname},
       </if>
       <if test="ssoPassword != null" >
-        #{ssoPassword,jdbcType=VARCHAR},
+        #{ssoPassword},
       </if>
       <if test="3rdPassword != null" >
-        #{3rdPassword,jdbcType=VARCHAR},
+        #{3rdPassword},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tb3rdclients
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.ThirdClients" >
     update tb3rdclients
     <set >
       <if test="clientId != null" >
-        client_id = #{clientId,jdbcType=VARCHAR},
+        client_id = #{clientId},
       </if>
       <if test="clientSecret != null" >
-        client_secret = #{clientSecret,jdbcType=VARCHAR},
+        client_secret = #{clientSecret},
       </if>
       <if test="contactorname != null" >
-        contactorName = #{contactorname,jdbcType=VARCHAR},
+        contactorName = #{contactorname},
       </if>
       <if test="contactorphone != null" >
-        contactorPhone = #{contactorphone,jdbcType=VARCHAR},
+        contactorPhone = #{contactorphone},
       </if>
       <if test="briefname != null" >
-        briefName = #{briefname,jdbcType=VARCHAR},
+        briefName = #{briefname},
       </if>
       <if test="ssoPassword != null" >
-        sso_password = #{ssoPassword,jdbcType=VARCHAR},
+        sso_password = #{ssoPassword},
       </if>
       <if test="3rdPassword != null" >
-        3rd_password = #{3rdPassword,jdbcType=VARCHAR},
+        third_password = #{3rdPassword},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.ThirdClients" >
     update tb3rdclients
-    set client_id = #{clientId,jdbcType=VARCHAR},
-      client_secret = #{clientSecret,jdbcType=VARCHAR},
-      contactorName = #{contactorname,jdbcType=VARCHAR},
-      contactorPhone = #{contactorphone,jdbcType=VARCHAR},
-      briefName = #{briefname,jdbcType=VARCHAR},
-      sso_password = #{ssoPassword,jdbcType=VARCHAR},
-      3rd_password = #{3rdPassword,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+    set client_id = #{clientId},
+      client_secret = #{clientSecret},
+      contactorName = #{contactorname},
+      contactorPhone = #{contactorphone},
+      briefName = #{briefname},
+      sso_password = #{ssoPassword},
+      third_password = #{3rdPassword}
+    where id = #{id}
   </update>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from tb3rdclients
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </select>
 </mapper>

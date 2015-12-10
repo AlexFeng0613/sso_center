@@ -20,6 +20,8 @@ import javax.servlet.http.HttpSession;
 /**
  * @author : zga
  * @date : 2015-11-25
+ *
+ * 用户控制类
  */
 @Controller
 @RequestMapping("/user/")

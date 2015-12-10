@@ -21,6 +21,8 @@ import java.sql.SQLException;
 /**
  * @author : zga
  * @date : 2015-11-24
+ *
+ * 数据源配置类
  */
 @Configuration
 public class DataConfig {

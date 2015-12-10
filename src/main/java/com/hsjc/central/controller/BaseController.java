@@ -6,6 +6,7 @@ import org.apache.shiro.SecurityUtils;
 /**
  * @author : zga
  * @date : 2015-12-2
+ *
  * 基础Controller类
  */
 public class BaseController {

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 /**
  * @author : zga
  * @date : 2015-12-2
+ *
+ * password 帮助类
  */
 @Component
 public class PasswordHelper {

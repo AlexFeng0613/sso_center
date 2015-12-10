@@ -13,6 +13,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author : zga
  * @date : 2015-12-03
+ *
+ * 基本Service类
  */
 @Service
 public class ApiBaseService {

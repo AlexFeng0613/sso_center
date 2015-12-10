@@ -3,6 +3,8 @@ package com.hsjc.central.constant;
 /**
  * @author : zga
  * @date : 2015-11-24
+ *
+ * 类型常量类
  */
 public class TypeConstant {
 

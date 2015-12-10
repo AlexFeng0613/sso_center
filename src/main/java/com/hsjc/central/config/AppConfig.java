@@ -15,6 +15,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 /**
  * @author : zga
  * @date : 2015-11-24
+ *
+ *
  */
 @Configuration
 @ComponentScan({"com.hsjc"})

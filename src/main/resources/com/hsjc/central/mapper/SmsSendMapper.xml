@@ -24,9 +24,9 @@
     insert into tbsmssend (ID, PhoneNum, MsgContent,
       SendFlag, SendTime, byModule, 
       RequestKeyID)
-    values (#{id,jdbcType=BIGINT}, #{phonenum,jdbcType=VARCHAR}, #{msgcontent,jdbcType=VARCHAR}, 
-      #{sendflag,jdbcType=INTEGER}, #{sendtime,jdbcType=TIMESTAMP}, #{bymodule,jdbcType=VARCHAR}, 
-      #{requestkeyid,jdbcType=BIGINT})
+    values (#{id}, #{phonenum}, #{msgcontent}, 
+      #{sendflag}, #{sendtime}, #{bymodule}, 
+      #{requestkeyid})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.SmsSend">
@@ -56,74 +56,74 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=BIGINT},
+        #{id},
       </if>
       <if test="phonenum != null">
-        #{phonenum,jdbcType=VARCHAR},
+        #{phonenum},
       </if>
       <if test="msgcontent != null">
-        #{msgcontent,jdbcType=VARCHAR},
+        #{msgcontent},
       </if>
       <if test="sendflag != null">
-        #{sendflag,jdbcType=INTEGER},
+        #{sendflag},
       </if>
       <if test="sendtime != null">
-        #{sendtime,jdbcType=TIMESTAMP},
+        #{sendtime},
       </if>
       <if test="bymodule != null">
-        #{bymodule,jdbcType=VARCHAR},
+        #{bymodule},
       </if>
       <if test="requestkeyid != null">
-        #{requestkeyid,jdbcType=BIGINT},
+        #{requestkeyid},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tbsmssend
-    where ID = #{id,jdbcType=BIGINT}
+    where ID = #{id}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.SmsSend">
     update tbsmssend
     <set>
       <if test="phonenum != null">
-        PhoneNum = #{phonenum,jdbcType=VARCHAR},
+        PhoneNum = #{phonenum},
       </if>
       <if test="msgcontent != null">
-        MsgContent = #{msgcontent,jdbcType=VARCHAR},
+        MsgContent = #{msgcontent},
       </if>
       <if test="sendflag != null">
-        SendFlag = #{sendflag,jdbcType=INTEGER},
+        SendFlag = #{sendflag},
       </if>
       <if test="sendtime != null">
-        SendTime = #{sendtime,jdbcType=TIMESTAMP},
+        SendTime = #{sendtime},
       </if>
       <if test="bymodule != null">
-        byModule = #{bymodule,jdbcType=VARCHAR},
+        byModule = #{bymodule},
       </if>
       <if test="requestkeyid != null">
-        RequestKeyID = #{requestkeyid,jdbcType=BIGINT},
+        RequestKeyID = #{requestkeyid},
       </if>
     </set>
-    where ID = #{id,jdbcType=BIGINT}
+    where ID = #{id}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.SmsSend">
     update tbsmssend
-    set PhoneNum = #{phonenum,jdbcType=VARCHAR},
-      MsgContent = #{msgcontent,jdbcType=VARCHAR},
-      SendFlag = #{sendflag,jdbcType=INTEGER},
-      SendTime = #{sendtime,jdbcType=TIMESTAMP},
-      byModule = #{bymodule,jdbcType=VARCHAR},
-      RequestKeyID = #{requestkeyid,jdbcType=BIGINT}
-    where ID = #{id,jdbcType=BIGINT}
+    set PhoneNum = #{phonenum},
+      MsgContent = #{msgcontent},
+      SendFlag = #{sendflag},
+      SendTime = #{sendtime},
+      byModule = #{bymodule},
+      RequestKeyID = #{requestkeyid}
+    where ID = #{id}
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tbsmssend
-    where ID = #{id,jdbcType=BIGINT}
+    where ID = #{id}
   </select>
 </mapper>

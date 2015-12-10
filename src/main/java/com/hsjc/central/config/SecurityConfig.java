@@ -28,6 +28,8 @@ import java.util.Map;
 /**
  * @author : zga
  * @date : 2015-11-24
+ *
+ * 安全配置类
  */
 @Configuration
 public class SecurityConfig {

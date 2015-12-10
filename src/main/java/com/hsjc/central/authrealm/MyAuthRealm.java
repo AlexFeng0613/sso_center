@@ -15,6 +15,8 @@ import javax.annotation.Resource;
 /**
  * @author : zga
  * @date : 2015-11-24
+ *
+ * 认证、授权类
  */
 public class MyAuthRealm extends AuthorizingRealm {
 

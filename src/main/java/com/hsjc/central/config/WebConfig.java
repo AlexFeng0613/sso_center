@@ -39,6 +39,8 @@ import java.util.*;
 /**
  * @author : zga
  * @date : 2015-11-24
+ *
+ * Web MVC配置类
  */
 @Configuration
 @ComponentScan({"com.hsjc"})

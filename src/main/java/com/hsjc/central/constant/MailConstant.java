@@ -3,6 +3,8 @@ package com.hsjc.central.constant;
 /**
  * @author : zga
  * @date : 2015-12-03
+ *
+ * email 常量类
  */
 public class MailConstant {
     public static String MAIL_HOST;
