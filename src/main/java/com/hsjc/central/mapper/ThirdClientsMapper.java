@@ -1,22 +1,17 @@
 package com.hsjc.central.mapper;
 
-import com.hsjc.central.domain.SsoClientDetails;
+import com.hsjc.central.domain.ThirdClients;
 
 public interface ThirdClientsMapper {
+    int insert(ThirdClients record);
+
+    int insertSelective(ThirdClients record);
+
     int deleteByPrimaryKey(Long id);
 
+    int updateByPrimaryKeySelective(ThirdClients record);
 
-    int insert(SsoClientDetails record);
+    int updateByPrimaryKey(ThirdClients record);
 
-
-    int insertSelective(SsoClientDetails record);
-
-
-    SsoClientDetails selectByPrimaryKey(Long id);
-
-
-    int updateByPrimaryKeySelective(SsoClientDetails record);
-
-
-    int updateByPrimaryKey(SsoClientDetails record);
+    ThirdClients selectByPrimaryKey(Long id);
 }

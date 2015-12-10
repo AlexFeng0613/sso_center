@@ -7,15 +7,15 @@ import com.hsjc.central.domain.SmsSend;
  * @date : 2015-12-2
  */
 public interface SmsSendMapper {
-    int deleteByPrimaryKey(Long id);
-
     int insert(SmsSend record);
 
     int insertSelective(SmsSend record);
 
-    SmsSend selectByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(SmsSend record);
 
     int updateByPrimaryKey(SmsSend record);
+
+    SmsSend selectByPrimaryKey(Long id);
 }

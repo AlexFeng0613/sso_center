@@ -8,20 +8,20 @@ import com.hsjc.central.domain.EmailResetPwd;
  */
 public interface EmailResetPwdMapper {
 
-    int deleteByPrimaryKey(Integer id);
-
-
     int insert(EmailResetPwd record);
 
 
     int insertSelective(EmailResetPwd record);
 
 
-    EmailResetPwd selectByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer id);
 
 
     int updateByPrimaryKeySelective(EmailResetPwd record);
 
 
     int updateByPrimaryKey(EmailResetPwd record);
+
+
+    EmailResetPwd selectByPrimaryKey(Integer id);
 }

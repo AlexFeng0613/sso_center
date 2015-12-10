@@ -8,16 +8,13 @@ import com.hsjc.central.domain.EmailSend;
  */
 public interface EmailSendMapper {
 
-    int deleteByPrimaryKey(Long id);
-
-
     int insert(EmailSend record);
 
 
     int insertSelective(EmailSend record);
 
 
-    EmailSend selectByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long id);
 
 
     int updateByPrimaryKeySelective(EmailSend record);
@@ -27,4 +24,7 @@ public interface EmailSendMapper {
 
 
     int updateByPrimaryKey(EmailSend record);
+
+
+    EmailSend selectByPrimaryKey(Long id);
 }

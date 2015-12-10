@@ -3,13 +3,11 @@ package com.hsjc.central.mapper;
 import com.hsjc.central.domain.UserTemp;
 
 public interface UserTempMapper {
-    int deleteByPrimaryKey(Integer id);
-
     int insert(UserTemp record);
 
     int insertSelective(UserTemp record);
 
-    UserTemp selectByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(UserTemp record);
 
@@ -18,4 +16,6 @@ public interface UserTempMapper {
     int updateStatusByEmial(UserTemp userTemp);
 
     UserTemp selectByEmailOrUserNameOrPhone(UserTemp userTemp);
+
+    UserTemp selectByPrimaryKey(Integer id);
 }
