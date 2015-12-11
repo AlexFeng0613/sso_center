@@ -1,7 +1,7 @@
 package com.hsjc.central.authrealm;
 
 import com.hsjc.central.domain.UserMain;
-import com.hsjc.central.service.UserService;
+import com.hsjc.central.service.UserMainService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -23,14 +23,14 @@ public class MyAuthRealm extends AuthorizingRealm {
     ApplicationContext applicationContext;
 
     @Resource
-    UserService userService;
+    UserMainService userMainService;
 
     public void setAc(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 
-    public UserService getUserService() {
-        return (userService == null) ? (UserService)applicationContext.getBean("userService") : userService;
+    public UserMainService getUserMainService() {
+        return (userMainService == null) ? (UserMainService)applicationContext.getBean("userService") : userMainService;
     }
 
     //认证
@@ -38,7 +38,7 @@ public class MyAuthRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
         String username = token.getUsername();
-        UserMain userMain = userService.findByEmail(username);
+        UserMain userMain = userMainService.findByEmail(username);
         if (userMain == null) {
             throw new UnknownAccountException("No account found for user[" + token.getUsername() + "]");
         }

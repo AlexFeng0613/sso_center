@@ -18,4 +18,6 @@ public interface ThirdClientsMapper {
     int updateByPrimaryKey(ThirdClients record);
 
     ThirdClients selectByPrimaryKey(Long id);
+
+    ThirdClients selectByClientId(ThirdClients thirdClients);
 }

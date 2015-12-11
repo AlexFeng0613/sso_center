@@ -9,12 +9,12 @@
     <result column="contactorPhone" property="contactorphone" jdbcType="VARCHAR" />
     <result column="briefName" property="briefname" jdbcType="VARCHAR" />
     <result column="sso_password" property="ssoPassword" jdbcType="VARCHAR" />
-    <result column="third_password" property="thirdPassword" jdbcType="VARCHAR" />
+    <result column="public_key" property="publicKey" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, client_id, client_secret, contactorName, contactorPhone, briefName, sso_password, 
-    third_password
+    public_key
   </sql>
 
   <!--
@@ -25,10 +25,10 @@
   <insert id="insert" parameterType="com.hsjc.central.domain.ThirdClients" >
     insert into tb3rdclients (id, client_id, client_secret, 
       contactorName, contactorPhone, briefName, 
-      sso_password, third_password)
+      sso_password, public_key)
     values (#{id}, #{clientId}, #{clientSecret}, 
       #{contactorname}, #{contactorphone}, #{briefname}, 
-      #{ssoPassword}, #{3rdPassword})
+      #{ssoPassword}, #{publicKey})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.ThirdClients" >
@@ -55,8 +55,8 @@
       <if test="ssoPassword != null" >
         sso_password,
       </if>
-      <if test="3rdPassword != null" >
-        third_password,
+      <if test="publicKey != null" >
+        public_key,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -81,8 +81,8 @@
       <if test="ssoPassword != null" >
         #{ssoPassword},
       </if>
-      <if test="3rdPassword != null" >
-        #{3rdPassword},
+      <if test="publicKey != null" >
+        #{publicKey},
       </if>
     </trim>
   </insert>
@@ -113,8 +113,8 @@
       <if test="ssoPassword != null" >
         sso_password = #{ssoPassword},
       </if>
-      <if test="3rdPassword != null" >
-        third_password = #{3rdPassword},
+      <if test="publicKey != null" >
+        public_key = #{publicKey},
       </if>
     </set>
     where id = #{id}
@@ -128,7 +128,7 @@
       contactorPhone = #{contactorphone},
       briefName = #{briefname},
       sso_password = #{ssoPassword},
-      third_password = #{3rdPassword}
+      public_key = #{publicKey}
     where id = #{id}
   </update>
 
@@ -137,5 +137,16 @@
     <include refid="Base_Column_List" />
     from tb3rdclients
     where id = #{id}
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2015-12-11
+    根据clientId查询记录
+  -->
+  <select id="selectByClientId" parameterType="ThirdClients" resultType="ThirdClients">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb3rdclients WHERE client_id = #{thirdClients.clientId}
   </select>
 </mapper>

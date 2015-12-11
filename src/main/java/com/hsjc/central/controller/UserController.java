@@ -5,7 +5,7 @@ import com.hsjc.central.domain.ActivateEmailMess;
 import com.hsjc.central.domain.UserMain;
 import com.hsjc.central.domain.UserTemp;
 import com.hsjc.central.service.ApiBaseService;
-import com.hsjc.central.service.UserService;
+import com.hsjc.central.service.UserMainService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
 public class UserController extends BaseController{
 
     @Autowired
-    private UserService userService;
+    private UserMainService userMainService;
 
     @Autowired
     private ApiBaseService apiBaseService;
@@ -36,6 +36,7 @@ public class UserController extends BaseController{
     /**
      * @author : zga
      * @date : 2015-12-04
+     *
      * 登录页面
      * @return
      */
@@ -47,6 +48,7 @@ public class UserController extends BaseController{
     /**
      * @author:zga
      * @date:2015-12-02
+     *
      * 用户登录
      * @param username
      * @param password
@@ -76,6 +78,7 @@ public class UserController extends BaseController{
     /**
      * @author : zga
      * @date : 2015-12-03
+     *
      * 注册用户
      * @param paramJson
      * @return
@@ -83,13 +86,14 @@ public class UserController extends BaseController{
     @RequestMapping(value = "register",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject register(@RequestBody JSONObject paramJson, HttpSession session){
-        JSONObject result = userService.register(paramJson,session);
+        JSONObject result = userMainService.register(paramJson,session);
         return result;
     }
 
     /**
      * @author : zga
      * @date : 2015-12-03
+     *
      * 激活Email
      * @param email
      * @param ticket
@@ -120,7 +124,7 @@ public class UserController extends BaseController{
             UserTemp userTemp = new UserTemp();
             userTemp.setEmail(originEmail);
             userTemp.setStatus("activated");
-            int num = userService.activateEmail(userTemp);
+            int num = userMainService.activateEmail(userTemp);
             if(num < 1) return "";//激活失败,返回错误页面
         } catch (Exception e) {
             e.printStackTrace();

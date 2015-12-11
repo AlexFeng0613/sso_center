@@ -26,7 +26,7 @@ import java.util.Calendar;
  * 用户Service类
  */
 @Service
-public class UserService {
+public class UserMainService {
     @Autowired
     private UserMainMapper userMainMapper;
 

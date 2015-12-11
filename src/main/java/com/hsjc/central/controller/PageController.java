@@ -82,4 +82,17 @@ public class PageController {
 
         return "/user/register"+num;
     }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-11
+     *
+     * 非授权的错误页面
+     * @return
+     */
+    @RequestMapping("authorizeFailed")
+    public String authorizeFailed(){
+        return "/authorizeFailed";
+    }
+
 }
