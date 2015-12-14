@@ -1,5 +1,7 @@
 package com.hsjc.central.domain;
 
+import java.util.Date;
+
 /**
  * @author : zga
  * @date : 2015-12-03
@@ -24,6 +26,12 @@ public class UserTemp {
     private String invitateCode;
 
     private String email;
+
+    private Date createTime;
+
+    private Integer isDelete;
+
+    private Integer organizationCode;
 
     public Integer getId() {
         return id;
@@ -95,6 +103,30 @@ public class UserTemp {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public Integer getOrganizationCode() {
+        return organizationCode;
+    }
+
+    public void setOrganizationCode(Integer organizationCode) {
+        this.organizationCode = organizationCode;
     }
 
     public String getCredentialsSalt(){

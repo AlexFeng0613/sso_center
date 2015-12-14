@@ -13,6 +13,7 @@ import java.lang.annotation.*;
 @Documented  
 public  @interface SystemLog {  
 	int actionId(); //执行方法Id
+	String module() default "";
 	String description()  default "";  //
 }
   

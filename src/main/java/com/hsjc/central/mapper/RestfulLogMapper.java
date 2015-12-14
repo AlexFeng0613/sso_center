@@ -2,12 +2,14 @@ package com.hsjc.central.mapper;
 
 import com.hsjc.central.domain.RestfulLog;
 
+import java.util.Map;
+
 /**
  * @author : zga
  * @date : 2015-12-10
  */
 public interface RestfulLogMapper {
-    int insert(RestfulLog record);
+    int insert(Map<String,Object> paramMap);
 
     int insertSelective(RestfulLog record);
 

@@ -123,7 +123,7 @@
   <!--
     @author : zga
     @date : 2015-12-14
-    查询增量组织机构数据
+    查询增量组织机构
   -->
   <select id="selectDifferentOrganization" resultType="java.util.HashMap">
    SELECT
@@ -132,8 +132,15 @@
    on tbo.organizationCode = tbso.organizationCode
   </select>
 
+  <!--
+    @author : zga
+    @date : 2015-12-14
+    查询增量用户
+  -->
   <select id="selectDifferentUser" resultType="java.util.HashMap">
     SELECT
-
+     tbu.userName,tbu.organizationCode,tbu.id openId,tbu.type role
+     FROM tbUserMain tbu LEFT JOIN tbsynuser${briefName} tbsu
+     ON tbsu.userId = tbsu.id
   </select>
 </mapper>

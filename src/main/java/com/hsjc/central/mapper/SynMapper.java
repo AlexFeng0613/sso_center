@@ -24,4 +24,6 @@ public interface SynMapper {
     int updateByPrimaryKey(Organization record);
 
     List<HashMap> selectDifferentOrganization(@Param("briefName")String briefName);
+
+    List<HashMap> selectDifferentUser(@Param("briefName")String briefName);
 }

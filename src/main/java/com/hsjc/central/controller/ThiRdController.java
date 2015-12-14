@@ -1,6 +1,7 @@
 package com.hsjc.central.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hsjc.central.annotation.SystemLog;
 import com.hsjc.central.domain.ThirdClients;
 import com.hsjc.central.service.ThirdClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,7 @@ public class ThirdController extends BaseController{
      */
     @RequestMapping("getAllOrganization")
     @ResponseBody
+    @SystemLog(actionId = 2,description = "同步所有组织机构",module = "接口同步")
     public JSONObject getAllOrganization(@RequestParam("client_id")String clientId,
                                          @RequestParam("password")String password,
                                          @RequestParam("time")String time){
@@ -81,6 +83,7 @@ public class ThirdController extends BaseController{
      */
     @RequestMapping("getDifferentOrganization")
     @ResponseBody
+    @SystemLog(actionId = 3,description = "同步增量组织机构",module = "接口同步")
     public JSONObject getDifferentOrganization(@RequestParam("client_id")String clientId,
                                                @RequestParam("password")String password,
                                                @RequestParam("time")String time){
@@ -108,6 +111,7 @@ public class ThirdController extends BaseController{
      */
     @RequestMapping("getAllUser")
     @ResponseBody
+    @SystemLog(actionId = 4,description = "同步所有用户",module = "接口同步")
     public JSONObject getAllUser(@RequestParam("client_id")String clientId,
                                  @RequestParam("password")String password,
                                  @RequestParam("time")String time){
@@ -134,6 +138,7 @@ public class ThirdController extends BaseController{
      */
     @RequestMapping("getDifferentUser")
     @ResponseBody
+    @SystemLog(actionId = 5,description = "同步增量用户",module = "接口同步")
     public JSONObject getDifferentUser(@RequestParam("client_id")String clientId,
                                        @RequestParam("password")String password,
                                        @RequestParam("time")String time){

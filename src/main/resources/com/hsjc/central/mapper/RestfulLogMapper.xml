@@ -3,15 +3,14 @@
 <mapper namespace="com.hsjc.central.mapper.RestfulLogMapper" >
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.RestfulLog" >
     <id column="restLogId" property="restLogId" jdbcType="BIGINT" />
-    <result column="userId" property="userId" jdbcType="BIGINT" />
+    <result column="clientId" property="clientId" jdbcType="BIGINT" />
     <result column="actionId" property="actionId" jdbcType="INTEGER" />
-    <result column="respCode" property="respCode" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="actionTime" property="actionTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    restLogId, userId, actionId, respCode, description, actionTime
+    restLogId, clientId, actionId,  description, actionTime
   </sql>
 
   <!--
@@ -19,11 +18,11 @@
    @date : 2015-12-04
    新增
   -->
-  <insert id="insert" parameterType="com.hsjc.central.domain.RestfulLog" >
-    insert into tbrestfullog (restLogId, userId, actionId, 
-      respCode, description, actionTime
+  <insert id="insert" parameterType="java.util.HashMap">
+    insert into tbrestfullog (clientId, actionId,
+       description, actionTime
       )
-    values (#{restLogId}, #{userId}, #{actionId}, 
+    values (#{clientId}, #{actionId},
       #{respCode}, #{description}, #{actionTime}
       )
   </insert>
@@ -34,14 +33,11 @@
       <if test="restLogId != null" >
         restLogId,
       </if>
-      <if test="userId != null" >
-        userId,
+      <if test="clientId != null" >
+        clientId,
       </if>
       <if test="actionId != null" >
         actionId,
-      </if>
-      <if test="respCode != null" >
-        respCode,
       </if>
       <if test="description != null" >
         description,
@@ -54,14 +50,11 @@
       <if test="restLogId != null" >
         #{restLogId},
       </if>
-      <if test="userId != null" >
-        #{userId},
+      <if test="clientId != null" >
+        #{clientId},
       </if>
       <if test="actionId != null" >
         #{actionId},
-      </if>
-      <if test="respCode != null" >
-        #{respCode},
       </if>
       <if test="description != null" >
         #{description},
@@ -80,14 +73,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.RestfulLog" >
     update tbrestfullog
     <set >
-      <if test="userId != null" >
-        userId = #{userId},
+      <if test="clientId != null" >
+        clientId = #{clientId},
       </if>
       <if test="actionId != null" >
         actionId = #{actionId},
-      </if>
-      <if test="respCode != null" >
-        respCode = #{respCode},
       </if>
       <if test="description != null" >
         description = #{description},
@@ -101,9 +91,8 @@
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.RestfulLog" >
     update tbrestfullog
-    set userId = #{userId},
+    set clientId = #{clientId},
       actionId = #{actionId},
-      respCode = #{respCode},
       description = #{description},
       actionTime = #{actionTime}
     where restLogId = #{restLogId}

@@ -1,6 +1,7 @@
 package com.hsjc.central.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hsjc.central.annotation.SystemLog;
 import com.hsjc.central.domain.ActivateEmailMess;
 import com.hsjc.central.domain.UserMain;
 import com.hsjc.central.domain.UserTemp;
@@ -55,6 +56,7 @@ public class UserController extends BaseController{
      * @return
      */
     @RequestMapping(value = "login",method = RequestMethod.POST)
+    @SystemLog(actionId = 1,description = "用户登录",module = "登录")
     public String login(String username,String password){
         UsernamePasswordToken upToken = new UsernamePasswordToken(username, password, true);
         try{

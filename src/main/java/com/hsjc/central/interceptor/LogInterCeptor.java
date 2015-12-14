@@ -3,10 +3,11 @@ package com.hsjc.central.interceptor;
 import com.hsjc.central.annotation.SystemLog;
 import com.hsjc.central.mapper.RestfulLogMapper;
 import com.hsjc.central.mapper.SystemLogMapper;
+import com.hsjc.central.util.DateUtils;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +53,17 @@ public class LogInterCeptor {
 
     }
 
-    @After("controllerAspect()")
-    public void doAfterInvoke(JoinPoint joinPoint){
+    @Around("controllerAspect()")
+    public void doAroundInvoke(JoinPoint joinPoint){
+        Map<String,Object> map = null;
+        try {
+            map = getControllerMethodDescription(joinPoint);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        map.put("actionTime", DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
+        restfulLogMapper.insert(map);
     }
 
     public Map<String, Object> getControllerMethodDescription(JoinPoint joinPoint)  throws Exception {
@@ -69,8 +78,11 @@ public class LogInterCeptor {
                 Class[] clazzs = method.getParameterTypes();
                 if (clazzs.length == arguments.length) {
                     map.put("actionId", method.getAnnotation(SystemLog.class).actionId());
+                    map.put("clientId",arguments[0]);
                     String de = method.getAnnotation(SystemLog.class).description();
-                    if(StringUtils.isEmpty(de)) de="执行成功!";
+                    if(StringUtils.isEmpty(de)) de = method.getAnnotation(SystemLog.class).module() + ","
+                            + method.getAnnotation(SystemLog.class).description()
+                            +"同步成功!";
                     map.put("description", de);
                     break;
                 }

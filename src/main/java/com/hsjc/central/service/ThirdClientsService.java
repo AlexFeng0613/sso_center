@@ -1,7 +1,6 @@
 package com.hsjc.central.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hsjc.central.annotation.SystemLog;
 import com.hsjc.central.constant.Constant;
 import com.hsjc.central.domain.ThirdClients;
 import com.hsjc.central.mapper.SynMapper;
@@ -48,7 +47,6 @@ public class ThirdClientsService {
      * @param paramJson
      * @return
      */
-    @SystemLog(actionId = 1,description = "同步所有组织机构")
     public JSONObject getAllOrganization(JSONObject paramJson){
         JSONObject resJsonObject = new JSONObject();
 
@@ -69,7 +67,6 @@ public class ThirdClientsService {
      * @param paramJson
      * @return
      */
-    @SystemLog(actionId = 2,description = "同步增量组织机构")
     public JSONObject getDifferentOrganization(JSONObject paramJson){
         JSONObject resJsonObject = new JSONObject();
 
@@ -78,9 +75,9 @@ public class ThirdClientsService {
 
 
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
-        List<HashMap> list = synMapper.selectDifferentOrganization(thirdClients.getBriefName());
+        List<HashMap> organizationList = synMapper.selectDifferentOrganization(thirdClients.getBriefName());
 
-        resJsonObject.put("Organization",list);
+        resJsonObject.put("organization",organizationList);
 
         return resJsonObject;
     }
@@ -94,7 +91,6 @@ public class ThirdClientsService {
      * @param paramJson
      * @return
      */
-    @SystemLog(actionId = 3,description = "同步所有用户")
     public JSONObject getAllUser(JSONObject paramJson){
         JSONObject resJsonObject = new JSONObject();
 
@@ -113,12 +109,15 @@ public class ThirdClientsService {
      * @param paramJson
      * @return
      */
-    @SystemLog(actionId = 4,description = "同步增量用户")
     public JSONObject getDifferentUser(JSONObject paramJson){
         JSONObject resJsonObject = new JSONObject();
 
         boolean flag = validateClientId(paramJson);
         if(!flag) return null;
+
+        ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
+        List<HashMap> userList = synMapper.selectDifferentUser(thirdClients.getBriefName());
+        resJsonObject.put("user", userList);
 
         return resJsonObject;
     }
@@ -146,7 +145,15 @@ public class ThirdClientsService {
         return true;
     }
 
-
+    /**
+     * @author : zga
+     * @date : 2015-12-14
+     *
+     * 根据ClientId查询第三方绑定表
+     *
+     * @param paramJson
+     * @return
+     */
     public ThirdClients getThirdClientsByClientId(JSONObject paramJson){
         String clientId = paramJson.getString("clientId");
 
@@ -157,5 +164,4 @@ public class ThirdClientsService {
 
         return thirdClients;
     }
-
 }

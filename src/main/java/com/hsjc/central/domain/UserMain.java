@@ -31,6 +31,8 @@ public class UserMain {
 
     private Integer isDelete;
 
+    private Integer organizationCode;
+
     public Integer getId() {
         return id;
     }
@@ -117,6 +119,14 @@ public class UserMain {
 
     public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public Integer getOrganizationCode() {
+        return organizationCode;
+    }
+
+    public void setOrganizationCode(Integer organizationCode) {
+        this.organizationCode = organizationCode;
     }
 
     public String getCredentialsSalt(){
