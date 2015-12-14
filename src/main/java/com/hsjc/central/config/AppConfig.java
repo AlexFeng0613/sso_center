@@ -38,10 +38,10 @@ public class AppConfig {
 	@Bean
 	public RedisConstant redisConstant(
 			@Value("${redis.dictDatabase}") Integer DB_DICT,
-			@Value("${3rd.secretKey}") String secretKey
+			@Value("${3rd.publicKey}") String secretKey
 	) {
 		RedisConstant.DB_DICT = DB_DICT;
-		Constant.secret_key = secretKey;
+		Constant.public_key = secretKey;
 		return null;
 	}
 

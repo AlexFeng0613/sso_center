@@ -20,5 +20,5 @@ public class Constant {
 
     public static final int REDIS_FETCH_TIME_OUT = 24 * 60 * 1000;
 
-    public static String secret_key;
+    public static String public_key;
 }

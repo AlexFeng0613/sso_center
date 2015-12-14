@@ -1,59 +1,59 @@
 package com.hsjc.central.domain;
 
-import java.io.Serializable;
-
 /**
  * @author : zga
- * @date : 2015-12-2
+ * @date : 2015-12-03
+ *
+ * 手机重置密码实体
  */
-public class SmsResetPasswd implements Serializable {
-    private Integer resetid;
+public class SmsResetPasswd {
+    private Integer resetId;
 
-    private Integer authid;
+    private Integer authId;
 
-    private Long userid;
+    private Long userId;
 
-    private String newpwdplain;
+    private String newPwdPlain;
 
-    private String newpwdcrypt;
+    private String newPwdCrypt;
 
-    public Integer getResetid() {
-        return resetid;
+    public Integer getResetId() {
+        return resetId;
     }
 
-    public void setResetid(Integer resetid) {
-        this.resetid = resetid;
+    public void setResetId(Integer resetId) {
+        this.resetId = resetId;
     }
 
-    public Integer getAuthid() {
-        return authid;
+    public Integer getAuthId() {
+        return authId;
     }
 
-    public void setAuthid(Integer authid) {
-        this.authid = authid;
+    public void setAuthId(Integer authId) {
+        this.authId = authId;
     }
 
-    public Long getUserid() {
-        return userid;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getNewpwdplain() {
-        return newpwdplain;
+    public String getNewPwdPlain() {
+        return newPwdPlain;
     }
 
-    public void setNewpwdplain(String newpwdplain) {
-        this.newpwdplain = newpwdplain == null ? null : newpwdplain.trim();
+    public void setNewPwdPlain(String newPwdPlain) {
+        this.newPwdPlain = newPwdPlain;
     }
 
-    public String getNewpwdcrypt() {
-        return newpwdcrypt;
+    public String getNewPwdCrypt() {
+        return newPwdCrypt;
     }
 
-    public void setNewpwdcrypt(String newpwdcrypt) {
-        this.newpwdcrypt = newpwdcrypt == null ? null : newpwdcrypt.trim();
+    public void setNewPwdCrypt(String newPwdCrypt) {
+        this.newPwdCrypt = newPwdCrypt;
     }
 }

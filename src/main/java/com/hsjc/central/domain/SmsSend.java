@@ -1,26 +1,27 @@
 package com.hsjc.central.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author : zga
- * @date : 2015-12-2
+ * @date : 2015-12-03
+ *
+ * 消息验证码实体
  */
-public class SmsSend implements Serializable {
+public class SmsSend {
     private Long id;
 
-    private String phonenum;
+    private String phoneNum;
 
-    private String msgcontent;
+    private String msgContent;
 
-    private Integer sendflag;
+    private Integer sendFlag;
 
-    private Date sendtime;
+    private Date sendTime;
 
-    private String bymodule;
+    private String byModule;
 
-    private Long requestkeyid;
+    private Long requestKeyId;
 
     public Long getId() {
         return id;
@@ -30,51 +31,51 @@ public class SmsSend implements Serializable {
         this.id = id;
     }
 
-    public String getPhonenum() {
-        return phonenum;
+    public String getPhoneNum() {
+        return phoneNum;
     }
 
-    public void setPhonenum(String phonenum) {
-        this.phonenum = phonenum == null ? null : phonenum.trim();
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 
-    public String getMsgcontent() {
-        return msgcontent;
+    public String getMsgContent() {
+        return msgContent;
     }
 
-    public void setMsgcontent(String msgcontent) {
-        this.msgcontent = msgcontent == null ? null : msgcontent.trim();
+    public void setMsgContent(String msgContent) {
+        this.msgContent = msgContent;
     }
 
-    public Integer getSendflag() {
-        return sendflag;
+    public Integer getSendFlag() {
+        return sendFlag;
     }
 
-    public void setSendflag(Integer sendflag) {
-        this.sendflag = sendflag;
+    public void setSendFlag(Integer sendFlag) {
+        this.sendFlag = sendFlag;
     }
 
-    public Date getSendtime() {
-        return sendtime;
+    public Date getSendTime() {
+        return sendTime;
     }
 
-    public void setSendtime(Date sendtime) {
-        this.sendtime = sendtime;
+    public void setSendTime(Date sendTime) {
+        this.sendTime = sendTime;
     }
 
-    public String getBymodule() {
-        return bymodule;
+    public String getByModule() {
+        return byModule;
     }
 
-    public void setBymodule(String bymodule) {
-        this.bymodule = bymodule == null ? null : bymodule.trim();
+    public void setByModule(String byModule) {
+        this.byModule = byModule;
     }
 
-    public Long getRequestkeyid() {
-        return requestkeyid;
+    public Long getRequestKeyId() {
+        return requestKeyId;
     }
 
-    public void setRequestkeyid(Long requestkeyid) {
-        this.requestkeyid = requestkeyid;
+    public void setRequestKeyId(Long requestKeyId) {
+        this.requestKeyId = requestKeyId;
     }
 }

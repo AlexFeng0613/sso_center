@@ -5,6 +5,8 @@ import java.io.Serializable;
 /**
  * @author : zga
  * @date : 2015-12-03
+ *
+ * Email激活实体
  */
 public class ActivateEmailMess implements Serializable {
     private String email;

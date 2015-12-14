@@ -1,39 +1,39 @@
 package com.hsjc.central.domain;
 
-import java.io.Serializable;
-
 /**
  * @author : zga
- * @date : 2015-12-2
+ * @date : 2015-12-03
+ *
+ * 手机绑定实体
  */
-public class SmsBindPhoneNum implements Serializable {
-    private Integer bindid;
+public class SmsBindPhoneNum {
+    private Integer bindId;
 
-    private Integer authid;
+    private Integer authId;
 
-    private Long userid;
+    private Long userId;
 
-    public Integer getBindid() {
-        return bindid;
+    public Integer getBindId() {
+        return bindId;
     }
 
-    public void setBindid(Integer bindid) {
-        this.bindid = bindid;
+    public void setBindId(Integer bindId) {
+        this.bindId = bindId;
     }
 
-    public Integer getAuthid() {
-        return authid;
+    public Integer getAuthId() {
+        return authId;
     }
 
-    public void setAuthid(Integer authid) {
-        this.authid = authid;
+    public void setAuthId(Integer authId) {
+        this.authId = authId;
     }
 
-    public Long getUserid() {
-        return userid;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

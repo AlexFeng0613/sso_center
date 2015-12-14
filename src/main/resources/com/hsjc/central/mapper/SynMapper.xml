@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hsjc.central.mapper.OrganizationMapper" >
+<mapper namespace="com.hsjc.central.mapper.SynMapper" >
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.Organization" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="organizationCode" property="organizationCode" jdbcType="INTEGER" />
@@ -120,10 +120,20 @@
     where id = #{id}
   </update>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select
-    <include refid="Base_Column_List" />
-    from tborganization
-    where id = #{id}
+  <!--
+    @author : zga
+    @date : 2015-12-14
+    查询增量组织机构数据
+  -->
+  <select id="selectDifferentOrganization" resultType="java.util.HashMap">
+   SELECT
+    tbo.organizationCode,tbo.organizationName,tbo.parentId
+   FROM tborganization tbo LEFT JOIN tbsynorganization${briefName} tbso
+   on tbo.organizationCode = tbso.organizationCode
+  </select>
+
+  <select id="selectDifferentUser" resultType="java.util.HashMap">
+    SELECT
+
   </select>
 </mapper>

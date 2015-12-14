@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hsjc.central.mapper.ThirdClientsMapper" >
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.ThirdClients" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="client_id" property="clientId" jdbcType="VARCHAR" />
-    <result column="client_secret" property="clientSecret" jdbcType="VARCHAR" />
-    <result column="contactorName" property="contactorname" jdbcType="VARCHAR" />
-    <result column="contactorPhone" property="contactorphone" jdbcType="VARCHAR" />
-    <result column="briefName" property="briefname" jdbcType="VARCHAR" />
-    <result column="sso_password" property="ssoPassword" jdbcType="VARCHAR" />
-    <result column="public_key" property="publicKey" jdbcType="VARCHAR" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="clientId" property="clientId" jdbcType="VARCHAR" />
+    <result column="clientSecret" property="clientSecret" jdbcType="VARCHAR" />
+    <result column="contactorName" property="contactorName" jdbcType="VARCHAR" />
+    <result column="contactorPhone" property="contactorPhone" jdbcType="VARCHAR" />
+    <result column="briefName" property="briefName" jdbcType="VARCHAR" />
+    <result column="ssoPassword" property="ssoPassword" jdbcType="VARCHAR" />
+    <result column="publicKey" property="publicKey" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id, client_id, client_secret, contactorName, contactorPhone, briefName, sso_password, 
-    public_key
+    id, clientId, clientSecret, contactorName, contactorPhone, briefName, ssoPassword, 
+    publicKey
   </sql>
 
   <!--
@@ -23,11 +23,11 @@
    新增
   -->
   <insert id="insert" parameterType="com.hsjc.central.domain.ThirdClients" >
-    insert into tb3rdclients (id, client_id, client_secret, 
+    insert into tb3rdclients (id, clientId, clientSecret, 
       contactorName, contactorPhone, briefName, 
-      sso_password, public_key)
+      ssoPassword, publicKey)
     values (#{id}, #{clientId}, #{clientSecret}, 
-      #{contactorname}, #{contactorphone}, #{briefname}, 
+      #{contactorName}, #{contactorPhone}, #{briefName}, 
       #{ssoPassword}, #{publicKey})
   </insert>
 
@@ -38,25 +38,25 @@
         id,
       </if>
       <if test="clientId != null" >
-        client_id,
+        clientId,
       </if>
       <if test="clientSecret != null" >
-        client_secret,
+        clientSecret,
       </if>
-      <if test="contactorname != null" >
+      <if test="contactorName != null" >
         contactorName,
       </if>
-      <if test="contactorphone != null" >
+      <if test="contactorPhone != null" >
         contactorPhone,
       </if>
-      <if test="briefname != null" >
+      <if test="briefName != null" >
         briefName,
       </if>
       <if test="ssoPassword != null" >
-        sso_password,
+        ssoPassword,
       </if>
       <if test="publicKey != null" >
-        public_key,
+        publicKey,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -69,14 +69,14 @@
       <if test="clientSecret != null" >
         #{clientSecret},
       </if>
-      <if test="contactorname != null" >
-        #{contactorname},
+      <if test="contactorName != null" >
+        #{contactorName},
       </if>
-      <if test="contactorphone != null" >
-        #{contactorphone},
+      <if test="contactorPhone != null" >
+        #{contactorPhone},
       </if>
-      <if test="briefname != null" >
-        #{briefname},
+      <if test="briefName != null" >
+        #{briefName},
       </if>
       <if test="ssoPassword != null" >
         #{ssoPassword},
@@ -96,25 +96,25 @@
     update tb3rdclients
     <set >
       <if test="clientId != null" >
-        client_id = #{clientId},
+        clientId = #{clientId},
       </if>
       <if test="clientSecret != null" >
-        client_secret = #{clientSecret},
+        clientSecret = #{clientSecret},
       </if>
-      <if test="contactorname != null" >
-        contactorName = #{contactorname},
+      <if test="contactorName != null" >
+        contactorName = #{contactorName},
       </if>
-      <if test="contactorphone != null" >
-        contactorPhone = #{contactorphone},
+      <if test="contactorPhone != null" >
+        contactorPhone = #{contactorPhone},
       </if>
-      <if test="briefname != null" >
-        briefName = #{briefname},
+      <if test="briefName != null" >
+        briefName = #{briefName},
       </if>
       <if test="ssoPassword != null" >
-        sso_password = #{ssoPassword},
+        ssoPassword = #{ssoPassword},
       </if>
       <if test="publicKey != null" >
-        public_key = #{publicKey},
+        publicKey = #{publicKey},
       </if>
     </set>
     where id = #{id}
@@ -122,13 +122,13 @@
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.ThirdClients" >
     update tb3rdclients
-    set client_id = #{clientId},
-      client_secret = #{clientSecret},
-      contactorName = #{contactorname},
-      contactorPhone = #{contactorphone},
-      briefName = #{briefname},
-      sso_password = #{ssoPassword},
-      public_key = #{publicKey}
+    set clientId = #{clientId},
+      clientSecret = #{clientSecret},
+      contactorName = #{contactorName},
+      contactorPhone = #{contactorPhone},
+      briefName = #{briefName},
+      ssoPassword = #{ssoPassword},
+      publicKey = #{publicKey}
     where id = #{id}
   </update>
 
@@ -147,6 +147,6 @@
   <select id="selectByClientId" parameterType="ThirdClients" resultType="ThirdClients">
     SELECT
     <include refid="Base_Column_List"/>
-    FROM tb3rdclients WHERE client_id = #{thirdClients.clientId}
+    FROM tb3rdclients WHERE clientId = #{thirdClients.clientId}
   </select>
 </mapper>

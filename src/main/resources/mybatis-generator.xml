@@ -25,54 +25,30 @@
         <!-- !!!! Model Configurations !!!! -->
         <javaModelGenerator targetPackage="com.hsjc.central.domain" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
             <property name="enableSubPackages" value="false"/>
-            <property name="trimStrings" value="true"/>
+            <!--<property name="trimStrings" value="true"/>-->
         </javaModelGenerator>
 
         <!-- !!!! Mapper XML Configurations !!!! -->
-        <sqlMapGenerator targetPackage="com.hsjc.central.mapper" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
+        <!--<sqlMapGenerator targetPackage="com.hsjc.central.mapper" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
             <property name="enableSubPackages" value="false"/>
-        </sqlMapGenerator>
+        </sqlMapGenerator>-->
 
         <!-- !!!! Mapper Interface Configurations !!!! -->
-        <javaClientGenerator targetPackage="com.hsjc.central.mapper" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED" type="XMLMAPPER">
+        <!--<javaClientGenerator targetPackage="com.hsjc.central.mapper" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED" type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
-        </javaClientGenerator>
+        </javaClientGenerator>-->
 
         <!-- !!!! Table Configurations !!!! -->
-        <!--<table tableName="usermain" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-        <table tableName="userteacher" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-        <table tableName="userstudent" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-        <table tableName="ssoclientdetails" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-        <table tableName="tbemailactivate" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-        <table tableName="tbemailresetpwd" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-        <table tableName="tbemailsend" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-        <table tableName="tbsmsbindphonenum" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-        <table tableName="tbsmsresetpasswd" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-        <table tableName="tbsmssend" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-        <table tableName="userTemp" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>-->
-
         <table tableName="tb3rdclients" domainObjectName="ThirdClients" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tbemailactivate" domainObjectName="EmailActivate" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tbemailresetpwd" domainObjectName="EmailResetPwd" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tbemailsend" domainObjectName="EmailSend" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
 
         <table tableName="tborganization" domainObjectName="Organization" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
@@ -87,7 +63,29 @@
         <table tableName="tbschoolinvite" domainObjectName="SchoolInvite" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
 
+        <table tableName="tbsmsbindphonenum" domainObjectName="SmsBindPhoneNum" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tbsmsresetpasswd" domainObjectName="SmsResetPasswd" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tbsmssend" domainObjectName="SmsSend" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
         <table tableName="tbsystemlog" domainObjectName="SystemLog" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
+
+        <table tableName="tbusermain" domainObjectName="UserMain" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tbuserstudent" domainObjectName="UserStudent" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tbuserteacher" domainObjectName="UserTeacher" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tuserTemp" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
     </context>
 </generatorConfiguration>

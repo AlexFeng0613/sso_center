@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hsjc.central.mapper.RestfulLogMapper" >
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.RestfulLog" >
-    <id column="restlogid" property="restlogid" jdbcType="BIGINT" />
-    <result column="userid" property="userid" jdbcType="BIGINT" />
-    <result column="actionid" property="actionid" jdbcType="INTEGER" />
-    <result column="respcode" property="respcode" jdbcType="INTEGER" />
+    <id column="restLogId" property="restLogId" jdbcType="BIGINT" />
+    <result column="userId" property="userId" jdbcType="BIGINT" />
+    <result column="actionId" property="actionId" jdbcType="INTEGER" />
+    <result column="respCode" property="respCode" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="actiontime" property="actiontime" jdbcType="TIMESTAMP" />
+    <result column="actionTime" property="actionTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    restlogid, userid, actionid, respcode, description, actiontime
+    restLogId, userId, actionId, respCode, description, actionTime
   </sql>
 
   <!--
@@ -20,99 +20,99 @@
    新增
   -->
   <insert id="insert" parameterType="com.hsjc.central.domain.RestfulLog" >
-    insert into tbrestfullog (restlogid, userid, actionid, 
-      respcode, description, actiontime
+    insert into tbrestfullog (restLogId, userId, actionId, 
+      respCode, description, actionTime
       )
-    values (#{restlogid}, #{userid}, #{actionid}, 
-      #{respcode}, #{description}, #{actiontime}
+    values (#{restLogId}, #{userId}, #{actionId}, 
+      #{respCode}, #{description}, #{actionTime}
       )
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.RestfulLog" >
     insert into tbrestfullog
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="restlogid != null" >
-        restlogid,
+      <if test="restLogId != null" >
+        restLogId,
       </if>
-      <if test="userid != null" >
-        userid,
+      <if test="userId != null" >
+        userId,
       </if>
-      <if test="actionid != null" >
-        actionid,
+      <if test="actionId != null" >
+        actionId,
       </if>
-      <if test="respcode != null" >
-        respcode,
+      <if test="respCode != null" >
+        respCode,
       </if>
       <if test="description != null" >
         description,
       </if>
-      <if test="actiontime != null" >
-        actiontime,
+      <if test="actionTime != null" >
+        actionTime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="restlogid != null" >
-        #{restlogid},
+      <if test="restLogId != null" >
+        #{restLogId},
       </if>
-      <if test="userid != null" >
-        #{userid},
+      <if test="userId != null" >
+        #{userId},
       </if>
-      <if test="actionid != null" >
-        #{actionid},
+      <if test="actionId != null" >
+        #{actionId},
       </if>
-      <if test="respcode != null" >
-        #{respcode},
+      <if test="respCode != null" >
+        #{respCode},
       </if>
       <if test="description != null" >
         #{description},
       </if>
-      <if test="actiontime != null" >
-        #{actiontime},
+      <if test="actionTime != null" >
+        #{actionTime},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tbrestfullog
-    where restlogid = #{restlogid}
+    where restLogId = #{restLogId}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.RestfulLog" >
     update tbrestfullog
     <set >
-      <if test="userid != null" >
-        userid = #{userid},
+      <if test="userId != null" >
+        userId = #{userId},
       </if>
-      <if test="actionid != null" >
-        actionid = #{actionid},
+      <if test="actionId != null" >
+        actionId = #{actionId},
       </if>
-      <if test="respcode != null" >
-        respcode = #{respcode},
+      <if test="respCode != null" >
+        respCode = #{respCode},
       </if>
       <if test="description != null" >
         description = #{description},
       </if>
-      <if test="actiontime != null" >
-        actiontime = #{actiontime},
+      <if test="actionTime != null" >
+        actionTime = #{actionTime},
       </if>
     </set>
-    where restlogid = #{restlogid}
+    where restLogId = #{restLogId}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.RestfulLog" >
     update tbrestfullog
-    set userid = #{userid},
-      actionid = #{actionid},
-      respcode = #{respcode},
+    set userId = #{userId},
+      actionId = #{actionId},
+      respCode = #{respCode},
       description = #{description},
-      actiontime = #{actiontime}
-    where restlogid = #{restlogid}
+      actionTime = #{actionTime}
+    where restLogId = #{restLogId}
   </update>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from tbrestfullog
-    where restlogid = #{restlogid}
+    where restLogId = #{restLogId}
   </select>
 </mapper>

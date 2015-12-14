@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hsjc.central.mapper.EmailSendMapper">
+<mapper namespace="com.hsjc.central.mapper.emailSendMapper">
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.EmailSend">
-    <id column="ID" jdbcType="BIGINT" property="id" />
-    <result column="Email" jdbcType="VARCHAR" property="email" />
-    <result column="Subject" jdbcType="VARCHAR" property="subject" />
-    <result column="SendFlag" jdbcType="BIT" property="sendflag" />
-    <result column="SendTime" jdbcType="TIMESTAMP" property="sendtime" />
-    <result column="byModule" jdbcType="VARCHAR" property="bymodule" />
-    <result column="RequestKeyID" jdbcType="BIGINT" property="requestkeyid" />
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="sendFlag" jdbcType="BIT" property="sendFlag" />
+    <result column="sendTime" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="byModule" jdbcType="VARCHAR" property="byModule" />
+    <result column="requestKeyId" jdbcType="BIGINT" property="requestKeyId" />
   </resultMap>
 
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hsjc.central.domain.EmailSend">
-    <result column="Content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    ID, Email, Subject, SendFlag, SendTime, byModule, RequestKeyID
+    id, email, subject, sendFlag, sendTime, byModule, requestKeyId
   </sql>
   <sql id="Blob_Column_List">
     Content
@@ -28,37 +28,37 @@
    新增
  -->
   <insert id="insert" parameterType="com.hsjc.central.domain.EmailSend">
-    insert into tbemailsend (ID, Email, Subject,
-      SendFlag, SendTime, byModule, 
-      RequestKeyID, Content)
+    insert into tbEmailSend (id, email, subject,
+      sendFlag, sendTime, byModule, 
+      requestKeyId, Content)
     values (#{id}, #{email}, #{subject}, 
-      #{sendflag}, #{sendtime}, #{bymodule}, 
-      #{requestkeyid}, #{content})
+      #{sendFlag}, #{sendTime}, #{byModule}, 
+      #{requestKeyId}, #{content})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.EmailSend">
     insert into tbemailsend
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        ID,
+        id,
       </if>
       <if test="email != null">
-        Email,
+        email,
       </if>
       <if test="subject != null">
-        Subject,
+        subject,
       </if>
-      <if test="sendflag != null">
-        SendFlag,
+      <if test="sendFlag != null">
+        sendFlag,
       </if>
-      <if test="sendtime != null">
-        SendTime,
+      <if test="sendTime != null">
+        sendTime,
       </if>
-      <if test="bymodule != null">
+      <if test="byModule != null">
         byModule,
       </if>
-      <if test="requestkeyid != null">
-        RequestKeyID,
+      <if test="requestKeyId != null">
+        requestKeyId,
       </if>
       <if test="content != null">
         Content,
@@ -74,17 +74,17 @@
       <if test="subject != null">
         #{subject},
       </if>
-      <if test="sendflag != null">
-        #{sendflag},
+      <if test="sendFlag != null">
+        #{sendFlag},
       </if>
-      <if test="sendtime != null">
-        #{sendtime},
+      <if test="sendTime != null">
+        #{sendTime},
       </if>
-      <if test="bymodule != null">
-        #{bymodule},
+      <if test="byModule != null">
+        #{byModule},
       </if>
-      <if test="requestkeyid != null">
-        #{requestkeyid},
+      <if test="requestKeyId != null">
+        #{requestKeyId},
       </if>
       <if test="content != null">
         #{content},
@@ -94,58 +94,58 @@
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tbemailsend
-    where ID = #{id}
+    where id = #{id}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.EmailSend">
     update tbemailsend
     <set>
       <if test="email != null">
-        Email = #{email},
+        email = #{email},
       </if>
       <if test="subject != null">
-        Subject = #{subject},
+        subject = #{subject},
       </if>
-      <if test="sendflag != null">
-        SendFlag = #{sendflag},
+      <if test="sendFlag != null">
+        sendFlag = #{sendFlag},
       </if>
-      <if test="sendtime != null">
-        SendTime = #{sendtime},
+      <if test="sendTime != null">
+        sendTime = #{sendTime},
       </if>
-      <if test="bymodule != null">
-        byModule = #{bymodule},
+      <if test="byModule != null">
+        byModule = #{byModule},
       </if>
-      <if test="requestkeyid != null">
-        RequestKeyID = #{requestkeyid},
+      <if test="requestKeyId != null">
+        requestKeyId = #{requestKeyId},
       </if>
       <if test="content != null">
         Content = #{content},
       </if>
     </set>
-    where ID = #{id}
+    where id = #{id}
   </update>
 
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hsjc.central.domain.EmailSend">
     update tbemailsend
-    set Email = #{email},
-      Subject = #{subject},
-      SendFlag = #{sendflag},
-      SendTime = #{sendtime},
-      byModule = #{bymodule},
-      RequestKeyID = #{requestkeyid},
+    set email = #{email},
+      subject = #{subject},
+      sendFlag = #{sendFlag},
+      sendTime = #{sendTime},
+      byModule = #{byModule},
+      requestKeyId = #{requestKeyId},
       Content = #{content}
-    where ID = #{id}
+    where id = #{id}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.EmailSend">
     update tbemailsend
-    set Email = #{email},
-      Subject = #{subject},
-      SendFlag = #{sendflag},
-      SendTime = #{sendtime},
-      byModule = #{bymodule},
-      RequestKeyID = #{requestkeyid}
-    where ID = #{id}
+    set email = #{email},
+      subject = #{subject},
+      sendFlag = #{sendFlag},
+      sendTime = #{sendTime},
+      byModule = #{byModule},
+      requestKeyId = #{requestKeyId}
+    where id = #{id}
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
@@ -154,6 +154,6 @@
     ,
     <include refid="Blob_Column_List" />
     from tbemailsend
-    where ID = #{id}
+    where id = #{id}
   </select>
 </mapper>

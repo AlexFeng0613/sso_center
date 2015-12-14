@@ -1,6 +1,7 @@
 package com.hsjc.central.controller;
 
 import com.hsjc.central.service.ApiBaseService;
+import com.hsjc.central.service.ThirdClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,10 @@ public class PageController {
 
     @Autowired
     private ApiBaseService apiBaseService;
+
+    @Autowired
+    private ThirdClientsService thirdClientsService;
+
     /**
      * @author : zga
      * @date : 2015-12-04

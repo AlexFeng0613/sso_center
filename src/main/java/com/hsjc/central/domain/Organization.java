@@ -2,20 +2,26 @@ package com.hsjc.central.domain;
 
 import java.util.Date;
 
+/**
+ * @author : zga
+ * @date : 2015-12-03
+ *
+ * 组织机构实体
+ */
 public class Organization {
     private Long id;
 
-    private Integer organizationid;
+    private Integer organizationCode;
 
-    private String organizationname;
+    private String organizationName;
 
-    private Long parentid;
+    private Long parentId;
 
     private String status;
 
-    private Date createtime;
+    private Date createTime;
 
-    private Integer isdelete;
+    private Integer isDelete;
 
     public Long getId() {
         return id;
@@ -25,28 +31,28 @@ public class Organization {
         this.id = id;
     }
 
-    public Integer getOrganizationid() {
-        return organizationid;
+    public Integer getOrganizationCode() {
+        return organizationCode;
     }
 
-    public void setOrganizationid(Integer organizationid) {
-        this.organizationid = organizationid;
+    public void setOrganizationCode(Integer organizationCode) {
+        this.organizationCode = organizationCode;
     }
 
-    public String getOrganizationname() {
-        return organizationname;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
-    public void setOrganizationname(String organizationname) {
-        this.organizationname = organizationname == null ? null : organizationname.trim();
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 
-    public Long getParentid() {
-        return parentid;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setParentid(Long parentid) {
-        this.parentid = parentid;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public String getStatus() {
@@ -54,22 +60,22 @@ public class Organization {
     }
 
     public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+        this.status = status;
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Integer getIsdelete() {
-        return isdelete;
+    public Integer getIsDelete() {
+        return isDelete;
     }
 
-    public void setIsdelete(Integer isdelete) {
-        this.isdelete = isdelete;
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
     }
 }

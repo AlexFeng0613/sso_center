@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hsjc.central.mapper.SystemLogMapper" >
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.SystemLog" >
-    <id column="syslogid" property="syslogid" jdbcType="BIGINT" />
-    <result column="userid" property="userid" jdbcType="BIGINT" />
-    <result column="logintime" property="logintime" jdbcType="TIMESTAMP" />
-    <result column="logintype" property="logintype" jdbcType="VARCHAR" />
-    <result column="loginip" property="loginip" jdbcType="VARCHAR" />
-    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <id column="sysLogId" property="sysLogId" jdbcType="BIGINT" />
+    <result column="userId" property="userId" jdbcType="BIGINT" />
+    <result column="loginTime" property="loginTime" jdbcType="TIMESTAMP" />
+    <result column="loginType" property="loginType" jdbcType="VARCHAR" />
+    <result column="loginIp" property="loginIp" jdbcType="VARCHAR" />
+    <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    syslogid, userid, logintime, logintype, loginip, createdate
+    sysLogId, userId, loginTime, loginType, loginIp, createDate
   </sql>
 
   <!--
@@ -20,98 +20,98 @@
    新增
   -->
   <insert id="insert" parameterType="com.hsjc.central.domain.SystemLog" >
-    insert into tbsystemlog (syslogid, userid, logintime, 
-      logintype, loginip, createdate
+    insert into tbsystemlog (sysLogId, userId, loginTime, 
+      loginType, loginIp, createDate
       )
-    values (#{syslogid}, #{userid}, #{logintime}, 
-      #{logintype}, #{loginip}, #{createdate}
+    values (#{sysLogId}, #{userId}, #{loginTime}, 
+      #{loginType}, #{loginIp}, #{createDate}
       )
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.SystemLog" >
     insert into tbsystemlog
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="syslogid != null" >
-        syslogid,
+      <if test="sysLogId != null" >
+        sysLogId,
       </if>
-      <if test="userid != null" >
-        userid,
+      <if test="userId != null" >
+        userId,
       </if>
-      <if test="logintime != null" >
-        logintime,
+      <if test="loginTime != null" >
+        loginTime,
       </if>
-      <if test="logintype != null" >
-        logintype,
+      <if test="loginType != null" >
+        loginType,
       </if>
-      <if test="loginip != null" >
-        loginip,
+      <if test="loginIp != null" >
+        loginIp,
       </if>
-      <if test="createdate != null" >
-        createdate,
+      <if test="createDate != null" >
+        createDate,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="syslogid != null" >
-        #{syslogid},
+      <if test="sysLogId != null" >
+        #{sysLogId},
       </if>
-      <if test="userid != null" >
-        #{userid},
+      <if test="userId != null" >
+        #{userId},
       </if>
-      <if test="logintime != null" >
-        #{logintime},
+      <if test="loginTime != null" >
+        #{loginTime},
       </if>
-      <if test="logintype != null" >
-        #{logintype},
+      <if test="loginType != null" >
+        #{loginType},
       </if>
-      <if test="loginip != null" >
-        #{loginip},
+      <if test="loginIp != null" >
+        #{loginIp},
       </if>
-      <if test="createdate != null" >
-        #{createdate},
+      <if test="createDate != null" >
+        #{createDate},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tbsystemlog
-    where syslogid = #{syslogid}
+    where sysLogId = #{sysLogId}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.SystemLog" >
     update tbsystemlog
     <set >
-      <if test="userid != null" >
-        userid = #{userid},
+      <if test="userId != null" >
+        userId = #{userId},
       </if>
-      <if test="logintime != null" >
-        logintime = #{logintime},
+      <if test="loginTime != null" >
+        loginTime = #{loginTime},
       </if>
-      <if test="logintype != null" >
-        logintype = #{logintype},
+      <if test="loginType != null" >
+        loginType = #{loginType},
       </if>
-      <if test="loginip != null" >
-        loginip = #{loginip},
+      <if test="loginIp != null" >
+        loginIp = #{loginIp},
       </if>
-      <if test="createdate != null" >
-        createdate = #{createdate},
+      <if test="createDate != null" >
+        createDate = #{createDate},
       </if>
     </set>
-    where syslogid = #{syslogid}
+    where sysLogId = #{sysLogId}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.SystemLog" >
     update tbsystemlog
-    set userid = #{userid},
-      logintime = #{logintime},
-      logintype = #{logintype},
-      loginip = #{loginip},
-      createdate = #{createdate}
-    where syslogid = #{syslogid}
+    set userId = #{userId},
+      loginTime = #{loginTime},
+      loginType = #{loginType},
+      loginIp = #{loginIp},
+      createDate = #{createDate}
+    where sysLogId = #{sysLogId}
   </update>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from tbsystemlog
-    where syslogid = #{syslogid}
+    where sysLogId = #{sysLogId}
   </select>
 </mapper>

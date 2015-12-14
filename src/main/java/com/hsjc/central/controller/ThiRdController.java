@@ -45,15 +45,25 @@ public class ThirdController extends BaseController{
      * @author : zga
      * @date : 2015-12-10
      *
-     * 同步所有用户
+     * 同步所有组织机构
+     *
+     * @param clientId
+     * @param password
+     * @param time
      * @return
      */
     @RequestMapping("getAllOrganization")
     @ResponseBody
-    public JSONObject getAllOrganization(){
-        JSONObject resJsonObject = new JSONObject();
+    public JSONObject getAllOrganization(@RequestParam("client_id")String clientId,
+                                         @RequestParam("password")String password,
+                                         @RequestParam("time")String time){
 
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("clientId", clientId);
+        paramJson.put("password", password);
+        paramJson.put("time", time);
 
+        JSONObject resJsonObject = thirdClientsService.getAllOrganization(paramJson);
 
         return resJsonObject;
     }
@@ -62,18 +72,27 @@ public class ThirdController extends BaseController{
      * @author : zga
      * @date : 2015-12-10
      *
-     * 同步增量用户
+     * 同步增量组织机构
+     *
+     * @param clientId
+     * @param password
+     * @param time
      * @return
      */
     @RequestMapping("getDifferentOrganization")
     @ResponseBody
-    public JSONObject getDifferentOrganization(){
-        JSONObject resJsonObject = new JSONObject();
+    public JSONObject getDifferentOrganization(@RequestParam("client_id")String clientId,
+                                               @RequestParam("password")String password,
+                                               @RequestParam("time")String time){
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("clientId", clientId);
+        paramJson.put("password", password);
+        paramJson.put("time", time);
 
+        JSONObject resJsonObject = thirdClientsService.getDifferentOrganization(paramJson);
 
 
         return resJsonObject;
-
     }
 
     /**
@@ -81,13 +100,23 @@ public class ThirdController extends BaseController{
      * @date : 2015-12-10
      *
      * 同步所有的用户
+     *
+     * @param clientId
+     * @param password
+     * @param time
      * @return
      */
     @RequestMapping("getAllUser")
     @ResponseBody
-    public JSONObject getAllUser(){
-        JSONObject resJsonObject = new JSONObject();
+    public JSONObject getAllUser(@RequestParam("client_id")String clientId,
+                                 @RequestParam("password")String password,
+                                 @RequestParam("time")String time){
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("clientId", clientId);
+        paramJson.put("password", password);
+        paramJson.put("time", time);
 
+        JSONObject resJsonObject = thirdClientsService.getAllUser(paramJson);
 
         return resJsonObject;
     }
@@ -97,13 +126,23 @@ public class ThirdController extends BaseController{
      * @date : 2015-12-10
      *
      * 同步增量用户
+     *
+     * @param clientId
+     * @param password
+     * @param time
      * @return
      */
     @RequestMapping("getDifferentUser")
     @ResponseBody
-    public JSONObject getDifferentUser(){
-        JSONObject resJsonObject = new JSONObject();
+    public JSONObject getDifferentUser(@RequestParam("client_id")String clientId,
+                                       @RequestParam("password")String password,
+                                       @RequestParam("time")String time){
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("clientId", clientId);
+        paramJson.put("password", password);
+        paramJson.put("time", time);
 
+        JSONObject resJsonObject = thirdClientsService.getDifferentUser(paramJson);
 
         return resJsonObject;
     }

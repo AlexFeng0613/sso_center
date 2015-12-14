@@ -2,64 +2,70 @@ package com.hsjc.central.domain;
 
 import java.util.Date;
 
+/**
+ * @author : zga
+ * @date : 2015-12-03
+ *
+ * 系统日志实体
+ */
 public class SystemLog {
-    private Long syslogid;
+    private Long sysLogId;
 
-    private Long userid;
+    private Long userId;
 
-    private Date logintime;
+    private Date loginTime;
 
-    private String logintype;
+    private String loginType;
 
-    private String loginip;
+    private String loginIp;
 
-    private Date createdate;
+    private Date createDate;
 
-    public Long getSyslogid() {
-        return syslogid;
+    public Long getSysLogId() {
+        return sysLogId;
     }
 
-    public void setSyslogid(Long syslogid) {
-        this.syslogid = syslogid;
+    public void setSysLogId(Long sysLogId) {
+        this.sysLogId = sysLogId;
     }
 
-    public Long getUserid() {
-        return userid;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Date getLogintime() {
-        return logintime;
+    public Date getLoginTime() {
+        return loginTime;
     }
 
-    public void setLogintime(Date logintime) {
-        this.logintime = logintime;
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
     }
 
-    public String getLogintype() {
-        return logintype;
+    public String getLoginType() {
+        return loginType;
     }
 
-    public void setLogintype(String logintype) {
-        this.logintype = logintype == null ? null : logintype.trim();
+    public void setLoginType(String loginType) {
+        this.loginType = loginType;
     }
 
-    public String getLoginip() {
-        return loginip;
+    public String getLoginIp() {
+        return loginIp;
     }
 
-    public void setLoginip(String loginip) {
-        this.loginip = loginip == null ? null : loginip.trim();
+    public void setLoginIp(String loginIp) {
+        this.loginIp = loginIp;
     }
 
-    public Date getCreatedate() {
-        return createdate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

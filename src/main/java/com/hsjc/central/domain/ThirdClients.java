@@ -1,5 +1,11 @@
 package com.hsjc.central.domain;
 
+/**
+ * @author : zga
+ * @date : 2015-12-03
+ *
+ * 第三方绑定实体
+ */
 public class ThirdClients {
     private Long id;
 
@@ -7,11 +13,11 @@ public class ThirdClients {
 
     private String clientSecret;
 
-    private String contactorname;
+    private String contactorName;
 
-    private String contactorphone;
+    private String contactorPhone;
 
-    private String briefname;
+    private String briefName;
 
     private String ssoPassword;
 
@@ -30,7 +36,7 @@ public class ThirdClients {
     }
 
     public void setClientId(String clientId) {
-        this.clientId = clientId == null ? null : clientId.trim();
+        this.clientId = clientId;
     }
 
     public String getClientSecret() {
@@ -38,31 +44,31 @@ public class ThirdClients {
     }
 
     public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret == null ? null : clientSecret.trim();
+        this.clientSecret = clientSecret;
     }
 
-    public String getContactorname() {
-        return contactorname;
+    public String getContactorName() {
+        return contactorName;
     }
 
-    public void setContactorname(String contactorname) {
-        this.contactorname = contactorname == null ? null : contactorname.trim();
+    public void setContactorName(String contactorName) {
+        this.contactorName = contactorName;
     }
 
-    public String getContactorphone() {
-        return contactorphone;
+    public String getContactorPhone() {
+        return contactorPhone;
     }
 
-    public void setContactorphone(String contactorphone) {
-        this.contactorphone = contactorphone == null ? null : contactorphone.trim();
+    public void setContactorPhone(String contactorPhone) {
+        this.contactorPhone = contactorPhone;
     }
 
-    public String getBriefname() {
-        return briefname;
+    public String getBriefName() {
+        return briefName;
     }
 
-    public void setBriefname(String briefname) {
-        this.briefname = briefname == null ? null : briefname.trim();
+    public void setBriefName(String briefName) {
+        this.briefName = briefName;
     }
 
     public String getSsoPassword() {
@@ -70,7 +76,7 @@ public class ThirdClients {
     }
 
     public void setSsoPassword(String ssoPassword) {
-        this.ssoPassword = ssoPassword == null ? null : ssoPassword.trim();
+        this.ssoPassword = ssoPassword;
     }
 
     public String getPublicKey() {

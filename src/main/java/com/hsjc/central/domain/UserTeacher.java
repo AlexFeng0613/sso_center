@@ -1,15 +1,15 @@
 package com.hsjc.central.domain;
 
-import java.io.Serializable;
-
 /**
  * @author : zga
- * @date : 2015-12-2
+ * @date : 2015-12-03
+ *
+ * 老师实体
  */
-public class UserTeacher implements Serializable {
+public class UserTeacher {
     private Integer id;
 
-    private String userid;
+    private String userId;
 
     public Integer getId() {
         return id;
@@ -19,11 +19,11 @@ public class UserTeacher implements Serializable {
         this.id = id;
     }
 
-    public String getUserid() {
-        return userid;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid == null ? null : userid.trim();
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

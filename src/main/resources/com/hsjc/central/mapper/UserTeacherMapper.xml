@@ -3,7 +3,7 @@
 <mapper namespace="com.hsjc.central.mapper.UserTeacherMapper">
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.UserTeacher">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -17,7 +17,7 @@
   -->
   <insert id="insert" parameterType="com.hsjc.central.domain.UserTeacher">
     insert into userteacher (id, userId)
-    values (#{id}, #{userid})
+    values (#{id}, #{userId})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.UserTeacher">
@@ -26,7 +26,7 @@
       <if test="id != null">
         id,
       </if>
-      <if test="userid != null">
+      <if test="userId != null">
         userId,
       </if>
     </trim>
@@ -34,8 +34,8 @@
       <if test="id != null">
         #{id},
       </if>
-      <if test="userid != null">
-        #{userid},
+      <if test="userId != null">
+        #{userId},
       </if>
     </trim>
   </insert>
@@ -48,8 +48,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.UserTeacher">
     update userteacher
     <set>
-      <if test="userid != null">
-        userId = #{userid},
+      <if test="userId != null">
+        userId = #{userId},
       </if>
     </set>
     where id = #{id}
@@ -57,7 +57,7 @@
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.UserTeacher">
     update userteacher
-    set userId = #{userid}
+    set userId = #{userId}
     where id = #{id}
   </update>
 

@@ -1,65 +1,66 @@
 package com.hsjc.central.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author : zga
- * @date : 2015-12-2
+ * @date : 2015-12-03
+ *
+ * Email激活实体
  */
-public class EmailActivate implements Serializable{
-    private Integer activateid;
+public class EmailActivate {
+    private Integer activateId;
 
-    private Long userid;
+    private Long userId;
 
-    private Date createtime;
+    private Date createTime;
 
-    private Date activetime;
+    private Date activeTime;
 
-    private String activatekey;
+    private String activateKey;
 
     private String state;
 
-    private Integer validseconds;
+    private Integer validSeconds;
 
-    public Integer getActivateid() {
-        return activateid;
+    public Integer getActivateId() {
+        return activateId;
     }
 
-    public void setActivateid(Integer activateid) {
-        this.activateid = activateid;
+    public void setActivateId(Integer activateId) {
+        this.activateId = activateId;
     }
 
-    public Long getUserid() {
-        return userid;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getActivetime() {
-        return activetime;
+    public Date getActiveTime() {
+        return activeTime;
     }
 
-    public void setActivetime(Date activetime) {
-        this.activetime = activetime;
+    public void setActiveTime(Date activeTime) {
+        this.activeTime = activeTime;
     }
 
-    public String getActivatekey() {
-        return activatekey;
+    public String getActivateKey() {
+        return activateKey;
     }
 
-    public void setActivatekey(String activatekey) {
-        this.activatekey = activatekey == null ? null : activatekey.trim();
+    public void setActivateKey(String activateKey) {
+        this.activateKey = activateKey;
     }
 
     public String getState() {
@@ -67,14 +68,14 @@ public class EmailActivate implements Serializable{
     }
 
     public void setState(String state) {
-        this.state = state == null ? null : state.trim();
+        this.state = state;
     }
 
-    public Integer getValidseconds() {
-        return validseconds;
+    public Integer getValidSeconds() {
+        return validSeconds;
     }
 
-    public void setValidseconds(Integer validseconds) {
-        this.validseconds = validseconds;
+    public void setValidSeconds(Integer validSeconds) {
+        this.validSeconds = validSeconds;
     }
 }

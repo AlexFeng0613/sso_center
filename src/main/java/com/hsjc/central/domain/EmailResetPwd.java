@@ -1,26 +1,27 @@
 package com.hsjc.central.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author : zga
- * @date : 2015-12-2
+ * @date : 2015-12-03
+ *
+ * Email重置密码实体
  */
-public class EmailResetPwd implements Serializable{
+public class EmailResetPwd {
     private Integer id;
 
-    private Long userid;
+    private Long userId;
 
-    private Date createtime;
+    private Date createTime;
 
-    private Date usetime;
+    private Date useTime;
 
     private String code;
 
     private String state;
 
-    private Integer validseconds;
+    private Integer validSeconds;
 
     public Integer getId() {
         return id;
@@ -30,28 +31,28 @@ public class EmailResetPwd implements Serializable{
         this.id = id;
     }
 
-    public Long getUserid() {
-        return userid;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getUsetime() {
-        return usetime;
+    public Date getUseTime() {
+        return useTime;
     }
 
-    public void setUsetime(Date usetime) {
-        this.usetime = usetime;
+    public void setUseTime(Date useTime) {
+        this.useTime = useTime;
     }
 
     public String getCode() {
@@ -59,7 +60,7 @@ public class EmailResetPwd implements Serializable{
     }
 
     public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+        this.code = code;
     }
 
     public String getState() {
@@ -67,14 +68,14 @@ public class EmailResetPwd implements Serializable{
     }
 
     public void setState(String state) {
-        this.state = state == null ? null : state.trim();
+        this.state = state;
     }
 
-    public Integer getValidseconds() {
-        return validseconds;
+    public Integer getValidSeconds() {
+        return validSeconds;
     }
 
-    public void setValidseconds(Integer validseconds) {
-        this.validseconds = validseconds;
+    public void setValidSeconds(Integer validSeconds) {
+        this.validSeconds = validSeconds;
     }
 }

@@ -1,9 +1,17 @@
 package com.hsjc.central.service;
 
+import com.alibaba.fastjson.JSONObject;
+import com.hsjc.central.annotation.SystemLog;
+import com.hsjc.central.constant.Constant;
 import com.hsjc.central.domain.ThirdClients;
+import com.hsjc.central.mapper.SynMapper;
 import com.hsjc.central.mapper.ThirdClientsMapper;
+import com.hsjc.central.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author : zga
@@ -16,6 +24,9 @@ public class ThirdClientsService {
     @Autowired
     private ThirdClientsMapper thirdClientsMapper;
 
+    @Autowired
+    private SynMapper synMapper;
+
     /**
      * @author : zga
      * @date : 2015-12-11
@@ -26,6 +37,125 @@ public class ThirdClientsService {
      */
     public ThirdClients selectByClientId(ThirdClients thirdClients){
         return  thirdClientsMapper.selectByClientId(thirdClients);
+    }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-14
+     *
+     * 同步所有组织机构
+     *
+     * @param paramJson
+     * @return
+     */
+    @SystemLog(actionId = 1,description = "同步所有组织机构")
+    public JSONObject getAllOrganization(JSONObject paramJson){
+        JSONObject resJsonObject = new JSONObject();
+
+        boolean flag = validateClientId(paramJson);
+        if(!flag) return null;
+
+
+
+        return resJsonObject;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-14
+     *
+     * 同步增量组织机构
+     *
+     * @param paramJson
+     * @return
+     */
+    @SystemLog(actionId = 2,description = "同步增量组织机构")
+    public JSONObject getDifferentOrganization(JSONObject paramJson){
+        JSONObject resJsonObject = new JSONObject();
+
+        boolean flag = validateClientId(paramJson);
+        if(!flag) return null;
+
+
+        ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
+        List<HashMap> list = synMapper.selectDifferentOrganization(thirdClients.getBriefName());
+
+        resJsonObject.put("Organization",list);
+
+        return resJsonObject;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-14
+     *
+     * 同步所有用户
+     *
+     * @param paramJson
+     * @return
+     */
+    @SystemLog(actionId = 3,description = "同步所有用户")
+    public JSONObject getAllUser(JSONObject paramJson){
+        JSONObject resJsonObject = new JSONObject();
+
+        boolean flag = validateClientId(paramJson);
+        if(!flag) return null;
+
+        return resJsonObject;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-14
+     *
+     * 同步增量用户
+     *
+     * @param paramJson
+     * @return
+     */
+    @SystemLog(actionId = 4,description = "同步增量用户")
+    public JSONObject getDifferentUser(JSONObject paramJson){
+        JSONObject resJsonObject = new JSONObject();
+
+        boolean flag = validateClientId(paramJson);
+        if(!flag) return null;
+
+        return resJsonObject;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-14
+     *
+     * 验证client_id
+     *
+     * @param paramJson
+     * @return
+     */
+    public boolean validateClientId(JSONObject paramJson){
+        ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
+
+        if(thirdClients == null) return false;
+
+        String client_secret = thirdClients.getClientSecret();
+        String password = paramJson.getString("password");
+        String time = paramJson.getString("time");
+        String validatePwd = MD5.encode(client_secret + MD5.encode(Constant.public_key) + time);
+        if(!validatePwd.equals(password)) return false;
+
+        return true;
+    }
+
+
+    public ThirdClients getThirdClientsByClientId(JSONObject paramJson){
+        String clientId = paramJson.getString("clientId");
+
+
+        ThirdClients paramThirdClients = new ThirdClients();
+        paramThirdClients.setClientId(clientId);
+        ThirdClients thirdClients = thirdClientsMapper.selectByClientId(paramThirdClients);
+
+        return thirdClients;
     }
 
 }

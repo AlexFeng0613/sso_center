@@ -1,9 +1,15 @@
 package com.hsjc.central.domain;
 
+/**
+ * @author : zga
+ * @date : 2015-12-03
+ *
+ * 临时用户实体
+ */
 public class UserTemp {
     private Integer id;
 
-    private String username;
+    private String userName;
 
     private String password;
 
@@ -15,7 +21,7 @@ public class UserTemp {
 
     private String status;
 
-    private String invitatecode;
+    private String invitateCode;
 
     private String email;
 
@@ -27,12 +33,12 @@ public class UserTemp {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -40,7 +46,7 @@ public class UserTemp {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
     public String getSalt() {
@@ -48,7 +54,7 @@ public class UserTemp {
     }
 
     public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
+        this.salt = salt;
     }
 
     public String getPhone() {
@@ -56,7 +62,7 @@ public class UserTemp {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone;
     }
 
     public String getType() {
@@ -64,7 +70,7 @@ public class UserTemp {
     }
 
     public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+        this.type = type;
     }
 
     public String getStatus() {
@@ -72,15 +78,15 @@ public class UserTemp {
     }
 
     public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+        this.status = status;
     }
 
-    public String getInvitatecode() {
-        return invitatecode;
+    public String getInvitateCode() {
+        return invitateCode;
     }
 
-    public void setInvitatecode(String invitatecode) {
-        this.invitatecode = invitatecode == null ? null : invitatecode.trim();
+    public void setInvitateCode(String invitateCode) {
+        this.invitateCode = invitateCode;
     }
 
     public String getEmail() {
@@ -88,10 +94,10 @@ public class UserTemp {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email;
     }
 
     public String getCredentialsSalt(){
-        return username + salt;
+        return userName + salt;
     }
 }

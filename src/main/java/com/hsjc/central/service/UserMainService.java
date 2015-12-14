@@ -90,7 +90,7 @@ public class UserMainService {
         String email = paramJson.getString("email");
 
         userTemp.setType(type);
-        userTemp.setUsername(username);
+        userTemp.setUserName(username);
         userTemp.setPassword(password);
         //设置salt和password
         passwordHelper.encryptPassword(userTemp);

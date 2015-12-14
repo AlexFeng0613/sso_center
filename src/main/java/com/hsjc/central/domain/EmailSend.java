@@ -1,26 +1,27 @@
 package com.hsjc.central.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author : zga
- * @date : 2015-12-2
+ * @date : 2015-12-03
+ *
+ * Email发送实体
  */
-public class EmailSend implements Serializable{
+public class EmailSend {
     private Long id;
 
     private String email;
 
     private String subject;
 
-    private Boolean sendflag;
+    private Boolean sendFlag;
 
-    private Date sendtime;
+    private Date sendTime;
 
-    private String bymodule;
+    private String byModule;
 
-    private Long requestkeyid;
+    private Long requestKeyId;
 
     private String content;
 
@@ -37,7 +38,7 @@ public class EmailSend implements Serializable{
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email;
     }
 
     public String getSubject() {
@@ -45,39 +46,39 @@ public class EmailSend implements Serializable{
     }
 
     public void setSubject(String subject) {
-        this.subject = subject == null ? null : subject.trim();
+        this.subject = subject;
     }
 
-    public Boolean getSendflag() {
-        return sendflag;
+    public Boolean getSendFlag() {
+        return sendFlag;
     }
 
-    public void setSendflag(Boolean sendflag) {
-        this.sendflag = sendflag;
+    public void setSendFlag(Boolean sendFlag) {
+        this.sendFlag = sendFlag;
     }
 
-    public Date getSendtime() {
-        return sendtime;
+    public Date getSendTime() {
+        return sendTime;
     }
 
-    public void setSendtime(Date sendtime) {
-        this.sendtime = sendtime;
+    public void setSendTime(Date sendTime) {
+        this.sendTime = sendTime;
     }
 
-    public String getBymodule() {
-        return bymodule;
+    public String getByModule() {
+        return byModule;
     }
 
-    public void setBymodule(String bymodule) {
-        this.bymodule = bymodule == null ? null : bymodule.trim();
+    public void setByModule(String byModule) {
+        this.byModule = byModule;
     }
 
-    public Long getRequestkeyid() {
-        return requestkeyid;
+    public Long getRequestKeyId() {
+        return requestKeyId;
     }
 
-    public void setRequestkeyid(Long requestkeyid) {
-        this.requestkeyid = requestkeyid;
+    public void setRequestKeyId(Long requestKeyId) {
+        this.requestKeyId = requestKeyId;
     }
 
     public String getContent() {
@@ -85,6 +86,6 @@ public class EmailSend implements Serializable{
     }
 
     public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+        this.content = content;
     }
 }

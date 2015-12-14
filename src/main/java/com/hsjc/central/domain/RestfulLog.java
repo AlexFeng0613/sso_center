@@ -2,49 +2,55 @@ package com.hsjc.central.domain;
 
 import java.util.Date;
 
+/**
+ * @author : zga
+ * @date : 2015-12-03
+ *
+ * 接口同步日志实体
+ */
 public class RestfulLog {
-    private Long restlogid;
+    private Long restLogId;
 
-    private Long userid;
+    private Long userId;
 
-    private Integer actionid;
+    private Integer actionId;
 
-    private Integer respcode;
+    private Integer respCode;
 
     private String description;
 
-    private Date actiontime;
+    private Date actionTime;
 
-    public Long getRestlogid() {
-        return restlogid;
+    public Long getRestLogId() {
+        return restLogId;
     }
 
-    public void setRestlogid(Long restlogid) {
-        this.restlogid = restlogid;
+    public void setRestLogId(Long restLogId) {
+        this.restLogId = restLogId;
     }
 
-    public Long getUserid() {
-        return userid;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Integer getActionid() {
-        return actionid;
+    public Integer getActionId() {
+        return actionId;
     }
 
-    public void setActionid(Integer actionid) {
-        this.actionid = actionid;
+    public void setActionId(Integer actionId) {
+        this.actionId = actionId;
     }
 
-    public Integer getRespcode() {
-        return respcode;
+    public Integer getRespCode() {
+        return respCode;
     }
 
-    public void setRespcode(Integer respcode) {
-        this.respcode = respcode;
+    public void setRespCode(Integer respCode) {
+        this.respCode = respCode;
     }
 
     public String getDescription() {
@@ -52,14 +58,14 @@ public class RestfulLog {
     }
 
     public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
+        this.description = description;
     }
 
-    public Date getActiontime() {
-        return actiontime;
+    public Date getActionTime() {
+        return actionTime;
     }
 
-    public void setActiontime(Date actiontime) {
-        this.actiontime = actiontime;
+    public void setActionTime(Date actionTime) {
+        this.actionTime = actionTime;
     }
 }

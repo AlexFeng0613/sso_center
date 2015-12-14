@@ -1,11 +1,19 @@
 package com.hsjc.central.domain;
 
+/**
+ * @author : zga
+ * @date : 2015-12-03
+ *
+ * 系统行为实体
+ */
 public class Restactiontype {
     private Long id;
 
-    private Integer actionid;
+    private Integer actionId;
 
-    private String actionname;
+    private String module;
+
+    private String actionName;
 
     private String description;
 
@@ -17,20 +25,28 @@ public class Restactiontype {
         this.id = id;
     }
 
-    public Integer getActionid() {
-        return actionid;
+    public Integer getActionId() {
+        return actionId;
     }
 
-    public void setActionid(Integer actionid) {
-        this.actionid = actionid;
+    public void setActionId(Integer actionId) {
+        this.actionId = actionId;
     }
 
-    public String getActionname() {
-        return actionname;
+    public String getModule() {
+        return module;
     }
 
-    public void setActionname(String actionname) {
-        this.actionname = actionname == null ? null : actionname.trim();
+    public void setModule(String module) {
+        this.module = module;
+    }
+
+    public String getActionName() {
+        return actionName;
+    }
+
+    public void setActionName(String actionName) {
+        this.actionName = actionName;
     }
 
     public String getDescription() {
@@ -38,6 +54,6 @@ public class Restactiontype {
     }
 
     public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
+        this.description = description;
     }
 }

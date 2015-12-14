@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hsjc.central.mapper.SmsBindPhoneNumMapper">
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.SmsBindPhoneNum">
-    <id column="BindID" jdbcType="INTEGER" property="bindid" />
-    <result column="AuthID" jdbcType="INTEGER" property="authid" />
-    <result column="UserID" jdbcType="BIGINT" property="userid" />
+    <id column="bindId" jdbcType="INTEGER" property="bindId" />
+    <result column="authId" jdbcType="INTEGER" property="authId" />
+    <result column="userId" jdbcType="BIGINT" property="userId" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    BindID, AuthID, UserID
+    bindId, authId, userId
   </sql>
 
   <!--
@@ -17,67 +17,67 @@
    新增
   -->
   <insert id="insert" parameterType="com.hsjc.central.domain.SmsBindPhoneNum">
-    insert into tbsmsbindphonenum (BindID, AuthID, UserID
+    insert into tbsmsbindphonenum (bindId, authId, userId
       )
-    values (#{bindid}, #{authid}, #{userid}
+    values (#{bindId}, #{authId}, #{userId}
       )
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.SmsBindPhoneNum">
     insert into tbsmsbindphonenum
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="bindid != null">
-        BindID,
+      <if test="bindId != null">
+        bindId,
       </if>
-      <if test="authid != null">
-        AuthID,
+      <if test="authId != null">
+        authId,
       </if>
-      <if test="userid != null">
-        UserID,
+      <if test="userId != null">
+        userId,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="bindid != null">
-        #{bindid},
+      <if test="bindId != null">
+        #{bindId},
       </if>
-      <if test="authid != null">
-        #{authid},
+      <if test="authId != null">
+        #{authId},
       </if>
-      <if test="userid != null">
-        #{userid},
+      <if test="userId != null">
+        #{userId},
       </if>
     </trim>
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbsmsbindphonenum
-    where BindID = #{bindid}
+    where bindId = #{bindId}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.SmsBindPhoneNum">
     update tbsmsbindphonenum
     <set>
-      <if test="authid != null">
-        AuthID = #{authid},
+      <if test="authId != null">
+        authId = #{authId},
       </if>
-      <if test="userid != null">
-        UserID = #{userid},
+      <if test="userId != null">
+        userId = #{userId},
       </if>
     </set>
-    where BindID = #{bindid}
+    where bindId = #{bindId}
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.SmsBindPhoneNum">
     update tbsmsbindphonenum
-    set AuthID = #{authid},
-      UserID = #{userid}
-    where BindID = #{bindid}
+    set authId = #{authId},
+      userId = #{userId}
+    where bindId = #{bindId}
   </update>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tbsmsbindphonenum
-    where BindID = #{bindid}
+    where bindId = #{bindId}
   </select>
 </mapper>

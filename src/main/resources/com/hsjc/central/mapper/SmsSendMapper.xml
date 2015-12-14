@@ -2,17 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hsjc.central.mapper.SmsSendMapper">
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.SmsSend">
-    <id column="ID" jdbcType="BIGINT" property="id" />
-    <result column="PhoneNum" jdbcType="VARCHAR" property="phonenum" />
-    <result column="MsgContent" jdbcType="VARCHAR" property="msgcontent" />
-    <result column="SendFlag" jdbcType="INTEGER" property="sendflag" />
-    <result column="SendTime" jdbcType="TIMESTAMP" property="sendtime" />
-    <result column="byModule" jdbcType="VARCHAR" property="bymodule" />
-    <result column="RequestKeyID" jdbcType="BIGINT" property="requestkeyid" />
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="phoneNum" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="msgContent" jdbcType="VARCHAR" property="msgContent" />
+    <result column="sendFlag" jdbcType="INTEGER" property="sendFlag" />
+    <result column="sendTime" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="byModule" jdbcType="VARCHAR" property="byModule" />
+    <result column="requestKeyId" jdbcType="BIGINT" property="requestKeyId" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    ID, PhoneNum, MsgContent, SendFlag, SendTime, byModule, RequestKeyID
+    ID, phoneNum, msgContent, sendFlag, sendTime, byModule, requestKeyId
   </sql>
 
   <!--
@@ -21,12 +21,12 @@
    新增
   -->
   <insert id="insert" parameterType="com.hsjc.central.domain.SmsSend">
-    insert into tbsmssend (ID, PhoneNum, MsgContent,
-      SendFlag, SendTime, byModule, 
-      RequestKeyID)
-    values (#{id}, #{phonenum}, #{msgcontent}, 
-      #{sendflag}, #{sendtime}, #{bymodule}, 
-      #{requestkeyid})
+    insert into tbsmssend (ID, phoneNum, msgContent,
+      sendFlag, sendTime, byModule, 
+      requestKeyId)
+    values (#{id}, #{phoneNum}, #{msgContent}, 
+      #{sendFlag}, #{sendTime}, #{byModule}, 
+      #{requestKeyId})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.SmsSend">
@@ -35,46 +35,46 @@
       <if test="id != null">
         ID,
       </if>
-      <if test="phonenum != null">
-        PhoneNum,
+      <if test="phoneNum != null">
+        phoneNum,
       </if>
-      <if test="msgcontent != null">
-        MsgContent,
+      <if test="msgContent != null">
+        msgContent,
       </if>
-      <if test="sendflag != null">
-        SendFlag,
+      <if test="sendFlag != null">
+        sendFlag,
       </if>
-      <if test="sendtime != null">
-        SendTime,
+      <if test="sendTime != null">
+        sendTime,
       </if>
-      <if test="bymodule != null">
+      <if test="byModule != null">
         byModule,
       </if>
-      <if test="requestkeyid != null">
-        RequestKeyID,
+      <if test="requestKeyId != null">
+        requestKeyId,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id},
       </if>
-      <if test="phonenum != null">
-        #{phonenum},
+      <if test="phoneNum != null">
+        #{phoneNum},
       </if>
-      <if test="msgcontent != null">
-        #{msgcontent},
+      <if test="msgContent != null">
+        #{msgContent},
       </if>
-      <if test="sendflag != null">
-        #{sendflag},
+      <if test="sendFlag != null">
+        #{sendFlag},
       </if>
-      <if test="sendtime != null">
-        #{sendtime},
+      <if test="sendTime != null">
+        #{sendTime},
       </if>
-      <if test="bymodule != null">
-        #{bymodule},
+      <if test="byModule != null">
+        #{byModule},
       </if>
-      <if test="requestkeyid != null">
-        #{requestkeyid},
+      <if test="requestKeyId != null">
+        #{requestKeyId},
       </if>
     </trim>
   </insert>
@@ -87,23 +87,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.SmsSend">
     update tbsmssend
     <set>
-      <if test="phonenum != null">
-        PhoneNum = #{phonenum},
+      <if test="phoneNum != null">
+        phoneNum = #{phoneNum},
       </if>
-      <if test="msgcontent != null">
-        MsgContent = #{msgcontent},
+      <if test="msgContent != null">
+        msgContent = #{msgContent},
       </if>
-      <if test="sendflag != null">
-        SendFlag = #{sendflag},
+      <if test="sendFlag != null">
+        sendFlag = #{sendFlag},
       </if>
-      <if test="sendtime != null">
-        SendTime = #{sendtime},
+      <if test="sendTime != null">
+        sendTime = #{sendTime},
       </if>
-      <if test="bymodule != null">
-        byModule = #{bymodule},
+      <if test="byModule != null">
+        byModule = #{byModule},
       </if>
-      <if test="requestkeyid != null">
-        RequestKeyID = #{requestkeyid},
+      <if test="requestKeyId != null">
+        requestKeyId = #{requestKeyId},
       </if>
     </set>
     where ID = #{id}
@@ -111,12 +111,12 @@
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.SmsSend">
     update tbsmssend
-    set PhoneNum = #{phonenum},
-      MsgContent = #{msgcontent},
-      SendFlag = #{sendflag},
-      SendTime = #{sendtime},
-      byModule = #{bymodule},
-      RequestKeyID = #{requestkeyid}
+    set phoneNum = #{phoneNum},
+      msgContent = #{msgContent},
+      sendFlag = #{sendFlag},
+      sendTime = #{sendTime},
+      byModule = #{byModule},
+      requestKeyId = #{requestKeyId}
     where ID = #{id}
   </update>
 

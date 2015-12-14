@@ -2,51 +2,57 @@ package com.hsjc.central.domain;
 
 import java.util.Date;
 
+/**
+ * @author : zga
+ * @date : 2015-12-03
+ *
+ * 邀请码实体
+ */
 public class SchoolInvite {
-    private Long inviteid;
+    private Long inviteId;
 
-    private String invitecode;
+    private String inviteCode;
 
-    private Integer schoolid;
+    private Integer schoolId;
 
-    private Long byuserid;
+    private Long byUserId;
 
     private String state;
 
-    private Date createtime;
+    private Date createTime;
 
-    private Date usetime;
+    private Date useTime;
 
-    public Long getInviteid() {
-        return inviteid;
+    public Long getInviteId() {
+        return inviteId;
     }
 
-    public void setInviteid(Long inviteid) {
-        this.inviteid = inviteid;
+    public void setInviteId(Long inviteId) {
+        this.inviteId = inviteId;
     }
 
-    public String getInvitecode() {
-        return invitecode;
+    public String getInviteCode() {
+        return inviteCode;
     }
 
-    public void setInvitecode(String invitecode) {
-        this.invitecode = invitecode == null ? null : invitecode.trim();
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
     }
 
-    public Integer getSchoolid() {
-        return schoolid;
+    public Integer getSchoolId() {
+        return schoolId;
     }
 
-    public void setSchoolid(Integer schoolid) {
-        this.schoolid = schoolid;
+    public void setSchoolId(Integer schoolId) {
+        this.schoolId = schoolId;
     }
 
-    public Long getByuserid() {
-        return byuserid;
+    public Long getByUserId() {
+        return byUserId;
     }
 
-    public void setByuserid(Long byuserid) {
-        this.byuserid = byuserid;
+    public void setByUserId(Long byUserId) {
+        this.byUserId = byUserId;
     }
 
     public String getState() {
@@ -54,22 +60,22 @@ public class SchoolInvite {
     }
 
     public void setState(String state) {
-        this.state = state == null ? null : state.trim();
+        this.state = state;
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getUsetime() {
-        return usetime;
+    public Date getUseTime() {
+        return useTime;
     }
 
-    public void setUsetime(Date usetime) {
-        this.usetime = usetime;
+    public void setUseTime(Date useTime) {
+        this.useTime = useTime;
     }
 }

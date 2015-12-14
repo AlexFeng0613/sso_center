@@ -3,17 +3,17 @@
 <mapper namespace="com.hsjc.central.mapper.UserTempMapper" >
   <resultMap id="BaseResultMap" type="UserTemp" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="salt" property="salt" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="CHAR" />
     <result column="status" property="status" jdbcType="CHAR" />
-    <result column="invitateCode" property="invitatecode" jdbcType="VARCHAR" />
+    <result column="invitateCode" property="invitateCode" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, username, password, salt, phone, type, status, invitateCode, email
+    id, userName, password, salt, phone, type, status, invitateCode, email
   </sql>
 
   <!--
@@ -23,9 +23,9 @@
   -->
   <insert id="insert" parameterType="UserTemp">
     insert into usertemp
-    (username, password,salt,type, email)
+    (userName, password,salt,type, email)
     values (
-    #{userTemp.username},
+    #{userTemp.userName},
     #{userTemp.password},
     #{userTemp.salt},
     #{userTemp.type},
@@ -44,8 +44,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="userName != null" >
+        userName,
       </if>
       <if test="password != null" >
         password,
@@ -62,7 +62,7 @@
       <if test="status != null" >
         status,
       </if>
-      <if test="invitatecode != null" >
+      <if test="invitateCode != null" >
         invitateCode,
       </if>
       <if test="email != null" >
@@ -73,8 +73,8 @@
       <if test="id != null" >
         #{id},
       </if>
-      <if test="username != null" >
-        #{username},
+      <if test="userName != null" >
+        #{userName},
       </if>
       <if test="password != null" >
         #{password},
@@ -91,8 +91,8 @@
       <if test="status != null" >
         #{status},
       </if>
-      <if test="invitatecode != null" >
-        #{invitatecode},
+      <if test="invitateCode != null" >
+        #{invitateCode},
       </if>
       <if test="email != null" >
         #{email},
@@ -118,8 +118,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="UserTemp">
     update usertemp
     <set >
-      <if test="username != null" >
-        username = #{username},
+      <if test="userName != null" >
+        userName = #{userName},
       </if>
       <if test="password != null" >
         password = #{password},
@@ -136,8 +136,8 @@
       <if test="status != null" >
         status = #{status},
       </if>
-      <if test="invitatecode != null" >
-        invitateCode = #{invitatecode},
+      <if test="invitateCode != null" >
+        invitateCode = #{invitateCode},
       </if>
       <if test="email != null" >
         email = #{email},
@@ -168,13 +168,13 @@
   -->
   <update id="updateByPrimaryKey" parameterType="UserTemp" >
     update usertemp
-    set username = #{username},
+    set userName = #{userName},
     password = #{password},
     salt = #{salt},
     phone = #{phone},
     type = #{type},
     status = #{status},
-    invitateCode = #{invitatecode},
+    invitateCode = #{invitateCode},
     email = #{email}
     where id = #{id}
   </update>
@@ -194,9 +194,9 @@
   <!--
     @author : zga
     @date : 2015-12-04
-    根据username、phone、email查询用户
+    根据userName、phone、email查询用户
   -->
-  <select id="selectByEmailOrUserNameOrPhone" resultMap="BaseResultMap" parameterType="UserTemp">
+  <select id="selectByEmailOruserNameOrPhone" resultMap="BaseResultMap" parameterType="UserTemp">
     select
     <include refid="Base_Column_List" />
     from usertemp
@@ -207,8 +207,8 @@
     <if test="userTemp.phone != null" >
       phone = #{userTemp.phone},
     </if>
-    <if test="userTemp.username != null" >
-      username = #{userTemp.username},
+    <if test="userTemp.userName != null" >
+      userName = #{userTemp.userName},
     </if>
   </select>
 
