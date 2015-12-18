@@ -4,6 +4,7 @@ import com.hsjc.central.annotation.SystemLog;
 import com.hsjc.central.mapper.RestfulLogMapper;
 import com.hsjc.central.mapper.SystemLogMapper;
 import com.hsjc.central.util.DateUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -12,7 +13,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

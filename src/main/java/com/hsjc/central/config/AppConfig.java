@@ -6,6 +6,7 @@ import com.hsjc.central.constant.RedisConstant;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableScheduling
 @EnableTransactionManagement
 @EnableSpringDataWebSupport
+@EnableMongoRepositories({"com.hsjc.central.importMongoData.repository"})
 @PropertySources({
 	@PropertySource(value = "classpath:application.development.properties"),
 	@PropertySource(value = "classpath:log4j.properties")

@@ -11,7 +11,7 @@ import java.util.Date;
 public class EmailResetPwd {
     private Integer id;
 
-    private Long userId;
+    private String email;
 
     private Date createTime;
 
@@ -31,12 +31,12 @@ public class EmailResetPwd {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getCreateTime() {

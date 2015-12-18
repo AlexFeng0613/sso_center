@@ -3,7 +3,7 @@
 <mapper namespace="com.hsjc.central.mapper.EmailResetPwdMapper">
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.EmailResetPwd">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="userid" jdbcType="BIGINT" property="userid" />
+    <result column="email" jdbcType="BIGINT" property="email" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="useTime" jdbcType="TIMESTAMP" property="useTime" />
     <result column="code" jdbcType="VARCHAR" property="code" />
@@ -12,7 +12,7 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, userid, createTime, useTime, code, state, validSeconds
+    id, email, createTime, useTime, code, state, validSeconds
   </sql>
 
   <!--
@@ -21,11 +21,11 @@
     新增
   -->
   <insert id="insert" parameterType="com.hsjc.central.domain.EmailResetPwd">
-    insert into tbemailresetpwd (id, userid, createTime,
-      useTime, code, state, 
+    insert into tbemailresetpwd (email, createTime,
+      code, state,
       validSeconds)
-    values (#{id}, #{userid}, #{createTime}, 
-      #{useTime}, #{code}, #{state}, 
+    values (#{email},#{createTime},
+      #{code}, #{state},
       #{validSeconds})
   </insert>
 
@@ -35,8 +35,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="userid != null">
-        userid,
+      <if test="email != null">
+        email,
       </if>
       <if test="createTime != null">
         createTime,
@@ -58,8 +58,8 @@
       <if test="id != null">
         #{id},
       </if>
-      <if test="userid != null">
-        #{userid},
+      <if test="email != null">
+        #{email},
       </if>
       <if test="createTime != null">
         #{createTime},
@@ -87,8 +87,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.EmailResetPwd">
     update tbemailresetpwd
     <set>
-      <if test="userid != null">
-        userid = #{userid},
+      <if test="email != null">
+        email = #{email},
       </if>
       <if test="createTime != null">
         createTime = #{createTime},
@@ -111,7 +111,7 @@
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.EmailResetPwd">
     update tbemailresetpwd
-    set userid = #{userid},
+    set email = #{email},
       createTime = #{createTime},
       useTime = #{useTime},
       code = #{code},
@@ -125,5 +125,18 @@
     <include refid="Base_Column_List" />
     from tbemailresetpwd
     where id = #{id}
+    limit 1
+  </select>
+
+  <select id="selectByEmail" resultType="EmailResetPwd">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from tbemailresetpwd
+    <where>
+      <if test="email != null">
+        email = #{email}
+      </if>
+    </where>
+    limit 1
   </select>
 </mapper>

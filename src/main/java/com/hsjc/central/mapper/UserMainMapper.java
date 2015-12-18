@@ -1,23 +1,32 @@
 package com.hsjc.central.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hsjc.central.domain.UserMain;
 
 /**
  * @author : zga
  * @date : 2015-12-2
+ *
+ * 用户Mapper接口
  */
 public interface UserMainMapper {
-    int insert(UserMain record);
+    int insert(UserMain userMain);
 
-    int insertSelective(UserMain record);
+    int insertSelective(UserMain userMain);
 
     int deleteByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(UserMain record);
+    int updateByPrimaryKeySelective(UserMain userMain);
 
-    int updateByPrimaryKey(UserMain record);
+    int updateByPrimaryKey(UserMain userMain);
+
+    int updatePasswordByEmail(String email);
 
     UserMain selectByPrimaryKey(Integer id);
 
     UserMain selectByEmail(UserMain userMain);
+
+    Integer selectCountByClientId(UserMain userMain);
+
+    UserMain selectUserByEmailOrPhone(JSONObject paramJson);
 }

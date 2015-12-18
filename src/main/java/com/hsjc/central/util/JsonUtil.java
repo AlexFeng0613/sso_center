@@ -1,5 +1,7 @@
 package com.hsjc.central.util;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -147,6 +149,31 @@ public class JsonUtil {
         }
         return json;
     }
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static JSONObject fromObjectToJsonObject(Object bean) {
+        JSONObject jsonObject = new JSONObject();
+        if (bean == null)
+            return jsonObject;
+        Class cls = bean.getClass();
+        Field[] fs = cls.getDeclaredFields();
+        Object value = null;
+        String fieldName = null;
+        Method method = null;
+        int len = fs.length;
+        for (int i = 0; i < len; i++) {
+            fieldName = fs[i].getName();
+            try {
+                method = cls.getMethod(getGetter(fieldName), (Class[]) null);
+                value = method.invoke(bean, (Object[]) null);
+            } catch (Exception e) {
+                continue;
+            }
+            jsonObject.put(fieldName, value);
+        }
+        return jsonObject;
+    }
+
     public static JsonUtil fromObject(Map<String, Object> map) {
         JsonUtil json = new JsonUtil();
         if (map == null)
@@ -154,6 +181,7 @@ public class JsonUtil {
         json.getMap().putAll(map);
         return json;
     }
+
     private static String getGetter(String property) {
         return "get" + property.substring(0, 1).toUpperCase()
                 + property.substring(1, property.length());

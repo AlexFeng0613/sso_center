@@ -39,6 +39,7 @@ public class UserController extends BaseController{
      * @date : 2015-12-04
      *
      * 登录页面
+     *
      * @return
      */
     @RequestMapping(value = "login",method = RequestMethod.GET)
@@ -51,6 +52,7 @@ public class UserController extends BaseController{
      * @date:2015-12-02
      *
      * 用户登录
+     *
      * @param username
      * @param password
      * @return
@@ -82,6 +84,7 @@ public class UserController extends BaseController{
      * @date : 2015-12-03
      *
      * 注册用户
+     *
      * @param paramJson
      * @return
      */
@@ -96,7 +99,8 @@ public class UserController extends BaseController{
      * @author : zga
      * @date : 2015-12-03
      *
-     * 激活Email
+     * 注册用户>激活Email
+     *
      * @param email
      * @param ticket
      * @return
@@ -135,4 +139,70 @@ public class UserController extends BaseController{
         return "redirect:/page/register/4.html?email=" + email;
     }
 
+    /**
+     * @author : zga
+     * @date : 2015-12-16
+     *
+     * 忘记密码>校验用户是否存在
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping("validateUser")
+    @ResponseBody
+    public JSONObject validateUser(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = new JSONObject();
+        UserMain userMain = userMainService.validateUser(paramJson);
+        if(userMain == null)
+            resultJson.put("success",false);
+
+        resultJson.put("success",true);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-16
+     *
+     * 忘记密码>发送验证码
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping("sendResetPwdCodeWithEmail")
+    @ResponseBody
+    public JSONObject sendResetPwdCodeWithEmail(@RequestBody JSONObject paramJson){
+        userMainService.sendResetPwdCodeWithEmail(paramJson);
+        return null;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-16
+     *
+     * 忘记密码>验证Email验证码
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping("validateResetPasswordEmailCode")
+    @ResponseBody
+    public JSONObject validateResetPasswordEmailCode(@RequestBody JSONObject paramJson){
+        return userMainService.validateResetPasswordEmailCode(paramJson);
+    }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-16
+     *
+     * 忘记密码>重置密码
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping("resetPasswordWithEmail")
+    @ResponseBody
+    public JSONObject resetPasswordWithEmail(@RequestBody JSONObject paramJson){
+        return userMainService.resetPasswordWithEmail(paramJson);
+    }
 }

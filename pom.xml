@@ -15,8 +15,12 @@
         <java.version>1.8</java.version>
         <fastjson.version>1.2.7</fastjson.version>
         <spring.version>4.1.2.RELEASE</spring.version>
+        <spring.mongodb.version>1.6.1.RELEASE</spring.mongodb.version>
 
+        <mongodb.driver.version>2.12.4</mongodb.driver.version>
+        <dbutils.version>1.6</dbutils.version>
         <spring.redis.version>1.4.1.RELEASE</spring.redis.version>
+        <dbutils.version>1.6</dbutils.version>
         <jedis.version>2.6.1</jedis.version>
 
         <shiro.version>1.2.3</shiro.version>
@@ -49,6 +53,8 @@
 
         <aspectjrt.version>1.7.4</aspectjrt.version>
         <cglib.version>2.2.2</cglib.version>
+
+        <commons-lang>2.6</commons-lang>
     </properties>
 
     <dependencies>
@@ -93,6 +99,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>${spring.mongodb.version}</version>
         </dependency>
 
         <!--servlet,jsp-->
@@ -173,6 +185,16 @@
         </dependency>
 
         <!--database connection、datasource-->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongodb.driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbutils</groupId>
+            <artifactId>commons-dbutils</artifactId>
+            <version>${dbutils.version}</version>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -308,6 +330,12 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>${mail.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang}</version>
         </dependency>
     </dependencies>
 

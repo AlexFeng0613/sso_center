@@ -1,5 +1,6 @@
 package com.hsjc.central.util;
 
+import com.hsjc.central.domain.UserMain;
 import com.hsjc.central.domain.UserTemp;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -39,6 +40,16 @@ public class PasswordHelper {
                 .getCredentialsSalt()), hashIterations).toHex();
 
         userTemp.setPassword(newPassword);
+    }
+
+    public void encryptPassword(UserMain userMain) {
+
+        userMain.setSalt(randomNumberGenerator.nextBytes().toHex());
+
+        String newPassword = new SimpleHash(algorithmName, userMain.getPassword(), ByteSource.Util.bytes(userMain
+                .getCredentialsSalt()), hashIterations).toHex();
+
+        userMain.setPassword(newPassword);
     }
 
     public void test(){
