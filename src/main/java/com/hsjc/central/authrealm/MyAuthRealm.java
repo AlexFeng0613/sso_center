@@ -38,7 +38,7 @@ public class MyAuthRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
         String username = token.getUsername();
-        UserMain userMain = userMainService.findByEmail(username);
+        UserMain userMain = userMainService.findByEmailOrPhoneOrUserName(username);
         if (userMain == null) {
             throw new UnknownAccountException("No account found for user[" + token.getUsername() + "]");
         }

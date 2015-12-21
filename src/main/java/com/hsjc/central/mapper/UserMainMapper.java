@@ -24,7 +24,7 @@ public interface UserMainMapper {
 
     UserMain selectByPrimaryKey(Integer id);
 
-    UserMain selectByEmail(UserMain userMain);
+    UserMain findByEmailOrPhoneOrUserName(UserMain userMain);
 
     Integer selectCountByClientId(UserMain userMain);
 

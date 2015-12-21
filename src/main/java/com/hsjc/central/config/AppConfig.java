@@ -6,7 +6,6 @@ import com.hsjc.central.constant.RedisConstant;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * @author : zga
  * @date : 2015-11-24
  *
- *
  */
 @Configuration
 @ComponentScan({"com.hsjc"})
@@ -25,11 +23,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableScheduling
 @EnableTransactionManagement
 @EnableSpringDataWebSupport
-@EnableMongoRepositories({"com.hsjc.central.importMongoData.repository"})
-@PropertySources({
-	@PropertySource(value = "classpath:application.development.properties"),
-	@PropertySource(value = "classpath:log4j.properties")
-})
 public class AppConfig {
 
 	@Bean
@@ -63,4 +56,16 @@ public class AppConfig {
 		return null;
 	}
 
+	@Configuration
+	@Profile("development")
+	@PropertySource("classpath:application.development.properties")
+	static class Development {}
+
+	@Configuration
+	@Profile("log4j")
+	@PropertySources({
+			@PropertySource("classpath:application.development.properties"),
+			@PropertySource("classpath:log4j.properties")
+	})
+	static class Log4j{}
 }

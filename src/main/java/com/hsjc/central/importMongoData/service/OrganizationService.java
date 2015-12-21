@@ -1,10 +1,8 @@
 package com.hsjc.central.importMongoData.service;
 
 import com.hsjc.central.importMongoData.entity.Organization;
-import com.hsjc.central.importMongoData.repository.OrganizationRepository;
-import org.springframework.stereotype.Service;
+import com.hsjc.central.importMongoData.repository.mongodb.OrganizationRepository;
 
-import javax.annotation.Resource;
 import java.util.Iterator;
 
 /**
@@ -12,9 +10,9 @@ import java.util.Iterator;
  * @date : 2015-12-17
  *
  */
-@Service
+//@Service
 public class OrganizationService {
-    @Resource
+    //@Resource
     private OrganizationRepository organizationRepository;
 
     public void importOrganizationToMysql(){
@@ -22,7 +20,7 @@ public class OrganizationService {
 
         Iterator iterator = iterable.iterator();
         while(iterator.hasNext()){
-            System.out.println((Organization)(iterator.next()));
+            System.out.println((iterator.next()));
         }
     }
 }

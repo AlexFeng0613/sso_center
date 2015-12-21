@@ -209,7 +209,7 @@
     @date : 2015-12-04
     根据email、userName、phone查询用户信息(登录的时候不知道用户输入的是email、phone、username那一个)
   -->
-  <select id="selectByEmail" parameterType="UserMain" resultType="UserMain">
+  <select id="findByEmailOrPhoneOrUserName" parameterType="UserMain" resultType="UserMain">
     select
     <include refid="Base_Column_List" />
     from tbusermain
@@ -223,7 +223,7 @@
       </if>
 
       <if test="userName != null">
-        and userName = #{userName},
+        and userName = #{userName}
       </if>
     </where>
   </select>

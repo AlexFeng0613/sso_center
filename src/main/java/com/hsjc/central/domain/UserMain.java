@@ -1,5 +1,6 @@
 package com.hsjc.central.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  *
  * 用户实体
  */
-public class UserMain {
+public class UserMain implements Serializable{
     private Integer id;
 
     private String userName;

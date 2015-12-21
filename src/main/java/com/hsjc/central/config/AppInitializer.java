@@ -43,7 +43,7 @@ public class AppInitializer implements WebApplicationInitializer {
 	private AnnotationConfigWebApplicationContext getContext() {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		context.setConfigLocation("com.hsjc.central.config");
-		context.getEnvironment().setActiveProfiles("login");
+		context.getEnvironment().setActiveProfiles("log4j");
 		return context;
 	}
 

@@ -1,6 +1,7 @@
 package com.hsjc.central.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
 import com.hsjc.central.annotation.SystemLog;
 import com.hsjc.central.domain.ThirdClients;
 import com.hsjc.central.service.ThirdClientsService;
@@ -120,6 +121,7 @@ public class ThirdController extends BaseController{
         paramJson.put("password", password);
         paramJson.put("time", time);
 
+        PageHelper.startPage(1,10);
         JSONObject resJsonObject = thirdClientsService.getAllUser(paramJson);
 
         return resJsonObject;

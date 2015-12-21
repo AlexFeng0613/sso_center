@@ -55,6 +55,8 @@
         <cglib.version>2.2.2</cglib.version>
 
         <commons-lang>2.6</commons-lang>
+
+        <pagehelper.version>4.0.1</pagehelper.version>
     </properties>
 
     <dependencies>
@@ -107,6 +109,12 @@
             <version>${spring.mongodb.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
         <!--servlet,jsp-->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -125,12 +133,6 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>${jedis.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
-            <version>${spring.redis.version}</version>
         </dependency>
 
         <dependency>
@@ -218,6 +220,12 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>1.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>${pagehelper.version}</version>
         </dependency>
 
         <!--json-->

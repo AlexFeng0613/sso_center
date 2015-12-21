@@ -44,7 +44,7 @@ import java.util.List;
 public class DataConfig {
 
 	@Bean
-	public DruidDataSource dataSource(
+	public DruidDataSource druidDataSource(
 			@Value("${db.driver}") String driver,
 			@Value("${db.url}") String url,
 			@Value("${db.username}") String username,
@@ -85,7 +85,7 @@ public class DataConfig {
 																	 @Value("${db.username}") String username,
 																	 @Value("${db.password}") String password){
 		DataSourceTransactionManager dataSourceTransactionManager  = new DataSourceTransactionManager();
-		dataSourceTransactionManager.setDataSource(dataSource(driver, url, username, password));
+		dataSourceTransactionManager.setDataSource(druidDataSource(driver, url, username, password));
 		return dataSourceTransactionManager;
 	}
 
@@ -95,7 +95,7 @@ public class DataConfig {
 											   @Value("${db.username}") String username,
 											   @Value("${db.password}") String password) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-		sqlSessionFactoryBean.setDataSource(dataSource(driver, url, username, password));
+		sqlSessionFactoryBean.setDataSource(druidDataSource(driver, url, username, password));
 		sqlSessionFactoryBean.setTypeAliasesPackage("com.hsjc.central.domain");
 		final Resource configLocation = new ClassPathResource("mybatis-config.xml");
 		sqlSessionFactoryBean.setConfigLocation(configLocation);
@@ -170,7 +170,7 @@ public class DataConfig {
 
 		MongoDbFactory mongoDbFactory;
 
-		if (StringUtils.isNotEmpty(username)) {
+		if (!org.springframework.util.StringUtils.isEmpty(username)) {
 			UserCredentials credentials = new UserCredentials(username, password);
 			mongoDbFactory = new SimpleMongoDbFactory(mongo, dbName, credentials);
 		} else {

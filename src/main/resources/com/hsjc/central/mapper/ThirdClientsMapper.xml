@@ -22,7 +22,7 @@
    @date : 2015-12-04
    新增
   -->
-  <insert id="insert" parameterType="com.hsjc.central.domain.ThirdClients" >
+  <insert id="insert" parameterType="com.hsjc.central.domain.ThirdClients">
     insert into tb3rdclients (id, clientId, clientSecret, 
       contactorName, contactorPhone, briefName, 
       ssoPassword, publicKey)

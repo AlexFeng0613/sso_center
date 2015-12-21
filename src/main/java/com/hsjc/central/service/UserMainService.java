@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author : zga
@@ -55,10 +57,23 @@ public class UserMainService {
      * param email
      * @return
      */
-    public UserMain findByEmail(String email){
+    public UserMain findByEmailOrPhoneOrUserName(String param){
         UserMain paramUserMain = new UserMain();
-        paramUserMain.setEmail(email);
-        UserMain userMain = userMainMapper.selectByEmail(paramUserMain);
+        //判断Email
+        if(param.indexOf("@") > 0){
+            paramUserMain.setEmail(param);
+        } else {
+            //判断手机号
+            Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+            Matcher m = p.matcher(param);
+            if (m.matches()) {
+                paramUserMain.setPhone(param);
+            } else {
+                paramUserMain.setUserName(param);
+            }
+        }
+
+        UserMain userMain = userMainMapper.findByEmailOrPhoneOrUserName(paramUserMain);
         return userMain;
     }
 
