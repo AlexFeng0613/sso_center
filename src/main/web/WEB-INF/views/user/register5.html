@@ -47,18 +47,20 @@
 	</header>
 	<div class="container-fluid">
 		<div class="center">
-			<div class="invite">
-				<div class="invite_box">
-					<div class="invite_box_l">邀请码</div>
-					<input type="text" class="inviteCode" placeholder="请输入您的邀请码"/>
-					<div class="mistake"></div>
-					<div class="correct"></div>
+			<form name="inviteForm">
+				<div class="invite">
+					<div class="invite_box">
+						<div class="invite_box_l">邀请码</div>
+						<input type="text" class="inviteCode" placeholder="请输入您的邀请码"/>
+						<div class="mistake"></div>
+						<div class="correct"></div>
+					</div>
+					<div class="ipone_box_next">
+						<a class="invite_next" style="margin-right:20px;">下一步</a>
+						<a class="vault">跳过</a>
+					</div>
 				</div>
-				<div class="ipone_box_next">
-					<a class="ipone_next" style="margin-right:20px;">下一步</a>
-					<a class="vault">跳过</a>
-				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 	<footer class="footer">
@@ -69,21 +71,50 @@
 	<script type="text/javascript">
 		$(function(){
 			//点击下一步函数
-			$('.ipone_next').click(function(){
-				$.ajax({
-					url : '/user/checkInviteCode.json',
-					type : 'post',
-					data : JSON.stringify({'inviteCode' : $('.inviteCode').val()}),
-					contentType: 'application/json',
-					dataType : 'json',
-					success : function(data){
-						if(data.success){
-							//成功跳转
-						} else {
-							//否则提示错误
+
+			var demo=$(".regForm").Validform({
+				btnSubmit:'.invite_next',
+				tiptype:3,
+				showAllError:false,
+				datatype:{
+					"n8":/^\d{8}$/
+				},
+				callback : function(form){
+					if(true){
+						var data = {
+							'inviteCode' : $('.verify_code').val()
 						}
+						$.ajax({
+							url : '/user/checkInviteCode.json',
+							type : 'post',
+							data : JSON.stringify(data),
+							contentType: 'application/json',
+							dataType : 'json',
+							success : function(data){
+								if(data.success){
+									//成功跳转
+								} else {
+									//否则提示错误
+									$.Showmsg('邀请码错误!');
+								}
+							}
+						})
 					}
-				})
+					return false;
+				}
+			});
+			demo.tipmsg.w["n8"]="请输入8位数的邀请码";
+
+			demo.addRule([{
+				ele:".inviteCode:eq(0)",
+				datatype:"n8",
+				nullmsg:'请输入邀请码',
+				sucmsg:' '
+			}]);
+
+			//跳过click函数
+			$('.skip').click(function(){
+
 			});
 		});
 	</script>

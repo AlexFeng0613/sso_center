@@ -19,6 +19,8 @@ public interface UserTempMapper {
 
     int updateStatusByEmial(UserTemp userTemp);
 
+    int updateOrganizationCodeByEmail(UserTemp userTemp);
+
     UserTemp selectByEmailOrUserNameOrPhone(UserTemp userTemp);
 
     UserTemp selectByPrimaryKey(Integer id);

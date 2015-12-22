@@ -1,9 +1,10 @@
 package com.hsjc.central.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hsjc.central.service.SmsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author : zga
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/sms/")
 public class SMSController extends BaseController {
+    @Autowired
+    private SmsService smsService;
+
 
     /**
      * @author : zga
@@ -25,7 +29,7 @@ public class SMSController extends BaseController {
      * @return
      */
     @RequestMapping("sendSmsCode")
-    public JSONObject sendSmsCode(@RequestParam JSONObject paramJson){
+    public JSONObject sendSmsCode(@RequestBody JSONObject paramJson){
         JSONObject resultJson = new JSONObject();
         return resultJson;
     }
@@ -39,10 +43,10 @@ public class SMSController extends BaseController {
      * @param paramJson
      * @return
      */
-    @RequestMapping("validateSmsCode")
-    public JSONObject validateSmsCode(@RequestParam JSONObject paramJson){
-        JSONObject resultJson = new JSONObject();
-
+    @RequestMapping(value = "validateSmsCode",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject validateSmsCode(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = smsService.validateSmsCode(paramJson);
         return resultJson;
     }
 

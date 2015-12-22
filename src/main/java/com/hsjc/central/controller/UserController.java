@@ -148,10 +148,30 @@ public class UserController extends BaseController{
      * @param paramJson
      * @return
      */
-    @RequestMapping("checkInviteCode")
+    @RequestMapping(value = "checkInviteCode",method = RequestMethod.POST)
+    @ResponseBody
     public JSONObject checkInviteCode(@RequestBody JSONObject paramJson){
         JSONObject resultJson = userMainService.checkInviteCode(paramJson);
         return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-22
+     *
+     * 注册用户>更新用户组织机构(根据邀请码)
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping("activateInviteCode")
+    public String activateInviteCode(@RequestBody JSONObject paramJson){
+        int num = userMainService.activateInviteCode(paramJson);
+        if(num <= 0){
+
+        }
+
+        return "/page/register/6";
     }
 
     /**

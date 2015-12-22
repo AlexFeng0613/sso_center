@@ -164,8 +164,23 @@
 
   <!--
     @author : zga
+    @date : 2015-12-22
+    根据email更新用户组织机构
+  -->
+  <update id="updateOrganizationCodeByEmail" parameterType="UserTemp">
+    UPDATE usertemp
+    <set>
+      <if test="organizationCode != null">
+        organizationCode = #{organizationCode}
+      </if>
+    </set>
+    where email = #{email}
+  </update>
+
+  <!--
+    @author : zga
     @date : 2015-12-04
-    新增单个用户
+    更新用户信息
   -->
   <update id="updateByPrimaryKey" parameterType="UserTemp" >
     update usertemp
@@ -197,19 +212,19 @@
     @date : 2015-12-04
     根据userName、phone、email查询用户
   -->
-  <select id="selectByEmailOruserNameOrPhone" resultMap="BaseResultMap" parameterType="UserTemp">
+  <select id="selectByEmailOrUserNameOrPhone" resultMap="BaseResultMap" parameterType="UserTemp">
     select
     <include refid="Base_Column_List" />
     from usertemp
     where 1=1
     <if test="userTemp.email != null" >
-      email = #{userTemp.email},
+      and email = #{userTemp.email},
     </if>
     <if test="userTemp.phone != null" >
-      phone = #{userTemp.phone},
+      and phone = #{userTemp.phone},
     </if>
     <if test="userTemp.userName != null" >
-      userName = #{userTemp.userName},
+      and userName = #{userTemp.userName}
     </if>
   </select>
 

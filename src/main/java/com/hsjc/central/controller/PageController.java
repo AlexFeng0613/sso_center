@@ -73,14 +73,15 @@ public class PageController {
 
             case 4:
                 try {
-                    String original = apiBaseService.getDesUtil().decrypt(email);
-                    model.addAttribute("email", original);
+                    //String original = apiBaseService.getDesUtil().decrypt(email);
+                    model.addAttribute("email", email);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
 
             case 5:
+                model.addAttribute("email", email);
                 break;
 
             case 6:

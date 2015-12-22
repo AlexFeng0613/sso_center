@@ -173,9 +173,50 @@ public class UserMainService {
             return resultJson;
         }
 
+        //邀请码校验成功,更新用户信息
+
         resultJson.put("success",true);
 
         return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-22
+     *
+     * 注册用户>更新用户组织机构(根据邀请码)
+     *
+     * @param paramJson
+     * @return
+     */
+    public int activateInviteCode(JSONObject paramJson){
+        SchoolInvite schoolInvite = schoolInviteMapper.selectByInviteCode(paramJson);
+        int num = 0;
+        if(schoolInvite != null){
+            UserTemp userTemp = new UserTemp();
+            userTemp.setEmail(paramJson.getString("email"));
+            num = userTempMapper.updateOrganizationCodeByEmail(userTemp);
+            if(num > 0){
+                UserMain userMain = new UserMain();
+                UserTemp userTemp1 = userTempMapper.selectByEmailOrUserNameOrPhone(userTemp);
+                if(userTemp1 != null){
+                    userMain.setEmail(userTemp1.getEmail());
+                    userMain.setUserName(userTemp1.getUserName());
+                    userMain.setPhone(userTemp1.getPhone());
+                    userMain.setCreateTime(userTemp1.getCreateTime());
+                    userMain.setSalt(userTemp1.getSalt());
+                    userMain.setInvitateCode(userTemp1.getInvitateCode());
+                    userMain.setIsDelete(userTemp1.getIsDelete());
+                    userMain.setOrganizationCode(userTemp1.getOrganizationCode());
+                    userMain.setPassword(userTemp1.getPassword());
+                    userMain.setType(userTemp1.getType());
+                    userMain.setStatus(userTemp1.getStatus());
+
+                    num = userMainMapper.insert(userMain);
+                }
+            }
+        }
+        return num;
     }
 
     /**
