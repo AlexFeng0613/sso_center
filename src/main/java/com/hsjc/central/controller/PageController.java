@@ -66,6 +66,7 @@ public class PageController {
             case 2:
                 model.addAttribute("type",type);
                 break;
+
             case 3:
                 model.addAttribute("email", email);
                 break;
@@ -78,6 +79,7 @@ public class PageController {
                     e.printStackTrace();
                 }
                 break;
+
             case 5:
                 break;
 

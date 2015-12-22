@@ -50,13 +50,13 @@
 			<div class="invite">
 				<div class="invite_box">
 					<div class="invite_box_l">邀请码</div>
-					<input type="text" class="ipone_num" placeholder="请输入您的邀请码"/>
+					<input type="text" class="inviteCode" placeholder="请输入您的邀请码"/>
 					<div class="mistake"></div>
 					<div class="correct"></div>
 				</div>
 				<div class="ipone_box_next">
-					<a class="ipone_next" style="margin-right:20px;" href="http://localhost:8080/page/register/6.html">下一步</a>
-					<a class="vault" href="http://localhost:8080/page/register/6.html">跳过</a>
+					<a class="ipone_next" style="margin-right:20px;">下一步</a>
+					<a class="vault">跳过</a>
 				</div>
 			</div>
 		</div>
@@ -65,6 +65,28 @@
 		<div class="foot"><pre>版权所有 © 2002-2014 上海市普陀区教育局 上海市普陀区现代教育技术中心</pre></div>
 		<div class="foot"><pre>地址：上海市普陀区大渡河路1688号 邮编：200333 电话：021-62601856</pre></div>
 	</footer>
+
+	<script type="text/javascript">
+		$(function(){
+			//点击下一步函数
+			$('.ipone_next').click(function(){
+				$.ajax({
+					url : '/user/checkInviteCode.json',
+					type : 'post',
+					data : JSON.stringify({'inviteCode' : $('.inviteCode').val()}),
+					contentType: 'application/json',
+					dataType : 'json',
+					success : function(data){
+						if(data.success){
+							//成功跳转
+						} else {
+							//否则提示错误
+						}
+					}
+				})
+			});
+		});
+	</script>
 </body>
 </html>
 

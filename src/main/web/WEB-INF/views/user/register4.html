@@ -47,7 +47,7 @@
 	<div class="container-fluid">
 		<div class="center">
 			<div class="ipone">
-				<input type="hidden" th:value="${email}"/>
+				<input type="hidden" th:value="${email}" name="email"/>
 				<div class="ipone_box">
 					<div class="ipone_box_l">手机号</div>
 					<input type="text" class="ipone_num"/>
@@ -59,8 +59,8 @@
 					<time class="count"></time>
 				</div>
 				<div class="ipone_box_next">
-					<a class="ipone_next" href="http://localhost:8080/page/register/5.html">下一步</a>
-					<a class="skip" href="http://localhost:8080/page/register/5.html">跳过</a>
+					<a class="ipone_next">下一步</a>
+					<a class="skip">跳过</a>
 				</div>
 			</div>
 		</div>
@@ -70,6 +70,7 @@
 		<div class="foot"><pre>地址：上海市普陀区大渡河路1688号 邮编：200333 电话：021-62601856</pre></div>
 	</footer>
 	<script text="text/javascript">
+
 		$(function(){
 			var time=5;
 			var timer=null;
@@ -92,10 +93,29 @@
 				},1000);
 			}
 
+			//短信获取click函数
 			$(document).on('click','.note',function(){
 				$(this).addClass('click');
 				$('.count').show();
 				Movetime();
+			});
+
+			//下一步click函数
+			$('ipone_next').click(function(){
+				$.ajax({
+					url : '/sms/validateSmsCode.json',
+					type : 'post',
+					data : JSON.stringify({'smsCode' : $('.verify_code').val()}),
+					contentType: 'application/json',
+					dataType : 'json',
+					success : function(data){
+						if(data.success){
+							//成功跳转
+						} else {
+							//否则提示错误
+						}
+					}
+				})
 			});
 		});
 	</script>

@@ -3,7 +3,7 @@
 <mapper namespace="com.hsjc.central.mapper.RestfulLogMapper" >
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.RestfulLog" >
     <id column="restLogId" property="restLogId" jdbcType="BIGINT" />
-    <result column="clientId" property="clientId" jdbcType="BIGINT" />
+    <result column="clientId" property="clientId" jdbcType="VARCHAR" />
     <result column="actionId" property="actionId" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="actionTime" property="actionTime" jdbcType="TIMESTAMP" />
@@ -20,10 +20,10 @@
   -->
   <insert id="insert" parameterType="java.util.HashMap">
     insert into tbrestfullog (clientId, actionId,
-       description, actionTime
+       description,actionTime
       )
     values (#{clientId}, #{actionId},
-      #{respCode}, #{description}, #{actionTime}
+      #{description},#{actionTime}
       )
   </insert>
 
@@ -42,9 +42,6 @@
       <if test="description != null" >
         description,
       </if>
-      <if test="actionTime != null" >
-        actionTime,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="restLogId != null" >
@@ -58,9 +55,6 @@
       </if>
       <if test="description != null" >
         #{description},
-      </if>
-      <if test="actionTime != null" >
-        #{actionTime},
       </if>
     </trim>
   </insert>
@@ -82,9 +76,6 @@
       <if test="description != null" >
         description = #{description},
       </if>
-      <if test="actionTime != null" >
-        actionTime = #{actionTime},
-      </if>
     </set>
     where restLogId = #{restLogId}
   </update>
@@ -94,7 +85,6 @@
     set clientId = #{clientId},
       actionId = #{actionId},
       description = #{description},
-      actionTime = #{actionTime}
     where restLogId = #{restLogId}
   </update>
 

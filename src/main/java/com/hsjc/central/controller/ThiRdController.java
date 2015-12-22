@@ -1,7 +1,6 @@
 package com.hsjc.central.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.PageHelper;
 import com.hsjc.central.annotation.SystemLog;
 import com.hsjc.central.domain.ThirdClients;
 import com.hsjc.central.service.ThirdClientsService;
@@ -59,12 +58,17 @@ public class ThirdController extends BaseController{
     @SystemLog(actionId = 2,description = "同步所有组织机构",module = "接口同步")
     public JSONObject getAllOrganization(@RequestParam("client_id")String clientId,
                                          @RequestParam("password")String password,
-                                         @RequestParam("time")String time){
+                                         @RequestParam("time")String time,
+                                         @RequestParam("currentPage")String currentPage,
+                                         @RequestParam("pageSize")String pageSize
+                                         ){
 
         JSONObject paramJson = new JSONObject();
         paramJson.put("clientId", clientId);
         paramJson.put("password", password);
         paramJson.put("time", time);
+        paramJson.put("currentPage", currentPage);
+        paramJson.put("pageSize", pageSize);
 
         JSONObject resJsonObject = thirdClientsService.getAllOrganization(paramJson);
 
@@ -115,13 +119,16 @@ public class ThirdController extends BaseController{
     @SystemLog(actionId = 4,description = "同步所有用户",module = "接口同步")
     public JSONObject getAllUser(@RequestParam("client_id")String clientId,
                                  @RequestParam("password")String password,
-                                 @RequestParam("time")String time){
+                                 @RequestParam("time")String time,
+                                 @RequestParam("currentPage")String currentPage,
+                                 @RequestParam("pageSize")String pageSize){
         JSONObject paramJson = new JSONObject();
         paramJson.put("clientId", clientId);
         paramJson.put("password", password);
         paramJson.put("time", time);
+        paramJson.put("currentPage", currentPage);
+        paramJson.put("pageSize", pageSize);
 
-        PageHelper.startPage(1,10);
         JSONObject resJsonObject = thirdClientsService.getAllUser(paramJson);
 
         return resJsonObject;

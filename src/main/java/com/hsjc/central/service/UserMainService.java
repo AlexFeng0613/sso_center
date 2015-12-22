@@ -3,11 +3,9 @@ package com.hsjc.central.service;
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.central.constant.Constant;
 import com.hsjc.central.constant.MailTemplate;
-import com.hsjc.central.domain.ActivateEmailMess;
-import com.hsjc.central.domain.EmailResetPwd;
-import com.hsjc.central.domain.UserMain;
-import com.hsjc.central.domain.UserTemp;
+import com.hsjc.central.domain.*;
 import com.hsjc.central.mapper.EmailResetPwdMapper;
+import com.hsjc.central.mapper.SchoolInviteMapper;
 import com.hsjc.central.mapper.UserMainMapper;
 import com.hsjc.central.mapper.UserTempMapper;
 import com.hsjc.central.util.MD5;
@@ -30,6 +28,7 @@ import java.util.regex.Pattern;
  *
  * 用户Service类
  */
+@SuppressWarnings("ALL")
 @Service
 public class UserMainService {
     @Autowired
@@ -47,6 +46,8 @@ public class UserMainService {
     @Autowired
     private EmailResetPwdMapper emailResetPwdMapper;
 
+    @Autowired
+    private SchoolInviteMapper schoolInviteMapper;
 
     /**
      * @author : zga
@@ -87,24 +88,24 @@ public class UserMainService {
      * @return
      */
     public JSONObject register(JSONObject paramJson, HttpSession session){
-        JSONObject result = new JSONObject();
-        result.put("success",false);
+        JSONObject resultJson = new JSONObject();
+        resultJson.put("success",false);
 
         if(paramJson == null){
-            result.put("message", Constant.NULL_PARAM);
-            return result;
+            resultJson.put("message", Constant.NULL_PARAM);
+            return resultJson;
         }
 
         //判断验证码
         String code = paramJson.getString("code");
         Object sessionCode = session.getAttribute("rand");
         if(org.springframework.util.StringUtils.isEmpty(sessionCode)){
-            result.put("message", Constant.INVALID_CODE);
-            return result;
+            resultJson.put("message", Constant.INVALID_CODE);
+            return resultJson;
         } else {
             if(!sessionCode.toString().equalsIgnoreCase(code)){
-                result.put("message", Constant.INVALID_CODE);
-                return result;
+                resultJson.put("message", Constant.INVALID_CODE);
+                return resultJson;
             }
         }
 
@@ -139,18 +140,42 @@ public class UserMainService {
                 MailUtils.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
             } catch (Exception e) {
                 e.printStackTrace();
-                result.put("message", Constant.SEND_MAIL_FAIL);
-                return result;
+                resultJson.put("message", Constant.SEND_MAIL_FAIL);
+                return resultJson;
             }
 
-            result.put("message", Constant.REG_SUCCESS);
-            result.put("success", true);
-            return result;
+            resultJson.put("message", Constant.REG_SUCCESS);
+            resultJson.put("success", true);
+            return resultJson;
         }
 
-        result.put("message", Constant.REG_FAIL);
+        resultJson.put("message", Constant.REG_FAIL);
 
-        return result;
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2015-12-22
+     *
+     * 注册用户>校验邀请码
+     *
+     * @param paramJson
+     * @return
+     */
+    public JSONObject checkInviteCode(JSONObject paramJson){
+        JSONObject resultJson = new JSONObject();
+
+        SchoolInvite schoolInvite = schoolInviteMapper.selectByInviteCode(paramJson);
+
+        if(schoolInvite == null){
+            resultJson.put("success",false);
+            return resultJson;
+        }
+
+        resultJson.put("success",true);
+
+        return resultJson;
     }
 
     /**

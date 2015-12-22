@@ -147,6 +147,6 @@
   <select id="selectByClientId" parameterType="ThirdClients" resultType="ThirdClients">
     SELECT
     <include refid="Base_Column_List"/>
-    FROM tb3rdclients WHERE clientId = #{thirdClients.clientId}
+    FROM tb3rdclients WHERE clientId = #{clientId}
   </select>
 </mapper>

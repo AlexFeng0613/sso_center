@@ -50,7 +50,7 @@
 			<div class="register_succeed_r">
 				<div class="register_succeed">
 					<div class="congratulation">恭喜您注册成功！</div>
-					<a href="http://localhost:8080/page/login.html" class="login_html">立即登录&gt;&gt;</a>
+					<a href="/user/login.html" class="login_html">立即登录&gt;&gt;</a>
 				</div>
 				<div class="leap"></div>
 			</div>
@@ -71,13 +71,11 @@
 				$('.leap').html('（'+second+'秒钟后将自动跳转至登录页面）');
 				}else{
 					clearInterval(sec);
-					window.location.href="http://localhost:8080/page/login.html";
-
+					window.location.href="/user/login.html";
 				};
 
 			},1000);
 		});
-
 	</script>
 </body>
 </html>

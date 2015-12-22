@@ -11,7 +11,7 @@ import java.util.Date;
 public class RestfulLog {
     private Long restLogId;
 
-    private Long clientId;
+    private String clientId;
 
     private Integer actionId;
 
@@ -28,11 +28,11 @@ public class RestfulLog {
         this.restLogId = restLogId;
     }
 
-    public Long getClientId() {
+    public String getClientId() {
         return clientId;
     }
 
-    public void setClientId(Long clientId) {
+    public void setClientId(String clientId) {
         this.clientId = clientId;
     }
 

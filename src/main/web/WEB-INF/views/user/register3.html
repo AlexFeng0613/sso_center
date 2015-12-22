@@ -65,6 +65,11 @@
 		<div class="foot"><pre>地址：上海市普陀区大渡河路1688号 邮编：200333 电话：021-62601856</pre></div>
 	</footer>
 	<script text="text/javascript">
+		if($('input[name="email"]').val() == null
+				||$('input[name="email"]').val() == ''
+				||$('input[name="email"]').val() == undefined){
+			//window.location.href = '/page/register/1.html';
+		}
 		$(function(){
 			var time=100;
 			var timer=null;

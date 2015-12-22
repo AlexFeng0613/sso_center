@@ -1,6 +1,7 @@
 package com.hsjc.central.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
 import com.hsjc.central.constant.Constant;
 import com.hsjc.central.domain.ThirdClients;
 import com.hsjc.central.mapper.SynMapper;
@@ -18,6 +19,7 @@ import java.util.List;
  *
  * 第三方Service类
  */
+@SuppressWarnings("ALL")
 @Service
 public class ThirdClientsService {
     @Autowired
@@ -53,7 +55,20 @@ public class ThirdClientsService {
         boolean flag = validateClientId(paramJson);
         if(!flag) return null;
 
+        Integer currentPage = paramJson.getInteger("currentPage");
+        Integer pageSize  =paramJson.getInteger("pageSize");
 
+        if(currentPage == null || currentPage == 0) currentPage = 1;
+        if(pageSize == null || pageSize == 0) currentPage = 600;
+
+        PageHelper.startPage(currentPage,pageSize);
+        List<HashMap> organizationList = synMapper.selectAllOrganization();
+
+        Integer totalNum = synMapper.countAllOrganization();
+        Integer leftNum = totalNum - currentPage * pageSize;
+
+        resJsonObject.put("organization",organizationList);
+        resJsonObject.put("leftNum",leftNum);
 
         return resJsonObject;
     }
@@ -96,6 +111,23 @@ public class ThirdClientsService {
 
         boolean flag = validateClientId(paramJson);
         if(!flag) return null;
+
+        Integer currentPage = paramJson.getInteger("currentPage");
+        Integer pageSize  =paramJson.getInteger("pageSize");
+
+        if(currentPage == null || currentPage == 0) currentPage = 1;
+        if(pageSize == null || pageSize == 0) currentPage = 600;
+
+        PageHelper.startPage(currentPage,pageSize);
+
+        PageHelper.startPage(currentPage,pageSize);
+        List<HashMap> userList = synMapper.selectAllUser();
+
+        Integer totalNum = synMapper.countAllUser();
+        Integer leftNum = totalNum - currentPage * pageSize;
+
+        resJsonObject.put("user",userList);
+        resJsonObject.put("leftNum",leftNum);
 
         return resJsonObject;
     }

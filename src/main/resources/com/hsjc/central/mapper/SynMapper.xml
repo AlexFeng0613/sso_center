@@ -143,4 +143,40 @@
      FROM tbUserMain tbu LEFT JOIN tbsynuser${briefName} tbsu
      ON tbsu.userId = tbsu.id
   </select>
+
+  <!--
+    @author : zga
+    @date : 2015-12-21
+    查询所有的组织机构
+  -->
+  <select id="selectAllOrganization" resultType="java.util.HashMap">
+    SELECT organizationCode,organizationName,parentId FROM tborganization
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2015-12-22
+    查询组织机构总数目
+  -->
+  <select id="countAllOrganization" resultType="java.lang.Integer">
+    SELECT count(1) FROM tborganization
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2015-12-21
+    查看所有的用户
+  -->
+  <select id="selectAllUser" resultType="java.util.HashMap">
+    SELECT userName,organizationCode,id openId,TYPE role FROM tbusermain
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2015-12-22
+    查看用户总数目
+  -->
+  <select id="countAllUser" resultType="java.lang.Integer">
+    SELECT count(1) FROM tbusermain
+  </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.hsjc.central.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hsjc.central.domain.SchoolInvite;
 
 /**
@@ -18,4 +19,6 @@ public interface SchoolInviteMapper {
     int updateByPrimaryKey(SchoolInvite record);
 
     SchoolInvite selectByPrimaryKey(Long inviteid);
+
+    SchoolInvite selectByInviteCode(JSONObject paramJson);
 }

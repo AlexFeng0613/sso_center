@@ -3,18 +3,18 @@ package com.hsjc.central.interceptor;
 import com.hsjc.central.annotation.SystemLog;
 import com.hsjc.central.mapper.RestfulLogMapper;
 import com.hsjc.central.mapper.SystemLogMapper;
-import com.hsjc.central.util.DateUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +24,7 @@ import java.util.Map;
  *
  * 日志拦截器
  */
+@SuppressWarnings("ALL")
 @Component
 @Aspect
 public class LogInterCeptor {
@@ -53,7 +54,7 @@ public class LogInterCeptor {
 
     }
 
-    @Around("controllerAspect()")
+    @After("controllerAspect()")
     public void doAroundInvoke(JoinPoint joinPoint){
         Map<String,Object> map = null;
         try {
@@ -62,7 +63,7 @@ public class LogInterCeptor {
             e.printStackTrace();
         }
 
-        map.put("actionTime", DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
+        map.put("actionTime", new Date());
         restfulLogMapper.insert(map);
     }
 

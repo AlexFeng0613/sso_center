@@ -126,4 +126,21 @@
     from tbschoolinvite
     where inviteId = #{inviteId}
   </select>
+
+  <!--
+    @author : zga
+    @date :  2015-12-22
+    查询邀请码是否存在
+  -->
+  <select id="selectByInviteCode" resultType="SchoolInvite">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbschoolinvite
+    <where>
+      <if test="inviteCode != null">
+        inviteCode = #{inviteCode}
+      </if>
+    </where>
+    limit 1
+  </select>
 </mapper>

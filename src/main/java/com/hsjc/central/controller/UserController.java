@@ -141,6 +141,21 @@ public class UserController extends BaseController{
 
     /**
      * @author : zga
+     * @date : 2015-12-22
+     *
+     * 注册用户>校验邀请码
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping("checkInviteCode")
+    public JSONObject checkInviteCode(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = userMainService.checkInviteCode(paramJson);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
      * @date : 2015-12-16
      *
      * 忘记密码>校验用户是否存在
@@ -204,37 +219,6 @@ public class UserController extends BaseController{
     @ResponseBody
     public JSONObject resetPasswordWithEmail(@RequestBody JSONObject paramJson){
         return userMainService.resetPasswordWithEmail(paramJson);
-    }
-
-    /**
-     * @author : zga
-     * @date : 2015-12-17
-     *
-     * 忘记密码>SMS发送验证码
-     *
-     * @param paramJson
-     * @return
-     */
-    @RequestMapping("sendSmsCode")
-    public JSONObject sendSmsCode(@RequestParam JSONObject paramJson){
-        JSONObject resultJson = new JSONObject();
-        return resultJson;
-    }
-
-    /**
-     * @author : zga
-     * @date : 2015-12-17
-     *
-     * 忘记密码>SMS验证短信码
-     *
-     * @param paramJson
-     * @return
-     */
-    @RequestMapping("validateSmsCode")
-    public JSONObject validateSmsCode(@RequestParam JSONObject paramJson){
-        JSONObject resultJson = new JSONObject();
-
-        return resultJson;
     }
 
     /**
