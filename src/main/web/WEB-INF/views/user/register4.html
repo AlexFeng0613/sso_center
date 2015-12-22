@@ -46,23 +46,27 @@
 	</header>
 	<div class="container-fluid">
 		<div class="center">
-			<div class="ipone">
-				<input type="hidden" th:value="${email}" name="email"/>
-				<div class="ipone_box">
-					<div class="ipone_box_l">手机号</div>
-					<input type="text" class="ipone_num"/>
-					<div class="note">短信获取</div>
+			<form class="regForm" action="" method="post">
+				<div class="ipone">
+					<input type="hidden" th:value="${email}" name="email"/>
+					<div class="ipone_box">
+						<div class="ipone_box_l">手机号</div>
+						<input type="text" class="ipone_num"/>
+						<div class="note">短信获取</div>
+					</div>
+					<div class="ipone_box">
+						<div class="ipone_box_l">验证码</div>
+						<input type="text" class="verify_code"/>
+						<time class="count"></time>
+					</div>
+
+					<div class="ipone_box_next">
+						<div class="ipone_next">下一步</div>
+						<div class="skip">跳过</div>
+					</div>
+
 				</div>
-				<div class="ipone_box">
-					<div class="ipone_box_l">验证码</div>
-					<input type="text" class="verify_code"/>
-					<time class="count"></time>
-				</div>
-				<div class="ipone_box_next">
-					<a class="ipone_next">下一步</a>
-					<a class="skip">跳过</a>
-				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 	<footer class="footer">
@@ -70,7 +74,6 @@
 		<div class="foot"><pre>地址：上海市普陀区大渡河路1688号 邮编：200333 电话：021-62601856</pre></div>
 	</footer>
 	<script text="text/javascript">
-
 		$(function(){
 			var time=5;
 			var timer=null;
@@ -100,22 +103,40 @@
 				Movetime();
 			});
 
+
 			//下一步click函数
-			$('ipone_next').click(function(){
+			$('.ipone_next').click(function(){
+				var demo=$(".regForm").Validform({
+					tiptype:3,
+					showAllError:true,
+					datatype:{
+						"s11":/^[\s]{11}$/
+					},
+					showAllError:true,
+				});
+
 				$.ajax({
-					url : '/sms/validateSmsCode.json',
+					url : '/user/checkInviteCode.json',
 					type : 'post',
-					data : JSON.stringify({'smsCode' : $('.verify_code').val()}),
+					data : JSON.stringify({'inviteCode' : $('.inviteCode').val()}),
 					contentType: 'application/json',
 					dataType : 'json',
 					success : function(data){
 						if(data.success){
 							//成功跳转
+							window.location.href = '/page/register/3.html?email=' + email;
 						} else {
 							//否则提示错误
+							alert('请输入11位手机号');
 						}
 					}
-				})
+				});
+				demo.tipmsg.w["s11"]="请输入11位手机号";
+
+				demo.addRule([{
+					ele:".inputxt:eq(1)",
+					datatype:"s11"
+				}]);
 			});
 		});
 	</script>

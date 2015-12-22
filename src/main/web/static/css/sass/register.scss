@@ -689,9 +689,10 @@ margin-left:90px;
 @extend .fff;
 @extend .fs20;
 @extend .text-center;
-@extend .block;
-margin-right:55px;
+	margin-right:55px;
 @extend .family;
+	@extend .pointer;
+
 }
 
 .ipone_next:hover{
@@ -705,10 +706,22 @@ line-height:58px;
 @extend .family;
 color:#b5b9bc;
 @extend .fs20;
+	@extend .pointer;
 }
 
 .skip:hover{
 color:#74bc41;
+}
+
+.inviteCode{
+width:210px;
+	height:52px;
+	line-height: 52px;
+	background: url("../../images/register/ipone_num.png") no-repeat;
+	border:none;
+	text-indent:20px;
+	font-size: 20px;
+
 }
 
 .invite{

@@ -28,13 +28,13 @@ a:visited {
   height: 52px;
   line-height: 52px; }
 
-.block, .figure a:link, .context a, .promptly, .ipone_next, .vault, .login_html, #vimg {
+.block, .figure a:link, .context a, .promptly, .vault, .login_html, #vimg {
   display: block; }
 
 .none, .aside2, .mistake, .correct, .anew, .count {
   display: none; }
 
-.pointer, .anew, .anew60, .note {
+.pointer, .anew, .anew60, .note, .ipone_next, .skip {
   cursor: pointer; }
 
 .top_box, .ipone, .invite {
@@ -385,6 +385,15 @@ a:visited {
 
 .skip:hover {
   color: #74bc41; }
+
+.inviteCode {
+  width: 210px;
+  height: 52px;
+  line-height: 52px;
+  background: url("../../images/register/ipone_num.png") no-repeat;
+  border: none;
+  text-indent: 20px;
+  font-size: 20px; }
 
 .invite {
   width: 542px;

@@ -1062,14 +1062,6 @@ th {
           box-sizing: border-box;
 }
 
-input,
-button,
-select,
-textarea {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
 
 img {
   vertical-align: middle;
