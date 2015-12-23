@@ -3,7 +3,7 @@
 <mapper namespace="com.hsjc.central.mapper.UserTeacherMapper">
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.UserTeacher">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="userId" jdbcType="INTEGER" property="userId" />
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -16,12 +16,12 @@
    新增
   -->
   <insert id="insert" parameterType="com.hsjc.central.domain.UserTeacher">
-    insert into userteacher (id, userId)
-    values (#{id}, #{userId})
+    insert into tbuserteacher ( userId)
+    values (#{userId})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.central.domain.UserTeacher">
-    insert into userteacher
+    insert into tbuserteacher
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -41,12 +41,12 @@
   </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from userteacher
+    delete from tbuserteacher
     where id = #{id}
   </delete>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.central.domain.UserTeacher">
-    update userteacher
+    update tbuserteacher
     <set>
       <if test="userId != null">
         userId = #{userId},
@@ -56,7 +56,7 @@
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.central.domain.UserTeacher">
-    update userteacher
+    update tbuserteacher
     set userId = #{userId}
     where id = #{id}
   </update>
@@ -64,7 +64,7 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from userteacher
+    from tbuserteacher
     where id = #{id}
   </select>
 </mapper>

@@ -23,7 +23,7 @@
     新增单个用户
   -->
   <insert id="insert" parameterType="UserTemp">
-    insert into usertemp
+    insert into tbusertemp
     (userName, password,salt,type, email)
     values (
     #{userTemp.userName},
@@ -40,7 +40,7 @@
     新增多个用户
   -->
   <insert id="insertSelective" parameterType="UserTemp" >
-    insert into usertemp
+    insert into tbusertemp
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -107,7 +107,7 @@
     通过id删除用户
   -->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from usertemp
+    delete from tbusertemp
     where id = #{id}
   </delete>
 
@@ -117,7 +117,7 @@
     根据id更新用户信息
   -->
   <update id="updateByPrimaryKeySelective" parameterType="UserTemp">
-    update usertemp
+    update tbusertemp
     <set >
       <if test="userName != null" >
         userName = #{userName},
@@ -153,7 +153,7 @@
     根据email更新用户状态
   -->
   <update id="updateStatusByEmial" parameterType="UserTemp">
-    update usertemp
+    update tbusertemp
     <set>
       <if test="status != null">
         status = #{status}
@@ -168,7 +168,7 @@
     根据email更新用户组织机构
   -->
   <update id="updateOrganizationCodeByEmail" parameterType="UserTemp">
-    UPDATE usertemp
+    UPDATE tbusertemp
     <set>
       <if test="organizationCode != null">
         organizationCode = #{organizationCode}
@@ -183,7 +183,7 @@
     更新用户信息
   -->
   <update id="updateByPrimaryKey" parameterType="UserTemp" >
-    update usertemp
+    update tbusertemp
     set userName = #{userName},
     password = #{password},
     salt = #{salt},
@@ -203,7 +203,7 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
-    from usertemp
+    from tbusertemp
     where id = #{id}
   </select>
 
@@ -212,20 +212,21 @@
     @date : 2015-12-04
     根据userName、phone、email查询用户
   -->
-  <select id="selectByEmailOrUserNameOrPhone" resultMap="BaseResultMap" parameterType="UserTemp">
+  <select id="selectByEmailOrUserNameOrPhone" resultType="UserTemp" parameterType="UserTemp">
     select
     <include refid="Base_Column_List" />
-    from usertemp
-    where 1=1
-    <if test="userTemp.email != null" >
-      and email = #{userTemp.email},
-    </if>
-    <if test="userTemp.phone != null" >
-      and phone = #{userTemp.phone},
-    </if>
-    <if test="userTemp.userName != null" >
-      and userName = #{userTemp.userName}
-    </if>
+    from tbusertemp
+    <where>
+      <if test="email != null" >
+        email = #{email}
+      </if>
+      <if test="phone != null" >
+        phone = #{phone}
+      </if>
+      <if test="userName != null" >
+        userName = #{userName}
+      </if>
+    </where>
   </select>
 
 </mapper>

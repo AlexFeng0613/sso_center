@@ -5,6 +5,8 @@ import com.hsjc.central.domain.UserTemp;
 /**
  * @author : zga
  * @date : 2015-12-10
+ *
+ * 临时用户Mapper类
  */
 public interface UserTempMapper {
     int insert(UserTemp record);

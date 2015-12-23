@@ -9,7 +9,7 @@ package com.hsjc.central.domain;
 public class UserStudent {
     private Integer id;
 
-    private String userId;
+    private Integer userId;
 
     public Integer getId() {
         return id;
@@ -19,11 +19,11 @@ public class UserStudent {
         this.id = id;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 }

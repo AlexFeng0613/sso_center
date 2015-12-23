@@ -179,7 +179,7 @@ public class DesUtils {
 	   */
 	 public static void main(String[] args) {
 		try {
-	      String test = "929346402@qq.com";
+	      String test = "2514358941@qq.com";
 	      DesUtils des = new DesUtils();//自定义密钥
 	      System.out.println("加密前的字符：" + test);
 	      System.out.println("加密后的字符：" + des.encrypt(test));

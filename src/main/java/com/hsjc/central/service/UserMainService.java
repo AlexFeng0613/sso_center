@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.hsjc.central.constant.Constant;
 import com.hsjc.central.constant.MailTemplate;
 import com.hsjc.central.domain.*;
-import com.hsjc.central.mapper.EmailResetPwdMapper;
-import com.hsjc.central.mapper.SchoolInviteMapper;
-import com.hsjc.central.mapper.UserMainMapper;
-import com.hsjc.central.mapper.UserTempMapper;
+import com.hsjc.central.mapper.*;
 import com.hsjc.central.util.MD5;
 import com.hsjc.central.util.MailUtils;
 import com.hsjc.central.util.PasswordHelper;
@@ -39,6 +36,12 @@ public class UserMainService {
 
     @Autowired
     private UserTempMapper userTempMapper;
+
+    @Autowired
+    private UserTeacherMapper userTeacherMapper;
+
+    @Autowired
+    private UserStudentMapper userStudentMapper;
 
     @Autowired
     private PasswordHelper passwordHelper;
@@ -174,6 +177,10 @@ public class UserMainService {
         }
 
         //邀请码校验成功,更新用户信息
+        UserTemp userTemp = new UserTemp();
+        userTemp.setEmail(paramJson.getString("email"));
+        userTemp.setOrganizationCode(schoolInvite.getSchoolId());
+        userTempMapper.updateOrganizationCodeByEmail(userTemp);
 
         resultJson.put("success",true);
 
@@ -190,31 +197,42 @@ public class UserMainService {
      * @return
      */
     public int activateInviteCode(JSONObject paramJson){
-        SchoolInvite schoolInvite = schoolInviteMapper.selectByInviteCode(paramJson);
         int num = 0;
-        if(schoolInvite != null){
-            UserTemp userTemp = new UserTemp();
-            userTemp.setEmail(paramJson.getString("email"));
-            num = userTempMapper.updateOrganizationCodeByEmail(userTemp);
-            if(num > 0){
-                UserMain userMain = new UserMain();
-                UserTemp userTemp1 = userTempMapper.selectByEmailOrUserNameOrPhone(userTemp);
-                if(userTemp1 != null){
-                    userMain.setEmail(userTemp1.getEmail());
-                    userMain.setUserName(userTemp1.getUserName());
-                    userMain.setPhone(userTemp1.getPhone());
-                    userMain.setCreateTime(userTemp1.getCreateTime());
-                    userMain.setSalt(userTemp1.getSalt());
-                    userMain.setInvitateCode(userTemp1.getInvitateCode());
-                    userMain.setIsDelete(userTemp1.getIsDelete());
-                    userMain.setOrganizationCode(userTemp1.getOrganizationCode());
-                    userMain.setPassword(userTemp1.getPassword());
-                    userMain.setType(userTemp1.getType());
-                    userMain.setStatus(userTemp1.getStatus());
+        UserTemp userTemp = new UserTemp();
+        try {
+            String original = apiBaseService.getDesUtil().decrypt(paramJson.getString("email"));
+            userTemp.setEmail(original);
 
-                    num = userMainMapper.insert(userMain);
+            UserTemp userTemp1 = userTempMapper.selectByEmailOrUserNameOrPhone(userTemp);
+
+            UserMain userMain = new UserMain();
+            if(userTemp1 != null){
+                userMain.setUserName(userTemp1.getUserName());
+                userMain.setPassword(userTemp1.getPassword());
+                userMain.setSalt(userTemp1.getSalt());
+                userMain.setPhone(userTemp1.getPhone());
+                userMain.setType(userTemp1.getType());
+                userMain.setStatus(userTemp1.getStatus());
+                userMain.setInvitateCode(userTemp1.getInvitateCode());
+                userMain.setEmail(userTemp1.getEmail());
+                userMain.setOrganizationCode(userTemp1.getOrganizationCode());
+
+                num = userMainMapper.insert(userMain);
+
+                if("teacher".equals(userMain.getType())){
+                    UserTeacher userTeacher = new UserTeacher();
+                    userTeacher.setUserId(userMain.getId());
+                    userTeacherMapper.insert(userTeacher);
+                }
+
+                if("student".equals(userMain.getType())){
+                    UserStudent userStudent = new UserStudent();
+                    userStudent.setUserId(userMain.getId());
+                    userStudentMapper.insert(userStudent);
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return num;
     }

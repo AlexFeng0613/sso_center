@@ -22,7 +22,7 @@
     @date : 2015-12-04
     新增用户
   -->
-  <insert id="insert" parameterType="UserMain">
+  <insert id="insert" parameterType="UserMain" useGeneratedKeys="true" keyProperty="id">
     insert into tbusermain (
     userName,
     password,
@@ -31,7 +31,8 @@
     type,
     status,
     invitateCode,
-    email)
+    email,
+    organizationCode)
     values (
     #{userName},
     #{password},
@@ -40,7 +41,9 @@
     #{type},
     #{status},
     #{invitateCode},
-    #{email})
+    #{email},
+    #{organizationCode}
+    )
   </insert>
 
   <!--

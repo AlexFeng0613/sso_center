@@ -11,6 +11,7 @@
 	<script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../../static/scripts/ie/html5shiv.js"></script>
 	<script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
 	<script text="text/javascript" th:src="@{/static/scripts/bootstrap/bootstrap.min.js}" src="../../../static/scripts/bootstrap/bootstrap.min.js"></script>
+	<script text="text/javascript" th:src="@{/static/scripts/validform/Validform_v5.3.2_min.js}" src="../../../static/scripts/validform/Validform_v5.3.2_min.js"></script>
 	<script text="text/javascript" th:src="@{/static/scripts/register.js}" src="../../../static/scripts/register.js"></script>
 	<style>
 		.progress_2{
@@ -48,6 +49,7 @@
 	<div class="container-fluid">
 		<div class="center">
 			<form name="inviteForm" >
+				<input type="hidden" name="email" th:value="${email}"/>
 				<div class="invite">
 					<div class="invite_box">
 						<div class="invite_box_l">邀请码</div>
@@ -70,9 +72,7 @@
 
 	<script type="text/javascript">
 		$(function(){
-			//点击下一步函数
-
-			var demo=$(".regForm").Validform({
+			var demo=$(".inviteForm").Validform({
 				btnSubmit:'.invite_next',
 				tiptype:3,
 				showAllError:false,
@@ -82,6 +82,7 @@
 				callback : function(form){
 					if(true){
 						var data = {
+							'email' : $('input[name="email"]').val(),
 							'inviteCode' : $('.verify_code').val()
 						}
 						$.ajax({
@@ -93,6 +94,16 @@
 							success : function(data){
 								if(data.success){
 									//成功跳转
+									$.ajax({
+										url : '/user/activateInviteCode.json',
+										type : 'post',
+										data : JSON.stringify(),
+										contentType : 'application/json',
+										dataType : 'json',
+										success : function(){
+											activateInviteCode();
+										}
+									});
 								} else {
 									//否则提示错误
 									$.Showmsg('邀请码错误!');
@@ -114,10 +125,30 @@
 
 			//跳过click函数
 			$('.skip').click(function(){
-
+				activateInviteCode();
 			});
 		});
+
+		/**
+		 * 激活验证码
+		 */
+		function activateInviteCode(){
+			var email = $('input[name="email"]').val();
+			var data = {
+				'email' : email
+			};
+			$.ajax({
+				url : '/user/activateInviteCode.html',
+				type : 'post',
+				data : JSON.stringify(data),
+				contentType : 'application/json',
+				dataType : 'json',
+				success : function(){
+				}
+			});
+		}
 	</script>
 </body>
 </html>
+
 

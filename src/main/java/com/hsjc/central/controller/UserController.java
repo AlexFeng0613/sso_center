@@ -168,10 +168,10 @@ public class UserController extends BaseController{
     public String activateInviteCode(@RequestBody JSONObject paramJson){
         int num = userMainService.activateInviteCode(paramJson);
         if(num <= 0){
-
+            //
+            return "";
         }
-
-        return "/page/register/6";
+        return "redirect:/page/register/6.html";
     }
 
     /**
