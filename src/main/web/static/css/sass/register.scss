@@ -601,7 +601,7 @@ font-size:28px;
 }
 
 .ipone{
-width:460px;
+width:650px;
 @extend .top_box;
 }
 
@@ -721,7 +721,9 @@ width:210px;
 	border:none;
 	text-indent:20px;
 	font-size: 20px;
-
+	color: #768089;
+	@extend .left;
+	margin-right:20px;
 }
 
 .invite{
@@ -743,6 +745,18 @@ height:60px;
 margin-right:30px;
 }
 
+.invite_next{
+	@extend .left;
+	margin-right:30px;
+	@extend .block;
+	@extend .pointer;
+	color: #364049;
+	height:52px;
+	line-height: 52px;
+	@extend .family;
+	@extend .fs20;
+}
+
 .vault{
 width:216px;
 height:58px;
@@ -754,6 +768,7 @@ background:url(../../images/register/vault.png) no-repeat center;
 color:#74bc41;
 @extend .family;
 @extend .fs20;
+
 }
 
 .vault:hover{
@@ -922,9 +937,9 @@ color:#74bc41;
 
 .footer{
 	background-color:$foot_bg;
-	height:$foot_h;
 	@extend .hidden;
   background-color:#fff;
+	padding:25px 0;
 }
 
 
@@ -933,9 +948,8 @@ color:#74bc41;
 	@extend %mt15;
 	@extend .fc;
   	@extend .fs16;
-
+	@extend .family;
+	white-space: pre;
 }
 
-pre{
-  @extend .family;
-}
+
