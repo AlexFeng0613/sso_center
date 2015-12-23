@@ -4,7 +4,6 @@
 	  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 	<head>
 		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<link th:href="@{/static/css/sass/register.css}" href="../../../static/css/sass/register.css" rel="stylesheet" type="text/css"/>
 		<link th:href="@{/static/css/sass/bootstrap.css}" href="../../../static/css/sass/bootstrap.css" rel="stylesheet" type="text/css"/>
 		<script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../../../static/scripts/jquery/jquery-1.11.3.min.js"></script>
@@ -40,15 +39,8 @@
 
 			</div>
 		</header>
-		<div class="container-fluid">
-			<div class="center">
-				<figure class="figure">
-					<a class="student" href="/page/register/2.html?type=student">我是学生</a>
-					<a class="teacher" href="/page/register/2.html?type=teacher">我是老师</a>
-				</figure>
-			</div>
-		</div>
-		<footer layout:fragment="footer">
+		<div class="container-fluid" layout:fragment="container-fluid"></div>
+		<footer class="footer">
 			<div class="foot">版权所有 © 2002-2014 上海市普陀区教育局 上海市普陀区现代教育技术中心</div>
 			<div class="foot">地址：上海市普陀区大渡河路1688号 邮编：200333 电话：021-62601856</div>
 		</footer>
