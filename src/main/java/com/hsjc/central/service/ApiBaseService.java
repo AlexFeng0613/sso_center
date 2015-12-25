@@ -2,7 +2,7 @@ package com.hsjc.central.service;
 
 import com.hsjc.central.base.FastJsonRedisSerializer;
 import com.hsjc.central.constant.Constant;
-import com.hsjc.central.util.DesUtils;
+import com.hsjc.central.util.DesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
@@ -63,13 +63,13 @@ public class ApiBaseService {
      * @return
      * @throws Exception
      */
-    public DesUtils getDesUtil(){
-        DesUtils desUtils = null;
+    public DesUtil getDesUtil(){
+        DesUtil desUtil = null;
         try {
-            desUtils = new DesUtils();
+            desUtil = new DesUtil();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return desUtils;
+        return desUtil;
     }
 }

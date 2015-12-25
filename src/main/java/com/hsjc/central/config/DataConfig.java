@@ -3,10 +3,6 @@ package com.hsjc.central.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.hsjc.central.base.FastJsonRedisSerializer;
 import com.hsjc.central.constant.RedisConstant;
-import com.mongodb.Mongo;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.ServerAddress;
 import org.apache.commons.lang.StringUtils;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
@@ -15,24 +11,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.authentication.UserCredentials;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
-import org.springframework.data.mongodb.core.convert.DbRefResolver;
-import org.springframework.data.mongodb.core.convert.DefaultDbRefResolver;
-import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
-import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
-import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
-import java.net.UnknownHostException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author : zga
@@ -144,7 +128,7 @@ public class DataConfig {
 		redisTemplate.setDefaultSerializer(new FastJsonRedisSerializer<>(redisClass));
 	}
 
-	@Bean
+	/*@Bean
 	public MongoTemplate mongoTemplate(
 			@Value("${mongodb.servers}") String servers,
 			@Value("${mongodb.dbName}") String dbName,
@@ -183,5 +167,5 @@ public class DataConfig {
 		converter.setTypeMapper(new DefaultMongoTypeMapper(null));
 
 		return new MongoTemplate(mongoDbFactory, converter);
-	}
+	}*/
 }

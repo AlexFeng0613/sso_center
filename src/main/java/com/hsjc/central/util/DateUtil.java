@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * 日期工具类
  */
-public class DateUtils {
+public class DateUtil {
     public final static String getCurrentDate(String formatStr) {
         return new SimpleDateFormat(formatStr).format(new Date());
     }

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * password 帮助类
  */
 @Component
-public class PasswordHelper {
+public class PasswordUtil {
     private RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
     private String algorithmName = "md5";
     private int hashIterations = 2;
@@ -61,6 +61,6 @@ public class PasswordHelper {
     }
 
     public static void main(String[] args) {
-        new PasswordHelper().test();
+        new PasswordUtil().test();
     }
 }

@@ -10,7 +10,7 @@ import java.security.Security;
  *
  * Des加密工具类
  */
-public class DesUtils {
+public class DesUtil {
 
 	 /** 字符串默认键值     */
 	  private static String strDefaultKey = "hsjcsso";
@@ -79,7 +79,7 @@ public class DesUtils {
 	   *
 	   * @throws Exception
 	   */
-	  public DesUtils() throws Exception {
+	  public DesUtil() throws Exception {
 	    this(strDefaultKey);
 	  }
 
@@ -90,7 +90,7 @@ public class DesUtils {
 	   *            指定的密钥
 	   * @throws Exception
 	   */
-	  public DesUtils(String strKey) throws Exception {
+	  public DesUtil(String strKey) throws Exception {
 	    Security.addProvider(new com.sun.crypto.provider.SunJCE());
 	    Key key = getKey(strKey.getBytes());
 
@@ -180,7 +180,7 @@ public class DesUtils {
 	 public static void main(String[] args) {
 		try {
 	      String test = "2514358941@qq.com";
-	      DesUtils des = new DesUtils();//自定义密钥
+	      DesUtil des = new DesUtil();//自定义密钥
 	      System.out.println("加密前的字符：" + test);
 	      System.out.println("加密后的字符：" + des.encrypt(test));
 	      System.out.println("解密后的字符：" + des.decrypt(des.encrypt(test)));
@@ -194,7 +194,7 @@ public class DesUtils {
 
 
 
-			String res = MD5.encode(uid+ MD5.encode(secret_key)+dataStr);
+			String res = MD5Util.encode(uid+ MD5Util.encode(secret_key)+dataStr);
 			System.out.println(res);
 		}
 	    catch (Exception e) {

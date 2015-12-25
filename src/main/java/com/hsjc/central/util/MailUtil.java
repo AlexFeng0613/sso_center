@@ -14,8 +14,8 @@ import java.util.Properties;
  *
  * Email 工具类
  */
-public class MailUtils {
-    private static final Logger logger = Logger.getLogger(MailUtils.class);
+public class MailUtil {
+    private static final Logger logger = Logger.getLogger(MailUtil.class);
 
     /**
      * @author : zga

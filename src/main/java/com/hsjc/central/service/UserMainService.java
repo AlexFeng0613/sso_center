@@ -5,10 +5,10 @@ import com.hsjc.central.constant.Constant;
 import com.hsjc.central.constant.MailTemplate;
 import com.hsjc.central.domain.*;
 import com.hsjc.central.mapper.*;
-import com.hsjc.central.util.MD5;
-import com.hsjc.central.util.MailUtils;
-import com.hsjc.central.util.PasswordHelper;
-import com.hsjc.central.util.SSOCenterStringUtils;
+import com.hsjc.central.util.MD5Util;
+import com.hsjc.central.util.MailUtil;
+import com.hsjc.central.util.PasswordUtil;
+import com.hsjc.central.util.SSOStringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +44,7 @@ public class UserMainService {
     private UserStudentMapper userStudentMapper;
 
     @Autowired
-    private PasswordHelper passwordHelper;
+    private PasswordUtil passwordUtil;
 
     @Autowired
     private EmailResetPwdMapper emailResetPwdMapper;
@@ -123,7 +123,7 @@ public class UserMainService {
         userTemp.setUserName(username);
         userTemp.setPassword(password);
         //设置salt和password
-        passwordHelper.encryptPassword(userTemp);
+        passwordUtil.encryptPassword(userTemp);
         userTemp.setEmail(email);
 
         int res = userTempMapper.insert(userTemp);
@@ -132,15 +132,15 @@ public class UserMainService {
             try {
                 ActivateEmailMess activateEmailMess = new ActivateEmailMess();
                 activateEmailMess.setEmail(apiBaseService.getDesUtil().encrypt(email));
-                activateEmailMess.setTicket(MD5.encode(Calendar.getInstance().getTime().toString()));
+                activateEmailMess.setTicket(MD5Util.encode(Calendar.getInstance().getTime().toString()));
 
                 apiBaseService.insertIntoRedis(email,activateEmailMess,ActivateEmailMess.class);
 
                 String activateURL = "http://localhost:8080/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
                     activateEmailMess.getTicket();
 
-                String content = SSOCenterStringUtils.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%",email,activateURL,activateURL);
-                MailUtils.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
+                String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%",email,activateURL,activateURL);
+                MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
             } catch (Exception e) {
                 e.printStackTrace();
                 resultJson.put("message", Constant.SEND_MAIL_FAIL);
@@ -280,9 +280,9 @@ public class UserMainService {
      */
     public void sendResetPwdCodeWithEmail(JSONObject paramJson){
         String email = paramJson.getString("email");
-        String code = SSOCenterStringUtils.getRandomString(4);
+        String code = SSOStringUtil.getRandomString(4);
         if(!StringUtils.isEmpty(email)){
-            String content = SSOCenterStringUtils.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REST_PASSWORD_MESSAGE,"%",code);
+            String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REST_PASSWORD_MESSAGE,"%",code);
 
             EmailResetPwd emailResetPwd = new EmailResetPwd();
             emailResetPwd.setCreateTime(new Date());
@@ -293,7 +293,7 @@ public class UserMainService {
 
             emailResetPwdMapper.insert(emailResetPwd);
 
-            MailUtils.sendMail(MailTemplate.MAIL_SEND_RESET_PASSWORD,content,email);
+            MailUtil.sendMail(MailTemplate.MAIL_SEND_RESET_PASSWORD,content,email);
         }
     }
 
@@ -339,7 +339,7 @@ public class UserMainService {
         UserMain userMain = new UserMain();
         userMain.setEmail(email);
         userMain.setPassword(password);
-        passwordHelper.encryptPassword(userMain);
+        passwordUtil.encryptPassword(userMain);
 
         int uNum = userMainMapper.updatePasswordByEmail(email);
         if(uNum <= 0) resultJson.put("success",false);

@@ -105,6 +105,7 @@ public class SecurityConfig {
 		filterChainDefinitionMap.put("/page/register/*.html", "anon");
 		filterChainDefinitionMap.put("/page/logout.html", "logout");
 		filterChainDefinitionMap.put("/user/login.html", "anon");
+		filterChainDefinitionMap.put("/3rd/**", "anon");
 		filterChainDefinitionMap.put("/**", "user");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;

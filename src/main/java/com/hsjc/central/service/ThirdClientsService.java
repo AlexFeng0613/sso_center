@@ -6,7 +6,7 @@ import com.hsjc.central.constant.Constant;
 import com.hsjc.central.domain.ThirdClients;
 import com.hsjc.central.mapper.SynMapper;
 import com.hsjc.central.mapper.ThirdClientsMapper;
-import com.hsjc.central.util.MD5;
+import com.hsjc.central.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -171,7 +171,7 @@ public class ThirdClientsService {
         String client_secret = thirdClients.getClientSecret();
         String password = paramJson.getString("password");
         String time = paramJson.getString("time");
-        String validatePwd = MD5.encode(client_secret + MD5.encode(Constant.public_key) + time);
+        String validatePwd = MD5Util.encode(client_secret + MD5Util.encode(Constant.public_key) + time);
         if(!validatePwd.equals(password)) return false;
 
         return true;

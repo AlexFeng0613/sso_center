@@ -8,7 +8,7 @@ import java.util.Random;
  *
  * 字符串工具类
  */
-public class SSOCenterStringUtils {
+public class SSOStringUtil {
 
     /**
      * @author : zga
