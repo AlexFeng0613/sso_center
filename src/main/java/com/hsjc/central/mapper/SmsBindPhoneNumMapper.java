@@ -5,6 +5,9 @@ import com.hsjc.central.domain.SmsBindPhoneNum;
 /**
  * @author : zga
  * @date : 2015-12-2
+ *
+ * SMS绑定手机Mapper
+ *
  */
 public interface SmsBindPhoneNumMapper {
     int insert(SmsBindPhoneNum record);

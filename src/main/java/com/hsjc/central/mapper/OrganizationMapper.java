@@ -5,17 +5,20 @@ import com.hsjc.central.domain.Organization;
 /**
  * @author : zga
  * @date : 2015-12-10
+ *
+ * 组织机构Mapper类
+ *
  */
 public interface OrganizationMapper {
-    int insert(Organization record);
+    int insert(Organization organization);
 
-    int insertSelective(Organization record);
+    int insertSelective(Organization organization);
 
     int deleteByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Organization record);
+    int updateByPrimaryKeySelective(Organization organization);
 
-    int updateByPrimaryKey(Organization record);
+    int updateByPrimaryKey(Organization organization);
 
     Organization selectByPrimaryKey(Long id);
 }

@@ -13,15 +13,15 @@ import java.util.List;
  * 同步Mapper
  */
 public interface SynMapper {
-    int insert(Organization record);
+    int insert(Organization organization);
 
-    int insertSelective(Organization record);
+    int insertSelective(Organization organization);
 
     int deleteByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Organization record);
+    int updateByPrimaryKeySelective(Organization organization);
 
-    int updateByPrimaryKey(Organization record);
+    int updateByPrimaryKey(Organization organization);
 
     List<HashMap> selectDifferentOrganization(@Param("briefName")String briefName);
 

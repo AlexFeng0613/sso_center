@@ -9,15 +9,15 @@ import com.hsjc.central.domain.UserTemp;
  * 临时用户Mapper类
  */
 public interface UserTempMapper {
-    int insert(UserTemp record);
+    int insert(UserTemp userTemp);
 
-    int insertSelective(UserTemp record);
+    int insertSelective(UserTemp userTemp);
 
     int deleteByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(UserTemp record);
+    int updateByPrimaryKeySelective(UserTemp userTemp);
 
-    int updateByPrimaryKey(UserTemp record);
+    int updateByPrimaryKey(UserTemp userTemp);
 
     int updateStatusByEmial(UserTemp userTemp);
 

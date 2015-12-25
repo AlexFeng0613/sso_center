@@ -6,17 +6,20 @@ import com.hsjc.central.domain.SchoolInvite;
 /**
  * @author : zga
  * @date : 2015-12-10
+ * 
+ * 学校邀请码Mapper类
+ * 
  */
 public interface SchoolInviteMapper {
-    int insert(SchoolInvite record);
+    int insert(SchoolInvite schoolInvite);
 
-    int insertSelective(SchoolInvite record);
+    int insertSelective(SchoolInvite schoolInvite);
 
     int deleteByPrimaryKey(Long inviteid);
 
-    int updateByPrimaryKeySelective(SchoolInvite record);
+    int updateByPrimaryKeySelective(SchoolInvite schoolInvite);
 
-    int updateByPrimaryKey(SchoolInvite record);
+    int updateByPrimaryKey(SchoolInvite schoolInvite);
 
     SchoolInvite selectByPrimaryKey(Long inviteid);
 

@@ -7,6 +7,7 @@ import com.hsjc.central.domain.EmailResetPwd;
  * @date : 2015-12-2
  *
  * Email 重置密码Mapper
+ *
  */
 public interface EmailResetPwdMapper {
 

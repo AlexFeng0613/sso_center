@@ -7,15 +7,15 @@ import com.hsjc.central.domain.UserStudent;
  * @date : 2015-12-2
  */
 public interface UserStudentMapper {
-    int insert(UserStudent record);
+    int insert(UserStudent userStudent);
 
-    int insertSelective(UserStudent record);
+    int insertSelective(UserStudent userStudent);
 
     int deleteByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(UserStudent record);
+    int updateByPrimaryKeySelective(UserStudent userStudent);
 
-    int updateByPrimaryKey(UserStudent record);
+    int updateByPrimaryKey(UserStudent userStudent);
 
     UserStudent selectByPrimaryKey(Integer id);
 }

@@ -7,15 +7,15 @@ import com.hsjc.central.domain.SystemLog;
  * @date : 2015-12-10
  */
 public interface SystemLogMapper {
-    int insert(SystemLog record);
+    int insert(SystemLog systemLog);
 
-    int insertSelective(SystemLog record);
+    int insertSelective(SystemLog systemLog);
 
     int deleteByPrimaryKey(Long syslogid);
 
-    int updateByPrimaryKeySelective(SystemLog record);
+    int updateByPrimaryKeySelective(SystemLog systemLog);
 
-    int updateByPrimaryKey(SystemLog record);
+    int updateByPrimaryKey(SystemLog systemLog);
 
     SystemLog selectByPrimaryKey(Long syslogid);
 }

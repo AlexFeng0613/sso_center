@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hsjc.central.mapper.emailSendMapper">
+<mapper namespace="com.hsjc.central.mapper.EmailSendMapper">
   <resultMap id="BaseResultMap" type="com.hsjc.central.domain.EmailSend">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="email" jdbcType="VARCHAR" property="email" />

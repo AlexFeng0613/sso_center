@@ -90,6 +90,7 @@ public class ThirdClientsService {
 
 
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
+        if(thirdClients == null) return null;
         List<HashMap> organizationList = synMapper.selectDifferentOrganization(thirdClients.getBriefName());
 
         resJsonObject.put("organization",organizationList);

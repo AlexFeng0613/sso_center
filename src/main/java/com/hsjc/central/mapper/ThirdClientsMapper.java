@@ -7,15 +7,15 @@ import com.hsjc.central.domain.ThirdClients;
  * @date : 2015-12-10
  */
 public interface ThirdClientsMapper {
-    int insert(ThirdClients record);
+    int insert(ThirdClients thirdClients);
 
-    int insertSelective(ThirdClients record);
+    int insertSelective(ThirdClients thirdClients);
 
     int deleteByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(ThirdClients record);
+    int updateByPrimaryKeySelective(ThirdClients thirdClients);
 
-    int updateByPrimaryKey(ThirdClients record);
+    int updateByPrimaryKey(ThirdClients thirdClients);
 
     ThirdClients selectByPrimaryKey(Long id);
 
