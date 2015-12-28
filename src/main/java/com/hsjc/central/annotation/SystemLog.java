@@ -17,4 +17,3 @@ public  @interface SystemLog {
 	String description()  default "";  //
 }
   
- 
