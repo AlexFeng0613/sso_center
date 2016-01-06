@@ -86,6 +86,7 @@ a{
 .banner{
     width:100%;
     height:auto;
+
     position: relative;
     overflow: visible;
 }
