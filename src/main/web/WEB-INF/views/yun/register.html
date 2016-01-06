@@ -1,0 +1,125 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link th:href="@{/static/css/sso.css}" href="../../../static/css/sso.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/static/css/sass/bootstrap.css}" href="../../../static/css/sass/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../../../static/scripts/jquery/jquery-1.11.3.min.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../../static/scripts/ie/html5shiv.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/bootstrap/bootstrap.min.js}" src="../../../static/scripts/bootstrap/bootstrap.min.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/sso.js}" src="../../../static/scripts/sso.js"></script>
+    </head>
+    <body>
+        <header class="header">
+            <div class="center">
+                <div class="label-info">华师智慧教育云平台</div>
+            </div>
+        </header>
+        <div class="banner">
+            <img src="../images/sso_banner.png"/>
+            <div class="center">
+                <div class="register_box">
+                    <div class="title">请登录</div>
+                    <form action="" methed="post">
+                        <input type="text" class="register_input text" />
+                        <input type="password" class="register_input password2" />
+                        <ul class="remember">
+                            <li class="left">
+                                <input type="checkbox" />
+                                记住登录名
+                            </li>
+                            <li class="right">
+                                <input type="checkbox" />
+                                自动登录
+                            </li>
+                        </ul>
+                        <input type="submit" class="register_submit" value="登录"/>
+                    </form>
+                    <div class="forget">
+                        <a href="#" class="left">忘记密码了？</a>
+                        <a href="#" class="right">立即注册</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="center">
+                <div class="partner">
+                    <div class="title">合作伙伴</div>
+                    <ul class="partner_icon">
+                        <li>
+                            <img src="../images/p1.png"/>
+                        </li>
+                        <li>
+                            <img src="../images/p2.png"/>
+                        </li>
+                        <li>
+                            <img src="../images/p3.png"/>
+                        </li>
+                        <li>
+                            <img src="../images/p4.png"/>
+                        </li>
+                        <li>
+                            <img src="../images/p5.png"/>
+                        </li>
+                        <li>
+                            <img src="../images/p6.png"/>
+                        </li>
+                        <li>
+                            <img src="../images/p7.png"/>
+                        </li>
+                    </ul>
+                </div>
+                <div class="partner">
+                    <div class="title">联合研发单位</div>
+                    <ul class="partner_icon">
+                        <li>
+                            <img src="../images/p8.png"/>
+                        </li>
+                        <li>
+                            <img src="../images/p9.png"/>
+                        </li>
+                        <li>
+                            <img src="../images/p9.png"/>
+                        </li>
+                        <li>
+                            <img src="../images/p9.png"/>
+                        </li>
+                        <li>
+                            <img src="../images/p9.png"/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="center">
+                <div class="foot-size">客服电话：400-880-5056        客服邮箱：Help@hsjc.com.cn</div>
+                <div class="foot-size">共筑教育云平台 ,创建教育新模式</div>
+                <div class="foot-size">Copyright ©t华师京城网络科技股份有限公司  沪IC备10208270号-3</div>
+                <div class="android">
+                    <img src="../images/android.png"/>
+                    <span>For  Android</span>
+                </div>
+                <div class="ios">
+                    <img src="../images/ios.png"/>
+                    <span>For  IOS</span>
+                </div>
+            </div>
+        </footer>
+        <script text="text/javascript">
+            $(function(){
+                var ch= $(window).height()-($('.header').height())-($('.footer').outerHeight())-($('.banner').height());
+                 $('.container').css('min-height',ch+'px');
+
+                $(window).on('resize scroll',function(){
+                    var ch= $(window).height()-($('.header').height())-($('.footer').outerHeight())-($('.banner').height());
+                    $('.container').css('min-height',ch+'px');
+                });
+
+            });
+        </script>
+    </body>
+</html>
