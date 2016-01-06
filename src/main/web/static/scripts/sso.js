@@ -11,7 +11,7 @@ $(function(){
 
     $(window).on('resize scroll',function(){
         var ch= $(window).height()-($('.header').height())-($('.footer').outerHeight());
-        $('.container').css('min-height',ch+'px');
+       $('.container').css('min-height',ch+'px');
         $('.datum_r').css('min-height',ch-20+'px');
 
         var cr=$('.datum_r').outerHeight();
