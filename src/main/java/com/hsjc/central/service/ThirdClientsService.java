@@ -53,7 +53,11 @@ public class ThirdClientsService {
         JSONObject resJsonObject = new JSONObject();
 
         boolean flag = validateClientId(paramJson);
-        if(!flag) return null;
+        if(!flag){
+            resJsonObject.put("flag",false);
+            resJsonObject.put("message","client_id not exists or password is error!");
+            return resJsonObject;
+        }
 
         Integer currentPage = paramJson.getInteger("currentPage");
         Integer pageSize  =paramJson.getInteger("pageSize");
@@ -86,7 +90,11 @@ public class ThirdClientsService {
         JSONObject resJsonObject = new JSONObject();
 
         boolean flag = validateClientId(paramJson);
-        if(!flag) return null;
+        if(!flag){
+            resJsonObject.put("flag",false);
+            resJsonObject.put("message","client_id not exists or password is error!");
+            return resJsonObject;
+        }
 
 
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
@@ -111,7 +119,11 @@ public class ThirdClientsService {
         JSONObject resJsonObject = new JSONObject();
 
         boolean flag = validateClientId(paramJson);
-        if(!flag) return null;
+        if(!flag){
+            resJsonObject.put("flag",false);
+            resJsonObject.put("message","client_id not exists or password is error!");
+            return resJsonObject;
+        }
 
         Integer currentPage = paramJson.getInteger("currentPage");
         Integer pageSize  =paramJson.getInteger("pageSize");
@@ -146,7 +158,11 @@ public class ThirdClientsService {
         JSONObject resJsonObject = new JSONObject();
 
         boolean flag = validateClientId(paramJson);
-        if(!flag) return null;
+        if(!flag){
+            resJsonObject.put("flag",false);
+            resJsonObject.put("message","client_id not exists or password is error!");
+            return resJsonObject;
+        }
 
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
         List<HashMap> userList = synMapper.selectDifferentUser(thirdClients.getBriefName());
