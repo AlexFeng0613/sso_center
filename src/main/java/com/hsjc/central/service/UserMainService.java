@@ -118,6 +118,8 @@ public class UserMainService {
         String username = paramJson.getString("username");
         String password = paramJson.getString("password");
         String email = paramJson.getString("email");
+        String realName = paramJson.getString("realName");
+        String gender = paramJson.getString("gender");
 
         userTemp.setType(type);
         userTemp.setUserName(username);
@@ -125,6 +127,8 @@ public class UserMainService {
         //设置salt和password
         passwordUtil.encryptPassword(userTemp);
         userTemp.setEmail(email);
+        userTemp.setGender(gender);
+        userTemp.setRealName(realName);
 
         int res = userTempMapper.insert(userTemp);
         if(res > 0){

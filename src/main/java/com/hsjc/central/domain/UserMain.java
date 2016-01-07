@@ -34,6 +34,10 @@ public class UserMain implements Serializable{
 
     private Integer organizationCode;
 
+    private String gender;
+
+    private String realName;
+
     public Integer getId() {
         return id;
     }
@@ -132,5 +136,21 @@ public class UserMain implements Serializable{
 
     public String getCredentialsSalt(){
         return userName + salt;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 }

@@ -65,6 +65,23 @@
 						<div class="mistake"></div>
 						<div class="correct"></div>
 					</div>
+
+					<!--姓名、性别-->
+					<div class="input_box">
+						<div class="input_box_l">姓名</div>
+						<input type="text" name="realName" placeholder="姓名" class="inputxt"/>
+						<div class="mistake"></div>
+						<div class="correct"></div>
+					</div>
+
+					<div class="input_box">
+						<div class="input_box_l">性别</div>
+						<input type="radio" name="gender" value="1" placeholder="男" checked="checked"/>
+						<input type="radio" name="gender" value="0" placeholder="女"/>
+						<div class="mistake"></div>
+						<div class="correct"></div>
+					</div>
+
 					<div class="input_box">
 						<div class="input_box_l" >密码</div>
 						<input type="password" placeholder="6~10个英文和数字,区分大小写" name="password" class="inputxt"/>
@@ -103,6 +120,7 @@
 				showAllError:true,
 				datatype:{
 					"s6-18":/^[\w\.\s]{6,18}$/,
+					"s2-10":/^\s{2,10}/,
 					"e":/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 				},
 				showAllError:true,
@@ -114,13 +132,17 @@
 						var email = $('input[name="email"]').val();
 						var type = $('input[name="type"]').val();
 						var code = $('input[name="code"]').val();
+						var realName = $('input[name="realName"]').val();
+						var gender = $('input[name="gender"]').val();
 
 						var data = {
 							'username' : username,
 							'password' : password,
 							'email' : email,
 							'type' : type,
-							'code' : code
+							'code' : code,
+							'realName' : realName,
+							'gender' : gender
 						}
 
 
@@ -147,20 +169,23 @@
 			demo.tipmsg.w["s6-18"]="请输入6到18位英文和数字";
 
 			demo.addRule([{
-				ele:".inputxt:eq(0)",
-				datatype:"s6-18"
-				},	{
-				ele:".inputxt:eq(1)",
-				datatype:"e"
-				}, {
+					ele:".inputxt:eq(0)",
+					datatype:"s6-18"
+				},{
+					ele:".inputxt:eq(1)",
+					datatype:"e"
+				},{
 					ele:".inputxt:eq(2)",
-					datatype:"*6-10"
+					datatype:"s2-10"
 				},{
 					ele:".inputxt:eq(3)",
+					datatype:"*6-10"
+				},{
+					ele:".inputxt:eq(4)",
 					datatype:"*",
 					recheck:"password"
 				},{
-					ele:".inputxt:eq(4)",
+					ele:".inputxt:eq(5)",
 					datatype:"*6"
 				}
 			]);

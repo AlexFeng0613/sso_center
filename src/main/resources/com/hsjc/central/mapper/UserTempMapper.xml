@@ -14,7 +14,7 @@
     <result column="organizationCode" property="organizationCode" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, userName, password, salt, phone, type, status, invitateCode, email,organizationCode
+    id, userName, password, salt, phone, type, status, invitateCode, email,organizationCode,realName,gender
   </sql>
 
   <!--
@@ -24,13 +24,15 @@
   -->
   <insert id="insert" parameterType="UserTemp">
     insert into tbusertemp
-    (userName, password,salt,type, email)
+    (userName, password,salt,type, email,realName,gender)
     values (
     #{userTemp.userName},
     #{userTemp.password},
     #{userTemp.salt},
     #{userTemp.type},
-    #{userTemp.email}
+    #{userTemp.email},
+    #{userTemp.realName},
+    #{userTemp.gender}
     )
   </insert>
 
