@@ -253,8 +253,6 @@ public class UserController extends BaseController{
     @RequestMapping("resetPasswordWithSms")
     public JSONObject resetPasswordWithSms(@RequestBody JSONObject paramJson){
         JSONObject resultJson = new JSONObject();
-
-
         return resultJson;
     }
 
