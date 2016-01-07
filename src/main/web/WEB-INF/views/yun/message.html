@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="../../public/yun">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -10,120 +12,73 @@
         <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../../static/scripts/ie/html5shiv.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/sso.js}" src="../../../static/scripts/sso.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $('#basic_message').addClass('selected');
+                $('#basic_message').children('#mailbox a').addClass('selected');
+            });
+        </script>
     </head>
     <body>
-        <header class="header">
-            <div class="center">
-                <div class="label-info">华师智慧教育云平台</div>
-                <a href="#" class="exit">退出</a>
-                <div class="people">
-                    <img src="../../../static/images/yun/people.png"/>
-                    <span>刘老师</span>
-                </div>
-            </div>
-        </header>
-        <div class="container">
-            <div class="container_title">
-                <div class="center">您的位置： 首页 》<span>个人设置</span></div>
-            </div>
-            <div class="datum">
-                <ul class="datum_l">
-                    <li class="selected" id="basic_message">
-                        <a href="message.html" class="selected" >基本信息</a>
-                    </li>
-                    <li id="mailbox">
-                        <a href="mailbox.html">绑定邮箱</a>
-                    </li>
-                    <li id="phone">
-                        <a href="phone.html">绑定手机</a>
-                    </li>
-                    <li>
-                        <a href="passion.html">邀请码</a>
-                    </li>
-                    <li id="amend_password">
-                        <a href="password.html">修改密码</a>
-                    </li>
-                    <li id="news">
-                        <a href="#">消息提醒</a>
-                    </li>
-                </ul>
-                <div class="datum_r">
-                    <div class="message">
-                        <div class="message_l">云账号：</div>
-                        <div class="message_r">000</div>
-                    </div>
-                    <div class="message">
-                        <div class="message_l">用户名：</div>
-                        <div class="message_r">刘老师</div>
-                    </div>
-                    <div class="message">
-                        <div class="message_l">绑定邮箱：</div>
-                        <a href="#" class="bound"> 未绑定</a>
-                    </div>
-                    <div class="message">
-                        <div class="message_l">绑定手机： </div>
-                        <a href="#" class="bound"> 未绑定</a>
-                    </div>
-                    <div class="message">
-                        <div class="message_l">绑定邀请码：</div>
-                        <a href="#" class="bound"> 未绑定</a>
-                    </div>
-                    <div class="message">
-                        <div class="message_l">头像：</div>
-                        <div class="head_img">
-                            <input type="file" class="head_file"/>
-                        </div>
-                        <div class="head_img_strong">(支持Jpg、Png或bmp格式的图片，建议文件小于20M)</div>
-                    </div>
-                    <div class="message">
-                        <div class="message_l">真实姓名：</div>
-                        <input type="text" id="user_name"/>
-                    </div>
-                    <div class="message">
-                        <div class="message_l">性别：</div>
-                        <ul class="sex">
-                            <li class="selected">
-                                <input type="radio" name="sex"/>
-                                男
-                            </li>
-                            <li>
-                                <input type="radio" name="sex"/>
-                                女
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="message">
-                        <div class="message_l">证件号码：</div>
-                        <select>
-                            <option>证件类型</option>
-                        </select>
-                        <input type="text" class="papers" />
-                    </div>
-                    <div class="message">
-                        <div class="message_l">个人介绍：</div>
-                        <div style="width:384px;">
-                            <textarea class="peo_text"></textarea>
-                            <input type="submit" class="message_submit" value="保存"/>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <footer class="footer">
-            <div class="center">
-                <div class="foot-size">客服电话：400-880-5056        客服邮箱：Help@hsjc.com.cn</div>
-                <div class="foot-size">共筑教育云平台 ,创建教育新模式</div>
-                <div class="foot-size">Copyright ©t华师京城网络科技股份有限公司  沪IC备10208270号-3</div>
-                <div class="android">
-                    <img src="../../../static/images/yun/android.png"/>
-                    <span>For  Android</span>
-                </div>
-                <div class="ios">
-                    <img src="../../../static/images/yun/ios.png"/>
-                    <span>For  IOS</span>
-                </div>
-            </div>
-        </footer>
+        <div id="content1" layout:fragment="content">
+           <div class="message">
+               <div class="message_l">云账号：</div>
+               <div class="message_r">000</div>
+           </div>
+           <div class="message">
+               <div class="message_l">用户名：</div>
+               <div class="message_r">刘老师</div>
+           </div>
+           <div class="message">
+               <div class="message_l">绑定邮箱：</div>
+               <a href="#" class="bound"> 未绑定</a>
+           </div>
+           <div class="message">
+               <div class="message_l">绑定手机： </div>
+               <a href="#" class="bound"> 未绑定</a>
+           </div>
+           <div class="message">
+               <div class="message_l">绑定邀请码：</div>
+               <a href="#" class="bound"> 未绑定</a>
+           </div>
+           <div class="message">
+               <div class="message_l">头像：</div>
+               <div class="head_img">
+                   <input type="file" class="head_file"/>
+               </div>
+               <div class="head_img_strong">(支持Jpg、Png或bmp格式的图片，建议文件小于20M)</div>
+           </div>
+           <div class="message">
+               <div class="message_l">真实姓名：</div>
+               <input type="text" id="user_name"/>
+           </div>
+           <div class="message">
+               <div class="message_l">性别：</div>
+               <ul class="sex">
+                   <li class="selected">
+                       <input type="radio" name="sex"/>
+                       男
+                   </li>
+                   <li>
+                       <input type="radio" name="sex"/>
+                       女
+                   </li>
+               </ul>
+           </div>
+           <div class="message">
+               <div class="message_l">证件号码：</div>
+               <select>
+                   <option>证件类型</option>
+               </select>
+               <input type="text" class="papers" />
+           </div>
+           <div class="message">
+               <div class="message_l">个人介绍：</div>
+               <div style="width:384px;">
+                   <textarea class="peo_text"></textarea>
+                   <input type="submit" class="message_submit" value="保存"/>
+               </div>
+           </div>
+       </div>
     </body>
 </html>
