@@ -1,6 +1,7 @@
 package com.hsjc.central.controller;
 
 import com.hsjc.central.service.ApiBaseService;
+import com.hsjc.central.service.IndexIcosService;
 import com.hsjc.central.service.ThirdClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author : zga
@@ -25,6 +29,9 @@ public class PageController {
     @Autowired
     private ThirdClientsService thirdClientsService;
 
+    @Autowired
+    private IndexIcosService indexIcosService;
+
     /**
      * @author : zga
      * @date : 2015-12-04
@@ -32,7 +39,10 @@ public class PageController {
      * @return
      */
     @RequestMapping("index")
-    public String index(){
+    public String index(Model model){
+        List<HashMap> list = indexIcosService.getAllIcos();
+        model.addAttribute("icons",list);
+
         return "/user/index";
     }
 

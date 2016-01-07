@@ -16,7 +16,9 @@
         </commentGenerator>
 
         <!-- !!!! Database Configurations !!!! -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/sso_center" userId="root" password="000000"/>
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/sso_center" userId="root" password="000000"/>-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.18.201:3310/sso_center"
+                        userId="admin" password="1HL9v5BErLQW"/>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -29,17 +31,17 @@
         </javaModelGenerator>
 
         <!-- !!!! Mapper XML Configurations !!!! -->
-        <!--<sqlMapGenerator targetPackage="com.hsjc.central.mapper" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
+        <sqlMapGenerator targetPackage="com.hsjc.central.mapper" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
             <property name="enableSubPackages" value="false"/>
-        </sqlMapGenerator>-->
+        </sqlMapGenerator>
 
         <!-- !!!! Mapper Interface Configurations !!!! -->
-        <!--<javaClientGenerator targetPackage="com.hsjc.central.mapper" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.hsjc.central.mapper" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED" type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
-        </javaClientGenerator>-->
+        </javaClientGenerator>
 
         <!-- !!!! Table Configurations !!!! -->
-        <table tableName="tb3rdclients" domainObjectName="ThirdClients" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+        <!--<table tableName="tb3rdclients" domainObjectName="ThirdClients" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
 
         <table tableName="tbemailactivate" domainObjectName="EmailActivate" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
@@ -84,8 +86,10 @@
         <table tableName="tbuserteacher" domainObjectName="UserTeacher" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
 
-        <table tableName="tuserTemp" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+        <table tableName="tbuserTemp" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>-->
 
+        <table tableName="tbindexicos" domainObjectName="IndexIcos" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>

@@ -44,7 +44,7 @@ public class UserController extends BaseController{
      */
     @RequestMapping(value = "login",method = RequestMethod.GET)
     public String login(){
-        return "/login";
+        return "/user/login";
     }
 
     /**
@@ -257,4 +257,18 @@ public class UserController extends BaseController{
 
         return resultJson;
     }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-07
+     *
+     * SSO主页>>个人设置
+     *
+     * @return
+     */
+    @RequestMapping("personalSettings")
+    public String personalSettings(){
+        return "/yun/message";
+    }
+
 }
