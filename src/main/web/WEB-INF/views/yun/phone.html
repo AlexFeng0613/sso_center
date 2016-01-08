@@ -2,14 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="../../public/yun">
-    <head>
-        <script type="text/javascript">
-            $(function(){
-                $('#phone').addClass('selected');
-                $('#phone a').children('#mailbox a').addClass('selected');
-            });
-        </script>
-    </head>
+    <head></head>
     <body>
         <div id="content" layout:fragment="content">
            <div class="password_box">
@@ -28,6 +21,13 @@
                    <input type="submit" value="下一步" class="phone_submit">
                </form>
            </div>
-       </div>
+        </div>
+
+        <script type="text/javascript">
+            $(function(){
+                $('#phone').addClass('selected');
+                $('#phone a').children('#mailbox a').addClass('selected');
+            });
+        </script>
     </body>
 </html>
