@@ -44,6 +44,7 @@ public class UserController extends BaseController{
      */
     @RequestMapping(value = "login",method = RequestMethod.GET)
     public String login(){
+        //return "/login";
         return "/user/login";
     }
 
@@ -103,35 +104,54 @@ public class UserController extends BaseController{
      *
      * @param email
      * @param ticket
+     * @param type
      * @return
      */
     @RequestMapping(value = "activateEmail",method = RequestMethod.GET)
     public String activateEmail(@RequestParam("email")String email,
-                                @RequestParam("ticket")String ticket){
+                                @RequestParam("ticket")String ticket,
+                                @RequestParam(value = "type",required = false)String type){
         try {
             //验证email、ticket是否正确,ticket是否过期
             String originEmail = apiBaseService.getDesUtil().decrypt(email);
-            Object obj = apiBaseService.fetchObject(originEmail, ActivateEmailMess.class);
 
-            ActivateEmailMess activateEmailMess = null;
-            if(obj == null) {
-                //ticket失效,返回错误页面,提示重新注册,或者返回首页
+            if("0".equals(type)){
+                Object obj = apiBaseService.fetchObject(originEmail, ActivateEmailMess.class);
 
-                return "";
+                ActivateEmailMess activateEmailMess = null;
+                if(obj == null) {
+                    //ticket失效,返回错误页面,提示重新注册,或者返回首页
+
+                    return "";
+                }
+
+                activateEmailMess = (ActivateEmailMess) obj;
+                if(!(originEmail.equals(activateEmailMess.getEmail()) && ticket.equals(activateEmailMess.getTicket()))){
+                    //比对不一致,返回错误页面
+                    return "";
+                }
+
+                //如果正确且没有过期,更新状态为activated
+                UserTemp userTemp = new UserTemp();
+                userTemp.setEmail(originEmail);
+                userTemp.setStatus("activated");
+                int num = userMainService.activateEmail(userTemp);
+                if(num < 1) return "";//激活失败,返回错误页面
+            } else {
+                UserMain currentUserMain = getCurrentUser();
+                UserMain userMain = new UserMain();
+                userMain.setEmail(originEmail);
+                userMain.setId(currentUserMain.getId());
+                currentUserMain.setEmail(originEmail);
+                int num = userMainService.updateUserMainEmail(userMain);
+                if(num > 0){
+                    Subject subject = SecurityUtils.getSubject();
+                    Session session = subject.getSession(true);
+                    session.setTimeout(-1);
+                    session.setAttribute("user", currentUserMain);
+                    return "redirect:/sso/personalSettings.html";
+                }
             }
-
-            activateEmailMess = (ActivateEmailMess) obj;
-            if(!(originEmail.equals(activateEmailMess.getEmail()) && ticket.equals(activateEmailMess.getTicket()))){
-                //比对不一致,返回错误页面
-                return "";
-            }
-
-            //如果正确且没有过期,更新状态为activated
-            UserTemp userTemp = new UserTemp();
-            userTemp.setEmail(originEmail);
-            userTemp.setStatus("activated");
-            int num = userMainService.activateEmail(userTemp);
-            if(num < 1) return "";//激活失败,返回错误页面
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -255,18 +275,4 @@ public class UserController extends BaseController{
         JSONObject resultJson = new JSONObject();
         return resultJson;
     }
-
-    /**
-     * @author : zga
-     * @date : 2016-01-07
-     *
-     * SSO主页>>个人设置
-     *
-     * @return
-     */
-    @RequestMapping("personalSettings")
-    public String personalSettings(){
-        return "/yun/message";
-    }
-
 }

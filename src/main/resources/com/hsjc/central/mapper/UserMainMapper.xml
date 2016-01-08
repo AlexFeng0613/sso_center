@@ -14,7 +14,7 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, userName, password, salt, phone, type, status, invitateCode, email
+    id, userName, password, salt, phone, type, status, invitateCode, email,organizationCode,studentNum,teacherNum,starBeldId,userId,gender,realName
   </sql>
 
   <!--
@@ -193,6 +193,16 @@
       </if>
     </set>
     where email = #{email}
+  </update>
+
+  <update id="updateEmailWithId">
+    UPDATE tbusermain
+    <set>
+      <if test="email != null">
+        email = #{email}
+      </if>
+    </set>
+    where id = #{id}
   </update>
 
   <!--

@@ -122,4 +122,11 @@ public class PageController {
     public String passion(){
         return "/yun/passion";
     }
+
+    @RequestMapping("/sso/bindEmailSucc")
+    public String bindEmailSucc(String email,Model model){
+        model.addAttribute("email",email);
+        model.addAttribute("targetWebsite","http://mail."+email.substring(email.lastIndexOf("@")+1));
+        return "/page/bindEmailSucc";
+    }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="../../public/yun">
     <head></head>
@@ -7,23 +8,26 @@
         <div id="content1" layout:fragment="content">
            <div class="message">
                <div class="message_l">云账号：</div>
-               <div class="message_r">000</div>
+               <!--<div class="message_r" th:text="${session.user.starBeldId}"></div>-->
            </div>
            <div class="message">
                <div class="message_l">用户名：</div>
-               <div class="message_r">刘老师</div>
+               <div class="message_r" th:text="${session.user.userName}"></div>
            </div>
            <div class="message">
                <div class="message_l">绑定邮箱：</div>
-               <a href="#" class="bound"> 未绑定</a>
+               <a th:if="${session.user.email} == null" href="/sso/bindEmail.html" class="bound">未绑定</a>
+               <span th:if="${session.user.email} != null" th:text="${session.user.email}"></span>
            </div>
            <div class="message">
                <div class="message_l">绑定手机： </div>
-               <a href="#" class="bound"> 未绑定</a>
+               <a th:if="${session.user.phone} == null" href="/sso/bindPhone.html" class="bound">未绑定</a>
+               <span th:if="${session.user.phone} != null" th:text="${session.user.phone}"></span>
            </div>
            <div class="message">
                <div class="message_l">绑定邀请码：</div>
-               <a href="#" class="bound"> 未绑定</a>
+               <a th:if="${session.user.invitateCode} == null" href="/sso/bindInviteCode.html" class="bound">未绑定</a>
+               <span th:if="${session.user.invitateCode} != null" th:text="${session.user.invitateCode}"></span>
            </div>
            <div class="message">
                <div class="message_l">头像：</div>
@@ -34,7 +38,7 @@
            </div>
            <div class="message">
                <div class="message_l">真实姓名：</div>
-               <input type="text" id="user_name"/>
+               <span th:text="${session.user.realName}"></span>
            </div>
            <div class="message">
                <div class="message_l">性别：</div>

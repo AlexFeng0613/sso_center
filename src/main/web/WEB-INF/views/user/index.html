@@ -16,8 +16,8 @@
                 <div class="label-info">华师智慧教育云平台</div>
                 <a href="login.html" class="exit">退出</a>
                 <div class="people">
-                    <img th:if="${session.user.gender==0}" src="../../../static/images/yun/people.png"/>
-                    <img th:if="${session.user.gender==1}" src="../../../static/images/yun/boy.jpg"/>
+                    <img th:if="${session.user.gender == 0}" src="../../../static/images/yun/people.png"/>
+                    <img th:if="${session.user.gender == 1}" src="../../../static/images/yun/boy.jpg"/>
                     <span th:text="${session.user.realName}"></span>
                 </div>
             </div>
@@ -25,26 +25,8 @@
         <div class="container">
             <div class="register_nav">
                 <nav>
-                    <a href="#">
-                        <img src="../../../static/images/yun/jclass.png"/>
-                    </a>
-                    <a href="#">
-                        <img src="../../../static/images/yun/hsbb.png"/>
-                    </a>
-                    <a href="#">
-                        <img src="../../../static/images/yun/mooc.png"/>
-                    </a>
-                    <a href="../yun/message.html">
-                        <img src="../../../static/images/yun/personal_settings.png"/>
-                    </a>
-                    <a href="#" style="width:574px;">
-                        <img src="../../../static/images/yun/r5.png"/>
-                    </a>
-                    <a href="#">
-                        <img src="../../../static/images/yun/helper_center.png"/>
-                    </a>
-                    <a href="#">
-                        <img src="../../../static/images/yun/know_hsjc.png"/>
+                    <a th:each="ico : ${icons}" th:href="@{${ico.accessURL}}">
+                        <img  th:src="@{${ico.icoPath}}"/>
                     </a>
                 </nav>
             </div>

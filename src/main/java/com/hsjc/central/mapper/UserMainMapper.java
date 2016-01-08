@@ -22,6 +22,8 @@ public interface UserMainMapper {
 
     int updatePasswordByEmail(String email);
 
+    int updateEmailWithId(UserMain userMain);
+
     UserMain selectByPrimaryKey(Integer id);
 
     UserMain findByEmailOrPhoneOrUserName(UserMain userMain);

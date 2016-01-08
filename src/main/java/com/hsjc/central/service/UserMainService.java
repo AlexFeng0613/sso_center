@@ -134,19 +134,8 @@ public class UserMainService {
         if(res > 0){
             //调用Email发送接口发送Email
             try {
-                ActivateEmailMess activateEmailMess = new ActivateEmailMess();
-                activateEmailMess.setEmail(apiBaseService.getDesUtil().encrypt(email));
-                activateEmailMess.setTicket(MD5Util.encode(Calendar.getInstance().getTime().toString()));
-
-                apiBaseService.insertIntoRedis(email,activateEmailMess,ActivateEmailMess.class);
-
-                String activateURL = "http://localhost:8080/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
-                    activateEmailMess.getTicket();
-
-                String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%",email,activateURL,activateURL);
-                MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
+                resultJson = sendEmail(email,apiBaseService,"0");
             } catch (Exception e) {
-                e.printStackTrace();
                 resultJson.put("message", Constant.SEND_MAIL_FAIL);
                 return resultJson;
             }
@@ -310,8 +299,7 @@ public class UserMainService {
      * @return
      */
     public JSONObject validateResetPasswordEmailCode(JSONObject paramJson){
-        JSONObject resultJson = new JSONObject();
-        resultJson.put("success", true);
+        JSONObject resultJson = getResultJson();
 
         String code = paramJson.getString("code");
         String email = paramJson.getString("email");
@@ -334,8 +322,7 @@ public class UserMainService {
      * @return
      */
     public JSONObject resetPasswordWithEmail(JSONObject paramJson){
-        JSONObject resultJson = new JSONObject();
-        resultJson.put("success",true);
+        JSONObject resultJson = getResultJson();
 
         String email = paramJson.getString("email");
         String password = paramJson.getString("password");
@@ -351,4 +338,89 @@ public class UserMainService {
         return resultJson;
     }
 
+    /**
+     * @author : zga
+     * @date : 2016-01-08
+     *
+     * SSO后台个人中心>>绑定邮箱,发送激活Email
+     *
+     * @param paramJson
+     * @return
+     */
+    public JSONObject updateEmail(JSONObject paramJson){
+        JSONObject resultJson = new JSONObject();
+
+        String email = paramJson.getString("email");
+
+        try {
+            resultJson = sendEmail(email,apiBaseService,"1");
+            resultJson.put("message",Constant.SEND_MAIL_SUCCESS);
+        } catch (Exception e) {
+            resultJson.put("success",false);
+            resultJson.put("message",Constant.SEND_MAIL_FAIL);
+        }
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-08
+     *
+     * SSO后台个人中心>>绑定邮箱,激活用户Email
+     *
+     * @param paramJson
+     * @return
+     */
+    public int updateUserMainEmail(UserMain userMain){
+        return userMainMapper.updateEmailWithId(userMain);
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-08
+     *
+     * 发送Email
+     *
+     * @param email
+     * @param apiBaseService
+     * @return
+     * @throws Exception
+     */
+    public static JSONObject sendEmail(String email, ApiBaseService apiBaseService,String type) throws Exception {
+        JSONObject resultJson = getResultJson();
+
+        ActivateEmailMess activateEmailMess = new ActivateEmailMess();
+        activateEmailMess.setEmail(apiBaseService.getDesUtil().encrypt(email));
+        activateEmailMess.setTicket(MD5Util.encode(Calendar.getInstance().getTime().toString()));
+
+        apiBaseService.insertIntoRedis(email,activateEmailMess,ActivateEmailMess.class);
+
+        String activateURL = null;
+        if("0".equals(type)){
+            activateURL = "http://localhost:8080/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
+                    activateEmailMess.getTicket();
+        } else {
+            activateURL = "http://localhost:8080/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
+                    activateEmailMess.getTicket()+"&type="+type;
+        }
+
+        String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%",email,activateURL,activateURL);
+        MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
+
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-08
+     *
+     * 返回JsonObject
+     *
+     * @return
+     */
+    public static JSONObject getResultJson() {
+        JSONObject resultJson = new JSONObject();
+        resultJson.put("success",true);
+        return resultJson;
+    }
 }
