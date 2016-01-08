@@ -5,10 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link th:href="@{/static/css/sso.css}" href="../../../static/css/sso.css" rel="stylesheet" type="text/css"/>
         <link th:href="@{/static/css/bootstrap.css}" href="../../../static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/static/css/validform.css}" href="../../../static/css/validform.css" rel="stylesheet" type="text/css"/>
         <script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../../../static/scripts/jquery/jquery-1.11.3.min.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../../static/scripts/ie/html5shiv.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/sso.js}" src="../../../static/scripts/sso.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/validform/Validform_v5.3.2_min.js}" src="../../../static/scripts/validform/Validform_v5.3.2_min.js"></script>
     </head>
     <body>
         <header class="header">
@@ -21,9 +23,9 @@
             <div class="center">
                 <div class="register_box">
                     <div class="title">请登录</div>
-                    <form action="/user/login.html" methed="post">
-                        <input type="text" name="username" class="register_input text" />
-                        <input type="password" name="password" class="register_input password2" />
+                    <form class="regForm" action="/user/login.html" methed="post" >
+                        <input type="text" name="username" class="register_input text inputxt"/>
+                        <input type="password" name="password" class="register_input password2 inputxt"/>
                         <ul class="remember">
                             <li class="left">
                                 <input type="checkbox" />
@@ -110,6 +112,28 @@
         </footer>
         <script text="text/javascript">
             $(function(){
+                var demo = $(".regForm").Validform({
+                    tiptype: 3,
+                    label: ".label",
+                    showAllError: true,
+                    datatype: {
+                        "s6-18": /^[\w\.\s]{6,18}$/,
+                        "e": /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+                    },
+                    showAllError: true,
+
+
+                    });
+                demo.tipmsg.w["s6-18"] = "请输入6到18位英文和数字";
+                demo.addRule([{
+                    ele:".inputxt:eq(0)",
+                    datatype:"s6-18"
+                },{
+                    ele:".inputxt:eq(1)",
+                    datatype:"e"
+                }]);
+
+
                 var ch= $(window).height()-($('.header').height())-($('.footer').outerHeight())-($('.banner').height());
                  $('.container').css('min-height',ch+'px');
 
