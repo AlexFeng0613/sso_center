@@ -113,12 +113,12 @@ public class PageController {
         return "/authorizeFailed";
     }
 
-    @RequestMapping("mailbox")
+    @RequestMapping("sso/mailbox")
     public String mailBox(){
         return "/yun/mailbox";
     }
 
-    @RequestMapping("passion")
+    @RequestMapping("sso/passion")
     public String passion(){
         return "/yun/passion";
     }
