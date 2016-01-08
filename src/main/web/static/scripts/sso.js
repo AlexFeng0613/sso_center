@@ -18,14 +18,6 @@ $(function(){
         $('.datum_l').css('min-height',cr+'px');
     });
 
-    $('.register_input').focus(function(){
-        $(this).addClass('fillout');
-    });
-
-    $('.register_input').blur(function(){
-        $(this).removeClass('fillout');
-    });
-
     $('.remember li').click(function(){
         $(this).toggleClass('checked');
     });

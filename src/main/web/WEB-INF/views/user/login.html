@@ -6,10 +6,14 @@
         <link th:href="@{/static/css/sso.css}" href="../../../static/css/sso.css" rel="stylesheet" type="text/css"/>
         <link th:href="@{/static/css/bootstrap.css}" href="../../../static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link th:href="@{/static/css/validform.css}" href="../../../static/css/validform.css" rel="stylesheet" type="text/css"/>
+        <style>
+            .Validform_checktip{
+                margin-left:20px;
+            }
+        </style>
         <script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../../../static/scripts/jquery/jquery-1.11.3.min.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../../static/scripts/ie/html5shiv.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
-        <script text="text/javascript" th:src="@{/static/scripts/sso.js}" src="../../../static/scripts/sso.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/validform/Validform_v5.3.2_min.js}" src="../../../static/scripts/validform/Validform_v5.3.2_min.js"></script>
     </head>
     <body>
@@ -112,13 +116,22 @@
         </footer>
         <script text="text/javascript">
             $(function(){
+
+                $('.register_input').focus(function(){
+                    $(this).addClass('fillout');
+                });
+
+                $('.register_input').blur(function(){
+                    $(this).removeClass('fillout');
+                });
+
                 var demo = $(".regForm").Validform({
                     tiptype: 3,
                     label: ".label",
                     showAllError: true,
                     datatype: {
                         "s6-18": /^[\w\.\s]{6,18}$/,
-                        "e": /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+
                     },
                     showAllError: true,
 
@@ -130,17 +143,21 @@
                     datatype:"s6-18"
                 },{
                     ele:".inputxt:eq(1)",
-                    datatype:"e"
+                    datatype:"*",
                 }]);
 
 
-                var ch= $(window).height()-($('.header').height())-($('.footer').outerHeight())-($('.banner').height());
-                 $('.container').css('min-height',ch+'px');
+                var ch= ($(window).height())-($('.header').height())-($('.footer').outerHeight())-($('.banner').height());
+
+                $('.container').css('min-height',ch+'px');
 
                 $(window).on('resize scroll',function(){
                     var ch= $(window).height()-($('.header').height())-($('.footer').outerHeight())-($('.banner').height());
-                    $('.container').css('min-height',ch+'px');
+                     $('.container').css('min-height',ch+'px');
                 });
+
+                var bh=($(window).width()-1200)/2;
+                $('.register_box').css('right',bh+'px');
 
             });
         </script>
