@@ -23,7 +23,7 @@ public class UserTemp {
 
     private String status;
 
-    private String invitateCode;
+    private String inviteCode;
 
     private String email;
 
@@ -36,6 +36,8 @@ public class UserTemp {
     private String gender;
 
     private String realName;
+
+    private String userIcon;
 
     public Integer getId() {
         return id;
@@ -93,12 +95,12 @@ public class UserTemp {
         this.status = status;
     }
 
-    public String getInvitateCode() {
-        return invitateCode;
+    public String getInviteCode() {
+        return inviteCode;
     }
 
-    public void setInvitateCode(String invitateCode) {
-        this.invitateCode = invitateCode;
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
     }
 
     public String getEmail() {
@@ -151,5 +153,13 @@ public class UserTemp {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public String getUserIcon() {
+        return userIcon;
+    }
+
+    public void setUserIcon(String userIcon) {
+        this.userIcon = userIcon;
     }
 }

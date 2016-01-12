@@ -120,6 +120,24 @@
     where inviteId = #{inviteId}
   </update>
 
+  <!--
+    @author : zga
+    @date : 2016-01-12
+    更新使用用户和使用时间
+  -->
+  <update id="updateUseTimeAndByUserId">
+    update tbschoolinvite
+    <set>
+      <if test="byUserId != null">
+        byUserId = #{byUserId},
+      </if>
+      <if test="useTime != null">
+        useTime = #{useTime}
+      </if>
+    </set>
+    where inviteCode = #{inviteCode}
+  </update>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />

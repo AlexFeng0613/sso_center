@@ -10,6 +10,7 @@ import java.util.Date;
  * 用户实体
  */
 public class UserMain implements Serializable{
+
     private Integer id;
 
     private String userName;
@@ -24,7 +25,7 @@ public class UserMain implements Serializable{
 
     private String status;
 
-    private String invitateCode;
+    private String inviteCode;
 
     private String email;
 
@@ -37,6 +38,8 @@ public class UserMain implements Serializable{
     private String gender;
 
     private String realName;
+
+    private String userIcon;
 
     public Integer getId() {
         return id;
@@ -94,12 +97,12 @@ public class UserMain implements Serializable{
         this.status = status;
     }
 
-    public String getInvitateCode() {
-        return invitateCode;
+    public String getInviteCode() {
+        return inviteCode;
     }
 
-    public void setInvitateCode(String invitateCode) {
-        this.invitateCode = invitateCode;
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
     }
 
     public String getEmail() {
@@ -152,5 +155,13 @@ public class UserMain implements Serializable{
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public String getUserIcon() {
+        return userIcon;
+    }
+
+    public void setUserIcon(String userIcon) {
+        this.userIcon = userIcon;
     }
 }

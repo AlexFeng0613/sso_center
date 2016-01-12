@@ -9,12 +9,16 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="type" jdbcType="CHAR" property="type" />
     <result column="status" jdbcType="CHAR" property="status" />
-    <result column="invitateCode" jdbcType="VARCHAR" property="invitateCode" />
+    <result column="inviteCode" jdbcType="VARCHAR" property="inviteCode" />
     <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="organizationCode" jdbcType="VARCHAR" property="organizationCode"/>
+    <result column="gender" jdbcType="VARCHAR" property="gender"/>
+    <result column="realName" jdbcType="VARCHAR" property="realName"/>
+    <result column="userIcon" jdbcType="VARCHAR" property="userIcon"/>
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, userName, password, salt, phone, type, status, invitateCode, email,organizationCode,studentNum,teacherNum,starBeldId,userId,gender,realName
+    id, userName, password, salt, phone, type, status, inviteCode, email,organizationCode,studentNum,teacherNum,starBeldId,userId,gender,realName,userIcon
   </sql>
 
   <!--
@@ -30,7 +34,7 @@
     phone,
     type,
     status,
-    invitateCode,
+    inviteCode,
     email,
     organizationCode)
     values (
@@ -40,7 +44,7 @@
     #{phone},
     #{type},
     #{status},
-    #{invitateCode},
+    #{inviteCode},
     #{email},
     #{organizationCode}
     )
@@ -75,8 +79,8 @@
       <if test="status != null">
         status,
       </if>
-      <if test="invitateCode != null">
-        invitateCode,
+      <if test="inviteCode != null">
+        inviteCode,
       </if>
       <if test="email != null">
         email,
@@ -104,8 +108,8 @@
       <if test="status != null">
         #{status},
       </if>
-      <if test="invitateCode != null">
-        #{invitateCode},
+      <if test="inviteCode != null">
+        #{inviteCode},
       </if>
       <if test="email != null">
         #{email},
@@ -149,8 +153,8 @@
       <if test="status != null">
         status = #{status},
       </if>
-      <if test="invitateCode != null">
-        invitateCode = #{invitateCode},
+      <if test="inviteCode != null">
+        inviteCode = #{inviteCode},
       </if>
       <if test="email != null">
         email = #{email},
@@ -172,7 +176,7 @@
       phone = #{phone},
       type = #{type},
       status = #{status},
-      invitateCode = #{invitateCode},
+      inviteCode = #{inviteCode},
       email = #{email}
     where id = #{id}
   </update>
@@ -195,6 +199,11 @@
     where email = #{email}
   </update>
 
+  <!--
+    @author : zga
+    @date : 2016-01-12
+    更新用户Email
+  -->
   <update id="updateEmailWithId">
     UPDATE tbusermain
     <set>
@@ -205,6 +214,77 @@
     where id = #{id}
   </update>
 
+  <!--
+    @author : zga
+    @date : 2016-01-12
+    更新用户密码
+  -->
+  <update id="updatePasswordWithId">
+    UPDATE tbusermain
+    <set>
+      <if test="password != null">
+        password = #{password},
+      </if>
+      <if test="salt != null">
+        salt = #{salt}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
+  <!--
+    @author : zga
+    @date : 2016-01-12
+    更新邀请码和组织机构码
+  -->
+  <update id="updateInviteCodeAndOrgCode">
+    update tbusermain
+    <set>
+      <if test="inviteCode != null">
+        inviteCode = #{inviteCode},
+      </if>
+      <if test="organizationCode != null">
+        organizationCode = #{organizationCode}
+      </if>
+    </set>
+    WHERE userName = #{userName}
+  </update>
+
+  <!--
+    @author : zga
+    @date : 2016-01-12
+    绑定手机
+  -->
+  <update id="updatePhoneWithUserName">
+    UPDATE tbusermain
+    <set>
+      <if test="phone != null">
+        phone = #{phone}
+      </if>
+    </set>
+    WHERE userName = #{userName}
+  </update>
+
+  <!--
+    @author : zga
+    @date : 2016-01-12
+    修改个人信息
+  -->
+  <update id="updatePersonalInfoWithUserName">
+    UPDATE tbusermain
+    <set>
+      <if test="realName != null">
+        realName = #{realName},
+      </if>
+      <if test="gender != null">
+        gender = #{gender},
+      </if>
+      <if test="userIcon != null">
+        userIcon = #{userIcon}
+      </if>
+    </set>
+    WHERE userName = #{userName}
+  </update>
   <!--
     @author : zga
     @date : 2015-12-04

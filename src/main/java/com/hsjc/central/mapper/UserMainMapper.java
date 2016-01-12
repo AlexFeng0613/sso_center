@@ -24,6 +24,14 @@ public interface UserMainMapper {
 
     int updateEmailWithId(UserMain userMain);
 
+    int updatePasswordWithId(UserMain userMain);
+
+    int updateInviteCodeAndOrgCode(UserMain userMain);
+
+    int updatePhoneWithUserName(UserMain userMain);
+
+    int updatePersonalInfoWithUserName(UserMain userMain);
+
     UserMain selectByPrimaryKey(Integer id);
 
     UserMain findByEmailOrPhoneOrUserName(UserMain userMain);

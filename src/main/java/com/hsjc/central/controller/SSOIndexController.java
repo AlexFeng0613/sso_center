@@ -1,13 +1,13 @@
 package com.hsjc.central.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hsjc.central.domain.UserMain;
+import com.hsjc.central.fileUpload.FileUpload;
 import com.hsjc.central.service.UserMainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author : zga
@@ -104,4 +104,86 @@ public class SSOIndexController extends BaseController{
         JSONObject resultJson = userMainService.updateEmail(paramJson);
         return resultJson;
     }
+
+    /**
+     * @author : zga
+     * @date : 2016-1-10
+     *
+     * SSO后台个人中心>>修改密码
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "modifyPassword",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject modifyPassword(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = userMainService.modifyPassword(paramJson);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * SSO后台个人中心>>绑定邀请码
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "bindInviteCode",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject bindInviteCode(@RequestBody JSONObject paramJson) {
+        JSONObject resultJson = userMainService.bindInviteCode(paramJson);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * SSO后台个人中心>>绑定手机
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "bindPhone",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject bindPhone(@RequestBody JSONObject paramJson) {
+        JSONObject resultJson = userMainService.bindPhone(paramJson);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * SSO后台个人中心>>修改个人资料
+     *
+     * @param realName
+     * @param gender
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "modifyPersonalInfo",method = RequestMethod.POST)
+    public String modifyPersonalInfo(@RequestParam("realName")String realName,
+                                     @RequestParam("gender")String gender,
+                                     @RequestParam("imgFile") MultipartFile file){
+
+        String absoluteFilePath = FileUpload.upload(file);
+        UserMain userMain = getCurrentUser();
+        if(userMain == null){
+            return "redirect:/user/login.html";
+        }
+
+        userMain.setRealName(realName);
+        userMain.setGender(gender);
+        userMain.setUserIcon(absoluteFilePath);
+
+        boolean flag = userMainService.modifyPersonalInfo(userMain);
+        if(flag){
+            return "redirect:/sso/personalSettings.html";
+        }
+        return null;
+    }
+
 }

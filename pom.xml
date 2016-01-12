@@ -57,6 +57,8 @@
         <commons-lang>2.6</commons-lang>
 
         <pagehelper.version>4.0.1</pagehelper.version>
+
+        <fastdfs-version>1.19RELEASE</fastdfs-version>
     </properties>
 
     <dependencies>
@@ -318,6 +320,13 @@
             <artifactId>commons-fileupload</artifactId>
             <version>${commons-fileupload.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>upload.fastdfs_client</groupId>
+            <artifactId>fastdfs_client</artifactId>
+            <version>${fastdfs-version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
@@ -344,6 +353,11 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>${commons-lang}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
         </dependency>
     </dependencies>
 

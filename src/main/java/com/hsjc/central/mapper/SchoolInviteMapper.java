@@ -21,6 +21,8 @@ public interface SchoolInviteMapper {
 
     int updateByPrimaryKey(SchoolInvite schoolInvite);
 
+    int updateUseTimeAndByUserId(SchoolInvite schoolInvite);
+
     SchoolInvite selectByPrimaryKey(Long inviteid);
 
     SchoolInvite selectByInviteCode(JSONObject paramJson);

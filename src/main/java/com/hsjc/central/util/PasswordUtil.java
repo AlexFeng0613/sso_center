@@ -52,6 +52,27 @@ public class PasswordUtil {
         userMain.setPassword(newPassword);
     }
 
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * 校验密码
+     *
+     * @param userNameAndSalt(用户名和salt)
+     * @param validPassword(要校验的密码)
+     * @param password(数据库存储密码)
+     * @return
+     */
+    public boolean validPassword(String userNameAndSalt,String validPassword,String password){
+        String entryValidPassword = new SimpleHash(algorithmName, validPassword, ByteSource.Util.bytes(userNameAndSalt), hashIterations).toHex();
+
+        if(!password.equals(entryValidPassword)){
+            return false;
+        }
+
+        return true;
+    }
+
     public void test(){
         String salt = randomNumberGenerator.nextBytes().toHex();
         String newPassword = new SimpleHash(algorithmName, "123456", ByteSource.Util.bytes("admin"+salt), hashIterations).toHex();

@@ -26,53 +26,68 @@
            </div>
            <div class="message">
                <div class="message_l">绑定邀请码：</div>
-               <a th:if="${session.user.invitateCode} == null" href="/sso/bindInviteCode.html" class="bound">未绑定</a>
-               <span th:if="${session.user.invitateCode} != null" th:text="${session.user.invitateCode}"></span>
+               <a th:if="${session.user.inviteCode} == null" href="/sso/bindInviteCode.html" class="bound">未绑定</a>
+               <span th:if="${session.user.inviteCode} != null" th:text="${session.user.inviteCode}"></span>
            </div>
-           <div class="message">
-               <div class="message_l">头像：</div>
-               <div class="head_img">
-                   <input type="file" class="head_file"/>
+           <form action="" method="post" enctype="multipart/form-data">
+               <div class="message">
+                   <div class="message_l">头像：</div>
+                   <div class="head_img">
+                       <img th:src="@{${session.user.userIcon}}" th:if="${session.user.userIcon} != null"  class="viewInfo"/>
+                       <input type="file" name="imgFile" class="head_file modifyInfo"/>
+                   </div>
+                   <div class="head_img_strong">(支持Jpg、Png或bmp格式的图片，建议文件小于20M)</div>
                </div>
-               <div class="head_img_strong">(支持Jpg、Png或bmp格式的图片，建议文件小于20M)</div>
-           </div>
-           <div class="message">
-               <div class="message_l">真实姓名：</div>
-               <span th:text="${session.user.realName}"></span>
-           </div>
-           <div class="message">
-               <div class="message_l">性别：</div>
-               <ul class="sex">
-                   <li class="selected">
-                       <input type="radio" name="sex"/>
-                       男
-                   </li>
-                   <li>
-                       <input type="radio" name="sex"/>
-                       女
-                   </li>
-               </ul>
-           </div>
-           <div class="message">
-               <div class="message_l">证件号码：</div>
-               <select>
-                   <option>证件类型</option>
-               </select>
-               <input type="text" class="papers" />
-           </div>
-           <div class="message">
-               <div class="message_l">个人介绍：</div>
-               <div style="width:384px;">
-                   <textarea class="peo_text"></textarea>
-                   <input type="submit" class="message_submit" value="保存"/>
+               <div class="message">
+                   <div class="message_l">真实姓名：</div>
+                   <span th:text="${session.user.realName}" class="viewInfo"></span>
+                   <input type="text" name="realName" th:value="${session.user.realName}" class="modifyInfo" style="display: none;"/>
                </div>
-           </div>
-       </div>
-       <script type="text/javascript">
-            $(function(){
-                $('#basic_message').addClass('selected');
-                $('#basic_message').children('#mailbox a').addClass('selected');
-            });
-       </script>
+               <div class="message">
+                   <div class="message_l">性别：</div>
+                   <span th:if="${session.user.gender} == 0" class="viewInfo">女</span>
+                   <span th:if="${session.user.gender} == 1" class="viewInfo">男</span>
+                   <ul class="sex modifyInfo" style="display: none;">
+                       <li class="selected">
+                           <input type="radio" name="gender" th:if="${session.user.gender} == 0" checked="checked"/>
+                           男
+                       </li>
+                       <li>
+                           <input type="radio" name="gender" th:if="${session.user.gender} == 1" checked="checked"/>
+                           女
+                       </li>
+                   </ul>
+               </div>
+               <!--<div class="message">
+                   <div class="message_l">证件号码：</div>
+                   <select>
+                       <option>证件类型</option>
+                   </select>
+                   <input type="text" class="papers" />
+               </div>-->
+               <div class="message">
+                   <!--<div class="message_l">个人介绍：</div>-->
+                   <div style="width:384px;">
+                       <!--<textarea class="peo_text"></textarea>-->
+                       <input type="button" value="修改" name="modifyInfo" class="message_submit"/>
+                       <input type="submit" class="message_submit" value="保存"/>
+                   </div>
+               </div>
+           </form>
+           <script type="text/javascript">
+                $(function(){
+                    $('#basic_message').addClass('selected');
+                    $('#basic_message').children('#mailbox a').addClass('selected');
+
+                    /**
+                     * 修改信息
+                     */
+                    $('input[name="modifyInfo"]').click(function(){
+                        $('.viewInfo').css('display','none');
+                        $('.modifyInfo').css('display','block');
+                    });
+                });
+           </script>
+        </div>
     </body>
 </html>

@@ -219,7 +219,7 @@ public class UserController extends BaseController{
      * @author : zga
      * @date : 2015-12-16
      *
-     * 忘记密码>发送验证码
+     * 忘记密码>发送Email验证码
      *
      * @param paramJson
      * @return
@@ -250,7 +250,7 @@ public class UserController extends BaseController{
      * @author : zga
      * @date : 2015-12-16
      *
-     * 忘记密码>重置密码
+     * 忘记密码>Email重置密码
      *
      * @param paramJson
      * @return
@@ -259,6 +259,38 @@ public class UserController extends BaseController{
     @ResponseBody
     public JSONObject resetPasswordWithEmail(@RequestBody JSONObject paramJson){
         return userMainService.resetPasswordWithEmail(paramJson);
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * 忘记密码>>发送SMS验证码
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "sendSmsCodeWithPhone",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject sendSmsCodeWithPhone(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = new JSONObject();
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * 忘记密码>>验证Sms验证码
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "validateResetPasswordSmsCode",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject validateResetPasswordSmsCode(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = new JSONObject();
+        return resultJson;
     }
 
     /**

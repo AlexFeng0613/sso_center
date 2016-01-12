@@ -123,10 +123,37 @@ public class PageController {
         return "/yun/passion";
     }
 
-    @RequestMapping("/sso/bindEmailSucc")
+    @RequestMapping("sso/bindEmailSucc")
     public String bindEmailSucc(String email,Model model){
         model.addAttribute("email",email);
         model.addAttribute("targetWebsite","http://mail."+email.substring(email.lastIndexOf("@")+1));
         return "/page/bindEmailSucc";
     }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * SSO个人中心>>修改密码成功
+     *
+     * @return
+     */
+    @RequestMapping("sso/modifyPasswordSucc")
+    public String modifyPasswordSucc(){
+        return "/page/modifyPasswordSucc";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * SSO个人中心>>绑定邀请码成功
+     *
+     * @return
+     */
+    @RequestMapping("sso/bindInviteCodeSucc")
+    public String bindInviteCodeSucc(){
+        return "/page/bindInviteCodeSucc";
+    }
+
 }

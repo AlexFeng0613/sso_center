@@ -10,6 +10,9 @@ import com.hsjc.central.util.MailUtil;
 import com.hsjc.central.util.PasswordUtil;
 import com.hsjc.central.util.SSOStringUtil;
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -206,7 +209,7 @@ public class UserMainService {
                 userMain.setPhone(userTemp1.getPhone());
                 userMain.setType(userTemp1.getType());
                 userMain.setStatus(userTemp1.getStatus());
-                userMain.setInvitateCode(userTemp1.getInvitateCode());
+                userMain.setInviteCode(userTemp1.getInviteCode());
                 userMain.setEmail(userTemp1.getEmail());
                 userMain.setOrganizationCode(userTemp1.getOrganizationCode());
 
@@ -267,7 +270,7 @@ public class UserMainService {
      * @author : zga
      * @date : 2015-12-16
      *
-     * 忘记密码>发送验证码
+     * 忘记密码>发送Email验证码
      *
      * @param paramJson
      */
@@ -377,6 +380,160 @@ public class UserMainService {
 
     /**
      * @author : zga
+     * @date : 2016-01-12
+     *
+     * SSO后台个人中心>>修改密码
+     *
+     * @param paramJson
+     * @return
+     */
+    public JSONObject modifyPassword(JSONObject paramJson){
+        JSONObject resultJson = getResultJson();
+
+        String oldPassword = paramJson.getString("oldPassword");
+        String password = paramJson.getString("password");
+
+        UserMain userMain = getCurrentUser();
+        if(userMain == null){
+            resultJson.put("success",false);
+            resultJson.put("message", Constant.NOT_LOGIN);
+            return resultJson;
+        } else{
+            String userNameSalt = userMain.getCredentialsSalt();
+            boolean flag = passwordUtil.validPassword(userNameSalt,oldPassword,userMain.getPassword());
+            if(!flag){
+                resultJson.put("success",false);
+                resultJson.put("message", Constant.ERROR_PASSWORD);
+                return resultJson;
+            }
+
+            //修改密码
+            userMain.setPassword(password);
+            passwordUtil.encryptPassword(userMain);
+            int num = userMainMapper.updatePasswordWithId(userMain);
+            if(num > 0){
+                resultJson.put("message", Constant.MODIFY_PASSWORD_SUCCESS);
+            } else {
+                resultJson.put("success",false);
+                resultJson.put("message", Constant.MODIFY_PASSWORD_FAILED);
+                return resultJson;
+            }
+        }
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * SSO后台个人中心>>绑定邀请码
+     *
+     * @param paramJson
+     * @return
+     */
+    public JSONObject bindInviteCode(JSONObject paramJson){
+        JSONObject resultJson = getResultJson();
+
+        SchoolInvite schoolInvite = schoolInviteMapper.selectByInviteCode(paramJson);
+        if(schoolInvite == null){
+            resultJson.put("success",false);
+            resultJson.put("message", Constant.ERROR_INVITE_CODE);
+            return resultJson;
+        } else {
+            /**
+            #tbschoolinvite
+            #更新byUserId useTime
+
+            #tbuesrmain
+            #更新invitateCode、organizationCode
+            */
+            UserMain userMain = getCurrentUser();
+            if(userMain == null){
+                resultJson.put("success",false);
+                resultJson.put("message", Constant.NOT_LOGIN);
+                return resultJson;
+            }
+            schoolInvite.setByUserId(Long.parseLong(userMain.getId().toString()));
+            schoolInvite.setUseTime(new Date());
+            int num = schoolInviteMapper.updateUseTimeAndByUserId(schoolInvite);
+            if(num > 0){
+                userMain.setOrganizationCode(schoolInvite.getSchoolId());
+                userMain.setInviteCode(schoolInvite.getInviteCode());
+                int num1 = userMainMapper.updateInviteCodeAndOrgCode(userMain);
+                if(num1 > 0){
+                    resultJson.put("message", Constant.BIND_INVITE_CODE_SUCCESS);
+                }else{
+                    resultJson.put("success",false);
+                    resultJson.put("message", Constant.BIND_INVITE_CODE_FAIL);
+                    return resultJson;
+                }
+            } else {
+                resultJson.put("success",false);
+                resultJson.put("message", Constant.BIND_INVITE_CODE_FAIL);
+                return resultJson;
+            }
+        }
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * SSO后台个人中心>>绑定手机
+     *
+     * @param paramJson
+     * @return
+     */
+    public JSONObject bindPhone(JSONObject paramJson){
+        JSONObject resultJson = getResultJson();
+
+        UserMain userMain = userMainMapper.selectUserByEmailOrPhone(paramJson);
+        if(userMain != null){
+            resultJson.put("success",false);
+            resultJson.put("message", Constant.EXISTS_BIND_PHONE);
+            return resultJson;
+        } else {
+            /**
+             * 校验验证码(有效性、正确性)
+             */
+
+            UserMain currentUser = getCurrentUser();
+            currentUser.setPhone(paramJson.getString("phone"));
+            int num = userMainMapper.updatePhoneWithUserName(currentUser);
+            if(num > 0){
+                resultJson.put("message", Constant.BIND_PHONE_SUCCESS);
+            }else{
+                resultJson.put("success",false);
+                resultJson.put("message", Constant.BIND_PHONE_FAIL);
+                return resultJson;
+            }
+        }
+
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * SSO后台个人中心>>修改个人资料
+     *
+     * @param userMain
+     * @return
+     */
+    public boolean modifyPersonalInfo(UserMain userMain){
+        int num = userMainMapper.updatePersonalInfoWithUserName(userMain);
+        if(num > 0){
+            return true;
+        }
+        return false;
+    }
+
+
+    /*--------------------------下面是页面调用的共用方法--------------------------*/
+    /**
+     * @author : zga
      * @date : 2016-01-08
      *
      * 发送Email
@@ -422,5 +579,24 @@ public class UserMainService {
         JSONObject resultJson = new JSONObject();
         resultJson.put("success",true);
         return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * 获取当前登录者
+     *
+     * @param subject
+     * @return
+     */
+    public UserMain getCurrentUser() {
+        Subject subject = SecurityUtils.getSubject();
+        Session session = subject.getSession(true);
+        Object object = session.getAttribute("user");
+        if(object == null){
+            return null;
+        }
+        return (UserMain)object;
     }
 }
