@@ -55,6 +55,8 @@ public class SSOStringUtil {
 
         String clientSecret = getRandomString(10);
 
-        System.out.println(clientId + "\r\n" + clientSecret);
+        String ssoPassword = getRandomString(10);
+
+        System.out.println(clientId + "\r\n" + clientSecret + "\r\n" + ssoPassword);
     }
 }

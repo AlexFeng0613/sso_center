@@ -9,7 +9,6 @@
         <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../../static/scripts/ie/html5shiv.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/validform/Validform_v5.3.2_min.js}" src="../../../static/scripts/validform/Validform_v5.3.2_min.js"></script>
-        <script text="text/javascript" th:src="@{/static/scripts/validform/passwordStrength-min.js}" src="../../../static/scripts/validform/passwordStrength-min.js"></script>
     </head>
     <body>
         <div id="content" layout:fragment="content">
@@ -18,7 +17,7 @@
                    <div class="long_input_top">
                        <div class="input_font">邀请码</div>
                        <input type="text" class="email" name="inviteCode"/>
-                       <input type="submit" class="email_submit" value="下一步"/>
+                       <input type="button" class="email_submit" value="下一步"/>
                    </div>
                </form>
            </div>
@@ -33,7 +32,7 @@
                     /**
                      * 绑定邀请码
                      */
-                    $('email_submit').click(function(){
+                    $('.email_submit').click(function(){
                         var inviteCode = $('input[name="inviteCode"]').val();
                         var data = {
                             'inviteCode' : inviteCode

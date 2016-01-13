@@ -5,8 +5,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author : zga
@@ -16,14 +16,16 @@ import java.io.IOException;
  *
  */
 public class FileUpload {
-	public static String upload(MultipartFile file){
+	public static String upload(MultipartFile file,String ip){
 		CommonsMultipartFile cf= (CommonsMultipartFile)file;
 		DiskFileItem fi = (DiskFileItem)cf.getFileItem();
 		File fil = fi.getStoreLocation();
-		FileInputStream fis = null;
+		InputStream fis = null;
 		String fileAbsolutePath=null;
 		try {
-			fis = new FileInputStream(fil);
+			//fis = new FileInputStream(fil);
+			fis = file.getInputStream();
+
 			byte[] file_buff = null;
 			if (fis != null) {
 				int len = fis.available();
@@ -32,7 +34,7 @@ public class FileUpload {
 			}
 			String suffix=fi.getName().substring(fi.getName().lastIndexOf(".") + 1, fi.getName().length());
 			FastDFSFile file1 = new FastDFSFile(fil.getName(), file_buff, suffix);
-			fileAbsolutePath = FileManager.upload(file1);
+			fileAbsolutePath = FileManager.upload(file1,ip);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

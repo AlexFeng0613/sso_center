@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.hsjc.central.domain.UserMain;
 import com.hsjc.central.fileUpload.FileUpload;
 import com.hsjc.central.service.UserMainService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -167,17 +168,19 @@ public class SSOIndexController extends BaseController{
     @RequestMapping(value = "modifyPersonalInfo",method = RequestMethod.POST)
     public String modifyPersonalInfo(@RequestParam("realName")String realName,
                                      @RequestParam("gender")String gender,
-                                     @RequestParam("imgFile") MultipartFile file){
+                                     @RequestParam(value = "imgFile",required = false) MultipartFile file){
 
-        String absoluteFilePath = FileUpload.upload(file);
         UserMain userMain = getCurrentUser();
+        if(file != null && StringUtils.isNotEmpty(file.getOriginalFilename())){
+            String absoluteFilePath = FileUpload.upload(file,"192.168.18.210");
+            userMain.setUserIcon(absoluteFilePath);
+        }
         if(userMain == null){
             return "redirect:/user/login.html";
         }
 
         userMain.setRealName(realName);
         userMain.setGender(gender);
-        userMain.setUserIcon(absoluteFilePath);
 
         boolean flag = userMainService.modifyPersonalInfo(userMain);
         if(flag){

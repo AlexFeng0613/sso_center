@@ -31,7 +31,7 @@ public class FileManager extends FileManagerConfig {
 		}
 	}
 
-	public static String upload(FastDFSFile file) {
+	public static String upload(FastDFSFile file,String ip) {
 		NameValuePair[] meta_list = new NameValuePair[3];
 		meta_list[0] = new NameValuePair("width", "120");
 		meta_list[1] = new NameValuePair("heigth", "120");

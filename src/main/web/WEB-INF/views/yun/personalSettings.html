@@ -3,7 +3,24 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="../../public/yun">
-    <head></head>
+    <head>
+        <style type="text/css">
+            .up-img{ width:350px; height:38px; margin-left:auto; margin-right:auto;}
+            .up-img input{vertical-align:middle; margin:0; padding:0;border: 0;}
+            .up-img .file-box{ position:relative;width:340px}
+            .up-img .txt{ height:22px; border:1px solid #cdcdcd; width:180px;}
+            .up-img .btn{ background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;}
+            .up-img .file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:75px }
+
+            .up1-img{ width:150px; height:38px; margin-left:42px; margin-right:auto;}
+            /*.up1-img input{vertical-align:middle; margin:0; padding:0;border: 0;}*/
+            .up1-img .file-box{ position:relative;width:930px}
+            .up1-img .file-box1{ position:relative;width:930px;padding-top:40px}
+            .up1 .results{position: relative;margin: 30px 0 50px 42px;padding:10px 20px 10px 20px;width: 900px;height:200px;background-color: #ffe4b5;}
+            .up1 .results .video-img1{position: relative;width: 250px;float: left;}
+            .up1 .results .ToView-info1{position: relative;width: 600px;margin-left:40px;float: right;}
+        </style>
+    </head>
     <body>
         <div id="content1" layout:fragment="content">
            <div class="message">
@@ -29,12 +46,19 @@
                <a th:if="${session.user.inviteCode} == null" href="/sso/bindInviteCode.html" class="bound">未绑定</a>
                <span th:if="${session.user.inviteCode} != null" th:text="${session.user.inviteCode}"></span>
            </div>
-           <form action="" method="post" enctype="multipart/form-data">
+           <form action="/sso/modifyPersonalInfo.html" method="post" enctype="multipart/form-data">
                <div class="message">
                    <div class="message_l">头像：</div>
-                   <div class="head_img">
-                       <img th:src="@{${session.user.userIcon}}" th:if="${session.user.userIcon} != null"  class="viewInfo"/>
-                       <input type="file" name="imgFile" class="head_file modifyInfo"/>
+                   <div class="up-img">
+                       <img th:src="@{${session.user.userIcon}}" th:if="${session.user.userIcon} != null" width="100px" height="100px"  class="viewInfo"/>
+                       <div class="file-box modifyInfo" style="display: none;">
+                           <!--<input type='text' name='textfield' id='textfield' class='txt'
+                                  readonly="readonly"/>
+                           <input type='button' class='btn' value='浏览...'/>
+                           <input type="file" name="imgFile" class="file modifyInfo" id="imgFile"
+                                  size="28" onchange="document.getElementById('textfield').value=this.value"/>-->
+                           <input type="file" name="imgFile"/>
+                       </div>
                    </div>
                    <div class="head_img_strong">(支持Jpg、Png或bmp格式的图片，建议文件小于20M)</div>
                </div>
@@ -48,13 +72,18 @@
                    <span th:if="${session.user.gender} == 0" class="viewInfo">女</span>
                    <span th:if="${session.user.gender} == 1" class="viewInfo">男</span>
                    <ul class="sex modifyInfo" style="display: none;">
-                       <li class="selected">
-                           <input type="radio" name="gender" th:if="${session.user.gender} == 0" checked="checked"/>
-                           男
+                       <li class="selected" th:if="${session.user.gender} == 1">
+                           <input type="radio" name="gender" value="1" checked="checked"/>男
                        </li>
-                       <li>
-                           <input type="radio" name="gender" th:if="${session.user.gender} == 1" checked="checked"/>
-                           女
+                       <li th:if="${session.user.gender} == 1">
+                           <input type="radio" name="gender" value="0"/>女
+                       </li>
+
+                       <li th:if="${session.user.gender} == 0">
+                           <input type="radio" name="gender" value="1"/>男
+                       </li>
+                       <li class="selected" th:if="${session.user.gender} == 0">
+                           <input type="radio" name="gender" value="0" checked="checked"/>女
                        </li>
                    </ul>
                </div>

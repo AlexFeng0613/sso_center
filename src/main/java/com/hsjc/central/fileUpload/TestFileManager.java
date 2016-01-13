@@ -32,7 +32,7 @@ public class TestFileManager {
 
 		FastDFSFile file = new FastDFSFile("boy", file_buff, "jpg");
 
-		String fileAbsolutePath = FileManager.upload(file);
+		String fileAbsolutePath = FileManager.upload(file,"192.168.18.210");
 		System.out.println(fileAbsolutePath);
 		fis.close();
 	}
