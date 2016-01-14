@@ -4,23 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-       <typeAlias type="com.hsjc.central.domain.ActivateEmailMess" alias="ActivateEmailMess"/>
-       <typeAlias type="com.hsjc.central.domain.EmailActivate" alias="EmailActivate"/>
-       <typeAlias type="com.hsjc.central.domain.EmailResetPwd" alias="EmailResetPwd"/>
-       <typeAlias type="com.hsjc.central.domain.EmailSend" alias="EmailSend"/>
-       <typeAlias type="com.hsjc.central.domain.Organization" alias="Organization"/>
-       <typeAlias type="com.hsjc.central.domain.Restactiontype" alias="Restactiontype"/>
-       <typeAlias type="com.hsjc.central.domain.RestfulLog" alias="RestfulLog"/>
-       <typeAlias type="com.hsjc.central.domain.SchoolInvite" alias="SchoolInvite"/>
-       <typeAlias type="com.hsjc.central.domain.SmsBindPhoneNum" alias="SmsBindPhoneNum"/>
-       <typeAlias type="com.hsjc.central.domain.SmsResetPasswd" alias="SmsResetPasswd"/>
-       <typeAlias type="com.hsjc.central.domain.SmsSend" alias="SmsSend"/>
-       <typeAlias type="com.hsjc.central.domain.SystemLog" alias="SystemLog"/>
-       <typeAlias type="com.hsjc.central.domain.ThirdClients" alias="ThirdClients"/>
-       <typeAlias type="com.hsjc.central.domain.UserMain" alias="UserMain"/>
-       <typeAlias type="com.hsjc.central.domain.UserStudent" alias="UserStudent"/>
-       <typeAlias type="com.hsjc.central.domain.UserTeacher" alias="UserTeacher"/>
-       <typeAlias type="com.hsjc.central.domain.UserTemp" alias="UserTemp"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.ActivateEmailMess" alias="ActivateEmailMess"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.EmailActivate" alias="EmailActivate"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.EmailResetPwd" alias="EmailResetPwd"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.EmailSend" alias="EmailSend"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.Organization" alias="Organization"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.Restactiontype" alias="Restactiontype"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.RestfulLog" alias="RestfulLog"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.SchoolInvite" alias="SchoolInvite"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.SmsBindPhoneNum" alias="SmsBindPhoneNum"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.SmsResetPasswd" alias="SmsResetPasswd"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.SmsSend" alias="SmsSend"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.SystemLog" alias="SystemLog"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.ThirdClients" alias="ThirdClients"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.UserMain" alias="UserMain"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.UserStudent" alias="UserStudent"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.UserTeacher" alias="UserTeacher"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.UserTemp" alias="UserTemp"/>
     </typeAliases>
 
     <!--
@@ -64,21 +64,23 @@
 
 
    <mappers>
-       <mapper resource="com/hsjc/central/mapper/EmailActivateMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/EmailResetPwdMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/EmailSendMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/OrganizationMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/RestactiontypeMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/RestfulLogMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/SchoolInviteMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/SmsBindPhoneNumMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/SmsResetPasswdMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/SmsSendMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/SystemLogMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/ThirdClientsMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/UserMainMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/UserStudentMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/UserTeacherMapper.xml"/>
-       <mapper resource="com/hsjc/central/mapper/UserTempMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/EmailActivateMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/EmailResetPwdMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/EmailSendMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/IndexIcosMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/OrganizationMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/RestactiontypeMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/RestfulLogMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/SchoolInviteMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/SmsBindPhoneNumMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/SmsResetPasswdMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/SmsSendMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/SynMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/SystemLogMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/ThirdClientsMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/UserMainMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/UserStudentMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/UserTeacherMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/UserTempMapper.xml"/>
    </mappers>
 </configuration>

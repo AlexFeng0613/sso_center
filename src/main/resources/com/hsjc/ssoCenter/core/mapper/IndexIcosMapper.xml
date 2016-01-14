@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsjc.ssoCenter.core.mapper.IndexIcosMapper" >
+  <resultMap id="BaseResultMap" type="com.hsjc.ssoCenter.core.domain.IndexIcos" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="icoName" property="iconame" jdbcType="VARCHAR" />
+    <result column="icoPath" property="icopath" jdbcType="VARCHAR" />
+    <result column="accessURL" property="accessurl" jdbcType="VARCHAR" />
+    <result column="icoType" property="icotype" jdbcType="CHAR" />
+    <result column="icoDescription" property="icodescription" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, icoName, icoPath, accessURL, icoType, icoDescription
+  </sql>
+
+  <!--
+   @author : zga
+   @date : 2016-01-07
+   新增
+  -->
+  <insert id="insert" parameterType="com.hsjc.ssoCenter.core.domain.IndexIcos" >
+    insert into tbindexicos (id, icoName, icoPath,
+    accessURL, icoType, icoDescription
+    )
+    values (#{id,jdbcType=INTEGER}, #{iconame,jdbcType=VARCHAR}, #{icopath,jdbcType=VARCHAR},
+    #{accessurl,jdbcType=VARCHAR}, #{icotype,jdbcType=CHAR}, #{icodescription,jdbcType=VARCHAR}
+    )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.hsjc.ssoCenter.core.domain.IndexIcos" >
+    insert into tbindexicos
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="iconame != null" >
+        icoName,
+      </if>
+      <if test="icopath != null" >
+        icoPath,
+      </if>
+      <if test="accessurl != null" >
+        accessURL,
+      </if>
+      <if test="icotype != null" >
+        icoType,
+      </if>
+      <if test="icodescription != null" >
+        icoDescription,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="iconame != null" >
+        #{iconame,jdbcType=VARCHAR},
+      </if>
+      <if test="icopath != null" >
+        #{icopath,jdbcType=VARCHAR},
+      </if>
+      <if test="accessurl != null" >
+        #{accessurl,jdbcType=VARCHAR},
+      </if>
+      <if test="icotype != null" >
+        #{icotype,jdbcType=CHAR},
+      </if>
+      <if test="icodescription != null" >
+        #{icodescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbindexicos
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.ssoCenter.core.domain.IndexIcos" >
+    update tbindexicos
+    <set >
+      <if test="iconame != null" >
+        icoName = #{iconame,jdbcType=VARCHAR},
+      </if>
+      <if test="icopath != null" >
+        icoPath = #{icopath,jdbcType=VARCHAR},
+      </if>
+      <if test="accessurl != null" >
+        accessURL = #{accessurl,jdbcType=VARCHAR},
+      </if>
+      <if test="icotype != null" >
+        icoType = #{icotype,jdbcType=CHAR},
+      </if>
+      <if test="icodescription != null" >
+        icoDescription = #{icodescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.hsjc.ssoCenter.core.domain.IndexIcos" >
+    update tbindexicos
+    set icoName = #{iconame,jdbcType=VARCHAR},
+      icoPath = #{icopath,jdbcType=VARCHAR},
+      accessURL = #{accessurl,jdbcType=VARCHAR},
+      icoType = #{icotype,jdbcType=CHAR},
+      icoDescription = #{icodescription,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tbindexicos
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!--
+   @author : zga
+   @date : 2016-01-07
+   查询所有的图标
+  -->
+  <select id="selectAllIcos" resultType="java.util.HashMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    tbindexicos
+  </select>
+</mapper>
