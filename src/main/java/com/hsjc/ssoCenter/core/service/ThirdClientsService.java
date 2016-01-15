@@ -2,7 +2,7 @@ package com.hsjc.ssoCenter.core.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
-import com.hsjc.ssoCenter.core.annotation.SystemLog;
+import com.hsjc.ssoCenter.core.annotation.SSOSystemLog;
 import com.hsjc.ssoCenter.core.constant.ThirdSynConstant;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.mapper.SynMapper;
@@ -49,7 +49,7 @@ public class ThirdClientsService extends ApiBaseService{
      * @param paramJson
      * @return
      */
-    @SystemLog(actionId = 2,description = "同步所有组织机构",module = "接口同步")
+    @SSOSystemLog(actionId = 2,description = "同步所有组织机构",module = "接口同步")
     public JSONObject getAllOrganization(JSONObject paramJson){
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
 
@@ -97,7 +97,7 @@ public class ThirdClientsService extends ApiBaseService{
      * @param paramJson
      * @return
      */
-    @SystemLog(actionId = 3,description = "同步增量组织机构",module = "接口同步")
+    @SSOSystemLog(actionId = 3,description = "同步增量组织机构",module = "接口同步")
     public JSONObject getDifferentOrganization(JSONObject paramJson){
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
 
@@ -133,7 +133,7 @@ public class ThirdClientsService extends ApiBaseService{
      * @param paramJson
      * @return
      */
-    @SystemLog(actionId = 4,description = "同步所有用户",module = "接口同步")
+    @SSOSystemLog(actionId = 4,description = "同步所有用户",module = "接口同步")
     public JSONObject getAllUser(JSONObject paramJson){
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
 
@@ -182,7 +182,7 @@ public class ThirdClientsService extends ApiBaseService{
      * @param paramJson
      * @return
      */
-    @SystemLog(actionId = 5,description = "同步增量用户",module = "接口同步")
+    @SSOSystemLog(actionId = 5,description = "同步增量用户",module = "接口同步")
     public JSONObject getDifferentUser(JSONObject paramJson){
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
 

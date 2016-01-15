@@ -11,7 +11,7 @@ import java.util.Date;
 public class SystemLog {
     private Long sysLogId;
 
-    private Long userId;
+    private String userId;
 
     private Date loginTime;
 
@@ -29,11 +29,11 @@ public class SystemLog {
         this.sysLogId = sysLogId;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
