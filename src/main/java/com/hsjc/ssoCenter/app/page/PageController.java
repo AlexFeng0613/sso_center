@@ -118,6 +118,46 @@ public class PageController {
         return "/yun/mailbox";
     }
 
+    @RequestMapping("sso/backstage_index")
+    public String backstage_index(){
+        return "/backstage/backstage_index";
+    }
+
+    @RequestMapping("sso/user_list")
+    public String user_list(){
+        return "/backstage/user_list";
+    }
+
+    @RequestMapping("sso/new_user")
+    public String new_user(){
+        return "/backstage/new_user";
+    }
+
+    @RequestMapping("sso/template_to")
+    public String template_to(){
+        return "/backstage/template_to";
+    }
+
+    @RequestMapping("sso/platform_list")
+    public String template_list(){
+        return "/backstage/platform_list";
+    }
+
+    @RequestMapping("sso/platform")
+    public String platform(){
+        return "/backstage/platform";
+    }
+
+    @RequestMapping("sso/service_list")
+    public String service_list(){
+        return "/backstage/service_list";
+    }
+
+    @RequestMapping("sso/new_service")
+    public String new_service(){
+        return "/backstage/new_service";
+    }
+
     @RequestMapping("sso/passion")
     public String passion(){
         return "/yun/passion";

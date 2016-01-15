@@ -1,57 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="../../public/backstage">
     <head>
-        <meta charset="utf-8"/>
+        <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link href="../css/sso_backstage.css" rel="stylesheet" type="text/css">
-        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
-        <script text="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
-        <script text="text/javascript" src="../js/html5shiv.js"></script>
+        <link th:href="@{/static/css/sso_backstage.css}" href="../../../static/css/sso_backstage.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/static/css/bootstrap.css}" href="../../../static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../../../static/scripts/jquery/jquery-1.11.3.min.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../../static/scripts/ie/html5shiv.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
     </head>
     <body>
-        <header></header>
-        <div class="container">
-            <div class="center">
-                <aside class="aside">
-                    <dl class="menu_title">
-                        <dt class="d1">用户管理</dt>
-                        <dd><a href="user_list.html">用户列表</a></dd>
-                        <dd><a href="new_user.html" >新增用户</a></dd>
-                    </dl>
-                    <dl class="menu_title">
-                        <dt class="d2">第三方平台管理</dt>
-                        <dd><a href="platform_list.html">平台列表</a></dd>
-                        <dd>组织机构权限管理</dd>
-                        <dd>组织机构密码管理</dd>
-                    </dl>
-                    <dl class="menu_title">
-                        <dt class="d3">客服管理</dt>
-                        <dd><a href="service_list.html" class="selected">客服员列表</a></dd>
-                        <dd><a href="new_service.html">新增客服</a></dd>
-                        <dd><a href="one_manage.html">一次客服管理</a></dd>
-                        <dd><a href="two_manage.html">二次客服管理</a></dd>
-                    </dl>
-                    <dl class="menu_title">
-                        <dt class="d4">织机构管理</dt>
-                        <dd><a href="tissue_list.html">组织机构列表</a></dd>
-                        <dd><a href="new_tissue.html">新增组织机构</a></dd>
-                        <dd><a href="invitation_manage.html">邀请码管理</a></dd>
-                        <dd><a href="new_invitation.html">新增邀请码</a></dd>
-                    </dl>
-                    <dl class="menu_title">
-                        <dt class="d5">管理员管理</dt>
-                        <dd><a href="admin_list.html">管理员列表</a></dd>
-                        <dd><a href="new_admin.html">新增管理员</a></dd>
-                    </dl>
-                    <dl class="menu_title">
-                        <dt class="d6">站点管理</dt>
-                        <dd><a href="site_basic.html">站点基本设置</a></dd>
-                        <dd><a href="email_port.html">邮件接口设置</a></dd>
-                        <dd><a href="mess_port.html">短信接口设置</a></dd>
-                        <dd><a href="site_log.html">站点日志</a></dd>
-                    </dl>
-                </aside>
-                <section class="section">
+
+
+
+
+            <div id="content" layout:fragment="content">
                     <div class="index_title">客服员列表</div>
                     <div class="tab_search">
                         <div class="Single_Log">确认筛选项：</div>
@@ -282,7 +248,7 @@
                         </tbody>
                     </table>
                     <div class="tab_foot">
-                        <div class="all_select"><input type="checkbox" class="checkAll">全选</div>
+                        <div class="all_select"><input type="checkbox" class="checkAll" />全选</div>
                         <ul class="handle">
                             <li>客服会话记录</li>
                             <li>修改客服状态</li>
@@ -303,24 +269,21 @@
                             </select>
                         </div>
                     </div>
-                </section>
+                    <script type="text/javascript">
+                        $(function(){
+                            $('.checkAll').click(function(){
+                                if(this.checked){
+                                    $(":checkbox").prop("checked",true);
+                                }else{
+                                    $(":checkbox").prop("checked",false);
+                                }
+
+
+                            });
+                        });
+                    </script>
             </div>
-        </div>
-        <footer class="footer">
-
-        </footer>
-        <script type="text/javascript">
-            $(function(){
-                $('.checkAll').click(function(){
-                    if(this.checked){
-                        $(":checkbox").prop("checked",true);
-                    }else{
-                        $(":checkbox").prop("checked",false);
-                    }
 
 
-                });
-            });
-        </script>
     </body>
 </html>
