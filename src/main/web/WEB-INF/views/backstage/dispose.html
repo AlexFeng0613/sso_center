@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html lang="en">
     <head>
-        <meta charset="UTF-8"/>
+        <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link th:href="@{/static/css/sso_backstage.css}" href="../static/css/sso_backstage.css" rel="stylesheet" type="text/css"/>
-        <link th:href="@{/static/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../static/scripts/jquery/jquery-1.11.3.min.js"></script>
-        <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../static/scripts/ie/html5shiv.js"></script>
-        <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../static/scripts/ie/placeholder.js"></script>
+        <link href="../css/sso_backstage.css" rel="stylesheet" type="text/css">
+        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
+        <script text="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+        <script text="text/javascript" src="../js/html5shiv.js"></script>
+
     </head>
     <body>
         <header></header>
@@ -19,7 +17,7 @@
                     <dl class="menu_title">
                         <dt class="d1">用户管理</dt>
                         <dd><a href="user_list.html">用户列表</a></dd>
-                        <dd><a href="new_user.html">新增用户</a></dd>
+                        <dd><a href="new_user.html" >新增用户</a></dd>
                     </dl>
                     <dl class="menu_title">
                         <dt class="d2">第三方平台管理</dt>
@@ -30,9 +28,9 @@
                     <dl class="menu_title">
                         <dt class="d3">客服管理</dt>
                         <dd><a href="service_list.html">客服员列表</a></dd>
-                        <dd>新增客服</dd>
-                        <dd>一次客服管理</dd>
-                        <dd>二次客服管理</dd>
+                        <dd><a href="new_service.html">新增客服</a></dd>
+                        <dd><a href="one_manage.html">一次客服管理</a></dd>
+                        <dd><a href="two_manage.html" class="selected">二次客服管理</a></dd>
                     </dl>
                     <dl class="menu_title">
                         <dt class="d4">织机构管理</dt>
@@ -55,16 +53,34 @@
                     </dl>
                 </aside>
                 <section class="section">
-                    <div id="content1" layout:fragment="content"></div>
+                    <div class="index_title">二次客服管理</div>
+                    <div class="dispose_box">
+                        <div class="examine_box_aside">
+                            <div class="examine_title">处理记录</div>
+                        </div>
+                        <div class="examine_box_details"></div>
+                        <div class="examine_box_aside">
+                            <a href="two_manage.html" class="close_window">关闭</a>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>
         <footer class="footer">
-            <div class="center">
-                <div class="foot-size">客服电话：400-880-5056        客服邮箱：Help@hsjc.com.cn</div>
-                <div class="foot-size">共筑教育云平台 ,创建教育新模式</div>
-                <div class="foot-size">Copyright ©t华师京城网络科技股份有限公司  沪IC备10208270号-3</div>
-            </div>
+
         </footer>
+        <script type="text/javascript">
+            $(function(){
+                $('.checkAll').click(function(){
+                    if(this.checked){
+                        $(":checkbox").prop("checked",true);
+                    }else{
+                        $(":checkbox").prop("checked",false);
+                    }
+
+
+                });
+            });
+        </script>
     </body>
 </html>
