@@ -3,7 +3,7 @@
 <mapper namespace="com.hsjc.ssoCenter.core.mapper.SystemLogMapper" >
   <resultMap id="BaseResultMap" type="com.hsjc.ssoCenter.core.domain.SystemLog" >
     <id column="sysLogId" property="sysLogId" jdbcType="BIGINT" />
-    <result column="userId" property="userId" jdbcType="BIGINT" />
+    <result column="userId" property="userId" jdbcType="VARCHAR" />
     <result column="loginTime" property="loginTime" jdbcType="TIMESTAMP" />
     <result column="loginType" property="loginType" jdbcType="VARCHAR" />
     <result column="loginIp" property="loginIp" jdbcType="VARCHAR" />
@@ -20,7 +20,7 @@
    新增
   -->
   <insert id="insert" parameterType="com.hsjc.ssoCenter.core.domain.SystemLog" >
-    insert into tbsystemlog (sysLogId, userId, loginTime, 
+    insert into tbsystemlog (userId, loginTime,
       loginType, loginIp, createDate
       )
     values (#{sysLogId}, #{userId}, #{loginTime}, 

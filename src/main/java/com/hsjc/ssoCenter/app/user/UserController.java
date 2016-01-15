@@ -2,6 +2,7 @@ package com.hsjc.ssoCenter.app.user;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.app.base.BaseController;
+import com.hsjc.ssoCenter.core.annotation.SSOSystemLog;
 import com.hsjc.ssoCenter.core.domain.ActivateEmailMess;
 import com.hsjc.ssoCenter.core.domain.UserMain;
 import com.hsjc.ssoCenter.core.domain.UserTemp;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -59,8 +61,8 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "login",method = RequestMethod.POST)
-    //@SystemLog(actionId = 1,description = "用户登录",module = "登录")
-    public String login(String username,String password){
+    @SSOSystemLog(actionId = 1,description = "用户登录",module = "登录")
+    public String login(HttpServletRequest request,String username, String password){
         UsernamePasswordToken upToken = new UsernamePasswordToken(username, password, true);
         try{
             SecurityUtils.getSubject().login(upToken);
