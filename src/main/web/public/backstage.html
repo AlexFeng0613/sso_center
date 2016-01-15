@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link th:href="@{/static/css/sso_backstage.css}" href="../static/css/sso_backstage.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/static/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../static/scripts/jquery/jquery-1.11.3.min.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../static/scripts/ie/html5shiv.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../static/scripts/ie/placeholder.js"></script>
+    </head>
+    <body>
+        <header ></header>
+        <div class="container">
+            <div class="center">
+                <aside class="aside">
+                    <dl class="menu_title">
+                        <dt class="d1">用户管理</dt>
+                        <dd><a href="user_list.html">用户列表</a></dd>
+                        <dd><a href="new_user.html">新增用户</a></dd>
+                    </dl>
+                    <dl class="menu_title">
+                        <dt class="d2">第三方平台管理</dt>
+                        <dd><a href="platform_list.html">平台列表</a></dd>
+                        <dd>组织机构权限管理</dd>
+                        <dd>组织机构密码管理</dd>
+                    </dl>
+                    <dl class="menu_title">
+                        <dt class="d3">客服管理</dt>
+                        <dd><a href="service_list.html">客服员列表</a></dd>
+                        <dd>新增客服</dd>
+                        <dd>一次客服管理</dd>
+                        <dd>二次客服管理</dd>
+                    </dl>
+                    <dl class="menu_title">
+                        <dt class="d4">织机构管理</dt>
+                        <dd><a href="tissue_list.html">组织机构列表</a></dd>
+                        <dd><a href="new_tissue.html">新增组织机构</a></dd>
+                        <dd><a href="invitation_manage.html">邀请码管理</a></dd>
+                        <dd><a href="new_invitation.html">新增邀请码</a></dd>
+                    </dl>
+                    <dl class="menu_title">
+                        <dt class="d5">管理员管理</dt>
+                        <dd><a href="admin_list.html">管理员列表</a></dd>
+                        <dd><a href="new_admin.html">新增管理员</a></dd>
+                    </dl>
+                    <dl class="menu_title">
+                        <dt class="d6">站点管理</dt>
+                        <dd><a href="site_basic.html">站点基本设置</a></dd>
+                        <dd><a href="email_port.html">邮件接口设置</a></dd>
+                        <dd><a href="mess_port.html">短信接口设置</a></dd>
+                        <dd><a href="site_log.html">站点日志</a></dd>
+                    </dl>
+                </aside>
+                <section class="section">
+                    <div id="content1" layout:fragment="content"></div>
+                </section>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="center">
+                <div class="foot-size">客服电话：400-880-5056        客服邮箱：Help@hsjc.com.cn</div>
+                <div class="foot-size">共筑教育云平台 ,创建教育新模式</div>
+                <div class="foot-size">Copyright ©t华师京城网络科技股份有限公司  沪IC备10208270号-3</div>
+            </div>
+        </footer>
+    </body>
+</html>
