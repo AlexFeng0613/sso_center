@@ -282,16 +282,26 @@ public class PageController {
         return "/backstage/dispose";
     }
 
-    @RequestMapping("sso/dispose")
+    @RequestMapping("sso/passwordOne")
     public String passwordOne(){
-        return "/backstage/dispose";
+        return "/backstage/passwordOne";
     }
-
 
     @RequestMapping("sso/create_service")
     public String create_service(){
         return "/backstage/create_service";
     }
+
+    @RequestMapping("sso/passwordTwo")
+    public String passwordTwo(){
+        return "/backstage/passwordTwo";
+    }
+
+    @RequestMapping("sso/passwordThree")
+    public String passwordThree(){
+        return "/backstage/passwordThree";
+    }
+
 
     @RequestMapping("sso/passion")
     public String passion(){
