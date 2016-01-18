@@ -282,6 +282,12 @@ public class PageController {
         return "/backstage/dispose";
     }
 
+    @RequestMapping("sso/dispose")
+    public String passwordOne(){
+        return "/backstage/dispose";
+    }
+
+
     @RequestMapping("sso/create_service")
     public String create_service(){
         return "/backstage/create_service";
