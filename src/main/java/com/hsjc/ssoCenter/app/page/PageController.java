@@ -284,7 +284,7 @@ public class PageController {
 
     @RequestMapping("sso/passwordOne")
     public String passwordOne(){
-        return "/backstage/passwordOne";
+        return "/password/passwordOne";
     }
 
     @RequestMapping("sso/create_service")
@@ -294,12 +294,12 @@ public class PageController {
 
     @RequestMapping("sso/passwordTwo")
     public String passwordTwo(){
-        return "/backstage/passwordTwo";
+        return "/password/passwordTwo";
     }
 
     @RequestMapping("sso/passwordThree")
     public String passwordThree(){
-        return "/backstage/passwordThree";
+        return "/password/passwordThree";
     }
 
 
