@@ -1625,4 +1625,7 @@ a{
     display:block;
 }
 
-
+.tab_search input.Wdate{
+    float:left;
+    width:150px;
+}

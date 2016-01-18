@@ -118,6 +118,7 @@ public class PageController {
         return "/yun/mailbox";
     }
 
+
     @RequestMapping("sso/backstage_index")
     public String backstage_index(){
         return "/backstage/backstage_index";
@@ -156,6 +157,81 @@ public class PageController {
     @RequestMapping("sso/new_service")
     public String new_service(){
         return "/backstage/new_service";
+    }
+
+    @RequestMapping("sso/one_manage")
+    public String one_manage(){
+        return "/backstage/one_manage";
+    }
+
+    @RequestMapping("sso/two_manage")
+    public String two_manage(){
+        return "/backstage/two_manage";
+    }
+
+    @RequestMapping("sso/look_details")
+    public String look(){
+        return "/backstage/look_details";
+    }
+
+    @RequestMapping("sso/tissue_list")
+    public String tissue_list(){
+        return "/backstage/tissue_list";
+    }
+
+    @RequestMapping("sso/new_tissue")
+    public String new_tissue(){
+        return "/backstage/new_tissue";
+    }
+
+    @RequestMapping("sso/invitation_manage")
+    public String invitation_manage(){
+        return "/backstage/invitation_manage";
+    }
+
+    @RequestMapping("sso/new_invitation")
+    public String new_invitation(){
+        return "/backstage/new_invitation";
+    }
+
+    @RequestMapping("sso/admin_list")
+    public String admin_list(){
+        return "/backstage/admin_list";
+    }
+
+    @RequestMapping("sso/new_admin")
+    public String new_admin(){
+        return "/backstage/new_admin";
+    }
+
+    @RequestMapping("sso/site_basic")
+    public String site_basic(){
+        return "/backstage/site_basic";
+    }
+
+    @RequestMapping("sso/email_port")
+    public String email_port(){
+        return "/backstage/email_port";
+    }
+
+    @RequestMapping("sso/mess_port")
+    public String mess_port(){
+        return "/backstage/mess_port";
+    }
+
+    @RequestMapping("sso/site_log")
+    public String site_log(){
+        return "/backstage/site_log";
+    }
+
+    @RequestMapping("sso/dispose")
+    public String dispose(){
+        return "/backstage/dispose";
+    }
+
+    @RequestMapping("sso/create_service")
+    public String create_service(){
+        return "/backstage/create_service";
     }
 
     @RequestMapping("sso/passion")
