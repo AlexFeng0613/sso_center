@@ -3,7 +3,12 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
     <head>
-
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link th:href="@{/static/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/static/css/sso_backstage.css}" href="../static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../static/scripts/jquery/jquery-1.11.3.min.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../static/scripts/ie/html5shiv.js"></script>
     </head>
     <body>
         <header></header>
@@ -37,15 +42,15 @@
                     </dl>
                     <dl class="menu_title">
                         <dt class="d5">管理员管理</dt>
-                        <dd><a href="admin_list.html" id="admin_list">管理员列表</a></dd>
-                        <dd><a href="new_admin.html" id="new_admin">新增管理员</a></dd>
+                        <dd><a href="admin_list.html">管理员列表</a></dd>
+                        <dd><a href="new_admin.html">新增管理员</a></dd>
                     </dl>
                     <dl class="menu_title">
                         <dt class="d6">站点管理</dt>
-                        <dd><a href="site_basic.html" id="site_basic">站点基本设置</a></dd>
-                        <dd><a href="email_port.html" id="email_port">邮件接口设置</a></dd>
-                        <dd><a href="mess_port.html" id="mess_port">短信接口设置</a></dd>
-                        <dd><a href="site_log.html" id="site_log">站点日志</a></dd>
+                        <dd><a href="site_basic.html">站点基本设置</a></dd>
+                        <dd><a href="email_port.html">邮件接口设置</a></dd>
+                        <dd><a href="mess_port.html">短信接口设置</a></dd>
+                        <dd><a href="site_log.html">站点日志</a></dd>
                     </dl>
                 </aside>
                 <section class="section">

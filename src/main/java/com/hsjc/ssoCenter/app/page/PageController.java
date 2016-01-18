@@ -227,6 +227,16 @@ public class PageController {
         return "/backstage/new_tissue";
     }
 
+    @RequestMapping("sso/create_tissue")
+    public String create_tissue(){
+        return "/backstage/create_tissue";
+    }
+
+    @RequestMapping("sso/template")
+    public String template(){
+        return "/backstage/template";
+    }
+
     @RequestMapping("sso/invitation_manage")
     public String invitation_manage(){
         return "/backstage/invitation_manage";
