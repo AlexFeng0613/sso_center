@@ -113,6 +113,49 @@ public class PageController {
         return "/authorizeFailed";
     }
 
+    /**
+     * @author : zga
+     * @date : 2016-1-10
+     *
+     * 绑定Email成功
+     *
+     * @param email
+     * @param model
+     * @return
+     */
+    @RequestMapping("sso/bindEmailSucc")
+    public String bindEmailSucc(String email,Model model){
+        model.addAttribute("email",email);
+        model.addAttribute("targetWebsite","http://mail."+email.substring(email.lastIndexOf("@")+1));
+        return "/page/bindEmailSucc";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * SSO个人中心>>修改密码成功
+     *
+     * @return
+     */
+    @RequestMapping("sso/modifyPasswordSucc")
+    public String modifyPasswordSucc(){
+        return "/page/modifyPasswordSucc";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-01-12
+     *
+     * SSO个人中心>>绑定邀请码成功
+     *
+     * @return
+     */
+    @RequestMapping("sso/bindInviteCodeSucc")
+    public String bindInviteCodeSucc(){
+        return "/page/bindInviteCodeSucc";
+    }
+
     @RequestMapping("sso/mailbox")
     public String mailBox(){
         return "/yun/mailbox";
@@ -163,37 +206,133 @@ public class PageController {
         return "/yun/passion";
     }
 
-    @RequestMapping("sso/bindEmailSucc")
-    public String bindEmailSucc(String email,Model model){
-        model.addAttribute("email",email);
-        model.addAttribute("targetWebsite","http://mail."+email.substring(email.lastIndexOf("@")+1));
-        return "/page/bindEmailSucc";
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * 组织机构列表
+     *
+     * @return
+     */
+    @RequestMapping("sso/tissueList")
+    public String tissueList(){
+        return "/backstage/tissue_list";
     }
 
     /**
      * @author : zga
-     * @date : 2016-01-12
+     * @date : 2016-1-18
      *
-     * SSO个人中心>>修改密码成功
-     *
+     * 新增组织机构
      * @return
      */
-    @RequestMapping("sso/modifyPasswordSucc")
-    public String modifyPasswordSucc(){
-        return "/page/modifyPasswordSucc";
+    @RequestMapping("sso/newTissue")
+    public String newTissue(){
+        return "/backstage/new_tissue";
     }
 
     /**
      * @author : zga
-     * @date : 2016-01-12
+     * @date : 2016-1-18
      *
-     * SSO个人中心>>绑定邀请码成功
+     * 邀请码管理
      *
      * @return
      */
-    @RequestMapping("sso/bindInviteCodeSucc")
-    public String bindInviteCodeSucc(){
-        return "/page/bindInviteCodeSucc";
+    @RequestMapping("sso/invitationManage")
+    public String invitationManage(){
+        return "/backstage/invitation_manage";
     }
 
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * 新增邀请码
+     *
+     * @return
+     */
+    @RequestMapping("sso/newInvitation")
+    public String newInvitation(){
+        return "/backstage/newInvitation";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * 管理员列表
+     *
+     * @return
+     */
+    @RequestMapping("sso/adminList")
+    public String adminList(){
+        return "/backstage/admin_list";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * 新增管理员
+     *
+     * @return
+     */
+    @RequestMapping("sso/newAdmin")
+    public String newAdmin(){
+        return "/backstage/new_admin";
+    }
+
+
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * 站点基本设置
+     *
+     * @return
+     */
+    @RequestMapping("sso/siteBasic")
+    public String siteBasic(){
+        return "/backstage/site_basic";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * 邮件接口设置
+     *
+     * @return
+     */
+    @RequestMapping("sso/emailPort")
+    public String emailPort(){
+        return "/backstage/email_port";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * 短信接口设置
+     *
+     * @return
+     */
+    @RequestMapping("sso/messPort")
+    public String messPort(){
+        return "/backstage/mess_port";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * 站点日志
+     *
+     * @return
+     */
+    @RequestMapping("sso/siteLog")
+    public String siteLog(){
+        return "/backstage/site_log";
+    }
 }

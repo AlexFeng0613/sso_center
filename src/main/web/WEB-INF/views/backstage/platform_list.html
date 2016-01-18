@@ -13,180 +13,133 @@
         <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
     </head>
     <body>
-
-
-
-                <div id="content" layout:fragment="content">
-                    <div class="index_title">平台列表</div>
-                    <div class="tab_search">
-                        <ul class="tab_fn">
-                            <li>查询</li>
-                            <li>返回</li>
-                        </ul>
-                        <input type="search"/>
-                    </div>
-                    <table class="platform_tab">
-                        <thead>
-                            <tr>
-                                <th>平台名称</th>
-                                <th>地址</th>
-                                <th>状态</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input type="checkbox"/>
-                                    BB Learning
-                                </td>
-                                <td>http://lsbb.lsqedu.com</td>
-                                <td>激活</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox"/>
-                                    J课堂
-                                </td>
-                                <td>http://lsxt.lsqedu.com</td>
-                                <td>激活</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox"/>
-                                    MOOC
-                                </td>
-                                <td>http://lsmkadmin.lsqedu.com</td>
-                                <td>冻结</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="tab_foot">
-                        <div class="all_select"><input type="checkbox" class="checkAll" />全选</div>
-                        <ul class="handle">
-                            <li>修改基本信息</li>
-                            <li>修改状态</li>
-                            <li>删除</li>
-                        </ul>
-                        <div class="pages">
-                            <div class="jil">共58999条记录</div>
-                            <a href="#" class="page">首页</a>
-                            <a href="#" class="page">上一页</a>
-                            <a href="#" class="page">下一页</a>
-                            <a href="#" class="page">尾页</a>
-                            <select>
-                                <option>1/20</option>
-                                <option>2/20</option>
-                                <option>3/20</option>
-                                <option>4/20</option>
-                                <option>5/20</option>
-                            </select>
-                        </div>
-                    </div>
-                    <script type="text/javascript">
-                        $(function(){
-                            $('.checkAll').click(function(){
-                                if(this.checked){
-                                    $(":checkbox").prop("checked",true);
-                                }else{
-                                    $(":checkbox").prop("checked",false);
-                                }
-                            });
-                        });
-                    </script>
+        <div id="content" layout:fragment="content">
+            <div class="index_title">平台列表</div>
+            <div class="tab_search">
+                <ul class="tab_fn">
+                    <li>查询</li>
+                    <li>返回</li>
+                </ul>
+                <input type="search"/>
+            </div>
+            <table class="platform_tab">
+                <thead>
+                    <tr>
+                        <th>平台名称</th>
+                        <th>地址</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox"/>
+                            BB Learning
+                        </td>
+                        <td>http://lsbb.lsqedu.com</td>
+                        <td>激活</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox"/>
+                            J课堂
+                        </td>
+                        <td>http://lsxt.lsqedu.com</td>
+                        <td>激活</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox"/>
+                            MOOC
+                        </td>
+                        <td>http://lsmkadmin.lsqedu.com</td>
+                        <td>冻结</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="tab_foot">
+                <div class="all_select"><input type="checkbox" class="checkAll" />全选</div>
+                <ul class="handle">
+                    <li>修改基本信息</li>
+                    <li>修改状态</li>
+                    <li>删除</li>
+                </ul>
+                <div class="pages">
+                    <div class="jil">共58999条记录</div>
+                    <a href="#" class="page">首页</a>
+                    <a href="#" class="page">上一页</a>
+                    <a href="#" class="page">下一页</a>
+                    <a href="#" class="page">尾页</a>
+                    <select>
+                        <option>1/20</option>
+                        <option>2/20</option>
+                        <option>3/20</option>
+                        <option>4/20</option>
+                        <option>5/20</option>
+                    </select>
                 </div>
-
+            </div>
+            <script type="text/javascript">
+                $(function(){
+                    $('.checkAll').click(function(){
+                        if(this.checked){
+                            $(":checkbox").prop("checked",true);
+                        }else{
+                            $(":checkbox").prop("checked",false);
+                        }
+                    });
+                });
+            </script>
+        </div>
     </body>
 </html>
