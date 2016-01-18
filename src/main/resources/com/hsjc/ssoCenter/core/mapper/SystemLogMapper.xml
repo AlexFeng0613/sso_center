@@ -23,7 +23,7 @@
     insert into tbsystemlog (userId, loginTime,
       loginType, loginIp, createDate
       )
-    values (#{sysLogId}, #{userId}, #{loginTime}, 
+    values (#{userId}, #{loginTime},
       #{loginType}, #{loginIp}, #{createDate}
       )
   </insert>
