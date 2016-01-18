@@ -1,8 +1,6 @@
 package com.hsjc.ssoCenter.app.page;
 
-import com.hsjc.ssoCenter.core.service.ApiBaseService;
 import com.hsjc.ssoCenter.core.service.IndexIcosService;
-import com.hsjc.ssoCenter.core.service.ThirdClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +20,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/page/")
 public class PageController {
-
-    @Autowired
-    private ApiBaseService apiBaseService;
-
-    @Autowired
-    private ThirdClientsService thirdClientsService;
 
     @Autowired
     private IndexIcosService indexIcosService;
