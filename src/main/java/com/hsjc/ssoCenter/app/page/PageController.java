@@ -230,17 +230,6 @@ public class PageController {
 
     /**
      *
-     * SSO后台>>
-     *
-     * @return
-     */
-    @RequestMapping("sso/platform")
-    public String platform(){
-        return "/backstage/platform";
-    }
-
-    /**
-     *
      * SSO后台>>客服列表
      *
      * @return
@@ -285,7 +274,7 @@ public class PageController {
 
     /**
      *
-     * SSO后台>>一次客服管理会话详情
+     * SSO后台>>一次客服管理查看会话详情
      *
      * @return
      */
@@ -296,7 +285,7 @@ public class PageController {
 
     /**
      *
-     * SSO后台>>二次客服处理记录
+     * SSO后台>>二次客服管理处理记录
      *
      * @return
      */
