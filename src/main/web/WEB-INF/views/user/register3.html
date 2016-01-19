@@ -1,127 +1,100 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="utf-8"/>
-	<meta http-equiv = "X-UA-Compatible" content = "IE=chrome" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link th:href="@{/static/css/sass/register.css}" href="../../../static/css/sass/register.css" rel="stylesheet" type="text/css"/>
-	<link th:href="@{/static/css/sass/bootstrap.css}" href="../../../static/css/sass/bootstrap.css" rel="stylesheet" type="text/css"/>
-	<script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../../../static/scripts/jquery/jquery-1.11.3.min.js"></script>
-	<script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../../static/scripts/ie/html5shiv.js"></script>
-	<script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
-	<script text="text/javascript" th:src="@{/static/scripts/bootstrap/bootstrap.min.js}" src="../../../static/scripts/bootstrap/bootstrap.min.js"></script>
-	<script text="text/javascript" th:src="@{/static/scripts/register.js}" src="../../../static/scripts/register.js"></script>
-	<style>
-		.progress_2{
-			width:440px;
-		}
-	</style>
-</head>
-<body>
-	<header class="header">
-		<div class="center">
-			<div class="h_title">完成注册只需6个简单的步骤</div>
-			<div class="step">
-				<div class="progress_1"></div>
-				<div class="progress_2"></div>
-				<ul class="step_mark">
-					<li class="selected"></li>
-					<li class="selected"></li>
-					<li class="select">3</li>
-					<li>4</li>
-					<li>5</li>
-					<li class="last">6</li>
-				</ul>
-				<ul class="step_step">
-					<li class="selected">选择角色</li>
-					<li class="selected">基本信息</li>
-					<li class="selected">邮箱验证</li>
-					<li>手机验证</li>
-					<li class="particularly">邀请码验证</li>
-					<li class="last">注册成功</li>
-				</ul>
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	  layout:decorator="../../public/register">
+	<head>
+		<style>
+			.progress_2{
+				width:440px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid" layout:fragment="content">
+			<div class="center">
+				<aside class="verify_img"></aside>
+				<section class="verify">
+					<div class="send">
+						<div class="send_l">验证信息已发送至邮箱!</div>
+						<div class="anew">重新发送</div>
+						<div class="anew60"></div>
+					</div>
+					<input type="hidden" th:value="${email}" name="email"/>
+					<a href="#" class="promptly">立即前往验证&gt;&gt;</a>
+					<div class="hint">(邮箱激活链接24小时内有效)</div>
+				</section>
 			</div>
+			<script text="text/javascript">
+				if($('input[name="email"]').val() == null
+						||$('input[name="email"]').val() == ''
+						||$('input[name="email"]').val() == undefined){
+					//window.location.href = '/page/register/1.html';
+				}
+				$(function(){
+					$('.step_mark1').html('');
+					$('.step_mark2').html('');
+					$('.step_mark1').addClass('selected');
+					$('.step_mark2').addClass('selected');
+					$('.step_mark2').addClass('selected');
+					$('.step_mark3').addClass('select');
 
-		</div>
-	</header>
-	<div class="container-fluid">
-		<div class="center">
-			<aside class="verify_img"></aside>
-			<section class="verify">
-				<div class="send">
-					<div class="send_l">验证信息已发送至邮箱!</div>
-					<div class="anew">重新发送</div>
-					<div class="anew60"></div>
-				</div>
-				<input type="hidden" th:value="${email}" name="email"/>
-				<a href="#" class="promptly">立即前往验证&gt;&gt;</a>
-				<div class="hint">(邮箱激活链接24小时内有效)</div>
-			</section>
-		</div>
-	</div>
-	<footer class="footer">
-		<div class="foot">版权所有 © 2002-2014 上海市普陀区教育局 上海市普陀区现代教育技术中心</div>
-		<div class="foot">地址：上海市普陀区大渡河路1688号 邮编：200333 电话：021-62601856</div>
-	</footer>
-	<script text="text/javascript">
-		if($('input[name="email"]').val() == null
-				||$('input[name="email"]').val() == ''
-				||$('input[name="email"]').val() == undefined){
-			//window.location.href = '/page/register/1.html';
-		}
-		$(function(){
-			var time=100;
-			var timer=null;
-			$('.anew60').html(time+'秒后可重新发送');
+					$('.step_step1').addClass('selected1');
+					$('.step_step2').addClass('selected1');
+					$('.step_step3').addClass('selected2');
 
-			timer=setInterval(function(){
-				if(time>1){
-					time--;
+					var time=100;
+					var timer=null;
 					$('.anew60').html(time+'秒后可重新发送');
-				}else{
-					clearInterval(timer);
-					time=100;
-					$('.anew60').html(time+'秒后可重新发送');
-					$('.anew60').hide();
-					$('.anew').show();
-				};
 
-			},1000);
+					timer=setInterval(function(){
+						if(time>1){
+							time--;
+							$('.anew60').html(time+'秒后可重新发送');
+						}else{
+							clearInterval(timer);
+							time=100;
+							$('.anew60').html(time+'秒后可重新发送');
+							$('.anew60').hide();
+							$('.anew').show();
+						};
+
+					},1000);
 
 
-			$(document).on('click','.anew',function(){
-				$('.anew60').show();
-				$('.anew').hide();
-				clearInterval(timer);
-				timer=setInterval(function(){
-					if(time>1){
-						time--;
-						$('.anew60').html(time+'秒后可重新获取');
-					}else{
+					$(document).on('click','.anew',function(){
+						$('.anew60').show();
+						$('.anew').hide();
 						clearInterval(timer);
-						time=100;
-						$('.anew60').html(time+'秒后可重新获取');
-						$('.anew60').hide();
-						$('.anew').show();
-					};
+						timer=setInterval(function(){
+							if(time>1){
+								time--;
+								$('.anew60').html(time+'秒后可重新获取');
+							}else{
+								clearInterval(timer);
+								time=100;
+								$('.anew60').html(time+'秒后可重新获取');
+								$('.anew60').hide();
+								$('.anew').show();
+							};
 
-				},1000);
-			});
+						},1000);
+					});
 
-			//立即前往
-			$('.promptly').click(function(){
-				var email = $('input[name="email"]').val();
-				var sub = email.substring(email.indexOf("@"));
-				window.location.href = 'https://mail.'+ sub;
-			});
+					//立即前往
+					$('.promptly').click(function(){
+						var email = $('input[name="email"]').val();
+						var sub = email.substring(email.indexOf("@"));
+						window.location.href = 'https://mail.'+ sub;
+					});
 
-			//重新发送
-			$('.anew').click(function(){
+					//重新发送
+					$('.anew').click(function(){
 
-			});
-		});
-	</script>
-</body>
+					});
+				});
+			</script>
+		</div>
+	</body>
 </html>
 

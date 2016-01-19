@@ -40,9 +40,6 @@ a:visited {
 .top_box, .ipone, .invite {
   margin: 120px auto 0; }
 
-.foot {
-  margin-top: 15px; }
-
 .input_box {
   margin-bottom: 20px; }
 
@@ -73,7 +70,7 @@ a:visited {
 .step_mark {
   top: 0; }
 
-.fc, .h_title, .step_step li, .foot {
+.fc, .h_title, .step_step li {
   color: #727c85; }
 
 .fs34, .h_title {
@@ -85,7 +82,7 @@ a:visited {
 .fs18, .step_step li, .input_box input, .leap, .login_input, .log {
   font-size: 18px; }
 
-.fs16, .foot {
+.fs16 {
   font-size: 16px; }
 
 .fff, .context a, .context .next, .anew, .note, .ipone_next, .vault:hover, .log {
@@ -103,7 +100,7 @@ a:visited {
 .fs28, .congratulation, .login_html {
   font-size: 28px; }
 
-.family, .h_title, .step_step li, .figure a:link, .aside1, .aside2, .input_box_l, .context a, .context .next, .send_l, .anew, .anew60, .promptly, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .congratulation, .login_html, .leap, .login_title, .login_input, .forget, .log, .log_promptly, .promptly_register, .promptly_register a, .foot {
+.family, .h_title, .step_step li, .figure a:link, .aside1, .aside2, .input_box_l, .context a, .context .next, .send_l, .anew, .anew60, .promptly, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .congratulation, .login_html, .leap, .login_title, .login_input, .forget, .log, .log_promptly, .promptly_register, .promptly_register a {
   font-family: \5FAE\8F6F\96C5\9ED1; }
 
 .center, .header .center, .container-fluid .center {
@@ -116,7 +113,7 @@ a:visited {
 .right, .figure .teacher:link, .context .next, .count, .forget {
   float: right; }
 
-.text-center, .step_mark li, .figure a:link, .aside1, .aside2, .context a, .context .next, .anew, .anew60, .note, .ipone_next, .vault, .login_title, .log, .foot {
+.text-center, .step_mark li, .figure a:link, .aside1, .aside2, .context a, .context .next, .anew, .anew60, .note, .ipone_next, .vault, .login_title, .log {
   text-align: center; }
 
 .text-left, .h_title {
@@ -131,7 +128,7 @@ a:visited {
 .abs, .step_mark, .step_step, .progress_1, .progress_2, .self_motion input {
   position: absolute; }
 
-.hidden, .header, .container-fluid, .send, .register_succeed_r, .register_succeed, .footer {
+.hidden, .header, .container-fluid, .send, .register_succeed_r, .register_succeed {
   overflow: hidden; }
 
 .header {
@@ -163,8 +160,11 @@ a:visited {
 .step_step li {
   margin-right: 138px; }
 
-.step_step li.selected {
+.step_step li.selected2 {
   color: #fff; }
+
+.step_step li.selected1 {
+  color: #ffad00; }
 
 .step_step li.particularly {
   margin-left: -12px;
@@ -178,7 +178,7 @@ a:visited {
 
 .progress_2 {
   height: 16px;
-  background-color: #74bc41;
+  background-color: #ffad00;
   z-index: 2; }
 
 .container-fluid {
@@ -275,14 +275,13 @@ a:visited {
 .context {
   width: 450px;
   margin-top: 60px;
-  margin-left: 230px;
   padding-bottom: 100px; }
 
 .context a {
   width: 216px;
   height: 58px;
   line-height: 58px;
-  background: url(../../images/register/prev.gif) no-repeat center; }
+  background: url(../../images/register/prev.png) no-repeat center; }
 
 .context a:hover {
   background: url(../../images/register/next.png) no-repeat center; }
@@ -291,7 +290,7 @@ a:visited {
   width: 216px;
   height: 58px;
   line-height: 58px;
-  background: url(../../images/register/prev.gif) no-repeat center;
+  background: url(../../images/register/prev.png) no-repeat center;
   border: none; }
 .context .next:hover {
   background: url(../../images/register/next.png) no-repeat center; }
@@ -352,8 +351,10 @@ a:visited {
   color: #768089; }
 
 .note {
-  width: 123px;
-  background: url(../../images/register/note.png) no-repeat; }
+  width: 140px;
+  background-color: #00b6e3;
+  border: none;
+  border-radius: 5px; }
 
 .note.click {
   color: #b5b9bc;
@@ -371,7 +372,7 @@ a:visited {
   width: 216px;
   height: 58px;
   line-height: 58px;
-  background: url(../../images/register/ipone_next.png) no-repeat center;
+  background: url(../../images/register/prev.png) no-repeat center;
   margin-left: 90px;
   margin-right: 55px; }
 
@@ -511,11 +512,48 @@ a:visited {
   height: 48px; }
 
 .footer {
-  background-color: #f4f4f4;
-  background-color: #fff;
-  padding: 25px 0; }
+  background-color: #353535; }
 
-.foot {
-  white-space: pre; }
+.footer .center {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 30px 0;
+  position: relative; }
+
+.foot-size {
+  height: 28px;
+  line-height: 28px;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  white-space: pre;
+  color: #959595;
+  font-size: 14px;
+  text-align: center; }
+
+.footer .center span {
+  height: 30px;
+  line-height: 30px;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  white-space: pre;
+  text-align: center;
+  color: #959595;
+  display: block;
+  font-size: 14px; }
+
+.footer .center img {
+  width: 94px;
+  height: 94px;
+  display: block; }
+
+.android {
+  width: 94px;
+  position: absolute;
+  right: 0;
+  top: 20px; }
+
+.ios {
+  width: 94px;
+  position: absolute;
+  right: 140px;
+  top: 20px; }
 
 /*# sourceMappingURL=register.css.map */
