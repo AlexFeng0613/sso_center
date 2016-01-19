@@ -271,7 +271,7 @@ public class UserMainService extends ApiBaseService{
      */
     public void sendResetPwdCodeWithEmail(JSONObject paramJson){
         String email = paramJson.getString("email");
-        String code = SSOStringUtil.getRandomString(4);
+        String code = SSOStringUtil.getRandomString(1,4);
         if(!StringUtils.isEmpty(email)){
             String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REST_PASSWORD_MESSAGE,"%",code);
 

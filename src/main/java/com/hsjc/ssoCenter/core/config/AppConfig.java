@@ -3,6 +3,7 @@ package com.hsjc.ssoCenter.core.config;
 import com.hsjc.ssoCenter.core.constant.Constant;
 import com.hsjc.ssoCenter.core.constant.MailConstant;
 import com.hsjc.ssoCenter.core.constant.RedisConstant;
+import com.hsjc.ssoCenter.core.constant.SMSConstant;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -53,6 +54,25 @@ public class AppConfig {
 		MailConstant.MAIL_USERNAME = MAIL_USERNAME;
 		MailConstant.MAIL_PASSWORD = MAIL_PASSWORD;
 		MailConstant.MAIL_FROM = MAIL_FORM;
+		return null;
+	}
+
+	@Bean
+	public SMSConstant SMSConstant(
+			@Value("${sms.appkey}")String APP_KEY,
+			@Value("${sms.appsecret}")String APP_SECRET,
+			@Value("${sms.signname}")String SIGN_NAME,
+			@Value("${sms.templatecode}")String TEMPLATE_CODE,
+			@Value("${sms.url}")String URL,
+			@Value("${sms.type}")String TYPE
+
+	){
+		SMSConstant.APPKEY = APP_KEY;
+		SMSConstant.APPSECRET = APP_SECRET;
+		SMSConstant.SIGNNAME = SIGN_NAME;
+		SMSConstant.TEMPLATECODE = TEMPLATE_CODE;
+		SMSConstant.URL = URL;
+		SMSConstant.TYPE  = TYPE;
 		return null;
 	}
 

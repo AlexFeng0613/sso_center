@@ -10,10 +10,15 @@ import java.util.Random;
  */
 public class SSOStringUtil {
 
+    public static String baseRandomString = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    public static String baseRandomSmsCode = "1234567890";
+
     /**
      * @author : zga
      * @date : 2015-12-10
      * 替换字符串中指定的值
+     *
      * explain:
      * src : Hello,%,Welcome to %.
      * split : %
@@ -39,8 +44,13 @@ public class SSOStringUtil {
      * @param length  字符串长度
      * @return
      */
-    public static String getRandomString(int length) {
-        String base = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static String getRandomString(int type,int length) {
+        String base;
+        if(type == 1){
+            base = baseRandomString;
+        } else {
+            base = baseRandomSmsCode;
+        }
         Random random = new Random();
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < length; i++) {
@@ -51,11 +61,11 @@ public class SSOStringUtil {
     }
 
     public static void main(String[] args) {
-        String clientId = getRandomString(8);
+        String clientId = getRandomString(1,8);
 
-        String clientSecret = getRandomString(10);
+        String clientSecret = getRandomString(1,10);
 
-        String ssoPassword = getRandomString(10);
+        String ssoPassword = getRandomString(1,10);
 
         System.out.println(clientId + "\r\n" + clientSecret + "\r\n" + ssoPassword);
     }
