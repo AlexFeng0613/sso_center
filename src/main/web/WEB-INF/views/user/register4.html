@@ -1,189 +1,151 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="utf-8"/>
-	<meta http-equiv = "X-UA-Compatible" content = "IE=chrome" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link th:href="@{/static/css/sass/register.css}" href="../../../static/css/sass/register.css" rel="stylesheet" type="text/css"/>
-	<link th:href="@{/static/css/sass/bootstrap.css}" href="../../../static/css/sass/bootstrap.css" rel="stylesheet" type="text/css"/>
-	<link th:href="@{/static/css/validform.css}" href="../../../static/css/validform.css" rel="stylesheet" type="text/css"/>
-	<script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../../../static/scripts/jquery/jquery-1.11.3.min.js"></script>
-	<script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../../static/scripts/ie/html5shiv.js"></script>
-	<script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
-	<script text="text/javascript" th:src="@{/static/scripts/bootstrap/bootstrap.min.js}" src="../../../static/scripts/bootstrap/bootstrap.min.js"></script>
-	<script text="text/javascript" th:src="@{/static/scripts/validform/Validform_v5.3.2_min.js}" src="../../../static/scripts/validform/Validform_v5.3.2_min.js"></script>
-	<script text="text/javascript" th:src="@{/static/scripts/register.js}" src="../../../static/scripts/register.js"></script>
-	<script text="text/javascript" th:src="@{/static/scripts/constant/constant.js}" src="../../../static/scripts/constant/constant.js"></script>
-	<script text="text/javascript" th:src="@{/static/scripts/util/SSOUtil.js}" src="../../../static/scripts/util/SSOUtil.js"></script>
-	<style>
-		.progress_2{
-			width:660px;
-		}
-	</style>
-</head>
-<body>
-	<header class="header">
-		<div class="center">
-			<div class="h_title">完成注册只需6个简单的步骤</div>
-			<div class="step">
-				<div class="progress_1"></div>
-				<div class="progress_2"></div>
-				<ul class="step_mark">
-					<li class="selected"></li>
-					<li class="selected"></li>
-					<li class="selected"></li>
-					<li class="select">4</li>
-					<li>5</li>
-					<li class="last">6</li>
-				</ul>
-				<ul class="step_step">
-					<li class="selected">选择角色</li>
-					<li class="selected">基本信息</li>
-					<li class="selected">邮箱验证</li>
-					<li class="selected">手机验证</li>
-					<li class="particularly">邀请码验证</li>
-					<li class="last">注册成功</li>
-				</ul>
-			</div>
-		</div>
-	</header>
-	<div class="container-fluid">
-		<div class="center">
-			<form class="regForm" action="" method="post">
-				<div class="ipone">
-					<input type="hidden" th:value="${email}" name="email"/>
-					<div class="ipone_box">
-						<div class="ipone_box_l">手机号</div>
-						<input type="text" name="phone" class="ipone_num"/>
-						<input type="button" class="note" value="获取验证码"/>
-					</div>
-					<div class="ipone_box">
-						<div class="ipone_box_l">验证码</div>
-						<input type="text" name="" class="verify_code"/>
-						<time class="count"></time>
-					</div>
-
-					<div class="ipone_box_next">
-						<div class="ipone_next">下一步</div>
-						<div class="skip">跳过</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-	<footer class="footer">
-		<div class="foot">版权所有 © 2002-2014 上海市普陀区教育局 上海市普陀区现代教育技术中心</div>
-		<div class="foot">地址：上海市普陀区大渡河路1688号 邮编：200333 电话：021-62601856</div>
-	</footer>
-	<script text="text/javascript">
-		$(function(){
-			/*var time=5;
-			var timer=null;
-			$('.count').html(time+'秒后可重新获取');
-
-			function Movetime(){
-				clearInterval(timer);
-				timer=setInterval(function(){
-					if(time>1){
-						time--;
-						$('.count').html(time+'秒后可重新获取');
-					}else{
-						clearInterval(timer);
-						$('.count').hide();
-						$('.note').removeClass('click');
-						time=5;
-						$('.count').html(time+'秒后可重新获取');
-					};
-
-				},1000);
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	  layout:decorator="../../public/register">
+	<head>
+		<script text="text/javascript" th:src="@{/static/scripts/constant/constant.js}" src="../../../static/scripts/constant/constant.js"></script>
+		<script text="text/javascript" th:src="@{/static/scripts/util/SSOUtil.js}" src="../../../static/scripts/util/SSOUtil.js"></script>
+		<style>
+			.progress_2{
+				width:660px;
 			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid" layout:fragment="content">
+			<div class="center">
+				<form class="regForm" action="" method="post">
+					<div class="ipone">
+						<input type="hidden" th:value="${email}" name="email"/>
+						<div class="ipone_box">
+							<div class="ipone_box_l">手机号</div>
+							<input type="text" name="phone" class="ipone_num"/>
+							<input type="button" class="note" value="获取验证码"/>
+						</div>
+						<div class="ipone_box">
+							<div class="ipone_box_l">验证码</div>
+							<input type="text" name="" class="verify_code"/>
+							<time class="count"></time>
+						</div>
 
-			$(document).on('click','.note',function(){
-				$(this).addClass('click');
-				$('.count').show();
-				Movetime();
-			});*/
+						<div class="ipone_box_next">
+							<div class="ipone_next">下一步</div>
+							<div class="skip">跳过</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<script text="text/javascript">
+				$(function(){
+					/*var time=5;
+					 var timer=null;
+					 $('.count').html(time+'秒后可重新获取');
+
+					 function Movetime(){
+					 clearInterval(timer);
+					 timer=setInterval(function(){
+					 if(time>1){
+					 time--;
+					 $('.count').html(time+'秒后可重新获取');
+					 }else{
+					 clearInterval(timer);
+					 $('.count').hide();
+					 $('.note').removeClass('click');
+					 time=5;
+					 $('.count').html(time+'秒后可重新获取');
+					 };
+
+					 },1000);
+					 }
+
+					 $(document).on('click','.note',function(){
+					 $(this).addClass('click');
+					 $('.count').show();
+					 Movetime();
+					 });*/
 
 
-			//短信获取click函数
-			$('.note').click(function(){
-				$('input[name="phone"]').blur();
-				var phone = $('input[name="phone"]').val();
-				if(phone == null || phone == '' || !Constant.phonePattern.test(phone)) return false;
+					//短信获取click函数
+					$('.note').click(function(){
+						$('input[name="phone"]').blur();
+						var phone = $('input[name="phone"]').val();
+						if(phone == null || phone == '' || !Constant.phonePattern.test(phone)) return false;
 
-				time($(this),5,"获取验证码");
-				return false;
-				//发送短信
-				$.ajax({
-					url : '/sms/sendSmsCode.json',
-					type : 'POST',
-					data : JSON.stringify(data),
-					contentType: 'application/json',
-					dataType : 'json',
-					success : function(data){
-						if(data.success){
-						} else {
-						}
-					}
-				});
-			});
-
-			//下一步click函数
-			var demo = $(".regForm").Validform({
-				btnSubmit:'.ipone_next',
-				tiptype:3,
-				showAllError:false,
-				datatype:{
-					"s11":Constant.phonePattern,
-					"s4":/^\d{4}$/
-				},
-				callback : function(form){
-					if(true){
-						var data = {
-							'smsCode' : $('.verify_code').val()
-						}
+						time($(this),5,"获取验证码");
+						return false;
+						//发送短信
 						$.ajax({
-							url : '/sms/validateSmsCode.json',
+							url : '/sms/sendSmsCode.json',
 							type : 'POST',
 							data : JSON.stringify(data),
 							contentType: 'application/json',
 							dataType : 'json',
 							success : function(data){
 								if(data.success){
-									//成功跳转
-									window.location.href = '/page/register/5.html?email=' + $('input[name="email"]').val();
 								} else {
-									//否则提示错误
-									$.Showmsg('验证码错误');
 								}
 							}
 						});
-					}
-					return false;
-				}
-			});
-			demo.tipmsg.w["s11"]="请输入11位手机号";
-			demo.tipmsg.w["s4"]="请输入4位数字的验证码";
+					});
 
-			demo.addRule([{
-				ele:".ipone_num:eq(0)",
-				datatype:"s11",
-				nullmsg:'请输入手机号',
-				sucmsg:' '
-			},{
-				ele:".verify_code:eq(0)",
-				datatype:"s4",
-				nullmsg:'请输入验证码',
-				sucmsg:' '
-			}]);
+					//下一步click函数
+					var demo = $(".regForm").Validform({
+						btnSubmit:'.ipone_next',
+						tiptype:3,
+						showAllError:false,
+						datatype:{
+							"s11":Constant.phonePattern,
+							"s4":/^\d{4}$/
+						},
+						callback : function(form){
+							if(true){
+								var data = {
+									'smsCode' : $('.verify_code').val()
+								}
+								$.ajax({
+									url : '/sms/validateSmsCode.json',
+									type : 'POST',
+									data : JSON.stringify(data),
+									contentType: 'application/json',
+									dataType : 'json',
+									success : function(data){
+										if(data.success){
+											//成功跳转
+											window.location.href = '/page/register/5.html?email=' + $('input[name="email"]').val();
+										} else {
+											//否则提示错误
+											$.Showmsg('验证码错误');
+										}
+									}
+								});
+							}
+							return false;
+						}
+					});
+					demo.tipmsg.w["s11"]="请输入11位手机号";
+					demo.tipmsg.w["s4"]="请输入4位数字的验证码";
 
-			//跳过click函数
-			$('.skip').click(function(){
-				window.location.href = '/page/register/5.html?email='+$('input[name="email"]').val();
-			});
-		});
-	</script>
-</body>
+					demo.addRule([{
+						ele:".ipone_num:eq(0)",
+						datatype:"s11",
+						nullmsg:'请输入手机号',
+						sucmsg:' '
+					},{
+						ele:".verify_code:eq(0)",
+						datatype:"s4",
+						nullmsg:'请输入验证码',
+						sucmsg:' '
+					}]);
+
+					//跳过click函数
+					$('.skip').click(function(){
+						window.location.href = '/page/register/5.html?email='+$('input[name="email"]').val();
+					});
+				});
+			</script>
+		</div>
+
+	</body>
 </html>
 
