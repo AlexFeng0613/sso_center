@@ -160,8 +160,11 @@ a:visited {
 .step_step li {
   margin-right: 138px; }
 
-.step_step li.selected {
+.step_step li.selected2 {
   color: #fff; }
+
+.step_step li.selected1 {
+  color: #ffad00; }
 
 .step_step li.particularly {
   margin-left: -12px;
@@ -175,7 +178,7 @@ a:visited {
 
 .progress_2 {
   height: 16px;
-  background-color: #74bc41;
+  background-color: #ffad00;
   z-index: 2; }
 
 .container-fluid {

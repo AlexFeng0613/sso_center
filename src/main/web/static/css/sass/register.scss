@@ -263,8 +263,12 @@ margin-right:138px;
 
 }
 
-.step_step li.selected{
+.step_step li.selected2{
 color:#fff;
+}
+
+.step_step li.selected1{
+	color:#ffad00;
 }
 
 .step_step li.last{
@@ -291,8 +295,7 @@ z-index:1;
 .progress_2{
 @extend .abs;
 height:$progress_height;
-
-background-color:#74bc41;
+	background-color:#ffad00;
 @extend %t16;
 @extend %ml25;
 z-index:2;
