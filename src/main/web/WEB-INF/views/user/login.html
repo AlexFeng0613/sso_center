@@ -14,8 +14,14 @@
             <script text="text/javascript" th:src="@{/static/scripts/validform/Validform_v5.3.2_min.js}" src="../../../static/scripts/validform/Validform_v5.3.2_min.js"></script>
             <style>
                 .Validform_checktip{
-                    margin-left:20px;
+                    margin-left:25px;
+                    line-height: 38px;
+                    height: 38px;
+                    margin-top:-14px;
+
                 }
+
+
             </style>
     </head>
     <body>
@@ -30,8 +36,12 @@
                 <div class="register_box">
                     <div class="title">请登录</div>
                     <form class="regForm" method="post" action="/user/login.html">
-                        <input type="text" name="username" class="register_input text inputxt"/>
-                        <input type="password" name="password" class="register_input password2 inputxt"/>
+                        <label>
+                            <input type="text" name="username" class="register_input text inputxt"/>
+                        </label>
+                        <label>
+                            <input type="password" name="password" class="register_input password2 inputxt"/>
+                        </label>
                         <ul class="remember">
                             <li class="left">
                                 <input type="checkbox" />
@@ -43,11 +53,12 @@
                             </li>
                         </ul>
                         <input type="submit" class="register_submit" value="登录"/>
+                        <div class="forget">
+                            <a href="#" class="left">忘记密码了？</a>
+                            <a href="/page/register/1.html" class="right">立即注册</a>
+                        </div>
                     </form>
-                    <div class="forget">
-                        <a href="#" class="left">忘记密码了？</a>
-                        <a href="/page/register/1.html" class="right">立即注册</a>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -128,7 +139,7 @@
 
                 var demo = $(".regForm").Validform({
                     tiptype: 3,
-                    label: ".label",
+                    label: "label",
                     showAllError: true,
                     datatype: {
                         "s5-18": /^[\w\.\s]{5,18}$/
