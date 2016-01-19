@@ -1,8 +1,6 @@
 package com.hsjc.ssoCenter.app.page;
 
-import com.hsjc.ssoCenter.core.service.ApiBaseService;
 import com.hsjc.ssoCenter.core.service.IndexIcosService;
-import com.hsjc.ssoCenter.core.service.ThirdClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +20,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/page/")
 public class PageController {
-
-    @Autowired
-    private ApiBaseService apiBaseService;
-
-    @Autowired
-    private ThirdClientsService thirdClientsService;
-
     @Autowired
     private IndexIcosService indexIcosService;
 
@@ -161,148 +152,209 @@ public class PageController {
         return "/yun/mailbox";
     }
 
-
-    @RequestMapping("sso/backstage_index")
-    public String backstage_index(){
-        return "/backstage/backstage_index";
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * SSO后台管理页面
+     *
+     * @return
+     */
+    @RequestMapping("sso/backstageIndex")
+    public String backstageIndex(){
+        return "/backstage/backstageIndex";
     }
 
-    @RequestMapping("sso/user_list")
-    public String user_list(){
-        return "/backstage/user_list";
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * SSO后台>>用户列表
+     *
+     * @return
+     */
+    @RequestMapping("sso/userList")
+    public String userList(){
+        return "/backstage/userList";
     }
 
-    @RequestMapping("sso/new_user")
-    public String new_user(){
-        return "/backstage/new_user";
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * SSO后台>>新增用户
+     *
+     * @return
+     */
+    @RequestMapping("sso/newUser")
+    public String newUser(){
+        return "/backstage/newUser";
     }
 
-    @RequestMapping("sso/template_to")
-    public String template_to(){
-        return "/backstage/template_to";
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * SSO后台>>模板导入用户
+     *
+     * @return
+     */
+    @RequestMapping("sso/templateTo")
+    public String templateTo(){
+        return "/backstage/templateTo";
     }
 
-    @RequestMapping("sso/platform_list")
-    public String template_list(){
-        return "/backstage/platform_list";
-    }
-
-    @RequestMapping("sso/platform")
-    public String platform(){
-        return "/backstage/platform";
-    }
-
-    @RequestMapping("sso/service_list")
-    public String service_list(){
-        return "/backstage/service_list";
-    }
-
-    @RequestMapping("sso/new_service")
-    public String new_service(){
-        return "/backstage/new_service";
-    }
-
-    @RequestMapping("sso/one_manage")
-    public String one_manage(){
-        return "/backstage/one_manage";
-    }
-
-    @RequestMapping("sso/two_manage")
-    public String two_manage(){
-        return "/backstage/two_manage";
-    }
-
-    @RequestMapping("sso/look_details")
-    public String look(){
-        return "/backstage/look_details";
-    }
-
-    @RequestMapping("sso/tissue_list")
-    public String tissue_list(){
-        return "/backstage/tissue_list";
-    }
-
-    @RequestMapping("sso/new_tissue")
-    public String new_tissue(){
-        return "/backstage/new_tissue";
-    }
-
-    @RequestMapping("sso/create_tissue")
-    public String create_tissue(){
-        return "/backstage/create_tissue";
-    }
-
+    /**
+     *
+     * SSO后台>>模板导入用户说明
+     *
+     * @return
+     */
     @RequestMapping("sso/template")
     public String template(){
         return "/backstage/template";
     }
 
-    @RequestMapping("sso/invitation_manage")
-    public String invitation_manage(){
-        return "/backstage/invitation_manage";
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * SSO后台>>第三方列表
+     *
+     * @return
+     */
+    @RequestMapping("sso/platformList")
+    public String platformList(){
+        return "/backstage/platformList";
     }
 
-    @RequestMapping("sso/new_invitation")
-    public String new_invitation(){
-        return "/backstage/new_invitation";
+    /**
+     *
+     * SSO后台>>
+     *
+     * @return
+     */
+    @RequestMapping("sso/platform")
+    public String platform(){
+        return "/backstage/platform";
     }
 
-    @RequestMapping("sso/admin_list")
-    public String admin_list(){
-        return "/backstage/admin_list";
+    /**
+     *
+     * SSO后台>>客服列表
+     *
+     * @return
+     */
+    @RequestMapping("sso/serviceList")
+    public String serviceList(){
+        return "/backstage/serviceList";
     }
 
-    @RequestMapping("sso/new_admin")
-    public String new_admin(){
-        return "/backstage/new_admin";
+    /**
+     *
+     * SSO后台>>新增客服
+     *
+     * @return
+     */
+    @RequestMapping("sso/newService")
+    public String newService(){
+        return "/backstage/newService";
     }
 
-    @RequestMapping("sso/site_basic")
-    public String site_basic(){
-        return "/backstage/site_basic";
+    /**
+     *
+     * SSO后台>>一次客服管理
+     *
+     * @return
+     */
+    @RequestMapping("sso/oneManage")
+    public String oneManage(){
+        return "/backstage/oneManage";
     }
 
-    @RequestMapping("sso/email_port")
-    public String email_port(){
-        return "/backstage/email_port";
+    /**
+     *
+     * SSO后台>>二次客服管理
+     *
+     * @return
+     */
+    @RequestMapping("sso/twoManage")
+    public String twoManage(){
+        return "/backstage/twoManage";
     }
 
-    @RequestMapping("sso/mess_port")
-    public String mess_port(){
-        return "/backstage/mess_port";
+    /**
+     *
+     * SSO后台>>一次客服管理会话详情
+     *
+     * @return
+     */
+    @RequestMapping("sso/lookDetails")
+    public String lookDetails(){
+        return "/backstage/lookDetails";
     }
 
-    @RequestMapping("sso/site_log")
-    public String site_log(){
-        return "/backstage/site_log";
-    }
-
+    /**
+     *
+     * SSO后台>>二次客服处理记录
+     *
+     * @return
+     */
     @RequestMapping("sso/dispose")
     public String dispose(){
         return "/backstage/dispose";
     }
 
+    /**
+     *
+     * SSO后台>>新增客服
+     *
+     * @return
+     */
+    @RequestMapping("sso/createService")
+    public String createService(){
+        return "/backstage/createService";
+    }
+
+    /**
+     *
+     * SSO后台>>重置密码第1步
+     *
+     * @return
+     */
     @RequestMapping("sso/passwordOne")
     public String passwordOne(){
         return "/password/passwordOne";
     }
 
-    @RequestMapping("sso/create_service")
-    public String create_service(){
-        return "/backstage/create_service";
-    }
-
+    /**
+     *
+     * SSO后台>>重置密码第2步
+     *
+     * @return
+     */
     @RequestMapping("sso/passwordTwo")
     public String passwordTwo(){
         return "/password/passwordTwo";
     }
 
+    /**
+     *
+     * SSO后台>>重置密码第3步
+     *
+     * @return
+     */
     @RequestMapping("sso/passwordThree")
     public String passwordThree(){
         return "/password/passwordThree";
     }
 
-
+    /**
+     *
+     * SSO后台>>
+     *
+     * @return
+     */
     @RequestMapping("sso/passion")
     public String passion(){
         return "/yun/passion";
@@ -318,7 +370,18 @@ public class PageController {
      */
     @RequestMapping("sso/tissueList")
     public String tissueList(){
-        return "/backstage/tissue_list";
+        return "/backstage/tissueList";
+    }
+
+    /**
+     *
+     * SSO后台>>新增组织机构完成页面
+     *
+     * @return
+     */
+    @RequestMapping("sso/createTissue")
+    public String createTissue(){
+        return "/backstage/createTissue";
     }
 
     /**
@@ -330,7 +393,7 @@ public class PageController {
      */
     @RequestMapping("sso/newTissue")
     public String newTissue(){
-        return "/backstage/new_tissue";
+        return "/backstage/newTissue";
     }
 
     /**
@@ -343,7 +406,7 @@ public class PageController {
      */
     @RequestMapping("sso/invitationManage")
     public String invitationManage(){
-        return "/backstage/invitation_manage";
+        return "/backstage/invitationManage";
     }
 
     /**
@@ -369,7 +432,7 @@ public class PageController {
      */
     @RequestMapping("sso/adminList")
     public String adminList(){
-        return "/backstage/admin_list";
+        return "/backstage/adminList";
     }
 
     /**
@@ -382,7 +445,7 @@ public class PageController {
      */
     @RequestMapping("sso/newAdmin")
     public String newAdmin(){
-        return "/backstage/new_admin";
+        return "/backstage/newAdmin";
     }
 
 
@@ -396,7 +459,7 @@ public class PageController {
      */
     @RequestMapping("sso/siteBasic")
     public String siteBasic(){
-        return "/backstage/site_basic";
+        return "/backstage/siteBasic";
     }
 
     /**
@@ -409,7 +472,7 @@ public class PageController {
      */
     @RequestMapping("sso/emailPort")
     public String emailPort(){
-        return "/backstage/email_port";
+        return "/backstage/emailPort";
     }
 
     /**
@@ -422,7 +485,7 @@ public class PageController {
      */
     @RequestMapping("sso/messPort")
     public String messPort(){
-        return "/backstage/mess_port";
+        return "/backstage/messPort";
     }
 
     /**
@@ -435,6 +498,6 @@ public class PageController {
      */
     @RequestMapping("sso/siteLog")
     public String siteLog(){
-        return "/backstage/site_log";
+        return "/backstage/siteLog";
     }
 }

@@ -46,7 +46,6 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "login",method = RequestMethod.GET)
     public String login(){
-        //return "/login";
         return "/user/login";
     }
 
@@ -62,18 +61,21 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "login",method = RequestMethod.POST)
     @SSOSystemLog(actionId = 1,description = "用户登录",module = "登录")
-    public String login(HttpServletRequest request,String username, String password){
+    public String login(HttpServletRequest request,String username, String password) throws Exception {
         UsernamePasswordToken upToken = new UsernamePasswordToken(username, password, true);
         try{
             SecurityUtils.getSubject().login(upToken);
         } catch (AuthenticationException e) {
             e.printStackTrace();
-            return "redirect:login.html";
+            throw new Exception("用户名/密码不正确");
         }
 
         Subject subject = SecurityUtils.getSubject();
-
         UserMain userMain = (UserMain) subject.getPrincipal();
+
+        if("admin".equals(userMain.getUserName())){
+            return "redirect:/page/sso/backstageIndex.html";
+        }
 
         Session session = subject.getSession(true);
         session.setTimeout(-1);

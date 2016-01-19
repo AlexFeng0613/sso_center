@@ -8,10 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -57,8 +54,8 @@ public class LogInterCeptor {
 
     }
 
-    @After("controllerAspect()")
-    public void doAroundInvoke(JoinPoint joinPoint){
+    @AfterReturning("controllerAspect()")
+    public void doAfterReturning(JoinPoint joinPoint){
         /**
          * 获取保存日志的信息
          */
@@ -72,7 +69,6 @@ public class LogInterCeptor {
         /**
          * 保存日志
          */
-        //
         Object object = map.get("clientId");
         if(object == null){
             //系统日志保存
@@ -84,7 +80,6 @@ public class LogInterCeptor {
             systemLog.setUserId(map.get("userName") == null ? "" : map.get("userName").toString());
 
             systemLogMapper.insert(systemLog);
-
         } else {
             //同步接口日志保存
             com.hsjc.ssoCenter.core.domain.RestfulLog restfulLog = new com.hsjc.ssoCenter.core.domain.RestfulLog();
@@ -111,9 +106,14 @@ public class LogInterCeptor {
                     resultJson = (JSONObject)o;
                 }
             }
-
             resultJson.put("requestSynId",restfulLog.getRestLogId());
         }
+    }
+
+
+    @After("controllerAspect()")
+    public void doAroundInvoke(JoinPoint joinPoint){
+
     }
 
     /**
