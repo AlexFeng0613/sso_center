@@ -480,7 +480,7 @@ margin-top:11px;
 .context{
 width:450px;
 margin-top:60px;
-margin-left:230px;
+
 padding-bottom:100px;
 }
 
@@ -493,7 +493,7 @@ padding-bottom:100px;
 	@extend .fff;
 	@extend .fs20;
 	@extend .text-center;
-	background:url(../../images/register/prev.gif) no-repeat center;
+	background:url(../../images/register/prev.png) no-repeat center;
 	@extend .block;
  }
 }
@@ -520,14 +520,13 @@ padding-bottom:100px;
 	  @extend .fff;
 	  @extend .fs20;
 	  @extend .text-center;
-	  background:url(../../images/register/prev.gif) no-repeat center;
+	  background:url(../../images/register/prev.png) no-repeat center;
 	  border:none;
 	}
   .next:hover{
 	background:url(../../images/register/next.png) no-repeat center;
   }
 }
-
 
 .verify_img{
 	width:586px;
@@ -646,15 +645,17 @@ color:#768089;
 }
 
 .note{
-width:123px;
+width:140px;
 @extend .input_lh;
 @extend .left;
-background:url(../../images/register/note.png) no-repeat;
-@extend .pointer;
+	@extend .pointer;
 @extend .family;
 @extend .fs20;
 @extend .fff;
 @extend .text-center;
+	background-color: #00b6e3;
+	border: none;
+	border-radius:5px;
 }
 
 .note.click{
@@ -936,20 +937,56 @@ color:#74bc41;
 }
 
 .footer{
-	background-color:$foot_bg;
-	@extend .hidden;
-  background-color:#fff;
-	padding:25px 0;
+	background-color: #353535;
 }
 
+.footer .center{
+	width:1000px;
 
-.foot{
-	@extend .text-center;
-	@extend %mt15;
-	@extend .fc;
-  	@extend .fs16;
-	@extend .family;
+	margin:0 auto;
+	padding:30px 0;
+	position: relative;
+}
+
+.foot-size{
+	height:28px;
+	line-height: 28px;
+	font-family: \5FAE\8F6F\96C5\9ED1;
 	white-space: pre;
+	color:#959595;
+	font-size: 14px;
+	text-align: center;
+}
+
+.footer .center span{
+	height:30px;
+	line-height: 30px;
+	font-family: \5FAE\8F6F\96C5\9ED1;
+	white-space: pre;
+	text-align: center;
+	color:#959595;
+	display:block;
+	font-size: 14px;
+}
+
+.footer .center img{
+	width:94px;
+	height:94px;
+	display:block;
+}
+
+.android{
+	width:94px;
+	position: absolute;
+	right:0;
+	top:20px;
+}
+
+.ios{
+	width:94px;
+	position: absolute;
+	right:140px;
+	top:20px;
 }
 
 

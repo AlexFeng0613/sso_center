@@ -1,16 +1,61 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
     <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link th:href="@{/static/css/sass/register.css}" href="../static/css/sass/register.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/static/css/sass/bootstrap.css}" href="../static/css/sass/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/static/css/validform.css}" href="../static/css/validform.css" rel="stylesheet" type="text/css"/>
+        <script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../static/scripts/jquery/jquery-1.11.3.min.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../static/scripts/ie/html5shiv.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../static/scripts/ie/placeholder.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/bootstrap/bootstrap.min.js}" src="../static/scripts/bootstrap/bootstrap.min.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/register.js}" src="../static/scripts/register.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/validform/Validform_v5.3.2_min.js}" src="../static/scripts/validform/Validform_v5.3.2_min.js"></script>
     </head>
     <body>
-
+        <header class="header">
+            <div class="center" >
+                <div class="h_title">完成注册只需6个简单的步骤</div>
+                <div class="step">
+                    <div class="progress_1"></div>
+                    <div class="progress_2"></div>
+                    <ul class="step_mark">
+                        <li class="selected"></li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li class="last">6</li>
+                    </ul>
+                    <ul class="step_step">
+                        <li class="selected">选择角色</li>
+                        <li>基本信息</li>
+                        <li>邮箱验证</li>
+                        <li>手机验证</li>
+                        <li class="particularly">邀请码验证</li>
+                        <li class="last">注册成功</li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid" layout:fragment="content"></div>
         <footer class="footer">
-            <div class="foot">版权所有 © 2002-2014 上海市普陀区教育局 上海市普陀区现代教育技术中心</div>
-            <div class="foot">地址：上海市普陀区大渡河路1688号 邮编：200333 电话：021-62601856</div>
+            <div class="center">
+                <div class="foot-size">客服电话：400-880-5056        客服邮箱：Help@hsjc.com.cn</div>
+                <div class="foot-size">共筑教育云平台 ,创建教育新模式</div>
+                <div class="foot-size">Copyright ©t华师京城网络科技股份有限公司  沪IC备10208270号-3</div>
+                <div class="android">
+                    <img src="../../../static/images/yun/android.png"/>
+                    <span>For  Android</span>
+                </div>
+                <div class="ios">
+                    <img src="../../../static/images/yun/ios.png"/>
+                    <span>For  IOS</span>
+                </div>
+            </div>
         </footer>
     </body>
 </html>
