@@ -33,10 +33,10 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class ApiBaseService {
     @Autowired
-    private RedisTemplate redisTemplate;
+    RedisTemplate redisTemplate;
 
     @Autowired
-    private ThirdClientsMapper thirdClientsMapper;
+    ThirdClientsMapper thirdClientsMapper;
 
     /**
      * @author : zga
@@ -66,7 +66,7 @@ public class ApiBaseService {
      * @param obj
      * @param clazz
      */
-    protected void insertIntoRedis(String key, Object obj, Class clazz) {
+    public void insertIntoRedis(String key, Object obj, Class clazz) {
         redisTemplate.setKeySerializer(new GenericToStringSerializer<>(String.class));
         redisTemplate.setValueSerializer(new FastJsonRedisSerializer<>(clazz));
         redisTemplate.opsForValue().set(key, obj, 0);

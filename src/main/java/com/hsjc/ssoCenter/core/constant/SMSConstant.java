@@ -20,4 +20,16 @@ public class SMSConstant {
     public static String TEMPLATECODE;
 
     public static String TYPE;
+
+
+    /**
+     * 错误码
+     */
+    public static final String NULL_SMS_CODE = "300001";
+
+    public static final String INVALID_SMS_CODE = "300002";
+
+    public static final String ERROR_SMS_CODE = "300003";
+
+    public static final String RIGHT_SMS_CODE = "300004";
 }

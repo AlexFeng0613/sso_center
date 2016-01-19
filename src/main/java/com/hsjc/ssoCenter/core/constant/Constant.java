@@ -51,7 +51,7 @@ public class Constant {
 
     public static final String BIND_PHONE_SUCCESS = "100017";
 
-    public static final int REDIS_FETCH_TIME_OUT = 24 * 60 * 1000;
+    public static final int REDIS_FETCH_TIME_OUT = 18 * 60 * 1000;
 
     public static String public_key;
 }
