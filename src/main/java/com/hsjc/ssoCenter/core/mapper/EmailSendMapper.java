@@ -2,6 +2,8 @@ package com.hsjc.ssoCenter.core.mapper;
 
 import com.hsjc.ssoCenter.core.domain.EmailSend;
 
+import java.util.List;
+
 /**
  * @author : zga
  * @date : 2015-12-2
@@ -29,5 +31,9 @@ public interface EmailSendMapper {
     int updateByPrimaryKey(EmailSend emailSend);
 
 
+    int updateSendFlagById(EmailSend emailSend);
+
     EmailSend selectByPrimaryKey(Long id);
+
+    List<EmailSend> selectEmailSendBySendFlag();
 }

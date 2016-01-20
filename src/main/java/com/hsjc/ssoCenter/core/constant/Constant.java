@@ -54,4 +54,6 @@ public class Constant {
     public static final int REDIS_FETCH_TIME_OUT = 18 * 60 * 1000;
 
     public static String public_key;
+
+    public static String websiteAddress;
 }

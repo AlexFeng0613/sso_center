@@ -1,6 +1,7 @@
 package com.hsjc.ssoCenter.thirdInterface.syndata;
 
 import com.alibaba.fastjson.JSONObject;
+import com.hsjc.ssoCenter.core.constant.Constant;
 import com.hsjc.ssoCenter.core.util.HttpRequestUtil;
 
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import java.util.HashMap;
  */
 public class ThirdInterfaceGetDifferentOrganization {
     public static void main(String[] args) {
-        String url = "http://localhost:8080/3rd/getDifferentOrganizatio.json";
+        String url = Constant.websiteAddress + "/3rd/getDifferentOrganizatio.json";
 
         HashMap<String,Object> paramMap = new HashMap<>();
         paramMap.put("client_id","6NqlFnLG");

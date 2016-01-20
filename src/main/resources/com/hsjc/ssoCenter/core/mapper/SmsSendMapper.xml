@@ -1,129 +1,211 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hsjc.ssoCenter.core.mapper.SmsSendMapper">
-  <resultMap id="BaseResultMap" type="com.hsjc.ssoCenter.core.domain.SmsSend">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="phoneNum" jdbcType="VARCHAR" property="phoneNum" />
-    <result column="msgContent" jdbcType="VARCHAR" property="msgContent" />
-    <result column="sendFlag" jdbcType="INTEGER" property="sendFlag" />
-    <result column="sendTime" jdbcType="TIMESTAMP" property="sendTime" />
-    <result column="byModule" jdbcType="VARCHAR" property="byModule" />
-    <result column="requestKeyId" jdbcType="BIGINT" property="requestKeyId" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsjc.ssoCenter.core.mapper.SmsSendMapper" >
+  <resultMap id="BaseResultMap" type="com.hsjc.ssoCenter.core.domain.SmsSend" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="phoneNum" property="phoneNum" jdbcType="VARCHAR" />
+    <result column="msgContent" property="msgContent" jdbcType="VARCHAR" />
+    <result column="sendFlag" property="sendFlag" jdbcType="INTEGER" />
+    <result column="sendTime" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="byModule" property="byModule" jdbcType="VARCHAR" />
+    <result column="requestKeyId" property="requestKeyId" jdbcType="BIGINT" />
+    <result column="smsType" property="smsType" jdbcType="VARCHAR" />
+    <result column="smsSignName" property="smsSignName" jdbcType="VARCHAR" />
+    <result column="smsSendCode" property="smsSendCode" jdbcType="VARCHAR" />
+    <result column="smsParam" property="smsParam" jdbcType="VARCHAR" />
+    <result column="smsTemplateCode" property="smsTemplateCode" jdbcType="VARCHAR" />
   </resultMap>
-
-  <sql id="Base_Column_List">
-    ID, phoneNum, msgContent, sendFlag, sendTime, byModule, requestKeyId
+  <sql id="Base_Column_List" >
+    id, phoneNum, msgContent, sendFlag, sendTime, byModule, requestKeyId, smsType, smsSignName, 
+    smsSendCode, smsParam, smsTemplateCode
   </sql>
 
   <!--
-   @author : zga
-   @date : 2015-12-04
-   新增
+    @author : zga
+    @date : 2016-1-20
+    新增短信发送
   -->
-  <insert id="insert" parameterType="com.hsjc.ssoCenter.core.domain.SmsSend">
-    insert into tbsmssend (ID, phoneNum, msgContent,
-      sendFlag, sendTime, byModule, 
-      requestKeyId)
-    values (#{id}, #{phoneNum}, #{msgContent}, 
-      #{sendFlag}, #{sendTime}, #{byModule}, 
-      #{requestKeyId})
+  <insert id="insert" parameterType="com.hsjc.ssoCenter.core.domain.SmsSend" >
+    insert into tbsmssend (phoneNum, msgContent, 
+      smsType, smsSignName, 
+      smsSendCode, smsParam, smsTemplateCode
+      )
+    values (#{phoneNum}, #{msgContent}, 
+      #{smsType}, #{smsSignName}, 
+      #{smsSendCode}, #{smsParam}, #{smsTemplateCode}
+      )
   </insert>
-
-  <insert id="insertSelective" parameterType="com.hsjc.ssoCenter.core.domain.SmsSend">
+  
+  <insert id="insertSelective" parameterType="com.hsjc.ssoCenter.core.domain.SmsSend" >
     insert into tbsmssend
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
       </if>
-      <if test="phoneNum != null">
+      <if test="phoneNum != null" >
         phoneNum,
       </if>
-      <if test="msgContent != null">
+      <if test="msgContent != null" >
         msgContent,
       </if>
-      <if test="sendFlag != null">
+      <if test="sendFlag != null" >
         sendFlag,
       </if>
-      <if test="sendTime != null">
+      <if test="sendTime != null" >
         sendTime,
       </if>
-      <if test="byModule != null">
+      <if test="byModule != null" >
         byModule,
       </if>
-      <if test="requestKeyId != null">
+      <if test="requestKeyId != null" >
         requestKeyId,
       </if>
+      <if test="smsType != null" >
+        smsType,
+      </if>
+      <if test="smsSignName != null" >
+        smsSignName,
+      </if>
+      <if test="smsSendCode != null" >
+        smsSendCode,
+      </if>
+      <if test="smsParam != null" >
+        smsParam,
+      </if>
+      <if test="smsTemplateCode != null" >
+        smsTemplateCode,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         #{id},
       </if>
-      <if test="phoneNum != null">
+      <if test="phoneNum != null" >
         #{phoneNum},
       </if>
-      <if test="msgContent != null">
+      <if test="msgContent != null" >
         #{msgContent},
       </if>
-      <if test="sendFlag != null">
+      <if test="sendFlag != null" >
         #{sendFlag},
       </if>
-      <if test="sendTime != null">
+      <if test="sendTime != null" >
         #{sendTime},
       </if>
-      <if test="byModule != null">
+      <if test="byModule != null" >
         #{byModule},
       </if>
-      <if test="requestKeyId != null">
+      <if test="requestKeyId != null" >
         #{requestKeyId},
+      </if>
+      <if test="smsType != null" >
+        #{smsType},
+      </if>
+      <if test="smsSignName != null" >
+        #{smsSignName},
+      </if>
+      <if test="smsSendCode != null" >
+        #{smsSendCode},
+      </if>
+      <if test="smsParam != null" >
+        #{smsParam},
+      </if>
+      <if test="smsTemplateCode != null" >
+        #{smsTemplateCode},
       </if>
     </trim>
   </insert>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tbsmssend
-    where ID = #{id}
+    where id = #{id}
   </delete>
-
-  <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.ssoCenter.core.domain.SmsSend">
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.ssoCenter.core.domain.SmsSend" >
     update tbsmssend
-    <set>
-      <if test="phoneNum != null">
+    <set >
+      <if test="phoneNum != null" >
         phoneNum = #{phoneNum},
       </if>
-      <if test="msgContent != null">
+      <if test="msgContent != null" >
         msgContent = #{msgContent},
       </if>
-      <if test="sendFlag != null">
+      <if test="sendFlag != null" >
         sendFlag = #{sendFlag},
       </if>
-      <if test="sendTime != null">
+      <if test="sendTime != null" >
         sendTime = #{sendTime},
       </if>
-      <if test="byModule != null">
+      <if test="byModule != null" >
         byModule = #{byModule},
       </if>
-      <if test="requestKeyId != null">
+      <if test="requestKeyId != null" >
         requestKeyId = #{requestKeyId},
       </if>
+      <if test="smsType != null" >
+        smsType = #{smsType},
+      </if>
+      <if test="smsSignName != null" >
+        smsSignName = #{smsSignName},
+      </if>
+      <if test="smsSendCode != null" >
+        smsSendCode = #{smsSendCode},
+      </if>
+      <if test="smsParam != null" >
+        smsParam = #{smsParam},
+      </if>
+      <if test="smsTemplateCode != null" >
+        smsTemplateCode = #{smsTemplateCode},
+      </if>
     </set>
-    where ID = #{id}
+    where id = #{id}
   </update>
-
-  <update id="updateByPrimaryKey" parameterType="com.hsjc.ssoCenter.core.domain.SmsSend">
+  
+  <update id="updateByPrimaryKey" parameterType="com.hsjc.ssoCenter.core.domain.SmsSend" >
     update tbsmssend
     set phoneNum = #{phoneNum},
       msgContent = #{msgContent},
       sendFlag = #{sendFlag},
       sendTime = #{sendTime},
       byModule = #{byModule},
-      requestKeyId = #{requestKeyId}
-    where ID = #{id}
+      requestKeyId = #{requestKeyId},
+      smsType = #{smsType},
+      smsSignName = #{smsSignName},
+      smsSendCode = #{smsSendCode},
+      smsParam = #{smsParam},
+      smsTemplateCode = #{smsTemplateCode}
+    where id = #{id}
   </update>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <!--
+    @author : zga
+    @date : 2016-1-20
+    更新sendFlag状态为1
+  -->
+  <update id="updateSendFlagById">
+    UPDATE tbsmssend
+    SET
+    sendFlag = 1,
+    sendTime = #{sendTime}
+    where id = #{id}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from tbsmssend
-    where ID = #{id}
+    where id = #{id}
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-1-20
+    查询sendFlag为0的短信
+  -->
+  <select id="selectSmsSendBysendFlag" resultType="SmsSend">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbsmssend
+    WHERE sendFlag = 0
   </select>
 </mapper>

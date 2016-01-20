@@ -6,8 +6,11 @@ import com.hsjc.ssoCenter.core.constant.Constant;
 import com.hsjc.ssoCenter.core.constant.MailTemplate;
 import com.hsjc.ssoCenter.core.constant.ThirdSynConstant;
 import com.hsjc.ssoCenter.core.domain.ActivateEmailMess;
+import com.hsjc.ssoCenter.core.domain.EmailSend;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.domain.UserMain;
+import com.hsjc.ssoCenter.core.mapper.EmailSendMapper;
+import com.hsjc.ssoCenter.core.mapper.SmsSendMapper;
 import com.hsjc.ssoCenter.core.mapper.ThirdClientsMapper;
 import com.hsjc.ssoCenter.core.util.DesUtil;
 import com.hsjc.ssoCenter.core.util.MD5Util;
@@ -37,6 +40,12 @@ public class ApiBaseService {
 
     @Autowired
     ThirdClientsMapper thirdClientsMapper;
+
+    @Autowired
+    EmailSendMapper emailSendMapper;
+
+    @Autowired
+    SmsSendMapper smsSendMapper;
 
     /**
      * @author : zga
@@ -112,15 +121,59 @@ public class ApiBaseService {
 
         String activateURL = null;
         if("0".equals(type)){
-            activateURL = "http://localhost:8080/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
+            activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
                     activateEmailMess.getTicket();
         } else {
-            activateURL = "http://localhost:8080/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
+            activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
                     activateEmailMess.getTicket()+"&type="+type;
         }
 
         String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%",email,activateURL,activateURL);
         MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
+
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-1-20
+     *
+     * 插入Email发送表
+     *
+     * @param email
+     * @param apiBaseService
+     * @param type
+     * @return
+     * @throws Exception
+     */
+    public JSONObject insetSendEmail(String email, ApiBaseService apiBaseService, String type) throws Exception {
+        JSONObject resultJson = getResultJson();
+
+        ActivateEmailMess activateEmailMess = new ActivateEmailMess();
+        activateEmailMess.setEmail(apiBaseService.getDesUtil().encrypt(email));
+        activateEmailMess.setTicket(MD5Util.encode(Calendar.getInstance().getTime().toString()));
+
+        apiBaseService.insertIntoRedis(email,activateEmailMess,ActivateEmailMess.class);
+
+        String activateURL = null;
+        if("0".equals(type)){
+            activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
+                    activateEmailMess.getTicket();
+        } else {
+            activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
+                    activateEmailMess.getTicket()+"&type="+type;
+        }
+
+        String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%",email,activateURL,activateURL);
+        //MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
+
+        EmailSend emailSend = new EmailSend();
+        emailSend.setContent(content);
+        emailSend.setByModule("");
+        emailSend.setEmail(apiBaseService.getDesUtil().encrypt(email));
+        emailSend.setSubject(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT);
+
+        emailSendMapper.insert(emailSend);
 
         return resultJson;
     }

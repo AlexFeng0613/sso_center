@@ -90,9 +90,13 @@
                enableUpdateByExample="false"/>
 
         <table tableName="tbindexicos" domainObjectName="IndexIcos" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>-->
+               enableUpdateByExample="false"/>
 
         <table tableName="tb3rdfilter" domainObjectName="ThirdFilter" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>-->
+
+        <table tableName="tbsmssend" domainObjectName="SmsSend" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
+
     </context>
 </generatorConfiguration>

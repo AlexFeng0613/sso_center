@@ -2,14 +2,12 @@ package com.hsjc.ssoCenter.core.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.constant.SMSConstant;
+import com.hsjc.ssoCenter.core.domain.SmsSend;
 import com.hsjc.ssoCenter.core.util.SSOStringUtil;
-import com.taobao.api.ApiException;
-import com.taobao.api.DefaultTaobaoClient;
-import com.taobao.api.TaobaoClient;
-import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
-import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author : zga
@@ -20,45 +18,48 @@ import org.springframework.stereotype.Service;
 @Service
 public class SmsService extends ApiBaseService{
 
+    /**
+     * @author : zga
+     * @date : 2016-1-20
+     *
+     * 发送验证码
+     *
+     * @param paramJson
+     * @return
+     */
     public JSONObject sendSmsCode(JSONObject paramJson){
         JSONObject resultJson = getResultJson();
         String phone = paramJson.getString("phone");
 
-        TaobaoClient client = new DefaultTaobaoClient(SMSConstant.URL, SMSConstant.APPKEY, SMSConstant.APPSECRET);
-        AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
-        req.setSmsType("normal");
-        req.setSmsFreeSignName(SMSConstant.SIGNNAME);
-        JSONObject sendParamJson = new JSONObject();
-        String smsSendCode = SSOStringUtil.getRandomString(2,4);
-
         /**
          * 把验证码放入到Redis缓存中
          */
+        String smsSendCode = SSOStringUtil.getRandomString(2,4);
         insertIntoRedis(phone,smsSendCode,String.class);
 
+        JSONObject sendParamJson = new JSONObject();
         sendParamJson.put("code",smsSendCode);
         sendParamJson.put("product","华师京城云平台");
-        req.setSmsParam(sendParamJson.toJSONString());
-        req.setRecNum(phone);
-        req.setSmsTemplateCode(SMSConstant.TEMPLATECODE);
+        SmsSend smsSend = new SmsSend();
+        smsSend.setPhoneNum(phone);
+        smsSend.setMsgContent("");
+        smsSend.setSmsType("normal");
+        smsSend.setSmsSignName(SMSConstant.SIGNNAME);
+        smsSend.setSmsSendCode(smsSendCode);
+        smsSend.setSmsParam(sendParamJson.toJSONString());
+        smsSend.setSmsTemplateCode(SMSConstant.TEMPLATECODE);
+
         try {
-            AlibabaAliqinFcSmsNumSendResponse response = client.execute(req);
-            String errorCode = response.getErrorCode();
-            if(StringUtils.isEmpty(errorCode)){
+            int num = smsSendMapper.insert(smsSend);
+            if(num < 1){
                 resultJson.put("success",false);
                 return resultJson;
             }
-            /*System.out.println("Body: " + response.getBody());
-            System.out.println("Result: " + response.getResult());
-            System.out.println("ErrorCode: " + response.getErrorCode());
-            System.out.println("Msg : " + response.getMsg());
-            System.out.println("params : " + response.getParams());*/
-        } catch (ApiException e) {
+        } catch (Exception e){
             e.printStackTrace();
             resultJson.put("success",false);
             return resultJson;
         }
-
         return resultJson;
     }
 
@@ -110,4 +111,29 @@ public class SmsService extends ApiBaseService{
         return resultJson;
     }
 
+    /**
+     * @author : zga
+     * @date : 2016-1-20
+     *
+     * 查询Email发送表中的sendFlag为0的数据
+     *
+     * @return
+     */
+    public List<SmsSend> selectSmsSendBySendFlag(){
+        List<SmsSend> list = smsSendMapper.selectSmsSendBysendFlag();
+        return list;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-1-20
+     *
+     * 更新Email发送表的状态为1
+     *
+     * @param smsSend
+     * @return
+     */
+    public int updateSendFlagById(SmsSend smsSend){
+        return smsSendMapper.updateSendFlagById(smsSend);
+    }
 }

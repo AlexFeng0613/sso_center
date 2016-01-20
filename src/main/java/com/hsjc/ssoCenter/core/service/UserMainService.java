@@ -132,7 +132,7 @@ public class UserMainService extends ApiBaseService{
         if(res > 0){
             //调用Email发送接口发送Email
             try {
-                resultJson = sendEmail(email,apiBaseService,"0");
+                resultJson = insetSendEmail(email,apiBaseService,"0");
             } catch (Exception e) {
                 resultJson.put("message", Constant.SEND_MAIL_FAIL);
                 return resultJson;
@@ -351,7 +351,7 @@ public class UserMainService extends ApiBaseService{
         String email = paramJson.getString("email");
 
         try {
-            resultJson = sendEmail(email,apiBaseService,"1");
+            resultJson = insetSendEmail(email,apiBaseService,"1");
             resultJson.put("message",Constant.SEND_MAIL_SUCCESS);
         } catch (Exception e) {
             resultJson.put("success",false);

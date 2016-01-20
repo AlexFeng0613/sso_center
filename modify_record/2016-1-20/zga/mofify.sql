@@ -14,6 +14,13 @@ CREATE TABLE tbsynorganizationbb LIKE tbsynorganizationjclass;
 
 CREATE TABLE tbsynuserbb LIKE tbsynuserjclass;
 
+#tbsmssend
+alter table tbsmssend add smsType varchar(500);
+alter table tbsmssend add smsSignName varchar(500);
+alter table tbsmssend add smsSendCode varchar(500);
+alter table tbsmssend add smsParam varchar(500);
+alter table tbsmssend add smsTemplateCode varchar(500);
+
 #trigger
 DELIMITER $$
 

@@ -19,7 +19,7 @@
     id, email, subject, sendFlag, sendTime, byModule, requestKeyId
   </sql>
   <sql id="Blob_Column_List">
-    Content
+    content
   </sql>
 
   <!--
@@ -28,12 +28,12 @@
    新增
  -->
   <insert id="insert" parameterType="com.hsjc.ssoCenter.core.domain.EmailSend">
-    insert into tbEmailSend (id, email, subject,
-      sendFlag, sendTime, byModule, 
-      requestKeyId, Content)
-    values (#{id}, #{email}, #{subject}, 
-      #{sendFlag}, #{sendTime}, #{byModule}, 
-      #{requestKeyId}, #{content})
+    insert into tbEmailSend (email, subject,
+      byModule,
+      content)
+    values (#{email}, #{subject}, 
+      #{byModule},
+      #{content})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.ssoCenter.core.domain.EmailSend">
@@ -61,7 +61,7 @@
         requestKeyId,
       </if>
       <if test="content != null">
-        Content,
+        content,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -119,7 +119,7 @@
         requestKeyId = #{requestKeyId},
       </if>
       <if test="content != null">
-        Content = #{content},
+        content = #{content},
       </if>
     </set>
     where id = #{id}
@@ -133,7 +133,7 @@
       sendTime = #{sendTime},
       byModule = #{byModule},
       requestKeyId = #{requestKeyId},
-      Content = #{content}
+      content = #{content}
     where id = #{id}
   </update>
 
@@ -148,6 +148,18 @@
     where id = #{id}
   </update>
 
+  <!--
+    @author : zga
+    @date : 2016-1-20
+    更新发送Email状态
+  -->
+  <update id="updateSendFlagById">
+    UPDATE tbemailsend
+    SET sendFlag = 1,
+    sendTime = #{sendTime}
+    where id = #{id}
+  </update>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
@@ -155,5 +167,17 @@
     <include refid="Blob_Column_List" />
     from tbemailsend
     where id = #{id}
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-1-20
+    查询Email发送表中sendFlag为0的数据
+  -->
+  <select id="selectEmailSendBySendFlag" resultType="EmailSend">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbemailsend
+    WHERE sendflag = 0
   </select>
 </mapper>
