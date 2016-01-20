@@ -18,6 +18,7 @@
 				<section class="section">
 					<form class="regForm" action="/user/register.json" method="post">
 						<input type="hidden" th:value="${type}" name="type"/>
+
 						<div class="input_box">
 							<label><div class="input_box_l">用户名</div></label>
 							<input type="text" name="username" placeholder="请输入8到20位英文和数字" class="inputxt" />
@@ -30,7 +31,6 @@
 							<div class="mistake"></div>
 							<div class="correct"></div>
 						</div>
-
 						<!--姓名、性别-->
 						<div class="input_box">
 							<div class="input_box_l">姓名</div>
