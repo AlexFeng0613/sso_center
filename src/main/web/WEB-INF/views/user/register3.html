@@ -18,7 +18,7 @@
 					<div class="send">
 						<div class="send_l">验证信息已发送至邮箱!</div>
 						<div class="anew">重新发送</div>
-						<div class="anew60"></div>
+						<input type="button" class="anew60"/>
 					</div>
 					<input type="hidden" th:value="${email}" name="email"/>
 					<a href="#" class="promptly">立即前往验证&gt;&gt;</a>
@@ -43,18 +43,18 @@
 					$('.step_step2').addClass('selected1');
 					$('.step_step3').addClass('selected2');
 
-					var time=100;
+					var time=60;
 					var timer=null;
-					$('.anew60').html(time+'秒后可重新发送');
+					$('input.anew60').val(time+'秒后可重新发送');
 
 					timer=setInterval(function(){
 						if(time>1){
 							time--;
-							$('.anew60').html(time+'秒后可重新发送');
+							$('.anew60').val(time+'秒后可重新发送');
 						}else{
 							clearInterval(timer);
 							time=100;
-							$('.anew60').html(time+'秒后可重新发送');
+							$('.anew60').val(time+'秒后可重新发送');
 							$('.anew60').hide();
 							$('.anew').show();
 						};
@@ -69,11 +69,11 @@
 						timer=setInterval(function(){
 							if(time>1){
 								time--;
-								$('.anew60').html(time+'秒后可重新获取');
+								$('.anew60').val(time+'秒后可重新获取');
 							}else{
 								clearInterval(timer);
 								time=100;
-								$('.anew60').html(time+'秒后可重新获取');
+								$('.anew60').val(time+'秒后可重新获取');
 								$('.anew60').hide();
 								$('.anew').show();
 							};

@@ -316,7 +316,7 @@ background-color:$foot_bg;
 .figure{
 	width:568px;
 	
-	margin:180px auto 0;
+	margin:150px auto 0;
 }
 
 .figure a:link{
@@ -327,12 +327,12 @@ height:250px;
 @extend .fs24;
 @extend .text-center;
 @extend .fc364;
-line-height:465px;
+line-height:520px;
 text-decoration:none;
 }
 
 .figure a:hover{
-	color:#008acb;
+
 }
 
 
@@ -346,23 +346,23 @@ text-decoration:none;
 	.student:link{
 		@extend .left;
 		
-		background:url(../../images/register/student1.png) no-repeat center 8px;
+		background:url(../../images/register/student1.png) no-repeat center;
 	}
 	.teacher:link{
 		@extend .right;
-		background:url(../../images/register/teacher1.png) no-repeat center 8px;
+		background:url(../../images/register/teacher1.png) no-repeat center;
 		
 	}
 }
 
 .figure{
 	.student:hover{
-		background:url(../../images/register/student2.png) no-repeat center 8px;
-		color:#008acb;
+		background:url(../../images/register/student2.png) no-repeat center;
+		color:#7bbb5e;
 		text-decoration:none;
 	}
 	.teacher:hover{
-		background:url(../../images/register/teacher2.png) no-repeat center 8px;
+		background:url(../../images/register/teacher2.png) no-repeat center;
 		color:#008acb;
 		text-decoration:none;
 	}
@@ -370,30 +370,24 @@ text-decoration:none;
 
 .figure{
 	.student:active{
-		background:url(../../images/register/student3.png) no-repeat center top;
+		background:url(../../images/register/student3.png) no-repeat center;
 		color:#008acb;
 		text-decoration:none;
 	}
 	.teacher:active{
-		background:url(../../images/register/teacher3.png) no-repeat center top;
+		background:url(../../images/register/teacher3.png) no-repeat center;
 		color:#008acb;
 		text-decoration:none;
 	}
 }
 
-
-
-
-
-
 .aside1{
 	@extend %mt88;
 	@extend .left;
-	width:344px;
+	width:300px;
 	height:250px;
-	border-right:1px solid #768089;
-	background:url(../../images/register/student3.png) no-repeat center top;
-	color:#008acb;
+	background:url(../../images/register/student2.png) no-repeat center top;
+	color:#7bbb5e;
 	@extend .family;
 	@extend .fs24;
 	@extend .text-center;
@@ -404,10 +398,9 @@ text-decoration:none;
 .aside2{
 	@extend %mt88;
 	@extend .left;
-	width:344px;
+	width:300px;
 	height:250px;
-	border-right:1px solid #768089;
-	background:url(../../images/register/teacher3.png) no-repeat center top;
+	background:url(../../images/register/teacher2.png) no-repeat center top;
 	color:#008acb;
 	@extend .family;
 	@extend .fs24;
@@ -419,18 +412,18 @@ text-decoration:none;
 .section{
 	@extend %mt88;
 	@extend .left;
-	
+	border-left:1px solid #768089;
 }
 
 .input_box{
-	width:750px;
+	width:890px;
 	height:50px;
 	@extend %mb20;
 
 }
 
 .input_box_l{
-width:110px;
+width:130px;
 @extend .left;
 height:50px;
 line-height:50px;
@@ -446,12 +439,12 @@ background:url(../../images/register/xi.png) no-repeat 10px center;
 @extend .left;
 height:48px;
 line-height:48px;
-width:300px;
+width:450px;
 background:none;
 border:1px solid #717679;
 border-radius:5px;
 @extend .indent;
-margin-right:40px;
+
 color:#768089;
 @extend .fs18;
 
@@ -483,7 +476,7 @@ margin-top:11px;
 .context{
 width:450px;
 margin-top:60px;
-
+margin-left:150px;
 padding-bottom:100px;
 }
 
@@ -565,32 +558,29 @@ width:210px;
 @extend .text-center;
 @extend .fs20;
 @extend .pointer;
-background:url(../../images/register/anew1.png) no-repeat;
+background-color: #ffad00;
+	border-radius:5px;
   @extend .none;
 }
 
-.anew:hover{
-background:url(../../images/register/anew2.png) no-repeat;
-}
 
-
-.anew60{
+input.anew60{
 width:210px;
 @extend .input_lh;
 @extend .left;
 @extend .family;
 @extend .text-center;
-color:#ec8558;
+color:#ffad00;
 @extend .fs20;
-@extend .pointer;
-
-background:url(../../images/register/anew60.png) no-repeat;
+	border-radius:5px;
+	border:1px solid #ffad00;
+	background: none;
 }
 
 .promptly{
 line-height:44px;
 @extend .family;
-color:#ec8558;
+color:#ffad00;
 font-size:28px;
 @extend .block;
 }
@@ -714,7 +704,7 @@ color:#b5b9bc;
 }
 
 .skip:hover{
-color:#74bc41;
+color:#ffad00;
 }
 
 .inviteCode{
@@ -810,10 +800,41 @@ margin-right:5px;
 .login_html{
 @extend .left;
 	@extend .input_lh;
-	color:#ec8558;
+	color:#ffad00;
 	@extend .family;
 	@extend .fs28;
 	@extend .block;
+}
+
+.sex{
+	height:50px;
+	@extend .left;
+}
+
+.sex li{
+	width:100px;
+	height:50px;
+	line-height: 50px;
+	@extend .family;
+	color: #364049;
+	@extend .left;
+	background:url(../../images/register/progress2.png) no-repeat center;
+	@extend .rel;
+	@extend .fs20;
+}
+
+.sex li.selected{
+	background:url(../../images/register/progress3.png) no-repeat center;
+}
+
+.sex li input{
+	width:100%;
+	height:100%;
+	@extend .abs;
+	top:0;
+	left:0;
+	opacity: 0;
+	filter:alpha(opacity=0);
 }
 
 .leap{
@@ -937,6 +958,7 @@ color:#74bc41;
   height:48px;
   @extend .left;
   @extend .block;
+	margin-left:80px;
 }
 
 .footer{

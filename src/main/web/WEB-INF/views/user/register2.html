@@ -41,8 +41,14 @@
 
 						<div class="input_box">
 							<div class="input_box_l">性别</div>
-							<input type="radio" name="gender" value="1" placeholder="男" checked="checked"/>
-							<input type="radio" name="gender" value="0" placeholder="女"/>
+							<ul class="sex">
+								<li class="selected">男
+									<input type="radio" name="gender" value="1" placeholder="男" checked="checked"/>
+								</li>
+								<li>女
+									<input type="radio" name="gender" value="0" placeholder="女"/>
+								</li>
+							</ul>
 							<div class="mistake"></div>
 							<div class="correct"></div>
 						</div>
@@ -73,11 +79,21 @@
 			</div>
 			<script type="text/javascript">
 				$(function(){
-					alert(1);
+					var _index=0;
 					$('.step_mark1').html('');
-					$('.step_mark2').html('');
+
 					$('.step_mark1').addClass('selected');
+					$('.step_mark2').addClass('select');
+
 					$('.step_step1').addClass('selected1');
+					$('.step_step2').addClass('selected2');
+
+					$('.sex li').click(function(){
+						index=$(this).index();
+						$(this).addClass('selected').siblings('.sex li').removeClass('selected');
+						$(this).find('input').attr('checked',true).end().siblings('.sex li').find('input').attr('checked',false);
+
+					});
 
 					var demo = $(".regForm").Validform({
 						tiptype:3,
@@ -86,7 +102,7 @@
 						datatype:{
 							"s6-18":/^[\w\.\s]{6,18}$/,
 							"s2-10":/^\s{2,10}/,
-							"e" : const
+							//"e" : const
 						},
 						callback : function(form){
 							var check=confirm("您确定要提交表单吗？");

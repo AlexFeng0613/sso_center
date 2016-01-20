@@ -24,7 +24,7 @@ a:visited {
 .fc364, .step_mark li, .figure a:link, .figure a:visited, .input_box_l, .send_l, .hint, .ipone_box_l, .invite_box_l, .congratulation, .leap {
   color: #364049; }
 
-.input_lh, .send_l, .anew, .anew60, .hint, .ipone_box, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_box_next, .invite_box, .invite_box_l, .congratulation, .login_html {
+.input_lh, .send_l, .anew, input.anew60, .hint, .ipone_box, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_box_next, .invite_box, .invite_box_l, .congratulation, .login_html {
   height: 52px;
   line-height: 52px; }
 
@@ -34,7 +34,7 @@ a:visited {
 .none, .aside2, .mistake, .correct, .anew, .count {
   display: none; }
 
-.pointer, .anew, .anew60, .note, .ipone_next, .skip, .invite_next {
+.pointer, .anew, .note, .ipone_next, .skip, .invite_next {
   cursor: pointer; }
 
 .top_box, .ipone, .invite {
@@ -88,7 +88,7 @@ a:visited {
 .fff, .context a, .context .next, .anew, .note, .ipone_next, .vault:hover, .log {
   color: #fff; }
 
-.fs20, .context a, .context .next, .anew, .anew60, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault {
+.fs20, .context a, .context .next, .anew, input.anew60, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .sex li {
   font-size: 20px; }
 
 .fs24, .figure a:link, .aside1, .aside2 {
@@ -100,20 +100,20 @@ a:visited {
 .fs28, .congratulation, .login_html {
   font-size: 28px; }
 
-.family, .h_title, .step_step li, .figure a:link, .aside1, .aside2, .input_box_l, .context a, .context .next, .send_l, .anew, .anew60, .promptly, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .congratulation, .login_html, .leap, .login_title, .login_input, .forget, .log, .log_promptly, .promptly_register, .promptly_register a {
+.family, .h_title, .step_step li, .figure a:link, .aside1, .aside2, .input_box_l, .context a, .context .next, .send_l, .anew, input.anew60, .promptly, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .congratulation, .login_html, .sex li, .leap, .login_title, .login_input, .forget, .log, .log_promptly, .promptly_register, .promptly_register a {
   font-family: \5FAE\8F6F\96C5\9ED1; }
 
 .center, .header .center, .container-fluid .center {
   width: 1200px;
   margin: 0 auto; }
 
-.left, .step_mark li, .step_step li, .figure .student:link, .aside1, .aside2, .section, .input_box_l, .input_box input, .mistake, .correct, .context a.prev, .verify_img, .verify, .send_l, .anew, .anew60, .ipone_box_l, .ipone_num, .verify_code, .note, .ipone_next, .skip, .inviteCode, .invite_box_l, .invite_next, .vault, .register_succeed_l, .register_succeed_r, .congratulation, .login_html, .self_motion, #vimg {
+.left, .step_mark li, .step_step li, .figure .student:link, .aside1, .aside2, .section, .input_box_l, .input_box input, .mistake, .correct, .context a.prev, .verify_img, .verify, .send_l, .anew, input.anew60, .ipone_box_l, .ipone_num, .verify_code, .note, .ipone_next, .skip, .inviteCode, .invite_box_l, .invite_next, .vault, .register_succeed_l, .register_succeed_r, .congratulation, .login_html, .sex, .sex li, .self_motion, #vimg {
   float: left; }
 
 .right, .figure .teacher:link, .context .next, .count, .forget {
   float: right; }
 
-.text-center, .step_mark li, .figure a:link, .aside1, .aside2, .context a, .context .next, .anew, .anew60, .note, .ipone_next, .vault, .login_title, .log {
+.text-center, .step_mark li, .figure a:link, .aside1, .aside2, .context a, .context .next, .anew, input.anew60, .note, .ipone_next, .vault, .login_title, .log {
   text-align: center; }
 
 .text-left, .h_title {
@@ -122,10 +122,10 @@ a:visited {
 .text-right, .input_box_l, .count {
   text-align: right; }
 
-.rel, .step, .login, .self_motion {
+.rel, .step, .sex li, .login, .self_motion {
   position: relative; }
 
-.abs, .step_mark, .step_step, .progress_1, .progress_2, .self_motion input {
+.abs, .step_mark, .step_step, .progress_1, .progress_2, .sex li input, .self_motion input {
   position: absolute; }
 
 .hidden, .header, .container-fluid, .send, .register_succeed_r, .register_succeed {
@@ -186,65 +186,63 @@ a:visited {
 
 .figure {
   width: 568px;
-  margin: 180px auto 0; }
+  margin: 150px auto 0; }
 
 .figure a:link {
   width: 187px;
   height: 250px;
-  line-height: 465px;
+  line-height: 520px;
   text-decoration: none; }
-
-.figure a:hover {
-  color: #008acb; }
 
 .figure a:visited {
   text-decoration: none; }
 
 .figure .student:link {
-  background: url(../../images/register/student1.png) no-repeat center 8px; }
+  background: url(../../images/register/student1.png) no-repeat center; }
 .figure .teacher:link {
-  background: url(../../images/register/teacher1.png) no-repeat center 8px; }
+  background: url(../../images/register/teacher1.png) no-repeat center; }
 
 .figure .student:hover {
-  background: url(../../images/register/student2.png) no-repeat center 8px;
-  color: #008acb;
+  background: url(../../images/register/student2.png) no-repeat center;
+  color: #7bbb5e;
   text-decoration: none; }
 .figure .teacher:hover {
-  background: url(../../images/register/teacher2.png) no-repeat center 8px;
+  background: url(../../images/register/teacher2.png) no-repeat center;
   color: #008acb;
   text-decoration: none; }
 
 .figure .student:active {
-  background: url(../../images/register/student3.png) no-repeat center top;
+  background: url(../../images/register/student3.png) no-repeat center;
   color: #008acb;
   text-decoration: none; }
 .figure .teacher:active {
-  background: url(../../images/register/teacher3.png) no-repeat center top;
+  background: url(../../images/register/teacher3.png) no-repeat center;
   color: #008acb;
   text-decoration: none; }
 
 .aside1 {
-  width: 344px;
+  width: 300px;
   height: 250px;
-  border-right: 1px solid #768089;
-  background: url(../../images/register/student3.png) no-repeat center top;
-  color: #008acb;
+  background: url(../../images/register/student2.png) no-repeat center top;
+  color: #7bbb5e;
   line-height: 470px; }
 
 .aside2 {
-  width: 344px;
+  width: 300px;
   height: 250px;
-  border-right: 1px solid #768089;
-  background: url(../../images/register/teacher3.png) no-repeat center top;
+  background: url(../../images/register/teacher2.png) no-repeat center top;
   color: #008acb;
   line-height: 470px; }
 
+.section {
+  border-left: 1px solid #768089; }
+
 .input_box {
-  width: 750px;
+  width: 890px;
   height: 50px; }
 
 .input_box_l {
-  width: 110px;
+  width: 130px;
   height: 50px;
   line-height: 50px;
   margin-right: 20px;
@@ -254,11 +252,10 @@ a:visited {
 .input_box input {
   height: 48px;
   line-height: 48px;
-  width: 300px;
+  width: 450px;
   background: none;
   border: 1px solid #717679;
   border-radius: 5px;
-  margin-right: 40px;
   color: #768089; }
 
 .inspect, .mistake, .correct {
@@ -275,6 +272,7 @@ a:visited {
 .context {
   width: 450px;
   margin-top: 60px;
+  margin-left: 150px;
   padding-bottom: 100px; }
 
 .context a {
@@ -312,19 +310,19 @@ a:visited {
 
 .anew {
   width: 210px;
-  background: url(../../images/register/anew1.png) no-repeat; }
+  background-color: #ffad00;
+  border-radius: 5px; }
 
-.anew:hover {
-  background: url(../../images/register/anew2.png) no-repeat; }
-
-.anew60 {
+input.anew60 {
   width: 210px;
-  color: #ec8558;
-  background: url(../../images/register/anew60.png) no-repeat; }
+  color: #ffad00;
+  border-radius: 5px;
+  border: 1px solid #ffad00;
+  background: none; }
 
 .promptly {
   line-height: 44px;
-  color: #ec8558;
+  color: #ffad00;
   font-size: 28px; }
 
 .ipone {
@@ -385,7 +383,7 @@ a:visited {
   color: #b5b9bc; }
 
 .skip:hover {
-  color: #74bc41; }
+  color: #ffad00; }
 
 .inviteCode {
   width: 210px;
@@ -436,7 +434,28 @@ a:visited {
   margin-right: 5px; }
 
 .login_html {
-  color: #ec8558; }
+  color: #ffad00; }
+
+.sex {
+  height: 50px; }
+
+.sex li {
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  color: #364049;
+  background: url(../../images/register/progress2.png) no-repeat center; }
+
+.sex li.selected {
+  background: url(../../images/register/progress3.png) no-repeat center; }
+
+.sex li input {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  filter: alpha(opacity=0); }
 
 .leap {
   margin-top: 15px; }
@@ -509,7 +528,8 @@ a:visited {
   color: #74bc41; }
 
 #vimg {
-  height: 48px; }
+  height: 48px;
+  margin-left: 80px; }
 
 .footer {
   background-color: #353535; }
