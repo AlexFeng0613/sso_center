@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsjc.ssoCenter.core.mapper.ThirdFilterMapper" >
+  <resultMap id="BaseResultMap" type="com.hsjc.ssoCenter.core.domain.ThirdFilter" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="trdClientId" property="trdclientid" jdbcType="VARCHAR" />
+    <result column="organizationCode" property="organizationcode" jdbcType="INTEGER" />
+    <result column="tstudent" property="tstudent" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, trdClientId, organizationCode, tstudent
+  </sql>
+
+  <insert id="insert" parameterType="com.hsjc.ssoCenter.core.domain.ThirdFilter" >
+    insert into tb3rdfilter (id, trdClientId, organizationCode,
+    tstudent)
+    values (#{id}, #{trdclientid}, #{organizationcode},
+    #{tstudent})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.hsjc.ssoCenter.core.domain.ThirdFilter" >
+    insert into tb3rdfilter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="trdclientid != null" >
+        trdClientId,
+      </if>
+      <if test="organizationcode != null" >
+        organizationCode,
+      </if>
+      <if test="tstudent != null" >
+        tstudent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="trdclientid != null" >
+        #{trdclientid},
+      </if>
+      <if test="organizationcode != null" >
+        #{organizationcode},
+      </if>
+      <if test="tstudent != null" >
+        #{tstudent},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb3rdfilter
+    where id = #{id}
+  </delete>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.ssoCenter.core.domain.ThirdFilter" >
+    update tb3rdfilter
+    <set >
+      <if test="trdclientid != null" >
+        trdClientId = #{trdclientid},
+      </if>
+      <if test="organizationcode != null" >
+        organizationCode = #{organizationcode},
+      </if>
+      <if test="tstudent != null" >
+        tstudent = #{tstudent},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.hsjc.ssoCenter.core.domain.ThirdFilter" >
+    update tb3rdfilter
+    set trdClientId = #{trdclientid},
+      organizationCode = #{organizationcode},
+      tstudent = #{tstudent}
+    where id = #{id}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tb3rdfilter
+    where id = #{id}
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-1-20
+    根据clientId查询第三方过滤信息
+  -->
+  <select id="selectByClientId" resultType="java.util.List">
+    select
+    <include refid="Base_Column_List" />
+    from tb3rdfilter
+    where trdClientId = #{trdclientid}
+  </select>
+</mapper>

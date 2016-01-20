@@ -11,54 +11,62 @@
     <description>Central API for HSJC Cloud Service</description>
 
     <properties>
+        <!--项目基本信息-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <fastjson.version>1.2.7</fastjson.version>
         <spring.version>4.1.2.RELEASE</spring.version>
-        <spring.mongodb.version>1.6.1.RELEASE</spring.mongodb.version>
+        <quartz.version>2.1.6</quartz.version>
+        <servlet.version>3.1.0</servlet.version>
+        <jsp.version>2.2</jsp.version>
 
+        <!--数据库-->
         <mongodb.driver.version>2.12.4</mongodb.driver.version>
+        <spring.mongodb.version>1.6.1.RELEASE</spring.mongodb.version>
         <dbutils.version>1.6</dbutils.version>
         <spring.redis.version>1.4.1.RELEASE</spring.redis.version>
         <dbutils.version>1.6</dbutils.version>
         <jedis.version>2.6.1</jedis.version>
 
+        <!--shiro-->
         <shiro.version>1.2.3</shiro.version>
 
+        <!--thymeleaf-->
         <thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
         <thymeleaf.extras.shiro.version>1.1.0</thymeleaf.extras.shiro.version>
         <thymeleaf.dialect.layout.version>1.2.7</thymeleaf.dialect.layout.version>
 
+        <!--log-->
         <log4j.version>1.2.17</log4j.version>
         <slf4j.version>1.7.5</slf4j.version>
 
         <plugin.war.version>2.4</plugin.war.version>
         <plugin.compiler.version>3.1</plugin.compiler.version>
 
+        <!--fileupload-->
         <httpclient.version>4.3</httpclient.version>
         <commons-io.version>2.4</commons-io.version>
         <commons-fileupload.version>1.2.2</commons-fileupload.version>
+        <fastdfs-version>1.19RELEASE</fastdfs-version>
 
-        <servlet.version>3.1.0</servlet.version>
-        <jsp.version>2.2</jsp.version>
-
+        <!--ehcache-->
         <ehcache.version>2.6.6</ehcache.version>
-
         <hibernate.validator.version>5.1.1.Final</hibernate.validator.version>
 
+        <!--json-->
         <jackson-core-asl.version>1.9.12</jackson-core-asl.version>
         <jackson-mapper-asl.version>1.9.12</jackson-mapper-asl.version>
 
+        <!--email-->
         <mail.version>1.4.7</mail.version>
 
+        <!--aop-->
         <aspectjrt.version>1.7.4</aspectjrt.version>
         <cglib.version>2.2.2</cglib.version>
 
         <commons-lang>2.6</commons-lang>
 
         <pagehelper.version>4.0.1</pagehelper.version>
-
-        <fastdfs-version>1.19RELEASE</fastdfs-version>
     </properties>
 
     <dependencies>
@@ -161,7 +169,7 @@
             <version>${thymeleaf.extras.shiro.version}</version>
         </dependency>
 
-        <!-- SHIRO -->
+        <!-- shiro -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
@@ -354,6 +362,13 @@
             <artifactId>commons-lang</artifactId>
             <version>${commons-lang}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

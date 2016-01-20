@@ -27,9 +27,9 @@ public interface SynMapper {
 
     List<HashMap> selectDifferentUser(@Param("briefName")String briefName);
 
-    List<HashMap> selectAllOrganization();
+    List<HashMap> selectAllOrganization(HashMap paramMap);
 
-    List<HashMap> selectAllUser();
+    List<HashMap> selectAllUser(HashMap paramMap);
 
     Integer countAllOrganization();
 

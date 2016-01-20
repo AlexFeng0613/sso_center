@@ -17,8 +17,8 @@
 
         <!-- !!!! Database Configurations !!!! -->
         <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/sso_center" userId="root" password="000000"/>-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.18.201:3310/sso_center"
-                        userId="admin" password="1HL9v5BErLQW"/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.18.201:3323/sso_center"
+                        userId="root" password="123456"/>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -87,9 +87,12 @@
                enableUpdateByExample="false"/>
 
         <table tableName="tbuserTemp" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>-->
+               enableUpdateByExample="false"/>
 
         <table tableName="tbindexicos" domainObjectName="IndexIcos" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>-->
+
+        <table tableName="tb3rdfilter" domainObjectName="ThirdFilter" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>

@@ -21,6 +21,7 @@
        <typeAlias type="com.hsjc.ssoCenter.core.domain.UserStudent" alias="UserStudent"/>
        <typeAlias type="com.hsjc.ssoCenter.core.domain.UserTeacher" alias="UserTeacher"/>
        <typeAlias type="com.hsjc.ssoCenter.core.domain.UserTemp" alias="UserTemp"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.ThirdFilter" alias="ThirdFilter"/>
     </typeAliases>
 
     <!--
@@ -82,5 +83,6 @@
        <mapper resource="com/hsjc/ssoCenter/core/mapper/UserStudentMapper.xml"/>
        <mapper resource="com/hsjc/ssoCenter/core/mapper/UserTeacherMapper.xml"/>
        <mapper resource="com/hsjc/ssoCenter/core/mapper/UserTempMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/ThirdFilterMapper.xml"/>
    </mappers>
 </configuration>

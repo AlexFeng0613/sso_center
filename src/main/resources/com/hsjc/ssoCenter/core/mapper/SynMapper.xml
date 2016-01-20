@@ -150,7 +150,13 @@
     查询所有的组织机构
   -->
   <select id="selectAllOrganization" resultType="java.util.HashMap">
-    SELECT organizationCode,organizationName,parentId FROM tborganization
+    SELECT
+      torg.organizationCode,
+      torg.organizationName,
+      torg.parentId
+    FROM tborganization torg,tb3rdfilter tf
+    WHERE tf.trdClientId = #{trdClientId}
+    AND tf.organizationCode = torg.organizationCode
   </select>
 
   <!--
@@ -168,7 +174,12 @@
     查看所有的用户
   -->
   <select id="selectAllUser" resultType="java.util.HashMap">
-    SELECT userName,organizationCode,id openId,TYPE role FROM tbusermain
+    /*SELECT userName,organizationCode,id openId,TYPE role FROM tbusermain*/
+    SELECT tu.userName,tu.organizationCode,tu.id openId,tu.TYPE role FROM tbusermain tu,tb3rdfilter tf
+    WHERE 
+    tf.trdClientId = #{trdClientId} 
+    AND tf.organizationCode = tu.organizationCode 
+    AND tf.tstudent = tu.type
   </select>
 
   <!--

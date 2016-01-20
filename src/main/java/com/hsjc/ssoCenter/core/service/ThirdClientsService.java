@@ -7,6 +7,7 @@ import com.hsjc.ssoCenter.core.constant.ThirdSynConstant;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.mapper.SynMapper;
 import com.hsjc.ssoCenter.core.mapper.ThirdClientsMapper;
+import com.hsjc.ssoCenter.core.mapper.ThirdFilterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,9 @@ public class ThirdClientsService extends ApiBaseService{
 
     @Autowired
     private SynMapper synMapper;
+
+    @Autowired
+    private ThirdFilterMapper thirdFilterMapper;
 
     /**
      * @author : zga
@@ -64,8 +68,13 @@ public class ThirdClientsService extends ApiBaseService{
         if(pageSize == null || pageSize == 0) currentPage = 600;
 
         try {
+            /**
+             * 查询第三方过滤表
+             */
+            HashMap paramMap = new HashMap();
+            paramMap.put("trdClientId",paramJson.getString("clientId"));
             PageHelper.startPage(currentPage, pageSize);
-            List<HashMap> organizationList = synMapper.selectAllOrganization();
+            List<HashMap> organizationList = synMapper.selectAllOrganization(paramMap);
 
             if(organizationList == null || (organizationList != null && organizationList.size() < 1)){
                 resultJson.put("flag",false);
@@ -148,8 +157,11 @@ public class ThirdClientsService extends ApiBaseService{
         if(pageSize == null || pageSize == 0) currentPage = 600;
 
         try{
+            HashMap paramMap = new HashMap();
+            paramMap.put("trdClientId",paramJson.getString("clientId"));
+
             PageHelper.startPage(currentPage,pageSize);
-            List<HashMap> userList = synMapper.selectAllUser();
+            List<HashMap> userList = synMapper.selectAllUser(paramMap);
 
             Integer totalNum = synMapper.countAllUser();
 
