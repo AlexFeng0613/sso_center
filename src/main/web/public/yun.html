@@ -43,7 +43,7 @@
                     <li id="phone" th:if="${session.user.phone} == null">
                         <a href="/sso/bindPhone.html">绑定手机</a>
                     </li>
-                    <li th:if="${session.user.inviteCode} == null">
+                    <li id="bindInviteCode" th:if="${session.user.inviteCode} == null">
                         <a href="/sso/bindInviteCode.html">邀请码</a>
                     </li>
                     <li id="amend_password">

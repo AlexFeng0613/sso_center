@@ -313,6 +313,14 @@ label{
     background: #ffad00 url(../images/yun/basic_message2.png) no-repeat 57px center;
 }
 
+#bindInviteCode{
+    background:url(../images/yun/bindInviteCode1.png) no-repeat 57px center;
+}
+
+#bindInviteCode.selected{
+    background:#ffad00 url(../images/yun/bindInviteCode2.png) no-repeat 57px center;
+}
+
 #mailbox{
     background:url(../images/yun/mailbox1.png) no-repeat 57px center;
 }
