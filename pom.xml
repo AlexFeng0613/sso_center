@@ -370,6 +370,14 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache</groupId>
+            <artifactId>test</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/web/WEB-INF/lib/taobao-sdk-java-auto_1452788057542-20160118.jar</systemPath>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
