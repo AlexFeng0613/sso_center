@@ -84,6 +84,26 @@
     where id = #{id}
   </delete>
 
+  <!--
+    @author : zga
+    @date : 2016-1-21
+    删除同步完成的用户数据
+  -->
+  <delete id="deleteFinishSynUserByUserId">
+    DELETE from tbsynuser${briefName}
+    where userId = #{userId}
+  </delete>
+
+  <!--
+    @author : zga
+    @date : 2016-1-21
+    删除同步完成的组织机构数据
+  -->
+  <delete id="deleteFinishSynOrganizationByOrganizationCode">
+    DELETE from tbsynorganization${briefName}
+    where organizationCode = #{organizationCode}
+  </delete>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.ssoCenter.core.domain.Organization" >
     update tborganization
     <set >
@@ -141,7 +161,7 @@
     SELECT
      tbu.userName,tbu.organizationCode,tbu.id openId,tbu.type role
      FROM tbUserMain tbu LEFT JOIN tbsynuser${briefName} tbsu
-     ON tbsu.userId = tbsu.id
+     ON tbsu.userId = tbu.id
   </select>
 
   <!--

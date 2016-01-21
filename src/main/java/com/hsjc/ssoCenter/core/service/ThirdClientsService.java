@@ -123,6 +123,20 @@ public class ThirdClientsService extends ApiBaseService{
                 return resultJson;
             }
             resultJson.put("organization",organizationList);
+
+            /**
+             * 删除同步组织机构表中的数据
+             */
+            for(int i = 0;i < organizationList.size();i ++ ){
+                HashMap hashMap = organizationList.get(i);
+                String organizationCode = hashMap.get("organizationCode").toString();
+
+                HashMap paramMap = new HashMap();
+                paramMap.put("briefName",thirdClients.getBriefName());
+                paramMap.put("organizationCode",organizationCode);
+
+                synMapper.deleteFinishSynOrganizationByOrganizationCode(paramMap);
+            }
         } catch (Exception e){
             resultJson.put("flag",false);
             resultJson.put("respCode", ThirdSynConstant.SERVER_EXPECTION);
@@ -211,6 +225,21 @@ public class ThirdClientsService extends ApiBaseService{
             }
 
             resultJson.put("user", userList);
+
+            /**
+             * 删除同步用户表中的数据
+             */
+            for(int i = 0;i < userList.size();i ++ ){
+                HashMap hashMap = userList.get(i);
+                int userId = Integer.parseInt(hashMap.get("openId").toString());
+
+                HashMap paramMap = new HashMap();
+                paramMap.put("briefName",thirdClients.getBriefName());
+                paramMap.put("userId",userId);
+
+                synMapper.deleteFinishSynUserByUserId(paramMap);
+            }
+
         } catch (Exception e) {
             resultJson.put("flag",false);
             resultJson.put("respCode", ThirdSynConstant.SERVER_EXPECTION);

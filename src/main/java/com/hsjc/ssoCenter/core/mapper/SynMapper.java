@@ -19,6 +19,10 @@ public interface SynMapper {
 
     int deleteByPrimaryKey(Long id);
 
+    int deleteFinishSynUserByUserId(HashMap paramMap);
+
+    int deleteFinishSynOrganizationByOrganizationCode(HashMap paramMap);
+
     int updateByPrimaryKeySelective(Organization organization);
 
     int updateByPrimaryKey(Organization organization);
