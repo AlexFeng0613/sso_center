@@ -45,11 +45,12 @@ public class SMSAndEmailQuartz {
     public synchronized void snedSmsAndEmail() {
         List<SmsSend> list = smsService.selectSmsSendBySendFlag();
         if(list != null && list.size() > 0){
+            TaobaoClient client = new DefaultTaobaoClient(SMSConstant.URL, SMSConstant.APPKEY, SMSConstant.APPSECRET);
+            AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+
             for(int i = 0;i < list.size();i ++){
                 SmsSend smsSend = list.get(i);
 
-                TaobaoClient client = new DefaultTaobaoClient(SMSConstant.URL, SMSConstant.APPKEY, SMSConstant.APPSECRET);
-                AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
                 req.setSmsType(smsSend.getSmsType());
                 req.setSmsFreeSignName(smsSend.getSmsSignName());
                 req.setSmsParam(smsSend.getSmsParam());
