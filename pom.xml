@@ -418,7 +418,8 @@
         <repository>
             <id>vincce-nexus</id>
             <name>vincce-nexus</name>
-            <url>http://115.29.35.216:8089/nexus/content/groups/public/</url>
+            <!--<url>http://115.29.35.216:8089/nexus/content/groups/public/</url>-->
+            <url>http://192.168.18.201:8082/content/repositories/central/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -432,7 +433,8 @@
         <pluginRepository>
             <id>vincce-nexus</id>
             <name>vincce-nexus</name>
-            <url>http://115.29.35.216:8089/nexus/content/groups/public/</url>
+            <!--<url>http://115.29.35.216:8089/nexus/content/groups/public/</url>-->
+            <url>http://192.168.18.201:8082/content/repositories/central/</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
