@@ -349,6 +349,14 @@ public class PageController {
         return "/yun/passion";
     }
 
+
+
+    @RequestMapping("sso/lineService")
+    public String lineService(){
+        return "/yun/lineService";
+    }
+
+
     /**
      * @author : zga
      * @date : 2016-1-18
