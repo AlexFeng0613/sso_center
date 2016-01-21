@@ -9,17 +9,11 @@
     <result column="sendTime" jdbcType="TIMESTAMP" property="sendTime" />
     <result column="byModule" jdbcType="VARCHAR" property="byModule" />
     <result column="requestKeyId" jdbcType="BIGINT" property="requestKeyId" />
-  </resultMap>
-
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hsjc.ssoCenter.core.domain.EmailSend">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, email, subject, sendFlag, sendTime, byModule, requestKeyId
-  </sql>
-  <sql id="Blob_Column_List">
-    content
+    id, email, subject, sendFlag, sendTime, byModule, requestKeyId,content
   </sql>
 
   <!--
@@ -160,11 +154,11 @@
     where id = #{id}
   </update>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long">
     select
     <include refid="Base_Column_List" />
     ,
-    <include refid="Blob_Column_List" />
+    <include refid="Base_Column_List" />
     from tbemailsend
     where id = #{id}
   </select>

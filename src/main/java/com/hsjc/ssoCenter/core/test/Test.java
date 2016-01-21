@@ -1,6 +1,11 @@
 package com.hsjc.ssoCenter.core.test;
 
-import com.alibaba.fastjson.JSONObject;
+import com.hsjc.ssoCenter.core.constant.Constant;
+import com.hsjc.ssoCenter.core.constant.MailTemplate;
+import com.hsjc.ssoCenter.core.util.MD5Util;
+import com.hsjc.ssoCenter.core.util.SSOStringUtil;
+
+import java.util.Calendar;
 
 /**
  * @author : zga
@@ -17,7 +22,7 @@ public class Test {
         System.out.println(validatePwd);*/
 
 
-        JSONObject resultJson = new JSONObject();
+        /*JSONObject resultJson = new JSONObject();
         resultJson.put("flag", false);
 
         boolean flag = resultJson.getBoolean("flag");
@@ -27,6 +32,14 @@ public class Test {
             System.out.println(1);
         } else {
             System.out.println(2);
-        }
+        }*/
+
+        String activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=617542946@qq.com&ticket=" +
+                MD5Util.encode(Calendar.getInstance().getTime().toString());
+
+
+        String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%","617542946@qq.com",activateURL,activateURL);
+
+        System.out.println(content);
     }
 }
