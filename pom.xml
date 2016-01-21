@@ -404,11 +404,11 @@
                         <arg>-extdirs</arg>
                         <arg>${project.basedir}/src/main/web/WEB-INF/lib</arg>
                     </compilerArgs>-->
-                    <compilerArguments>
+                    <!--<compilerArguments>
                         <verbose />
                         <bootclasspath>${env.JAVA_HOME}/jre/lib/rt.jar</bootclasspath>
                         <extdirs>${project.basedir}/src/main/webapp/WEB-INF/lib</extdirs>
-                    </compilerArguments>
+                    </compilerArguments>-->
                 </configuration>
             </plugin>
             <plugin>
