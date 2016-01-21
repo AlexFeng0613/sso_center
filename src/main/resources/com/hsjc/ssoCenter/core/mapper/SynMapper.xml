@@ -148,8 +148,8 @@
   <select id="selectDifferentOrganization" resultType="java.util.HashMap">
    SELECT
     tbo.organizationCode,tbo.organizationName,tbo.parentId
-   FROM tborganization tbo LEFT JOIN tbsynorganization${briefName} tbso
-   on tbo.organizationCode = tbso.organizationCode
+   FROM tborganization tbo RIGHT JOIN tbsynorganization${briefName} tbso
+   on tbso.organizationCode = tbo.organizationCode
   </select>
 
   <!--
@@ -160,7 +160,7 @@
   <select id="selectDifferentUser" resultType="java.util.HashMap">
     SELECT
      tbu.userName,tbu.organizationCode,tbu.id openId,tbu.type role
-     FROM tbUserMain tbu LEFT JOIN tbsynuser${briefName} tbsu
+     FROM tbusermain tbu RIGHT JOIN tbsynuser${briefName} tbsu
      ON tbsu.userId = tbu.id
   </select>
 

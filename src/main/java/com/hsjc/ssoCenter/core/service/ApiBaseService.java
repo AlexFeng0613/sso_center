@@ -256,6 +256,7 @@ public class ApiBaseService {
             resultJson.put("message", ThirdSynConstant.ERROR_SSO_PASSWORD);
             return resultJson;
         }
+        resultJson.put("flag",true);
         return resultJson;
     }
 }
