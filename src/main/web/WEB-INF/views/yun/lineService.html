@@ -64,7 +64,28 @@
                         </div>
                     </div>
                 </section>
-                <aside class="serverAside"></aside>
+                <aside class="serverAside">
+                    <div class="help">获取更多帮助</div>
+                    <ul class="helpWay">
+                        <li>
+                            <div class="helpImg h1">
+                                <div class="weichar"></div>
+                            </div>
+                            <div class="helpFont">微信公众号</div>
+                            <div class="helpFont">hsjc6666</div>
+                        </li>
+                        <li>
+                            <div class="helpImg h2"></div>
+                            <div class="helpFont">发送邮件到</div>
+                            <div class="helpFont">support@hsjc.com.cn</div>
+                        </li>
+                        <li>
+                            <div class="helpImg h3"></div>
+                            <div class="helpFont">400-880-5056</div>
+                            <div class="helpFont">9:00-18:00 周一至周五</div>
+                        </li>
+                    </ul>
+                </aside>
             </div>
             <script type="text/javascript">
                 $(function(){
@@ -86,7 +107,11 @@
                         $('.serverWindow').show();
                     });
 
-
+                    $('.helpImg.h1').hover(function(){
+                        $(this).find('.weichar').show();
+                    },function(){
+                        $(this).find('.weichar').hide();
+                    });
 
                 });
             </script>

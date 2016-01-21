@@ -40,6 +40,7 @@ a{
     font-size: 16px;
     color: #fff;
     font-family: \5FAE\8F6F\96C5\9ED1;
+
 }
 
 .people{
@@ -91,6 +92,7 @@ a{
 
 label{
     display:block;
+    position: relative;
     width:100%;
 }
 
@@ -966,6 +968,7 @@ label{
     width:294px;
     height:690px;
     border-left:1px solid #dadada;
+
 }
 
 .robotImg{
@@ -1070,6 +1073,78 @@ margin-left:20px;
 
 .textOperate li.O3:hover{
     background: url(../../static/images/yun/O33.png) no-repeat center;
+}
+
+.help{
+    width:100%;
+    margin-top:60px;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    text-align: center;
+    font-size: 24px;
+    color:#323232;
+}
+
+.helpWay{
+    margin-top:60px;
+    overflow: visible;
+}
+
+.helpWay li{
+    width:100%;
+    margin-bottom:40px;
+
+}
+
+.helpImg{
+    width:100%;
+    height:66px;
+    margin-bottom:10px;
+    position: relative;
+    overflow: visible;
+}
+
+.h1{
+    background: url(../../static/images/yun/helpImg1.png) no-repeat center;
+}
+
+.h1:hover{
+    background: url(../../static/images/yun/helpImg11.png) no-repeat center;
+}
+
+.h2{
+    background: url(../../static/images/yun/helpImg2.png) no-repeat center;
+}
+
+.h2:hover{
+    background: url(../../static/images/yun/helpImg22.png) no-repeat center;
+}
+
+.h3{
+    background: url(../../static/images/yun/helpImg3.png) no-repeat center;
+}
+
+.h3:hover{
+    background: url(../../static/images/yun/helpImg33.png) no-repeat center;
+}
+
+.weichar{
+    width:187px;
+    height:178px;
+    position: absolute;
+    background: url(../../static/images/yun/weichar.png) no-repeat center;
+    top:-55px;
+    left:200px;
+    display:none;
+}
+
+
+.helpFont{
+    width:100%;
+    line-height: 22px;
+    text-align: center;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    color:#020202;
+    font-size: 14px;
 }
 
 .footer{
