@@ -12,6 +12,22 @@
                     </a>
                 </nav>
             </div>
+            <script type="text/javascript">
+                $(function(){
+                    var comh= $('.container').height();
+                    var rh= $('.register_nav').height();
+                    var rrh=(comh-rh)/2;
+                    $('.register_nav').css('margin',rrh+ 'px auto 0');
+
+                    $(window).on('resize scroll',function(){
+                        var comh= $('.container').height();
+                        var rh= $('.register_nav').height();
+                        var rrh=(comh-rh)/2;
+                        $('.register_nav').css('margin',rrh+ 'px auto 0');
+                    });
+
+                });
+            </script>
         </div>
     </body>
 </html>

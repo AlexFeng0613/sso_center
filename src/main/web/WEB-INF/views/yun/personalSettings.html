@@ -5,13 +5,13 @@
       layout:decorator="../../public/yun">
     <head>
         <style type="text/css">
-            .up-img{ width:350px; height:38px; margin-left:auto; margin-right:auto;}
+            .up-img{ width:100px; height:100px;}
             .up-img input{vertical-align:middle; margin:0; padding:0;border: 0;}
             .up-img .file-box{ position:relative;width:340px}
             .up-img .txt{ height:22px; border:1px solid #cdcdcd; width:180px;}
             .up-img .btn{ background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;}
             .up-img .file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:75px }
-
+            .viewInfo{display:block;line-height: 40px;}
             .up1-img{ width:150px; height:38px; margin-left:42px; margin-right:auto;}
             /*.up1-img input{vertical-align:middle; margin:0; padding:0;border: 0;}*/
             .up1-img .file-box{ position:relative;width:930px}
@@ -34,7 +34,7 @@
            <div class="message">
                <div class="message_l">绑定邮箱：</div>
                <a th:if="${session.user.email} == null" href="/sso/bindEmail.html" class="bound">未绑定</a>
-               <span th:if="${session.user.email} != null" th:text="${session.user.email}"></span>
+               <span th:if="${session.user.email} != null" th:text="${session.user.email}" class="viewInfo"></span>
            </div>
            <div class="message">
                <div class="message_l">绑定手机： </div>
