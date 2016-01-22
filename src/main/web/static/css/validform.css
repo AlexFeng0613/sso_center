@@ -7,6 +7,7 @@
     font-size: 20px;
     float:left;
 }
+
 .Validform_right{
     color:#71b83d;
     padding-left:35px;
@@ -14,6 +15,7 @@
     background:url(../images/register/correct.png) no-repeat left center;
     float:left;
 }
+
 .Validform_wrong{
     color:#ff0000;
     padding-left:35px;
@@ -21,10 +23,12 @@
     background:url(../images/register/mistake.png) no-repeat left center;
     float:left;
 }
+
 .Validform_loading{
     padding-left:20px;
     background:url(../images/validform/onLoad.gif) no-repeat left center;
 }
+
 .Validform_error{
     background-color:#ffe7e7;
 }
