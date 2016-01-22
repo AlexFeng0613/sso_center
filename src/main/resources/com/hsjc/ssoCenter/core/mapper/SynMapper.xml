@@ -170,8 +170,8 @@
     查询所有的组织机构
   -->
   <select id="selectAllOrganization" resultType="java.util.HashMap">
-    SELECT
-      torg.organizationCode,
+    SELECT DISTINCT
+      torg.organizationCode ,
       torg.organizationName,
       torg.parentId
     FROM tborganization torg,tb3rdfilter tf
