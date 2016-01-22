@@ -159,7 +159,12 @@
   -->
   <select id="selectDifferentUser" resultType="java.util.HashMap">
     SELECT
-     tbu.userName,tbu.organizationCode,tbu.id openId,tbu.type role
+     tbu.realName,tbu.organizationCode,tbu.id openId,tbu.TYPE role,tbu.gender,tbu.email,
+     (CASE WHEN tbu.type = 'teacher'
+      THEN tbu.teacherNum
+      WHEN tbu.type = 'student'
+      THEN tbu.studentNum
+      END) personNum
      FROM tbusermain tbu RIGHT JOIN tbsynuser${briefName} tbsu
      ON tbsu.userId = tbu.id
   </select>
@@ -194,11 +199,16 @@
     查看所有的用户
   -->
   <select id="selectAllUser" resultType="java.util.HashMap">
-    /*SELECT userName,organizationCode,id openId,TYPE role FROM tbusermain*/
-    SELECT tu.userName,tu.organizationCode,tu.id openId,tu.TYPE role FROM tbusermain tu,tb3rdfilter tf
-    WHERE 
-    tf.trdClientId = #{trdClientId} 
-    AND tf.organizationCode = tu.organizationCode 
+    SELECT tu.realName,tu.organizationCode,tu.id openId,tu.TYPE role,tu.gender,tu.email,
+	(CASE WHEN tu.type = 'teacher'
+	THEN tu.teacherNum
+	WHEN tu.type = 'student'
+	THEN tu.studentNum
+	END) personNum
+	FROM tbusermain tu,tb3rdfilter tf
+    WHERE
+    tf.trdClientId = #{trdClientId}
+    AND tf.organizationCode = tu.organizationCode
     AND tf.tstudent = tu.type
   </select>
 
