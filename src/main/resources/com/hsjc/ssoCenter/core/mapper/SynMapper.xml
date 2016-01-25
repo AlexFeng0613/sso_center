@@ -190,7 +190,8 @@
     查询组织机构总数目
   -->
   <select id="countAllOrganization" resultType="java.lang.Integer">
-    SELECT count(1) FROM tborganization
+    SELECT count(1) FROM tborganization torg,tb3rdfilter tf
+    WHERE  tf.organizationCode = torg.organizationCode
   </select>
 
   <!--
@@ -218,6 +219,7 @@
     查看用户总数目
   -->
   <select id="countAllUser" resultType="java.lang.Integer">
-    SELECT count(1) FROM tbusermain
+    SELECT count(1) FROM tbusermain tu,tb3rdfilter tf
+    WHERE tf.organizationCode = tu.organizationCode
   </select>
 </mapper>

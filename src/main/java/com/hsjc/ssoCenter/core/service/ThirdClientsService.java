@@ -84,6 +84,9 @@ public class ThirdClientsService extends ApiBaseService{
 
             Integer totalNum = synMapper.countAllOrganization();
             Integer leftNum = totalNum - currentPage * pageSize;
+            if(totalNum < currentPage * pageSize){
+                leftNum = 0;
+            }
 
             resultJson.put("organization", organizationList);
             resultJson.put("leftNum", leftNum);
@@ -186,6 +189,9 @@ public class ThirdClientsService extends ApiBaseService{
             }
 
             Integer leftNum = totalNum - currentPage * pageSize;
+            if(totalNum < currentPage * pageSize){
+                leftNum = 0;
+            }
 
             resultJson.put("user",userList);
             resultJson.put("leftNum",leftNum);
