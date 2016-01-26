@@ -1,9 +1,6 @@
 package com.hsjc.ssoCenter.core.config;
 
-import com.hsjc.ssoCenter.core.constant.Constant;
-import com.hsjc.ssoCenter.core.constant.MailConstant;
 import com.hsjc.ssoCenter.core.constant.RedisConstant;
-import com.hsjc.ssoCenter.core.constant.SMSConstant;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -39,49 +36,20 @@ public class AppConfig {
 		return null;
 	}
 
-	@Bean
-	public Constant Constant(
-			@Value("${3rd.publicKey}") String secretKey,
-			@Value("website.address")String websiteAddress){
-		Constant.public_key = secretKey;
-		Constant.websiteAddress = websiteAddress;
+	/*@Bean
+	public Constant Constant(){
 		return null;
 	}
 
 	@Bean
-	public MailConstant MailConstant(
-			@Value("${mail.host}") String MAIL_HOST,
-			@Value("${mail.port}") Integer MAIL_PORT,
-			@Value("${mail.username}") String MAIL_USERNAME,
-			@Value("${mail.password}") String MAIL_PASSWORD,
-			@Value("${mail.from}") String MAIL_FORM
-	){
-		MailConstant.MAIL_HOST = MAIL_HOST;
-		MailConstant.MAIL_PORT = MAIL_PORT;
-		MailConstant.MAIL_USERNAME = MAIL_USERNAME;
-		MailConstant.MAIL_PASSWORD = MAIL_PASSWORD;
-		MailConstant.MAIL_FROM = MAIL_FORM;
+	public MailConstant MailConstant(){
 		return null;
 	}
 
 	@Bean
-	public SMSConstant SMSConstant(
-			@Value("${sms.appkey}")String APP_KEY,
-			@Value("${sms.appsecret}")String APP_SECRET,
-			@Value("${sms.signname}")String SIGN_NAME,
-			@Value("${sms.templatecode}")String TEMPLATE_CODE,
-			@Value("${sms.url}")String URL,
-			@Value("${sms.type}")String TYPE
-
-	){
-		SMSConstant.APPKEY = APP_KEY;
-		SMSConstant.APPSECRET = APP_SECRET;
-		SMSConstant.SIGNNAME = SIGN_NAME;
-		SMSConstant.TEMPLATECODE = TEMPLATE_CODE;
-		SMSConstant.URL = URL;
-		SMSConstant.TYPE  = TYPE;
+	public SMSConstant SMSConstant(){
 		return null;
-	}
+	}*/
 
 	@Configuration
 	@Profile("development")

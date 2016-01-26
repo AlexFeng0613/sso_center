@@ -87,6 +87,7 @@ public class LogInterCeptor {
             restfulLog.setActionId(Integer.parseInt(map.get("actionId").toString()));
             restfulLog.setActionTime(new Date());
             restfulLog.setDescription(map.get("description").toString());
+            restfulLog.setSynCount(Integer.parseInt((map.get("synCount") == null ? "0" : map.get("synCount").toString())));
 
             restfulLogMapper.insert(restfulLog);
 
@@ -143,10 +144,10 @@ public class LogInterCeptor {
                     if(arguments[0] instanceof JSONObject){
                         paramJson = (JSONObject)arguments[0];
                         map.put("clientId",paramJson.getString("clientId"));
+                        map.put("synCount",paramJson.getInteger("synCount"));
                     } else if(arguments[0] instanceof HttpServletRequest){
                         HttpServletRequest request = (HttpServletRequest)arguments[0];
                         String host = request.getRemoteHost();
-                        System.out.println("host is >>" + host);
 
                         map.put("host",host);
                         map.put("userName",arguments[1]);

@@ -7,10 +7,11 @@
     <result column="actionId" property="actionId" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="actionTime" property="actionTime" jdbcType="TIMESTAMP" />
+    <result column="synCount" property="synCount" jdbcType="INTEGER" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    restLogId, clientId, actionId,  description, actionTime
+    restLogId, clientId, actionId,  description, actionTime,synCount
   </sql>
 
   <!--
@@ -20,12 +21,13 @@
   -->
   <insert id="insert" useGeneratedKeys="true" keyProperty="restLogId" parameterType="java.util.HashMap">
     insert into tbrestfullog
-    (clientId, actionId,description,actionTime)
+    (clientId, actionId,description,actionTime,synCount)
     values (
       #{clientId},
       #{actionId},
       #{description},
-      #{actionTime}
+      #{actionTime},
+      #{synCount}
     )
   </insert>
 

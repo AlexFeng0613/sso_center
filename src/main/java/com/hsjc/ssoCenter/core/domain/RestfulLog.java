@@ -20,6 +20,8 @@ public class RestfulLog {
 
     private Date actionTime;
 
+    private Integer synCount;
+
     public Long getRestLogId() {
         return restLogId;
     }
@@ -58,5 +60,13 @@ public class RestfulLog {
 
     public void setActionTime(Date actionTime) {
         this.actionTime = actionTime;
+    }
+
+    public Integer getSynCount() {
+        return synCount;
+    }
+
+    public void setSynCount(Integer synCount) {
+        this.synCount = synCount;
     }
 }
