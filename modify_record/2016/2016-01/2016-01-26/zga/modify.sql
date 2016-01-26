@@ -70,3 +70,12 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+#add new column 'description' on table tb3rdclients
+ALTER TABLE tb3rdclients ADD description VARCHAR(500);
+
+ALTER TABLE tb3rdclients MODIFY synCount INT(11) DEFAULT 0;
+
+ALTER TABLE tb3rdclients ADD callbackUrl VARCHAR(500);
+
+ALTER TABLE tb3rdclients ADD STATUS ENUM('0','1');
