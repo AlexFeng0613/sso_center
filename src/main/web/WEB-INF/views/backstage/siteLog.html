@@ -7,9 +7,6 @@
         <script text="text/javascript" th:src="@{/static/scripts/WdatePicker.js}"  src="../../../static/scripts/WdatePicker.js"></script>
     </head>
     <body>
-
-
-
                 <div id="content" layout:fragment="content">
                     <div class="index_title">站点日志</div>
                     <div class="tab_search">
@@ -17,11 +14,11 @@
                         <input type="text" id="fromDate" class="Wdate"/>
                         <div class="time">结束时间</div>
                         <input type="text" id="toDate" class="Wdate"/>
-                        <ul class="tab_fn">
-                            <li>查询</li>
-                            <li>返回</li>
-                        </ul>
-                        <input type="search"/>
+                        <div class="tab_fn">
+                            <input type="button" value="查询" class="tab_fnLi"/>
+                            <input type="reset" value="重置" class="tab_fnLi"/>
+                        </div>
+                        <input type="search" placeholder="输入操作关键字…"/>
                     </div>
                     <table class="site_tab">
                         <thead>

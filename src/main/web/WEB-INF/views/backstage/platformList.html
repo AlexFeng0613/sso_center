@@ -11,11 +11,11 @@
                 <div id="content" layout:fragment="content">
                     <div class="index_title">平台列表</div>
                     <div class="tab_search">
-                        <ul class="tab_fn">
-                            <li>查询</li>
-                            <li>返回</li>
-                        </ul>
-                        <input type="search" />
+                        <div class="tab_fn">
+                            <input type="button" value="查询" class="tab_fnLi"/>
+                            <input type="reset" value="重置" class="tab_fnLi"/>
+                        </div>
+                        <input type="search" placeholder="输入平台名称…"/>
                     </div>
                     <table class="platform_tab">
                         <thead>
