@@ -280,4 +280,16 @@ public class ThirdClientsService extends ApiBaseService{
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
         return resultJson;
     }
+
+    /**
+     * @author : zga
+     * @date : 2016-1-26
+     *
+     * 查询所有的ThirdClietnts记录
+     *
+     * @return
+     */
+    public List<ThirdClients> selectAllThirdClients(){
+        return thirdClientsMapper.selectAllThirdClients();
+    }
 }

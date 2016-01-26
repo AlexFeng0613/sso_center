@@ -23,6 +23,14 @@ public class ThirdClients {
 
     private String publicKey;
 
+    private Integer synCount;
+
+    private String description;
+
+    private String callbackUrl;
+
+    private String status;
+
     public Long getId() {
         return id;
     }
@@ -85,5 +93,37 @@ public class ThirdClients {
 
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
+    }
+
+    public Integer getSynCount() {
+        return synCount;
+    }
+
+    public void setSynCount(Integer synCount) {
+        this.synCount = synCount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCallbackUrl() {
+        return callbackUrl;
+    }
+
+    public void setCallbackUrl(String callbackUrl) {
+        this.callbackUrl = callbackUrl;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

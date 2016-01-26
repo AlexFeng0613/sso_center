@@ -1,6 +1,9 @@
 package com.hsjc.ssoCenter.app.page;
 
+import com.hsjc.ssoCenter.app.base.BaseController;
+import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.service.IndexIcosService;
+import com.hsjc.ssoCenter.core.service.ThirdClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +22,12 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/page/")
-public class PageController {
+public class PageController extends BaseController{
     @Autowired
-    private IndexIcosService indexIcosService;
+    IndexIcosService indexIcosService;
+
+    @Autowired
+    ThirdClientsService thirdClientsService;
 
     /**
      * @author : zga
@@ -224,7 +230,11 @@ public class PageController {
      * @return
      */
     @RequestMapping("sso/platformList")
-    public String platformList(){
+    public String platformList(Model model){
+        List<ThirdClients> list = thirdClientsService.selectAllThirdClients();
+
+        model.addAttribute("thirdClientsList",list);
+
         return "/backstage/platformList";
     }
 

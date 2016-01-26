@@ -9,6 +9,32 @@ CREATE TABLE tbsystemproperties(
  modifyTime TIMESTAMP
 );
 
+#insert need data
+INSERT INTO tbsystemproperties (proKey,proValue)
+VALUES('dbUrl','jdbc:mysql://192.168.18.201:3323/sso_center?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8'),
+('dbUserName','root'),
+('dbPassword','123456'),
+('redisHost','localhost'),
+('redisPort','6379'),
+('redisPassword',''),
+('redisDictDatabase','3'),
+('mailHost','smtp.163.com'),
+('mailPort','25'),
+('mailUserName','service@hsjc.com.cn'),
+('mailPassword','***521HSJC1314'),
+('mailFrom','service@hsjc.com.cn'),
+('trdPublicKey','hsjcsso'),
+('smsUrl','http://gw.api.taobao.com/router/rest'),
+('smsAppKey','23300750'),
+('smsAppSecret','8781b891cdb666c9e038d368ecafa7ac'),
+('smsSignName','华师京城云平台'),
+('smsTemplateCode','SMS_4785362'),
+('smsType','normal'),
+('websiteAddress','http://192.168.18.201:89');
+
+SELECT * FROM tbsystemproperties;
+
+
 #modify table tb3rdclients--add new column 'synCount'
 ALTER TABLE tb3rdclients ADD synCount INT(11);
 
@@ -24,7 +50,7 @@ CREATE TABLE tb3rdsynuserdetaillog(
  id INT(11) PRIMARY KEY AUTO_INCREMENT,
  clientId VARCHAR(8),
  synTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
- userName VARCHAR(50)
+ userId INT(11)
 )
 
 

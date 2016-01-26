@@ -2,6 +2,8 @@ package com.hsjc.ssoCenter.core.mapper;
 
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 
+import java.util.List;
+
 /**
  * @author : zga
  * @date : 2015-12-10
@@ -20,4 +22,6 @@ public interface ThirdClientsMapper {
     ThirdClients selectByPrimaryKey(Long id);
 
     ThirdClients selectByClientId(ThirdClients thirdClients);
+
+    List<ThirdClients> selectAllThirdClients();
 }

@@ -10,11 +10,15 @@
     <result column="briefName" property="briefName" jdbcType="VARCHAR" />
     <result column="ssoPassword" property="ssoPassword" jdbcType="VARCHAR" />
     <result column="publicKey" property="publicKey" jdbcType="VARCHAR" />
+    <result column="synCount" property="synCount" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="callbackUrl" property="callbackUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, clientId, clientSecret, contactorName, contactorPhone, briefName, ssoPassword, 
-    publicKey
+    publicKey,synCount,description,callbackUrl,status
   </sql>
 
   <!--
@@ -28,7 +32,7 @@
       ssoPassword, publicKey)
     values (#{id}, #{clientId}, #{clientSecret}, 
       #{contactorName}, #{contactorPhone}, #{briefName}, 
-      #{ssoPassword}, #{publicKey})
+      #{ssoPassword}, #{publicKey},#{description})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.ssoCenter.core.domain.ThirdClients" >
@@ -148,5 +152,17 @@
     SELECT
     <include refid="Base_Column_List"/>
     FROM tb3rdclients WHERE clientId = #{clientId}
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2015-12-11
+    查询所有的ThirdClients记录
+  -->
+  <select id="selectAllThirdClients" resultType="ThirdClients">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb3rdclients
+    WHERE status = '1'
   </select>
 </mapper>
