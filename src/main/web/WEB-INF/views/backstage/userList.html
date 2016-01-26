@@ -7,7 +7,7 @@
     <body>
         <div id="content" layout:fragment="content">
             <div class="index_title">用户列表</div>
-            <div class="condition">
+            <div class="tab_search">
                 <select>
                     <option>按来源</option>
                     <option>J课堂</option>
@@ -25,22 +25,24 @@
                     <option>老师</option>
                     <option>学生</option>
                 </select>
-                        <select>
-                            <option>按账号状态</option>
-                            <option>未激活</option>
-                            <option>已激活</option>
-                            <option>已冻结</option>
-                        </select>
-                        <select>
-                            <option>按时间</option>
-                            <option>近三天来</option>
-                            <option>近一周来</option>
-                            <option>近一月来</option>
-                        </select>
-                        <input type="search" placeholder="输入关键字…"/>
-                        <div class="refer">查询</div>
-                        <div class="refer">返回</div>
-                    </div>
+                <select>
+                    <option>按账号状态</option>
+                    <option>未激活</option>
+                    <option>已激活</option>
+                    <option>已冻结</option>
+                </select>
+                <select>
+                    <option>按时间</option>
+                    <option>近三天来</option>
+                    <option>近一周来</option>
+                    <option>近一月来</option>
+                </select>
+                <div class="tab_fn">
+                    <input type="button" value="查询" class="tab_fnLi"/>
+                    <input type="reset" value="重置" class="tab_fnLi"/>
+                </div>
+                <input type="search" placeholder="输入关键字…"/>
+            </div>
                     <table class="user_tab">
                         <tbody>
                             <tr>

@@ -56,14 +56,18 @@ width:1202px;
     margin-right:20px;
 }
 
+
 .UserName{
     height:60px;
     line-height: 60px;
     font-family: \5FAE\8F6F\96C5\9ED1;
     font-size: 14px;
     color:#333333;
-
+    float:left;
 }
+
+
+
 
 .closeUser{
     height:60px;
@@ -889,24 +893,26 @@ width:1202px;
     float: right;
 }
 
-.arrange{
-    float: right;
-}
-
-.tab_fn li{
+.tab_fn input.tab_fnLi{
     width:50px;
     float:left;
     margin-left:10px;
     line-height: 30px;
     height: 30px;
-    cursor:pointer;
     font-family: \5FAE\8F6F\96C5\9ED1;
     color: #fff;
     font-weight: 400;
     font-size: 14px;
     text-align: center;
     background-color: #44b549;
+    border:none;
 }
+
+.arrange{
+    float: right;
+}
+
+
 
 .Single_Log{
     float:left;
@@ -1311,12 +1317,14 @@ width:1202px;
 
 .email_sel li.selected{
     color:#fff;
-    background-color: #44b549;;
+    background-color: #44b549;
+    border: none;
 }
 
 .mess_sel li.selected{
     color:#fff;
-    background-color: #44b549;;
+    background-color: #44b549;
+    border: none;
 }
 
 .email_box{
