@@ -93,9 +93,15 @@
                enableUpdateByExample="false"/>
 
         <table tableName="tb3rdfilter" domainObjectName="ThirdFilter" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>-->
+               enableUpdateByExample="false"/>
 
         <table tableName="tbsmssend" domainObjectName="SmsSend" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>-->
+
+        <table tableName="tbsystemproperties" domainObjectName="SystemProperties" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+        <table tableName="tb3rdsynuserdetaillog" domainObjectName="ThirdSynUserDetailLog" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
 
     </context>

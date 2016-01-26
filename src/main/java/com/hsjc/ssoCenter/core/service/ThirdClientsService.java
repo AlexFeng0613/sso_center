@@ -24,13 +24,13 @@ import java.util.List;
 @Service
 public class ThirdClientsService extends ApiBaseService{
     @Autowired
-    private ThirdClientsMapper thirdClientsMapper;
+    ThirdClientsMapper thirdClientsMapper;
 
     @Autowired
-    private SynMapper synMapper;
+    SynMapper synMapper;
 
     @Autowired
-    private ThirdFilterMapper thirdFilterMapper;
+    ThirdFilterMapper thirdFilterMapper;
 
     /**
      * @author : zga
@@ -76,6 +76,11 @@ public class ThirdClientsService extends ApiBaseService{
             PageHelper.startPage(currentPage, pageSize);
             List<HashMap> organizationList = synMapper.selectAllOrganization(paramMap);
 
+            /**
+             * 记录同步数据总数(tbrestfullog:synCount)
+             */
+            paramJson.put("synCount",(organizationList == null ? 0 : organizationList.size()));
+
             if(organizationList == null || (organizationList != null && organizationList.size() < 1)){
                 resultJson.put("flag",false);
                 resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
@@ -119,6 +124,11 @@ public class ThirdClientsService extends ApiBaseService{
 
         try{
             List<HashMap> organizationList = synMapper.selectDifferentOrganization(thirdClients.getBriefName());
+
+            /**
+             * 记录同步数据总数(tbrestfullog:synCount)
+             */
+            paramJson.put("synCount",(organizationList == null ? 0 : organizationList.size()));
 
             if(organizationList == null || (organizationList!= null && organizationList.size() < 1)){
                 resultJson.put("flag",false);
@@ -182,6 +192,11 @@ public class ThirdClientsService extends ApiBaseService{
 
             Integer totalNum = synMapper.countAllUser();
 
+            /**
+             * 记录同步数据总数(tbrestfullog:synCount)
+             */
+            paramJson.put("synCount",(userList == null ? 0 : userList.size()));
+
             if(userList == null || (userList!= null && userList.size() < 1)){
                 resultJson.put("flag",false);
                 resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
@@ -224,6 +239,11 @@ public class ThirdClientsService extends ApiBaseService{
         try {
             List<HashMap> userList = synMapper.selectDifferentUser(thirdClients.getBriefName());
 
+            /**
+             * 记录同步数据总数(tbrestfullog:synCount)
+             */
+            paramJson.put("synCount",(userList == null ? 0 : userList.size()));
+
             if(userList == null || (userList != null && userList.size() < 1)){
                 resultJson.put("flag",false);
                 resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
@@ -233,7 +253,7 @@ public class ThirdClientsService extends ApiBaseService{
             resultJson.put("user", userList);
 
             /**
-             * 删除同步用户表中的数据
+             * 删除同步用户表中的数据;
              */
             for(int i = 0;i < userList.size();i ++ ){
                 HashMap hashMap = userList.get(i);
@@ -244,6 +264,11 @@ public class ThirdClientsService extends ApiBaseService{
                 paramMap.put("userId",userId);
 
                 synMapper.deleteFinishSynUserByUserId(paramMap);
+
+                /**
+                 * 插入同步详情日志
+                 */
+                insertSynUserDeailLog(paramJson,userId);
             }
 
         } catch (Exception e) {

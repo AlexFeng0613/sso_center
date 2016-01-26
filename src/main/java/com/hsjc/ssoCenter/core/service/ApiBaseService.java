@@ -5,13 +5,11 @@ import com.hsjc.ssoCenter.core.base.FastJsonRedisSerializer;
 import com.hsjc.ssoCenter.core.constant.Constant;
 import com.hsjc.ssoCenter.core.constant.MailTemplate;
 import com.hsjc.ssoCenter.core.constant.ThirdSynConstant;
-import com.hsjc.ssoCenter.core.domain.ActivateEmailMess;
-import com.hsjc.ssoCenter.core.domain.EmailSend;
-import com.hsjc.ssoCenter.core.domain.ThirdClients;
-import com.hsjc.ssoCenter.core.domain.UserMain;
+import com.hsjc.ssoCenter.core.domain.*;
 import com.hsjc.ssoCenter.core.mapper.EmailSendMapper;
 import com.hsjc.ssoCenter.core.mapper.SmsSendMapper;
 import com.hsjc.ssoCenter.core.mapper.ThirdClientsMapper;
+import com.hsjc.ssoCenter.core.mapper.ThirdSynUserDetailLogMapper;
 import com.hsjc.ssoCenter.core.util.DesUtil;
 import com.hsjc.ssoCenter.core.util.MD5Util;
 import com.hsjc.ssoCenter.core.util.MailUtil;
@@ -46,6 +44,9 @@ public class ApiBaseService {
 
     @Autowired
     SmsSendMapper smsSendMapper;
+
+    @Autowired
+    ThirdSynUserDetailLogMapper thirdSynUserDetailLogMapper;
 
     /**
      * @author : zga
@@ -250,7 +251,7 @@ public class ApiBaseService {
         String client_secret = thirdClients.getClientSecret();
         String password = paramJson.getString("password");
         String time = paramJson.getString("time");
-        String validatePwd = MD5Util.encode(client_secret + MD5Util.encode(Constant.public_key) + time);
+        String validatePwd = MD5Util.encode(client_secret + MD5Util.encode(Constant.publicKey) + time);
         if(!validatePwd.equals(password)){
             resultJson.put("flag",false);
             resultJson.put("message", ThirdSynConstant.ERROR_SSO_PASSWORD);
@@ -258,5 +259,22 @@ public class ApiBaseService {
         }
         resultJson.put("flag",true);
         return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-1-26
+     *
+     * 插入同步用户详情日志
+     *
+     * @param paramJson
+     * @param userId
+     * @throws Exception
+     */
+    public void insertSynUserDeailLog(JSONObject paramJson,Integer userId) throws Exception{
+        ThirdSynUserDetailLog thirdSynUserDetailLog = new ThirdSynUserDetailLog();
+        thirdSynUserDetailLog.setClientId(paramJson.getString("clientId"));
+        thirdSynUserDetailLog.setUserId(userId);
+        thirdSynUserDetailLogMapper.insert(thirdSynUserDetailLog);
     }
 }

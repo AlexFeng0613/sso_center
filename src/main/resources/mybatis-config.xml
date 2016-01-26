@@ -22,6 +22,8 @@
        <typeAlias type="com.hsjc.ssoCenter.core.domain.UserTeacher" alias="UserTeacher"/>
        <typeAlias type="com.hsjc.ssoCenter.core.domain.UserTemp" alias="UserTemp"/>
        <typeAlias type="com.hsjc.ssoCenter.core.domain.ThirdFilter" alias="ThirdFilter"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.ThirdSynUserDetailLog" alias="ThirdSynUserDetailLog"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.SystemProperties" alias="SystemProperties"/>
     </typeAliases>
 
     <!--
@@ -63,7 +65,6 @@
         </plugin>
     </plugins>
 
-
    <mappers>
        <mapper resource="com/hsjc/ssoCenter/core/mapper/EmailActivateMapper.xml"/>
        <mapper resource="com/hsjc/ssoCenter/core/mapper/EmailResetPwdMapper.xml"/>
@@ -84,5 +85,7 @@
        <mapper resource="com/hsjc/ssoCenter/core/mapper/UserTeacherMapper.xml"/>
        <mapper resource="com/hsjc/ssoCenter/core/mapper/UserTempMapper.xml"/>
        <mapper resource="com/hsjc/ssoCenter/core/mapper/ThirdFilterMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/ThirdSynUserDetailLogMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/SystemPropertiesMapper.xml"/>
    </mappers>
 </configuration>
