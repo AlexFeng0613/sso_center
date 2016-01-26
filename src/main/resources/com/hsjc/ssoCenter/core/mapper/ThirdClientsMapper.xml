@@ -165,4 +165,21 @@
     FROM tb3rdclients
     WHERE status = '1'
   </select>
+
+  <!--
+    @author : zga
+    @date : 2015-12-11
+    根据平台名称查询所有的ThirdClient记录
+  -->
+  <select id="selectThirdClientByName" resultType="ThirdClients">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb3rdclients
+    <where>
+      status = '1'
+      <if test="description != null">
+        AND description like CONCAT('%','${description}','%')
+      </if>
+    </where>
+  </select>
 </mapper>

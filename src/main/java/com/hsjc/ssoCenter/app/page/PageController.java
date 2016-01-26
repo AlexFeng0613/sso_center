@@ -4,6 +4,7 @@ import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.service.IndexIcosService;
 import com.hsjc.ssoCenter.core.service.ThirdClientsService;
+import com.hsjc.ssoCenter.core.service.ThirdFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,9 @@ public class PageController extends BaseController{
 
     @Autowired
     ThirdClientsService thirdClientsService;
+
+    @Autowired
+    ThirdFilterService thirdFilterService;
 
     /**
      * @author : zga
@@ -229,14 +233,47 @@ public class PageController extends BaseController{
      *
      * @return
      */
-    @RequestMapping("sso/platformList")
-    public String platformList(Model model){
-        List<ThirdClients> list = thirdClientsService.selectAllThirdClients();
+    @RequestMapping("sso/platformList/{currentPage},{pageSize}")
+    public String platformList(@PathVariable("currentPage") Integer currentPage,
+                               @PathVariable("pageSize") Integer pageSize,
+                               @RequestParam(value = "description",required = false)String description,Model model){
+        List<ThirdClients> list = thirdClientsService.selectAllThirdClients(description,currentPage,pageSize);
 
         model.addAttribute("thirdClientsList",list);
+        model.addAttribute("description",description);
+
+        model.addAttribute("count",(list == null ? 0 : list.size()));
+        model.addAttribute("currentPage",currentPage);
+        model.addAttribute("pageSize",pageSize);
+        model.addAttribute("pageCount",5);
 
         return "/backstage/platformList";
     }
+
+    /**
+     * @author : zga
+     * @date : 2016-1-18
+     *
+     * SSO后台>>第三方平台过滤规则列表
+     *
+     * @return
+     */
+    @RequestMapping("sso/platformFilterList/{currentPage},{pageSize}")
+    public String platformFilterList(@PathVariable("currentPage") Integer currentPage,
+                                     @PathVariable("pageSize") Integer pageSize,
+                                     @RequestParam(value = "description",required = false)String description,Model model){
+        List<HashMap> list = thirdFilterService.selectAllThirdFilters(description,currentPage,pageSize);
+        model.addAttribute("thirdFilterList",list);
+        model.addAttribute("description",description);
+
+        model.addAttribute("count",(list == null ? 0 : list.size()));
+        model.addAttribute("currentPage",currentPage);
+        model.addAttribute("pageSize",pageSize);
+        model.addAttribute("pageCount",5);
+        return "/backstage/platformFilterList";
+    }
+
+
 
     /**
      *

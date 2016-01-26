@@ -8,6 +8,7 @@ import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.mapper.SynMapper;
 import com.hsjc.ssoCenter.core.mapper.ThirdClientsMapper;
 import com.hsjc.ssoCenter.core.mapper.ThirdFilterMapper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -285,11 +286,16 @@ public class ThirdClientsService extends ApiBaseService{
      * @author : zga
      * @date : 2016-1-26
      *
-     * 查询所有的ThirdClietnts记录
+     * 查询所有的ThirdClietnt记录
      *
      * @return
      */
-    public List<ThirdClients> selectAllThirdClients(){
-        return thirdClientsMapper.selectAllThirdClients();
+    public List<ThirdClients> selectAllThirdClients(String description,Integer currentPage,Integer pageSize){
+        if(StringUtils.isEmpty(description)){
+            PageHelper.startPage(currentPage,pageSize);
+            return thirdClientsMapper.selectAllThirdClients();
+        } else{
+            return thirdClientsMapper.selectThirdClientByName(description);
+        }
     }
 }

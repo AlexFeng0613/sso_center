@@ -2,6 +2,7 @@ package com.hsjc.ssoCenter.core.mapper;
 
 import com.hsjc.ssoCenter.core.domain.ThirdFilter;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface ThirdFilterMapper {
@@ -18,4 +19,6 @@ public interface ThirdFilterMapper {
     ThirdFilter selectByPrimaryKey(Integer id);
 
     List<ThirdFilter> selectByClientId(ThirdFilter thirdFilter);
+
+    List<HashMap> selectAllThirdFilters();
 }

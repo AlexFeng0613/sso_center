@@ -71,7 +71,7 @@
     where id = #{id}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.hsjc.ssoCenter.core.domain.ThirdFilter" >
+  <update id="updateByPrimaryKey" parameterType="ThirdFilter" >
     update tb3rdfilter
     set trdClientId = #{trdclientid},
       organizationCode = #{organizationcode},
@@ -91,10 +91,22 @@
     @date : 2016-1-20
     根据clientId查询第三方过滤信息
   -->
-  <select id="selectByClientId" resultType="java.util.List">
+  <select id="selectByClientId" resultType="ThirdFilter">
     select
     <include refid="Base_Column_List" />
     from tb3rdfilter
     where trdClientId = #{trdclientid}
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-1-26
+    查询所有的第三方过滤规则列表
+  -->
+  <select id="selectAllThirdFilters" resultType="java.util.HashMap">
+    SELECT tc.description,tc.clientId,torg.organizationCode,torg.organizationName,tf.tstudent
+    FROM tb3rdfilter tf,tb3rdclients tc,tborganization torg
+    WHERE tf.organizationCode = torg.organizationCode
+    AND tf.trdClientId = tc.clientId
   </select>
 </mapper>
