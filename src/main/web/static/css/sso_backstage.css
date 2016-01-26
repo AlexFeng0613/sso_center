@@ -906,6 +906,7 @@ width:1202px;
     text-align: center;
     background-color: #44b549;
     border:none;
+    text-indent:0;
 }
 
 .arrange{
@@ -952,7 +953,7 @@ width:1202px;
     color: #333333;
     font-weight: 400;
     font-size: 14px;
-
+text-indent: 20px;
 }
 
 .tab_search input{
@@ -965,6 +966,7 @@ width:1202px;
     color: #333333;
     font-weight: 400;
     font-size: 14px;
+    text-indent: 20px;
 }
 
 .platform_tab{
