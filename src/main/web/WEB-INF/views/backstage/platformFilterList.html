@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="tf : ${thirdFilterList}">
-                        <td><input type="checkbox"/></td>
+                        <td><input type="checkbox" class="filterList"/></td>
                         <td th:text="${tf.description}"></td>
                         <td th:text="${tf.clientId}"></td>
                         <td th:text="${tf.organizationCode}"></td>
@@ -66,13 +66,15 @@
                 $(function(){
                     $('#platformfilter_list').addClass('selected');
 
+                    /**
+                     * 全选与单选事件
+                     */
                     $('.checkAll').click(function(){
-                        if(this.checked){
-                            $(":checkbox").prop("checked",true);
-                        }else{
-                            $(":checkbox").prop("checked",false);
-                        }
+                        $(".filterList").prop("checked",$(this).prop("checked"));
                     });
+                    $(".filterList").click(function(){
+                        $('.checkAll').prop('checked',($(".filterList").length == $(".filterList:checked").length));
+                    })
                 });
             </script>
         </div>
