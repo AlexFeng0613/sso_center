@@ -45,7 +45,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="tc : ${thirdClientsList}">
-                        <td><input type="checkbox"/></td>
+                        <td><input type="checkbox" class="clientList"/></td>
                         <td th:text="${tc.description}"></td>
                         <td th:text="${tc.contactorName}"></td>
                         <td th:text="${tc.contactorPhone}"></td>
@@ -83,12 +83,11 @@
                 $(function(){
                     $('#platform_list').addClass('selected');
 
+                    /**
+                     * 全选与单选事件
+                     */
                     $('.checkAll').click(function(){
-                        if(this.checked){
-                            $(":checkbox").prop("checked",true);
-                        }else{
-                            $(":checkbox").prop("checked",false);
-                        }
+                        $(".clientList").prop("checked",$(this).prop("checked"));
                     });
 
                     $('.handle li:first').click(function(){
@@ -96,6 +95,10 @@
                         $('.modifiedBox').show();
                     });
 
+
+                    $(".clientList").click(function(){
+                        $('.checkAll').prop('checked',($(".clientList").length == $(".clientList:checked").length));
+                    })
                 });
             </script>
         </div>
