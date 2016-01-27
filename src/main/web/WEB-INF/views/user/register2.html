@@ -5,9 +5,7 @@
 	  layout:decorator="../../public/register">
 	<head>
 		<style>
-			.progress_2{
-				width:220px;
-			}
+
 		</style>
 	</head>
 	<body>
@@ -65,7 +63,7 @@
 						</div>
 						<div class="input_box">
 							<div class="input_box_l" style="background: none;">验证码</div>
-							<input type="text" name="code" placeholder="请输入右侧验证码" style="width:170px;" class="inputxt"/>
+							<input type="text" name="code" placeholder="请输入右侧验证码" style="width:128px;text-indent:0;text-align: center" class="inputxt"/>
 							<img id="vimg" src="/code.html"/>
 						</div>
 						<div class="context">
@@ -77,14 +75,33 @@
 			</div>
 			<script type="text/javascript">
 				$(function(){
-					var _index=0;
 					$('.step_mark1').html('');
 
-					$('.step_mark1').addClass('selected');
-					$('.step_mark2').addClass('select');
+					$('.step_mark1').addClass('selected2');
+					$('.step_mark2').addClass('selected1');
 
-					$('.step_step1').addClass('selected1');
-					$('.step_step2').addClass('selected2');
+					$('.step_step1').addClass('selected2');
+					$('.step_step2').addClass('selected1');
+
+					var conh=$('.container-fluid').height();
+
+					var cenh=$('.container-fluid .center').height();
+
+					var cenm=(conh-cenh)/2;
+
+					$('.container-fluid .center').css('margin',cenm+'px auto 0');
+
+
+					$(window).on('resize scroll',function(){
+
+						var conh=$('.container-fluid').height();
+
+						var cenh=$('.container-fluid .center').height();
+
+						var cenm=(conh-cenh)/2;
+
+						$('.container-fluid .center').css('margin',cenm+'px auto 0');
+					});
 
 					$('.sex li').click(function(){
 						index=$(this).index();

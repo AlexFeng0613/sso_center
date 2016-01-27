@@ -30,14 +30,14 @@ a:visited {
 
 
 
-.fc364, .step_mark li, .figure a:link, .figure a:visited, .input_box_l, .send_l, .hint, .ipone_box_l, .invite_box_l, .congratulation, .leap {
+.fc364,   .input_box_l, .send_l, .hint, .ipone_box_l, .invite_box_l, .congratulation, .leap {
   color: #364049; }
 
 .input_lh, .send_l, .anew, input.anew60, .hint, .ipone_box, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_box_next, .invite_box, .invite_box_l, .congratulation, .login_html {
   height: 52px;
   line-height: 52px; }
 
-.block, .figure a:link, .context a, .promptly, .invite_next, .vault, .login_html, #vimg {
+.block,   .promptly, .invite_next, .vault, .login_html, #vimg {
   display: block; }
 
 .none, .aside2, .mistake, .correct, .anew, .count {
@@ -53,8 +53,11 @@ a:visited {
   margin-bottom: 20px; }
 
 .h_title{
+  font-size: 22px;
   height:70px;
   line-height: 70px;
+  color:#828282;
+  font-family: \5FAE\8F6F\96C5\9ED1;
 }
 
 .indent, .input_box input, .ipone_num, .verify_code, .login_input, .self_motion {
@@ -63,43 +66,18 @@ a:visited {
 .progress_1, .progress_2 {
   margin-left: 25px; }
 
-.aside1, .aside2, .section {
-  margin-top: 88px; }
-
-.step_mark li.last, .step_step li.last {
-  margin-right: 0px; }
-
-.step_mark li {
-  margin-right: 160px; }
-
-
-
-
-
-
-.fc, .h_title, .step_step li {
-  color: #828282; }
-
-.fs34, .h_title {
-  font-size: 22px; }
 
 .fs14, .forget, .log_promptly, .promptly_register, .promptly_register a {
   font-size: 14px; }
 
-.fs18, .step_step li, .input_box input, .leap, .login_input, .log {
-  font-size: 18px; }
-
 .fs16 {
   font-size: 16px; }
 
-.fff, .context a, .context .next, .anew, .note, .ipone_next, .vault:hover, .log {
+.fff, .context .next, .anew, .note, .ipone_next, .vault:hover, .log {
   color: #fff; }
 
-.fs20, .context a, .context .next, .anew, input.anew60, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .sex li {
+.fs20, .context .next, .anew, input.anew60, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .sex li {
   font-size: 20px; }
-
-.fs24, .figure a:link, .aside1, .aside2 {
-  font-size: 24px; }
 
 .fs26, .login_title {
   font-size: 24px; }
@@ -107,33 +85,29 @@ a:visited {
 .fs28, .congratulation, .login_html {
   font-size: 28px; }
 
-.family, .h_title, .step_step li, .figure a:link, .aside1, .aside2, .input_box_l, .context a, .context .next, .send_l, .anew, input.anew60, .promptly, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .congratulation, .login_html, .sex li, .leap, .login_title, .login_input, .forget, .log, .log_promptly, .promptly_register, .promptly_register a {
+.family,   .aside1,  .context .next, .send_l, .anew, input.anew60, .promptly, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .congratulation, .login_html, .sex li, .leap, .login_title, .login_input, .forget, .log, .log_promptly, .promptly_register, .promptly_register a {
   font-family: \5FAE\8F6F\96C5\9ED1; }
 
 .center, .header .center, .container-fluid .center {
   width: 960px;
   margin: 0 auto; }
 
-.left, .step_mark li, .step_step li, .figure .student:link, .aside1, .aside2, .section, .input_box_l, .input_box input, .mistake, .correct, .context a.prev, .verify_img, .verify, .send_l, .anew, input.anew60, .ipone_box_l, .ipone_num, .verify_code, .note, .ipone_next, .skip, .inviteCode, .invite_box_l, .invite_next, .vault, .register_succeed_l, .register_succeed_r, .congratulation, .login_html, .sex, .sex li, .self_motion, #vimg {
+  .input_box input, .mistake, .correct, .verify_img, .verify, .send_l, .anew, input.anew60, .ipone_box_l, .ipone_num, .verify_code, .note, .ipone_next, .skip, .inviteCode, .invite_box_l, .invite_next, .vault, .register_succeed_l, .register_succeed_r, .congratulation, .login_html, .sex, .sex li, .self_motion, #vimg {
   float: left; }
 
-.right, .figure .teacher:link, .context .next, .count, .forget {
+.right,  .count, .forget {
   float: right; }
 
-.text-center, .step_mark li, .figure a:link, .aside1, .aside2, .context a, .context .next, .anew, input.anew60, .note, .ipone_next, .vault, .login_title, .log {
+.text-center,  .aside1,   .context .next, .anew, input.anew60, .note, .ipone_next, .vault, .login_title, .log {
   text-align: center; }
 
-.text-left, .h_title {
-  text-align: left; }
 
-.text-right, .input_box_l, .count {
+
+.text-right,  .count {
   text-align: right; }
 
 .rel, .step, .sex li, .login, .self_motion {
   position: relative; }
-
-.abs, .step_mark, .step_step, .progress_1, .progress_2, .sex li input, .self_motion input {
-  position: absolute; }
 
 .hidden, .header, .container-fluid, .send, .register_succeed_r, .register_succeed {
   overflow: hidden; }
@@ -144,126 +118,150 @@ a:visited {
 
 .step_mark {
   width: 1098px;
-  z-index: 3;
-  left: 20px; }
+
+}
+
+.step_step{
+  width: 1098px;
+}
 
 .step_mark li {
-  background: url(../../images/register/progress1.png) no-repeat;
-  width: 48px;
+  background: url(../images/password/circle1.png) no-repeat center top;
+  width: 64px;
   height: 48px;
   line-height: 48px;
-  font-size: 24px; }
+  font-size: 24px;
+  color:#828282;
+  text-align: center;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  float:left;
+  margin-right:115px;
+}
 
-.step_mark li.select {
-  background: url(../../images/register/progress2.png) no-repeat;
-  color: #fff; }
+.step_step li{
+  width:64px;
+  height: 40px;
+  line-height: 40px;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  float:left;
+  font-size: 16px;
+  color:#828282;
+  margin-right:115px;
+}
 
-.step_mark li.selected {
-  background: url(../../images/register/progress3.png) no-repeat; }
 
-.step_step {
-  left: 6px; }
+.step_mark li.selected1 {
+  background: url(../images/password/circle2.png)  no-repeat center top;
+color: #323232;
+}
 
-.step_step li {
-  margin-right: 138px; }
+.step_mark li.selected2{
+  background: url(../images/password/circle3.png) no-repeat center top;
+}
 
-.step_step li.selected2 {
-  color: #fff; }
-
-.step_step li.selected1 {
-  color: #ffad00; }
-
-.step_step li.particularly {
-  margin-left: -12px;
-  margin-right: 128px; }
-
-.progress_1 {
-  height: 16px;
-  width: 1080px;
-  background-color: #768089;
-  z-index: 1; }
-
-.progress_2 {
-  height: 16px;
-  background-color: #ffad00;
-  z-index: 2; }
+.step_step li.selected1{
+  color:#ffad00;
+}
+.step_step li.selected2{
+  color:#fff;
+}
 
 .container-fluid {
   background-color: #f4f4f4; }
 
 .figure {
-  width: 568px;
-  margin: 150px auto 0; }
+  width: 618px;
 
-.figure a:link {
-  width: 187px;
-  height: 250px;
+  overflow: hidden;
+}
+
+.figure a {
+  width:187px;
+  height: 290px;
   line-height: 520px;
-  text-decoration: none; }
+  text-decoration: none;
+  display:block;
+  font-size: 16px;
+  color:#444444;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  text-align: center;
+}
 
-.figure a:visited {
-  text-decoration: none; }
+.figure a.student{
+  float:left;
+  background: url(../images/register/student1.png) no-repeat center;
+}
+.figure a.teacher{
+  float:right;
+  background: url(../images/register/teacher1.png) no-repeat center;
+}
 
-.figure .student:link {
-  background: url(../../images/register/student1.png) no-repeat center; }
-.figure .teacher:link {
-  background: url(../../images/register/teacher1.png) no-repeat center; }
-
-.figure .student:hover {
-  background: url(../../images/register/student2.png) no-repeat center;
+.figure a.student:hover {
+  background: url(../images/register/student2.png) no-repeat center;
   color: #7bbb5e;
-  text-decoration: none; }
-.figure .teacher:hover {
-  background: url(../../images/register/teacher2.png) no-repeat center;
+  }
+.figure a.teacher:hover {
+  background: url(../images/register/teacher2.png) no-repeat center;
   color: #008acb;
-  text-decoration: none; }
+   }
 
-.figure .student:active {
-  background: url(../../images/register/student3.png) no-repeat center;
-  color: #008acb;
-  text-decoration: none; }
-.figure .teacher:active {
-  background: url(../../images/register/teacher3.png) no-repeat center;
-  color: #008acb;
-  text-decoration: none; }
+
 
 .aside1 {
   width: 300px;
   height: 250px;
-  background: url(../../images/register/student2.png) no-repeat center top;
+  background: url(../images/register/student2.png) no-repeat center top;
   color: #7bbb5e;
-  line-height: 470px; }
+  line-height: 470px;
+  font-size: 16px;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  float:left;
+  text-align: center;
+}
 
 .aside2 {
   width: 300px;
   height: 250px;
-  background: url(../../images/register/teacher2.png) no-repeat center top;
+  background: url(../images/register/teacher2.png) no-repeat center top;
   color: #008acb;
-  line-height: 470px; }
+  line-height: 470px;
+  font-size: 16px;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  float:left;
+  text-align: center;
+}
 
 .section {
+  float:left;
   border-left: 1px solid #768089; }
 
 .input_box {
-  width: 890px;
-  height: 50px; }
+  width: 650px;
+  height: 36px;
+}
 
 .input_box_l {
-  width: 130px;
-  height: 50px;
-  line-height: 50px;
-  margin-right: 20px;
-  font-size: 20px;
-  background: url(../../images/register/xi.png) no-repeat 10px center; }
+  width: 120px;
+  height:36px;
+  line-height: 36px;
+  margin-right: 10px;
+  font-size: 14px;
+  color:#323232;
+  text-align: right;
+  float:left;
+  background: url(../images/register/xi.png) no-repeat 10px center;
+}
 
 .input_box input {
-  height: 48px;
-  line-height: 48px;
-  width: 450px;
+  height: 34px;
+  line-height: 34px;
+  width: 318px;
   background: none;
   border: 1px solid #717679;
   border-radius: 5px;
-  color: #768089; }
+  color: #768089;
+  float:left;
+}
 
 .inspect, .mistake, .correct {
   width: 28px;
@@ -271,39 +269,56 @@ a:visited {
   margin-top: 11px; }
 
 .mistake {
-  background: url(../../images/register/mistake.png) no-repeat center; }
+  background: url(../images/register/mistake.png) no-repeat center; }
 
 .correct {
-  background: url(../../images/register/correct.png) no-repeat center; }
+  background: url(../images/register/correct.png) no-repeat center; }
 
 .context {
-  width: 450px;
-  margin-top: 60px;
-  margin-left: 150px;
-  padding-bottom: 100px; }
+  width: 318px;
+  margin-top: 40px;
+  margin-left: 130px;
+  height:40px;
+  }
 
 .context a {
-  width: 216px;
-  height: 58px;
-  line-height: 58px;
-  background: url(../../images/register/prev.png) no-repeat center; }
+  width: 139px;
+  height: 40px;
+  line-height:  40px;
+  float:left;
+  background: url(../images/register/prev.png) no-repeat center;
+  display:block;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  color:#ffffff;
+  font-size: 14px;
+  text-align: center;
+}
 
 .context a:hover {
-  background: url(../../images/register/next.png) no-repeat center; }
+  background: url(../images/register/next.png) no-repeat center;
+
+}
 
 .context .next {
-  width: 216px;
-  height: 58px;
-  line-height: 58px;
-  background: url(../../images/register/prev.png) no-repeat center;
-  border: none; }
+  width: 139px;
+  height: 40px;
+  line-height:40px;
+  float:right;
+  background: url(../images/register/prev.png) no-repeat center;
+  border: none;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  color:#ffffff;
+  font-size: 14px;
+  text-align: center;
+}
+
 .context .next:hover {
-  background: url(../../images/register/next.png) no-repeat center; }
+  background: url(../images/register/next.png) no-repeat center; }
 
 .verify_img {
   width: 586px;
   height: 385px;
-  background: url(../../images/register/verify.png) no-repeat; }
+  background: url(../images/register/verify.png) no-repeat; }
 
 .verify {
   width: 614px; }
@@ -343,14 +358,14 @@ input.anew60 {
 
 .ipone_num {
   width: 210px;
-  background: url(../../images/register/ipone_num.png) no-repeat;
+  background: url(../images/register/ipone_num.png) no-repeat;
   border: none;
   margin-right: 20px;
   color: #768089; }
 
 .verify_code {
   width: 140px;
-  background: url(../../images/register/verify_code.png) no-repeat;
+  background: url(../images/register/verify_code.png) no-repeat;
   border: none;
   margin-right: 35px;
   color: #768089; }
@@ -363,7 +378,7 @@ input.anew60 {
 
 .note.click {
   color: #b5b9bc;
-  background: url(../../images/register/note_click.png) no-repeat; }
+  background: url(../images/register/note_click.png) no-repeat; }
 
 .count {
   color: #e55348;
@@ -377,12 +392,12 @@ input.anew60 {
   width: 216px;
   height: 58px;
   line-height: 58px;
-  background: url(../../images/register/prev.png) no-repeat center;
+  background: url(../images/register/prev.png) no-repeat center;
   margin-left: 90px;
   margin-right: 55px; }
 
 .ipone_next:hover {
-  background: url(../../images/register/next.png) no-repeat center; }
+  background: url(../images/register/next.png) no-repeat center; }
 
 .skip {
   height: 58px;
@@ -396,7 +411,7 @@ input.anew60 {
   width: 210px;
   height: 52px;
   line-height: 52px;
-  background: url("../../images/register/ipone_num.png") no-repeat;
+  background: url("../images/register/ipone_num.png") no-repeat;
   border: none;
   text-indent: 20px;
   font-size: 20px;
@@ -420,16 +435,16 @@ input.anew60 {
   width: 216px;
   height: 58px;
   line-height: 58px;
-  background: url(../../images/register/vault.png) no-repeat center;
+  background: url(../images/register/vault.png) no-repeat center;
   color: #74bc41; }
 
 .vault:hover {
-  background: url(../../images/register/next.png) no-repeat center; }
+  background: url(../images/register/next.png) no-repeat center; }
 
 .register_succeed_l {
   width: 518px;
   height: 327px;
-  background: url(../../images/register/register_succeed.png) no-repeat; }
+  background: url(../images/register/register_succeed.png) no-repeat; }
 
 .register_succeed_r {
   width: 682px; }
@@ -444,17 +459,23 @@ input.anew60 {
   color: #ffad00; }
 
 .sex {
-  height: 50px; }
+  height: 50px;
+  float:left;
+  margin-left:50px;
+}
 
 .sex li {
   width: 100px;
-  height: 50px;
-  line-height: 50px;
+  height: 36px;
+  line-height:36px;
   color: #364049;
-  background: url(../../images/register/progress2.png) no-repeat center; }
+  font-size: 16px;
+  background: url(../images/register/progress2.png) no-repeat center;
+  margin-right:20px;
+}
 
 .sex li.selected {
-  background: url(../../images/register/progress3.png) no-repeat center; }
+  background: url(../images/register/progress3.png) no-repeat center; }
 
 .sex li input {
   width: 100%;
@@ -470,7 +491,7 @@ input.anew60 {
 .login {
   width: 481px;
   height: 356px;
-  background: url(../../images/register/login.png) no-repeat;
+  background: url(../images/register/login.png) no-repeat;
   margin: 250px auto; }
 
 .login_title {
@@ -490,7 +511,7 @@ input.anew60 {
   width: 375px;
   height: 48px;
   line-height: 48px;
-  background: url(../../images/register/login_input.png) no-repeat;
+  background: url(../images/register/login_input.png) no-repeat;
   border: none;
   color: #b3b2b6; }
 
@@ -500,7 +521,7 @@ input.anew60 {
 .self_motion {
   height: 16px;
   line-height: 16px;
-  background: url(../../images/register/self_motion1.png) no-repeat left;
+  background: url(../images/register/self_motion1.png) no-repeat left;
   margin-right: 10px; }
 
 .self_motion input {
@@ -510,7 +531,7 @@ input.anew60 {
   opacity: 0; }
 
 .self_motion.check {
-  background: url(../../images/register/self_motion2.png) no-repeat left; }
+  background: url(../images/register/self_motion2.png) no-repeat left; }
 
 .forget {
   height: 16px;
@@ -521,7 +542,7 @@ input.anew60 {
   width: 375px;
   height: 48px;
   line-height: 48px;
-  background: url(../../images/register/log.png) no-repeat;
+  background: url(../images/register/log.png) no-repeat;
   border: none; }
 
 .log_promptly, .promptly_register, .promptly_register a {
@@ -535,8 +556,8 @@ input.anew60 {
   color: #74bc41; }
 
 #vimg {
-  height: 48px;
-  margin-left: 80px; }
+  height: 36px;
+  margin-left: 40px; }
 
 .footer {
   background-color: #353535; }
