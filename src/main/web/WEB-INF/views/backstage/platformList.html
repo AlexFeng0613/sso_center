@@ -90,11 +90,21 @@
                         $(".clientList").prop("checked",$(this).prop("checked"));
                     });
 
+
                     $('.handle li:first').click(function(){
                         $('.section').css('background-color','#e5e5e5');
                         $('.modifiedBox').show();
                     });
 
+                    $('.butR').click(function(){
+                        $('.modifiedBox').hide();
+                        $('.section').css('background-color','#ffffff');
+                    });
+
+                    $('.butL').click(function(){
+                        $('.modifiedBox').hide();
+                        $('.section').css('background-color','#ffffff');
+                    });
 
                     $(".clientList").click(function(){
                         $('.checkAll').prop('checked',($(".clientList").length == $(".clientList:checked").length));
