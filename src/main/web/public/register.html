@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link th:href="@{/static/css/sass/register.css}" href="../static/css/sass/register.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/static/css/register.css}" href="../static/css/register.css" rel="stylesheet" type="text/css"/>
         <link th:href="@{/static/css/sass/bootstrap.css}" href="../static/css/sass/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link th:href="@{/static/css/validform.css}" href="../static/css/validform.css" rel="stylesheet" type="text/css"/>
         <script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../static/scripts/jquery/jquery-1.11.3.min.js"></script>
@@ -19,26 +19,22 @@
         <header class="header">
             <div class="center">
                 <div class="h_title">完成注册只需6个简单的步骤</div>
-                <div class="step">
-                    <div class="progress_1"></div>
-                    <div class="progress_2"></div>
-                    <ul class="step_mark">
-                        <li class="step_mark1">1</li>
-                        <li class="step_mark2">2</li>
-                        <li class="step_mark3">3</li>
-                        <li class="step_mark4">4</li>
-                        <li class="step_mark5">5</li>
-                        <li class="last step_mark6">6</li>
-                    </ul>
-                    <ul class="step_step">
-                        <li class="step_step1">选择角色</li>
-                        <li class="step_step2">基本信息</li>
-                        <li class="step_step3">邮箱验证</li>
-                        <li class="step_step4">手机验证</li>
-                        <li class="particularly step_step5">邀请码验证</li>
-                        <li class="last step_step6">注册成功</li>
-                    </ul>
-                </div>
+                <ul class="step_mark">
+                    <li class="step_mark1">1</li>
+                    <li class="step_mark2">2</li>
+                    <li class="step_mark3">3</li>
+                    <li class="step_mark4">4</li>
+                    <li class="step_mark5">5</li>
+                    <li class="step_mark6">6</li>
+                </ul>
+                <ul class="step_step">
+                    <li class="step_step1">选择角色</li>
+                    <li class="step_step2">基本信息</li>
+                    <li class="step_step3">邮箱验证</li>
+                    <li class="step_step4">手机验证</li>
+                    <li class="step_step5">邀请码验证</li>
+                    <li class="step_step6">注册成功</li>
+                  </ul>
             </div>
         </header>
         <div class="container-fluid" layout:fragment="content"></div>
