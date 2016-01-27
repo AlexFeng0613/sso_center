@@ -99,7 +99,8 @@
 						showAllError:true,
 						datatype:{
 							"s6-18":/^[\w\.\s]{6,18}$/,
-							"s2-10":/^\s{2,10}/,
+							"s2-10":/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,10}$/,
+							"s5" : /^[\w]{5}$/
 							//"e" : const
 						},
 						callback : function(form){
@@ -143,7 +144,13 @@
 						}
 					});
 
-					demo.tipmsg.w["s6-18"]="请输入6到18位英文和数字";
+					demo.tipmsg.w = {
+						's6-18' : '用户名为6到18位',
+						's2-10' : '姓名为2到10位中文字符',
+						'*6-10' : '密码为6到10位',
+						's5' : '验证码为5位',
+						'e' : '邮箱格式不正确'
+					};
 
 					demo.addRule([{
 						ele:".inputxt:eq(0)",
@@ -163,7 +170,7 @@
 						recheck:"password"
 					},{
 						ele:".inputxt:eq(5)",
-						datatype:"*6"
+						datatype:"s5"
 					}
 					]);
 
