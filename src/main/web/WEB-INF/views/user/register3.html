@@ -42,6 +42,27 @@
 					$('.step_step2').addClass('selected2');
 					$('.step_step3').addClass('selected1');
 
+					var conh=$('.container-fluid').height();
+
+					var cenh=$('.container-fluid .center').height();
+
+					var cenm=(conh-cenh)/2;
+
+					$('.container-fluid .center').css('margin',cenm+'px auto 0');
+
+
+					$(window).on('resize scroll',function(){
+
+						var conh=$('.container-fluid').height();
+
+						var cenh=$('.container-fluid .center').height();
+
+						var cenm=(conh-cenh)/2;
+
+						$('.container-fluid .center').css('margin',cenm+'px auto 0');
+					});
+
+
 					var time=60;
 					var timer=null;
 					$('input.anew60').val(time+'秒后可重新发送');

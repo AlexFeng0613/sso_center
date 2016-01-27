@@ -30,14 +30,14 @@ a:visited {
 
 
 
-.fc364,   .input_box_l, .send_l, .hint, .ipone_box_l, .invite_box_l, .congratulation, .leap {
+.fc364,   .input_box_l,  .ipone_box_l, .invite_box_l, .congratulation, .leap {
   color: #364049; }
 
-.input_lh, .send_l, .anew, input.anew60, .hint, .ipone_box, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_box_next, .invite_box, .invite_box_l, .congratulation, .login_html {
+.input_lh,  .anew, .ipone_box, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_box_next, .invite_box, .invite_box_l, .congratulation, .login_html {
   height: 52px;
   line-height: 52px; }
 
-.block,   .promptly, .invite_next, .vault, .login_html, #vimg {
+.block,    .invite_next, .vault, .login_html, #vimg {
   display: block; }
 
 .none, .aside2, .mistake, .correct, .anew, .count {
@@ -76,7 +76,7 @@ a:visited {
 .fff, .context .next, .anew, .note, .ipone_next, .vault:hover, .log {
   color: #fff; }
 
-.fs20, .context .next, .anew, input.anew60, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .sex li {
+.fs20, .context .next, .anew,   .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .sex li {
   font-size: 20px; }
 
 .fs26, .login_title {
@@ -85,20 +85,20 @@ a:visited {
 .fs28, .congratulation, .login_html {
   font-size: 28px; }
 
-.family,   .aside1,  .context .next, .send_l, .anew, input.anew60, .promptly, .hint, .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .congratulation, .login_html, .sex li, .leap, .login_title, .login_input, .forget, .log, .log_promptly, .promptly_register, .promptly_register a {
+.family,   .aside1,  .context .next,  .anew,  .ipone_box_l, .ipone_num, .verify_code, .note, .count, .ipone_next, .skip, .invite_box_l, .invite_next, .vault, .congratulation, .login_html, .sex li, .leap, .login_title, .login_input, .forget, .log, .log_promptly, .promptly_register, .promptly_register a {
   font-family: \5FAE\8F6F\96C5\9ED1; }
 
 .center, .header .center, .container-fluid .center {
   width: 960px;
   margin: 0 auto; }
 
-  .input_box input, .mistake, .correct, .verify_img, .verify, .send_l, .anew, input.anew60, .ipone_box_l, .ipone_num, .verify_code, .note, .ipone_next, .skip, .inviteCode, .invite_box_l, .invite_next, .vault, .register_succeed_l, .register_succeed_r, .congratulation, .login_html, .sex, .sex li, .self_motion, #vimg {
+  .input_box input, .mistake, .correct, .verify_img, .verify,  .anew,  .ipone_box_l, .ipone_num, .verify_code, .note, .ipone_next, .skip, .inviteCode, .invite_box_l, .invite_next, .vault, .register_succeed_l, .register_succeed_r, .congratulation, .login_html, .sex, .sex li, .self_motion, #vimg {
   float: left; }
 
 .right,  .count, .forget {
   float: right; }
 
-.text-center,  .aside1,   .context .next, .anew, input.anew60, .note, .ipone_next, .vault, .login_title, .log {
+.text-center,  .aside1,   .context .next, .anew,  .note, .ipone_next, .vault, .login_title, .log {
   text-align: center; }
 
 
@@ -109,7 +109,7 @@ a:visited {
 .rel, .step, .sex li, .login, .self_motion {
   position: relative; }
 
-.hidden, .header, .container-fluid, .send, .register_succeed_r, .register_succeed {
+.hidden, .header, .container-fluid,  .register_succeed_r, .register_succeed {
   overflow: hidden; }
 
 .header {
@@ -316,19 +316,33 @@ color: #323232;
   background: url(../images/register/next.png) no-repeat center; }
 
 .verify_img {
-  width: 586px;
-  height: 385px;
-  background: url(../images/register/verify.png) no-repeat; }
+  width: 366px;
+  height:176px;
+  float:left;
+  background: url(../images/register/verify.png) no-repeat right;
+}
 
 .verify {
-  width: 614px; }
+  width: 564px;
+  float:left;
+  margin-left:30px;
+}
 
-.send {
-  margin-top: 185px; }
+.send{
+  height:36px;
+  margin-top:40px;
+}
 
 .send_l {
-  font-size: 28px;
-  margin-right: 25px; }
+  height:36px;
+  line-height: 36px;
+  font-size: 16px;
+  color:#364049;
+  margin-right: 25px;
+  float:left;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+
+}
 
 .anew {
   width: 210px;
@@ -336,16 +350,26 @@ color: #323232;
   border-radius: 5px; }
 
 input.anew60 {
-  width: 210px;
+  width:168px;
   color: #ffad00;
   border-radius: 5px;
   border: 1px solid #ffad00;
-  background: none; }
+  background: none;
+  height:34px;
+  line-height: 34px;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  color:#ffad00;
+  font-size:16px;
+}
 
 .promptly {
-  line-height: 44px;
+  height:30px;
+  line-height: 30px;
   color: #ffad00;
-  font-size: 28px; }
+  font-size: 16px;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  display:block;
+}
 
 .ipone {
   width: 650px; }
