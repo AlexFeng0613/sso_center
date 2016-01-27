@@ -96,7 +96,7 @@ width:1202px;
     width:200px;
     float:left;
     border-right:1px solid #d9d9d9;
-    height:1150px;
+    height:1190px;
 }
 
 .menu_title{
@@ -166,8 +166,9 @@ width:1202px;
 
 .section{
     width:1000px;
+    height:1190px;
     float:left;
-
+    position: relative;
 
 }
 
@@ -1617,13 +1618,57 @@ text-indent: 20px;
     border-right:1px solid #d9d9d9;
 }
 
+.modifiedBox{
+    width:900px;
+    position: absolute;
+    left:50%;
+    margin-left:-451px;
+    top:325px;
+    border-left:1px solid #d9d9d9;
+    border-right:1px solid #d9d9d9;
+    display:none;
+}
+
 .dispose_box{
     width:900px;
-    height:1000px;
     margin-top:20px;
     margin-left: 20px;
     border-left:1px solid #d9d9d9;
     border-right:1px solid #d9d9d9;
+}
+
+.modifieInput{
+    width:250px;
+    height:30px;
+    margin:10px auto 10px;
+}
+.modifieInput input{
+    width:100px;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+
+}
+
+
+.modifieInput input.butL{
+    height:30px;
+    line-height: 30px;
+    float:left;
+    background-color: #44b549;
+    color:#fff;
+    border:none;
+}
+
+.modifieInput input.butR{
+    height:28px;
+    line-height: 28px;
+    border:1px solid #cccccc;
+    float:right;
+}
+
+.modifiedBox_center{
+    width:100%;
+    background-color: #fff;
+    height:400px;
 }
 
 .examine_box_details{

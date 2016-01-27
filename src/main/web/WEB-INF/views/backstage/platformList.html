@@ -6,6 +6,18 @@
     <head></head>
     <body>
         <div id="content" layout:fragment="content">
+            <div class="modifiedBox">
+                <div class="examine_box_aside">
+                    <div class="examine_title">修改账号状态操作</div>
+                </div>
+                <div class="modifiedBox_center"></div>
+                <div class="examine_box_aside">
+                    <div class="modifieInput">
+                        <input type="button" value="保存" class="butL"/>
+                        <input type="button" value="取消" class="butR"/>
+                    </div>
+                </div>
+            </div>
             <div class="index_title">平台列表</div>
             <div class="tab_search">
                 <form th:action="@{/page/sso/platformList/${currentPage},10.html}" method="get">
@@ -78,6 +90,12 @@
                             $(":checkbox").prop("checked",false);
                         }
                     });
+
+                    $('.handle li:first').click(function(){
+                        $('.section').css('background-color','#e5e5e5');
+                        $('.modifiedBox').show();
+                    });
+
                 });
             </script>
         </div>
