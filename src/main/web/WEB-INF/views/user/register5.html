@@ -22,7 +22,7 @@
 						</div>
 						<div class="ipone_box_next">
 							<div class="ipone_next">下一步</div>
-							<div class="skip">跳过</div>
+							<input type="button" class="skip" value="跳过" />
 						</div>
 					</div>
 				</form>
@@ -46,6 +46,28 @@
 					$('.step_step3').addClass('selected2');
 					$('.step_step4').addClass('selected2');
 					$('.step_step5').addClass('selected1');
+
+					var conh=$('.container-fluid').height();
+
+						var cenh=$('.container-fluid .center').height();
+
+						var cenm=(conh-cenh)/2;
+
+						$('.container-fluid .center').css('margin',cenm+'px auto 0');
+
+
+						$(window).on('resize scroll',function(){
+
+							var conh=$('.container-fluid').height();
+
+							var cenh=$('.container-fluid .center').height();
+
+							var cenm=(conh-cenh)/2;
+
+							$('.container-fluid .center').css('margin',cenm+'px auto 0');
+					});
+
+
 
 					var demo=$(".inviteForm").Validform({
 						btnSubmit:'.invite_next',

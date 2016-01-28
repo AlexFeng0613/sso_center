@@ -23,11 +23,8 @@ a:hover {
 .aside2, .mistake, .correct, .anew, .count {
   display: none; }
 
-.pointer, .anew, .note, .ipone_next, .skip, .invite_next {
-  cursor: pointer; }
-
-.top_box, .ipone, .invite {
-  margin: 120px auto 0; }
+.top_box,  .invite {
+  margin: 0px auto 0; }
 
 .input_box {
   margin-bottom: 20px; }
@@ -205,6 +202,7 @@ color: #323232;
   border-radius: 5px;
   color: #768089;
   float:left;
+  text-indent: 20px;
 }
 
 .inspect, .mistake, .correct {
@@ -323,15 +321,18 @@ input.anew60 {
 }
 
 .ipone {
-  width: 650px; }
+  width: 444px;
+  margin:0 auto 0;
+}
 
 .ipone_box {
   height:36px;
   margin-bottom: 20px; }
 
 .ipone_box_l {
+  width:100px;
   font-family: \5FAE\8F6F\96C5\9ED1;
-  margin-right: 30px;
+
   height:36px;
   line-height: 36px;
   color:#323232;
@@ -351,6 +352,7 @@ input.anew60 {
   font-size: 14px;
   background: none;
   border-radius: 5px;
+  text-indent: 20px;
 }
 
 .ipone_num:hover{
@@ -364,13 +366,14 @@ input.anew60 {
   border:1px solid #717679;
   font-family: \5FAE\8F6F\96C5\9ED1;
   font-size: 14px;
-  border: none;
-  margin-right: 35px;
   color: #768089;
   float:left;
+  background: none;
+  border-radius: 5px;
+  text-indent: 20px;
 }
 
-.ipone_num:hover{
+.verify_code:hover{
   border:1px solid #ffad00;
 }
 
@@ -384,6 +387,8 @@ input.anew60 {
   font-family: \5FAE\8F6F\96C5\9ED1;
   text-align: center;
   color:#fff;
+  float:left;
+
 }
 
 .note.click {
@@ -391,55 +396,90 @@ input.anew60 {
   background: url(../images/register/note_click.png) no-repeat; }
 
 .count {
-  color: #e55348;
-  padding-right: 16px; }
+
+  color: #00b6e3;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+}
 
 .ipone_box_next {
-  height: 58px;
-  margin-top: 42px; }
+  margin-top: 40px; }
 
 .ipone_next {
-  width: 216px;
-  height: 58px;
-  line-height: 58px;
+  width: 139px;
+  height: 36px;
+  line-height: 36px;
   background: url(../images/register/prev.png) no-repeat center;
-  margin-left: 90px;
-  margin-right: 55px; }
+  margin-left: 100px;
+  text-align: center;
+  color:#fff;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  float:left;
+   }
 
 .ipone_next:hover {
   background: url(../images/register/next.png) no-repeat center; }
 
 .skip {
-  height: 58px;
-  line-height: 58px;
-  color: #b5b9bc; }
+  width:139px;
+  height: 36px;
+  line-height:36px;
+  color: #b5b9bc;
+  float:left;
+  text-align: center;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  color:#ffad00;
+  font-size: 14px;
+  background: none;
+  border: 1px solid #ffad00;
+  border-radius: 5px;
+  margin-left:15px;
+  cursor: pointer;
+}
 
 .skip:hover {
   color: #ffad00; }
 
 .inviteCode {
-  width: 210px;
-  height: 52px;
-  line-height: 52px;
-  background: url("../images/register/ipone_num.png") no-repeat;
-  border: none;
-  text-indent: 20px;
-  font-size: 20px;
-  color: #768089;
-  margin-right: 20px; }
+  width: 138px;
+  height: 34px;
+  line-height:  34px;
+  border:1px solid #717679;
+background: none;
+  text-indent: 10px;
+  font-size: 14px;
+  color: #828282;
+
+  border-radius: 5px;
+}
+
+.inviteCode:hover{
+  border:1px solid #ffad00;
+}
 
 .invite {
   width: 542px;
-  height: 60px; }
+
+}
+
+.invite_box{
+  height:36px;
+}
 
 .invite_box_l {
-  margin-right: 30px; }
+  float:left;
+  width:100px;
+  height:36px;
+  line-height: 36px;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+
+}
 
 .invite_next {
   margin-right: 30px;
   color: #364049;
   height: 52px;
-  line-height: 52px; }
+  line-height: 52px;
+}
 
 .vault {
   width: 216px;
@@ -452,18 +492,37 @@ input.anew60 {
   background: url(../images/register/next.png) no-repeat center; }
 
 .register_succeed_l {
-  width: 518px;
-  height: 327px;
-  background: url(../images/register/register_succeed.png) no-repeat; }
+  width: 400px;
+  height: 176px;
+  background: url(../images/register/register_succeed.png) no-repeat right top;
+  float:left;
+}
 
 .register_succeed_r {
-  width: 682px; }
+  width: 530px;
+  float:left;
+  margin-left:30px;
+}
 
 .register_succeed {
-  margin-top: 200px; }
+  margin-top: 30px;
+}
+
+.register_succeed a{
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  font-size: 18px;
+  color:#ffad00;
+  float:left;
+  display:block;
+}
 
 .congratulation {
-  margin-right: 5px; }
+  margin-right: 5px;
+  float:left;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  font-size: 18px;
+  color:#959595;
+}
 
 .login_html {
   color: #ffad00; }
@@ -483,6 +542,7 @@ input.anew60 {
   background: url(../images/register/sex1.png) no-repeat left center;
   margin-right:20px;
   text-indent:25px;
+  float:left;
 }
 
 .sex li.selected {
@@ -494,16 +554,23 @@ input.anew60 {
   top: 0;
   left: 0;
   opacity: 0;
-  filter: alpha(opacity=0); }
+  filter: alpha(opacity=0);
+}
 
 .leap {
-  margin-top: 15px; }
+  margin-top: 15px;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  font-size: 14px;
+  color:#364049;
+}
 
 .login {
   width: 481px;
   height: 356px;
   background: url(../images/register/login.png) no-repeat;
-  margin: 250px auto; }
+  margin: 250px auto;
+
+}
 
 .login_title {
   height: 90px;
