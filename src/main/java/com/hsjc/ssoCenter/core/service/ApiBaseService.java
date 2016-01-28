@@ -6,10 +6,7 @@ import com.hsjc.ssoCenter.core.constant.Constant;
 import com.hsjc.ssoCenter.core.constant.MailTemplate;
 import com.hsjc.ssoCenter.core.constant.ThirdSynConstant;
 import com.hsjc.ssoCenter.core.domain.*;
-import com.hsjc.ssoCenter.core.mapper.EmailSendMapper;
-import com.hsjc.ssoCenter.core.mapper.SmsSendMapper;
-import com.hsjc.ssoCenter.core.mapper.ThirdClientsMapper;
-import com.hsjc.ssoCenter.core.mapper.ThirdSynUserDetailLogMapper;
+import com.hsjc.ssoCenter.core.mapper.*;
 import com.hsjc.ssoCenter.core.util.DesUtil;
 import com.hsjc.ssoCenter.core.util.MD5Util;
 import com.hsjc.ssoCenter.core.util.MailUtil;
@@ -47,6 +44,9 @@ public class ApiBaseService {
 
     @Autowired
     ThirdSynUserDetailLogMapper thirdSynUserDetailLogMapper;
+
+    @Autowired
+    SystemPropertiesMapper systemPropertiesMapper;
 
     /**
      * @author : zga

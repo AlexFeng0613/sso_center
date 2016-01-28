@@ -108,4 +108,14 @@
     MAX(CASE proKey WHEN 'websiteAddress' THEN proValue END) websiteAddress
     FROM tbsystemproperties
   </select>
+
+  <select id="selectMail" resultType="com.hsjc.ssoCenter.core.domain.SystemProperties">
+    select
+    <include refid="Base_Column_List" />
+     from tbsystemproperties where proKey like 'mail%';
+  </select>
+
+  <select id="selectSms" resultType="com.hsjc.ssoCenter.core.domain.SystemProperties">
+    select * from tbsystemproperties where proKey like 'sms%';
+  </select>
 </mapper>
