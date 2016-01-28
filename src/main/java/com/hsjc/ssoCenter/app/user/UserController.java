@@ -67,7 +67,7 @@ public class UserController extends BaseController {
             SecurityUtils.getSubject().login(upToken);
         } catch (AuthenticationException e) {
             e.printStackTrace();
-            throw new Exception("用户名/密码不正确");
+            return "redirect:/user/login.html";
         }
 
         Subject subject = SecurityUtils.getSubject();

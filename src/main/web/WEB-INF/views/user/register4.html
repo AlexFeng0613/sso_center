@@ -58,7 +58,7 @@
 						var phone = $('input[name="phone"]').val();
 						if(phone == null || phone == '' || !Constant.phonePattern.test(phone)) return false;
 
-						time($(this),5,"获取验证码");
+						SSOSystem.time($(this),5,"获取验证码");
 						var data = {
 							'phone' : phone
 						}

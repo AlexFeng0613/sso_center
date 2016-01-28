@@ -20,12 +20,12 @@
         <header class="header">
             <div class="center">
                 <div class="label-info">华师智慧教育云平台</div>
-                <a href="/page/logout.html" class="exit">退出</a>
-                    <div class="people">
-                        <img th:if="${session.user.gender == 0}" src="../../../static/images/yun/people.png"/>
-                        <img th:if="${session.user.gender == 1}" src="../../../static/images/yun/boy.jpg"/>
-                        <span th:text="${session.user.realName}"></span>
-                    </div>
+                <button  class="exit" onclick="SSOSystem.exit()">退出</button>
+                <div class="people">
+                    <img th:if="${session.user.gender == 0}" src="../../../static/images/yun/people.png"/>
+                    <img th:if="${session.user.gender == 1}" src="../../../static/images/yun/boy.jpg"/>
+                    <span th:text="${session.user.realName}"></span>
+                </div>
             </div>
         </header>
         <div class="container" layout:fragment="service">
@@ -62,7 +62,7 @@
             <div class="center">
                 <div class="foot-size">客服电话：400-880-5056        客服邮箱：Help@hsjc.com.cn</div>
                 <div class="foot-size">共筑教育云平台 ,创建教育新模式</div>
-                <div class="foot-size">Copyright ©t华师京城网络科技股份有限公司  沪IC备10208270号-3</div>
+                <div class="foot-size">Copyright ©华师京城网络科技股份有限公司  沪IC备10208270号-3</div>
                 <div class="android">
                     <img src="../../../static/images/yun/android.png"/>
                     <span>For  Android</span>
