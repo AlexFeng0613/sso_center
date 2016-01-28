@@ -52,6 +52,27 @@
 					$('.step_step3').addClass('selected2');
 					$('.step_step4').addClass('selected1');
 
+
+					var conh=$('.container-fluid').height();
+
+					var cenh=$('.container-fluid .center').height();
+
+					var cenm=(conh-cenh)/2;
+
+					$('.container-fluid .center').css('margin',cenm+'px auto 0');
+
+
+					$(window).on('resize scroll',function(){
+
+						var conh=$('.container-fluid').height();
+
+						var cenh=$('.container-fluid .center').height();
+
+						var cenm=(conh-cenh)/2;
+
+						$('.container-fluid .center').css('margin',cenm+'px auto 0');
+					});
+
 					//短信获取click函数
 					$('.note').click(function(){
 						$('input[name="phone"]').blur();
@@ -122,17 +143,17 @@
 							return false;
 						}
 					});
-					demo.tipmsg.w["s11"]="请输入11位手机号";
-					demo.tipmsg.w["s4"]="请输入4位数字的验证码";
+					demo.tipmsg.w["s11"]=" "; //请输入11位手机号
+					demo.tipmsg.w["s4"]=" ";//请输入4位数字的验证码
 					demo.addRule([{
 						ele:".ipone_num:eq(0)",
 						datatype:"s11",
-						nullmsg:'请输入手机号',
+						nullmsg:' ',// 请输入手机号
 						sucmsg:' '
 					},{
 						ele:".verify_code:eq(0)",
 						datatype:"s4",
-						nullmsg:'请输入验证码',
+						nullmsg:' ',//请输入验证码
 						sucmsg:' '
 					}]);
 
