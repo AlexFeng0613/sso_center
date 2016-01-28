@@ -3,10 +3,13 @@ package com.hsjc.ssoCenter.core.service;
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.constant.SMSConstant;
 import com.hsjc.ssoCenter.core.domain.SmsSend;
+import com.hsjc.ssoCenter.core.domain.SystemProperties;
 import com.hsjc.ssoCenter.core.util.SSOStringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -107,7 +110,7 @@ public class SmsService extends ApiBaseService{
             return resultJson;
         }
 
-        resultJson.put("message",SMSConstant.RIGHT_SMS_CODE);
+        resultJson.put("message", SMSConstant.RIGHT_SMS_CODE);
         return resultJson;
     }
 
@@ -135,5 +138,15 @@ public class SmsService extends ApiBaseService{
      */
     public int updateSendFlagById(SmsSend smsSend){
         return smsSendMapper.updateSendFlagById(smsSend);
+    }
+
+    /**
+     * 短信配置查询
+     * @return
+     */
+    public List<SystemProperties> findSms(){
+        List<SystemProperties> list = new ArrayList<>();
+        list = systemPropertiesMapper.selectSms();
+        return list;
     }
 }

@@ -3,6 +3,7 @@ package com.hsjc.ssoCenter.core.mapper;
 import com.hsjc.ssoCenter.core.domain.SystemProperties;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author : zga
@@ -25,4 +26,8 @@ public interface SystemPropertiesMapper {
     SystemProperties selectByPrimaryKey(Integer id);
 
     HashMap selectAllSystemProperties();
+
+    List<SystemProperties> selectMail();
+
+    List<SystemProperties> selectSms();
 }

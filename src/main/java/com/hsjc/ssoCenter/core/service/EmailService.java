@@ -1,8 +1,11 @@
 package com.hsjc.ssoCenter.core.service;
 
 import com.hsjc.ssoCenter.core.domain.EmailSend;
+import com.hsjc.ssoCenter.core.domain.SystemProperties;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -36,5 +39,15 @@ public class EmailService extends ApiBaseService{
      */
     public int updateSendFlagById(EmailSend emailSend){
         return emailSendMapper.updateSendFlagById(emailSend);
+    }
+
+    /**
+     * 邮件配置查询
+     * @return
+     */
+    public List<SystemProperties> findEmail(){
+        List<SystemProperties> list = new ArrayList<>();
+        list = systemPropertiesMapper.selectMail();
+        return list;
     }
 }

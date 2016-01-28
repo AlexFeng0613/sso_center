@@ -1568,7 +1568,28 @@ text-indent: 20px;
     border-left: 1px solid #9c9c9c;
 }
 
+.emailTab{
+    margin-left:20px;
+    width:960px;
+    border-top: 1px solid #9c9c9c;
+    border-left: 1px solid #9c9c9c;
+}
+
 .invitation_manage_tab tr th{
+
+    height:50px;
+    line-height: 50px;
+    background-color:#e4e4e4 ;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    color: #333333;
+    font-weight: 400;
+    text-align: center;
+    font-size: 14px;
+    border-right: 1px solid #9c9c9c;
+    border-bottom: 1px solid #9c9c9c;
+}
+
+.emailTab tr th{
 
     height:50px;
     line-height: 50px;
@@ -1596,10 +1617,48 @@ text-indent: 20px;
     border-bottom: 1px solid #9c9c9c;
 }
 
+.emailTab tr td{
+
+    height:40px;
+    line-height: 40px;
+    background-color:#FFFFFF ;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    color: #333333;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    border-right: 1px solid #9c9c9c;
+    border-bottom: 1px solid #9c9c9c;
+}
+
 .invitation_manage_tab tr td input{
     float:left;
     margin-top:13px;
     margin-left:3px;
+}
+
+.update{
+    width: 70px;
+    line-height: 30px;
+    height: 30px;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    display:block;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    background-color: rgb(68, 181, 73);
+    border:none;
+    color:#fff;
+    margin:5px auto 0;
+}
+
+.emailIn{
+    width:100%;
+    height:100%;
+    border:none;
+    background: none;
+    text-align: center;
+
 }
 
 .invitation_box{

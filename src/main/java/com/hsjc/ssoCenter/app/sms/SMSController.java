@@ -2,13 +2,18 @@ package com.hsjc.ssoCenter.app.sms;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.app.base.BaseController;
+import com.hsjc.ssoCenter.core.domain.SystemProperties;
 import com.hsjc.ssoCenter.core.service.SmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : zga
@@ -52,5 +57,18 @@ public class SMSController extends BaseController {
     public JSONObject validateSmsCode(@RequestBody JSONObject paramJson){
         JSONObject resultJson = smsService.validateSmsCode(paramJson);
         return resultJson;
+    }
+
+    /**
+     * 短信配置显示
+     * @param model
+     * @return
+     */
+    @RequestMapping("messPort")
+    public String messPort(Model model){
+        List<SystemProperties> list = new ArrayList<>();
+        list = smsService.findSms();
+        model.addAttribute("smsList",list);
+        return "messPort";
     }
 }
