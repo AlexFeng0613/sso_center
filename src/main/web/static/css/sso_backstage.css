@@ -77,7 +77,8 @@ width:1202px;
     color:#333333;
     display:block;
     float:left;
-
+    background: none;
+    border: none;
 }
 
 .container{

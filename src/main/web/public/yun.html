@@ -20,7 +20,7 @@
         <header class="header">
             <div class="center">
                 <div class="label-info">华师智慧教育云平台</div>
-                <button  class="exit" onclick="SSOSystem.exit()">退出</button>
+                <input type="button"  class="exit" onclick="SSOSystem.exit()" value="退出"/>
                 <div class="people">
                     <img th:if="${session.user.gender == 0}" src="../../../static/images/yun/people.png"/>
                     <img th:if="${session.user.gender == 1}" src="../../../static/images/yun/boy.jpg"/>
