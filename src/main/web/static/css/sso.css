@@ -81,10 +81,7 @@ input.exit{
     border:none;
 }
 
-.exit:hover{
-    color: #fff;
-    text-decoration: none;
-}
+
 
 .banner{
     width:100%;
