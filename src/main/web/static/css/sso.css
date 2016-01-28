@@ -77,6 +77,8 @@ a{
     color: #fff;
     font-family: \5FAE\8F6F\96C5\9ED1;
     display:block;
+    background: none;
+    border:none;
 }
 
 .exit:hover{
