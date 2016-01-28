@@ -15,7 +15,10 @@
     insert into tb3rdfilter (trdClientId, organizationCode,tstudent)
     SELECT #{trdclientid}, #{organizationcode},#{tstudent} FROM DUAL
     WHERE NOT EXISTS (
-      SELECT trdClientId, organizationCode,tstudent FROM tb3rdfilter
+       SELECT trdClientId, organizationCode,tstudent FROM tb3rdfilter
+      WHERE trdClientId = #{trdclientid}
+      AND organizationCode = #{organizationcode}
+      AND tstudent = #{tstudent}
     )
   </insert>
 

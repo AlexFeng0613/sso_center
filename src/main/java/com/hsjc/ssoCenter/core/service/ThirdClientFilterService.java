@@ -54,7 +54,11 @@ public class ThirdClientFilterService extends ApiBaseService{
         thirdFilter.setOrganizationcode(organizatinCode);
         thirdFilter.setTstudent(teacherOrStudent);
 
-        int num = thirdFilterMapper.insert(thirdFilter);
-        return validate(num);
+        try{
+            thirdFilterMapper.insert(thirdFilter);
+            return validate(1);
+        } catch (Exception e){
+            return validate(0);
+        }
     }
 }
