@@ -2,6 +2,8 @@ package com.hsjc.ssoCenter.core.mapper;
 
 import com.hsjc.ssoCenter.core.domain.Organization;
 
+import java.util.List;
+
 /**
  * @author : zga
  * @date : 2015-12-10
@@ -21,4 +23,6 @@ public interface OrganizationMapper {
     int updateByPrimaryKey(Organization organization);
 
     Organization selectByPrimaryKey(Long id);
+
+    List<Organization> selectAllOrganization();
 }

@@ -6,6 +6,50 @@
     <head></head>
     <body>
         <div id="content" layout:fragment="content">
+
+            <div class="addBox" style="display: none;">
+                <form name="addForm">
+                    <div class="examine_box_aside">
+                        <div class="examine_title">新增平台</div>
+                    </div>
+                    <div class="modifiedBox_center">
+                        <table border="1">
+                            <tr>
+                                <td>平台名称</td>
+                                <td>
+                                    <select name="clientId">
+                                        <option th:each="tc : ${thirdClientsList}" th:value="${tc.clientId}" th:text="${tc.description}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>组织机构</td>
+                                <td>
+                                    <select name="organizationCode">
+                                        <option th:each="torg : ${organizationList}" th:value="${torg.organizationCode}"
+                                                th:text="${torg.organizationName}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>用户类型</td>
+                                <td>
+                                    <select name="tstudent">
+                                        <option value="teacher">老师</option>
+                                        <option value="student">学生</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="examine_box_aside">
+                        <div class="addInput">
+                            <input type="button" value="新增" class="add_new"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
             <div class="index_title">导入数据权限过滤列表</div>
             <div class="tab_search">
                 <form th:action="@{/page/sso/platformFilterList/${currentPage},10.html}" method="get">
@@ -26,6 +70,7 @@
                         <th>机构代码</th>
                         <th>机构名称</th>
                         <th>同步用户类型</th>
+                        <th>编辑</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,15 +82,14 @@
                         <td th:text="${tf.organizationName}"></td>
                         <td th:if="${tf.tstudent eq 'teacher'}">老师</td>
                         <td th:if="${tf.tstudent eq 'student'}">学生</td>
+                        <td><a href="javascript:void(0);" class="del_clientFilter">删除</a></td>
                     </tr>
                 </tbody>
             </table>
             <div class="tab_foot">
                 <div class="all_select"><input type="checkbox" class="checkAll" />全选</div>
                 <ul class="handle">
-                    <li>修改基本信息</li>
-                    <li>修改状态</li>
-                    <li>删除</li>
+                    <li>新增</li>
                 </ul>
                 <div class="pages">
                     <div class="jil">共<font th:text="${count}"></font>条记录</div>
@@ -62,21 +106,9 @@
                     </select>
                 </div>
             </div>
-            <script type="text/javascript">
-                $(function(){
-                    $('#platformfilter_list').addClass('selected');
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/platformFilter.js}"
+                    src="../../../static/scripts/backstage/platformFilter.js"></script>
 
-                    /**
-                     * 全选与单选事件
-                     */
-                    $('.checkAll').click(function(){
-                        $(".filterList").prop("checked",$(this).prop("checked"));
-                    });
-                    $(".filterList").click(function(){
-                        $('.checkAll').prop('checked',($(".filterList").length == $(".filterList:checked").length));
-                    })
-                });
-            </script>
         </div>
     </body>
 </html>

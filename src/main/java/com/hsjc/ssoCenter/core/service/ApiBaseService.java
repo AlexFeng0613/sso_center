@@ -277,4 +277,24 @@ public class ApiBaseService {
         thirdSynUserDetailLog.setUserId(userId);
         thirdSynUserDetailLogMapper.insert(thirdSynUserDetailLog);
     }
+
+    /**
+     * @author : zga
+     * @date : 2016-1-28
+     *
+     * 校验CRUD
+     *
+     * @param num
+     * @return
+     */
+    public JSONObject validate(int num){
+        JSONObject resultJson = getResultJson();
+        if(num < 1 ){
+            resultJson.put("success",false);
+            resultJson.put("message",Constant.SERVER_ERROR);
+            return resultJson;
+        }
+        resultJson.put("message",Constant.RETURN_SUCCESS);
+        return resultJson;
+    }
 }

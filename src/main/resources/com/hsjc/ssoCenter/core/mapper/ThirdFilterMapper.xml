@@ -12,10 +12,11 @@
   </sql>
 
   <insert id="insert" parameterType="com.hsjc.ssoCenter.core.domain.ThirdFilter" >
-    insert into tb3rdfilter (id, trdClientId, organizationCode,
-    tstudent)
-    values (#{id}, #{trdclientid}, #{organizationcode},
-    #{tstudent})
+    insert into tb3rdfilter (trdClientId, organizationCode,tstudent)
+    SELECT #{trdclientid}, #{organizationcode},#{tstudent} FROM DUAL
+    WHERE NOT EXISTS (
+      SELECT trdClientId, organizationCode,tstudent FROM tb3rdfilter
+    )
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.ssoCenter.core.domain.ThirdFilter" >

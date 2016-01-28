@@ -1,10 +1,12 @@
 package com.hsjc.ssoCenter.app.page;
 
 import com.hsjc.ssoCenter.app.base.BaseController;
+import com.hsjc.ssoCenter.core.domain.Organization;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.service.IndexIcosService;
+import com.hsjc.ssoCenter.core.service.OrganizationService;
 import com.hsjc.ssoCenter.core.service.ThirdClientsService;
-import com.hsjc.ssoCenter.core.service.ThirdFilterService;
+import com.hsjc.ssoCenter.core.service.ThirdClientFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/page/")
 public class PageController extends BaseController{
+
     @Autowired
     IndexIcosService indexIcosService;
 
@@ -31,7 +34,10 @@ public class PageController extends BaseController{
     ThirdClientsService thirdClientsService;
 
     @Autowired
-    ThirdFilterService thirdFilterService;
+    ThirdClientFilterService thirdFilterService;
+
+    @Autowired
+    OrganizationService organizationService;
 
     /**
      * @author : zga
@@ -267,10 +273,16 @@ public class PageController extends BaseController{
         model.addAttribute("thirdFilterList",list);
         model.addAttribute("description",description);
 
+        List<Organization> organizationList = organizationService.getAllOrganization();
+        List<ThirdClients> thirdClientsList = thirdClientsService.selectAllThirdClients();
+
         model.addAttribute("count",(list == null ? 0 : list.size()));
         model.addAttribute("currentPage",currentPage);
         model.addAttribute("pageSize",pageSize);
         model.addAttribute("pageCount",5);
+        model.addAttribute("organizationList",organizationList);
+        model.addAttribute("thirdClientsList",thirdClientsList);
+
         return "/backstage/platformFilterList";
     }
 

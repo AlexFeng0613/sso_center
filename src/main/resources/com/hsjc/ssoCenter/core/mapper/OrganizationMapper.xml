@@ -126,4 +126,15 @@
     from tborganization
     where id = #{id}
   </select>
+
+  <!--
+    @author : zga
+    @date : 2016-1-28
+    查询所有的组织机构
+  -->
+  <select id="selectAllOrganization" resultType="Organization">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tborganization
+  </select>
 </mapper>

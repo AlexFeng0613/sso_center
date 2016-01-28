@@ -59,6 +59,18 @@ public class ThirdClientsService extends ApiBaseService{
 
     /**
      * @author : zga
+     * @date : 2016-1-26
+     *
+     * 查询所有的ThirdClietnt记录
+     *
+     * @return
+     */
+    public List<ThirdClients> selectAllThirdClients(){
+        return thirdClientsMapper.selectAllThirdClients();
+    }
+
+    /**
+     * @author : zga
      * @date : 2016-1-28
      *
      * 更新第三方平台信息
@@ -148,26 +160,5 @@ public class ThirdClientsService extends ApiBaseService{
         int num = thirdClientsMapper.addNewThirdClient(thirdClients);
 
         return validate(num);
-    }
-
-    /*-------------------------------------*/
-    /**
-     * @author : zga
-     * @date : 2016-1-28
-     *
-     * 校验CRUD
-     *
-     * @param num
-     * @return
-     */
-    public JSONObject validate(int num){
-        JSONObject resultJson = getResultJson();
-        if(num < 1 ){
-            resultJson.put("success",false);
-            resultJson.put("message",Constant.SERVER_ERROR);
-            return resultJson;
-        }
-        resultJson.put("message",Constant.RETURN_SUCCESS);
-        return resultJson;
     }
 }
