@@ -202,6 +202,7 @@ color: #323232;
   border-radius: 5px;
   color: #768089;
   float:left;
+  text-indent: 20px;
 }
 
 .inspect, .mistake, .correct {
@@ -320,7 +321,7 @@ input.anew60 {
 }
 
 .ipone {
-  width: 420px;
+  width: 444px;
   margin:0 auto 0;
 }
 
@@ -432,6 +433,7 @@ input.anew60 {
   border: 1px solid #ffad00;
   border-radius: 5px;
   margin-left:15px;
+  cursor: pointer;
 }
 
 .skip:hover {
@@ -506,9 +508,20 @@ background: none;
   margin-top: 30px;
 }
 
+.register_succeed a{
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  font-size: 18px;
+  color:#ffad00;
+  float:left;
+  display:block;
+}
+
 .congratulation {
   margin-right: 5px;
   float:left;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  font-size: 18px;
+  color:#959595;
 }
 
 .login_html {
@@ -544,13 +557,19 @@ background: none;
   filter: alpha(opacity=0); }
 
 .leap {
-  margin-top: 15px; }
+  margin-top: 15px;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  font-size: 14px;
+  color:#364049;
+}
 
 .login {
   width: 481px;
   height: 356px;
   background: url(../images/register/login.png) no-repeat;
-  margin: 250px auto; }
+  margin: 250px auto;
+
+}
 
 .login_title {
   height: 90px;
