@@ -40,6 +40,28 @@
 					$('.step_step4').addClass('selected2');
 					$('.step_step5').addClass('selected2');
 					$('.step_step6').addClass('selected1');
+
+					var conh=$('.container-fluid').height();
+
+					var cenh=$('.container-fluid .center').height();
+
+					var cenm=(conh-cenh)/2;
+
+					$('.container-fluid .center').css('margin',cenm+'px auto 0');
+
+
+					$(window).on('resize scroll',function(){
+
+						var conh=$('.container-fluid').height();
+
+						var cenh=$('.container-fluid .center').height();
+
+						var cenm=(conh-cenh)/2;
+
+						$('.container-fluid .center').css('margin',cenm+'px auto 0');
+					});
+
+
 					var second=10;
 					$('.leap').html('（'+second+'秒钟后将自动跳转至登录页面）');
 
