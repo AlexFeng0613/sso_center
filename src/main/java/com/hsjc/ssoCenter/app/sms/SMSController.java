@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/sms/")
 public class SMSController extends BaseController {
     @Autowired
-    private SmsService smsService;
+    SmsService smsService;
 
     /**
      * @author : zga

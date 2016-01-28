@@ -41,7 +41,8 @@ public class SSOStringUtil {
 
     /**
      * 生成随机字符串
-     * @param length  字符串长度
+     * @param type
+     * @param length
      * @return
      */
     public static String getRandomString(int type,int length) {

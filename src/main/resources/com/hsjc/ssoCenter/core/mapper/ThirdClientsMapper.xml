@@ -17,7 +17,7 @@
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id, clientId, clientSecret, contactorName, contactorPhone, briefName, ssoPassword, 
+    id, clientId, clientSecret, contactorName, contactorPhone, briefName, ssoPassword,
     publicKey,synCount,description,callbackUrl,status
   </sql>
 
@@ -27,12 +27,25 @@
    新增
   -->
   <insert id="insert" parameterType="com.hsjc.ssoCenter.core.domain.ThirdClients">
-    insert into tb3rdclients (id, clientId, clientSecret, 
+    insert into tb3rdclients (clientId, clientSecret,
       contactorName, contactorPhone, briefName, 
       ssoPassword, publicKey)
     values (#{id}, #{clientId}, #{clientSecret}, 
       #{contactorName}, #{contactorPhone}, #{briefName}, 
       #{ssoPassword}, #{publicKey},#{description})
+  </insert>
+
+  <!--
+    @author : zga
+    @date : 2016-1-28
+    新增第三方
+  -->
+  <insert id="addNewThirdClient">
+    INSERT INTO tb3rdclients (clientId, clientSecret, contactorName, contactorPhone, briefName, ssoPassword,
+    description,callbackUrl)
+    VALUES (#{clientId}, #{clientSecret},
+      #{contactorName}, #{contactorPhone}, #{briefName},
+      #{ssoPassword},#{description},#{callbackUrl})
   </insert>
 
   <insert id="insertSelective" parameterType="com.hsjc.ssoCenter.core.domain.ThirdClients" >
@@ -96,6 +109,17 @@
     where id = #{id}
   </delete>
 
+  <!--
+    @author : zga
+    @date : 2016-1-28
+    删除第三方平台(更新状态为0)
+  -->
+  <update id="updateThirdClientByClientId">
+    UPDATE tb3rdclients
+    SET status = '0'
+    WHERE clientId = #{clientId}
+  </update>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.ssoCenter.core.domain.ThirdClients" >
     update tb3rdclients
     <set >
@@ -142,6 +166,24 @@
     from tb3rdclients
     where id = #{id}
   </select>
+
+  <!--
+    @author : zga
+    @date : 2016-1-28
+    更新第三方信息
+  -->
+  <update id="updateThirdClientInfoByClientId">
+    UPDATE tb3rdclients
+    <set>
+      <if test="contactorName != null">
+        contactorName = #{contactorName},
+      </if>
+      <if test="contactorPhone != null">
+        contactorPhone = #{contactorPhone}
+      </if>
+    </set>
+    WHERE clientId = #{clientId}
+  </update>
 
   <!--
     @author : zga

@@ -3,7 +3,7 @@ package com.hsjc.ssoCenter.app.third;
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
-import com.hsjc.ssoCenter.core.service.ThirdClientsService;
+import com.hsjc.ssoCenter.core.service.ThirdSynDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author : zga
  * @date : 2015-12-10
  *
- * 第三方相关控制类
+ * 第三方接口控制类
  */
 @Controller
 @RequestMapping("/3rd/")
-public class ThirdController extends BaseController {
+public class ThirdSynDataController extends BaseController {
 
     @Autowired
-    private ThirdClientsService thirdClientsService;
+    ThirdSynDataService thirdSynDataService;
 
     /**
      * @author : zga
@@ -36,7 +36,7 @@ public class ThirdController extends BaseController {
         ThirdClients thirdClients = new ThirdClients();
         thirdClients.setClientId(clientId);
 
-        ThirdClients res = thirdClientsService.selectByClientId(thirdClients);
+        ThirdClients res = thirdSynDataService.selectByClientId(thirdClients);
         if(res == null) return "redirect:/page/authorizeFailed";
 
         return "redirect:/user/login";
@@ -69,9 +69,9 @@ public class ThirdController extends BaseController {
         paramJson.put("currentPage", currentPage);
         paramJson.put("pageSize", pageSize);
 
-        JSONObject resJsonObject = thirdClientsService.getAllOrganization(paramJson);
+        JSONObject resultJson = thirdSynDataService.getAllOrganization(paramJson);
 
-        return resJsonObject;
+        return resultJson;
     }
 
     /**
@@ -95,10 +95,10 @@ public class ThirdController extends BaseController {
         paramJson.put("password", password);
         paramJson.put("time", time);
 
-        JSONObject resJsonObject = thirdClientsService.getDifferentOrganization(paramJson);
+        JSONObject resultJson = thirdSynDataService.getDifferentOrganization(paramJson);
 
 
-        return resJsonObject;
+        return resultJson;
     }
 
     /**
@@ -126,9 +126,9 @@ public class ThirdController extends BaseController {
         paramJson.put("currentPage", currentPage);
         paramJson.put("pageSize", pageSize);
 
-        JSONObject resJsonObject = thirdClientsService.getAllUser(paramJson);
+        JSONObject resultJson = thirdSynDataService.getAllUser(paramJson);
 
-        return resJsonObject;
+        return resultJson;
     }
 
     /**
@@ -152,8 +152,8 @@ public class ThirdController extends BaseController {
         paramJson.put("password", password);
         paramJson.put("time", time);
 
-        JSONObject resJsonObject = thirdClientsService.getDifferentUser(paramJson);
+        JSONObject resultJson = thirdSynDataService.getDifferentUser(paramJson);
 
-        return resJsonObject;
+        return resultJson;
     }
 }
