@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class NotFoundController {
     @RequestMapping("/*")
     public String NotFountError(){
-        System.out.println("11111");
         return "redirect:/user/login.html";
     }
 }
