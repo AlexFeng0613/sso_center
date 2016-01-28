@@ -10,7 +10,11 @@
                 <div class="examine_box_aside">
                     <div class="examine_title">修改账号状态操作</div>
                 </div>
-                <div class="modifiedBox_center"></div>
+                <div class="modifiedBox_center">
+                    <form>
+
+                    </form>
+                </div>
                 <div class="examine_box_aside">
                     <div class="modifieInput">
                         <input type="button" value="保存" class="butL"/>
@@ -89,26 +93,33 @@
                     $('.checkAll').click(function(){
                         $(".clientList").prop("checked",$(this).prop("checked"));
                     });
+                    $(".clientList").click(function(){
+                        $('.checkAll').prop('checked',($(".clientList").length == $(".clientList:checked").length));
+                    })
 
-
+                    /**
+                     * 修改基本信息
+                     */
                     $('.handle li:first').click(function(){
                         $('.section').css('background-color','#e5e5e5');
                         $('.modifiedBox').show();
                     });
 
+                    /**
+                     * 弹出窗取消事件
+                     */
                     $('.butR').click(function(){
                         $('.modifiedBox').hide();
                         $('.section').css('background-color','#ffffff');
                     });
 
+                    /**
+                     * 弹出窗保存事件
+                     */
                     $('.butL').click(function(){
                         $('.modifiedBox').hide();
                         $('.section').css('background-color','#ffffff');
                     });
-
-                    $(".clientList").click(function(){
-                        $('.checkAll').prop('checked',($(".clientList").length == $(".clientList:checked").length));
-                    })
                 });
             </script>
         </div>

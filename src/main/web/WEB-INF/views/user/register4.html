@@ -17,6 +17,7 @@
 			<div class="center">
 				<form class="regForm" action="" method="post">
 					<div class="ipone">
+
 						<input type="hidden" th:value="${email}" name="email"/>
 						<div class="ipone_box">
 							<div class="ipone_box_l">手机号</div>
@@ -28,7 +29,6 @@
 							<input type="text" name="" class="verify_code"/>
 							<time class="count"></time>
 						</div>
-
 						<div class="ipone_box_next">
 							<div class="ipone_next">下一步</div>
 							<div class="skip">跳过</div>
@@ -41,16 +41,16 @@
 					$('.step_mark1').html('');
 					$('.step_mark2').html('');
 					$('.step_mark3').html('');
-					$('.step_mark1').addClass('selected');
-					$('.step_mark2').addClass('selected');
-					$('.step_mark2').addClass('selected');
-					$('.step_mark3').addClass('selected');
-					$('.step_mark4').addClass('select');
 
-					$('.step_step1').addClass('selected1');
-					$('.step_step2').addClass('selected1');
-					$('.step_step3').addClass('selected1');
-					$('.step_step4').addClass('selected2');
+					$('.step_mark1').addClass('selected2');
+					$('.step_mark2').addClass('selected2');
+					$('.step_mark3').addClass('selected2');
+					$('.step_mark4').addClass('selected1');
+
+					$('.step_step1').addClass('selected2');
+					$('.step_step2').addClass('selected2');
+					$('.step_step3').addClass('selected2');
+					$('.step_step4').addClass('selected1');
 
 					//短信获取click函数
 					$('.note').click(function(){
@@ -122,17 +122,17 @@
 							return false;
 						}
 					});
-					demo.tipmsg.w["s11"]="请输入11位手机号";
-					demo.tipmsg.w["s4"]="请输入4位数字的验证码";
+					demo.tipmsg.w["s11"]=" "; //请输入11位手机号
+					demo.tipmsg.w["s4"]=" ";//请输入4位数字的验证码
 					demo.addRule([{
 						ele:".ipone_num:eq(0)",
 						datatype:"s11",
-						nullmsg:'请输入手机号',
+						nullmsg:' ',// 请输入手机号
 						sucmsg:' '
 					},{
 						ele:".verify_code:eq(0)",
 						datatype:"s4",
-						nullmsg:'请输入验证码',
+						nullmsg:' ',//请输入验证码
 						sucmsg:' '
 					}]);
 

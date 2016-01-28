@@ -5,9 +5,7 @@
 	  layout:decorator="../../public/register">
 	<head>
 		<style>
-			.progress_2{
-				width:440px;
-			}
+
 		</style>
 	</head>
 	<body>
@@ -34,14 +32,36 @@
 				$(function(){
 					$('.step_mark1').html('');
 					$('.step_mark2').html('');
-					$('.step_mark1').addClass('selected');
-					$('.step_mark2').addClass('selected');
-					$('.step_mark2').addClass('selected');
-					$('.step_mark3').addClass('select');
 
-					$('.step_step1').addClass('selected1');
-					$('.step_step2').addClass('selected1');
-					$('.step_step3').addClass('selected2');
+					$('.step_mark1').addClass('selected2');
+					$('.step_mark2').addClass('selected2');
+					$('.step_mark3').addClass('selected1');
+
+
+					$('.step_step1').addClass('selected2');
+					$('.step_step2').addClass('selected2');
+					$('.step_step3').addClass('selected1');
+
+					var conh=$('.container-fluid').height();
+
+					var cenh=$('.container-fluid .center').height();
+
+					var cenm=(conh-cenh)/2;
+
+					$('.container-fluid .center').css('margin',cenm+'px auto 0');
+
+
+					$(window).on('resize scroll',function(){
+
+						var conh=$('.container-fluid').height();
+
+						var cenh=$('.container-fluid .center').height();
+
+						var cenm=(conh-cenh)/2;
+
+						$('.container-fluid .center').css('margin',cenm+'px auto 0');
+					});
+
 
 					var time=60;
 					var timer=null;

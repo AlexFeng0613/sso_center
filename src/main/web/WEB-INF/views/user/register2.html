@@ -5,9 +5,7 @@
 	  layout:decorator="../../public/register">
 	<head>
 		<style>
-			.progress_2{
-				width:220px;
-			}
+
 		</style>
 	</head>
 	<body>
@@ -65,7 +63,7 @@
 						</div>
 						<div class="input_box">
 							<div class="input_box_l" style="background: none;">验证码</div>
-							<input type="text" name="code" placeholder="请输入右侧验证码" style="width:170px;" class="inputxt"/>
+							<input type="text" name="code" placeholder="请输入右侧验证码" style="width:128px;text-indent:0;text-align: center" class="inputxt"/>
 							<img id="vimg" src="/code.html"/>
 						</div>
 						<div class="context">
@@ -77,14 +75,33 @@
 			</div>
 			<script type="text/javascript">
 				$(function(){
-					var _index=0;
 					$('.step_mark1').html('');
 
-					$('.step_mark1').addClass('selected');
-					$('.step_mark2').addClass('select');
+					$('.step_mark1').addClass('selected2');
+					$('.step_mark2').addClass('selected1');
 
-					$('.step_step1').addClass('selected1');
-					$('.step_step2').addClass('selected2');
+					$('.step_step1').addClass('selected2');
+					$('.step_step2').addClass('selected1');
+
+					var conh=$('.container-fluid').height();
+
+					var cenh=$('.container-fluid .center').height();
+
+					var cenm=(conh-cenh)/2;
+
+					$('.container-fluid .center').css('margin',cenm+'px auto 0');
+
+
+					$(window).on('resize scroll',function(){
+
+						var conh=$('.container-fluid').height();
+
+						var cenh=$('.container-fluid .center').height();
+
+						var cenm=(conh-cenh)/2;
+
+						$('.container-fluid .center').css('margin',cenm+'px auto 0');
+					});
 
 					$('.sex li').click(function(){
 						index=$(this).index();
@@ -99,7 +116,8 @@
 						showAllError:true,
 						datatype:{
 							"s6-18":/^[\w\.\s]{6,18}$/,
-							"s2-10":/^\s{2,10}/,
+							"s2-10":/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,10}$/,
+							"s5" : /^[\w]{5}$/
 							//"e" : const
 						},
 						callback : function(form){
@@ -143,7 +161,13 @@
 						}
 					});
 
-					demo.tipmsg.w["s6-18"]="请输入6到18位英文和数字";
+					demo.tipmsg.w = {
+						's6-18' : ' ', //用户名为6到18位
+						's2-10' : ' ',//姓名为2到10位中文字符
+						'*6-10' : ' ',//密码为6到10位
+						's5' : ' ',//验证码为5位
+						'e' : ' '//邮箱格式不正确
+					};
 
 					demo.addRule([{
 						ele:".inputxt:eq(0)",
@@ -163,7 +187,7 @@
 						recheck:"password"
 					},{
 						ele:".inputxt:eq(5)",
-						datatype:"*6"
+						datatype:"s5"
 					}
 					]);
 
