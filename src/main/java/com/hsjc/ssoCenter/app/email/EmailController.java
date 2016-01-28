@@ -31,6 +31,6 @@ public class EmailController extends BaseController {
         List<SystemProperties> list = new ArrayList<>();
         list = emailService.findEmail();
         model.addAttribute("emailList",list);
-        return "emailPort";
+        return "forward:/page/sso/emailPort.html";
     }
 }
