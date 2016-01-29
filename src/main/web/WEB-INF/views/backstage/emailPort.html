@@ -83,7 +83,7 @@
                             <input type="text" th:value="${email.proKey}" class="emailIn prokey" disabled="true"/>
                         </td>
                         <td>
-                            <input type="text" th:value="${email.proValue}" class="emailIn provalue" disabled="true"/>
+                            <input type="text" th:value="${email.proValue}" class="emailIn emailIn2 provalue" disabled="true"/>
                         </td>
                         <td>
                         <!--<td th:text="${#dates.format(email.createTime, 'yyyy-MM-dd HH:mm:ss')}">-->
@@ -114,14 +114,14 @@
                             prokey= $(this).parent().siblings().children('.prokey').val();
                             provalue= $(this).parent().siblings().children('.provalue').val();
                             createtime= $(this).parent().siblings().children('.createtime').val();
-                            $(this).parent().siblings().children('.emailIn').css('color','#ff0000').attr('disabled',false);
+                            $(this).parent().siblings().children('.emailIn2').css('color','#ff0000').attr('disabled',false);
                             $(this).hide();
                             $(this).siblings('.emailBut').show();
 
                         });
 
                         $('.updateL').click(function(){
-                            $(this).parents().siblings().children('.emailIn').css('color','#333333').attr('disabled',true);
+                            $(this).parents().siblings().children('.emailIn2').css('color','#333333').attr('disabled',true);
                             id = $(this).parents().siblings('.eid').val();
                             prokey= $(this).parents().siblings().children('.prokey').val();
                             provalue= $(this).parents().siblings().children('.provalue').val();
@@ -142,7 +142,7 @@
                         });
 
                         $('.updateR').click(function(){
-                            $(this).parents().siblings().children('.emailIn').css('color','#333333').attr('disabled',true);
+                            $(this).parents().siblings().children('.emailIn2').css('color','#333333').attr('disabled',true);
                             $(this).parents().siblings().children('.prokey').val(prokey);
                             $(this).parents().siblings().children('.provalue').val(provalue);
                             $(this).parents().siblings().children('.createtime').val(createtime);
