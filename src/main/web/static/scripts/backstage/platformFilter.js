@@ -5,7 +5,7 @@
  * 平台过滤列表
  *
  */
-/*$('#platformfilter_list').addClass('selected');*/
+$('#platformfilter_list').addClass('selected');
 
 /**
  * 全选与单选事件
@@ -38,7 +38,6 @@ $('.handle li').eq(0).click(function(){
 
 $('.cancel').click(function(){
     $('.addBox').hide();
-
     $('.section').css('background-color','#ffffff');
 });
 

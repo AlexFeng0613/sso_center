@@ -80,6 +80,11 @@ $('.butR').click(function(){
     $('.section').css('background-color','#ffffff');
 });
 
+$('.cancel').click(function(){
+    $('.addBox').hide();
+    $('.section').css('background-color','#ffffff');
+});
+
 /**
  * 弹出窗保存事件
  */
