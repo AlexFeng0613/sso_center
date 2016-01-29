@@ -3,14 +3,16 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="../../public/backstage">
-    <head></head>
+    <head>
+
+    </head>
     <body>
         <div id="content" layout:fragment="content">
             <!--modify third client info start-->
             <div class="modifiedBox">
                 <form name="modifyForm">
                     <div class="examine_box_aside">
-                        <div class="examine_title">修改平台信息</div>
+                        <div class="index_title">修改平台信息</div>
                     </div>
                     <div class="modifiedBox_center">
                         <table border="1">
@@ -62,10 +64,10 @@
             <div class="addBox" style="display: none;">
                 <form name="addForm">
                     <div class="examine_box_aside">
-                        <div class="examine_title">新增平台</div>
+                        <div class="index_title">新增平台</div>
                     </div>
                     <div class="modifiedBox_center">
-                        <table border="1">
+                        <table class="modifiedBoxTab">
                             <tr>
                                 <td>平台名称</td>
                                 <td><input name="description"/></td>
@@ -91,74 +93,77 @@
                     <div class="examine_box_aside">
                         <div class="addInput">
                             <input type="button" value="新增" class="add_new"/>
+                            <input type="button" value="取消" class="cancel"/>
                         </div>
                     </div>
                 </form>
             </div>
             <!--add third client info end-->
 
-            <div class="index_title">平台列表</div>
-            <div class="tab_search">
-                <form th:action="@{/page/sso/platformList/${currentPage},10.html}" method="get">
-                    <div class="tab_fn">
-                        <input type="submit" value="查询" class="tab_fnLi"/>
-                        <input type="reset" value="重置" class="tab_fnLi"/>
-                    </div>
-                    <input type="text" name="description" th:value="${description}" placeholder="输入平台名称…"/>
-                </form>
-            </div>
-            <table class="platform_tab">
-                <thead>
-                    <tr>
-                        <th>
-                        </th>
-                        <th>平台</th>
-                        <th>联系人</th>
-                        <th>联系电话</th>
-                        <th>公钥</th>
-                        <th>clientId</th>
-                        <th>clientSecret</th>
-                        <th>ssoPassword</th>
-                        <th>回调地址</th>
-                        <th>编辑</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="tc : ${thirdClientsList}">
-                        <td><input type="checkbox" class="clientList"/></td>
-                        <td th:text="${tc.description}"></td>
-                        <td th:text="${tc.contactorName}"></td>
-                        <td th:text="${tc.contactorPhone}"></td>
-                        <td th:text="${tc.publicKey}"></td>
-                        <td th:text="${tc.clientId}"></td>
-                        <td th:text="${tc.clientSecret}"></td>
-                        <td th:text="${tc.ssoPassword}"></td>
-                        <td th:text="${tc.callbackUrl}"></td>
-                        <td><a href="javascript:void(0);" class="modify_info">修改</a> | <a href="javascript:void(0);" class="del_record">删除</a></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="tab_foot">
-                <div class="all_select"><input type="checkbox" class="checkAll" />全选</div>
-                <ul class="handle">
-                    <li>新增</li>
-                </ul>
-                <div class="pages">
-                    <div class="jil">共<font th:text="${count}"></font>条记录</div>
-                    <a th:href="@{/page/sso/platformList/1,10.html}" class="page">首页</a>
-                    <a th:if="${currentPage > 1}" th:href="@{'/page/sso/platformList/' + ${currentPage - 1} +',10.html'}" class="page">上一页</a>
-                    <a th:if="${currentPage } lt ${pageCount}" th:href="@{'/page/sso/platformList/' + ${currentPage + 1} + ',10.html'}" class="page">下一页</a>
-                    <a th:href="@{'/page/sso/platformList/' + ${pageCount} + ',10.html'}" class="page">尾页</a>
-                    <select>
-                        <option>1/20</option>
-                        <option>2/20</option>
-                        <option>3/20</option>
-                        <option>4/20</option>
-                        <option>5/20</option>
-                    </select>
+                <div class="index_title">平台列表</div>
+                <div class="tab_search">
+                    <form th:action="@{/page/sso/platformList/${currentPage},10.html}" method="get">
+                        <div class="tab_fn">
+                            <input type="submit" value="查询" class="tab_fnLi"/>
+                            <input type="reset" value="重置" class="tab_fnLi"/>
+                        </div>
+                        <input type="text" name="description" th:value="${description}" placeholder="输入平台名称…"/>
+                    </form>
                 </div>
-            </div>
-            <script type="text/javascript" th:src="@{/static/scripts/backstage/platform.js}" src="../../../static/scripts/backstage/platform.js"></script>
+                <table class="platform_tab">
+                    <thead>
+                        <tr>
+                            <th>
+                            </th>
+                            <th>平台</th>
+                            <th>联系人</th>
+                            <th>联系电话</th>
+                            <th>公钥</th>
+                            <th>clientId</th>
+                            <th>clientSecret</th>
+                            <th>ssoPassword</th>
+                            <th>回调地址</th>
+                            <th>编辑</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="tc : ${thirdClientsList}">
+                            <td><input type="checkbox" class="clientList"/></td>
+                            <td th:text="${tc.description}"></td>
+                            <td th:text="${tc.contactorName}"></td>
+                            <td th:text="${tc.contactorPhone}"></td>
+                            <td th:text="${tc.publicKey}"></td>
+                            <td th:text="${tc.clientId}"></td>
+                            <td th:text="${tc.clientSecret}"></td>
+                            <td th:text="${tc.ssoPassword}"></td>
+                            <td th:text="${tc.callbackUrl}"></td>
+                            <td><a href="javascript:void(0);" class="modify_info">修改</a> | <a href="javascript:void(0);" class="del_record">删除</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="tab_foot">
+                    <div class="all_select"><input type="checkbox" class="checkAll" />全选</div>
+                    <ul class="handle">
+                        <li>新增</li>
+                    </ul>
+                    <div class="pages">
+                        <div class="jil">共<font th:text="${count}"></font>条记录</div>
+                        <a th:href="@{/page/sso/platformList/1,10.html}" class="page">首页</a>
+                        <a th:if="${currentPage > 1}" th:href="@{'/page/sso/platformList/' + ${currentPage - 1} +',10.html'}" class="page">上一页</a>
+                        <a th:if="${currentPage } lt ${pageCount}" th:href="@{'/page/sso/platformList/' + ${currentPage + 1} + ',10.html'}" class="page">下一页</a>
+                        <a th:href="@{'/page/sso/platformList/' + ${pageCount} + ',10.html'}" class="page">尾页</a>
+                        <select>
+                            <option>1/20</option>
+                            <option>2/20</option>
+                            <option>3/20</option>
+                            <option>4/20</option>
+                            <option>5/20</option>
+                        </select>
+                    </div>
+                </div>
+
+            <script text="text/javascript" th:src="@{/static/scripts/backstage/platform.js}" src="../../../static/scripts/backstage/platform.js"></script>
+            <script text="text/javascript" th:src="@{/static/scripts/backstage/platformFilter.js}" src="../../../static/scripts/backstage/platformFilter.js"></script>
         </div>
     </body>
 </html>

@@ -5,7 +5,7 @@
  * 平台过滤列表
  *
  */
-$('#platformfilter_list').addClass('selected');
+/*$('#platformfilter_list').addClass('selected');*/
 
 /**
  * 全选与单选事件
@@ -33,6 +33,13 @@ $('.del_clientFilter').click(function(){
  */
 $('.handle li').eq(0).click(function(){
     $('.addBox').show();
+
+});
+
+$('.cancel').click(function(){
+    $('.addBox').hide();
+
+    $('.section').css('background-color','#ffffff');
 });
 
 /**
@@ -53,6 +60,7 @@ $('.add_new').click(function(){
         'organizationCode' : organizationCode,
         'tstudent' : tstudent
     };
+    return false;
     $.ajax({
         url : '/thirdClientFilter/addNewThirdClientFilter.json',
         type : 'POST',

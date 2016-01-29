@@ -49,6 +49,8 @@ $('.modify_info').click(function(){
 $('.del_record').click(function(){
     var third_name = $(this).parent().siblings().eq(1).html();
     if(window.confirm('确定删除 《' + third_name + '》 吗?')){
+
+        return false;
         var data = {
             'clientId' : $(this).parent().siblings().eq(5).html()
         };
@@ -87,7 +89,7 @@ $('.butL').click(function(){
         'contactorName' : $('form[name="modifyForm"] input[name="contactorName"]').val(),
         'contactorPhone' : $('form[name="modifyForm"] input[name="contactorPhone"]').val()
     };
-
+    return false;
     $.ajax({
         url : '/thirdClients/updateThirdClientInfo.json',
         type : 'POST',
@@ -144,7 +146,7 @@ $('.add_new').click(function(){
         'contactorPhone' : contactorPhone,
         'callbackUrl' : callbackUrl
     };
-
+    return false;
     $.ajax({
         url : '/thirdClients/addNewThirdClient.json',
         type : 'POST',
