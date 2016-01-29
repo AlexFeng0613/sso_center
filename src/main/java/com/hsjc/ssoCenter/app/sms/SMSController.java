@@ -74,31 +74,4 @@ public class SMSController extends BaseController {
         return "forward:/page/sso/messPort.html";
     }
 
-    /**
-     * 短信配置
-     * @param id
-     * @param prokey
-     * @param provalue
-     * @param createtime
-     * @return
-     */
-    @RequestMapping(value = "updateEmail")
-    public JSONObject updateEmail(String id,String prokey,String provalue,String createtime){
-        SystemProperties systemProperties = new SystemProperties();
-        systemProperties.setId(Integer.parseInt(id));
-        systemProperties.setProKey(prokey);
-        systemProperties.setProValue(provalue);
-
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            java.util.Date createdate = sdf.parse(createtime);
-            systemProperties.setCreateTime(createdate);
-            systemProperties.setModifyTime(new Date());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        int result = smsService.updateSms(systemProperties);
-        JSONObject json = new JSONObject(result);
-        return json;
-    }
 }

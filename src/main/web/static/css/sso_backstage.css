@@ -1707,7 +1707,7 @@ text-indent: 20px;
 }
 
 .emailTab tr th{
-
+    width:155px;
     height:50px;
     line-height: 50px;
     background-color:#e4e4e4 ;
@@ -1769,7 +1769,46 @@ text-indent: 20px;
     margin:5px auto 0;
 }
 
-.emailIn{
+.emailBut{
+    width:150px;
+    height: 30px;
+    margin:5px auto 0;
+    display:none;
+}
+
+
+.updateL{
+    width: 70px;
+    line-height: 30px;
+    height: 30px;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    display:block;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    background-color: rgb(68, 181, 73);
+    border:none;
+    color:#fff;
+   float:left;
+}
+
+.updateR{
+    width: 70px;
+    line-height: 30px;
+    height: 30px;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    display:block;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    background-color: rgb(68, 181, 73);
+    border:none;
+    color:#fff;
+    float:right;
+}
+
+
+.emailIn, .createtime, .modifytime{
     width:100%;
     height:100%;
     border:none;

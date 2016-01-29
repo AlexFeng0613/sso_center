@@ -41,7 +41,7 @@
                     </div>
                     <script type="text/javascript">
                         $(function(){
-                            $('#mess_port').addClass('selected');
+
 
                             var _index=0;
                             $('.mess_sel li').click(function(){
@@ -78,34 +78,61 @@
                     <!-- <td th:text="${#dates.format(email.modifyTime, 'yyyy-MM-dd HH:mm:ss')}">-->
                     <input type="text" class="Wdate toDate modifytime" th:value="${#dates.format(sms.modifyTime, 'yyyy-MM-dd HH:mm:ss')}" disabled="true"/>
                 </td>
-                <td><input type="button" value="修改"  class="update"/></td>
+                <td>
+                    <input type="button" value="修改"  class="update"/>
+                    <div class="emailBut">
+                        <input type="button" value="确认"  class="updateL"/>
+                        <input type="button" value="取消"  class="updateR"/>
+                    </div>
+                </td>
             </tr>
             </tbody>
         </table>
         <script type="text/javascript">
             $(function(){
+                var id = "";
+                var prokey= "";
+                var provalue= "";
+                var createtime= "";
+                $('#mess_port').addClass('selected');
                 $('.update').click(function(){
-                    if( $(this).val()==='修改'){
-                        $(this).val('确认');
-                        $(this).parent().siblings().children('.emailIn').attr('disabled',false);
-                    }else {
-                        var id = $(this).parent().siblings('.eid').val();
-                        var prokey= $(this).parent().siblings().children('.prokey').val();
-                        var provalue= $(this).parent().siblings().children('.provalue').val();
-                        var createtime= $(this).parent().siblings().children('.createtime').val();
-                        $.ajax({
-                            url: "/email/updateEmail.json",
-                            dataType: "json",
-                            data: {
-                                id:id,
-                                prokey:prokey,
-                                provalue:provalue,
-                                createtime:createtime,
-                            },
-                        });
-                        $(this).parent().siblings().children('.emailIn').attr('disabled',true);
-                        $(this).val('修改');
-                    }
+                    prokey= $(this).parent().siblings().children('.prokey').val();
+                    provalue= $(this).parent().siblings().children('.provalue').val();
+                    createtime= $(this).parent().siblings().children('.createtime').val();
+                    $(this).parent().siblings().children('.emailIn').css('color','#ff0000').attr('disabled',false);
+                    $(this).hide();
+                    $(this).siblings('.emailBut').show();
+
+                });
+
+                $('.updateL').click(function(){
+                    $(this).parents().siblings().children('.emailIn').css('color','#333333').attr('disabled',true);
+                   id = $(this).parents().siblings('.eid').val();
+                   prokey= $(this).parents().siblings().children('.prokey').val();
+                   provalue= $(this).parents().siblings().children('.provalue').val();
+                   createtime= $(this).parents().siblings().children('.createtime').val();
+                    $.ajax({
+                        url: "/email/updateEmail.json",
+                        dataType: "json",
+                        data: {
+                            id:id,
+                            prokey:prokey,
+                            provalue:provalue,
+                            createtime:createtime,
+                        },
+                    });
+                    $(this).parent().siblings('.update').show();
+                    $(this).parent('.emailBut').hide();
+
+                });
+
+                $('.updateR').click(function(){
+                    $(this).parents().siblings().children('.emailIn').css('color','#333333').attr('disabled',true);
+                    $(this).parents().siblings().children('.prokey').val(prokey);
+                    $(this).parents().siblings().children('.provalue').val(provalue);
+                    $(this).parents().siblings().children('.createtime').val(createtime);
+                    $(this).parents('.emailBut').hide();
+                    $(this).parent().siblings('.update').show();
 
                 });
 
