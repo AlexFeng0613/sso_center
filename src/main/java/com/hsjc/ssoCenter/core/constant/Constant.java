@@ -8,6 +8,9 @@ package com.hsjc.ssoCenter.core.constant;
  */
 public class Constant {
 
+    /**
+     * Common error
+     */
     public static final String NULL_PARAM = "100001";
 
     public static final String INVALID_CODE = "100002";
@@ -21,6 +24,10 @@ public class Constant {
     public static final String SEND_MAIL_SUCCESS = "100006";
 
     public static final String NOT_LOGIN = "100007";
+
+    public static final String SERVER_ERROR = "S500000";
+
+    public static final String RETURN_SUCCESS = "S200000";
 
     /**
      * 修改密码

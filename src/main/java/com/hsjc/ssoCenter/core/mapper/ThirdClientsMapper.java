@@ -14,11 +14,17 @@ public interface ThirdClientsMapper {
 
     int insertSelective(ThirdClients thirdClients);
 
+    int addNewThirdClient(ThirdClients thirdClients);
+
     int deleteByPrimaryKey(Long id);
+
+    int updateThirdClientByClientId(@Param("clientId") String clientId);
 
     int updateByPrimaryKeySelective(ThirdClients thirdClients);
 
     int updateByPrimaryKey(ThirdClients thirdClients);
+
+    int updateThirdClientInfoByClientId(ThirdClients thirdClients);
 
     ThirdClients selectByPrimaryKey(Long id);
 

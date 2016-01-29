@@ -31,5 +31,11 @@ var SSOSystem = {
         window.open('','_self');
         window.close();
         window.open("/page/logout.html","_blank")
+    },
+    isEmpty : function(str){
+        if(str == '' || str == null || str == undefined || str == 'undefined'){
+            return true;
+        }
+        return false;
     }
 }

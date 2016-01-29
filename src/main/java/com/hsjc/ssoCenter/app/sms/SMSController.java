@@ -27,7 +27,7 @@ import java.util.List;
 @RequestMapping("/sms/")
 public class SMSController extends BaseController {
     @Autowired
-    private SmsService smsService;
+    SmsService smsService;
 
     /**
      * @author : zga
