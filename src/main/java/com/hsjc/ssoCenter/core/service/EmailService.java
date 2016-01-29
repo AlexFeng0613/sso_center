@@ -50,4 +50,14 @@ public class EmailService extends ApiBaseService{
         list = systemPropertiesMapper.selectMail();
         return list;
     }
+
+    /**
+     * 邮件配置
+     * @param systemProperties
+     * @return
+     */
+    public int updateEmail(SystemProperties systemProperties){
+        int result = systemPropertiesMapper.updateByPrimaryKey(systemProperties);
+        return result;
+    }
 }

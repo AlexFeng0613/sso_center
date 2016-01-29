@@ -78,19 +78,20 @@
                     </thead>
                 <tbody>
                     <tr th:each="email:${emailList}">
+                        <input type="hidden" th:value="${email.id}" class="eid"/>
                         <td>
-                            <input type="text" th:value="${email.proKey}" class="emailIn" disabled="true"/>
+                            <input type="text" th:value="${email.proKey}" class="emailIn prokey" disabled="true"/>
                         </td>
                         <td>
-                            <input type="text" th:value="${email.proValue}" class="emailIn" disabled="true"/>
+                            <input type="text" th:value="${email.proValue}" class="emailIn provalue" disabled="true"/>
                         </td>
                         <td>
                         <!--<td th:text="${#dates.format(email.createTime, 'yyyy-MM-dd HH:mm:ss')}">-->
-                            <input type="text" class="Wdate fromDate emailIn" th:value="${#dates.format(email.createTime, 'yyyy-MM-dd HH:mm:ss')}" disabled="true"/>
+                            <input type="text" class="Wdate fromDate createtime" th:value="${#dates.format(email.createTime, 'yyyy-MM-dd HH:mm:ss')}" disabled="true"/>
                         </td>
                         <td>
                        <!-- <td th:text="${#dates.format(email.modifyTime, 'yyyy-MM-dd HH:mm:ss')}">-->
-                            <input type="text" class="Wdate toDate emailIn" th:value="${#dates.format(email.createTime, 'yyyy-MM-dd HH:mm:ss')}" disabled="true"/>
+                            <input type="text" class="Wdate toDate modifytime" th:value="${#dates.format(email.modifyTime, 'yyyy-MM-dd HH:mm:ss')}" disabled="true"/>
                         </td>
                         <td><input type="button" value="修改"  class="update"/></td>
                     </tr>
@@ -103,6 +104,20 @@
                                 $(this).val('确认');
                                 $(this).parent().siblings().children('.emailIn').attr('disabled',false);
                             }else {
+                                var id = $(this).parent().siblings('.eid').val();
+                                var prokey= $(this).parent().siblings().children('.prokey').val();
+                                var provalue= $(this).parent().siblings().children('.provalue').val();
+                                var createtime= $(this).parent().siblings().children('.createtime').val();
+                                $.ajax({
+                                    url: "/email/updateEmail.json",
+                                    dataType: "json",
+                                    data: {
+                                        id:id,
+                                        prokey:prokey,
+                                        provalue:provalue,
+                                        createtime:createtime,
+                                    },
+                                });
                                 $(this).parent().siblings().children('.emailIn').attr('disabled',true);
                                 $(this).val('修改');
                             }

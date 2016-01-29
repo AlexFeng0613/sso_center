@@ -149,4 +149,14 @@ public class SmsService extends ApiBaseService{
         list = systemPropertiesMapper.selectSms();
         return list;
     }
+
+    /**
+     * 短信配置
+     * @param systemProperties
+     * @return
+     */
+    public int updateSms(SystemProperties systemProperties){
+        int result = systemPropertiesMapper.updateByPrimaryKey(systemProperties);
+        return result;
+    }
 }

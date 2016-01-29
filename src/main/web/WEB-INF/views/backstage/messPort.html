@@ -3,11 +3,19 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="../../public/backstage">
-    <head></head>
+    <head>
+        <style>
+            input.Wdate{
+                border:none;
+
+            }
+        </style>
+        <script text="text/javascript" th:src="@{/static/scripts/WdatePicker.js}"  src="../../../static/scripts/WdatePicker.js"></script>
+    </head>
     <body>
     <div id="content" layout:fragment="content">
                     <div class="index_title">短信接口设置</div>
-                    <div class="tab_search">
+                    <!--<div class="tab_search">
                         <ul class="mess_sel">
                             <li class="selected">短信接口</li>
                             <li>短信测试</li>
@@ -42,7 +50,86 @@
                                 $('.mess_box').eq(_index).show().siblings('.mess_box').hide();
                             });
                         });
-                    </script>
+                    </script>-->
+        <table class="emailTab">
+            <thead>
+            <tr>
+                <th>proKey</th>
+                <th>proValue</th>
+                <th>createTime</th>
+                <th>modifyTime</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="sms:${smsList}">
+                <input type="hidden" th:value="${sms.id}" class="eid"/>
+                <td>
+                    <input type="text" th:value="${sms.proKey}" class="emailIn prokey" disabled="true"/>
+                </td>
+                <td>
+                    <input type="text" th:value="${sms.proValue}" class="emailIn provalue" disabled="true"/>
+                </td>
+                <td>
+                    <!--<td th:text="${#dates.format(email.createTime, 'yyyy-MM-dd HH:mm:ss')}">-->
+                    <input type="text" class="Wdate fromDate createtime" th:value="${#dates.format(sms.createTime, 'yyyy-MM-dd HH:mm:ss')}" disabled="true"/>
+                </td>
+                <td>
+                    <!-- <td th:text="${#dates.format(email.modifyTime, 'yyyy-MM-dd HH:mm:ss')}">-->
+                    <input type="text" class="Wdate toDate modifytime" th:value="${#dates.format(sms.modifyTime, 'yyyy-MM-dd HH:mm:ss')}" disabled="true"/>
+                </td>
+                <td><input type="button" value="修改"  class="update"/></td>
+            </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            $(function(){
+                $('.update').click(function(){
+                    if( $(this).val()==='修改'){
+                        $(this).val('确认');
+                        $(this).parent().siblings().children('.emailIn').attr('disabled',false);
+                    }else {
+                        var id = $(this).parent().siblings('.eid').val();
+                        var prokey= $(this).parent().siblings().children('.prokey').val();
+                        var provalue= $(this).parent().siblings().children('.provalue').val();
+                        var createtime= $(this).parent().siblings().children('.createtime').val();
+                        $.ajax({
+                            url: "/email/updateEmail.json",
+                            dataType: "json",
+                            data: {
+                                id:id,
+                                prokey:prokey,
+                                provalue:provalue,
+                                createtime:createtime,
+                            },
+                        });
+                        $(this).parent().siblings().children('.emailIn').attr('disabled',true);
+                        $(this).val('修改');
+                    }
+
+                });
+
+                $('.fromDate').focus(function(){
+                    WdatePicker({
+                        /*  isShowToday:false,
+                         isShowOK:false,*/
+                        isShowClear:false,
+
+                        /*  onpicked:function(){
+                         $('.toDate').focus();
+                         }*/
+                    });
+                });
+
+                $('.toDate').focus(function(){
+                    WdatePicker({
+                        // minDate:"#F{$dp.$D('fromDate')}"
+                        isShowClear:false,
+                    });
+                });
+            });
+        </script>
+
             </div>
 
     </body>

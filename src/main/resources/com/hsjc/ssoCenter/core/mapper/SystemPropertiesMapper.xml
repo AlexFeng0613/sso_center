@@ -78,9 +78,9 @@
 
   <update id="updateByPrimaryKey" parameterType="com.hsjc.ssoCenter.core.domain.SystemProperties" >
     update tbsystemproperties
-    set proKey = #{prokey},
-      proValue = #{provalue},
-      modifyTime = #{modifytime}
+    set proKey = #{proKey},
+      proValue = #{proValue},
+      modifyTime = #{modifyTime}
     where id = #{id}
   </update>
 
