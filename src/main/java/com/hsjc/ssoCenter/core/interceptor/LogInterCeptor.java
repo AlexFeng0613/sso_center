@@ -54,8 +54,8 @@ public class LogInterCeptor {
 
     }
 
-    @AfterReturning("controllerAspect()")
-    public void doAfterReturning(JoinPoint joinPoint){
+    @Before("controllerAspect()")
+    public void doBefore(JoinPoint joinPoint){
         /**
          * 获取保存日志的信息
          */
@@ -70,6 +70,7 @@ public class LogInterCeptor {
          * 保存日志
          */
         Object object = map.get("clientId");
+        JSONObject resultJson = null;
         if(object == null){
             //系统日志保存
             com.hsjc.ssoCenter.core.domain.SystemLog systemLog = new com.hsjc.ssoCenter.core.domain.SystemLog();
@@ -100,7 +101,6 @@ public class LogInterCeptor {
             if (target == null) return;
             if (signature == null) return;
 
-            JSONObject resultJson = null;
             Object[] args = joinPoint.getArgs();
             for(Object o : args){
                 if(o instanceof JSONObject){
@@ -111,10 +111,17 @@ public class LogInterCeptor {
         }
     }
 
+    @AfterReturning("controllerAspect()")
+    public void doAfterReturning(JoinPoint joinPoint){
+
+    }
+
+    @After("controllerAspect()")
+    public void doAfter(JoinPoint joinPoint){
+    }
 
     @After("controllerAspect()")
     public void doAroundInvoke(JoinPoint joinPoint){
-
     }
 
     /**
@@ -141,23 +148,29 @@ public class LogInterCeptor {
                 Class[] clazzs = method.getParameterTypes();
                 if (clazzs.length == arguments.length) {
                     map.put("actionId", method.getAnnotation(SSOSystemLog.class).actionId());
-                    if(arguments[0] instanceof JSONObject){
-                        paramJson = (JSONObject)arguments[0];
-                        map.put("clientId",paramJson.getString("clientId"));
-                        map.put("synCount",paramJson.getInteger("synCount"));
-                    } else if(arguments[0] instanceof HttpServletRequest){
+                    if(arguments[0] instanceof JSONObject) {
+                        paramJson = (JSONObject) arguments[0];
+                        map.put("clientId", paramJson.getString("clientId"));
+                        map.put("synCount", paramJson.getInteger("synCount"));
+                        String de = method.getAnnotation(SSOSystemLog.class).description();
+                        if(StringUtils.isEmpty(de)) de = method.getAnnotation(SSOSystemLog.class).module() + ","
+                                + method.getAnnotation(SSOSystemLog.class).description()
+                                +"同步成功!";
+                        map.put("description", de);
+                    }
+
+                    if(arguments[0] instanceof HttpServletRequest){
                         HttpServletRequest request = (HttpServletRequest)arguments[0];
                         String host = request.getRemoteHost();
 
                         map.put("host",host);
                         map.put("userName",arguments[1]);
+                        String de = method.getAnnotation(SSOSystemLog.class).description();
+                        if(StringUtils.isEmpty(de)) de = method.getAnnotation(SSOSystemLog.class).module() + ","
+                                + method.getAnnotation(SSOSystemLog.class).description()
+                                +"同步成功!";
+                        map.put("description", de);
                     }
-                    String de = method.getAnnotation(SSOSystemLog.class).description();
-                    if(StringUtils.isEmpty(de)) de = method.getAnnotation(SSOSystemLog.class).module() + ","
-                            + method.getAnnotation(SSOSystemLog.class).description()
-                            +"同步成功!";
-                    map.put("description", de);
-                    break;
                 }
             }
         }

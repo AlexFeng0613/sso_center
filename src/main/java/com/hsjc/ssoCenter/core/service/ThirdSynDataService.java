@@ -100,6 +100,7 @@ public class ThirdSynDataService extends ApiBaseService{
         }
 
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         return resultJson;
     }
 
@@ -155,6 +156,7 @@ public class ThirdSynDataService extends ApiBaseService{
         }
 
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         return resultJson;
     }
 
@@ -215,6 +217,7 @@ public class ThirdSynDataService extends ApiBaseService{
         }
 
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         return resultJson;
     }
 
@@ -276,6 +279,7 @@ public class ThirdSynDataService extends ApiBaseService{
         }
 
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         return resultJson;
     }
 

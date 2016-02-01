@@ -1,11 +1,6 @@
 package com.hsjc.ssoCenter.core.test;
 
-import com.hsjc.ssoCenter.core.constant.Constant;
-import com.hsjc.ssoCenter.core.constant.MailTemplate;
 import com.hsjc.ssoCenter.core.util.MD5Util;
-import com.hsjc.ssoCenter.core.util.SSOStringUtil;
-
-import java.util.Calendar;
 
 /**
  * @author : zga
@@ -34,12 +29,43 @@ public class Test {
             System.out.println(2);
         }*/
 
-        String activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=617542946@qq.com&ticket=" +
+       /* String activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=617542946@qq.com&ticket=" +
                 MD5Util.encode(Calendar.getInstance().getTime().toString());
 
 
         String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%","617542946@qq.com",activateURL,activateURL);
 
-        System.out.println(content);
+        System.out.println(content);*/
+
+        /**
+         * 跳出当前for循环
+         */
+        /*for(int i = 0; i < 5;i++){
+            for(int j = 0;j < 1;j++){
+                if(i == 3){
+                    break;
+                }
+                System.out.print(i+"\t");
+            }
+        }
+
+        System.out.println("-----------------");*/
+        /**
+         * 这个a相当于一个标签,可以直接跳出外层循环.
+         */
+        /*a : for(int i = 0; i < 5;i++){
+            for(int j = 0;j < 1;j++){
+                if(i == 3){
+                    break a;
+                }
+                System.out.print(i+"\t");
+            }
+        }*/
+
+        String password = MD5Util.encode("pReVWOmCDQ"+ MD5Util.encode("hsjcsso") + "201601291800");
+        System.out.println(password);
     }
+
+
+
 }
