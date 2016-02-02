@@ -1,7 +1,5 @@
 package com.hsjc.ssoCenter.core.test;
 
-import com.hsjc.ssoCenter.core.util.MD5Util;
-
 /**
  * @author : zga
  * @date : 2015-12-21
@@ -62,8 +60,11 @@ public class Test {
             }
         }*/
 
-        String password = MD5Util.encode("pReVWOmCDQ"+ MD5Util.encode("hsjcsso") + "201601291800");
-        System.out.println(password);
+        /*String password = MD5Util.encode("pReVWOmCDQ"+ MD5Util.encode("hsjcsso") + "201601291800");
+        System.out.println(password);*/
+
+        int pageCount = 440 / 200;
+        System.out.println(pageCount);
     }
 
 

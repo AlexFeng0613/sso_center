@@ -74,24 +74,30 @@ public class ThirdSynDataService extends ApiBaseService{
             PageHelper.startPage(currentPage, pageSize);
             List<HashMap> organizationList = synMapper.selectAllOrganization(paramMap);
 
+            Integer totalNum = synMapper.countAllOrganization(paramMap);
+            int totalPage = totalNum / pageSize;
+            Integer leftNum = 0;
+            if(currentPage <= totalPage){
+                leftNum = totalNum - currentPage * pageSize;
+                if(organizationList == null || (organizationList!= null && organizationList.size() < 1)){
+                    resultJson.put("flag",false);
+                    resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
+                    return resultJson;
+                }
+                paramJson.put("synCount",pageSize);
+            } else {
+                paramJson.put("synCount",totalNum - (currentPage - 1) * pageSize);
+            }
+
             /**
              * 记录同步数据总数(tbrestfullog:synCount)
              */
-            paramJson.put("synCount",(organizationList == null ? 0 : organizationList.size()));
-
-            if(organizationList == null || (organizationList != null && organizationList.size() < 1)){
-                resultJson.put("flag",false);
-                resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
-                return resultJson;
+            if((totalNum - (currentPage - 1) * pageSize) <= 0){
+                resultJson.put("organization",null);
+            } else {
+                resultJson.put("organization",(currentPage >= (totalNum + 2) ? null : organizationList));
             }
 
-            Integer totalNum = synMapper.countAllOrganization();
-            Integer leftNum = totalNum - currentPage * pageSize;
-            if(totalNum < currentPage * pageSize){
-                leftNum = 0;
-            }
-
-            resultJson.put("organization", organizationList);
             resultJson.put("leftNum", leftNum);
         }catch (Exception e){
             resultJson.put("flag",false);
@@ -190,25 +196,30 @@ public class ThirdSynDataService extends ApiBaseService{
             PageHelper.startPage(currentPage,pageSize);
             List<HashMap> userList = synMapper.selectAllUser(paramMap);
 
-            Integer totalNum = synMapper.countAllUser();
+            Integer totalNum = synMapper.countAllUser(paramMap);
+            int totalPage = totalNum / pageSize;
+            Integer leftNum = 0;
+            if(currentPage <= totalPage){
+                System.out.println("");
+                leftNum = totalNum - currentPage * pageSize;
+                if(userList == null || (userList!= null && userList.size() < 1)){
+                    resultJson.put("flag",false);
+                    resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
+                    return resultJson;
+                }
+                paramJson.put("synCount",pageSize);
+            } else {
+                paramJson.put("synCount",totalNum - (currentPage - 1) * pageSize);
+            }
 
             /**
              * 记录同步数据总数(tbrestfullog:synCount)
              */
-            paramJson.put("synCount",(userList == null ? 0 : userList.size()));
-
-            if(userList == null || (userList!= null && userList.size() < 1)){
-                resultJson.put("flag",false);
-                resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
-                return resultJson;
+            if((totalNum - (currentPage - 1) * pageSize) <= 0){
+                resultJson.put("user",null);
+            } else {
+                resultJson.put("user",(currentPage >= (totalNum + 2) ? null : userList));
             }
-
-            Integer leftNum = totalNum - currentPage * pageSize;
-            if(totalNum < currentPage * pageSize){
-                leftNum = 0;
-            }
-
-            resultJson.put("user",userList);
             resultJson.put("leftNum",leftNum);
         } catch (Exception e){
             resultJson.put("flag",false);
@@ -299,5 +310,13 @@ public class ThirdSynDataService extends ApiBaseService{
             return thirdClientsMapper.selectThirdClientByName(description);
         }
     }
+
+    public Integer getPageCount(Integer recordCount,Integer pageSize){
+        int pageCount = recordCount / pageSize;
+
+
+        return pageCount;
+    }
+
 
 }

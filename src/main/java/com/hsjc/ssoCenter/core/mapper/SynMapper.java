@@ -35,7 +35,7 @@ public interface SynMapper {
 
     List<HashMap> selectAllUser(HashMap paramMap);
 
-    Integer countAllOrganization();
+    Integer countAllOrganization(HashMap paramMap);
 
-    Integer countAllUser();
+    Integer countAllUser(HashMap paramMap);
 }

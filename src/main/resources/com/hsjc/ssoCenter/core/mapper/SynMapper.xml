@@ -190,8 +190,15 @@
     查询组织机构总数目
   -->
   <select id="countAllOrganization" resultType="java.lang.Integer">
-    SELECT count(1) FROM tborganization torg,tb3rdfilter tf
-    WHERE  tf.organizationCode = torg.organizationCode
+    SELECT count(1) FROM (
+      SELECT DISTINCT
+      torg.organizationCode ,
+      torg.organizationName,
+      torg.parentId
+      FROM tborganization torg,tb3rdfilter tf
+      WHERE tf.trdClientId = #{trdClientId}
+      AND tf.organizationCode = torg.organizationCode
+    ) t
   </select>
 
   <!--
@@ -219,7 +226,18 @@
     查看用户总数目
   -->
   <select id="countAllUser" resultType="java.lang.Integer">
-    SELECT count(1) FROM tbusermain tu,tb3rdfilter tf
-    WHERE tf.organizationCode = tu.organizationCode
+    SELECT count(1) FROM (
+      SELECT tu.realName,tu.organizationCode,tu.id openId,tu.TYPE role,tu.gender,tu.email,
+      (CASE WHEN tu.type = 'teacher'
+      THEN tu.teacherNum
+      WHEN tu.type = 'student'
+      THEN tu.studentNum
+      END) personNum
+      FROM tbusermain tu,tb3rdfilter tf
+      WHERE
+      tf.trdClientId = #{trdClientId}
+      AND tf.organizationCode = tu.organizationCode
+      AND tf.tstudent = tu.type
+    ) t
   </select>
 </mapper>
