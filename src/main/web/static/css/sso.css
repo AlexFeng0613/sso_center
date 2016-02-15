@@ -246,6 +246,35 @@ label{
     float:right;
 }
 
+.inputSubnmit{
+    width:380px;
+    margin:20px auto 0;
+}
+
+.submitL{
+    width:170px;
+    height:40px;
+    line-height: 40px;
+    float:left;
+    background-color: #ffad00;
+    color: #fff;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    border-radius: 5px;
+    border:none;
+}
+
+.resetR{
+    width:170px;
+    height:40px;
+    line-height: 40px;
+    float:right;
+    background-color: #ffad00;
+    color: #fff;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    border-radius: 5px;
+    border:none;
+}
+
 .container{
     width:100%;
     background-color: #f4f4f4;
@@ -388,7 +417,7 @@ label{
 
 .long_input_box{
     width:564px;
-    margin:120px auto 0;
+    margin:0px auto 0;
 }
 
 .long_input_top{
@@ -447,7 +476,7 @@ label{
 
 .password_box{
     width:380px;
-    margin:90px auto 0;
+    margin:0px auto 0;
 }
 
 .password_label{
@@ -600,12 +629,27 @@ label{
     border: 1px solid #949494;
 }
 
-.password_strong li.ddd{
+.password_strong li.ddd1{
     width:70px;
     height:9px;
-    background-color: #f63c5f;
+    background-color: #f65a5b;
     border:none;
 }
+
+.password_strong li.ddd2{
+    width:70px;
+    height:9px;
+    background-color: #ffad00;
+    border:none;
+}
+
+.password_strong li.ddd3{
+    width:70px;
+    height:9px;
+    background-color: #74bc41;
+    border:none;
+}
+
 
 .password_strong_font{
 
@@ -623,8 +667,16 @@ label{
     text-align: center;
 }
 
-.password_strong_font li.ddd{
-    color:#f63c5f;
+.password_strong_font li.ddd1{
+    color:#f65a5b;
+}
+
+.password_strong_font li.ddd2{
+    color:#ffad00;
+}
+
+.password_strong_font li.ddd3{
+    color:#74bc41;
 }
 
 .save{
@@ -645,7 +697,7 @@ label{
 .message_l{
     width:95px;
     float:left;
-    line-height:40px;
+    line-height:30px;
     font-family: \5FAE\8F6F\96C5\9ED1;
     font-size: 14px;
     color: #444444;
@@ -656,7 +708,12 @@ label{
     font-family: \5FAE\8F6F\96C5\9ED1;
     font-size: 14px;
     color: #444444;
-    line-height:40px;
+    line-height:30px;
+}
+
+.viewInfo{
+    display: block;
+    line-height: 30px;
 }
 
 #user_name{
@@ -747,7 +804,7 @@ label{
 
 .bound{
     float:left;
-    line-height:40px;
+    line-height:30px;
     display:block;
     font-family: \5FAE\8F6F\96C5\9ED1;
     font-size: 14px;

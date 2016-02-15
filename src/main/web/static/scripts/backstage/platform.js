@@ -95,6 +95,7 @@ $('.butL').click(function(){
         'contactorPhone' : $('form[name="modifyForm"] input[name="contactorPhone"]').val()
     };
     return false;
+
     $.ajax({
         url : '/thirdClients/updateThirdClientInfo.json',
         type : 'POST',

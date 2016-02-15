@@ -11,7 +11,6 @@
             .up-img .txt{ height:22px; border:1px solid #cdcdcd; width:180px;}
             .up-img .btn{ background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;}
             .up-img .file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:75px }
-            .viewInfo{display:block;line-height: 40px;}
             .up1-img{ width:150px; height:38px; margin-left:42px; margin-right:auto;}
             /*.up1-img input{vertical-align:middle; margin:0; padding:0;border: 0;}*/
             .up1-img .file-box{ position:relative;width:930px}
@@ -94,27 +93,32 @@
                    </select>
                    <input type="text" class="papers" />
                </div>-->
-               <div class="message">
+
                    <!--<div class="message_l">个人介绍：</div>-->
-                   <div style="width:384px;">
+               <div class="inputSubnmit">
                        <!--<textarea class="peo_text"></textarea>-->
-                       <input type="button" value="修改" name="modifyInfo" class="message_submit"/>
-                       <input type="submit" class="message_submit" value="保存"/>
-                   </div>
+                   <!--<input type="button" value="修改" name="modifyInfo" class="message_submit"/>-->
+                   <input type="submit" class="submitL" value="保 存"/>
+                   <input type="reset" class="resetR" value="取 消"/>
                </div>
+
            </form>
            <script type="text/javascript">
                 $(function(){
                     $('#basic_message').addClass('selected');
                     $('#basic_message').find('a').addClass('selected');
 
+
                     /**
                      * 修改信息
                      */
+
                     $('input[name="modifyInfo"]').click(function(){
                         $('.viewInfo').css('display','none');
                         $('.modifyInfo').css('display','block');
                     });
+
+
                 });
            </script>
         </div>
