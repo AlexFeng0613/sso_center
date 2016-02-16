@@ -112,27 +112,27 @@ public class UserMainService extends ApiBaseService{
 
         UserTemp userTemp = new UserTemp();
 
-        String type = paramJson.getString("type");
         String username = paramJson.getString("username");
+        String type = paramJson.getString("type");
         String password = paramJson.getString("password");
         String email = paramJson.getString("email");
         String realName = paramJson.getString("realName");
         String gender = paramJson.getString("gender");
 
-        userTemp.setType(type);
         userTemp.setUserName(username);
         userTemp.setPassword(password);
         //设置salt和password
         passwordUtil.encryptPassword(userTemp);
+        userTemp.setType(type);
         userTemp.setEmail(email);
-        userTemp.setGender(gender);
         userTemp.setRealName(realName);
+        userTemp.setGender(gender);
 
         int res = userTempMapper.insert(userTemp);
         if(res > 0){
             //调用Email发送接口发送Email
             try {
-                resultJson = insetSendEmail(email,apiBaseService,"0");
+                resultJson = insertSendEmail(email,apiBaseService,"0");
             } catch (Exception e) {
                 resultJson.put("message", Constant.SEND_MAIL_FAIL);
                 return resultJson;
@@ -221,6 +221,8 @@ public class UserMainService extends ApiBaseService{
                     userStudent.setUserId(userMain.getId());
                     userStudentMapper.insert(userStudent);
                 }
+
+                userTempMapper.deleteByPrimaryKey(userTemp1.getId());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -351,7 +353,7 @@ public class UserMainService extends ApiBaseService{
         String email = paramJson.getString("email");
 
         try {
-            resultJson = insetSendEmail(email,apiBaseService,"1");
+            resultJson = insertSendEmail(email,apiBaseService,"1");
             resultJson.put("message",Constant.SEND_MAIL_SUCCESS);
         } catch (Exception e) {
             resultJson.put("success",false);

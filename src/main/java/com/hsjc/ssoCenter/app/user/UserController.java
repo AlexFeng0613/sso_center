@@ -125,7 +125,6 @@ public class UserController extends BaseController {
                 ActivateEmailMess activateEmailMess = null;
                 if(obj == null) {
                     //ticket失效,返回错误页面,提示重新注册,或者返回首页
-
                     return "";
                 }
 
@@ -185,11 +184,13 @@ public class UserController extends BaseController {
      *
      * 注册用户>更新用户组织机构(根据邀请码)
      *
-     * @param paramJson
+     * @param email
      * @return
      */
     @RequestMapping("activateInviteCode")
-    public String activateInviteCode(@RequestBody JSONObject paramJson){
+    public String activateInviteCode(@RequestParam("email")String email){
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("email",email);
         int num = userMainService.activateInviteCode(paramJson);
         if(num <= 0){
             //

@@ -1,11 +1,18 @@
 package com.hsjc.ssoCenter.core.util;
 
-import com.hsjc.ssoCenter.core.constant.MailConstant;
 import org.apache.log4j.Logger;
 
-import javax.mail.*;
-import javax.mail.internet.*;
-import java.io.*;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 /**
@@ -26,11 +33,53 @@ public class MailUtil {
      */
     public static boolean sendMail(String subject, String content, String to){
         Properties props = new Properties();
-        String from = MailConstant.MAIL_FROM;// 发件人
+        /*String from = MailConstant.MAIL_FROM;// 发件人
         String host = MailConstant.MAIL_HOST;// smtp主机
 
         final String username = MailConstant.MAIL_USERNAME;
-        final String password = MailConstant.MAIL_PASSWORD;
+        final String password = MailConstant.MAIL_PASSWORD;*/
+
+        String from = null;// 发件人
+        String host = null;// smtp主机
+        String userName = null;
+        String pwd = null;
+
+        String sql = "SELECT\n" +
+                "    MAX(CASE proKey WHEN 'mailHost' THEN proValue END) mailHost,\n" +
+                "    MAX(CASE proKey WHEN 'mailPort' THEN proValue END) mailPort,\n" +
+                "    MAX(CASE proKey WHEN 'mailUserName' THEN proValue END) mailUserName,\n" +
+                "    MAX(CASE proKey WHEN 'mailPassword' THEN proValue END) mailPassword,\n" +
+                "    MAX(CASE proKey WHEN 'mailFrom' THEN proValue END) mailFrom,\n" +
+                "    MAX(CASE proKey WHEN 'trdPublicKey' THEN proValue END) trdPublicKey,\n" +
+                "    MAX(CASE proKey WHEN 'smsUrl' THEN proValue END) smsUrl,\n" +
+                "    MAX(CASE proKey WHEN 'smsAppKey' THEN proValue END) smsAppKey,\n" +
+                "    MAX(CASE proKey WHEN 'smsAppSecret' THEN proValue END) smsAppSecret,\n" +
+                "    MAX(CASE proKey WHEN 'smsSignName' THEN proValue END) smsSignName,\n" +
+                "    MAX(CASE proKey WHEN 'smsTemplateCode' THEN proValue END) smsTemplateCode,\n" +
+                "    MAX(CASE proKey WHEN 'smsType' THEN proValue END) smsType,\n" +
+                "    MAX(CASE proKey WHEN 'websiteAddress' THEN proValue END) websiteAddress\n" +
+                "    FROM tbsystemproperties";
+
+        Connection connection = DBUtil.getConn();
+        ResultSet resultSet = null;
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                from = resultSet.getString("mailFrom");
+                host = resultSet.getString("mailHost");
+                userName = resultSet.getString("mailUserName");
+                pwd = resultSet.getString("mailPassword");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.freeConn(connection,resultSet,statement);
+        }
+
+        final String username = userName;
+        final String password = pwd;
 
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.auth", false);

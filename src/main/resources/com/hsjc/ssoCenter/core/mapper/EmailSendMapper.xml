@@ -21,8 +21,8 @@
    @date : 2015-12-04
    新增
  -->
-  <insert id="insert" parameterType="com.hsjc.ssoCenter.core.domain.EmailSend">
-    insert into tbEmailSend (email, subject,
+  <insert id="insert" parameterType="EmailSend">
+    insert into tbemailsend (email, subject,
       byModule,
       content)
     values (#{email}, #{subject}, 
@@ -156,8 +156,6 @@
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long">
     select
-    <include refid="Base_Column_List" />
-    ,
     <include refid="Base_Column_List" />
     from tbemailsend
     where id = #{id}
