@@ -210,10 +210,14 @@ color: #323232;
   height: 28px;
   margin-top: 11px; }
 
+
+
 .mistake {
+  float:left;
   background: url(../images/register/mistake.png) no-repeat center; }
 
 .correct {
+  float:left;
   background: url(../images/register/correct.png) no-repeat center; }
 
 .context {
