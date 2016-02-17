@@ -107,6 +107,11 @@ public class SecurityConfig {
 		filterChainDefinitionMap.put("/sms/**", "anon");
 		filterChainDefinitionMap.put("/page/logout.html", "logout");
 		filterChainDefinitionMap.put("/user/login.html", "anon");
+
+		filterChainDefinitionMap.put("/user/register.json", "anon");
+		filterChainDefinitionMap.put("/user/activateInviteCode.html", "anon");
+
+
 		filterChainDefinitionMap.put("/3rd/**", "anon");
 		filterChainDefinitionMap.put("/**", "user");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

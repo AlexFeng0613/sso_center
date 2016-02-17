@@ -1,5 +1,6 @@
 package com.hsjc.ssoCenter.core.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  *
  * 临时用户实体
  */
-public class UserTemp {
+public class UserTemp implements Serializable {
     private Integer id;
 
     private String userName;

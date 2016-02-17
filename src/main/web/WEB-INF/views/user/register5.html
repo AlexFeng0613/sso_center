@@ -131,18 +131,7 @@
 				 */
 				function activateInviteCode(){
 					var email = $('input[name="email"]').val();
-					var data = {
-						'email' : email
-					};
-					$.ajax({
-						url : '/user/activateInviteCode.html',
-						type : 'post',
-						data : JSON.stringify(data),
-						contentType : 'application/json',
-						dataType : 'json',
-						success : function(){
-						}
-					});
+					window.location.href = '/user/activateInviteCode.html?email='+email;
 				}
 			</script>
 		</div>

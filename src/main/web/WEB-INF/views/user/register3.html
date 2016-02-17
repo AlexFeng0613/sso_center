@@ -104,7 +104,7 @@
 					//立即前往
 					$('.promptly').click(function(){
 						var email = $('input[name="email"]').val();
-						var sub = email.substring(email.indexOf("@"));
+						var sub = email.substring(email.indexOf("@")+1);
 						window.location.href = 'https://mail.'+ sub;
 					});
 

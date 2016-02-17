@@ -147,11 +147,11 @@ public class ApiBaseService {
      * @return
      * @throws Exception
      */
-    public JSONObject insetSendEmail(String email, ApiBaseService apiBaseService, String type) throws Exception {
+    public JSONObject insertSendEmail(String email, ApiBaseService apiBaseService, String type) throws Exception {
         JSONObject resultJson = getResultJson();
 
         ActivateEmailMess activateEmailMess = new ActivateEmailMess();
-        activateEmailMess.setEmail(apiBaseService.getDesUtil().encrypt(email));
+        activateEmailMess.setEmail(email);
         activateEmailMess.setTicket(MD5Util.encode(Calendar.getInstance().getTime().toString()));
 
         apiBaseService.insertIntoRedis(email,activateEmailMess,ActivateEmailMess.class);
@@ -159,7 +159,7 @@ public class ApiBaseService {
         String activateURL = null;
         if("0".equals(type)){
             activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
-                    activateEmailMess.getTicket();
+                    activateEmailMess.getTicket()+"&type="+type;
         } else {
             activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
                     activateEmailMess.getTicket()+"&type="+type;
@@ -171,7 +171,7 @@ public class ApiBaseService {
         EmailSend emailSend = new EmailSend();
         emailSend.setContent(content);
         emailSend.setByModule("");
-        emailSend.setEmail(apiBaseService.getDesUtil().encrypt(email));
+        emailSend.setEmail(email);
         emailSend.setSubject(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT);
 
         emailSendMapper.insert(emailSend);
