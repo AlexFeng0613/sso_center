@@ -157,9 +157,11 @@ label{
 
 .register_input.fillout{
     border:1px solid #ffad00;
+    background: url(../images/yun/text2.png) no-repeat 15px center;
 }
 
 .register_input.text.fillout{
+    border:1px solid #ffad00;
     background: url(../images/yun/text2.png) no-repeat 15px center;
 }
 
