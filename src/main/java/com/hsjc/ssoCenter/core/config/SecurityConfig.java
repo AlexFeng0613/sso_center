@@ -106,10 +106,9 @@ public class SecurityConfig {
 		filterChainDefinitionMap.put("/page/sso/**", "anon");
 		filterChainDefinitionMap.put("/sms/**", "anon");
 		filterChainDefinitionMap.put("/page/logout.html", "logout");
-		filterChainDefinitionMap.put("/user/login.html", "anon");
 
-		filterChainDefinitionMap.put("/user/register.json", "anon");
-		filterChainDefinitionMap.put("/user/activateInviteCode.html", "anon");
+		filterChainDefinitionMap.put("/user/*.html", "anon");
+		filterChainDefinitionMap.put("/user/*.json", "anon");
 
 
 		filterChainDefinitionMap.put("/3rd/**", "anon");

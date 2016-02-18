@@ -11,9 +11,11 @@ import com.hsjc.ssoCenter.core.util.SSOStringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -88,6 +90,7 @@ public class UserMainService extends ApiBaseService{
      * @param paramJson
      * @return
      */
+    @Transactional
     public JSONObject register(JSONObject paramJson, HttpSession session){
         JSONObject resultJson = new JSONObject();
         resultJson.put("success",false);
@@ -112,14 +115,14 @@ public class UserMainService extends ApiBaseService{
 
         UserTemp userTemp = new UserTemp();
 
-        String username = paramJson.getString("username");
+        String userName = paramJson.getString("userName");
         String type = paramJson.getString("type");
         String password = paramJson.getString("password");
         String email = paramJson.getString("email");
         String realName = paramJson.getString("realName");
         String gender = paramJson.getString("gender");
 
-        userTemp.setUserName(username);
+        userTemp.setUserName(userName);
         userTemp.setPassword(password);
         //设置salt和password
         passwordUtil.encryptPassword(userTemp);
@@ -144,6 +147,51 @@ public class UserMainService extends ApiBaseService{
         }
 
         resultJson.put("message", Constant.REG_FAIL);
+
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-2-18
+     *
+     * 校验用户名是否存在
+     *
+     * @param paramJson
+     * @return
+     */
+    public JSONObject isExistsUserName(JSONObject paramJson){
+        JSONObject resultJson = getResultJson();
+
+        List<UserMain> userMainList = userMainMapper.findUserByUserName(paramJson);
+
+        if(userMainList != null && userMainList .size() > 0){
+            resultJson.put("success",false);
+            resultJson.put("message", Constant.EXISTS_USERNAME);
+            return resultJson;
+        }
+
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-2-18
+     *
+     * 校验Email是否已经绑定
+     *
+     * @param paramJson
+     * @return
+     */
+    public JSONObject isBindEmail(JSONObject paramJson){
+        JSONObject resultJson = getResultJson();
+        List<UserMain> userMainList = userMainMapper.findUserByEmail(paramJson);
+
+        if(userMainList != null && userMainList.size() > 0){
+            resultJson.put("success",false);
+            resultJson.put("message", Constant.EXISTS_BIND_EMAIL);
+            return resultJson;
+        }
 
         return resultJson;
     }
@@ -191,7 +239,8 @@ public class UserMainService extends ApiBaseService{
         int num = 0;
         UserTemp userTemp = new UserTemp();
         try {
-            String original = apiBaseService.getDesUtil().decrypt(paramJson.getString("email"));
+            //String original = apiBaseService.getDesUtil().decrypt(paramJson.getString("email"));
+            String original = paramJson.getString("email");
             userTemp.setEmail(original);
 
             UserTemp userTemp1 = userTempMapper.selectByEmailOrUserNameOrPhone(userTemp);
@@ -207,6 +256,7 @@ public class UserMainService extends ApiBaseService{
                 userMain.setInviteCode(userTemp1.getInviteCode());
                 userMain.setEmail(userTemp1.getEmail());
                 userMain.setOrganizationCode(userTemp1.getOrganizationCode());
+                userMain.setRealName(userTemp1.getRealName());
 
                 num = userMainMapper.insert(userMain);
 

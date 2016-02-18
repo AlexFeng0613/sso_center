@@ -58,6 +58,15 @@ public class Constant {
 
     public static final String BIND_PHONE_SUCCESS = "100017";
 
+
+    /**
+     * 校验用户存在性
+     */
+    public static final String EXISTS_USERNAME = "100018";
+
+    public static final String EXISTS_BIND_EMAIL = "100019";
+
+
     public static final int REDIS_FETCH_TIME_OUT = 18 * 60 * 1000;
 
     public static String publicKey;

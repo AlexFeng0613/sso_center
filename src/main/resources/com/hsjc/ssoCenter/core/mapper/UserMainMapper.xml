@@ -36,7 +36,9 @@
     status,
     inviteCode,
     email,
-    organizationCode)
+    organizationCode,
+    gender,
+    realName)
     values (
     #{userName},
     #{password},
@@ -46,7 +48,9 @@
     #{status},
     #{inviteCode},
     #{email},
-    #{organizationCode}
+    #{organizationCode},
+    #{gender},
+    #{realName}
     )
   </insert>
 
@@ -302,7 +306,7 @@
     @date : 2015-12-04
     根据email、userName、phone查询用户信息(登录的时候不知道用户输入的是email、phone、username那一个)
   -->
-  <select id="findByEmailOrPhoneOrUserName" parameterType="UserMain" resultType="UserMain">
+  <select id="findByEmailOrPhoneOrUserName" parameterType="UserMain" resultType="UserMain" useCache="false">
     select
     <include refid="Base_Column_List" />
     from tbusermain
@@ -346,6 +350,60 @@
 
       <if test="phone != null">
         and phone = #{phone}
+      </if>
+    </where>
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-2-18
+    忘记密码时,查询Email、phone是否是绑定的用户
+  -->
+  <select id="findUserByUserName" resultType="UserMain">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbusermain
+    <where>
+      <if test="userName != null">
+        userName = #{userName}
+      </if>
+    </where>
+
+    UNION All
+
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbusertemp
+    <where>
+      <if test="userName != null">
+        userName = #{userName}
+      </if>
+    </where>
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-2-18
+    忘记密码时,查询Email、phone是否是绑定的用户
+  -->
+  <select id="findUserByEmail" resultType="UserMain">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbusermain
+    <where>
+      <if test="email != null">
+        email = #{email}
+      </if>
+    </where>
+
+    UNION All
+
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbusertemp
+    <where>
+      <if test="email != null">
+        email = #{email}
       </if>
     </where>
   </select>

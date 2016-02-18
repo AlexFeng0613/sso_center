@@ -36,6 +36,8 @@
 					</div>
 				</form>
 			</div>
+
+			<script type="text/javascript" th:src="@{/static/scripts/constant/constant.js}" src="../../../static/scripts/constant/constant.js"></script>
 			<script text="text/javascript">
 				$(function(){
 					$('.step_mark1').html('');
@@ -126,16 +128,7 @@
 											window.location.href = '/page/register/5.html?email=' + $('input[name="email"]').val();
 										} else {
 											//否则提示错误
-											if(data.message == '300001'){
-												$.Showmsg('验证码不能为空');
-												return false;
-											} else if(data.message == '300002'){
-												$.Showmsg('验证码已过期');
-												return false;
-											} else if(data.message == '300003'){
-												$.Showmsg('验证码错误');
-												return false;
-											}
+											alert(ErrorMessage[data.message])
 										}
 									}
 								});

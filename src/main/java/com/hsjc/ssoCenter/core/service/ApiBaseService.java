@@ -77,10 +77,14 @@ public class ApiBaseService {
      * @param clazz
      */
     public void insertIntoRedis(String key, Object obj, Class clazz) {
-        redisTemplate.setKeySerializer(new GenericToStringSerializer<>(String.class));
-        redisTemplate.setValueSerializer(new FastJsonRedisSerializer<>(clazz));
-        redisTemplate.opsForValue().set(key, obj, 0);
-        redisTemplate.expire(key, Constant.REDIS_FETCH_TIME_OUT,TimeUnit.SECONDS);
+        try {
+            redisTemplate.setKeySerializer(new GenericToStringSerializer<>(String.class));
+            redisTemplate.setValueSerializer(new FastJsonRedisSerializer<>(clazz));
+            redisTemplate.opsForValue().set(key, obj, 0);
+            redisTemplate.expire(key, Constant.REDIS_FETCH_TIME_OUT,TimeUnit.SECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -147,34 +151,38 @@ public class ApiBaseService {
      * @return
      * @throws Exception
      */
-    public JSONObject insertSendEmail(String email, ApiBaseService apiBaseService, String type) throws Exception {
+    public JSONObject insertSendEmail(String email, ApiBaseService apiBaseService, String type){
+
         JSONObject resultJson = getResultJson();
 
         ActivateEmailMess activateEmailMess = new ActivateEmailMess();
         activateEmailMess.setEmail(email);
         activateEmailMess.setTicket(MD5Util.encode(Calendar.getInstance().getTime().toString()));
+        try {
+            apiBaseService.insertIntoRedis(email,activateEmailMess,ActivateEmailMess.class);
 
-        apiBaseService.insertIntoRedis(email,activateEmailMess,ActivateEmailMess.class);
+            String activateURL = null;
+            if("0".equals(type)){
+                activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
+                        activateEmailMess.getTicket()+"&type="+type;
+            } else {
+                activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
+                        activateEmailMess.getTicket()+"&type="+type;
+            }
 
-        String activateURL = null;
-        if("0".equals(type)){
-            activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
-                    activateEmailMess.getTicket()+"&type="+type;
-        } else {
-            activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
-                    activateEmailMess.getTicket()+"&type="+type;
+            String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%",email,activateURL,activateURL);
+            //MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
+
+            EmailSend emailSend = new EmailSend();
+            emailSend.setContent(content);
+            emailSend.setByModule("");
+            emailSend.setEmail(email);
+            emailSend.setSubject(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT);
+
+            emailSendMapper.insert(emailSend);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%",email,activateURL,activateURL);
-        //MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
-
-        EmailSend emailSend = new EmailSend();
-        emailSend.setContent(content);
-        emailSend.setByModule("");
-        emailSend.setEmail(email);
-        emailSend.setSubject(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT);
-
-        emailSendMapper.insert(emailSend);
 
         return resultJson;
     }

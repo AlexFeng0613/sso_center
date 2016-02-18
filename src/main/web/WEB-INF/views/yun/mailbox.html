@@ -50,7 +50,7 @@
                                   if(data.success){
                                       window.location.href = '/page/sso/bindEmailSucc.html?email=' + email;
                                   }else {
-                                      if(data.message == '100005') alert('绑定失败');
+                                      alert(ErrorMessage[data.message])
                                   }
                               }
                           });

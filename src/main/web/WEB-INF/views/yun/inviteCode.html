@@ -49,17 +49,14 @@
                                 if(data.success){
                                     window.location.href = '/page/sso/bindInviteCodeSucc.html';
                                 }else {
-                                    if(data.message == '100007') window.location.href = "/user/login.html";
-
-                                    if(data.message == '100011') alert("邀请码不存在,请核对你的邀请码是否正确");
-
-                                    if(data.message == '100012') alert('绑定邀请码失败');
+                                    alert(ErrorMessage[data.message])
+                                    if(data.message == '100007') {
+                                        window.location.href = "/user/login.html";
+                                    }
                                 }
                             }
                         });
                     })
-
-
                 });
            </script>
         </div>

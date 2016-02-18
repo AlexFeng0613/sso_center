@@ -102,6 +102,38 @@ public class UserController extends BaseController {
 
     /**
      * @author : zga
+     * @date : 2016-2-18
+     *
+     * 校验用户名是否存在
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "isExistsUserName",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject isExistsUserName(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = userMainService.isExistsUserName(paramJson);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-2-18
+     *
+     * 校验Email是否已经绑定
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "isBindEmail",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject isBindEmail(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = userMainService.isBindEmail(paramJson);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
      * @date : 2015-12-03
      *
      * 注册用户>激活Email
@@ -117,7 +149,8 @@ public class UserController extends BaseController {
                                 @RequestParam(value = "type",required = false)String type){
         try {
             //验证email、ticket是否正确,ticket是否过期
-            String originEmail = apiBaseService.getDesUtil().decrypt(email);
+            //String originEmail = apiBaseService.getDesUtil().decrypt(email);
+            String originEmail = email;
 
             if("0".equals(type)){
                 Object obj = apiBaseService.fetchObject(originEmail, ActivateEmailMess.class);

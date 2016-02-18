@@ -73,6 +73,7 @@
 					</form>
 				</section>
 			</div>
+			<script type="text/javascript" th:src="@{/static/scripts/constant/constant.js}" src="../../../static/scripts/constant/constant.js"></script>
 			<script type="text/javascript">
 				$(function(){
 					$('.step_mark1').html('');
@@ -131,8 +132,8 @@
 								var realName = $('input[name="realName"]').val();
 								var gender = $('input[name="gender"]').val();
 
-								var data = {
-									'username' : username,
+								var parmData = {
+									'userName' : username,
 									'password' : password,
 									'email' : email,
 									'type' : type,
@@ -141,18 +142,46 @@
 									'gender' : gender
 								}
 
+								/**
+								 * 校验用户名与Email是否已经注册或存在
+								 */
 								$.ajax({
-									url : '/user/register.json',
+									url : '/user/isExistsUserName.json',
 									type : 'POST',
-									data : JSON.stringify(data),
+									data : JSON.stringify(parmData),
 									contentType: 'application/json',
 									dataType : 'json',
 									success : function(data){
 										if(data.success){
-											window.location.href = '/page/register/3.html?email=' + email;
+											$.ajax({
+												url : '/user/isBindEmail.json',
+												type : 'POST',
+												data : JSON.stringify(parmData),
+												contentType: 'application/json',
+												dataType : 'json',
+												success : function(data){
+													if(data.success){
+														$.ajax({
+															url : '/user/register.json',
+															type : 'POST',
+															data : JSON.stringify(parmData),
+															contentType: 'application/json',
+															dataType : 'json',
+															success : function(data){
+																if(data.success){
+																	window.location.href = '/page/register/3.html?email=' + email;
+																}else {
+																	alert(ErrorMessage[data.message])
+																}
+															}
+														});
+													}else {
+														alert(ErrorMessage[data.message])
+													}
+												}
+											});
 										}else {
-											if(data.message == '100002') alert('验证码错误');
-											if(data.message == '100004') alert('注册失败');
+											alert(ErrorMessage[data.message])
 										}
 									}
 								});
@@ -168,14 +197,6 @@
 						's5' : '验证码为5位',//验证码为5位
 						'e' : '邮箱格式不正确'//邮箱格式不正确
 					};
-
-					/*demo.tipmsg.w = {
-						's6-18' : ' ', //用户名为6到18位
-						's2-10' : ' ',//姓名为2到10位中文字符
-						'*6-10' : ' ',//密码为6到10位
-						's5' : ' ',//验证码为5位
-						'e' : ' '//邮箱格式不正确
-					};*/
 
 					demo.addRule([{
 						ele:".inputxt:eq(0)",
@@ -196,8 +217,7 @@
 					},{
 						ele:".inputxt:eq(5)",
 						datatype:"s5"
-					}
-					]);
+					}]);
 
 					//验证码
 					$('#vimg').click(function(){
