@@ -4,10 +4,15 @@ import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.annotation.SSOSystemLog;
 import com.hsjc.ssoCenter.core.domain.ActivateEmailMess;
+import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.domain.UserMain;
 import com.hsjc.ssoCenter.core.domain.UserTemp;
 import com.hsjc.ssoCenter.core.service.ApiBaseService;
+import com.hsjc.ssoCenter.core.service.ThirdClientsService;
 import com.hsjc.ssoCenter.core.service.UserMainService;
+import com.hsjc.ssoCenter.core.util.DateUtil;
+import com.hsjc.ssoCenter.core.util.MD5Util;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -15,9 +20,9 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -31,10 +36,14 @@ import javax.servlet.http.HttpSession;
 public class UserController extends BaseController {
 
     @Autowired
-    private UserMainService userMainService;
+    UserMainService userMainService;
 
     @Autowired
-    private ApiBaseService apiBaseService;
+    ApiBaseService apiBaseService;
+
+
+    @Autowired
+    ThirdClientsService thirdClientsService;
 
     /**
      * @author : zga
@@ -45,7 +54,12 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "login",method = RequestMethod.GET)
-    public String login(){
+    public String login(@RequestParam(value = "openId",required = false)String openId,
+                        @RequestParam(value = "clientId",required = false)String clientId,
+                        Model model){
+
+        model.addAttribute("clientId",clientId);
+        model.addAttribute("openId",openId);
         return "/user/login";
     }
 
@@ -61,7 +75,10 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "login",method = RequestMethod.POST)
     @SSOSystemLog(actionId = 1,description = "用户登录",module = "登录")
-    public String login(HttpServletRequest request,String username, String password) throws Exception {
+    public String login(@RequestParam(value = "clientId",required = false) String clientId,
+                        @RequestParam(value = "openId",required = false) String openId,
+            String username,
+            String password) throws Exception {
         UsernamePasswordToken upToken = new UsernamePasswordToken(username, password, true);
         try{
             SecurityUtils.getSubject().login(upToken);
@@ -75,6 +92,21 @@ public class UserController extends BaseController {
 
         if("admin".equals(userMain.getUserName())){
             return "redirect:/page/sso/backstageIndex.html";
+        }
+
+        if(StringUtils.isEmpty(openId)){
+            JSONObject paramJson = new JSONObject();
+            paramJson.put("clientId",clientId);
+
+            ThirdClients thirdClients = thirdClientsService.getThirdClientsByClientId(paramJson);
+
+            String accessTime = DateUtil.getCurrentDate("yyyyMMddHHmm");
+            String accessPassword = MD5Util.encode(thirdClients.getSsoPassword()+MD5Util.encode(thirdClients.getPublicKey())+accessTime);
+
+            return "forward:/page/toThird.html?accessURL=" + thirdClients.getCallbackUrl()
+                    + "&openid=" + userMain.getId()
+                    + "&pwd=" + accessPassword
+                    + "&time=" + accessTime;
         }
 
         Session session = subject.getSession(true);

@@ -7,6 +7,7 @@ import com.hsjc.ssoCenter.core.service.IndexIcosService;
 import com.hsjc.ssoCenter.core.service.OrganizationService;
 import com.hsjc.ssoCenter.core.service.ThirdClientsService;
 import com.hsjc.ssoCenter.core.service.ThirdClientFilterService;
+import com.hsjc.ssoCenter.core.util.SSOStringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -117,8 +118,9 @@ public class PageController extends BaseController{
      * @return
      */
     @RequestMapping("authorizeFailed")
-    public String authorizeFailed(){
-        return "/authorizeFailed";
+    public String authorizeFailed(@RequestParam("param")String param,Model model){
+        model.addAttribute("param",param);
+        return "/page/authorizeFailed";
     }
 
     /**
@@ -556,5 +558,22 @@ public class PageController extends BaseController{
     @RequestMapping("sso/siteLog")
     public String siteLog(){
         return "/backstage/siteLog";
+    }
+
+    @RequestMapping("toThird")
+    public String toThird(@RequestParam("accessURL") String accessURL,
+                          @RequestParam("openid") String openId,
+                          @RequestParam("pwd") String password,
+                          @RequestParam("time") String time,
+                          Model model){
+        /**
+         * accessURL中参数值用*代替,到需要传递时用具体值替换
+         */
+        accessURL = "http://192.168.18.159:8091/load.html?openid=%&password=%&time=%";
+
+        String targetURL = SSOStringUtil.replaceAllWithSplitStr(accessURL,"%",openId,password,time);
+        model.addAttribute("targetURL",targetURL);
+
+        return "/page/toThird";
     }
 }

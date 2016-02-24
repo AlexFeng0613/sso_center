@@ -171,8 +171,6 @@ public class ApiBaseService {
             }
 
             String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%",email,activateURL,activateURL);
-            //MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
-
             EmailSend emailSend = new EmailSend();
             emailSend.setContent(content);
             emailSend.setByModule("");
@@ -180,6 +178,8 @@ public class ApiBaseService {
             emailSend.setSubject(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT);
 
             emailSendMapper.insert(emailSend);
+
+            MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
         } catch (Exception e) {
             e.printStackTrace();
         }

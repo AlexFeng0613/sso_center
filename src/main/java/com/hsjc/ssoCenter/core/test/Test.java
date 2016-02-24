@@ -1,5 +1,8 @@
 package com.hsjc.ssoCenter.core.test;
 
+import com.hsjc.ssoCenter.core.util.DateUtil;
+import com.hsjc.ssoCenter.core.util.MD5Util;
+
 /**
  * @author : zga
  * @date : 2015-12-21
@@ -63,10 +66,19 @@ public class Test {
         /*String password = MD5Util.encode("pReVWOmCDQ"+ MD5Util.encode("hsjcsso") + "201601291800");
         System.out.println(password);*/
 
-        int pageCount = 440 / 200;
-        System.out.println(pageCount);
+        /*int pageCount = 440 / 200;
+        System.out.println(pageCount);*/
+
+
+        /**
+         * 构造参数
+         */
+        String time = DateUtil.getCurrentDate("yyyyMMddHHmm");
+        System.out.println(time);
+        String password = MD5Util.encode("Pxk8Wq9XWe"+MD5Util.encode("hsjcsso")+"201602241535");
+        System.out.println(password);
+
+
+
     }
-
-
-
 }

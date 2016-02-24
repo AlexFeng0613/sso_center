@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.service.ThirdSynDataService;
+import com.hsjc.ssoCenter.core.util.MD5Util;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,15 +33,27 @@ public class ThirdSynDataController extends BaseController {
      * @return
      */
     @RequestMapping("login")
-    public String login(@RequestParam("client_id")String clientId){
+    public String login(@RequestParam("client_id")String clientId,
+                        @RequestParam(value = "openId",required = false)String openId,
+                        @RequestParam("password")String password,
+                        @RequestParam("time")String time){
         //验证clientId
         ThirdClients thirdClients = new ThirdClients();
         thirdClients.setClientId(clientId);
 
         ThirdClients res = thirdSynDataService.selectByClientId(thirdClients);
-        if(res == null) return "redirect:/page/authorizeFailed";
+        if(res == null) return "forward:/page/authorizeFailed?param=errorClientId";
 
-        return "redirect:/user/login";
+        String checkPassword = MD5Util.encode(res.getClientSecret()+MD5Util.encode(res.getPublicKey())+time);
+        if(!checkPassword.equals(password)){
+            return "forward:/page/authorizeFailed.html?param=errorPassword";
+        }
+
+        if(StringUtils.isEmpty(openId)){
+            return "forward:/user/login.html?clientId="+clientId;
+        } else {
+            return "forward:/user/login.html?clientId="+clientId+"&openId="+openId;
+        }
     }
 
     /**

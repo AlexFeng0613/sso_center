@@ -62,12 +62,17 @@ public class SSOStringUtil {
     }
 
     public static void main(String[] args) {
-        String clientId = getRandomString(1,8);
+        /*String clientId = getRandomString(1,8);
 
         String clientSecret = getRandomString(1,10);
 
         String ssoPassword = getRandomString(1,10);
 
-        System.out.println(clientId + "\r\n" + clientSecret + "\r\n" + ssoPassword);
+        System.out.println(clientId + "\r\n" + clientSecret + "\r\n" + ssoPassword);*/
+
+
+        String str = "http://192.168.18.159:8091/load.html?openid=%&password=%&time=%";
+        String targetStr = replaceAllWithSplitStr(str,"%","1","c30b254b2f59c1265f0b8767532106a2","201602241420");
+        System.out.println(targetStr);
     }
 }

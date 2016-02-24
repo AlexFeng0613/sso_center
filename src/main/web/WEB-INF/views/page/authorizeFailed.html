@@ -6,6 +6,7 @@
     <title>AuthorizateFailed</title>
 </head>
 <body>
-    非授权的第三方,请联系管理员.
+    <span th:if="${param == 'errorClientId' }">非授权的第三方,请联系管理员.</span>
+    <span th:if="${param == 'errorPassword' }">Password错误,请检查.</span>
 </body>
 </html>
