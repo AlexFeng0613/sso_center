@@ -53,14 +53,17 @@ public class AppConfig {
 
 	@Configuration
 	@Profile("development")
-	@PropertySource("classpath:application.development.properties")
-	static class Development {}
-
-	@Configuration
-	@Profile("log4j")
 	@PropertySources({
 			@PropertySource("classpath:application.development.properties"),
 			@PropertySource("classpath:log4j.properties")
 	})
-	static class Log4j{}
+	static class Development{}
+
+	@Configuration
+	@Profile("production")
+	@PropertySources({
+			@PropertySource("classpath:application.production.properties"),
+			@PropertySource("classpath:log4j.properties")
+	})
+	static class Production{}
 }

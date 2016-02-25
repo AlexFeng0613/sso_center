@@ -33,7 +33,6 @@
     salt,
     phone,
     type,
-    status,
     inviteCode,
     email,
     organizationCode,
@@ -45,7 +44,6 @@
     #{salt},
     #{phone},
     #{type},
-    #{status},
     #{inviteCode},
     #{email},
     #{organizationCode},
@@ -312,15 +310,19 @@
     from tbusermain
     <where>
       <if test="email != null">
-        email = #{email},
+        email = #{email}
       </if>
 
       <if test="phone != null">
-        and phone = #{phone},
+        and phone = #{phone}
       </if>
 
       <if test="userName != null">
         and userName = #{userName}
+      </if>
+
+      <if test="status != null">
+        and status = #{status}
       </if>
     </where>
   </select>
@@ -345,11 +347,15 @@
     FROM tbusermain
     <where>
       <if test="email != null">
-        email = #{email},
+        email = #{email}
       </if>
 
       <if test="phone != null">
         and phone = #{phone}
+      </if>
+
+      <if test="status != null">
+        and status = #{status}
       </if>
     </where>
   </select>
@@ -384,7 +390,7 @@
   <!--
     @author : zga
     @date : 2016-2-18
-    忘记密码时,查询Email、phone是否是绑定的用户
+    根据Email查询用户
   -->
   <select id="findUserByEmail" resultType="UserMain">
     SELECT
@@ -393,6 +399,9 @@
     <where>
       <if test="email != null">
         email = #{email}
+      </if>
+      <if test="status != null">
+        and status = #{status}
       </if>
     </where>
 

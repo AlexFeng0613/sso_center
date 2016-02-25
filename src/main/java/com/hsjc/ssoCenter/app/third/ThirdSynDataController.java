@@ -42,11 +42,11 @@ public class ThirdSynDataController extends BaseController {
         thirdClients.setClientId(clientId);
 
         ThirdClients res = thirdSynDataService.selectByClientId(thirdClients);
-        if(res == null) return "forward:/page/authorizeFailed?param=errorClientId";
+        if(res == null) return "forward:/page/authorizeFailed?reqParam=errorClientId";
 
         String checkPassword = MD5Util.encode(res.getClientSecret()+MD5Util.encode(res.getPublicKey())+time);
         if(!checkPassword.equals(password)){
-            return "forward:/page/authorizeFailed.html?param=errorPassword";
+            return "forward:/page/authorizeFailed.html?reqParam=errorPassword";
         }
 
         if(StringUtils.isEmpty(openId)){

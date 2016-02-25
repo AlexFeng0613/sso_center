@@ -179,7 +179,7 @@ public class ApiBaseService {
 
             emailSendMapper.insert(emailSend);
 
-            MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
+            //MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
         } catch (Exception e) {
             e.printStackTrace();
         }

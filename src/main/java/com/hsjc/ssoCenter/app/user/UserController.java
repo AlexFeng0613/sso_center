@@ -10,6 +10,7 @@ import com.hsjc.ssoCenter.core.domain.UserTemp;
 import com.hsjc.ssoCenter.core.service.ApiBaseService;
 import com.hsjc.ssoCenter.core.service.ThirdClientsService;
 import com.hsjc.ssoCenter.core.service.UserMainService;
+import com.hsjc.ssoCenter.core.service.UserTempService;
 import com.hsjc.ssoCenter.core.util.DateUtil;
 import com.hsjc.ssoCenter.core.util.MD5Util;
 import org.apache.commons.lang.StringUtils;
@@ -39,8 +40,10 @@ public class UserController extends BaseController {
     UserMainService userMainService;
 
     @Autowired
-    ApiBaseService apiBaseService;
+    UserTempService userTempService;
 
+    @Autowired
+    ApiBaseService apiBaseService;
 
     @Autowired
     ThirdClientsService thirdClientsService;
@@ -94,7 +97,7 @@ public class UserController extends BaseController {
             return "redirect:/page/sso/backstageIndex.html";
         }
 
-        if(StringUtils.isEmpty(openId)){
+        if(StringUtils.isEmpty(openId)&&StringUtils.isNotEmpty(clientId)){
             JSONObject paramJson = new JSONObject();
             paramJson.put("clientId",clientId);
 
@@ -197,6 +200,14 @@ public class UserController extends BaseController {
                 if(!(originEmail.equals(activateEmailMess.getEmail()) && ticket.equals(activateEmailMess.getTicket()))){
                     //比对不一致,返回错误页面
                     return "";
+                }
+
+                //如果tbusertemp中没有数据的话,表示已经激活过了,就跳转到登录页面.
+                JSONObject paramJson = new JSONObject();
+                paramJson.put("email",email);
+                UserTemp resultUserTemp = userTempService.findByEmail(paramJson);
+                if(resultUserTemp == null){
+                    return "redirect:/page/register/activatedEmail.html";
                 }
 
                 //如果正确且没有过期,更新状态为activated

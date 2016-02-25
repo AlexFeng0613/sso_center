@@ -164,4 +164,9 @@ public class UserMain implements Serializable{
     public void setUserIcon(String userIcon) {
         this.userIcon = userIcon;
     }
+
+    @Override
+    public String toString() {
+        return "Email:"+getEmail()+"\tRealName:"+getRealName()+"\tStatus:"+getStatus()+"\tUserName:"+getUserName();
+    }
 }

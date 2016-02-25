@@ -118,8 +118,8 @@ public class PageController extends BaseController{
      * @return
      */
     @RequestMapping("authorizeFailed")
-    public String authorizeFailed(@RequestParam("param")String param,Model model){
-        model.addAttribute("param",param);
+    public String authorizeFailed(@RequestParam("reqParam")String reqParam,Model model){
+        model.addAttribute("reqParam",reqParam);
         return "/page/authorizeFailed";
     }
 
@@ -575,5 +575,10 @@ public class PageController extends BaseController{
         model.addAttribute("targetURL",targetURL);
 
         return "/page/toThird";
+    }
+
+    @RequestMapping("register/activatedEmail")
+    public String activatedEmail(){
+        return "/page/activatedEmail";
     }
 }

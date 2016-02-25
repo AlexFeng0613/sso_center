@@ -40,3 +40,12 @@ static 静态资源文件(css/js/image)
 WEB-INF 页面文件
 
 test 测试用例目录
+
+
+
+/*部署上线需要修改的地方*/
+1、AppInitializer类中setActiveProfiles 需要改成production
+
+2、DBUtil中的加载的properties文件修改为production
+
+3、InitService中需要修改为线上的数据库连接

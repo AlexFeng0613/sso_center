@@ -9,6 +9,7 @@ import com.hsjc.ssoCenter.core.util.MailUtil;
 import com.hsjc.ssoCenter.core.util.PasswordUtil;
 import com.hsjc.ssoCenter.core.util.SSOStringUtil;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,8 @@ import java.util.regex.Pattern;
 @SuppressWarnings("ALL")
 @Service
 public class UserMainService extends ApiBaseService{
+    private final static Logger logger = Logger.getLogger(UserMainService.class);
+
     @Autowired
     private UserMainMapper userMainMapper;
 
@@ -77,6 +80,7 @@ public class UserMainService extends ApiBaseService{
             }
         }
 
+        paramUserMain.setStatus("activated");
         UserMain userMain = userMainMapper.findByEmailOrPhoneOrUserName(paramUserMain);
         return userMain;
     }
@@ -185,6 +189,7 @@ public class UserMainService extends ApiBaseService{
      */
     public JSONObject isBindEmail(JSONObject paramJson){
         JSONObject resultJson = getResultJson();
+        paramJson.put("status","activated");
         List<UserMain> userMainList = userMainMapper.findUserByEmail(paramJson);
 
         if(userMainList != null && userMainList.size() > 0){
@@ -235,6 +240,7 @@ public class UserMainService extends ApiBaseService{
      * @param paramJson
      * @return
      */
+    @Transactional(rollbackFor = RuntimeException.class)
     public int activateInviteCode(JSONObject paramJson){
         int num = 0;
         UserTemp userTemp = new UserTemp();
@@ -242,23 +248,25 @@ public class UserMainService extends ApiBaseService{
             //String original = apiBaseService.getDesUtil().decrypt(paramJson.getString("email"));
             String original = paramJson.getString("email");
             userTemp.setEmail(original);
-
             UserTemp userTemp1 = userTempMapper.selectByEmailOrUserNameOrPhone(userTemp);
 
-            UserMain userMain = new UserMain();
             if(userTemp1 != null){
+                UserMain userMain = new UserMain();
+
                 userMain.setUserName(userTemp1.getUserName());
                 userMain.setPassword(userTemp1.getPassword());
                 userMain.setSalt(userTemp1.getSalt());
                 userMain.setPhone(userTemp1.getPhone());
                 userMain.setType(userTemp1.getType());
-                userMain.setStatus(userTemp1.getStatus());
                 userMain.setInviteCode(userTemp1.getInviteCode());
                 userMain.setEmail(userTemp1.getEmail());
                 userMain.setOrganizationCode(userTemp1.getOrganizationCode());
                 userMain.setRealName(userTemp1.getRealName());
 
+                logger.debug("New User info :" + userMain.toString());
+
                 num = userMainMapper.insert(userMain);
+                userTempMapper.deleteByPrimaryKey(userTemp1.getId());
 
                 if("teacher".equals(userMain.getType())){
                     UserTeacher userTeacher = new UserTeacher();
@@ -271,8 +279,6 @@ public class UserMainService extends ApiBaseService{
                     userStudent.setUserId(userMain.getId());
                     userStudentMapper.insert(userStudent);
                 }
-
-                userTempMapper.deleteByPrimaryKey(userTemp1.getId());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -309,6 +315,7 @@ public class UserMainService extends ApiBaseService{
      * @return
      */
     public UserMain validateUser(JSONObject paramJson){
+        paramJson.put("status","activated");
         UserMain userMain = userMainMapper.selectUserByEmailOrPhone(paramJson);
         return userMain;
     }
@@ -535,6 +542,7 @@ public class UserMainService extends ApiBaseService{
     public JSONObject bindPhone(JSONObject paramJson){
         JSONObject resultJson = getResultJson();
 
+        paramJson.put("status","activated");
         UserMain userMain = userMainMapper.selectUserByEmailOrPhone(paramJson);
         if(userMain != null){
             resultJson.put("success",false);

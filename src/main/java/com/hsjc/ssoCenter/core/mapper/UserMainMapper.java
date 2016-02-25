@@ -38,7 +38,6 @@ public interface UserMainMapper {
 
     UserMain findByEmailOrPhoneOrUserName(UserMain userMain);
 
-
     Integer selectCountByClientId(UserMain userMain);
 
     UserMain selectUserByEmailOrPhone(JSONObject paramJson);
