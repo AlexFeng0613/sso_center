@@ -107,7 +107,7 @@ public class UserController extends BaseController {
             String accessPassword = MD5Util.encode(thirdClients.getSsoPassword()+MD5Util.encode(thirdClients.getPublicKey())+accessTime);
 
             return "forward:/page/toThird.html?accessURL=" + thirdClients.getCallbackUrl()
-                    + "&openid=" + userMain.getId()
+                    + "&openid=" + 1997
                     + "&pwd=" + accessPassword
                     + "&time=" + accessTime;
         }

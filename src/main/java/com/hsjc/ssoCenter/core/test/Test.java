@@ -1,6 +1,5 @@
 package com.hsjc.ssoCenter.core.test;
 
-import com.hsjc.ssoCenter.core.util.DateUtil;
 import com.hsjc.ssoCenter.core.util.MD5Util;
 
 /**
@@ -71,14 +70,19 @@ public class Test {
 
 
         /**
-         * 构造参数
+         * 构造参数 SSO访问Jclass
          */
-        String time = DateUtil.getCurrentDate("yyyyMMddHHmm");
+        /*String time = DateUtil.getCurrentDate("yyyyMMddHHmm");
         System.out.println(time);
         String password = MD5Util.encode("Pxk8Wq9XWe"+MD5Util.encode("hsjcsso")+"201602241535");
+        System.out.println(password);*/
+
+        //Jclass访问SSO URl：http://192.168.18.159:8091/load.html?openid=1997&password=cd0319d830a085bc3585eb7733eb01cd&time=201602241535
+
+        /**
+         * Jclass访问SSO
+         */
+        String password = MD5Util.encode("NN2x9mwFvF"+ MD5Util.encode("hsjcsso")+"201602241535");
         System.out.println(password);
-
-
-
     }
 }

@@ -9,6 +9,7 @@ import com.hsjc.ssoCenter.core.mapper.SynMapper;
 import com.hsjc.ssoCenter.core.mapper.ThirdClientsMapper;
 import com.hsjc.ssoCenter.core.mapper.ThirdFilterMapper;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,8 @@ import java.util.List;
  */
 @Service
 public class ThirdSynDataService extends ApiBaseService{
+    private final static Logger logger = Logger.getLogger(ThirdSynDataService.class);
+
     @Autowired
     ThirdClientsMapper thirdClientsMapper;
 
@@ -47,8 +50,7 @@ public class ThirdSynDataService extends ApiBaseService{
      * @date : 2015-12-14
      *
      * 同步所有组织机构
-     *
-     * @param paramJson
+     ** @param paramJson
      * @return
      */
     @SSOSystemLog(actionId = 2,description = "同步所有组织机构",module = "接口同步")
@@ -100,6 +102,8 @@ public class ThirdSynDataService extends ApiBaseService{
 
             resultJson.put("leftNum", leftNum);
         }catch (Exception e){
+            logger.debug("getAllOrganization Exception Info:"+e.getMessage());
+
             resultJson.put("flag",false);
             resultJson.put("respCode", ThirdSynConstant.SERVER_EXPECTION);
             return resultJson;
@@ -121,10 +125,18 @@ public class ThirdSynDataService extends ApiBaseService{
      */
     @SSOSystemLog(actionId = 3,description = "同步增量组织机构",module = "接口同步")
     public JSONObject getDifferentOrganization(JSONObject paramJson){
+        /**
+         * 1、校验请求参数信息
+         *
+         * 2、查询数据
+         *  1)、查询数据会结合tb3rdfilter表来进行数据的过滤
+         *
+         * 3、LogInterCeptor记录同步数量,并返回requestSynId
+         *
+         * 4、请求完成的数据全部删除
+         */
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
-
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
-
         if(!resultJson.getBoolean("flag")) return resultJson;
 
         try{
@@ -156,6 +168,8 @@ public class ThirdSynDataService extends ApiBaseService{
                 synMapper.deleteFinishSynOrganizationByOrganizationCode(paramMap);
             }
         } catch (Exception e){
+            logger.debug("getDifferentOrganization Exception Info:"+e.getMessage());
+
             resultJson.put("flag",false);
             resultJson.put("respCode", ThirdSynConstant.SERVER_EXPECTION);
             return resultJson;
@@ -222,6 +236,8 @@ public class ThirdSynDataService extends ApiBaseService{
             }
             resultJson.put("leftNum",leftNum);
         } catch (Exception e){
+            logger.debug("getAllUser Exception Info:"+e.getMessage());
+
             resultJson.put("flag",false);
             resultJson.put("respCode", ThirdSynConstant.SERVER_EXPECTION);
             return resultJson;
@@ -243,11 +259,20 @@ public class ThirdSynDataService extends ApiBaseService{
      */
     @SSOSystemLog(actionId = 5,description = "同步增量用户",module = "接口同步")
     public JSONObject getDifferentUser(JSONObject paramJson){
+        /**
+         * 1、校验请求参数信息
+         *
+         * 2、查询数据
+         *  1)、查询数据会结合tb3rdfilter表来进行数据的过滤
+         *
+         * 3、LogInterCeptor记录同步数量,并返回requestSynId
+         *
+         * 4、请求完成的数据全部删除
+         */
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
-
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
-
         if(!resultJson.getBoolean("flag")) return resultJson;
+
         try {
             List<HashMap> userList = synMapper.selectDifferentUser(thirdClients.getBriefName());
 
@@ -282,8 +307,8 @@ public class ThirdSynDataService extends ApiBaseService{
                  */
                 insertSynUserDeailLog(paramJson,userId);
             }
-
         } catch (Exception e) {
+            logger.debug("getDifferentUser Exception Info:"+e.getMessage());
             resultJson.put("flag",false);
             resultJson.put("respCode", ThirdSynConstant.SERVER_EXPECTION);
             return resultJson;
@@ -313,10 +338,6 @@ public class ThirdSynDataService extends ApiBaseService{
 
     public Integer getPageCount(Integer recordCount,Integer pageSize){
         int pageCount = recordCount / pageSize;
-
-
         return pageCount;
     }
-
-
 }

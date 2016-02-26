@@ -28,7 +28,7 @@ import java.util.Map;
 @Component
 @Aspect
 public class LogInterCeptor {
-    private Logger logger = Logger.getLogger(LogInterCeptor.class);
+    private final static Logger logger = Logger.getLogger(LogInterCeptor.class);
 
     @Autowired
     private RestfulLogMapper restfulLogMapper;

@@ -248,6 +248,15 @@ public class ApiBaseService {
      * @return
      */
     public JSONObject validateClientIdAndPassword(JSONObject paramJson,ThirdClients thirdClients) {
+        /**
+         * 1、校验clientId
+         *  1)、clientId不存在,返回错误信息
+         *  2)、clientId存在,校验password
+         *
+         * 2、校验password
+         *  1)、password不正确,返回错误信息
+         *  2)、password正确,返回正确
+         */
         JSONObject resultJson = getResultJson();
 
         if(thirdClients == null) {

@@ -584,4 +584,18 @@ public class UserMainService extends ApiBaseService{
         }
         return false;
     }
+
+
+    /**
+     * @author : zga
+     * @date : 2016-2-26
+     *
+     * 根据Id查询用户
+     *
+     * @return
+     */
+    public UserMain getUserMainById(Integer id){
+        UserMain userMain = userMainMapper.selectByPrimaryKey(id);
+        return userMain;
+    }
 }

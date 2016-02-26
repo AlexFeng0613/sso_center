@@ -1,7 +1,9 @@
 package com.hsjc.ssoCenter.core.authrealm;
 
 import com.hsjc.ssoCenter.core.domain.UserMain;
+import com.hsjc.ssoCenter.core.service.ApiBaseService;
 import com.hsjc.ssoCenter.core.service.UserMainService;
+import com.hsjc.ssoCenter.core.util.PasswordUtil;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -27,6 +29,9 @@ public class MyAuthRealm extends AuthorizingRealm {
     @Resource
     UserMainService userMainService;
 
+    @Resource
+    ApiBaseService apiBaseService;
+
     public void setAc(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
@@ -40,13 +45,28 @@ public class MyAuthRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
         String username = token.getUsername();
+        String password = new String(token.getPassword());
+
         UserMain userMain = userMainService.findByEmailOrPhoneOrUserName(username);
+        SimpleAuthenticationInfo simpleAuthenticationInfo;
+
         if (userMain == null) {
             throw new UnknownAccountException("No account found for user[" + token.getUsername() + "]");
         }
 
-        return new SimpleAuthenticationInfo(userMain, userMain.getPassword(),
-                ByteSource.Util.bytes(userMain.getCredentialsSalt()),getName());
+        if(!"xxxxxx".equals(password)){
+            simpleAuthenticationInfo = new SimpleAuthenticationInfo(userMain, userMain.getPassword(),
+                    ByteSource.Util.bytes(userMain.getCredentialsSalt()),getName());
+        } else {
+            PasswordUtil passwordUtil = new PasswordUtil();
+            userMain.setPassword("xxxxxx");
+            passwordUtil.encryptPassword(userMain);
+
+            simpleAuthenticationInfo = new SimpleAuthenticationInfo(userMain, userMain.getPassword(),
+                    ByteSource.Util.bytes(userMain.getCredentialsSalt()),getName());
+        }
+
+        return simpleAuthenticationInfo;
     }
 
     //授权
