@@ -3,6 +3,8 @@ package com.hsjc.ssoCenter.core.mapper;
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.domain.SchoolInvite;
 
+import java.util.List;
+
 /**
  * @author : zga
  * @date : 2015-12-10
@@ -14,6 +16,8 @@ public interface SchoolInviteMapper {
     int insert(SchoolInvite schoolInvite);
 
     int insertSelective(SchoolInvite schoolInvite);
+
+    int batchInsertInviteCode(List list);
 
     int deleteByPrimaryKey(Long inviteid);
 

@@ -509,11 +509,16 @@ public class UserMainService extends ApiBaseService{
             }
             schoolInvite.setByUserId(Long.parseLong(userMain.getId().toString()));
             schoolInvite.setUseTime(new Date());
+            schoolInvite.setState("used");
             int num = schoolInviteMapper.updateUseTimeAndByUserId(schoolInvite);
             if(num > 0){
+                logger.debug("SchoolInvite Info：" + schoolInvite.toString());
+                logger.debug("SchoolInvite Info：" + userMain.toString());
+
                 userMain.setOrganizationCode(schoolInvite.getSchoolId());
                 userMain.setInviteCode(schoolInvite.getInviteCode());
                 int num1 = userMainMapper.updateInviteCodeAndOrgCode(userMain);
+
                 if(num1 > 0){
                     resultJson.put("message", Constant.BIND_INVITE_CODE_SUCCESS);
                 }else{

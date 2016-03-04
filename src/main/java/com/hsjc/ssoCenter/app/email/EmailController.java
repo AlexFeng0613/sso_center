@@ -15,7 +15,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/1/27.
+ * @author : zga
+ * @date : 2016-2-29
  * 邮件控制类
  */
 @Controller

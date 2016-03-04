@@ -1,7 +1,5 @@
 package com.hsjc.ssoCenter.core.test;
 
-import com.hsjc.ssoCenter.core.util.MD5Util;
-
 /**
  * @author : zga
  * @date : 2015-12-21
@@ -77,12 +75,17 @@ public class Test {
         String password = MD5Util.encode("Pxk8Wq9XWe"+MD5Util.encode("hsjcsso")+"201602241535");
         System.out.println(password);*/
 
-        //Jclass访问SSO URl：http://192.168.18.159:8091/load.html?openid=1997&password=cd0319d830a085bc3585eb7733eb01cd&time=201602241535
+        //SSO访问Jclass URl：http://192.168.18.159:8091/load.html?openid=1997&password=cd0319d830a085bc3585eb7733eb01cd&time=201602241535
 
         /**
          * Jclass访问SSO
          */
-        String password = MD5Util.encode("NN2x9mwFvF"+ MD5Util.encode("hsjcsso")+"201602241535");
-        System.out.println(password);
+        /*String password = MD5Util.encode("NN2x9mwFvF"+ MD5Util.encode("hsjcsso")+"201602241535");
+        System.out.println(password);*/
+
+
+        int num = Integer.parseInt("123");
+        System.out.println(num);
+
     }
 }

@@ -79,6 +79,19 @@
     </trim>
   </insert>
 
+  <!--
+    @author : zga
+    @date : 2016-2-29
+    批量插入邀请码数据
+  -->
+  <insert id="batchInsertInviteCode" parameterType="java.util.List">
+    INSERT INTO tbschoolinvite (inviteCode,schoolId)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.inviteCode},#{item.schoolId})
+    </foreach>
+  </insert>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tbschoolinvite
     where inviteId = #{inviteId}
@@ -132,7 +145,10 @@
         byUserId = #{byUserId},
       </if>
       <if test="useTime != null">
-        useTime = #{useTime}
+        useTime = #{useTime},
+      </if>
+      <if test="state != null">
+        state = #{state}
       </if>
     </set>
     where inviteCode = #{inviteCode}

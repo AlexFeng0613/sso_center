@@ -27,39 +27,48 @@
                     $('#bindInviteCode a').addClass('selected');
 
                     var inviteCodeForm = $('.inviteCodeForm').Validform({
-
-
-                    });
-
-                    /**
-                     * 绑定邀请码
-                     */
-                    $('.email_submit').click(function(){
-                        var inviteCode = $('input[name="inviteCode"]').val();
-                        var data = {
-                            'inviteCode' : inviteCode
-                        }
-                        $.ajax({
-                            url : '/sso/bindInviteCode.json',
-                            type : 'POST',
-                            data : JSON.stringify(data),
-                            contentType: 'application/json',
-                            dataType : 'json',
-                            success : function(data){
-                                if(data.success){
-                                    window.location.href = '/page/sso/bindInviteCodeSucc.html';
-                                }else {
-                                    alert(ErrorMessage[data.message])
-                                    if(data.message == '100007') {
-                                        window.location.href = "/user/login.html";
+                        tiptype:2,
+                        label:".label",
+                        showAllError:true,
+                        datatype:{
+                            "s6-18":/^[\w\.\s]{6,18}$/
+                        },
+                        callback : function(form){
+                            /**
+                             * 绑定邀请码(submit请求)
+                             */
+                            var inviteCode = $('input[name="inviteCode"]').val();
+                            var data = {
+                                'inviteCode' : inviteCode
+                            }
+                            $.ajax({
+                                url : '/sso/bindInviteCode.json',
+                                type : 'POST',
+                                data : JSON.stringify(data),
+                                contentType: 'application/json',
+                                dataType : 'json',
+                                success : function(data){
+                                    if(data.success){
+                                        window.location.href = '/sso/personalSettings.html';
+                                    }else {
+                                        alert(ErrorMessage[data.message])
+                                        if(data.message == '100007') {
+                                            window.location.href = "/user/login.html";
+                                        }
                                     }
                                 }
-                            }
-                        });
-                    })
+                            });
+                        }
+                    });
+
+                    inviteCodeForm.tipmsg.w["s6-18"]="请输入6到18位英文和数字";
+                    inviteCodeForm.addRule([{
+                        ele : ".password:eq(0)",
+                        datatype : "s6-18"
+                    }]);
+
                 });
            </script>
         </div>
-
     </body>
 </html>

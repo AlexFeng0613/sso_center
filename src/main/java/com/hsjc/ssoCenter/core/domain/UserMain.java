@@ -167,6 +167,17 @@ public class UserMain implements Serializable{
 
     @Override
     public String toString() {
-        return "Email:"+getEmail()+"\tRealName:"+getRealName()+"\tStatus:"+getStatus()+"\tUserName:"+getUserName();
+        return "UserMain{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", type='" + type + '\'' +
+                ", status='" + status + '\'' +
+                ", inviteCode='" + inviteCode + '\'' +
+                ", email='" + email + '\'' +
+                ", organizationCode=" + organizationCode +
+                ", gender='" + gender + '\'' +
+                ", realName='" + realName + '\'' +
+                '}';
     }
 }
