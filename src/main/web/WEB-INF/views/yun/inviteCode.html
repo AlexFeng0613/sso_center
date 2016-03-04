@@ -15,8 +15,8 @@
            <div class="long_input_box">
                <form class="inviteCodeForm" action="/sso/bindInviteCode.json" method="post">
                    <div class="long_input_top">
-                       <div id="input_font" class="input_font">邀请码</div>
-                       <input type="text" class="email" name="inviteCode"/>
+                       <div  class="input_font">邀请码</div>
+                       <input id="input_font" type="text" class="email" name="inviteCode"/>
                        <input type="button" class="email_submit" value="下一步"/>
                    </div>
                </form>
@@ -31,7 +31,7 @@
                         label:".label",
                         showAllError:true,
                         datatype:{
-                            "s10":/^[\w\.\s]{10}$/
+                            "s10":/^[\w\s]{10}$/
                         },
                         callback : function(form){
                             /**
