@@ -478,7 +478,7 @@ label{
 }
 
 .password_box{
-    width:420px;
+    width:430px;
     margin:0px auto 0;
 }
 
@@ -606,7 +606,7 @@ label{
 
 .password{
     width:294px;
-    float:right;
+    float:left;
     height:32px;
     line-height: 32px;
     border:1px solid #444444;
@@ -614,6 +614,7 @@ label{
     color:#364049;
     font-size: 14px;
     text-indent: 20px;
+    margin-left:20px;
 }
 
 .password_r{
