@@ -10,7 +10,7 @@
                <form class="phoneForm" action="/sso/bindPhone.json" method="post">
                    <div class="phone_label">
                        <div class="phone_font">手机号</div>
-                       <input type="text" pattern="13[0-9]\d{8}" id="phone_input" name="phone"/>
+                       <input type="text"  id="phone_input" name="phone"/>
                        <input type="button" class="get_phone" value="免费获取验证码"/>
                    </div>
                    <div class="phone_strong">用于接收来自平台的通知和找回密码，非常重要!</div>
@@ -31,11 +31,11 @@
                     *表单校验
                     */
                    var phoneForm = $('.phoneForm').Validform({
-                       tiptype:2,
+                       tiptype:3,
                        label:".label",
                        showAllError:true,
                        datatype:{
-                           "s6-18":/^[\w\.\s]{6,18}$/
+                           "n11":/^\d{11}$/
                        },
                        callback : function(form){
                            /**
@@ -66,10 +66,10 @@
                        }
                    });
 
-                   phoneForm.tipmsg.w["s6-18"]="请输入6到18位英文和数字";
+                   phoneForm.tipmsg.w["n11"]=" ";
                    phoneForm.addRule([{
-                       ele : ".password:eq(0)",
-                       datatype : "s6-18"
+                       ele : "#phone_input",
+                       datatype : "n11"
                    }]);
 
                    /**

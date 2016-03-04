@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link th:href="@{/static/css/sso.css}" href="../static/css/sso.css" rel="stylesheet" type="text/css"/>
         <link th:href="@{/static/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link th:href="@{/static/css/validform.css}" href="../../../static/css/validform.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/static/css/validform.css}" href="../static/css/validform.css" rel="stylesheet" type="text/css"/>
         <script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../static/scripts/jquery/jquery-1.11.3.min.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../static/scripts/ie/html5shiv.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/validform/Validform_v5.3.2_min.js}" src="../../../static/scripts/validform/Validform_v5.3.2_min.js"></script>
@@ -37,13 +37,16 @@
                     <li id="basic_message">
                         <a href="/sso/personalSettings.html">基本信息</a>
                     </li>
-                    <li id="mailbox" th:if="${session.user.email} == null or ${session.user.email} == ''">
+                    <li id="mailbox">
+                   <!-- <li id="mailbox" th:if="${session.user.email} == null or ${session.user.email} == ''"> -->
                         <a href="/sso/bindEmail.html">绑定邮箱</a>
                     </li>
-                    <li id="phone" th:if="${session.user.phone} == null or ${session.user.phone} == ''">
+                    <li id="phone">
+                   <!-- <li id="phone" th:if="${session.user.phone} == null or ${session.user.phone} == ''">-->
                         <a href="/sso/bindPhone.html">绑定手机</a>
                     </li>
-                    <li id="bindInviteCode" th:if="${session.user.inviteCode} == null or ${session.user.inviteCode} == ''">
+                    <li id="bindInviteCode">
+                  <!--  <li id="bindInviteCode" th:if="${session.user.inviteCode} == null or ${session.user.inviteCode} == ''">-->
                         <a href="/sso/bindInviteCode.html">邀请码</a>
                     </li>
                     <li id="amend_password">

@@ -446,7 +446,7 @@ label{
 }
 
 .email{
-    width:358px;
+    width:320px;
     height:32px;
     line-height: 32px;
     border:1px solid #444444;
@@ -470,6 +470,7 @@ label{
     border-radius: 5px;
     border:none;
     text-align: center;
+    float:left;
 }
 
 .message{
@@ -477,7 +478,7 @@ label{
 }
 
 .password_box{
-    width:380px;
+    width:420px;
     margin:0px auto 0;
 }
 
@@ -563,6 +564,7 @@ label{
     margin-top:40px;
     border:none;
     border-radius: 5px;
+    margin-right:45px;
 }
 
 .message_submit{
@@ -599,6 +601,7 @@ label{
     background-color: #72bcc5;
     border-radius:5px;
     cursor:pointer;
+    border:none;
 }
 
 .password{
