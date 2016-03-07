@@ -49,7 +49,7 @@
                                 dataType : 'json',
                                 success : function(data){
                                     if(data.success){
-                                        window.location.href = '/sso/personalSettings.html';
+                                        window.location.href = '/page/sso/bindInviteCodeSucc.html';
                                     }else {
                                         alert(ErrorMessage[data.message])
                                         if(data.message == '100007') {

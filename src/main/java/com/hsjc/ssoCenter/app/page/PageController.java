@@ -142,6 +142,19 @@ public class PageController extends BaseController{
 
     /**
      * @author : zga
+     * @date : 2016-3-7
+     *
+     * 绑定手机成功
+     *
+     * @return
+     */
+    @RequestMapping("sso/bindPhonelSucc")
+    public String bindPhonelSucc(){
+        return "/page/bindPhonelSucc";
+    }
+
+    /**
+     * @author : zga
      * @date : 2016-01-12
      *
      * SSO个人中心>>修改密码成功
