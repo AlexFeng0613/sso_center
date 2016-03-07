@@ -98,8 +98,8 @@
                <div class="inputSubnmit">
                        <!--<textarea class="peo_text"></textarea>-->
                    <!--<input type="button" value="修改" name="modifyInfo" class="message_submit"/>-->
+                   <input type="button" class="resetR" value="取 消"/>
                    <input type="submit" class="submitL" value="保 存"/>
-                   <input type="reset" class="resetR" value="取 消"/>
                </div>
 
            </form>
@@ -108,17 +108,14 @@
                     $('#basic_message').addClass('selected');
                     $('#basic_message a').addClass('selected');
 
-
+                    
                     /**
                      * 修改信息
                      */
-
                     $('input[name="modifyInfo"]').click(function(){
                         $('.viewInfo').css('display','none');
                         $('.modifyInfo').css('display','block');
                     });
-
-
                 });
            </script>
         </div>

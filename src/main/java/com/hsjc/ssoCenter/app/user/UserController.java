@@ -183,26 +183,28 @@ public class UserController extends BaseController {
                                 @RequestParam("ticket")String ticket,
                                 @RequestParam(value = "type",required = false)String type){
         try {
-            //验证email、ticket是否正确,ticket是否过期
+            /**
+             * 1、type 分为 0、1
+             *  1)、0代表的是注册的时候发送的Email
+             *  2)、1代表的是用户登录后绑定Email
+             *
+             * 2、type为0
+             *  1)、判断是否已经激活了,如果已经激活了,提示跳转到登录页面.
+             *  2)、没有激活,则判断ticket是否过期,如果过期提示重新注册
+             *  3)、ticket没有过期,判断ticket是否正确,如果不正确跳转到ticket错误提示页面.
+             *  4)、ticket正确,则进行激活
+             *
+             * 3、type为1
+             *  1)、判断是否已经激活了,如果已经激活了,直接跳转到个人设置页面
+             *  2)、没有激活,则判断ticket是否过期,如果过期提示重新绑定
+             *  3)、ticket没有过期,判断ticket是否正确,如果不正确跳转到ticket错误提示页面.
+             *  4)、ticket正确,则进行激活
+             */
             //String originEmail = apiBaseService.getDesUtil().decrypt(email);
-            String originEmail = email;
-
             if("0".equals(type)){
-                Object obj = apiBaseService.fetchObject(originEmail, ActivateEmailMess.class);
-
-                ActivateEmailMess activateEmailMess = null;
-                if(obj == null) {
-                    //ticket失效,返回错误页面,提示重新注册,或者返回首页
-                    return "";
-                }
-
-                activateEmailMess = (ActivateEmailMess) obj;
-                if(!(originEmail.equals(activateEmailMess.getEmail()) && ticket.equals(activateEmailMess.getTicket()))){
-                    //比对不一致,返回错误页面
-                    return "";
-                }
-
-                //如果tbusertemp中没有数据的话,表示已经激活过了,就跳转到登录页面.
+                /**
+                 * 如果tbusertemp中没有数据的话,表示已经激活过了,就跳转到登录页面.
+                 */
                 JSONObject paramJson = new JSONObject();
                 paramJson.put("email",email);
                 UserTemp resultUserTemp = userTempService.findByEmail(paramJson);
@@ -210,31 +212,80 @@ public class UserController extends BaseController {
                     return "redirect:/page/register/activatedEmail.html";
                 }
 
-                //如果正确且没有过期,更新状态为activated
+                Object obj = apiBaseService.fetchObject(email, ActivateEmailMess.class);
+                ActivateEmailMess activateEmailMess = null;
+                if(obj == null) {
+                    /**
+                     * ticket失效,返回错误页面,提示重新注册,或者返回首页
+                     */
+                    return "redirect:/page/register/errorEmailActivateCode.html?type=" + type;
+                }
+
+                activateEmailMess = (ActivateEmailMess) obj;
+                if(!(email.equals(activateEmailMess.getEmail()) && ticket.equals(activateEmailMess.getTicket()))){
+                    /**
+                     * ticket比对不一致,返回错误页面
+                     */
+                    return "redirect:/page/register/errorEmailActivateCode.html?type=" + type;
+                }
+
+                /**
+                 * 如果正确且没有过期,更新状态为activated
+                 */
                 UserTemp userTemp = new UserTemp();
-                userTemp.setEmail(originEmail);
+                userTemp.setEmail(email);
                 userTemp.setStatus("activated");
                 int num = userMainService.activateEmail(userTemp);
-                if(num < 1) return "";//激活失败,返回错误页面
+                if(num < 1) return "/page/serverError.html";//激活失败,返回错误页面
             } else {
                 UserMain currentUserMain = getCurrentUser();
-                UserMain userMain = new UserMain();
-                userMain.setEmail(originEmail);
-                userMain.setId(currentUserMain.getId());
-                currentUserMain.setEmail(originEmail);
-                int num = userMainService.updateUserMainEmail(userMain);
-                if(num > 0){
-                    Subject subject = SecurityUtils.getSubject();
-                    Session session = subject.getSession(true);
-                    session.setTimeout(-1);
-                    session.setAttribute("user", currentUserMain);
-                    return "redirect:/sso/personalSettings.html";
+                if(currentUserMain != null){
+                    if(StringUtils.isEmpty(type))type = "1";
+                    /**
+                     * 是否已经激活
+                     */
+                    if(StringUtils.isNotEmpty(currentUserMain.getEmail())){
+                        return "redirect:/sso/personalSettings.html";
+                    }
+
+                    /**
+                     * ticket是否正确
+                     */
+                    Object obj = apiBaseService.fetchObject(email, ActivateEmailMess.class);
+                    ActivateEmailMess activateEmailMess = null;
+                    if(obj == null) {
+                        /**
+                         * ticket失效,返回错误页面,提示重新注册,或者返回首页
+                         */
+                        return "redirect:/page/register/errorEmailActivateCode.html?type=" + type;
+                    }
+                    activateEmailMess = (ActivateEmailMess) obj;
+                    if(!(email.equals(activateEmailMess.getEmail()) && ticket.equals(activateEmailMess.getTicket()))){
+                        /**
+                         * ticket比对不一致,返回错误页面
+                         */
+                        return "redirect:/page/register/errorEmailActivateCode.html?type=" + type;
+                    }
+
+                    UserMain userMain = new UserMain();
+                    userMain.setEmail(email);
+                    userMain.setId(currentUserMain.getId());
+                    currentUserMain.setEmail(email);
+                    int num = userMainService.updateUserMainEmail(userMain);
+                    if(num > 0){
+                        Subject subject = SecurityUtils.getSubject();
+                        Session session = subject.getSession(true);
+                        session.setTimeout(-1);
+                        session.setAttribute("user", currentUserMain);
+                        return "redirect:/sso/personalSettings.html";
+                    }
+                } else {
+                    return "redirect:/user/login.html";
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return "redirect:/page/register/4.html?email=" + email;
     }
 

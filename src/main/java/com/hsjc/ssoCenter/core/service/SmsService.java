@@ -4,12 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.constant.SMSConstant;
 import com.hsjc.ssoCenter.core.domain.SmsSend;
 import com.hsjc.ssoCenter.core.domain.SystemProperties;
-import com.hsjc.ssoCenter.core.util.SSOStringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,10 +32,17 @@ public class SmsService extends ApiBaseService{
         JSONObject resultJson = getResultJson();
         String phone = paramJson.getString("phone");
 
+        Integer sendNum = smsSendMapper.selectTodaySendNum(phone);
+        if(sendNum >= 3){
+            resultJson.put("success",false);
+            resultJson.put("message",SMSConstant.BEYOND_LIMIT);
+            return resultJson;
+        }
+
         /**
          * 把验证码放入到Redis缓存中
          */
-        String smsSendCode = SSOStringUtil.getRandomString(2,4);
+        /*String smsSendCode = SSOStringUtil.getRandomString(2,4);
         insertIntoRedis(phone,smsSendCode,String.class);
 
         JSONObject sendParamJson = new JSONObject();
@@ -62,7 +67,7 @@ public class SmsService extends ApiBaseService{
             e.printStackTrace();
             resultJson.put("success",false);
             return resultJson;
-        }
+        }*/
         return resultJson;
     }
 

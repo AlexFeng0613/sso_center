@@ -48,6 +48,7 @@
                               success : function(data){
                                   if(data.success){
                                       window.location.href = '/page/sso/bindEmailSucc.html?email=' + email;
+                                      //window.location.href = '/sso/personalSettings.html';
                                   }else {
                                       alert(ErrorMessage[data.message])
                                   }

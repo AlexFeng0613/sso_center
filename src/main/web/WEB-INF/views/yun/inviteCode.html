@@ -17,7 +17,7 @@
                    <div class="long_input_top">
                        <div  class="input_font">邀请码</div>
                        <input id="input_font" type="text" class="email" name="inviteCode"/>
-                       <input type="button" class="email_submit" value="下一步"/>
+                       <input type="submit" class="email_submit" value="下一步"/>
                    </div>
                </form>
            </div>
@@ -58,6 +58,7 @@
                                     }
                                 }
                             });
+                            return false;
                         }
                     });
 
@@ -66,7 +67,6 @@
                         ele : "#input_font",
                         datatype : "s10"
                     }]);
-
                 });
            </script>
         </div>

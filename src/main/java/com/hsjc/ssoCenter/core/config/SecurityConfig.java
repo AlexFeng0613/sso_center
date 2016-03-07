@@ -103,6 +103,7 @@ public class SecurityConfig {
 		filterChainDefinitionMap.put("/static/**", "anon");
 		filterChainDefinitionMap.put("/code.html", "anon");
 		filterChainDefinitionMap.put("/page/register/*.html", "anon");
+		filterChainDefinitionMap.put("/page/serverError.html", "anon");
 		filterChainDefinitionMap.put("/page/sso/**", "anon");
 		filterChainDefinitionMap.put("/sms/**", "anon");
 		filterChainDefinitionMap.put("/page/logout.html", "logout");

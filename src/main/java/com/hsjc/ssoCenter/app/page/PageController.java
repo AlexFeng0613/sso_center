@@ -560,6 +560,19 @@ public class PageController extends BaseController{
         return "/backstage/siteLog";
     }
 
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
+     * 访问第三方
+     *
+     * @param accessURL
+     * @param openId
+     * @param password
+     * @param time
+     * @param model
+     * @return
+     */
     @RequestMapping("toThird")
     public String toThird(@RequestParam("accessURL") String accessURL,
                           @RequestParam("openid") String openId,
@@ -577,8 +590,39 @@ public class PageController extends BaseController{
         return "/page/toThird";
     }
 
+    /**
+     * 激活Email成功页面
+     * @return
+     */
     @RequestMapping("register/activatedEmail")
     public String activatedEmail(){
         return "/page/activatedEmail";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
+     * 激活Email失败页面
+     *
+     * @return
+     */
+    @RequestMapping("register/errorEmailActivateCode")
+    public String errorEmailActivateCode(@RequestParam("type")String type,Model model){
+        model.addAttribute("type",type);
+        return "/page/errorEmailActivateCode";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
+     * 服务器异常页面
+     *
+     * @return
+     */
+    @RequestMapping("serverError")
+    public String serverError(){
+       return "500";
     }
 }

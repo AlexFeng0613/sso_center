@@ -32,4 +32,6 @@ public class SMSConstant {
     public static final String ERROR_SMS_CODE = "300003";
 
     public static final String RIGHT_SMS_CODE = "300004";
+
+    public static final String BEYOND_LIMIT = "300005";
 }

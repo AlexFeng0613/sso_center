@@ -47,6 +47,8 @@ public class Constant {
 
     public static final String BIND_INVITE_CODE_SUCCESS = "100013";
 
+    public static final String EXISTS_BIND_INVITE_CODE = "100020";
+
     /**
      * 绑定手机号
      */

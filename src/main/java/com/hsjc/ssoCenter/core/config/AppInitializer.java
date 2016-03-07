@@ -43,8 +43,8 @@ public class AppInitializer implements WebApplicationInitializer {
 	private AnnotationConfigWebApplicationContext getContext() {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		context.setConfigLocation("com.hsjc.ssoCenter.core.config");
-		//context.getEnvironment().setActiveProfiles("development");
-		context.getEnvironment().setActiveProfiles("production");
+		context.getEnvironment().setActiveProfiles("development");
+		//context.getEnvironment().setActiveProfiles("production");
 		return context;
 	}
 

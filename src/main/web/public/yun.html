@@ -37,16 +37,13 @@
                     <li id="basic_message">
                         <a href="/sso/personalSettings.html">基本信息</a>
                     </li>
-                    <li id="mailbox">
-                   <!-- <li id="mailbox" th:if="${session.user.email} == null or ${session.user.email} == ''"> -->
+                    <li id="mailbox" th:if="${session.user.email} == null or ${session.user.email} == ''">
                         <a href="/sso/bindEmail.html">绑定邮箱</a>
                     </li>
-                    <li id="phone">
-                   <!-- <li id="phone" th:if="${session.user.phone} == null or ${session.user.phone} == ''">-->
+                   <li id="phone" th:if="${session.user.phone} == null or ${session.user.phone} == ''">
                         <a href="/sso/bindPhone.html">绑定手机</a>
                     </li>
-                    <li id="bindInviteCode">
-                  <!--  <li id="bindInviteCode" th:if="${session.user.inviteCode} == null or ${session.user.inviteCode} == ''">-->
+                  <li id="bindInviteCode" th:if="${session.user.inviteCode} == null or ${session.user.inviteCode} == ''">
                         <a href="/sso/bindInviteCode.html">邀请码</a>
                     </li>
                     <li id="amend_password">

@@ -485,9 +485,15 @@ public class UserMainService extends ApiBaseService{
      * @param paramJson
      * @return
      */
+    @Transactional(readOnly = false,rollbackFor = RuntimeException.class)
     public JSONObject bindInviteCode(JSONObject paramJson){
         JSONObject resultJson = getResultJson();
 
+        /**
+         * 1、先判断邀请码存在与否,不存在,则提示错误的验证码.
+         * 2、邀请码正确,判断是否已经绑定,提示已经绑定
+         * 3、没有绑定,则进行绑定
+         */
         SchoolInvite schoolInvite = schoolInviteMapper.selectByInviteCode(paramJson);
         if(schoolInvite == null){
             resultJson.put("success",false);
@@ -506,30 +512,37 @@ public class UserMainService extends ApiBaseService{
                 resultJson.put("success",false);
                 resultJson.put("message", Constant.NOT_LOGIN);
                 return resultJson;
-            }
-            schoolInvite.setByUserId(Long.parseLong(userMain.getId().toString()));
-            schoolInvite.setUseTime(new Date());
-            schoolInvite.setState("used");
-            int num = schoolInviteMapper.updateUseTimeAndByUserId(schoolInvite);
-            if(num > 0){
-                logger.debug("SchoolInvite Info：" + schoolInvite.toString());
-                logger.debug("SchoolInvite Info：" + userMain.toString());
+            } else {
+                if(StringUtils.isNotEmpty(userMain.getInviteCode())){
+                    resultJson.put("success",false);
+                    resultJson.put("message", Constant.EXISTS_BIND_INVITE_CODE);
+                    return resultJson;
+                }
 
-                userMain.setOrganizationCode(schoolInvite.getSchoolId());
-                userMain.setInviteCode(schoolInvite.getInviteCode());
-                int num1 = userMainMapper.updateInviteCodeAndOrgCode(userMain);
+                schoolInvite.setByUserId(Long.parseLong(userMain.getId().toString()));
+                schoolInvite.setUseTime(new Date());
+                schoolInvite.setState("used");
+                int num = schoolInviteMapper.updateUseTimeAndByUserId(schoolInvite);
+                if(num > 0){
+                    logger.debug("SchoolInvite Info：" + schoolInvite.toString());
+                    logger.debug("SchoolInvite Info：" + userMain.toString());
 
-                if(num1 > 0){
-                    resultJson.put("message", Constant.BIND_INVITE_CODE_SUCCESS);
-                }else{
+                    userMain.setOrganizationCode(schoolInvite.getSchoolId());
+                    userMain.setInviteCode(schoolInvite.getInviteCode());
+                    int num1 = userMainMapper.updateInviteCodeAndOrgCode(userMain);
+
+                    if(num1 > 0){
+                        resultJson.put("message", Constant.BIND_INVITE_CODE_SUCCESS);
+                    }else{
+                        resultJson.put("success",false);
+                        resultJson.put("message", Constant.BIND_INVITE_CODE_FAIL);
+                        return resultJson;
+                    }
+                } else {
                     resultJson.put("success",false);
                     resultJson.put("message", Constant.BIND_INVITE_CODE_FAIL);
                     return resultJson;
                 }
-            } else {
-                resultJson.put("success",false);
-                resultJson.put("message", Constant.BIND_INVITE_CODE_FAIL);
-                return resultJson;
             }
         }
         return resultJson;

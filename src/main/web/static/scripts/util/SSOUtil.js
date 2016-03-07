@@ -15,7 +15,7 @@ var SSOSystem = {
             o.val("重新发送(" + wait + " s)");
             wait--;
             setTimeout(function () {
-                time(o, wait, buttonVal)
+                SSOSystem.time(o, wait, buttonVal);
             }, 1000)
         }
     },
