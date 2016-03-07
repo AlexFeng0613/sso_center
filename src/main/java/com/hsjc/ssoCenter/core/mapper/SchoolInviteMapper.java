@@ -3,6 +3,7 @@ package com.hsjc.ssoCenter.core.mapper;
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.domain.SchoolInvite;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -30,4 +31,6 @@ public interface SchoolInviteMapper {
     SchoolInvite selectByPrimaryKey(Long inviteid);
 
     SchoolInvite selectByInviteCode(JSONObject paramJson);
+
+    List<HashMap> selectAllSchoolInvite();
 }

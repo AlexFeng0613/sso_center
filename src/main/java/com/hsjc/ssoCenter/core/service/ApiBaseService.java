@@ -331,7 +331,7 @@ public class ApiBaseService {
             String time = DateUtil.getCurrentDate("yyyyMMddHHmm");
             String password = MD5Util.encode(ssoPassword + MD5Util.encode(Constant.publicKey) + time);
 
-            resultJson.put("targetURL","?openId=" + currentUserMain.getId() + "&password=" + password + "&time=" + time);
+            resultJson.put("targetURL","?openid=" + currentUserMain.getId() + "&password=" + password + "&time=" + time);
         }
         return resultJson;
     }

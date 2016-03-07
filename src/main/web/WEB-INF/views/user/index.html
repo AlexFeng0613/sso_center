@@ -39,8 +39,6 @@
                         var clientId = $(this).find('input[name="clientId"]').val();
                         var ssoPassword = $(this).find('input[name="ssoPassword"]').val();
                         if(icoType == '0'){
-                            console.log(icoType + ' | ' + accessURL);
-                            var email = $('input[name="email"]').val();
                             var data = {
                                 'clientId' : clientId,
                                 'ssoPassword' : ssoPassword

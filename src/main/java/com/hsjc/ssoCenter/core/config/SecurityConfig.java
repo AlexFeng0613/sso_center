@@ -111,7 +111,6 @@ public class SecurityConfig {
 		filterChainDefinitionMap.put("/user/*.html", "anon");
 		filterChainDefinitionMap.put("/user/*.json", "anon");
 
-
 		filterChainDefinitionMap.put("/3rd/**", "anon");
 		filterChainDefinitionMap.put("/**", "user");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

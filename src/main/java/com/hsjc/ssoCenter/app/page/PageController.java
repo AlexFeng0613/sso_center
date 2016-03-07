@@ -4,10 +4,7 @@ import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.domain.IndexIcos;
 import com.hsjc.ssoCenter.core.domain.Organization;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
-import com.hsjc.ssoCenter.core.service.IndexIcosService;
-import com.hsjc.ssoCenter.core.service.OrganizationService;
-import com.hsjc.ssoCenter.core.service.ThirdClientsService;
-import com.hsjc.ssoCenter.core.service.ThirdClientFilterService;
+import com.hsjc.ssoCenter.core.service.*;
 import com.hsjc.ssoCenter.core.util.SSOStringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +37,9 @@ public class PageController extends BaseController{
 
     @Autowired
     OrganizationService organizationService;
+
+    @Autowired
+    SchoolInviteService schoolInviteService;
 
     /**
      * @author : zga
@@ -478,7 +478,10 @@ public class PageController extends BaseController{
      * @return
      */
     @RequestMapping("sso/invitationManage")
-    public String invitationManage(){
+    public String invitationManage(Model model){
+        List<HashMap> schoolInviteList = schoolInviteService.selectAllSchoolInvite();
+
+        model.addAttribute("schoolInviteList",schoolInviteList);
         return "/backstage/invitationManage";
     }
 
@@ -491,7 +494,9 @@ public class PageController extends BaseController{
      * @return
      */
     @RequestMapping("sso/newInvitation")
-    public String newInvitation(){
+    public String newInvitation(Model model){
+        List<Organization> organizationList = organizationService.getAllOrganization();
+        model.addAttribute("organizationList",organizationList);
         return "/backstage/newInvitation";
     }
 
@@ -638,5 +643,18 @@ public class PageController extends BaseController{
     @RequestMapping("serverError")
     public String serverError(){
        return "500";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
+     * 邀请码生成成功页面
+     *
+     * @return
+     */
+    @RequestMapping("batchGenerateInviteCodeSucc")
+    public String batchGenerateInviteCodeSucc(){
+        return "/page/batchGenerateInviteCodeSucc";
     }
 }
