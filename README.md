@@ -41,8 +41,6 @@ WEB-INF 页面文件
 
 test 测试用例目录
 
-
-
 /*部署上线需要修改的地方*/
 1、AppInitializer类中setActiveProfiles 需要改成production
 

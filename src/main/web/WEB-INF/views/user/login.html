@@ -17,7 +17,7 @@
                 height: 38px;
                 top:0;
                 position: absolute;
-                left:300px;
+                left:250px;
             }
         </style>
     </head>
@@ -134,6 +134,10 @@
 
                 $('.register_input').blur(function(){
                     $(this).removeClass('fillout');
+                });
+
+                $('.remember li').click(function(){
+                    $(this).toggleClass('checked');
                 });
 
                 var demo = $(".regForm").Validform({

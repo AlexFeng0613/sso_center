@@ -349,7 +349,7 @@ input.anew60 {
   height:34px;
   line-height: 34px;
   border:1px solid #717679;
-  margin-right: 20px;
+
   color: #768089;
   float:left;
   font-family: \5FAE\8F6F\96C5\9ED1;
@@ -391,8 +391,8 @@ input.anew60 {
   font-family: \5FAE\8F6F\96C5\9ED1;
   text-align: center;
   color:#fff;
-  float:left;
-
+  float:right;
+margin-right:43px;
 }
 
 .note.click {

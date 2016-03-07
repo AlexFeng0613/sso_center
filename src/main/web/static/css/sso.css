@@ -176,6 +176,7 @@ label{
 }
 
 .remember li{
+    width:100px;
     height:16px;
     line-height: 16px;
     cursor:pointer;
@@ -183,8 +184,9 @@ label{
     font-family: \5FAE\8F6F\96C5\9ED1;
     color:#8f8f8f;
     font-size: 14px;
-    background: url(../images/yun/checked1.png) no-repeat;
     position: relative;
+    float:left;
+    background: url(../images/yun/checked1.png) no-repeat;
 }
 
 .remember li.checked{
@@ -198,6 +200,7 @@ label{
     top:0;
     left:0;
     opacity: 0;
+
 }
 
 .remember li.left{
@@ -534,20 +537,20 @@ label{
     font-family: \5FAE\8F6F\96C5\9ED1;
     color:#364049;
     font-size: 14px;
-    text-align: center;
+    text-indent:20px;
     border:1px solid #444444;
     margin-right:15px;
 }
 
 #code{
-    width:108px;
+    width:120px;
     height:34px;
     line-height: 34px;
     float:left;
     font-family: \5FAE\8F6F\96C5\9ED1;
     color:#364049;
     font-size: 14px;
-    text-align: center;
+    text-indent:20px;
     border:1px solid #444444;
     margin-right:15px;
 }
@@ -593,9 +596,10 @@ label{
     width:108px;
     height:34px;
     line-height: 34px;
-    float:left;
+    float:right;
     font-family: \5FAE\8F6F\96C5\9ED1;
     color:#fff;
+    margin-right:50px;
     font-size: 14px;
     text-align: center;
     background-color: #72bcc5;
@@ -693,11 +697,11 @@ label{
     font-size: 14px;
     color: #fff;
     text-align: center;
-    float:right;
+
     background-color: #ffad00;
     border:none;
     border-radius: 5px;
-    margin-top:30px;
+    margin:30px auto 0;
 }
 
 .message_l{
