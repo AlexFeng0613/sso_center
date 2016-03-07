@@ -7,10 +7,7 @@ import com.hsjc.ssoCenter.core.constant.MailTemplate;
 import com.hsjc.ssoCenter.core.constant.ThirdSynConstant;
 import com.hsjc.ssoCenter.core.domain.*;
 import com.hsjc.ssoCenter.core.mapper.*;
-import com.hsjc.ssoCenter.core.util.DesUtil;
-import com.hsjc.ssoCenter.core.util.MD5Util;
-import com.hsjc.ssoCenter.core.util.MailUtil;
-import com.hsjc.ssoCenter.core.util.SSOStringUtil;
+import com.hsjc.ssoCenter.core.util.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -312,6 +309,30 @@ public class ApiBaseService {
             return resultJson;
         }
         resultJson.put("message",Constant.RETURN_SUCCESS);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
+     * 生成访问第三方的URL参数
+     *
+     * @return
+     */
+    public JSONObject generateSSOAccessThirdURL(JSONObject paramJson){
+        JSONObject resultJson = new JSONObject();
+
+        String ssoPassword = paramJson.getString("ssoPassword");
+
+        UserMain currentUserMain = getCurrentUser();
+        if(currentUserMain != null){
+            resultJson.put("openId",currentUserMain.getId());
+            String time = DateUtil.getCurrentDate("yyyyMMddHHmm");
+            String password = MD5Util.encode(ssoPassword + MD5Util.encode(Constant.publicKey) + time);
+
+            resultJson.put("targetURL","?openId=" + currentUserMain.getId() + "&password=" + password + "&time=" + time);
+        }
         return resultJson;
     }
 }

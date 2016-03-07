@@ -7,7 +7,11 @@
         <div class="container" layout:fragment="service">
             <div class="register_nav">
                 <nav>
-                    <a th:each="ico : ${icons}" th:href="@{${ico.accessURL}}">
+                    <a th:each="ico : ${icons}" href="javascript:void(0);">
+                        <input type="hidden" th:value="${ico.icoType}" name="icoType"/>
+                        <input type="hidden" th:value="${ico.accessUrl}" name="accessURL"/>
+                        <input type="hidden" th:value="${ico.clientId}" name="clientId"/>
+                        <input type="hidden" th:value="${ico.ssoPassword}" name="ssoPassword"/>
                         <img th:src="@{${ico.icoPath}}"/>
                     </a>
                 </nav>
@@ -26,6 +30,36 @@
                         $('.register_nav').css('margin',rrh+ 'px auto 0');
                     });
 
+                    /**
+                     * a click事件
+                     */
+                    $('a').click(function(){
+                        var accessURL = $(this).find('input[name="accessURL"]').val();
+                        var icoType = $(this).find('input[name="icoType"]').val();
+                        var clientId = $(this).find('input[name="clientId"]').val();
+                        var ssoPassword = $(this).find('input[name="ssoPassword"]').val();
+                        if(icoType == '0'){
+                            console.log(icoType + ' | ' + accessURL);
+                            var email = $('input[name="email"]').val();
+                            var data = {
+                                'clientId' : clientId,
+                                'ssoPassword' : ssoPassword
+                            }
+                            $.ajax({
+                                url : '/sso/generateSSOAccessThirdURL.json',
+                                type : 'POST',
+                                data : JSON.stringify(data),
+                                contentType: 'application/json',
+                                dataType : 'json',
+                                success : function(data){
+                                    var targetURL = data.targetURL;
+                                    window.location.href = accessURL + targetURL;
+                                }
+                            });
+                        } else {
+                            window.location.href = accessURL;
+                        }
+                    });
                 });
             </script>
         </div>
