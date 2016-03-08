@@ -257,7 +257,6 @@ public class UserMainService extends ApiBaseService{
 
             if(userTemp1 != null){
                 UserMain userMain = new UserMain();
-
                 userMain.setUserName(userTemp1.getUserName());
                 userMain.setPassword(userTemp1.getPassword());
                 userMain.setSalt(userTemp1.getSalt());
@@ -266,6 +265,7 @@ public class UserMainService extends ApiBaseService{
                 userMain.setInviteCode(userTemp1.getInviteCode());
                 userMain.setEmail(userTemp1.getEmail());
                 userMain.setOrganizationCode(userTemp1.getOrganizationCode());
+                userMain.setGender(userTemp1.getGender());
                 userMain.setRealName(userTemp1.getRealName());
 
                 logger.debug("New User info :" + userMain.toString());

@@ -4,13 +4,12 @@
 	  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	  layout:decorator="../../public/register">
 	<head>
-		<style>
-
-		</style>
 	</head>
 	<body>
 		<div class="container-fluid" layout:fragment="content">
-			<div class="center">
+			<input type="hidden" th:value="${email}" name="email"/>
+			<input type="hidden" th:value="${expiredTicket}" name="expiredTicket"/>
+			<div class="center" th:if="${expiredTicket == '1'}">
 				<aside class="verify_img"></aside>
 				<section class="verify">
 					<div class="send">
@@ -18,17 +17,76 @@
 						<div class="anew">重新发送</div>
 						<input type="button" class="anew60"/>
 					</div>
-					<input type="hidden" th:value="${email}" name="email"/>
 					<a href="#" class="promptly">立即前往验证&gt;&gt;</a>
 					<div class="hint">(邮箱激活链接24小时内有效)</div>
 				</section>
 			</div>
+			<div th:if="${expiredTicket == '0'}" class="center">
+				邮箱激活码已过期,请<a href="javascript:void(0);" class="reSendEmail">重新激活</a>
+			</div>
 			<script text="text/javascript">
-				if($('input[name="email"]').val() == null
-						||$('input[name="email"]').val() == ''
-						||$('input[name="email"]').val() == undefined){
-					//window.location.href = '/page/register/1.html';
+				var time = 60;
+				var timer = null;
+				function refreshTime(){
+					$('input.anew60').val(time+'秒后可重新发送');
+					timer=setInterval(function(){
+						if(time>1){
+							time--;
+							$('.anew60').val(time+'秒后可重新发送');
+						}else{
+							clearInterval(timer);
+							time = 60;
+							$('.anew60').val(time+'秒后可重新发送');
+							$('.anew60').hide();
+							$('.anew').show();
+						};
+
+					},1000);
 				}
+
+				window.onload = function(){
+					var expiredTicket = $('input[name="expiredTicket"]').val();
+					if(expiredTicket == '1'){
+						refreshTime();
+					}
+				}
+
+				function reSendEmail(){
+					if($('.anew60')){
+						$('.anew60').show();
+						$('.anew').hide();
+						clearInterval(timer);
+						timer=setInterval(function(){
+							if(time>1){
+								time--;
+								$('.anew60').val(time+'秒后可重新获取');
+							}else{
+								clearInterval(timer);
+								time = 60;
+								$('.anew60').val(time+'秒后可重新获取');
+								$('.anew60').hide();
+								$('.anew').show();
+							};
+						},1000);
+					}
+
+					var paramData = {
+						'email' : $('input[name="email"]').val()
+					};
+					$.ajax({
+						url : '/user/reSendEmail.json',
+						type : 'POST',
+						data : JSON.stringify(paramData),
+						contentType: 'application/json',
+						dataType : 'json',
+						success : function(data){
+							if($('.reSendEmail')){
+								window.location.reload();
+							}
+						}
+					});
+				}
+
 				$(function(){
 					$('.step_mark1').html('');
 					$('.step_mark2').html('');
@@ -43,62 +101,26 @@
 					$('.step_step3').addClass('selected1');
 
 					var conh=$('.container-fluid').height();
-
 					var cenh=$('.container-fluid .center').height();
-
 					var cenm=(conh-cenh)/2;
-
 					$('.container-fluid .center').css('margin',cenm+'px auto 0');
 
-
 					$(window).on('resize scroll',function(){
-
 						var conh=$('.container-fluid').height();
-
 						var cenh=$('.container-fluid .center').height();
-
 						var cenm=(conh-cenh)/2;
-
 						$('.container-fluid .center').css('margin',cenm+'px auto 0');
 					});
 
-
-					var time=60;
-					var timer=null;
-					$('input.anew60').val(time+'秒后可重新发送');
-
-					timer=setInterval(function(){
-						if(time>1){
-							time--;
-							$('.anew60').val(time+'秒后可重新发送');
-						}else{
-							clearInterval(timer);
-							time=100;
-							$('.anew60').val(time+'秒后可重新发送');
-							$('.anew60').hide();
-							$('.anew').show();
-						};
-
-					},1000);
-
-
+					/**
+					 * 重新发送
+					 */
 					$(document).on('click','.anew',function(){
-						$('.anew60').show();
-						$('.anew').hide();
-						clearInterval(timer);
-						timer=setInterval(function(){
-							if(time>1){
-								time--;
-								$('.anew60').val(time+'秒后可重新获取');
-							}else{
-								clearInterval(timer);
-								time=100;
-								$('.anew60').val(time+'秒后可重新获取');
-								$('.anew60').hide();
-								$('.anew').show();
-							};
+						reSendEmail();
+					});
 
-						},1000);
+					$(document).on('click','.reSendEmail',function(){
+						reSendEmail();
 					});
 
 					//立即前往
@@ -106,11 +128,6 @@
 						var email = $('input[name="email"]').val();
 						var sub = email.substring(email.indexOf("@")+1);
 						window.location.href = 'http://mail.'+ sub;
-					});
-
-					//重新发送
-					$('.anew').click(function(){
-
 					});
 				});
 			</script>

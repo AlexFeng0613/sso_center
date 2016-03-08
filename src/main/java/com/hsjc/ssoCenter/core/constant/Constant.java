@@ -76,9 +76,7 @@ public class Constant {
 
     public static final String BATCH_SCHOOL_INVITE_CODE_SUCCESS = "100022";
 
-
-
-    public static final int REDIS_FETCH_TIME_OUT = 18 * 60 * 1000;
+    public static final int REDIS_FETCH_TIME_OUT = 24 * 60 * 60;
 
     public static String publicKey;
 

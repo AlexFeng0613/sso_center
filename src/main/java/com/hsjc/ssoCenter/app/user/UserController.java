@@ -7,10 +7,7 @@ import com.hsjc.ssoCenter.core.domain.ActivateEmailMess;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.domain.UserMain;
 import com.hsjc.ssoCenter.core.domain.UserTemp;
-import com.hsjc.ssoCenter.core.service.ApiBaseService;
-import com.hsjc.ssoCenter.core.service.ThirdClientsService;
-import com.hsjc.ssoCenter.core.service.UserMainService;
-import com.hsjc.ssoCenter.core.service.UserTempService;
+import com.hsjc.ssoCenter.core.service.*;
 import com.hsjc.ssoCenter.core.util.DateUtil;
 import com.hsjc.ssoCenter.core.util.MD5Util;
 import org.apache.commons.lang.StringUtils;
@@ -47,6 +44,9 @@ public class UserController extends BaseController {
 
     @Autowired
     ThirdClientsService thirdClientsService;
+
+    @Autowired
+    EmailService emailService;
 
     /**
      * @author : zga
@@ -133,6 +133,21 @@ public class UserController extends BaseController {
     public JSONObject register(@RequestBody JSONObject paramJson, HttpSession session){
         JSONObject result = userMainService.register(paramJson,session);
         return result;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-8
+     *
+     * 注册用户,重新发送Email
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "reSendEmail",method = RequestMethod.POST)
+    public JSONObject reSendEmail(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = emailService.sendEmail(paramJson);
+        return resultJson;
     }
 
     /**

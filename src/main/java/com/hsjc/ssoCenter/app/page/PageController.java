@@ -1,13 +1,10 @@
 package com.hsjc.ssoCenter.app.page;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.app.base.BaseController;
-import com.hsjc.ssoCenter.core.domain.IndexIcos;
-import com.hsjc.ssoCenter.core.domain.Organization;
-import com.hsjc.ssoCenter.core.domain.ThirdClients;
-import com.hsjc.ssoCenter.core.service.IndexIcosService;
-import com.hsjc.ssoCenter.core.service.OrganizationService;
-import com.hsjc.ssoCenter.core.service.ThirdClientsService;
-import com.hsjc.ssoCenter.core.service.ThirdClientFilterService;
+import com.hsjc.ssoCenter.core.domain.*;
+import com.hsjc.ssoCenter.core.helper.RedisHelper;
+import com.hsjc.ssoCenter.core.service.*;
 import com.hsjc.ssoCenter.core.util.SSOStringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +37,15 @@ public class PageController extends BaseController{
 
     @Autowired
     OrganizationService organizationService;
+
+    @Autowired
+    UserTempService userTempService;
+
+    @Autowired
+    ApiBaseService apiBaseService;
+
+    @Autowired
+    RedisHelper redisHelper;
 
     /**
      * @author : zga
@@ -88,6 +94,33 @@ public class PageController extends BaseController{
                 break;
 
             case 3:
+                /**
+                 * 1、判断数据库中有没有相应的记录(根据emial和state查询数据)
+                 * 1)、有就跳转到第3步
+                 * 2)、没有跳转到第1步
+                 *
+                 * 2、通过去redis中取的结果来说明是否过期
+                 * 1)、过期提示重新发送
+                 */
+                JSONObject paramJson = new JSONObject();
+                paramJson.put("email",email);
+                UserTemp userTemp = userTempService.findByEmail(paramJson);
+                if(userTemp != null){
+                    String state = userTemp.getStatus();
+                    if("activated".equals(state)){
+                        return "redirect:/page/register/" + (num + 1) + ".html?email=" + email;
+                    }
+
+                    Object object = apiBaseService.fetchObject(email, ActivateEmailMess.class);
+                    if(object == null){
+                        model.addAttribute("expiredTicket" , "0");
+                    } else {
+                        model.addAttribute("expiredTicket" , "1");
+                    }
+                } else {
+                    return "redirect:/page/register/1.html";
+                }
+
                 model.addAttribute("email", email);
                 break;
 

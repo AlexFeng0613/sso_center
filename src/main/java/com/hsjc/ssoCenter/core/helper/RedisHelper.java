@@ -175,6 +175,19 @@ public class RedisHelper {
 		return result == null ? null : Long.valueOf(result);
 	}
 
+	/**
+	 * 获取键的过期时间
+	 * @param dbNumber
+	 * @param key
+     * @return
+     */
+	public Long pttl(Integer dbNumber,String key){
+		Jedis jedis = getResource(dbNumber);
+		Long result = jedis.pttl(key);
+		returnResource(jedis);
+		return result;
+	}
+
 	private Boolean exists(Integer dbNumber, String key) {
 		Jedis jedis = getResource(dbNumber);
 		Boolean result = jedis.exists(key);
