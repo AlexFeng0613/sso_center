@@ -47,3 +47,5 @@ test 测试用例目录
 2、DBUtil中的加载的properties文件修改为production
 
 3、InitService中需要修改为线上的数据库连接
+
+4、数据库表tbsystemproperties中的数据库连接参数要设置成production中的,websiteAddress也要改为线上的.

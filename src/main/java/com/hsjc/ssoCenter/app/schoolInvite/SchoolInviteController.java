@@ -5,8 +5,7 @@ import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.service.SchoolInviteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author : zga
@@ -31,8 +30,11 @@ public class SchoolInviteController extends BaseController {
      * @param paramJson
      * @return
      */
-    public JSONObject addNewSchoolInvite(@RequestParam JSONObject paramJson){
-        JSONObject resultJson = null;
+    @RequestMapping(value = "addNewSchoolInvite",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject addNewSchoolInvite(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = schoolInviteService.addNewSchoolInvite(paramJson);
+
         return resultJson;
     }
 }

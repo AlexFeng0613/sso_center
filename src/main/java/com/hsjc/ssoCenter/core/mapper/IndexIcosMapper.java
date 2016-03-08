@@ -2,7 +2,6 @@ package com.hsjc.ssoCenter.core.mapper;
 
 import com.hsjc.ssoCenter.core.domain.IndexIcos;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,5 +23,5 @@ public interface IndexIcosMapper {
 
     IndexIcos selectByPrimaryKey(Integer id);
 
-    List<HashMap> selectAllIcos();
+    List<IndexIcos> selectAllIcos();
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.domain.UserMain;
 import com.hsjc.ssoCenter.core.fileUpload.FileUpload;
+import com.hsjc.ssoCenter.core.service.ApiBaseService;
 import com.hsjc.ssoCenter.core.service.UserMainService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/sso/")
 public class SSOIndexController extends BaseController {
     @Autowired
-    private UserMainService userMainService;
+    UserMainService userMainService;
 
+    @Autowired
+    ApiBaseService apiBaseService;
 
     /**
      * @author : zga
@@ -188,6 +191,18 @@ public class SSOIndexController extends BaseController {
             return "redirect:/sso/personalSettings.html";
         }
         return null;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @RequestMapping(value = "generateSSOAccessThirdURL",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject generateSSOAccessThirdURL(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = apiBaseService.generateSSOAccessThirdURL(paramJson);
+
+        return resultJson;
     }
 
 }

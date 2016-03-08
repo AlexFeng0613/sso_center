@@ -24,6 +24,7 @@
        <typeAlias type="com.hsjc.ssoCenter.core.domain.ThirdFilter" alias="ThirdFilter"/>
        <typeAlias type="com.hsjc.ssoCenter.core.domain.ThirdSynUserDetailLog" alias="ThirdSynUserDetailLog"/>
        <typeAlias type="com.hsjc.ssoCenter.core.domain.SystemProperties" alias="SystemProperties"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.IndexIcos" alias="IndexIcos"/>
     </typeAliases>
 
     <!--

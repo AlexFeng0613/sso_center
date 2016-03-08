@@ -5,36 +5,66 @@
       layout:decorator="../../public/backstage">
     <head></head>
     <body>
-
-
-
-                <div id="content" layout:fragment="content">
-                    <div class="index_title">新增邀请码</div>
-                    <div class="invitation_box">
-                        <div class="users_message" style="margin-top:20px;">
-                            <div class="users_message_l">*</div>
-                            <div class="users_message_name">所属组织机构：</div>
-                            <input type="text" />
-                        </div>
-                        <div class="users_message">
-                            <div class="users_message_l">*</div>
-                            <div class="users_message_name">添加数量：</div>
-                            <input type="number" />
-                        </div>
-                        <ul class="build_submit">
-                            <li class="selected">
-                                <a href="invitationManage.html" class="selected">保存</a>
-                            </li>
-                            <li>
-                                <a href="invitationManage.html">取消</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <script type="text/javascript">
-                        $('#new_invitation').addClass('selected');
-                    </script>
+        <div id="content" layout:fragment="content">
+            <div class="index_title">新增邀请码</div>
+            <div class="invitation_box">
+                <div class="users_message" style="margin-top:20px;">
+                    <div class="users_message_l">*</div>
+                    <div class="users_message_name">所属组织机构：</div>
+                    <select name="organizationCode">
+                        <option th:each="organization : ${organizationList}" th:text="${organization.organizationName}" th:value="${organization.organizationCode}"></option>
+                    </select>
                 </div>
+                <div class="users_message">
+                    <div class="users_message_l">*</div>
+                    <div class="users_message_name">添加数量：</div>
+                    <input type="text" name="addNum"/>
+                </div>
+                <ul class="build_submit">
+                    <li class="selected">
+                        <a href="javascript:void(0);" class="selected" id="but_addNew">新增</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">取消</a>
+                    </li>
+                </ul>
+            </div>
+            <script type="text/javascript">
+                $('#new_invitation').addClass('selected');
 
+                /**
+                 * 保存事件
+                 */
+                $('#but_addNew').click(function(){
+                    var organizationCode = $('select[name="organizationCode"]').val();
+                    var addNum = $('input[name="addNum"]').val();
+                    var testPattern = /\d+/;
+                    if(SSOSystem.isEmpty(addNum) || !testPattern.test(addNum)){
+                        alert('请输入正确的数量');
+                        return false;
+                    }
 
+                    var data = {
+                        'organizationCode' : organizationCode,
+                        'addNum' : addNum
+                    }
+                    $.ajax({
+                        url : '/schoolInvite/addNewSchoolInvite.json',
+                        type : 'POST',
+                        data : JSON.stringify(data),
+                        contentType: 'application/json',
+                        dataType : 'json',
+                        success : function(data){
+                            if(data.success){
+                                window.location.href = '/page/batchGenerateInviteCodeSucc.html';
+                            } else {
+                                alert(ErrorMessage[data.message]);
+                            }
+                        }
+                    });
+                });
+
+            </script>
+        </div>
     </body>
 </html>

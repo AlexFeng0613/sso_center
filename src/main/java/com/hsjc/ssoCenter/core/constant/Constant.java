@@ -69,6 +69,15 @@ public class Constant {
     public static final String EXISTS_BIND_EMAIL = "100019";
 
 
+    /**
+     * 添加邀请码
+     */
+    public static final String BATCH_SCHOOL_INVITE_CODE_FAIL = "100021";
+
+    public static final String BATCH_SCHOOL_INVITE_CODE_SUCCESS = "100022";
+
+
+
     public static final int REDIS_FETCH_TIME_OUT = 18 * 60 * 1000;
 
     public static String publicKey;

@@ -29,7 +29,7 @@
       #{useTime})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.hsjc.ssoCenter.core.domain.SchoolInvite" >
+  <insert id="insertSelective" parameterType="SchoolInvite" >
     insert into tbschoolinvite
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="inviteId != null" >
@@ -85,10 +85,10 @@
     批量插入邀请码数据
   -->
   <insert id="batchInsertInviteCode" parameterType="java.util.List">
-    INSERT INTO tbschoolinvite (inviteCode,schoolId)
+    INSERT INTO tbschoolinvite (inviteCode,schoolId,createTime)
     VALUES
     <foreach collection="list" item="item" index="index" separator=",">
-      (#{item.inviteCode},#{item.schoolId})
+      (#{item.inviteCode},#{item.schoolId},now())
     </foreach>
   </insert>
 
@@ -176,5 +176,18 @@
       </if>
     </where>
     limit 1
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-3-7
+    查询所有的邀请码
+  -->
+  <select id="selectAllSchoolInvite" resultType="java.util.HashMap">
+    SELECT ts.inviteCode,torg.organizationName,tu.realName,ts.state,ts.createTime,ts.useTime FROM tbschoolinvite ts,tborganization torg,tbusermain tu
+    WHERE ts.schoolId = torg.organizationCode AND ts.byUserId = tu.id AND ts.state = 'used'
+    UNION ALL
+    SELECT ts.inviteCode,torg.organizationName,"xxx",ts.state,ts.createTime,"xxx" FROM tbschoolinvite ts,tborganization torg
+    WHERE ts.schoolId = torg.organizationCode AND ts.state = 'unused'
   </select>
 </mapper>
