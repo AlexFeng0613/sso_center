@@ -59,8 +59,7 @@ $('.add_new').click(function(){
         'organizationCode' : organizationCode,
         'tstudent' : tstudent
     };
-    return false;
-    $.ajax({
+    $.ajax({f
         url : '/thirdClientFilter/addNewThirdClientFilter.json',
         type : 'POST',
         data : JSON.stringify(data),
