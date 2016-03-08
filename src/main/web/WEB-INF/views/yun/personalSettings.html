@@ -22,6 +22,7 @@
     </head>
     <body>
         <div id="content1" layout:fragment="content">
+            <a href="/page/sso/personalEdit.html" class="edit">编辑</a>
            <div class="message">
                <div class="message_l">云账号：</div>
                <!--<div class="message_r" th:text="${session.user.starBeldId}"></div>-->
@@ -31,17 +32,17 @@
                <div class="message_r" th:text="${session.user.userName}"></div>
            </div>
            <div class="message">
-               <div class="message_l">绑定邮箱：</div>
+               <div class="message_l">邮箱：</div>
                <a th:if="${session.user.email} == null" href="/sso/bindEmail.html" class="bound">未绑定</a>
                <span th:if="${session.user.email} != null" th:text="${session.user.email}" class="viewInfo"></span>
            </div>
            <div class="message">
-               <div class="message_l">绑定手机： </div>
+               <div class="message_l">手机： </div>
                <a th:if="${session.user.phone} == null" href="/sso/bindPhone.html" class="bound">未绑定</a>
                <span th:if="${session.user.phone} != null" th:text="${session.user.phone}"></span>
            </div>
            <div class="message">
-               <div class="message_l">绑定邀请码：</div>
+               <div class="message_l">邀请码：</div>
                <a th:if="${session.user.inviteCode} == null" href="/sso/bindInviteCode.html" class="bound">未绑定</a>
                <span th:if="${session.user.inviteCode} != null" th:text="${session.user.inviteCode}"></span>
            </div>
@@ -62,7 +63,7 @@
                    <div class="head_img_strong">(支持Jpg、Png或bmp格式的图片，建议文件小于20M)</div>
                </div>
                <div class="message">
-                   <div class="message_l">真实姓名：</div>
+                   <div class="message_l">姓名：</div>
                    <span th:text="${session.user.realName}" class="viewInfo"></span>
                    <input type="text" name="realName" th:value="${session.user.realName}" class="modifyInfo" style="display: none;"/>
                </div>
@@ -86,17 +87,18 @@
                        </li>
                    </ul>
                </div>
-               <!--<div class="message">
-                   <div class="message_l">证件号码：</div>
-                   <select>
+               <div class="message">
+                   <div class="message_l">证件号：</div>
+
+                   <!--<select>
                        <option>证件类型</option>
                    </select>
-                   <input type="text" class="papers" />
-               </div>-->
+                   <input type="text" class="papers" />-->
+               </div>
 
-                   <!--<div class="message_l">个人介绍：</div>-->
+               <!--<div class="message_l">个人介绍：</div>-->
                <div class="inputSubnmit">
-                       <!--<textarea class="peo_text"></textarea>-->
+                   <!--<textarea class="peo_text"></textarea>-->
                    <!--<input type="button" value="修改" name="modifyInfo" class="message_submit"/>-->
                    <!--<input type="button" class="resetR" value="取 消"/>
                    <input type="submit" class="submitL" value="保 存"/>-->

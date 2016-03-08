@@ -420,6 +420,25 @@ label{
     padding:10px 50px;
 }
 
+#content1{
+    position: relative;
+}
+
+.edit{
+    position: absolute;
+    width:100px;
+    height:34px;
+    line-height: 34px;
+    right:0;
+    top:0;
+    border: 1px solid #61b6f7;
+    color:#61b6f7;
+    text-align: center;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    font-size: 14px;
+    background: url('');
+}
+
 .long_input_box{
     width:564px;
     margin:0px auto 0;
@@ -705,12 +724,14 @@ label{
 }
 
 .message_l{
-    width:95px;
+    width:80px;
     float:left;
-    line-height:30px;
+    line-height:35px;
     font-family: \5FAE\8F6F\96C5\9ED1;
     font-size: 14px;
     color: #444444;
+    text-align: left;
+    margin-right:10px;
 }
 
 .message_r{
@@ -718,7 +739,45 @@ label{
     font-family: \5FAE\8F6F\96C5\9ED1;
     font-size: 14px;
     color: #444444;
+    line-height:35px;
+}
+
+.message_rr{
+    width:400px;
+    float:left;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    font-size: 14px;
+    color: #444444;
     line-height:30px;
+    height:30px;
+    border: 1px solid #333;
+    margin-top:2px;
+    text-indent: 20px;
+}
+
+.up-img{
+    width:100px;
+    height:100px;
+    position: relative;
+    background: url('../../static/images/yun/peop.png') no-repeat;
+}
+
+.up-img input{
+    position: absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    opacity: 0;
+}
+
+.message_text{
+    width:400px;
+    height:100px;
+    float:left;
+    border:1px solid #000;
+    overflow-y:scroll;
+    overflow-x:hidden;
 }
 
 .viewInfo{

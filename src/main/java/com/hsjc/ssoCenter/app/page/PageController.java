@@ -573,6 +573,12 @@ public class PageController extends BaseController{
         return "/backstage/siteLog";
     }
 
+    @RequestMapping("sso/personalEdit")
+    public String personalEdit(){
+        return "/yun/personalEdit";
+    }
+
+
     /**
      * @author : zga
      * @date : 2016-3-7
@@ -638,4 +644,7 @@ public class PageController extends BaseController{
     public String serverError(){
        return "500";
     }
+
+
+
 }
