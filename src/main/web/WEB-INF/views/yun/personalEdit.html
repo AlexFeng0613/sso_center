@@ -6,46 +6,53 @@
     <head></head>
     <body>
         <div id="content1" layout:fragment="content">
-            <form action="/sso/personalSettings.html" method="post" enctype="multipart/form-data">
+            <form action="/sso/modifyPersonalInfo.html" method="post" enctype="multipart/form-data">
                 <div class="message">
                    <div class="message_l">云账号：</div>
-                   <input type="text" class="message_rr" />
                 </div>
                 <div class="message">
                    <div class="message_l">用户名：</div>
-                   <input type="text" class="message_rr" />
+                   <div th:text="${session.user.userName}"></div>
                 </div>
                 <div class="message">
                    <div class="message_l">邮箱：</div>
-                   <input type="text" class="message_rr" />
+                   <div th:text="${session.user.email}"></div>
                 </div>
                 <div class="message">
                    <div class="message_l">手机： </div>
-                   <input type="text" class="message_rr" />
+                    <div th:text="${session.user.phone}"></div>
                 </div>
                 <div class="message">
                    <div class="message_l">邀请码：</div>
-                   <input type="text" class="message_rr" />
+                   <div th:text="${session.user.inviteCode}"></div>
                 </div>
                 <div class="message">
                    <div class="message_l" style="line-height: 100px;">头像：</div>
                    <div class="up-img">
+                       <img th:src="@{${session.user.userIcon}}" th:if="${session.user.userIcon} != null" width="100px" height="100px"  class="viewInfo"/>
                        <input type="file" name="imgFile"/>
                    </div>
                    <div class="head_img_strong">(支持JPG/PNG/BMP格式的图片,建议文件小于20M,尺寸100×100(像素)</div>
                </div>
                <div class="message">
                    <div class="message_l">姓名：</div>
-                   <input type="text" name="realName" class="message_rr"/>
+                   <input type="text" name="realName" th:value="${session.user.realName}" class="message_rr"/>
                </div>
                <div class="message">
                    <div class="message_l">性别：</div>
                    <ul class="sex modifyInfo">
-                       <li class="selected">
+                       <li th:if="${session.user.gender} == 1" class="selected">
                            <input type="radio" name="gender" value="1" checked="checked"/>男
                        </li>
-                       <li>
+                       <li th:if="${session.user.gender} == 1">
                            <input type="radio" name="gender" value="0"/>女
+                       </li>
+
+                       <li th:if="${session.user.gender} == 0">
+                           <input type="radio" name="gender" value="1"/>男
+                       </li>
+                       <li th:if="${session.user.gender} == 0" class="selected">
+                           <input type="radio" name="gender" value="0" checked="checked"/>女
                        </li>
                    </ul>
                </div>
@@ -74,7 +81,6 @@
                    <input type="button" class="resetR" value="取 消"/>
                    <input type="submit" class="submitL" value="保 存"/>
                </div>
-
            </form>
            <script type="text/javascript">
                 $(function(){
