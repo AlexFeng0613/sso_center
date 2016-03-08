@@ -1,6 +1,7 @@
 package com.hsjc.ssoCenter.app.page;
 
 import com.hsjc.ssoCenter.app.base.BaseController;
+import com.hsjc.ssoCenter.core.domain.IndexIcos;
 import com.hsjc.ssoCenter.core.domain.Organization;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.service.IndexIcosService;
@@ -49,7 +50,7 @@ public class PageController extends BaseController{
     @RequestMapping("index")
     public String index(Model model){
 
-        List<HashMap> list = indexIcosService.getAllIcos();
+        List<IndexIcos> list = indexIcosService.getAllIcos();
         model.addAttribute("icons",list);
 
         return "/user/index";
@@ -182,6 +183,11 @@ public class PageController extends BaseController{
     @RequestMapping("sso/mailbox")
     public String mailBox(){
         return "/yun/mailbox";
+    }
+
+    @RequestMapping("sso/personalEdit")
+    public String personalEdit(){
+        return "/yun/personalEdit";
     }
 
     /**
