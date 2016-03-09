@@ -39,7 +39,7 @@
            <div class="message">
                <div class="message_l">手机： </div>
                <a th:if="${session.user.phone} == null" href="/sso/bindPhone.html" class="bound">未绑定</a>
-               <span th:if="${session.user.phone} != null" th:text="${session.user.phone}"></span>
+               <span th:if="${session.user.phone} != null" th:text="${session.user.phone}" style="line-height: 35px;"></span>
            </div>
            <div class="message">
                <div class="message_l">邀请码：</div>
@@ -47,7 +47,7 @@
                <span th:if="${session.user.inviteCode} != null" th:text="${session.user.inviteCode}"></span>
            </div>
            <form action="/sso/modifyPersonalInfo.html" method="post" enctype="multipart/form-data">
-               <div class="message">
+               <div class="message" style="margin-top:10px;">
                    <div class="message_l" style="line-height: 100px;">头像：</div>
                    <div class="up-img">
                        <img th:src="@{${session.user.userIcon}}" th:if="${session.user.userIcon} != null" width="100px" height="100px"  class="viewInfo"/>
