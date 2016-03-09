@@ -93,23 +93,7 @@
                     $('#basic_message').addClass('selected');
                     $('#basic_message a').addClass('selected');
 
-                    $(".select").each(function(){
-                        var s=$(this);
-                        var z=parseInt(s.css("z-index"));
-                        var dt=$(this).children("dt");
-                        var dd=$(this).children("dd");
 
-
-                        var _show=function(){dd.slideDown(200);s.css("z-index",z+1);dt.html('')};
-                        var _hide=function(){dd.slideUp(200);s.css("z-index",z)};
-
-                        dt.click(function(){dd.is(":hidden")?_show():_hide();});
-                        dd.find("li").click(function(){
-                            dt.html($(this).html());
-                            dt.attr('val',$(this).attr('value'));
-                            _hide();
-                        });
-                    })
 
                     /**
                      * 修改信息
