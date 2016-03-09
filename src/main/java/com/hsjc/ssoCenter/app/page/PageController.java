@@ -1,6 +1,7 @@
 package com.hsjc.ssoCenter.app.page;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.domain.*;
 import com.hsjc.ssoCenter.core.helper.RedisHelper;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +39,9 @@ public class PageController extends BaseController{
 
     @Autowired
     OrganizationService organizationService;
+
+    @Autowired
+    UserMainService userMainService;
 
     @Autowired
     UserTempService userTempService;
@@ -244,8 +249,55 @@ public class PageController extends BaseController{
      *
      * @return
      */
-    @RequestMapping("sso/userList")
-    public String userList(){
+    @RequestMapping("sso/userList/{pageNum},{pageSize}")
+    public String userList(@PathVariable("pageNum")Integer pageNum,
+                           @PathVariable("pageSize")Integer pageSize,
+                           Model model){
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+
+        PageInfo pageInfo = userMainService.getAllUserMainList(paramJson);
+        /**
+        endRow 结束的行数
+        firstPage 当前导航页码的第一个页码
+        hastNextPage 是否有下一页
+        hasPrevioisPage 是否有上一页
+        isFirstPage 是否是第一页
+        isLastPage 是否是最后一页
+        lastPage 当前导航页码的最后一个页码
+        list 所有的记录
+        navigatePages 导航页码数量
+        navigatepageNums 导航页码(数组)
+        nextPage 下一页码
+        pageNum 当前页数
+        pageSize 每一页显示的记录数
+        pages 总页数
+        prePage 前一页码
+        size 当前页面的记录数
+        startRow 开始的行数(从第几行记录开始)
+        total 记录总数
+        */
+
+        model.addAttribute("endRow",pageInfo.getEndRow());
+        model.addAttribute("firstPage",pageInfo.getFirstPage());
+        model.addAttribute("hastNextPage",pageInfo.isHasNextPage());
+        model.addAttribute("hasPrevioisPage",pageInfo.isHasPreviousPage());
+        model.addAttribute("isFirstPage",pageInfo.isIsFirstPage());
+        model.addAttribute("isLastPage",pageInfo.isIsLastPage());
+        model.addAttribute("lastPage",pageInfo.getLastPage());
+        model.addAttribute("userMainList",pageInfo.getList());
+        model.addAttribute("navigatePages",pageInfo.getNavigatePages());
+        model.addAttribute("navigatepageNums",pageInfo.getNavigatepageNums());
+
+        model.addAttribute("nextPage",pageInfo.getNextPage());
+        model.addAttribute("pageNum",pageInfo.getPageNum());
+        model.addAttribute("pageSize",pageInfo.getPageSize());
+        model.addAttribute("pages",pageInfo.getPages());
+        model.addAttribute("prePage",pageInfo.getPrePage());
+        model.addAttribute("size",pageInfo.getSize());
+        model.addAttribute("startRow",pageInfo.getStartRow());
+        model.addAttribute("total",pageInfo.getTotal());
         return "/backstage/userList";
     }
 
@@ -676,5 +728,21 @@ public class PageController extends BaseController{
     @RequestMapping("serverError")
     public String serverError(){
        return "500";
+    }
+
+
+    @RequestMapping("sso/testPageHelper")
+    @ResponseBody
+    public JSONObject testPageHelper(@RequestParam("pageNum")Integer pageNum,
+                                     @RequestParam("pageSize")Integer pageSize){
+
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+
+        JSONObject resultJson = new JSONObject();
+        PageInfo pageInfo = userMainService.getAllUserMainList(paramJson);
+        resultJson.put("pageInfo",pageInfo);
+        return resultJson;
     }
 }

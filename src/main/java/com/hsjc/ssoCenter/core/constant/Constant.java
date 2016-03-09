@@ -81,4 +81,9 @@ public class Constant {
     public static String publicKey;
 
     public static String websiteAddress;
+
+
+    public static final Integer PAGENUM = 1;
+
+    public static final Integer PAGESIZE = 10;
 }

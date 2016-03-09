@@ -417,4 +417,31 @@
     </where>
   </select>
 
+  <!--
+    @author : zga
+    @date : 2016-3-9
+    获取所有的用户
+  -->
+  <select id="findAllUser" resultType="java.util.HashMap">
+    SELECT
+    tu.realName,
+    tu.gender,
+    (CASE
+      WHEN torg.organizationName IS NULL THEN 'xxx'
+      ELSE torg.organizationName
+    END ) AS organizationName,
+    tu.type,
+    tu.status,
+    tu.createTime,
+    (CASE
+      WHEN tu.email IS NULL THEN 'xxx'
+      ELSE tu.email
+      END ) AS email,
+    (CASE
+      WHEN tu.phone IS NULL THEN 'xxx'
+      ELSE tu.phone
+    END ) AS phone
+    FROM tbusermain tu,tborganization torg
+    WHERE tu.organizationCode = torg.organizationCode
+  </select>
 </mapper>

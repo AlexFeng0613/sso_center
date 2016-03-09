@@ -3,6 +3,7 @@ package com.hsjc.ssoCenter.core.mapper;
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.domain.UserMain;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,4 +46,6 @@ public interface UserMainMapper {
     List<UserMain> findUserByUserName(JSONObject paramJson);
 
     List<UserMain> findUserByEmail(JSONObject paramJson);
+
+    List<HashMap> findAllUser();
 }

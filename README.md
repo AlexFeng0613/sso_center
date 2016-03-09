@@ -49,3 +49,25 @@ test 测试用例目录
 3、InitService中需要修改为线上的数据库连接
 
 4、数据库表tbsystemproperties中的数据库连接参数要设置成production中的,websiteAddress也要改为线上的.
+
+
+PageHelper包含的信息：
+
+endRow 结束的行数
+firstPage 当前导航页码的第一个页码
+hastNextPage 是否有下一页
+hasPrevioisPage 是否有上一页
+isFirstPage 是否是第一页
+isLastPage 是否是最后一页
+lastPage 当前导航页码的最后一个页码
+list 所有的记录
+navigatePages 导航页码数量 
+navigatepageNums 导航页码(数组)
+nextPage 下一页码
+pageNum 当前页数
+pageSize 每一页显示的记录数
+pages 总页数
+prePage 前一页码
+size 当前页面的记录数
+startRow 开始的行数(从第几行记录开始)
+total 记录总数

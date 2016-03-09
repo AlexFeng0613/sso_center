@@ -1,6 +1,8 @@
 package com.hsjc.ssoCenter.core.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hsjc.ssoCenter.core.constant.Constant;
 import com.hsjc.ssoCenter.core.constant.MailTemplate;
 import com.hsjc.ssoCenter.core.domain.*;
@@ -626,5 +628,31 @@ public class UserMainService extends ApiBaseService{
     public UserMain getUserMainById(Integer id){
         UserMain userMain = userMainMapper.selectByPrimaryKey(id);
         return userMain;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-9
+     *
+     * 后台管理获取用户列表
+     *
+     * @return
+     */
+    public PageInfo getAllUserMainList(JSONObject paramJson){
+        Integer pageNum = paramJson.getInteger("pageNum");
+        Integer pageSize = paramJson.getInteger("pageSize");
+        if(pageNum == null || pageNum == 0) {
+            pageNum = Constant.PAGENUM;
+            paramJson.put("pageNum", pageNum);
+        }
+        if(pageSize == null || pageSize == 0) {
+            pageSize = Constant.PAGESIZE;
+            paramJson.put("pageSize",pageSize);
+        }
+
+        PageHelper.startPage(pageNum,pageSize);
+        List userMainList = userMainMapper.findAllUser();
+        PageInfo pageInfo = new PageInfo(userMainList);
+        return pageInfo;
     }
 }
