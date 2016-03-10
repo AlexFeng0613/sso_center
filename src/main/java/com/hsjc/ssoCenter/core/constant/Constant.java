@@ -78,12 +78,27 @@ public class Constant {
 
     public static final int REDIS_FETCH_TIME_OUT = 24 * 60 * 60;
 
+
+    /**
+     * 后台管理员页面相关
+     */
+    public static final String ADMIN_RESET_PASSWORD_SUCCESS = "100023";
+
+    public static final String ADMIN_MODIFY_STATUS_SUCCESS = "100024";
+
+
+    /**
+     * 公共的常量
+     */
     public static String publicKey;
 
     public static String websiteAddress;
 
-
     public static final Integer PAGENUM = 1;
 
     public static final Integer PAGESIZE = 10;
+
+    public static final String PASSWORD = "123456";
+
+    public static String imgUploadPath;
 }

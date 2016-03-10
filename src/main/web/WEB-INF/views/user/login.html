@@ -11,6 +11,7 @@
         <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../../static/scripts/ie/html5shiv.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/validform/Validform_v5.3.2_min.js}" src="../../../static/scripts/validform/Validform_v5.3.2_min.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/util/SSOUtil.js}" src="../../../static/scripts/util/SSOUtil.js"></script>
         <style type="text/css">
             .Validform_checktip{
                 line-height: 38px;
@@ -32,6 +33,7 @@
             <div class="center">
                 <div class="register_box">
                     <div class="title">请登录</div>
+                    <input type="hidden" name="errorMessage" th:value="${errorMessage}"/>
                     <form class="regForm" method="post" action="/user/login.html">
                         <input type="hidden" name="clientId" th:value="${clientId}"/>
                         <input type="hidden" name="openId" th:value="${openId}"/>
@@ -126,47 +128,6 @@
                 </div>
             </div>
         </footer>
-        <script text="text/javascript">
-            $(function(){
-                $('.register_input').focus(function(){
-                    $(this).addClass('fillout');
-                });
-
-                $('.register_input').blur(function(){
-                    $(this).removeClass('fillout');
-                });
-
-                $('.remember li').click(function(){
-                    $(this).toggleClass('checked');
-                });
-
-                var demo = $(".regForm").Validform({
-                    tiptype: 3,
-                    label: "label",
-                    showAllError: true,
-                    datatype: {
-                        "s5-18": /^[\w\.\s]{5,18}$/
-                    }
-                });
-                demo.tipmsg.w["s5-18"] = "";
-                demo.addRule([{
-                    ele:".inputxt:eq(0)",
-                    datatype:"s5-18"
-                },{
-                    ele:".inputxt:eq(1)",
-                    datatype:"*",
-                }]);
-
-
-                var ch= ($(window).height())-($('.header').height())-($('.footer').outerHeight())-($('.banner').height());
-
-                $('.container').css('min-height',ch+'px');
-
-                $(window).on('resize scroll',function(){
-                    var ch= $(window).height()-($('.header').height())-($('.footer').outerHeight())-($('.banner').height());
-                     $('.container').css('min-height',ch+'px');
-                });
-            });
-        </script>
+        <script text="text/javascript" src="/static/scripts/login.js" th:src="@{/static/scripts/login.js}"></script>
     </body>
 </html>

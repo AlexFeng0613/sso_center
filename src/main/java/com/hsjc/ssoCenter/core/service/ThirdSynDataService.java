@@ -97,6 +97,8 @@ public class ThirdSynDataService extends ApiBaseService{
              * 剩余的数量: total - size - (pageNum-1) * pageSize
              */
             resultJson.put("leftNum",(pageInfo.getTotal() - pageInfo.getSize() - (pageInfo.getPageNum() -1) * pageInfo.getPageSize()));
+
+            deleteSynOrganizationData(thirdClients, organizationList);
         }catch (Exception e){
             logger.debug("getAllOrganization Exception Info:"+e.getMessage());
 
@@ -156,16 +158,7 @@ public class ThirdSynDataService extends ApiBaseService{
             /**
              * 删除同步组织机构表中的数据
              */
-            for(int i = 0;i < organizationList.size();i ++ ){
-                HashMap hashMap = organizationList.get(i);
-                String organizationCode = hashMap.get("organizationCode").toString();
-
-                HashMap paramMap = new HashMap();
-                paramMap.put("briefName",thirdClients.getBriefName());
-                paramMap.put("organizationCode",organizationCode);
-
-                synMapper.deleteFinishSynOrganizationByOrganizationCode(paramMap);
-            }
+            deleteSynOrganizationData(thirdClients, organizationList);
         } catch (Exception e){
             logger.debug("getDifferentOrganization Exception Info:"+e.getMessage());
 
@@ -232,7 +225,7 @@ public class ThirdSynDataService extends ApiBaseService{
             /**
              * 删除同步用户表中的数据;
              */
-            deleteSynchronizedData(paramJson, thirdClients, userList);
+            deleteSynUserData(paramJson, thirdClients, userList);
 
         } catch (Exception e){
             logger.debug("getAllUser Exception Info:"+e.getMessage());
@@ -294,7 +287,7 @@ public class ThirdSynDataService extends ApiBaseService{
             /**
              * 删除同步用户表中的数据;
              */
-            deleteSynchronizedData(paramJson, thirdClients, userList);
+            deleteSynUserData(paramJson, thirdClients, userList);
         } catch (Exception e) {
             logger.debug("getDifferentUser Exception Info:"+e.getMessage());
             resultJson.put("flag",false);
@@ -327,14 +320,14 @@ public class ThirdSynDataService extends ApiBaseService{
      * @author : zga
      * @date : 2016-3-10
      *
-     * 删除已经同步过的数据
+     * 删除已经同步过的用户数据
      *
      * @param paramJson
      * @param thirdClients
      * @param userList
      * @throws Exception
      */
-    public void deleteSynchronizedData(JSONObject paramJson, ThirdClients thirdClients, List<HashMap> userList) throws Exception {
+    public void deleteSynUserData(JSONObject paramJson, ThirdClients thirdClients, List<HashMap> userList) throws Exception {
         for(int i = 0;i < userList.size();i ++ ){
             HashMap hashMap = userList.get(i);
             int userId = Integer.parseInt(hashMap.get("openId").toString());
@@ -349,6 +342,29 @@ public class ThirdSynDataService extends ApiBaseService{
              * 插入同步详情日志
              */
             insertSynUserDeailLog(paramJson,userId);
+        }
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * 删除已经同步过的组织机构数据
+     *
+     * @param thirdClients
+     * @param organizationList
+     * @throws Exception
+     */
+    public void deleteSynOrganizationData(ThirdClients thirdClients, List<HashMap> organizationList) {
+        for(int i = 0;i < organizationList.size();i ++ ){
+            HashMap hashMap = organizationList.get(i);
+            String organizationCode = hashMap.get("organizationCode").toString();
+
+            HashMap paramMap = new HashMap();
+            paramMap.put("briefName",thirdClients.getBriefName());
+            paramMap.put("organizationCode",organizationCode);
+
+            synMapper.deleteFinishSynOrganizationByOrganizationCode(paramMap);
         }
     }
 }

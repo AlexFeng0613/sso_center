@@ -3,14 +3,18 @@ package com.hsjc.ssoCenter.app.user;
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.annotation.SSOSystemLog;
+import com.hsjc.ssoCenter.core.constant.Constant;
 import com.hsjc.ssoCenter.core.domain.ActivateEmailMess;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.domain.UserMain;
 import com.hsjc.ssoCenter.core.domain.UserTemp;
+import com.hsjc.ssoCenter.core.fileUpload.FileUpload;
 import com.hsjc.ssoCenter.core.service.*;
 import com.hsjc.ssoCenter.core.util.DateUtil;
 import com.hsjc.ssoCenter.core.util.MD5Util;
+import com.hsjc.ssoCenter.core.util.PasswordUtil;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -20,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,6 +37,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/user/")
 public class UserController extends BaseController {
+    private final static Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
     UserMainService userMainService;
@@ -48,6 +54,9 @@ public class UserController extends BaseController {
     @Autowired
     EmailService emailService;
 
+    @Autowired
+    PasswordUtil passwordUtil;
+
     /**
      * @author : zga
      * @date : 2015-12-04
@@ -59,10 +68,23 @@ public class UserController extends BaseController {
     @RequestMapping(value = "login",method = RequestMethod.GET)
     public String login(@RequestParam(value = "openId",required = false)String openId,
                         @RequestParam(value = "clientId",required = false)String clientId,
+                        @RequestParam(value = "errorMessage",required = false)String errorMessage,
                         Model model){
 
         model.addAttribute("clientId",clientId);
         model.addAttribute("openId",openId);
+        model.addAttribute("errorMessage",errorMessage);
+
+        UserMain currentUserMain = getCurrentUser();
+        if(currentUserMain != null){
+            if("admin".equals(currentUserMain.getUserName())){
+                return "redirect:/page/sso/backstageIndex.html";
+            }
+
+            if(!"admin".equals(currentUserMain.getUserName())){
+                return "redirect:/page/index.html";
+            }
+        }
         return "/user/login";
     }
 
@@ -80,13 +102,15 @@ public class UserController extends BaseController {
     @SSOSystemLog(actionId = 1,description = "用户登录",module = "登录")
     public String login(@RequestParam(value = "clientId",required = false) String clientId,
                         @RequestParam(value = "openId",required = false) String openId,
-            String username,
-            String password) throws Exception {
+                        String username,
+                        String password,
+                        Model model) throws Exception {
         UsernamePasswordToken upToken = new UsernamePasswordToken(username, password, true);
         try{
             SecurityUtils.getSubject().login(upToken);
         } catch (AuthenticationException e) {
-            e.printStackTrace();
+            logger.debug("用户名/密码不正确");
+            model.addAttribute("errorMessage","用户名/密码不正确");
             return "redirect:/user/login.html";
         }
 
@@ -452,5 +476,97 @@ public class UserController extends BaseController {
     public JSONObject resetPasswordWithSms(@RequestBody JSONObject paramJson){
         JSONObject resultJson = new JSONObject();
         return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * 管理员重置密码
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "adminResetPassword",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject adminResetPassword(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = userMainService.adminResetPassword(paramJson);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * 管理员修改状态
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "adminModifyStatus",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject adminModifyStatus(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = userMainService.adminModifyStatus(paramJson);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * 管理员新增用户
+     *
+     * @param userName
+     * @param realName
+     * @param gender
+     * @param password
+     * @param email
+     * @param phone
+     * @param inviteCode
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "adminAddNewUser",method = RequestMethod.POST)
+    public String adminAddNewUser(@RequestParam("userName")String userName,
+                @RequestParam("realName")String realName,
+                @RequestParam("type")String type,
+                @RequestParam("gender")String gender,
+                @RequestParam("password")String password,
+                @RequestParam("email")String email,
+                @RequestParam("phone")String phone,
+                @RequestParam("inviteCode")String inviteCode,
+                @RequestParam(value = "imgFile",required = false) MultipartFile file){
+
+        UserMain userMain = new UserMain();
+
+        userMain.setUserName(userName);
+        userMain.setRealName(realName);
+        userMain.setGender(gender);
+        userMain.setPassword(password);
+        userMain.setEmail(email);
+        userMain.setPhone(phone);
+        userMain.setInviteCode(inviteCode);
+        userMain.setType(type);
+        passwordUtil.encryptPassword(userMain);
+        if(file != null && StringUtils.isNotEmpty(file.getOriginalFilename())){
+            String absoluteFilePath = FileUpload.upload(file, Constant.imgUploadPath);
+            userMain.setUserIcon(absoluteFilePath);
+        }
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("userName",userName);
+        paramJson.put("realName",realName);
+        paramJson.put("gender",gender);
+        paramJson.put("password",userMain.getPassword());
+        paramJson.put("salt",userMain.getSalt());
+        paramJson.put("email",email);
+        paramJson.put("phone",phone);
+        paramJson.put("inviteCode",inviteCode);
+        paramJson.put("type",type);
+
+        int num = userMainService.adminAddNewUser(paramJson);
+        if(num < 1){
+            return "redirect:/page/sso/newUser.html";
+        }
+        return "redirect:/page/backstage/adminAddUserSucc.html";
     }
 }

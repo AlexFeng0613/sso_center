@@ -7,10 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link th:href="@{/static/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link th:href="@{/static/css/sso_backstage.css}" href="../static/css/sso_backstage.css" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/static/scripts/artDialog-master/css/ui-dialog.css}" href="../static/scripts/artDialog-master/css/ui-dialog.css" rel="stylesheet" type="text/css"/>
         <script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../static/scripts/jquery/jquery-1.11.3.min.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../static/scripts/ie/html5shiv.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}" src="../static/scripts/ie/placeholder.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/util/SSOUtil.js}" src="../static/scripts/util/SSOUtil.js"></script>
+        <script text="text/javascript" th:src="@{/static/scripts/artDialog-master/dist/dialog-min.js}" src="../static/scripts/artDialog-master/dist/dialog-min.js"></script>
     </head>
     <body>
         <header class="header">
@@ -29,7 +31,7 @@
                 <aside class="aside">
                     <dl class="menu_title">
                         <dt class="d1">用户管理</dt>
-                        <dd><a href="/page/sso/userList/1,10.html" id="user_list">用户列表</a></dd>
+                        <dd><a href="/page/sso/userList/1,10,0,0,0,0,0.html" id="user_list">用户列表</a></dd>
                         <dd><a href="/page/sso/newUser.html" id="new_user">新增用户</a></dd>
                     </dl>
                     <dl class="menu_title">

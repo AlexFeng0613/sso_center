@@ -1,5 +1,6 @@
 package com.hsjc.ssoCenter.core.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -31,31 +34,31 @@ import java.util.regex.Pattern;
 @SuppressWarnings("ALL")
 @Service
 public class UserMainService extends ApiBaseService{
-    private final static Logger logger = Logger.getLogger(UserMainService.class);
+    final static Logger logger = Logger.getLogger(UserMainService.class);
 
     @Autowired
-    private UserMainMapper userMainMapper;
+    UserMainMapper userMainMapper;
 
     @Autowired
-    private ApiBaseService apiBaseService;
+    ApiBaseService apiBaseService;
 
     @Autowired
-    private UserTempMapper userTempMapper;
+    UserTempMapper userTempMapper;
 
     @Autowired
-    private UserTeacherMapper userTeacherMapper;
+    UserTeacherMapper userTeacherMapper;
 
     @Autowired
-    private UserStudentMapper userStudentMapper;
+    UserStudentMapper userStudentMapper;
 
     @Autowired
-    private PasswordUtil passwordUtil;
+    PasswordUtil passwordUtil;
 
     @Autowired
-    private EmailResetPwdMapper emailResetPwdMapper;
+    EmailResetPwdMapper emailResetPwdMapper;
 
     @Autowired
-    private SchoolInviteMapper schoolInviteMapper;
+    SchoolInviteMapper schoolInviteMapper;
 
     /**
      * @author : zga
@@ -641,6 +644,18 @@ public class UserMainService extends ApiBaseService{
     public PageInfo getAllUserMainList(JSONObject paramJson){
         Integer pageNum = paramJson.getInteger("pageNum");
         Integer pageSize = paramJson.getInteger("pageSize");
+
+        String organization = paramJson.getString("organization");
+        String type = paramJson.getString("type");
+        String status = paramJson.getString("status");
+        String createTime = paramJson.getString("createTime");
+        String realName = paramJson.getString("realName");
+        try {
+            realName = URLDecoder.decode(realName,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
         if(pageNum == null || pageNum == 0) {
             pageNum = Constant.PAGENUM;
             paramJson.put("pageNum", pageNum);
@@ -650,9 +665,101 @@ public class UserMainService extends ApiBaseService{
             paramJson.put("pageSize",pageSize);
         }
 
+        if(StringUtils.isEmpty(organization) || "0".equals(organization)) paramJson.put("organization",null);
+        if(StringUtils.isEmpty(type) || "0".equals(type)) paramJson.put("type",null);
+        if(StringUtils.isEmpty(status) || "0".equals(status)) paramJson.put("status",null);
+        if(StringUtils.isEmpty(createTime) || "0".equals(createTime)) paramJson.put("createTime",null);
+        if(StringUtils.isEmpty(realName) || "0".equals(realName)) paramJson.put("realName",null);
+
+        paramJson.put("uname","zhuzi");
+
         PageHelper.startPage(pageNum,pageSize);
-        List userMainList = userMainMapper.findAllUser();
+        List userMainList = userMainMapper.findAllUser(paramJson);
         PageInfo pageInfo = new PageInfo(userMainList);
         return pageInfo;
     }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * 管理员重置用户密码
+     *
+     * @param paramJson
+     * @return
+     */
+    @Transactional(rollbackFor = RuntimeException.class)
+    public JSONObject adminResetPassword(JSONObject paramJson) throws RuntimeException{
+        JSONObject resultJson = getResultJson();
+        JSONArray jsonArray = paramJson.getJSONArray("userNames");
+        for (int i = 0; i < jsonArray.size(); i++) {
+            Object o =  jsonArray.get(i);
+            UserMain userMain = new UserMain();
+            userMain.setUserName(o.toString());
+            userMain.setPassword(Constant.PASSWORD);
+            passwordUtil.encryptPassword(userMain);
+
+            userMainMapper.adminResetPassword(userMain);
+        }
+
+        resultJson.put("message",Constant.ADMIN_RESET_PASSWORD_SUCCESS);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * 管理员修改用户状态
+     *
+     * @param paramJson
+     * @return
+     */
+    @Transactional(rollbackFor = RuntimeException.class)
+    public JSONObject adminModifyStatus(JSONObject paramJson) throws RuntimeException{
+        JSONObject resultJson = getResultJson();
+        String status = paramJson.getString("status");
+        JSONArray jsonArray = paramJson.getJSONArray("userNames");
+        for (int i = 0; i < jsonArray.size(); i++) {
+            Object o =  jsonArray.get(i);
+            UserMain userMain = new UserMain();
+            userMain.setUserName(o.toString());
+            userMain.setStatus(status);
+
+            userMainMapper.adminModifyStatus(userMain);
+        }
+
+        resultJson.put("message",Constant.ADMIN_MODIFY_STATUS_SUCCESS);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * 管理员新增用户
+     *
+     * @param userName
+     * @param realName
+     * @param gender
+     * @param password
+     * @param email
+     * @param phone
+     * @param inviteCode
+     * @param file
+     * @return
+     */
+    @Transactional(rollbackFor = RuntimeException.class)
+    public Integer adminAddNewUser(JSONObject paramJson) throws RuntimeException{
+        String inviteCode = paramJson.getString("inviteCode");
+        Integer num = 0;
+        if(StringUtils.isNotEmpty(inviteCode)){
+            SchoolInvite schoolInvite = schoolInviteMapper.selectByInviteCode(paramJson);
+            if(schoolInvite == null)return num;
+            paramJson.put("organizationCode",schoolInvite.getSchoolId());
+        }
+        num = userMainMapper.adminAddNewUser(paramJson);
+        return num;
+    }
+
 }

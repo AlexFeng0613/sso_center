@@ -7,6 +7,7 @@ import com.hsjc.ssoCenter.core.domain.*;
 import com.hsjc.ssoCenter.core.helper.RedisHelper;
 import com.hsjc.ssoCenter.core.service.*;
 import com.hsjc.ssoCenter.core.util.SSOStringUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -249,34 +250,46 @@ public class PageController extends BaseController{
      *
      * @return
      */
-    @RequestMapping("sso/userList/{pageNum},{pageSize}")
+    @RequestMapping("sso/userList/{pageNum},{pageSize},{organization},{type},{status},{createTime},{realName}")
     public String userList(@PathVariable("pageNum")Integer pageNum,
                            @PathVariable("pageSize")Integer pageSize,
+                           @PathVariable("organization")String organization,
+                           @PathVariable("type")String type,
+                           @PathVariable("status")String status,
+                           @PathVariable("createTime")String createTime,
+                           @PathVariable("realName")String realName,
                            Model model){
         JSONObject paramJson = new JSONObject();
         paramJson.put("pageNum",pageNum);
         paramJson.put("pageSize",pageSize);
+        paramJson.put("organization",organization);
+        paramJson.put("type",type);
+        paramJson.put("status",status);
+        paramJson.put("createTime",createTime);
+        paramJson.put("realName",realName);
 
         PageInfo pageInfo = userMainService.getAllUserMainList(paramJson);
+
+        List<Organization> organizationList = organizationService.getAllOrganization();
         /**
-        endRow 结束的行数
-        firstPage 当前导航页码的第一个页码
-        hastNextPage 是否有下一页
-        hasPrevioisPage 是否有上一页
-        isFirstPage 是否是第一页
-        isLastPage 是否是最后一页
-        lastPage 当前导航页码的最后一个页码
-        list 所有的记录
-        navigatePages 导航页码数量
-        navigatepageNums 导航页码(数组)
-        nextPage 下一页码
-        pageNum 当前页数
-        pageSize 每一页显示的记录数
-        pages 总页数
-        prePage 前一页码
-        size 当前页面的记录数
-        startRow 开始的行数(从第几行记录开始)
-        total 记录总数
+            endRow 结束的行数
+            firstPage 当前导航页码的第一个页码
+            hastNextPage 是否有下一页
+            hasPrevioisPage 是否有上一页
+            isFirstPage 是否是第一页
+            isLastPage 是否是最后一页
+            lastPage 当前导航页码的最后一个页码
+            list 所有的记录
+            navigatePages 导航页码数量
+            navigatepageNums 导航页码(数组)
+            nextPage 下一页码
+            pageNum 当前页数
+            pageSize 每一页显示的记录数
+            pages 总页数
+            prePage 前一页码
+            size 当前页面的记录数
+            startRow 开始的行数(从第几行记录开始)
+            total 记录总数
         */
 
         model.addAttribute("endRow",pageInfo.getEndRow());
@@ -298,6 +311,18 @@ public class PageController extends BaseController{
         model.addAttribute("size",pageInfo.getSize());
         model.addAttribute("startRow",pageInfo.getStartRow());
         model.addAttribute("total",pageInfo.getTotal());
+
+
+        model.addAttribute("organization",organization);
+        model.addAttribute("type",type);
+        model.addAttribute("status",status);
+        model.addAttribute("createTime",createTime);
+        if(StringUtils.isEmpty(realName)){
+            realName = "0";
+        }
+        model.addAttribute("realName",realName);
+
+        model.addAttribute("organizationList",organizationList);
         return "/backstage/userList";
     }
 
@@ -754,5 +779,18 @@ public class PageController extends BaseController{
         PageInfo pageInfo = userMainService.getAllUserMainList(paramJson);
         resultJson.put("pageInfo",pageInfo);
         return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * 管理员新增用户成功
+     *
+     * @return
+     */
+    @RequestMapping("/backstage/adminAddUserSucc")
+    public String adminAddUserSucc(){
+        return "/page/adminAddUserSucc";
     }
 }

@@ -2,6 +2,7 @@ package com.hsjc.ssoCenter.app.ssoIndex;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.app.base.BaseController;
+import com.hsjc.ssoCenter.core.constant.Constant;
 import com.hsjc.ssoCenter.core.domain.UserMain;
 import com.hsjc.ssoCenter.core.fileUpload.FileUpload;
 import com.hsjc.ssoCenter.core.service.ApiBaseService;
@@ -176,7 +177,7 @@ public class SSOIndexController extends BaseController {
 
         UserMain userMain = getCurrentUser();
         if(file != null && StringUtils.isNotEmpty(file.getOriginalFilename())){
-            String absoluteFilePath = FileUpload.upload(file,"192.168.18.210");
+            String absoluteFilePath = FileUpload.upload(file, Constant.imgUploadPath);
             userMain.setUserIcon(absoluteFilePath);
         }
         if(userMain == null){

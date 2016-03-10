@@ -17,6 +17,8 @@ public interface UserMainMapper {
 
     int insertSelective(UserMain userMain);
 
+    int adminAddNewUser(JSONObject paramJson);
+
     int deleteByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(UserMain userMain);
@@ -35,6 +37,10 @@ public interface UserMainMapper {
 
     int updatePersonalInfoWithUserName(UserMain userMain);
 
+    int adminResetPassword(UserMain userMain);
+
+    int adminModifyStatus(UserMain userMain);
+
     UserMain selectByPrimaryKey(Integer id);
 
     UserMain findByEmailOrPhoneOrUserName(UserMain userMain);
@@ -47,5 +53,5 @@ public interface UserMainMapper {
 
     List<UserMain> findUserByEmail(JSONObject paramJson);
 
-    List<HashMap> findAllUser();
+    List<HashMap> findAllUser(JSONObject paramJson);
 }
