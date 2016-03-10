@@ -335,8 +335,7 @@ public class UserController extends BaseController {
         paramJson.put("email",email);
         int num = userMainService.activateInviteCode(paramJson);
         if(num <= 0){
-            //
-            return "";
+            return "redirect:/page/serverError.html";
         }
         return "redirect:/page/register/6.html";
     }

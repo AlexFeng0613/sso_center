@@ -731,6 +731,16 @@ public class PageController extends BaseController{
     }
 
 
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * 测试Mybatis PageInfo对象
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @RequestMapping("sso/testPageHelper")
     @ResponseBody
     public JSONObject testPageHelper(@RequestParam("pageNum")Integer pageNum,
