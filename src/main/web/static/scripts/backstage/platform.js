@@ -40,7 +40,7 @@ $('.modify_info').click(function(){
     $('.platform_clientId').html(platform_clientId);
     $('.platform_clientSecret').html(platform_clientSecret);
     $('.platform_ssoPassword').html(platform_ssoPassword);
-    $('.platform_callbackUrl').html(platform_callbackUrl);
+    $('input[name="callbackUrl"]').val(platform_callbackUrl);
 });
 
 /**
@@ -49,8 +49,6 @@ $('.modify_info').click(function(){
 $('.del_record').click(function(){
     var third_name = $(this).parent().siblings().eq(1).html();
     if(window.confirm('确定删除 《' + third_name + '》 吗?')){
-
-        return false;
         var data = {
             'clientId' : $(this).parent().siblings().eq(5).html()
         };
@@ -92,9 +90,9 @@ $('.butL').click(function(){
     var data = {
         'clientId' : $('.platform_clientId').html(),
         'contactorName' : $('form[name="modifyForm"] input[name="contactorName"]').val(),
-        'contactorPhone' : $('form[name="modifyForm"] input[name="contactorPhone"]').val()
+        'contactorPhone' : $('form[name="modifyForm"] input[name="contactorPhone"]').val(),
+        'callbackUrl' : $('form[name="modifyForm"] input[name="callbackUrl"]').val()
     };
-    return false;
 
     $.ajax({
         url : '/thirdClients/updateThirdClientInfo.json',
@@ -152,7 +150,7 @@ $('.add_new').click(function(){
         'contactorPhone' : contactorPhone,
         'callbackUrl' : callbackUrl
     };
-    return false;
+
     $.ajax({
         url : '/thirdClients/addNewThirdClient.json',
         type : 'POST',

@@ -2,6 +2,7 @@ package com.hsjc.ssoCenter.core.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hsjc.ssoCenter.core.annotation.SSOSystemLog;
 import com.hsjc.ssoCenter.core.constant.ThirdSynConstant;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
@@ -13,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -58,12 +60,14 @@ public class ThirdSynDataService extends ApiBaseService{
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
 
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
-
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         if(!resultJson.getBoolean("flag")) return resultJson;
+
+        List<HashMap> list = new ArrayList<>();
+        resultJson.put("organization",list);
 
         Integer currentPage = paramJson.getInteger("currentPage");
         Integer pageSize  =paramJson.getInteger("pageSize");
-
         if(currentPage == null || currentPage == 0) currentPage = 1;
         if(pageSize == null || pageSize == 0) currentPage = 600;
 
@@ -75,32 +79,24 @@ public class ThirdSynDataService extends ApiBaseService{
             paramMap.put("trdClientId",paramJson.getString("clientId"));
             PageHelper.startPage(currentPage, pageSize);
             List<HashMap> organizationList = synMapper.selectAllOrganization(paramMap);
-
-            Integer totalNum = synMapper.countAllOrganization(paramMap);
-            int totalPage = totalNum / pageSize;
-            Integer leftNum = 0;
-            if(currentPage <= totalPage){
-                leftNum = totalNum - currentPage * pageSize;
-                if(organizationList == null || (organizationList!= null && organizationList.size() < 1)){
-                    resultJson.put("flag",false);
-                    resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
-                    return resultJson;
-                }
-                paramJson.put("synCount",pageSize);
-            } else {
-                paramJson.put("synCount",totalNum - (currentPage - 1) * pageSize);
+            PageInfo pageInfo = new PageInfo(organizationList);
+            if(pageInfo.getList() == null || (pageInfo.getList() != null && pageInfo.getList().size() < 1)){
+                System.out.println("getAllOrganization No syn data!");
+                resultJson.put("flag",false);
+                resultJson.put("leftNum",0);
+                resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
+                return resultJson;
             }
+            paramJson.put("synCount",pageInfo.getSize());
 
             /**
              * 记录同步数据总数(tbrestfullog:synCount)
              */
-            if((totalNum - (currentPage - 1) * pageSize) <= 0){
-                resultJson.put("organization",null);
-            } else {
-                resultJson.put("organization",(currentPage >= (totalNum + 2) ? null : organizationList));
-            }
-
-            resultJson.put("leftNum", leftNum);
+            resultJson.put("organization",pageInfo.getList());
+            /**
+             * 剩余的数量: total - size - (pageNum-1) * pageSize
+             */
+            resultJson.put("leftNum",(pageInfo.getTotal() - pageInfo.getSize() - (pageInfo.getPageNum() -1) * pageInfo.getPageSize()));
         }catch (Exception e){
             logger.debug("getAllOrganization Exception Info:"+e.getMessage());
 
@@ -110,7 +106,6 @@ public class ThirdSynDataService extends ApiBaseService{
         }
 
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
-        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         return resultJson;
     }
 
@@ -137,7 +132,11 @@ public class ThirdSynDataService extends ApiBaseService{
          */
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         if(!resultJson.getBoolean("flag")) return resultJson;
+
+        List<HashMap> list = new ArrayList<>();
+        resultJson.put("organization",list);
 
         try{
             List<HashMap> organizationList = synMapper.selectDifferentOrganization(thirdClients.getBriefName());
@@ -176,7 +175,6 @@ public class ThirdSynDataService extends ApiBaseService{
         }
 
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
-        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         return resultJson;
     }
 
@@ -194,12 +192,14 @@ public class ThirdSynDataService extends ApiBaseService{
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
 
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
-
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         if(!resultJson.getBoolean("flag")) return resultJson;
+
+        List<HashMap> list = new ArrayList<>();
+        resultJson.put("user",list);
 
         Integer currentPage = paramJson.getInteger("currentPage");
         Integer pageSize  =paramJson.getInteger("pageSize");
-
         if(currentPage == null || currentPage == 0) currentPage = 1;
         if(pageSize == null || pageSize == 0) currentPage = 600;
 
@@ -209,32 +209,31 @@ public class ThirdSynDataService extends ApiBaseService{
 
             PageHelper.startPage(currentPage,pageSize);
             List<HashMap> userList = synMapper.selectAllUser(paramMap);
+            PageInfo pageInfo = new PageInfo(userList);
 
-            Integer totalNum = synMapper.countAllUser(paramMap);
-            int totalPage = totalNum / pageSize;
-            Integer leftNum = 0;
-            if(currentPage <= totalPage){
-                System.out.println("");
-                leftNum = totalNum - currentPage * pageSize;
-                if(userList == null || (userList!= null && userList.size() < 1)){
-                    resultJson.put("flag",false);
-                    resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
-                    return resultJson;
-                }
-                paramJson.put("synCount",pageSize);
-            } else {
-                paramJson.put("synCount",totalNum - (currentPage - 1) * pageSize);
+            if(pageInfo.getList() == null || (pageInfo.getList() != null && pageInfo.getList().size() < 1)){
+                System.out.println("getAllUser No syn data!");
+                resultJson.put("flag",false);
+                resultJson.put("leftNum",0);
+                resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
+                return resultJson;
             }
+            paramJson.put("synCount",pageInfo.getSize());
 
             /**
              * 记录同步数据总数(tbrestfullog:synCount)
              */
-            if((totalNum - (currentPage - 1) * pageSize) <= 0){
-                resultJson.put("user",null);
-            } else {
-                resultJson.put("user",(currentPage >= (totalNum + 2) ? null : userList));
-            }
-            resultJson.put("leftNum",leftNum);
+            resultJson.put("user",pageInfo.getList());
+            /**
+             * 剩余的数量: total - size - (pageNum-1) * pageSize
+             */
+            resultJson.put("leftNum",(pageInfo.getTotal() - pageInfo.getSize() - (pageInfo.getPageNum() -1) * pageInfo.getPageSize()));
+
+            /**
+             * 删除同步用户表中的数据;
+             */
+            deleteSynchronizedData(paramJson, thirdClients, userList);
+
         } catch (Exception e){
             logger.debug("getAllUser Exception Info:"+e.getMessage());
 
@@ -244,7 +243,6 @@ public class ThirdSynDataService extends ApiBaseService{
         }
 
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
-        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         return resultJson;
     }
 
@@ -271,7 +269,11 @@ public class ThirdSynDataService extends ApiBaseService{
          */
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         if(!resultJson.getBoolean("flag")) return resultJson;
+
+        List<HashMap> list = new ArrayList<>();
+        resultJson.put("user",list);
 
         try {
             List<HashMap> userList = synMapper.selectDifferentUser(thirdClients.getBriefName());
@@ -292,21 +294,7 @@ public class ThirdSynDataService extends ApiBaseService{
             /**
              * 删除同步用户表中的数据;
              */
-            for(int i = 0;i < userList.size();i ++ ){
-                HashMap hashMap = userList.get(i);
-                int userId = Integer.parseInt(hashMap.get("openId").toString());
-
-                HashMap paramMap = new HashMap();
-                paramMap.put("briefName",thirdClients.getBriefName());
-                paramMap.put("userId",userId);
-
-                synMapper.deleteFinishSynUserByUserId(paramMap);
-
-                /**
-                 * 插入同步详情日志
-                 */
-                insertSynUserDeailLog(paramJson,userId);
-            }
+            deleteSynchronizedData(paramJson, thirdClients, userList);
         } catch (Exception e) {
             logger.debug("getDifferentUser Exception Info:"+e.getMessage());
             resultJson.put("flag",false);
@@ -315,7 +303,6 @@ public class ThirdSynDataService extends ApiBaseService{
         }
 
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
-        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         return resultJson;
     }
 
@@ -336,8 +323,32 @@ public class ThirdSynDataService extends ApiBaseService{
         }
     }
 
-    public Integer getPageCount(Integer recordCount,Integer pageSize){
-        int pageCount = recordCount / pageSize;
-        return pageCount;
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * 删除已经同步过的数据
+     *
+     * @param paramJson
+     * @param thirdClients
+     * @param userList
+     * @throws Exception
+     */
+    public void deleteSynchronizedData(JSONObject paramJson, ThirdClients thirdClients, List<HashMap> userList) throws Exception {
+        for(int i = 0;i < userList.size();i ++ ){
+            HashMap hashMap = userList.get(i);
+            int userId = Integer.parseInt(hashMap.get("openId").toString());
+
+            HashMap paramMap1 = new HashMap();
+            paramMap1.put("briefName",thirdClients.getBriefName());
+            paramMap1.put("userId",userId);
+
+            synMapper.deleteFinishSynUserByUserId(paramMap1);
+
+            /**
+             * 插入同步详情日志
+             */
+            insertSynUserDeailLog(paramJson,userId);
+        }
     }
 }

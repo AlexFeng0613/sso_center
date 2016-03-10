@@ -254,7 +254,7 @@ public class ApiBaseService {
          *  1)、password不正确,返回错误信息
          *  2)、password正确,返回正确
          */
-        JSONObject resultJson = getResultJson();
+        JSONObject resultJson = new JSONObject();
 
         if(thirdClients == null) {
             resultJson.put("flag",false);

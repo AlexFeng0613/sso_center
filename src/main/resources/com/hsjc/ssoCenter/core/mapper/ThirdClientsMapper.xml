@@ -179,7 +179,10 @@
         contactorName = #{contactorName},
       </if>
       <if test="contactorPhone != null">
-        contactorPhone = #{contactorPhone}
+        contactorPhone = #{contactorPhone},
+      </if>
+      <if test="callbackUrl != null">
+        callbackUrl = #{callbackUrl}
       </if>
     </set>
     WHERE clientId = #{clientId}

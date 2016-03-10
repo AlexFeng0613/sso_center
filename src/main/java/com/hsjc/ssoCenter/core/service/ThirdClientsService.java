@@ -84,6 +84,7 @@ public class ThirdClientsService extends ApiBaseService{
         String clientId = paramJson.getString("clientId");
         String contactorName = paramJson.getString("contactorName");
         String contactorPhone = paramJson.getString("contactorPhone");
+        String callbackUrl = paramJson.getString("callbackUrl");
 
         if(StringUtils.isEmpty(contactorName) || StringUtils.isEmpty(contactorPhone)) return resultJson;
 
@@ -97,6 +98,7 @@ public class ThirdClientsService extends ApiBaseService{
         thirdClients.setClientId(clientId);
         thirdClients.setContactorName(contactorName);
         thirdClients.setContactorPhone(contactorPhone);
+        thirdClients.setCallbackUrl(callbackUrl);
 
         int num = thirdClientsMapper.updateThirdClientInfoByClientId(thirdClients);
 
