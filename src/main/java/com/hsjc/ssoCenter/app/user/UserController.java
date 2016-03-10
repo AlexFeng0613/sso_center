@@ -76,13 +76,16 @@ public class UserController extends BaseController {
         model.addAttribute("errorMessage",errorMessage);
 
         UserMain currentUserMain = getCurrentUser();
-        if(currentUserMain != null){
-            if("admin".equals(currentUserMain.getUserName())){
-                return "redirect:/page/sso/backstageIndex.html";
-            }
+        Session session = SecurityUtils.getSubject().getSession(true);
+        if(session.getAttribute("user") != null){
+            if(currentUserMain != null){
+                if("admin".equals(currentUserMain.getUserName())){
+                    return "redirect:/page/sso/backstageIndex.html";
+                }
 
-            if(!"admin".equals(currentUserMain.getUserName())){
-                return "redirect:/page/index.html";
+                if(!"admin".equals(currentUserMain.getUserName())){
+                    return "redirect:/page/index.html";
+                }
             }
         }
         return "/user/login";
