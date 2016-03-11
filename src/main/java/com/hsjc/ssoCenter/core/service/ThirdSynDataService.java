@@ -226,7 +226,6 @@ public class ThirdSynDataService extends ApiBaseService{
              * 删除同步用户表中的数据;
              */
             deleteSynUserData(paramJson, thirdClients, userList);
-
         } catch (Exception e){
             logger.debug("getAllUser Exception Info:"+e.getMessage());
 

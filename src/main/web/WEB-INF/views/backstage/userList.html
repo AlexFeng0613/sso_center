@@ -79,8 +79,8 @@
                         <input type="hidden" name="id" th:value="${user.id}"/>
                         <td th:text="${user.realName}"></td>
 
-                        <td th:if="${user.gender == '0'}">男</td>
-                        <td th:if="${user.gender == '1'}">女</td>
+                        <td th:if="${user.gender == '1'}">男</td>
+                        <td th:if="${user.gender == '0'}">女</td>
 
                         <td th:if="${user.organizationName != 'xxx'}" th:text="${user.organizationName}"></td>
                         <td th:if="${user.organizationName == 'xxx'}" th:text=""></td>

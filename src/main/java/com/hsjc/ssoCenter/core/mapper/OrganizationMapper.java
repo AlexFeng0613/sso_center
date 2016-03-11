@@ -1,5 +1,6 @@
 package com.hsjc.ssoCenter.core.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.domain.Organization;
 
 import java.util.List;
@@ -22,7 +23,11 @@ public interface OrganizationMapper {
 
     int updateByPrimaryKey(Organization organization);
 
+    int adminUpdateStatus(Organization organization);
+
     Organization selectByPrimaryKey(Long id);
 
     List<Organization> selectAllOrganization();
+
+    List<Organization> selectAllOrganizationWithPage(JSONObject paramJson);
 }

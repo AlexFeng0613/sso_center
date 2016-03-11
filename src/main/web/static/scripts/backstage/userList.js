@@ -90,7 +90,7 @@ $(function(){
     $('.li_modifyAccountStatus').click(function(){
         var $checkedUsers = $('.userSelect:checked');
         if($checkedUsers.length == 0){
-            alert('请选择用户');
+            SSOSystem.showAlertDialog('请选择用户');
             return false;
         }
 
@@ -101,7 +101,6 @@ $(function(){
             content: '<select name="modify_status" style="text-align: center;margin: 0 auto;"><option value="activated">正常</option><option value="locked">锁定</option></select>',
             okValue: '确定',
             ok: function () {
-                var $checkedUsers = $('.userSelect:checked');
                 var userNames = new Array();
                 $checkedUsers.each(function(){
                     userNames.push($(this).parent().siblings("input[name='userName']").val());
@@ -121,7 +120,7 @@ $(function(){
                     success : function(data){
                         if(data.success){
                             d.close();
-                            alert('状态修改成功');
+                            SSOSystem.showAlertDialog('状态修改成功');
                             window.location.reload();
                         }
                     }
@@ -146,7 +145,7 @@ $(function(){
     $('.li_resetPassword').click(function(){
         var $checkedUsers = $('.userSelect:checked');
         if($checkedUsers.length == 0){
-            alert('请选择用户');
+            SSOSystem.showAlertDialog('请选择用户');
             return false;
         }
 
@@ -169,7 +168,7 @@ $(function(){
             dataType : 'json',
             success : function(data){
                 if(data.success){
-                    alert('密码重置成功,新密码为123456');
+                    SSOSystem.showAlertDialog('密码重置成功,新密码为123456');
                 }
             }
         });

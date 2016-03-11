@@ -86,6 +86,10 @@ public class Constant {
 
     public static final String ADMIN_MODIFY_STATUS_SUCCESS = "100024";
 
+    public static final String ADMIN_DELETE_ORGANIZATION_SUCCESS = "100025";
+
+    public static final String ADMIN_MODIFY_ORGANIZATION_SUCCESS = "100026";
+
 
     /**
      * 公共的常量

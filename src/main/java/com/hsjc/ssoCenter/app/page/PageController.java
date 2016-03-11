@@ -295,27 +295,8 @@ public class PageController extends BaseController{
             total 记录总数
         */
 
-        model.addAttribute("endRow",pageInfo.getEndRow());
-        model.addAttribute("firstPage",pageInfo.getFirstPage());
-        model.addAttribute("hastNextPage",pageInfo.isHasNextPage());
-        model.addAttribute("hasPrevioisPage",pageInfo.isHasPreviousPage());
-        model.addAttribute("isFirstPage",pageInfo.isIsFirstPage());
-        model.addAttribute("isLastPage",pageInfo.isIsLastPage());
-        model.addAttribute("lastPage",pageInfo.getLastPage());
+        modalAddAttributes(model, pageInfo);
         model.addAttribute("userMainList",pageInfo.getList());
-        model.addAttribute("navigatePages",pageInfo.getNavigatePages());
-        model.addAttribute("navigatepageNums",pageInfo.getNavigatepageNums());
-
-        model.addAttribute("nextPage",pageInfo.getNextPage());
-        model.addAttribute("pageNum",pageInfo.getPageNum());
-        model.addAttribute("pageSize",pageInfo.getPageSize());
-        model.addAttribute("pages",pageInfo.getPages());
-        model.addAttribute("prePage",pageInfo.getPrePage());
-        model.addAttribute("size",pageInfo.getSize());
-        model.addAttribute("startRow",pageInfo.getStartRow());
-        model.addAttribute("total",pageInfo.getTotal());
-
-
         model.addAttribute("organization",organization);
         model.addAttribute("type",type);
         model.addAttribute("status",status);
@@ -557,8 +538,32 @@ public class PageController extends BaseController{
      *
      * @return
      */
-    @RequestMapping("sso/tissueList")
-    public String tissueList(){
+    @RequestMapping("sso/tissueList/{pageNum},{pageSize},{status},{organizationName},{createTime}")
+    public String tissueList(@PathVariable("pageNum")Integer pageNum,
+                             @PathVariable("pageSize")Integer pageSize,
+                             @PathVariable("status")String status,
+                             @PathVariable("organizationName")String organizationName,
+                             @PathVariable("createTime")String createTime,
+                             Model model){
+
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("status",status);
+        paramJson.put("organizationName",organizationName);
+        paramJson.put("createTime",createTime);
+
+        PageInfo pageInfo = organizationService.getAllOrganizationWithPage(paramJson);
+        modalAddAttributes(model,pageInfo);
+
+        model.addAttribute("status",status);
+        if(StringUtils.isEmpty(organizationName)){
+            organizationName = "0";
+        }
+        model.addAttribute("organizationName",organizationName);
+        model.addAttribute("createTime",createTime);
+        model.addAttribute("organizationList",pageInfo.getList());
+
         return "/backstage/tissueList";
     }
 
@@ -810,5 +815,36 @@ public class PageController extends BaseController{
     @RequestMapping("/backstage/adminAddUserSucc")
     public String adminAddUserSucc(){
         return "/page/adminAddUserSucc";
+    }
+
+
+    /**
+     * @author : zga
+     * @date : 2016-3-11
+     *
+     * 返回页面的分页信息
+     *
+     * @param model
+     * @param pageInfo
+     */
+    public void modalAddAttributes(Model model, PageInfo pageInfo) {
+        model.addAttribute("endRow",pageInfo.getEndRow());
+        model.addAttribute("firstPage",pageInfo.getFirstPage());
+        model.addAttribute("hastNextPage",pageInfo.isHasNextPage());
+        model.addAttribute("hasPrevioisPage",pageInfo.isHasPreviousPage());
+        model.addAttribute("isFirstPage",pageInfo.isIsFirstPage());
+        model.addAttribute("isLastPage",pageInfo.isIsLastPage());
+        model.addAttribute("lastPage",pageInfo.getLastPage());
+        model.addAttribute("navigatePages",pageInfo.getNavigatePages());
+        model.addAttribute("navigatepageNums",pageInfo.getNavigatepageNums());
+
+        model.addAttribute("nextPage",pageInfo.getNextPage());
+        model.addAttribute("pageNum",pageInfo.getPageNum());
+        model.addAttribute("pageSize",pageInfo.getPageSize());
+        model.addAttribute("pages",pageInfo.getPages());
+        model.addAttribute("prePage",pageInfo.getPrePage());
+        model.addAttribute("size",pageInfo.getSize());
+        model.addAttribute("startRow",pageInfo.getStartRow());
+        model.addAttribute("total",pageInfo.getTotal());
     }
 }
