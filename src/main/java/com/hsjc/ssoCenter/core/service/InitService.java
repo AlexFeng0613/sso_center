@@ -44,7 +44,7 @@ public class InitService {
                     "    MAX(CASE proKey WHEN 'smsSignName' THEN proValue END) smsSignName,\n" +
                     "    MAX(CASE proKey WHEN 'smsTemplateCode' THEN proValue END) smsTemplateCode,\n" +
                     "    MAX(CASE proKey WHEN 'smsType' THEN proValue END) smsType,\n" +
-                    "    MAX(CASE proKey WHEN 'websiteAddress' THEN proValue END) websiteAddress\n" +
+                    "    MAX(CASE proKey WHEN 'websiteAddress' THEN proValue END) websiteAddress,\n" +
                     "    MAX(CASE proKey WHEN 'imgUploadPath' THEN proValue END) imgUploadPath\n" +
                     "    FROM tbsystemproperties";
             resultSet = stmt.executeQuery(sql);
