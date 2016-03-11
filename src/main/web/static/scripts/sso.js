@@ -1,5 +1,9 @@
 /**
- * Created by Administrator on 2015/12/30.
+ * @author : liuren
+ * @date : 2016-3-11
+ *
+ * 计算宽高,水平上下居中
+ *
  */
 $(function(){
     var ch= $(window).height()-($('.header').height())-($('.footer').outerHeight());
@@ -35,6 +39,4 @@ $(function(){
     $('.sex li').click(function(){
         $(this).addClass('selected').siblings('.sex li').removeClass('selected');
     });
-
-
 });

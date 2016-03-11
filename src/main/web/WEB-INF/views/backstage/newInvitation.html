@@ -40,7 +40,7 @@
                     var addNum = $('input[name="addNum"]').val();
                     var testPattern = /\d+/;
                     if(SSOSystem.isEmpty(addNum) || !testPattern.test(addNum)){
-                        alert('请输入正确的数量');
+                        SSOSystem.showAlertDialog('请输入正确的数量');
                         return false;
                     }
 

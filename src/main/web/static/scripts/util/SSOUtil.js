@@ -19,6 +19,7 @@ var SSOSystem = {
             }, 1000)
         }
     },
+
     /**
      * @author : zga
      * @date : 2016-1-28
@@ -32,10 +33,39 @@ var SSOSystem = {
         window.close();
         window.open("/page/logout.html","_blank")
     },
+
+    /**
+     * @author : zga
+     * @date : 2016-3-11
+     *
+     * 判断字符串是否为空
+     *
+     * @param str
+     * @returns {boolean}
+     */
     isEmpty : function(str){
         if(str == '' || str == null || str == undefined || str == 'undefined'){
             return true;
         }
         return false;
+    },
+
+    /**
+     * @author : zga
+     * @date : 2016-3-11
+     *
+     * artDialog 弹出窗口
+     *
+     * @param title
+     * @param content
+     */
+    showAlertDialog : function(content,title){
+        if(SSOSystem.isEmpty(title)) title = '提示信息';
+        var d = dialog({
+            title: title,
+            content: content
+        });
+        d.show();
     }
-}
+
+};

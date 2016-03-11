@@ -53,6 +53,9 @@ public class PageController extends BaseController{
     @Autowired
     RedisHelper redisHelper;
 
+    @Autowired
+    SchoolInviteService schoolInviteService;
+
     /**
      * @author : zga
      * @date : 2015-12-04
@@ -417,8 +420,6 @@ public class PageController extends BaseController{
         return "/backstage/platformFilterList";
     }
 
-
-
     /**
      *
      * SSO后台>>客服列表
@@ -593,7 +594,10 @@ public class PageController extends BaseController{
      * @return
      */
     @RequestMapping("sso/invitationManage")
-    public String invitationManage(){
+    public String invitationManage(Model model){
+        List<HashMap> schoolInviteList = schoolInviteService.selectAllSchoolInvite();
+
+        model.addAttribute("schoolInviteList",schoolInviteList);
         return "/backstage/invitationManage";
     }
 
@@ -606,7 +610,9 @@ public class PageController extends BaseController{
      * @return
      */
     @RequestMapping("sso/newInvitation")
-    public String newInvitation(){
+    public String newInvitation(Model model){
+        List<Organization> organizationList = organizationService.getAllOrganization();
+        model.addAttribute("organizationList",organizationList);
         return "/backstage/newInvitation";
     }
 
@@ -755,6 +761,18 @@ public class PageController extends BaseController{
        return "500";
     }
 
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
+     * 邀请码生成成功页面
+     *
+     * @return
+     */
+    @RequestMapping("batchGenerateInviteCodeSucc")
+    public String batchGenerateInviteCodeSucc(){
+        return "/page/batchGenerateInviteCodeSucc";
+    }
 
     /**
      * @author : zga
