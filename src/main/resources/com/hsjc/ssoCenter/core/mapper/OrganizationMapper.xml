@@ -166,7 +166,7 @@
     organizationName,
     parentId,
     status,
-    (DATE_FORMAT(createTime,'%Y-%m-%d')) AS createTime,
+    createTime,
     isDelete
     FROM tborganization
     <where>
@@ -188,5 +188,11 @@
         AND DATE_SUB(CURDATE(), INTERVAL 29 DAY) <![CDATA[<=]]> DATE(createTime)
       </if>
     </where>
+
+    ORDER BY createTime DESC
+  </select>
+
+  <select id="selectMaxOrganizationCode" resultType="java.lang.Integer">
+    SELECT MAX(organizationCode) FROM tborganization
   </select>
 </mapper>

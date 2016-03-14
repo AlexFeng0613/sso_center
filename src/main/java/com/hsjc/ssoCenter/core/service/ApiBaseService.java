@@ -17,6 +17,8 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -334,5 +336,28 @@ public class ApiBaseService {
             resultJson.put("targetURL","?openid=" + currentUserMain.getId() + "&password=" + password + "&time=" + time);
         }
         return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-14
+     *
+     * 生成邀请码
+     *
+     * @param set
+     * @param organizationCode
+     * @param num
+     */
+    public void getSchoolInviteCodeList(Set set,String organizationCode,int num){
+        for(int i = 0;i < num;i ++ ){
+            HashMap hashMap = new HashMap();
+            hashMap.put("schoolId",organizationCode);
+            hashMap.put("inviteCode",SSOStringUtil.getRandamInviteCode(1,6));
+            set.add(hashMap);
+        }
+
+        if(set.size() != num){
+            getSchoolInviteCodeList(set,organizationCode,(num - set.size()));
+        }
     }
 }

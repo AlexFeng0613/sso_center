@@ -7,15 +7,16 @@ import com.hsjc.ssoCenter.core.domain.*;
 import com.hsjc.ssoCenter.core.helper.RedisHelper;
 import com.hsjc.ssoCenter.core.service.*;
 import com.hsjc.ssoCenter.core.util.SSOStringUtil;
+import com.hsjc.ssoCenter.core.util.itextpdf.ItextPdfUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -586,7 +587,9 @@ public class PageController extends BaseController{
      * @return
      */
     @RequestMapping("sso/newTissue")
-    public String newTissue(){
+    public String newTissue(Model model){
+        List<Organization> list = organizationService.getAllOrganization();
+        model.addAttribute("organizationList",list);
         return "/backstage/newTissue";
     }
 
@@ -598,11 +601,42 @@ public class PageController extends BaseController{
      *
      * @return
      */
-    @RequestMapping("sso/invitationManage")
-    public String invitationManage(Model model){
-        List<HashMap> schoolInviteList = schoolInviteService.selectAllSchoolInvite();
+    @RequestMapping("sso/invitationManage/{pageNum},{pageSize},{organization},{status},{createTime},{inviteCode}")
+    public String invitationManage(@PathVariable("pageNum")Integer pageNum,
+                                   @PathVariable("pageSize")Integer pageSize,
+                                   @PathVariable("organization")String organization,
+                                   @PathVariable("status")String status,
+                                   @PathVariable("createTime")String createTime,
+                                   @PathVariable("inviteCode")String inviteCode,
+                                   Model model){
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("organization",organization);
+        paramJson.put("status",status);
+        paramJson.put("createTime",createTime);
+        paramJson.put("inviteCode",inviteCode);
 
-        model.addAttribute("schoolInviteList",schoolInviteList);
+        PageInfo pageInfo = schoolInviteService.selectAllSchoolInviteWithPage(paramJson);
+        List<Organization> organizationList = organizationService.getAllOrganization();
+
+        /**
+         * Model添加页面属性
+         */
+        modalAddAttributes(model, pageInfo);
+        model.addAttribute("organization",organization);
+        model.addAttribute("status",status);
+        model.addAttribute("createTime",createTime);
+        if(StringUtils.isEmpty(inviteCode)){
+            inviteCode = "0";
+        }
+        model.addAttribute("inviteCode",inviteCode);
+
+        /**
+         * Model添加页面列表
+         */
+        model.addAttribute("organizationList",organizationList);
+        model.addAttribute("schoolInviteList",pageInfo.getList());
         return "/backstage/invitationManage";
     }
 
@@ -817,6 +851,35 @@ public class PageController extends BaseController{
         return "/page/adminAddUserSucc";
     }
 
+    /**
+     * @author : zga
+     * @date : 2016-3-14
+     *
+     * 导出邀请码
+     *
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(value = "exportSchoolInvite",method = RequestMethod.GET)
+    public void exportSchoolInvite(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String path = request.getServletContext().getRealPath("/") + "public/schoolInviteTemplete.html";
+
+        String imgPath = request.getServletContext().getRealPath("/") + "static/images/templete/logo.gif";
+
+        List<HashMap> schoolInviteList = schoolInviteService.selectAllSchoolInvite();
+
+        byte[] arr = ItextPdfUtil.readTemplateFile(schoolInviteList, path,imgPath);
+        response.setContentType("application/pdf");
+        response.addHeader("Content-Disposition",
+                "attachment;filename=" + new String(("导出邀请码.pdf").getBytes("UTF-8"), "iso-8859-1"));
+        OutputStream os = response.getOutputStream();
+        os.write(arr, 0, arr.length);
+        os.close();
+    }
+
+
+    /*-----------------------------------------------------*/
 
     /**
      * @author : zga

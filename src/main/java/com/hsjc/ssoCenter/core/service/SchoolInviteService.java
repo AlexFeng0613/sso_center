@@ -1,16 +1,16 @@
 package com.hsjc.ssoCenter.core.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hsjc.ssoCenter.core.constant.Constant;
 import com.hsjc.ssoCenter.core.mapper.SchoolInviteMapper;
-import com.hsjc.ssoCenter.core.util.SSOStringUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author : zga
@@ -39,6 +39,45 @@ public class SchoolInviteService extends ApiBaseService {
 
     /**
      * @author : zga
+     * @date : 2016-3-14
+     *
+     * 查询所有的邀请码(使用分页)
+     *
+     * @param paramJson
+     * @return
+     */
+    public PageInfo selectAllSchoolInviteWithPage(JSONObject paramJson){
+        Integer pageNum = paramJson.getInteger("pageNum");
+        Integer pageSize = paramJson.getInteger("pageSize");
+
+        String organization = paramJson.getString("organization");
+        String createTime = paramJson.getString("createTime");
+        String inviteCode = paramJson.getString("inviteCode");
+
+        /**
+         * 设置Sql所需参数
+         */
+        if(pageNum == null || pageNum == 0) {
+            pageNum = Constant.PAGENUM;
+            paramJson.put("pageNum", pageNum);
+        }
+        if(pageSize == null || pageSize == 0) {
+            pageSize = Constant.PAGESIZE;
+            paramJson.put("pageSize",pageSize);
+        }
+        if(StringUtils.isEmpty(organization) || "0".equals(organization)) paramJson.put("organization",null);
+        if(StringUtils.isEmpty(createTime) || "0".equals(createTime)) paramJson.put("createTime",null);
+        if(StringUtils.isEmpty(inviteCode) || "0".equals(inviteCode)) paramJson.put("inviteCode",null);
+        paramJson.put("invite",null);
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<HashMap> hashMapList = schoolInviteMapper.selectAllSchoolInviteWithPage(paramJson);
+        PageInfo pageInfo = new PageInfo(hashMapList);
+        return pageInfo;
+    }
+
+    /**
+     * @author : zga
      * @date : 2016-3-7
      *
      * 添加相应数量的邀请码
@@ -52,14 +91,10 @@ public class SchoolInviteService extends ApiBaseService {
             String organizationCode = paramJson.getString("organizationCode");
             Integer addNum = paramJson.getInteger("addNum");
 
-            List addList = new ArrayList<>();
-            for(int i = 0;i < addNum;i++){
-                HashMap hashMap = new HashMap();
-                hashMap.put("schoolId",organizationCode);
-                hashMap.put("inviteCode",SSOStringUtil.getRandomString(1,10));
-                addList.add(hashMap);
-            }
+            Set addSet = new HashSet<>();
+            getSchoolInviteCodeList(addSet,organizationCode,addNum);
 
+            List addList = new ArrayList<>(addSet);
             int num = schoolInviteMapper.batchInsertInviteCode(addList);
             if(num < 0){
                 resultJson.put("success",false);

@@ -53,8 +53,24 @@ public class OrganizationController {
     @ResponseBody
     public JSONObject adminDeleteOrganization(@RequestBody JSONObject paramJson){
        JSONObject resultJson = organizationService.adminDeleteOrganization(paramJson);
-        return resultJson;
+       return resultJson;
     }
 
+
+    /**
+     * @author : zga
+     * @date : 2016-3-14
+     *
+     * 管理员新增组织机构
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "adminAddNewOrganization",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject adminAddNewOrganization(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = organizationService.adminAddNewOrganization(paramJson);
+        return resultJson;
+    }
 
 }

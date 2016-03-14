@@ -90,6 +90,12 @@ public class Constant {
 
     public static final String ADMIN_MODIFY_ORGANIZATION_SUCCESS = "100026";
 
+    public static final String ADMIN_ADD_ORGANIZATION_FAILED = "100027";
+
+    public static final String ADMIN_ADD_ORGANIZATION_SUCCESS = "100028";
+
+
+
 
     /**
      * 公共的常量

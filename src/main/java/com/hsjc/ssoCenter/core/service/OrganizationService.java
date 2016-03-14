@@ -126,5 +126,40 @@ public class OrganizationService extends ApiBaseService{
         return resultJson;
     }
 
+    /**
+     * @author : zga
+     * @date : 2016-3-11
+     *
+     * 管理员删除组织机构
+     *
+     * @param paramJson
+     * @return
+     */
+    @Transactional(rollbackFor = RuntimeException.class)
+    public JSONObject adminAddNewOrganization(JSONObject paramJson) throws RuntimeException{
+        JSONObject resultJson = getResultJson();
+
+        Integer maxOrganizationCode = organizationMapper.selectMaxOrganizationCode();
+
+        Organization organization = new Organization();
+        organization.setOrganizationName(paramJson.getString("organizationName"));
+        organization.setOrganizationCode(maxOrganizationCode + 1);
+        if("ss".equals(paramJson.getString("parentId"))){
+            organization.setParentId(0L);
+        } else {
+            organization.setParentId(paramJson.getLong("parentId"));
+        }
+
+        int num = organizationMapper.insertSelective(organization);
+        if(num < 1){
+            resultJson.put("success",false);
+            resultJson.put("message",Constant.ADMIN_ADD_ORGANIZATION_FAILED);
+            return resultJson;
+        }
+
+        resultJson.put("message",Constant.ADMIN_ADD_ORGANIZATION_SUCCESS);
+        return resultJson;
+    }
+
 
 }

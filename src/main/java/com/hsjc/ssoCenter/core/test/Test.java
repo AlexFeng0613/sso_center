@@ -1,5 +1,9 @@
 package com.hsjc.ssoCenter.core.test;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author : zga
  * @date : 2015-12-21
@@ -84,8 +88,24 @@ public class Test {
         System.out.println(password);*/
 
 
-        int num = Integer.parseInt("123");
-        System.out.println(num);
+        //int num = Integer.parseInt("123");
+        //System.out.println(num);
+
+        Set addSet = new HashSet<>();
+        HashMap hashMap = new HashMap();
+        hashMap.put("name","zhuzi");
+        hashMap.put("code","abc123");
+
+        HashMap hashMap1 = new HashMap();
+        hashMap1.put("name","zhuzi");
+        hashMap1.put("code","abc123");
+
+        addSet.add(hashMap);
+        addSet.add(hashMap1);
+
+        System.out.println(addSet.size());
+
+
 
     }
 }

@@ -190,4 +190,74 @@
     SELECT ts.inviteCode,torg.organizationName,"xxx",ts.state,ts.createTime,"xxx" FROM tbschoolinvite ts,tborganization torg
     WHERE ts.schoolId = torg.organizationCode AND ts.state = 'unused'
   </select>
+
+  <!--
+    @author : zga
+    @date : 2016-3-14
+    查询所有的邀请码
+  -->
+  <select id="selectAllSchoolInviteWithPage" resultType="java.util.HashMap">
+    SELECT ts.inviteCode,torg.organizationName,tu.realName,ts.state,ts.createTime,ts.useTime FROM tbschoolinvite ts,tborganization torg,tbusermain tu
+    <where>
+      <if test="invite == null">
+        ts.schoolId = torg.organizationCode
+        AND ts.byUserId = tu.id
+        AND ts.state = 'used'
+      </if>
+
+      <if test="organization != null">
+        AND ts.schoolId = #{organization}
+      </if>
+
+      <if test="status == 2">
+        AND ts.state = '2'
+      </if>
+
+      <if test="createTime == 3">
+        AND DATE_SUB(CURDATE(), INTERVAL 2 DAY) <![CDATA[<=]]> DATE(ts.createTime)
+      </if>
+      <if test="createTime == 7">
+        AND DATE_SUB(CURDATE(), INTERVAL 6 DAY) <![CDATA[<=]]> DATE(ts.createTime)
+      </if>
+      <if test="createTime == 30">
+        AND DATE_SUB(CURDATE(), INTERVAL 29 DAY) <![CDATA[<=]]> DATE(ts.createTime)
+      </if>
+
+      <if test="inviteCode != null">
+        AND ts.inviteCode like CONCAT('%','${inviteCode}','%')
+      </if>
+    </where>
+
+    UNION ALL
+
+    SELECT ts.inviteCode,torg.organizationName,"xxx",ts.state,ts.createTime,"xxx" FROM tbschoolinvite ts,tborganization torg
+    <where>
+      <if test="invite == null">
+        ts.schoolId = torg.organizationCode
+        AND ts.state = 'unused'
+      </if>
+
+      <if test="organization != null">
+        AND ts.schoolId = #{organization}
+      </if>
+
+      <if test="status == 1">
+        AND ts.state = '2'
+      </if>
+
+      <if test="createTime == 3">
+        AND DATE_SUB(CURDATE(), INTERVAL 2 DAY) <![CDATA[<=]]> DATE(ts.createTime)
+      </if>
+      <if test="createTime == 7">
+        AND DATE_SUB(CURDATE(), INTERVAL 6 DAY) <![CDATA[<=]]> DATE(ts.createTime)
+      </if>
+      <if test="createTime == 30">
+        AND DATE_SUB(CURDATE(), INTERVAL 29 DAY) <![CDATA[<=]]> DATE(ts.createTime)
+      </if>
+
+      <if test="inviteCode != null">
+        AND ts.inviteCode like CONCAT('%','${inviteCode}','%')
+      </if>
+    </where>
+  </select>
 </mapper>

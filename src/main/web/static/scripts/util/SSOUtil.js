@@ -59,13 +59,16 @@ var SSOSystem = {
      * @param title
      * @param content
      */
-    showAlertDialog : function(content,title){
+    showAlertDialog : function(content,title,modalType){
         if(SSOSystem.isEmpty(title)) title = '提示信息';
         var d = dialog({
             title: title,
             content: content
         });
-        d.show();
+        if(SSOSystem.isEmpty(modalType)){
+            d.show();
+        } else {
+            d.showModal();
+        }
     }
-
 };

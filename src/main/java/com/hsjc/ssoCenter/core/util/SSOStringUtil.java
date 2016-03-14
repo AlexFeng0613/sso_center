@@ -61,6 +61,34 @@ public class SSOStringUtil {
         return sb.toString();
     }
 
+    /**
+     *
+     *
+     * 生成随机学校邀请码
+     *
+     * @param type
+     * @param length
+     * @return
+     */
+    public static String getRandamInviteCode(int type,int length) {
+        if(type == 0) type = 1;
+        if(length == 0) length = 6;
+
+        String base;
+        if(type == 1){
+            base = baseRandomString;
+        } else {
+            base = baseRandomSmsCode;
+        }
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(base.length());
+            sb.append(base.charAt(number));
+        }
+        return sb.toString().toLowerCase();
+    }
+
     public static void main(String[] args) {
         /*String clientId = getRandomString(1,8);
 
