@@ -75,6 +75,10 @@ public class UserController extends BaseController {
         model.addAttribute("openId",openId);
         model.addAttribute("errorMessage",errorMessage);
 
+        if(StringUtils.isEmpty(openId)){
+            return "/user/login";
+        }
+
         UserMain currentUserMain = getCurrentUser();
         Session session = SecurityUtils.getSubject().getSession(true);
         if(session.getAttribute("user") != null){
@@ -114,7 +118,7 @@ public class UserController extends BaseController {
         } catch (AuthenticationException e) {
             logger.debug("用户名/密码不正确");
             model.addAttribute("errorMessage","用户名/密码不正确");
-            return "redirect:/user/login.html";
+            return "/user/login";
         }
 
         Subject subject = SecurityUtils.getSubject();

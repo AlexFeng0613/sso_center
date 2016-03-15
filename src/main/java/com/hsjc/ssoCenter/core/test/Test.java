@@ -104,8 +104,65 @@ public class Test {
         addSet.add(hashMap1);
 
         System.out.println(addSet.size());
+    }
 
+    @org.junit.Test
+    public void testConn(){
+       /* Statement stmt = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://10.16.1.127:3306/sso_center?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8", "mmysql", "m12345");
+            //connection = DriverManager.getConnection("jdbc:mysql://192.168.18.201:3323/sso_center?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8","root","123456");
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sso_center","root","000000");
+            stmt = connection.createStatement();
+            String sql = "SELECT\n" +
+                    "    MAX(CASE proKey WHEN 'mailHost' THEN proValue END) mailHost,\n" +
+                    "    MAX(CASE proKey WHEN 'mailPort' THEN proValue END) mailPort,\n" +
+                    "    MAX(CASE proKey WHEN 'mailUserName' THEN proValue END) mailUserName,\n" +
+                    "    MAX(CASE proKey WHEN 'mailPassword' THEN proValue END) mailPassword,\n" +
+                    "    MAX(CASE proKey WHEN 'mailFrom' THEN proValue END) mailFrom,\n" +
+                    "    MAX(CASE proKey WHEN 'trdPublicKey' THEN proValue END) trdPublicKey,\n" +
+                    "    MAX(CASE proKey WHEN 'smsUrl' THEN proValue END) smsUrl,\n" +
+                    "    MAX(CASE proKey WHEN 'smsAppKey' THEN proValue END) smsAppKey,\n" +
+                    "    MAX(CASE proKey WHEN 'smsAppSecret' THEN proValue END) smsAppSecret,\n" +
+                    "    MAX(CASE proKey WHEN 'smsSignName' THEN proValue END) smsSignName,\n" +
+                    "    MAX(CASE proKey WHEN 'smsTemplateCode' THEN proValue END) smsTemplateCode,\n" +
+                    "    MAX(CASE proKey WHEN 'smsType' THEN proValue END) smsType,\n" +
+                    "    MAX(CASE proKey WHEN 'websiteAddress' THEN proValue END) websiteAddress,\n" +
+                    "    MAX(CASE proKey WHEN 'imgUploadPath' THEN proValue END) imgUploadPath\n" +
+                    "    FROM tbsystemproperties";
+            resultSet = stmt.executeQuery(sql);
+            while (resultSet.next()) {
+                System.out.println(">>"+resultSet.getString("trdPublicKey"));
+            }
+        } catch (Exception e) {
 
-
+        } finally {
+            if(resultSet != null){
+                try{
+                    resultSet.close();
+                } catch (Exception e){
+                    e.printStackTrace();
+                } finally {
+                    if(stmt != null){
+                        try{
+                            stmt.close();
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        } finally {
+                            if(connection != null){
+                                try{
+                                    connection.close();
+                                } catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }*/
     }
 }

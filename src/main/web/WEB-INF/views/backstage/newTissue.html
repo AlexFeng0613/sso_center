@@ -16,7 +16,7 @@
                     <div class="tissue_box_name">所属区域：</div>
                     <select name="parentId">
                         <option value="ss">所属区域</option>
-                        <option th:each="organization : ${organizationList}" th:value="${organization.id}" th:text="${organization.organizationName}"></option>
+                        <option th:each="organization : ${organizationList}" th:value="${organization.getId()}" th:text="${organization.getOrganizationName()}"></option>
                     </select>
                 </div>
                 <div class="tissue_message">

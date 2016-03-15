@@ -42,17 +42,28 @@ WEB-INF 页面文件
 test 测试用例目录
 
 /*部署上线需要修改的地方*/
-1、AppInitializer类中setActiveProfiles 需要改成production
+1、AppInitializer类中setActiveProfiles 
+本地修改为:develop
+测试修改为:production
+线上修改为:online
 
-2、DBUtil中的加载的properties文件修改为production
+2、DBUtil中的加载的properties
+本地为:application.develop.properties
+测试为:application.production.properties
+线上为:application.online.properties
 
-3、InitService中需要修改为线上的数据库连接
+3、InitService中需要数据库连接
+本地为:application.develop.properties 中的连接
+测试为:application.production.properties 中的连接
+线上为:application.online.properties 中的连接
 
-4、数据库表tbsystemproperties中的数据库连接参数要设置成production中的,websiteAddress也要改为线上的.
+4、数据库表tbsystemproperties中的数据库连接参数要设置成相应环境的
+本地为:application.develop.properties 中的连接
+测试为:application.production.properties 中的连接
+线上为:application.online.properties 中的连接
 
 
 PageHelper包含的信息：
-
 endRow 结束的行数
 firstPage 当前导航页码的第一个页码
 hastNextPage 是否有下一页
@@ -71,3 +82,15 @@ prePage 前一页码
 size 当前页面的记录数
 startRow 开始的行数(从第几行记录开始)
 total 记录总数
+
+上线导数据需要注意的地方;
+需要保留的表数据:
+1)、tb3rdclients、tbindexicos、tbrestactiontype、tbsystemproperties
+
+2)、导入数据用mongo-mysql项目导入
+
+3)、导入数据后需要执行此sql更新相应的用户表中的organizationCode.
+UPDATE tbusermain tu SET tu.organizationCode =
+ (SELECT tor.`organizationCode` FROM tborganization tor,tborganizationuser tou
+ WHERE tou.organizationId = tor.`organizationId` AND tu.`userId` = tou.userId
+ )

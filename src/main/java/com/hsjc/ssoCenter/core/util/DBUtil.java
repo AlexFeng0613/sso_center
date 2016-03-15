@@ -23,6 +23,7 @@ public class DBUtil {
     public static Connection getConn(){
         try {
             Properties properties = new Properties();
+            //properties.load(DBUtil.class.getResourceAsStream("/application.online.properties"));
             properties.load(DBUtil.class.getResourceAsStream("/application.production.properties"));
             //properties.load(DBUtil.class.getResourceAsStream("/application.development.properties"));
 

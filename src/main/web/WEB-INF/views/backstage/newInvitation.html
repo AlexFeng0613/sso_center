@@ -12,7 +12,7 @@
                     <div class="users_message_l">*</div>
                     <div class="users_message_name">所属组织机构：</div>
                     <select name="organizationCode">
-                        <option th:each="organization : ${organizationList}" th:text="${organization.organizationName}" th:value="${organization.organizationCode}"></option>
+                        <option th:each="organization : ${organizationList}" th:text="${organization.getOrganizationName()}" th:value="${organization.getOrganizationCode()}"></option>
                     </select>
                 </div>
                 <div class="users_message">

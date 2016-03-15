@@ -66,4 +66,12 @@ public class AppConfig {
 			@PropertySource("classpath:log4j.properties")
 	})
 	static class Production{}
+
+	@Configuration
+	@Profile("online")
+	@PropertySources({
+			@PropertySource("classpath:application.online.properties"),
+			@PropertySource("classpath:log4j.properties")
+	})
+	static class Online{}
 }

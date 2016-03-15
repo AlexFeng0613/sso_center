@@ -59,6 +59,15 @@ $(function(){
 function alertErrorMessage(){
     var errorMessage = $('input[name="errorMessage"]').val();
     if(!SSOSystem.isEmpty(errorMessage)){
-        $('input[name="username"]').val("").prop("placeholder",errorMessage);
+        //$('input[name="username"]').val("").prop("placeholder",errorMessage);
+        var d = dialog({
+            title: '提示信息',
+            content: '<span style="text-align: center;">' + errorMessage + '</span>',
+            follow : document.getElementById('register_submit'),
+            size : function(){
+
+            }
+        });
+        d.show();
     }
 }

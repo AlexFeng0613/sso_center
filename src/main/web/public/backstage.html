@@ -20,8 +20,9 @@
             <div class="center">
                 <div class="head_r">
                     <div class="UserImg">
-                        <img src=""/>
-                        <div class="UserName">admin</div>
+                        <img th:if="${session.user.gender == 0}" src="../../../static/images/yun/people.png"/>
+                        <img th:if="${session.user.gender == 1}" src="../../../static/images/yun/boy.jpg"/>
+                        <div class="UserName" th:text="${session.user.realName}"></div>
                     </div>
                     <button class="closeUser" onclick="SSOSystem.exit();">退出</button>
                 </div>
@@ -30,6 +31,17 @@
         <div class="container">
             <div class="center">
                 <aside class="aside">
+                    <!--
+                        <dl class="menu_title">
+                            <dt th:text="${}">
+                                <input name="class_style" th:value="${className}"/>
+                            </dt>
+                            <dd>
+                                <input name="id_style" th:value="${idName}"/>
+                                <a th:href=@{resUrl}></a>
+                            </dd>
+                        </dl>
+                    -->
                     <dl class="menu_title">
                         <dt class="d1">用户管理</dt>
                         <dd><a href="/page/sso/userList/1,10,0,0,0,0,0.html" id="user_list">用户列表</a></dd>
@@ -39,8 +51,6 @@
                         <dt class="d2">第三方平台管理</dt>
                         <dd><a href="/page/sso/platformList/1,10.html" id="platform_list">平台列表</a></dd>
                         <dd><a href="/page/sso/platformFilterList/1,10.html" id="platformfilter_list">导入数据过滤列表</a></dd>
-                        <dd>组织机构权限管理</dd>
-                        <dd>组织机构密码管理</dd>
                     </dl>
                     <dl class="menu_title">
                         <dt class="d3">客服管理</dt>
