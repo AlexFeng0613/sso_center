@@ -77,6 +77,9 @@
             </table>
 
             <div class="tab_foot">
+                <ul class="handle">
+                    <li class="export_result">导出结果</li>
+                </ul>
                 <div class="pages">
                     <div class="jil">共<font th:text="${total}"></font>条记录</div>
                     <a th:href="@{'/page/sso/invitationManage/1,' + ${pageSize} + ',' + ${organization} + ',' + ${status} + ',' + ${createTime} + ',' + ${inviteCode} +'.html'}" class="page">首页</a>

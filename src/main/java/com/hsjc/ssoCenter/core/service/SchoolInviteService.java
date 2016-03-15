@@ -29,6 +29,39 @@ public class SchoolInviteService extends ApiBaseService {
      * @author : zga
      * @date : 2016-3-7
      *
+     * 添加相应数量的邀请码
+     *
+     * @return
+     */
+    public JSONObject addNewSchoolInvite(JSONObject paramJson){
+        JSONObject resultJson = getResultJson();
+
+        try {
+            String organizationCode = paramJson.getString("organizationCode");
+            Integer addNum = paramJson.getInteger("addNum");
+
+            Set addSet = new HashSet<>();
+            getSchoolInviteCodeList(addSet,organizationCode,addNum);
+
+            List addList = new ArrayList<>(addSet);
+            int num = schoolInviteMapper.batchInsertInviteCode(addList);
+            if(num < 0){
+                resultJson.put("success",false);
+                resultJson.put("message", Constant.BATCH_SCHOOL_INVITE_CODE_FAIL);
+                return resultJson;
+            }
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+        }
+
+        resultJson.put("message", Constant.BATCH_SCHOOL_INVITE_CODE_SUCCESS);
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
      * 查询所有的邀请码
      *
      * @return
@@ -78,34 +111,26 @@ public class SchoolInviteService extends ApiBaseService {
 
     /**
      * @author : zga
-     * @date : 2016-3-7
+     * @date : 2016-3-15
      *
-     * 添加相应数量的邀请码
+     * 查询所有的邀请码(根据相应的条件)
      *
      * @return
      */
-    public JSONObject addNewSchoolInvite(JSONObject paramJson){
-        JSONObject resultJson = getResultJson();
+    public List<HashMap> selectAllSchoolInviteWithParam(JSONObject paramJson){
+        String organization = paramJson.getString("organization");
+        String createTime = paramJson.getString("createTime");
+        String inviteCode = paramJson.getString("inviteCode");
 
-        try {
-            String organizationCode = paramJson.getString("organizationCode");
-            Integer addNum = paramJson.getInteger("addNum");
+        /**
+         * 设置Sql所需参数
+         */
+        if(StringUtils.isEmpty(organization) || "0".equals(organization)) paramJson.put("organization",null);
+        if(StringUtils.isEmpty(createTime) || "0".equals(createTime)) paramJson.put("createTime",null);
+        if(StringUtils.isEmpty(inviteCode) || "0".equals(inviteCode)) paramJson.put("inviteCode",null);
+        paramJson.put("invite",null);
 
-            Set addSet = new HashSet<>();
-            getSchoolInviteCodeList(addSet,organizationCode,addNum);
-
-            List addList = new ArrayList<>(addSet);
-            int num = schoolInviteMapper.batchInsertInviteCode(addList);
-            if(num < 0){
-                resultJson.put("success",false);
-                resultJson.put("message", Constant.BATCH_SCHOOL_INVITE_CODE_FAIL);
-                return resultJson;
-            }
-        } catch (Exception e) {
-            logger.debug(e.getMessage());
-        }
-
-        resultJson.put("message", Constant.BATCH_SCHOOL_INVITE_CODE_SUCCESS);
-        return resultJson;
+        List<HashMap> hashMapList = schoolInviteMapper.selectAllSchoolInviteWithPage(paramJson);
+        return hashMapList;
     }
 }

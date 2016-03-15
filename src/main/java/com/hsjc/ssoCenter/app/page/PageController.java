@@ -7,16 +7,15 @@ import com.hsjc.ssoCenter.core.domain.*;
 import com.hsjc.ssoCenter.core.helper.RedisHelper;
 import com.hsjc.ssoCenter.core.service.*;
 import com.hsjc.ssoCenter.core.util.SSOStringUtil;
-import com.hsjc.ssoCenter.core.util.itextpdf.ItextPdfUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -849,33 +848,6 @@ public class PageController extends BaseController{
     @RequestMapping("/backstage/adminAddUserSucc")
     public String adminAddUserSucc(){
         return "/page/adminAddUserSucc";
-    }
-
-    /**
-     * @author : zga
-     * @date : 2016-3-14
-     *
-     * 导出邀请码
-     *
-     * @param request
-     * @param response
-     * @throws Exception
-     */
-    @RequestMapping(value = "exportSchoolInvite",method = RequestMethod.GET)
-    public void exportSchoolInvite(HttpServletRequest request, HttpServletResponse response) throws Exception{
-        String path = request.getServletContext().getRealPath("/") + "public/schoolInviteTemplete.html";
-
-        String imgPath = request.getServletContext().getRealPath("/") + "static/images/templete/logo.gif";
-
-        List<HashMap> schoolInviteList = schoolInviteService.selectAllSchoolInvite();
-
-        byte[] arr = ItextPdfUtil.readTemplateFile(schoolInviteList, path,imgPath);
-        response.setContentType("application/pdf");
-        response.addHeader("Content-Disposition",
-                "attachment;filename=" + new String(("导出邀请码.pdf").getBytes("UTF-8"), "iso-8859-1"));
-        OutputStream os = response.getOutputStream();
-        os.write(arr, 0, arr.length);
-        os.close();
     }
 
 

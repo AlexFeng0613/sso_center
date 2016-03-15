@@ -65,6 +65,7 @@ public class ItextPdfUtil {
         BaseFont bFont = BaseFont.createFont("STSongStd-Light","UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
         Font font = new Font(bFont, 14, Font.NORMAL);
         Font font1 = new Font(bFont, 14, Font.BOLD);
+        Font font2 = FontFactory.getFont("/resources/fonts/Arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED, 14);
 
         doc = new Document(PageSize.A4, margin, margin, margin, margin);
         pdfWriter = PdfWriter.getInstance(doc, baos);
@@ -76,14 +77,16 @@ public class ItextPdfUtil {
             doc.add(image);
             doc.add(new Paragraph("",font));
 
-            doc.add(new Phrase("邀请码：",font1));
-            doc.add(new Phrase(HashMap.get("inviteCode").toString() + "\n",font));
+            doc.add(new Chunk("邀请码：",font1));
+            doc.add(new Chunk(HashMap.get("inviteCode").toString() + "\n",font2));
 
             doc.add(new Chunk("所属学校：",font1));
             doc.add(new Chunk(HashMap.get("organizationName").toString() + "\n",font));
 
             doc.add(new Paragraph("使用说明：\n",font1));
-            doc.add(new Paragraph("1．\t请登录华师智慧教育云平台" + Constant.websiteAddress + "，本邀请码适用于邀请老师加入学校；\n",font));
+            doc.add(new Chunk("1．\t请登录华师智慧教育云平台" ,font));
+            doc.add(new Chunk(Constant.websiteAddress,font2));
+            doc.add(new Chunk("，本邀请码适用于邀请老师加入学校；\n",font));
 
             doc.add(new Paragraph("2．\t已有账号的老师，请登录平台后，在“绑定邀请码”中输入邀请码；\n",font));
 
@@ -91,11 +94,12 @@ public class ItextPdfUtil {
 
             doc.add(new Paragraph("4．\t本邀请码只能使用一次，请妥善保管；如有泄露，请及时与学校管理员联系；\n",font));
 
-            doc.add(new Paragraph("5．\t更多信息，请查阅帮助中心：help.01edut.cn；\n",font));
+            doc.add(new Chunk("5．\t更多信息，请查阅帮助中心：",font));
+            doc.add(new Chunk("help.01edut.cn；\n",font2));
 
             doc.add(new Paragraph("6．\t如有问题，请致电咨询：400-800-5056\n",font));
 
-            doc.add(new Paragraph("\n\n",font));
+            doc.add(new Paragraph("--------------------------------------------------------------------------------------------------------\n",font));
         }
 
         if(bufferedReader != null){

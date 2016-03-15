@@ -159,14 +159,14 @@
     @date : 2016-3-11
     查询所有的组织机构
   -->
-  <select id="selectAllOrganizationWithPage" resultType="Organization">
+  <select id="selectAllOrganizationWithPage" resultType="java.util.HashMap">
     SELECT
     id,
     organizationCode,
     organizationName,
     parentId,
     status,
-    createTime,
+    (DATE_FORMAT(createTime,'%Y-%m-%d')) AS createTime,
     isDelete
     FROM tborganization
     <where>

@@ -33,6 +33,28 @@ $(function(){
     $('.tab_fnLi').click(function(){
         window.location.href = returnInviteCodeManageURL();
     });
+
+    /**
+     * @author : zga
+     * @date : 2016-3-15
+     *
+     * 导出查询结果
+     *
+     */
+    $('.export_result').click(function(){
+        var queryOrganization = $('select[name="organization"]').val();
+        var status = $('select[name="status"]').val();
+        var createTime = $('select[name="createTime"]').val();
+        var queryInviteCode = $('input[name="inviteCode"]').val();
+        if(SSOSystem.isEmpty(queryInviteCode)) queryInviteCode = '0';
+
+        if($('tbody tr').length < 1){
+            SSOSystem.showAlertDialog('无导出数据','','xxx')
+            return false;
+        }
+        var url = '/schoolInvite/exportSchoolInvite/'+ queryOrganization + ',' + status + ',' + createTime + ',' + queryInviteCode +  '.html';
+        window.location.href = url;
+    });
 });
 
 /**

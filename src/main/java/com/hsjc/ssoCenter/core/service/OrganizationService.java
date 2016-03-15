@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -69,7 +70,7 @@ public class OrganizationService extends ApiBaseService{
         if(StringUtils.isEmpty(createTime) || "0".equals(createTime)) paramJson.put("createTime",null);
 
         PageHelper.startPage(pageNum,pageSize);
-        List<Organization> list = organizationMapper.selectAllOrganizationWithPage(paramJson);
+        List<HashMap> list = organizationMapper.selectAllOrganizationWithPage(paramJson);
         PageInfo pageInfo = new PageInfo(list);
         return pageInfo;
     }
