@@ -124,6 +124,10 @@ public class UserController extends BaseController {
         Subject subject = SecurityUtils.getSubject();
         UserMain userMain = (UserMain) subject.getPrincipal();
 
+        Session session = subject.getSession(true);
+        session.setTimeout(-1);
+        session.setAttribute("user", userMain);
+
         if("admin".equals(userMain.getUserName())){
             return "redirect:/page/sso/backstageIndex.html";
         }
@@ -142,10 +146,6 @@ public class UserController extends BaseController {
                     + "&pwd=" + accessPassword
                     + "&time=" + accessTime;
         }
-
-        Session session = subject.getSession(true);
-        session.setTimeout(-1);
-        session.setAttribute("user", userMain);
 
         return "redirect:/page/index.html";
     }

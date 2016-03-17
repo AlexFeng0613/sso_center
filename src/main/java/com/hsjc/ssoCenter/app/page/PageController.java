@@ -755,7 +755,7 @@ public class PageController extends BaseController{
         /**
          * accessURL中参数值用*代替,到需要传递时用具体值替换
          */
-        accessURL = "http://192.168.18.159:8091/load.html?openid=%&password=%&time=%";
+        accessURL = accessURL + "?openid=%&password=%&time=%";
 
         String targetURL = SSOStringUtil.replaceAllWithSplitStr(accessURL,"%",openId,password,time);
         model.addAttribute("targetURL",targetURL);
