@@ -19,6 +19,8 @@ import java.util.Map;
 /**
  * @author : zga
  * @date : 2016-03-14
+ *
+ * PDF工具类
  */
 public class ItextPdfUtil {
     private static Logger logger = Logger.getLogger(ItextPdfUtil.class);

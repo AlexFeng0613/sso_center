@@ -73,6 +73,11 @@ public class MyAuthRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         UserMain userMain = (UserMain) principalCollection.fromRealm(getName()).iterator().next();
+
+        if(userMain != null){
+            Integer userId = userMain.getId();
+
+        }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.addRole(userMain.getType());
         return info;

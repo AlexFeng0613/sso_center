@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsjc.ssoCenter.core.mapper.ResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.hsjc.ssoCenter.core.domain.Resource" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="resKey" property="resKey" jdbcType="VARCHAR" />
+    <result column="resName" property="resName" jdbcType="VARCHAR" />
+    <result column="resPath" property="resPath" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentId" jdbcType="BIGINT" />
+    <result column="resType" property="resType" jdbcType="CHAR" />
+    <result column="resUrl" property="resUrl" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="CHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="className" property="className" jdbcType="VARCHAR" />
+    <result column="idName" property="idName" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="CHAR" />
+    <result column="clientId" property="clientId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, resKey, resName, resPath, parentId, resType, resUrl, state, description, createDate, 
+    className, idName, level, clientId
+  </sql>
+
+  <insert id="insert" parameterType="Resource">
+    insert into tbresource
+      (resKey,
+      resName,
+      resPath,
+      parentId,
+      resType,
+      resUrl,
+      state,
+      description,
+      createDate,
+      className,
+      idName,
+      level,
+      clientId)
+    values (
+      #{resKey}, 
+      #{resName}, 
+      #{resPath}, 
+      #{parentId}, 
+      #{resType}, 
+      #{resUrl}, 
+      #{state}, 
+      #{description}, 
+      #{createDate},
+      #{className},
+      #{idName},
+      #{level},
+      #{clientId})
+  </insert>
+
+  <insert id="insertSelective" parameterType="Resource">
+    insert into tbresource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="resKey != null" >
+        resKey,
+      </if>
+      <if test="resName != null" >
+        resName,
+      </if>
+      <if test="resPath != null" >
+        resPath,
+      </if>
+      <if test="parentId != null" >
+        parentId,
+      </if>
+      <if test="resType != null" >
+        resType,
+      </if>
+      <if test="resUrl != null" >
+        resUrl,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="createDate != null" >
+        createDate,
+      </if>
+      <if test="className != null" >
+        className,
+      </if>
+      <if test="idName != null" >
+        idName,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="clientId != null" >
+        clientId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="resKey != null" >
+        #{resKey},
+      </if>
+      <if test="resName != null" >
+        #{resName},
+      </if>
+      <if test="resPath != null" >
+        #{resPath},
+      </if>
+      <if test="parentId != null" >
+        #{parentId},
+      </if>
+      <if test="resType != null" >
+        #{resType},
+      </if>
+      <if test="resUrl != null" >
+        #{resUrl},
+      </if>
+      <if test="state != null" >
+        #{state},
+      </if>
+      <if test="description != null" >
+        #{description},
+      </if>
+      <if test="createDate != null" >
+        #{createDate},
+      </if>
+      <if test="className != null" >
+        #{className},
+      </if>
+      <if test="idName != null" >
+        #{idName},
+      </if>
+      <if test="level != null" >
+        #{level},
+      </if>
+      <if test="clientId != null" >
+        #{clientId},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tbresource
+    where id = #{id}
+  </delete>
+
+  <update id="updateByPrimaryKeySelective" parameterType="Resource">
+    update tbresource
+    <set >
+      <if test="resKey != null" >
+        resKey = #{resKey},
+      </if>
+      <if test="resName != null" >
+        resName = #{resName},
+      </if>
+      <if test="resPath != null" >
+        resPath = #{resPath},
+      </if>
+      <if test="parentId != null" >
+        parentId = #{parentId},
+      </if>
+      <if test="resType != null" >
+        resType = #{resType},
+      </if>
+      <if test="resUrl != null" >
+        resUrl = #{resUrl},
+      </if>
+      <if test="state != null" >
+        state = #{state},
+      </if>
+      <if test="description != null" >
+        description = #{description},
+      </if>
+      <if test="createDate != null" >
+        createDate = #{createDate},
+      </if>
+      <if test="className != null" >
+        className = #{className},
+      </if>
+      <if test="idName != null" >
+        idName = #{idName},
+      </if>
+      <if test="level != null" >
+        level = #{level},
+      </if>
+      <if test="clientId != null" >
+        clientId = #{clientId},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="Resource">
+    update tbresource
+    set resKey = #{resKey},
+      resName = #{resName},
+      resPath = #{resPath},
+      parentId = #{parentId},
+      resType = #{resType},
+      resUrl = #{resUrl},
+      state = #{state},
+      description = #{description},
+      createDate = #{createDate},
+      className = #{className},
+      idName = #{idName},
+      level = #{level},
+      clientId = #{clientId}
+    where id = #{id}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from tbresource
+    where id = #{id}
+  </select>
+</mapper>
