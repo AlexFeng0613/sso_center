@@ -2,6 +2,7 @@ package com.hsjc.ssoCenter.core.config;
 
 
 import com.hsjc.ssoCenter.core.authrealm.MyAuthRealm;
+import com.hsjc.ssoCenter.core.filter.KickoutSessionControlFilter;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -89,6 +90,17 @@ public class SecurityConfig {
 		return myAuthRealm;
 	}
 
+	@Bean
+	public KickoutSessionControlFilter kickoutFilter(){
+		KickoutSessionControlFilter kickoutSessionControlFilter = new KickoutSessionControlFilter();
+		kickoutSessionControlFilter.setKickoutUrl("/user/login.html");
+		kickoutSessionControlFilter.setSessionManager(defaultWebSessionManager());
+		kickoutSessionControlFilter.setKickoutAfter(false);
+		kickoutSessionControlFilter.setMaxSession(2);
+
+		return kickoutSessionControlFilter;
+	}
+
 	/**
 	 * 配置shiro的过滤器工厂类
 	 * @return
@@ -104,12 +116,11 @@ public class SecurityConfig {
 		filterChainDefinitionMap.put("/code.html", "anon");
 		filterChainDefinitionMap.put("/page/register/*.html", "anon");
 		filterChainDefinitionMap.put("/page/serverError.html", "anon");
-		filterChainDefinitionMap.put("/page/sso/**", "anon");
 		filterChainDefinitionMap.put("/sms/**", "anon");
 		filterChainDefinitionMap.put("/page/logout.html", "logout");
 
-		filterChainDefinitionMap.put("/user/*.html", "anon");
-		filterChainDefinitionMap.put("/user/*.json", "anon");
+		filterChainDefinitionMap.put("/user/register/*.html", "anon");
+		filterChainDefinitionMap.put("/user/register/*.json", "anon");
 
 		filterChainDefinitionMap.put("/3rd/**", "anon");
 		filterChainDefinitionMap.put("/**", "user");

@@ -126,7 +126,7 @@
     @date : 2016-3-10
     管理员新增用户
   -->
-  <insert id="adminAddNewUser" parameterType="UserMain">
+  <insert id="adminAddNewUser" parameterType="UserMain" useGeneratedKeys="true" keyProperty="id">
     insert into tbusermain
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userName != null">
@@ -159,6 +159,9 @@
       <if test="realName != null">
         realName,
       </if>
+      <if test="userIcon != null">
+        userIcon,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userName != null">
@@ -190,6 +193,9 @@
       </if>
       <if test="realName != null">
         #{realName},
+      </if>
+      <if test="userIcon != null">
+        #{userIcon},
       </if>
     </trim>
   </insert>

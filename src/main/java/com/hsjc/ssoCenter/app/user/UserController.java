@@ -76,7 +76,7 @@ public class UserController extends BaseController {
         model.addAttribute("openId",openId);
         model.addAttribute("errorMessage",errorMessage);
 
-        if(StringUtils.isEmpty(openId)){
+        if(StringUtils.isNotEmpty(clientId) && StringUtils.isEmpty(openId)){
             return "/user/login";
         }
 
@@ -160,7 +160,7 @@ public class UserController extends BaseController {
      * @param paramJson
      * @return
      */
-    @RequestMapping(value = "register",method = RequestMethod.POST)
+    @RequestMapping(value = "register/addNew",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject register(@RequestBody JSONObject paramJson, HttpSession session){
         JSONObject result = userMainService.register(paramJson,session);
@@ -176,7 +176,7 @@ public class UserController extends BaseController {
      * @param paramJson
      * @return
      */
-    @RequestMapping(value = "reSendEmail",method = RequestMethod.POST)
+    @RequestMapping(value = "register/reSendEmail",method = RequestMethod.POST)
     public JSONObject reSendEmail(@RequestBody JSONObject paramJson){
         JSONObject resultJson = emailService.sendEmail(paramJson);
         return resultJson;
@@ -191,7 +191,7 @@ public class UserController extends BaseController {
      * @param paramJson
      * @return
      */
-    @RequestMapping(value = "isExistsUserName",method = RequestMethod.POST)
+    @RequestMapping(value = "register/isExistsUserName",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject isExistsUserName(@RequestBody JSONObject paramJson){
         JSONObject resultJson = userMainService.isExistsUserName(paramJson);
@@ -207,7 +207,7 @@ public class UserController extends BaseController {
      * @param paramJson
      * @return
      */
-    @RequestMapping(value = "isBindEmail",method = RequestMethod.POST)
+    @RequestMapping(value = "register/isBindEmail",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject isBindEmail(@RequestBody JSONObject paramJson){
         JSONObject resultJson = userMainService.isBindEmail(paramJson);
@@ -225,7 +225,7 @@ public class UserController extends BaseController {
      * @param type
      * @return
      */
-    @RequestMapping(value = "activateEmail",method = RequestMethod.GET)
+    @RequestMapping(value = "register/activateEmail",method = RequestMethod.GET)
     public String activateEmail(@RequestParam("email")String email,
                                 @RequestParam("ticket")String ticket,
                                 @RequestParam(value = "type",required = false)String type){
@@ -345,7 +345,7 @@ public class UserController extends BaseController {
      * @param paramJson
      * @return
      */
-    @RequestMapping(value = "checkInviteCode",method = RequestMethod.POST)
+    @RequestMapping(value = "register/checkInviteCode",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject checkInviteCode(@RequestBody JSONObject paramJson){
         JSONObject resultJson = userMainService.checkInviteCode(paramJson);
@@ -361,7 +361,7 @@ public class UserController extends BaseController {
      * @param email
      * @return
      */
-    @RequestMapping("activateInviteCode")
+    @RequestMapping("register/activateInviteCode")
     public String activateInviteCode(@RequestParam("email")String email){
         JSONObject paramJson = new JSONObject();
         paramJson.put("email",email);
@@ -560,18 +560,8 @@ public class UserController extends BaseController {
             String absoluteFilePath = FileUpload.upload(file, Constant.imgUploadPath);
             userMain.setUserIcon(absoluteFilePath);
         }
-        JSONObject paramJson = new JSONObject();
-        paramJson.put("userName",userName);
-        paramJson.put("realName",realName);
-        paramJson.put("gender",gender);
-        paramJson.put("password",userMain.getPassword());
-        paramJson.put("salt",userMain.getSalt());
-        paramJson.put("email",email);
-        paramJson.put("phone",phone);
-        paramJson.put("inviteCode",inviteCode);
-        paramJson.put("type",type);
 
-        int num = userMainService.adminAddNewUser(paramJson);
+        int num = userMainService.adminAddNewUser(userMain);
         if(num < 1){
             return "redirect:/page/sso/newUser.html";
         }

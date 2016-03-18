@@ -6,7 +6,6 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
@@ -19,7 +18,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ComponentScan({"com.hsjc"})
 @EnableWebMvc
 @EnableScheduling
-@EnableTransactionManagement
 @EnableSpringDataWebSupport
 public class AppConfig {
 

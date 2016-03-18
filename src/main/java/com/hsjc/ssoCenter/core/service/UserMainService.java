@@ -60,6 +60,9 @@ public class UserMainService extends ApiBaseService{
     @Autowired
     SchoolInviteMapper schoolInviteMapper;
 
+    @Autowired
+    UserRoleService userRoleService;
+
     /**
      * @author : zga
      * @date : 2015-12-03
@@ -99,69 +102,62 @@ public class UserMainService extends ApiBaseService{
      * @param paramJson
      * @return
      */
-    @Transactional(readOnly = false,rollbackFor = RuntimeException.class)
+    @Transactional
     public JSONObject register(JSONObject paramJson, HttpSession session){
         JSONObject resultJson = getResultJson();
-        try{
-            if(paramJson == null){
-                resultJson.put("success",false);
-                resultJson.put("message", Constant.NULL_PARAM);
-                return resultJson;
-            }
-
-            //判断验证码
-            String code = paramJson.getString("code");
-            Object sessionCode = session.getAttribute("rand");
-            if(org.springframework.util.StringUtils.isEmpty(sessionCode)){
-                resultJson.put("message", Constant.INVALID_CODE);
-                return resultJson;
-            } else {
-                if(!sessionCode.toString().equalsIgnoreCase(code)){
-                    resultJson.put("message", Constant.INVALID_CODE);
-                    return resultJson;
-                }
-            }
-
-            UserTemp userTemp = new UserTemp();
-
-            String userName = paramJson.getString("userName");
-            String type = paramJson.getString("type");
-            String password = paramJson.getString("password");
-            String email = paramJson.getString("email");
-            String realName = paramJson.getString("realName");
-            String gender = paramJson.getString("gender");
-
-            userTemp.setUserName(userName);
-            userTemp.setPassword(password);
-            //设置salt和password
-            passwordUtil.encryptPassword(userTemp);
-            userTemp.setType(type);
-            userTemp.setEmail(email);
-            userTemp.setRealName(realName);
-            userTemp.setGender(gender);
-
-            int res = userTempMapper.insert(userTemp);
-            if(res > 0){
-                //调用Email发送接口发送Email
-                try {
-                    resultJson = insertSendEmail(email,apiBaseService,"0");
-                } catch (Exception e) {
-                    resultJson.put("message", Constant.SEND_MAIL_FAIL);
-                    return resultJson;
-                }
-
-                resultJson.put("message", Constant.REG_SUCCESS);
-                resultJson.put("success", true);
-                return resultJson;
-            }
-
-            resultJson.put("message", Constant.REG_FAIL);
-        } catch (Exception e){
+        if(paramJson == null){
             resultJson.put("success",false);
-            resultJson.put("message", Constant.SERVER_ERROR);
-            throw new RuntimeException(e);
+            resultJson.put("message", Constant.NULL_PARAM);
+            return resultJson;
         }
 
+        /**
+         *判断验证码
+         */
+        String code = paramJson.getString("code");
+        Object sessionCode = session.getAttribute("rand");
+        if(org.springframework.util.StringUtils.isEmpty(sessionCode)){
+            resultJson.put("success",false);
+            resultJson.put("message", Constant.INVALID_CODE);
+            return resultJson;
+        } else {
+            if(!sessionCode.toString().equalsIgnoreCase(code)){
+                resultJson.put("success",false);
+                resultJson.put("message", Constant.INVALID_CODE);
+                return resultJson;
+            }
+        }
+
+        UserTemp userTemp = new UserTemp();
+
+        String userName = paramJson.getString("userName");
+        String type = paramJson.getString("type");
+        String password = paramJson.getString("password");
+        String email = paramJson.getString("email");
+        String realName = paramJson.getString("realName");
+        String gender = paramJson.getString("gender");
+
+        userTemp.setUserName(userName);
+        userTemp.setPassword(password);
+        //设置salt和password
+        passwordUtil.encryptPassword(userTemp);
+        userTemp.setType(type);
+        userTemp.setEmail(email);
+        userTemp.setRealName(realName);
+        userTemp.setGender(gender);
+
+        int res = userTempMapper.insert(userTemp);
+        if(res > 0){
+            //调用Email发送接口发送Email
+            try {
+                resultJson = insertSendEmail(email,apiBaseService,"0");
+            } catch (Exception e) {
+                logger.debug("发送Email异常!");
+                resultJson.put("success",false);
+                resultJson.put("message", Constant.SEND_MAIL_FAIL);
+                return resultJson;
+            }
+        }
         return resultJson;
     }
 
@@ -289,6 +285,8 @@ public class UserMainService extends ApiBaseService{
                     userStudent.setUserId(userMain.getId());
                     userStudentMapper.insert(userStudent);
                 }
+
+                userRoleService.addNewUserRole(Long.parseLong(userMain.getId().toString()));
             }
         } catch (Exception e) {
             throw new RuntimeException();
@@ -750,15 +748,21 @@ public class UserMainService extends ApiBaseService{
      * @return
      */
     @Transactional(rollbackFor = RuntimeException.class)
-    public Integer adminAddNewUser(JSONObject paramJson) throws RuntimeException{
-        String inviteCode = paramJson.getString("inviteCode");
+    public Integer adminAddNewUser(UserMain userMain) throws RuntimeException{
+        String inviteCode = userMain.getInviteCode();
         Integer num = 0;
         if(StringUtils.isNotEmpty(inviteCode)){
+            JSONObject paramJson = new JSONObject();
+            paramJson.put("inviteCode",inviteCode);
             SchoolInvite schoolInvite = schoolInviteMapper.selectByInviteCode(paramJson);
+
             if(schoolInvite == null)return num;
-            paramJson.put("organizationCode",schoolInvite.getSchoolId());
+            userMain.setOrganizationCode(schoolInvite.getSchoolId());
         }
-        num = userMainMapper.adminAddNewUser(paramJson);
+
+        num = userMainMapper.adminAddNewUser(userMain);
+
+        userRoleService.addNewUserRole(Long.parseLong(userMain.getId().toString()));
         return num;
     }
 

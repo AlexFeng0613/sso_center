@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit;
  *
  * 基本Service类
  */
+@SuppressWarnings("ALL")
 @Service
 public class ApiBaseService {
     @Autowired
@@ -75,14 +76,14 @@ public class ApiBaseService {
      * @param obj
      * @param clazz
      */
-    public void insertIntoRedis(String key, Object obj, Class clazz) {
+    public void insertIntoRedis(String key, Object obj, Class clazz) throws RuntimeException{
         try {
             redisTemplate.setKeySerializer(new GenericToStringSerializer<>(String.class));
             redisTemplate.setValueSerializer(new FastJsonRedisSerializer<>(clazz));
             redisTemplate.opsForValue().set(key, obj, 0);
             redisTemplate.expire(key, Constant.REDIS_FETCH_TIME_OUT,TimeUnit.SECONDS);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("插入Redis Exception");
         }
     }
 
@@ -151,21 +152,21 @@ public class ApiBaseService {
      * @throws Exception
      */
     public JSONObject insertSendEmail(String email, ApiBaseService apiBaseService, String type){
-
         JSONObject resultJson = getResultJson();
 
         ActivateEmailMess activateEmailMess = new ActivateEmailMess();
         activateEmailMess.setEmail(email);
         activateEmailMess.setTicket(MD5Util.encode(Calendar.getInstance().getTime().toString()));
+
         try {
             apiBaseService.insertIntoRedis(email,activateEmailMess,ActivateEmailMess.class);
 
             String activateURL = null;
             if("0".equals(type)){
-                activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
+                activateURL = Constant.websiteAddress + "/user/register/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
                         activateEmailMess.getTicket()+"&type="+type;
             } else {
-                activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
+                activateURL = Constant.websiteAddress + "/user/register/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
                         activateEmailMess.getTicket()+"&type="+type;
             }
 
@@ -177,12 +178,10 @@ public class ApiBaseService {
             emailSend.setSubject(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT);
 
             emailSendMapper.insert(emailSend);
-
-            //MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
         } catch (Exception e) {
-            e.printStackTrace();
+            resultJson.put("success",false);
+            return resultJson;
         }
-
         return resultJson;
     }
 

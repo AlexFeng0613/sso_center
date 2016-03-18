@@ -15,6 +15,7 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.sql.SQLException;
 
@@ -25,6 +26,7 @@ import java.sql.SQLException;
  * 数据源配置类
  */
 @Configuration
+@EnableTransactionManagement
 public class DataConfig {
 
 	@Bean
@@ -127,45 +129,4 @@ public class DataConfig {
 		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
 		redisTemplate.setDefaultSerializer(new FastJsonRedisSerializer<>(redisClass));
 	}
-
-	/*@Bean
-	public MongoTemplate mongoTemplate(
-			@Value("${mongodb.servers}") String servers,
-			@Value("${mongodb.dbName}") String dbName,
-			@Value("${mongodb.username}") String username,
-			@Value("${mongodb.password}") String password
-	) throws UnknownHostException {
-		MongoClientOptions options = MongoClientOptions.builder().build();
-
-		Mongo mongo;
-
-		if (servers.contains(",")) {
-			List<ServerAddress> seeds = new ArrayList<>();
-			for (String server : servers.split(",")) {
-				String[] split = server.split(":");
-				seeds.add(new ServerAddress(split[0], Integer.parseInt(split[1])));
-			}
-			mongo = new MongoClient(seeds, options);
-		} else {
-			String[] split = servers.split(":");
-			ServerAddress addr = new ServerAddress(split[0], Integer.parseInt(split[1]));
-			mongo = new MongoClient(addr, options);
-		}
-
-		MongoDbFactory mongoDbFactory;
-
-		if (!org.springframework.util.StringUtils.isEmpty(username)) {
-			UserCredentials credentials = new UserCredentials(username, password);
-			mongoDbFactory = new SimpleMongoDbFactory(mongo, dbName, credentials);
-		} else {
-			mongoDbFactory = new SimpleMongoDbFactory(mongo, dbName);
-		}
-
-		DbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoDbFactory);
-
-		MappingMongoConverter converter = new MappingMongoConverter(dbRefResolver, new MongoMappingContext());
-		converter.setTypeMapper(new DefaultMongoTypeMapper(null));
-
-		return new MongoTemplate(mongoDbFactory, converter);
-	}*/
 }

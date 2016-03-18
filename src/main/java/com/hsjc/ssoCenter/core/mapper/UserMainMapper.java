@@ -17,7 +17,7 @@ public interface UserMainMapper {
 
     int insertSelective(UserMain userMain);
 
-    int adminAddNewUser(JSONObject paramJson);
+    int adminAddNewUser(UserMain userMain);
 
     int deleteByPrimaryKey(Integer id);
 

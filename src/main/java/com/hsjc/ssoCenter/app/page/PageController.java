@@ -306,7 +306,7 @@ public class PageController extends BaseController{
                            @PathVariable("status")String status,
                            @PathVariable("createTime")String createTime,
                            @PathVariable("realName")String realName,
-                           Model model){
+                           Model model) throws Exception{
         JSONObject paramJson = new JSONObject();
         paramJson.put("pageNum",pageNum);
         paramJson.put("pageSize",pageSize);
@@ -579,7 +579,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 组织机构列表
+     * SSO后台>>组织机构列表
      *
      * @return
      */
@@ -627,7 +627,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 新增组织机构
+     * SSO后台>>新增组织机构
      * @return
      */
     @RequestMapping("sso/newTissue")
@@ -641,7 +641,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 邀请码管理
+     * SSO后台>>邀请码管理
      *
      * @return
      */
@@ -688,7 +688,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 新增邀请码
+     * SSO后台>>新增邀请码
      *
      * @return
      */
@@ -703,7 +703,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 管理员列表
+     * SSO后台>>管理员列表
      *
      * @return
      */
@@ -716,7 +716,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 新增管理员
+     * SSO后台>>新增管理员
      *
      * @return
      */
@@ -730,7 +730,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 站点基本设置
+     * SSO后台>>站点基本设置
      *
      * @return
      */
@@ -743,7 +743,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 邮件接口设置
+     * SSO后台>>邮件接口设置
      *
      * @return
      */
@@ -756,7 +756,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 短信接口设置
+     * SSO后台>>短信接口设置
      *
      * @return
      */
@@ -769,7 +769,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 站点日志
+     * SSO后台>>站点日志
      *
      * @return
      */
@@ -848,7 +848,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-3-7
      *
-     * 邀请码生成成功页面
+     * SSO后台>>邀请码生成成功页面
      *
      * @return
      */
@@ -886,7 +886,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-3-10
      *
-     * 管理员新增用户成功
+     * SSO后台>>管理员新增用户成功
      *
      * @return
      */

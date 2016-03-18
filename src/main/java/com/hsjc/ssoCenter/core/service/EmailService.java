@@ -76,7 +76,12 @@ public class EmailService extends ApiBaseService{
      */
     public JSONObject sendEmail(JSONObject paramJson){
         String email = paramJson.getString("email");
-        JSONObject resultJson = insertSendEmail(email,apiBaseService,"0");
+        JSONObject resultJson = null;
+        try {
+            resultJson = insertSendEmail(email,apiBaseService,"0");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return resultJson;
     }
 }

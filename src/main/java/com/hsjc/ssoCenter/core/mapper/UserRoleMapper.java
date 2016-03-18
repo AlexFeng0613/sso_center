@@ -10,15 +10,15 @@ import com.hsjc.ssoCenter.core.domain.UserRole;
  *
  */
 public interface UserRoleMapper {
-    int insert(UserRole record);
+    int insert(UserRole userRole);
 
-    int insertSelective(UserRole record);
+    int insertSelective(UserRole userRole);
 
     int deleteByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(UserRole record);
+    int updateByPrimaryKeySelective(UserRole userRole);
 
-    int updateByPrimaryKey(UserRole record);
+    int updateByPrimaryKey(UserRole userRole);
 
     UserRole selectByPrimaryKey(Long id);
 }
