@@ -1,6 +1,11 @@
 package com.hsjc.ssoCenter.core.mapper;
 
 import com.hsjc.ssoCenter.core.domain.Resource;
+import com.hsjc.ssoCenter.core.domain.UserResource;
+import com.hsjc.ssoCenter.core.domain.UserRole;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author : zga
@@ -21,4 +26,8 @@ public interface ResourceMapper {
     int updateByPrimaryKey(Resource record);
 
     Resource selectByPrimaryKey(Long id);
+
+    List<HashMap> selectResourcesByRoleId(UserRole userRole);
+
+    List<HashMap> selectResourcesByUserId(UserResource userResource);
 }

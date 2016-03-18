@@ -38,6 +38,8 @@ public class Resource {
 
     private String clientId;
 
+    private String ssoPassword;
+
     public Long getId() {
         return id;
     }
@@ -150,6 +152,14 @@ public class Resource {
         this.clientId = clientId;
     }
 
+    public String getSsoPassword() {
+        return ssoPassword;
+    }
+
+    public void setSsoPassword(String ssoPassword) {
+        this.ssoPassword = ssoPassword;
+    }
+
     @Override
     public String toString() {
         return "Resource{" +
@@ -167,6 +177,7 @@ public class Resource {
                 ", idName='" + idName + '\'' +
                 ", level='" + level + '\'' +
                 ", clientId='" + clientId + '\'' +
+                ", ssoPassword='" + ssoPassword + '\'' +
                 '}';
     }
 }

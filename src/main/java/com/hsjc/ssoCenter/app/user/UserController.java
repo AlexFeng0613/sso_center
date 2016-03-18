@@ -34,6 +34,7 @@ import javax.servlet.http.HttpSession;
  *
  * 用户控制类
  */
+@SuppressWarnings("ALL")
 @Controller
 @RequestMapping("/user/")
 public class UserController extends BaseController {
@@ -128,7 +129,7 @@ public class UserController extends BaseController {
         session.setTimeout(-1);
         session.setAttribute("user", userMain);
 
-        if("admin".equals(userMain.getUserName())){
+        if(subject.hasRole("admin") || subject.hasRole("superAdmin")){
             return "redirect:/page/sso/backstageIndex.html";
         }
 

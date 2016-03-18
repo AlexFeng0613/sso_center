@@ -3,222 +3,98 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="../../public/backstage">
-    <head>
-        <script text="text/javascript" th:src="@{/static/scripts/WdatePicker.js}"  src="../../../static/scripts/WdatePicker.js"></script>
-    </head>
+    <head></head>
     <body>
-                <div id="content" layout:fragment="content">
-                    <div class="index_title">站点日志</div>
-                    <div class="tab_search">
-                        <div class="time">开始时间</div>
-                        <input type="text" id="fromDate" class="Wdate"/>
-                        <div class="time">结束时间</div>
-                        <input type="text" id="toDate" class="Wdate"/>
-                        <div class="tab_fn">
-                            <input type="button" value="查询" class="tab_fnLi"/>
-                            <input type="reset" value="重置" class="tab_fnLi"/>
-                        </div>
-                        <input type="search" placeholder="输入操作关键字…"/>
-                    </div>
-                    <table class="site_tab">
-                        <thead>
-                            <tr>
-                                <th>操作人</th>
-                                <th>操作功能模块</th>
-                                <th>登录IP</th>
-                                <th>操作时间</th>
-                                <th>操作说明</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>admin</td>
-                                <td>用户管理</td>
-                                <td>203.156.211.242</td>
-                                <td>2015-12-22 11:01:54</td>
-                                <td>登录</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>用户管理</td>
-                                <td>203.156.211.242</td>
-                                <td>2015-12-22 11:01:54</td>
-                                <td>新增用户</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>用户管理</td>
-                                <td>203.156.211.242</td>
-                                <td>2015-12-22 11:01:54</td>
-                                <td>短信接口设置</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>用户管理</td>
-                                <td>203.156.211.242</td>
-                                <td>2015-12-22 11:01:54</td>
-                                <td>登添加管理员</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>用户管理</td>
-                                <td>203.156.211.242</td>
-                                <td>2015-12-22 11:01:54</td>
-                                <td>组织机构权限管理</td>
-                            </tr>
-                            <tr>
-                                <td>admin</td>
-                                <td>用户管理</td>
-                                <td>203.156.211.242</td>
-                                <td>2015-12-22 11:01:54</td>
-                                <td>客服员管理</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="tab_foot">
-                        <div class="pages">
-                            <div class="jil">共58999条记录</div>
-                            <a href="#" class="page">首页</a>
-                            <a href="#" class="page">上一页</a>
-                            <a href="#" class="page">下一页</a>
-                            <a href="#" class="page">尾页</a>
-                            <select>
-                                <option>1/20</option>
-                                <option>2/20</option>
-                                <option>3/20</option>
-                                <option>4/20</option>
-                                <option>5/20</option>
-                            </select>
-                        </div>
-                    </div>
-                    <script text="text/javascript">
-                        $(function(){
-                            $('#site_log').addClass('selected');
+        <div id="content" layout:fragment="content">
+            <div class="index_title">站点日志</div>
 
-                            $('#fromDate').focus(function(){
-                                WdatePicker({
-                                      isShowToday:false,
-                                     isShowOK:false,
-                                     isShowClear:false,
-                                    onpicked:function(){
-                                        $('#toDate').focus();
-                                    }
-                                });
-                            });
-
-                            $('#toDate').focus(function(){
-                                WdatePicker({
-                                    minDate:"#F{$dp.$D('fromDate')}"
-                                });
-                            });
-                        });
-                    </script>
+            <div class="tab_search">
+                <div class="time">开始时间</div>
+                <input type="text" id="fromDate" class="Wdate"/>
+                <div class="time">结束时间</div>
+                <input type="text" id="toDate" class="Wdate"/>
+                <div class="tab_fn">
+                    <input type="button" value="查询" class="tab_fnLi"/>
+                    <input type="reset" value="重置" class="tab_fnLi"/>
                 </div>
+                <input type="search" placeholder="输入操作关键字…"/>
+            </div>
 
+            <table class="site_tab">
+                <thead>
+                    <tr>
+                        <th>操作人</th>
+                        <th>操作功能模块</th>
+                        <th>登录IP</th>
+                        <th>操作时间</th>
+                        <th>操作说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>admin</td>
+                        <td>用户管理</td>
+                        <td>203.156.211.242</td>
+                        <td>2015-12-22 11:01:54</td>
+                        <td>登录</td>
+                    </tr>
+                    <tr>
+                        <td>admin</td>
+                        <td>用户管理</td>
+                        <td>203.156.211.242</td>
+                        <td>2015-12-22 11:01:54</td>
+                        <td>新增用户</td>
+                    </tr>
+                    <tr>
+                        <td>admin</td>
+                        <td>用户管理</td>
+                        <td>203.156.211.242</td>
+                        <td>2015-12-22 11:01:54</td>
+                        <td>短信接口设置</td>
+                    </tr>
+                    <tr>
+                        <td>admin</td>
+                        <td>用户管理</td>
+                        <td>203.156.211.242</td>
+                        <td>2015-12-22 11:01:54</td>
+                        <td>登添加管理员</td>
+                    </tr>
+                    <tr>
+                        <td>admin</td>
+                        <td>用户管理</td>
+                        <td>203.156.211.242</td>
+                        <td>2015-12-22 11:01:54</td>
+                        <td>组织机构权限管理</td>
+                    </tr>
+                    <tr>
+                        <td>admin</td>
+                        <td>用户管理</td>
+                        <td>203.156.211.242</td>
+                        <td>2015-12-22 11:01:54</td>
+                        <td>客服员管理</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tab_foot">
+                <div class="pages">
+                    <div class="jil">共58999条记录</div>
+                    <a href="#" class="page">首页</a>
+                    <a href="#" class="page">上一页</a>
+                    <a href="#" class="page">下一页</a>
+                    <a href="#" class="page">尾页</a>
+                    <select>
+                        <option>1/20</option>
+                        <option>2/20</option>
+                        <option>3/20</option>
+                        <option>4/20</option>
+                        <option>5/20</option>
+                    </select>
+                </div>
+            </div>
+
+            <script text="text/javascript" th:src="@{/static/scripts/WdatePicker.js}"  src="../../../static/scripts/WdatePicker.js"></script>
+            <script text="text/javascript" th:src="@{/static/scripts/backstage/siteLog.js}" src="/static/scripts/backstage/siteLog.js"></script>
+        </div>
     </body>
 </html>

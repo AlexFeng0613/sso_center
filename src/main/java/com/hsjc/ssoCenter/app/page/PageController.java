@@ -6,6 +6,7 @@ import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.domain.*;
 import com.hsjc.ssoCenter.core.helper.RedisHelper;
 import com.hsjc.ssoCenter.core.service.*;
+import com.hsjc.ssoCenter.core.util.MenuUtil;
 import com.hsjc.ssoCenter.core.util.SSOStringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,6 +27,7 @@ import java.util.List;
  *
  * 页面跳转控制类
  */
+@SuppressWarnings("ALL")
 @Controller
 @RequestMapping("/page/")
 public class PageController extends BaseController{
@@ -56,6 +59,12 @@ public class PageController extends BaseController{
     @Autowired
     SchoolInviteService schoolInviteService;
 
+    @Autowired
+    RoleService roleService;
+
+    @Autowired
+    ResourceService resourceService;
+
     /**
      * @author : zga
      * @date : 2015-12-04
@@ -64,10 +73,27 @@ public class PageController extends BaseController{
      */
     @RequestMapping("index")
     public String index(Model model){
+        UserMain userMain = getCurrentUser();
+        if(userMain == null){
+            return "redirect:/user/login.html";
+        }
 
-        List<IndexIcos> list = indexIcosService.getAllIcos();
-        model.addAttribute("icons",list);
+        List<HashMap> list = null;
+        Long userId = Long.parseLong(userMain.getId().toString());
+        Role role = roleService.selectRoleByUserId(userId);
+        if(role != null){
+            /**
+             * 添加用户的资源
+             */
+            list = resourceService.selectResourcesByRoleId(userId);
 
+            if("user".equals(role.getRoleKey())){
+                List<HashMap> list1 = resourceService.selectResourcesByUserId(userId);
+                list.addAll(list1);
+            }
+        }
+
+        model.addAttribute("resourceList",list);
         return "/user/index";
     }
 
@@ -241,7 +267,26 @@ public class PageController extends BaseController{
      * @return
      */
     @RequestMapping("sso/backstageIndex")
-    public String backstageIndex(){
+    public String backstageIndex(Model model, HttpServletRequest request){
+        UserMain userMain = getCurrentUser();
+        if(userMain == null){
+            return "redirect:/user/login.html";
+        }
+
+        List<HashMap> list = null;
+        Long userId = Long.parseLong(userMain.getId().toString());
+        Role role = roleService.selectRoleByUserId(userId);
+        if(role != null){
+            /**
+             * 添加用户的资源
+             */
+            list = resourceService.selectResourcesByRoleId(userId);
+        }
+
+        List<HashMap> firstMenuList = MenuUtil.getMenuList(list);
+
+        request.getSession().setAttribute("firstMenuList",firstMenuList);
+        request.getSession().setAttribute("resourceList",list);
         return "/backstage/backstageIndex";
     }
 

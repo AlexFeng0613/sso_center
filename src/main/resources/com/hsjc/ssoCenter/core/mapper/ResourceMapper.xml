@@ -16,11 +16,12 @@
     <result column="idName" property="idName" jdbcType="VARCHAR" />
     <result column="level" property="level" jdbcType="CHAR" />
     <result column="clientId" property="clientId" jdbcType="VARCHAR" />
+    <result column="ssoPassword" property="ssoPassword" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, resKey, resName, resPath, parentId, resType, resUrl, state, description, createDate, 
-    className, idName, level, clientId
+    className, idName, level, clientId,ssoPassword
   </sql>
 
   <insert id="insert" parameterType="Resource">
@@ -37,7 +38,8 @@
       className,
       idName,
       level,
-      clientId)
+      clientId,
+      ssoPassword)
     values (
       #{resKey}, 
       #{resName}, 
@@ -51,7 +53,8 @@
       #{className},
       #{idName},
       #{level},
-      #{clientId})
+      #{clientId},
+      #{ssoPassword})
   </insert>
 
   <insert id="insertSelective" parameterType="Resource">
@@ -99,6 +102,9 @@
       <if test="clientId != null" >
         clientId,
       </if>
+      <if test="ssoPassword != null" >
+        ssoPassword,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -143,10 +149,13 @@
       <if test="clientId != null" >
         #{clientId},
       </if>
+      <if test="ssoPassword != null" >
+        #{ssoPassword},
+      </if>
     </trim>
   </insert>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbresource
     where id = #{id}
   </delete>
@@ -193,6 +202,9 @@
       <if test="clientId != null" >
         clientId = #{clientId},
       </if>
+      <if test="ssoPassword != null" >
+        ssoPassword = #{ssoPassword},
+      </if>
     </set>
     where id = #{id}
   </update>
@@ -211,14 +223,107 @@
       className = #{className},
       idName = #{idName},
       level = #{level},
-      clientId = #{clientId}
+      clientId = #{clientId},
+      ssoPassword = #{ssoPassword}
     where id = #{id}
   </update>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tbresource
     where id = #{id}
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-3-18
+    根据userId查询资源列表
+  -->
+  <select id="selectResourcesByRoleId" resultType="java.util.HashMap">
+    SELECT DISTINCT
+    tr.id,
+    tr.resKey,
+    tr.resName,
+    tr.resPath,
+    tr.parentId,
+    tr.resType,
+    tr.resUrl,
+    tr.state,
+    tr.description,
+    tr.createDate,
+    (CASE
+    WHEN tr.className IS NULL THEN 'xxx'
+    ELSE tr.className
+    END ) AS className,
+    (CASE
+    WHEN tr.idName IS NULL THEN 'xxx'
+    ELSE tr.idName
+    END ) AS idName,
+    tr.level,
+    (CASE
+    WHEN tr.clientId IS NULL THEN 'xxx'
+    ELSE tr.clientId
+    END ) AS clientId,
+    (CASE
+    WHEN tr.ssoPassword IS NULL THEN 'xxx'
+    ELSE tr.ssoPassword
+    END ) AS ssoPassword
+    FROM
+    tbresource tr,
+    tbroleresource trr,
+    tbuserrole tur
+    <where>
+      tr.id = trr.resourceId
+      AND trr.roleId = tur.roleId
+      <if test="userId != null">
+        AND tur.userId = #{userId}
+      </if>
+    </where>
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-3-18
+    根据userId查询资源列表(这个是针对普通用户的查询,管理员并不需要)
+  -->
+  <select id="selectResourcesByUserId" resultType="java.util.HashMap">
+    SELECT DISTINCT
+    tr.id,
+    tr.resKey,
+    tr.resName,
+    tr.resPath,
+    tr.parentId,
+    tr.resType,
+    tr.resUrl,
+    tr.state,
+    tr.description,
+    tr.createDate,
+    (CASE
+    WHEN tr.className IS NULL THEN 'xxx'
+    ELSE tr.className
+    END ) AS className,
+    (CASE
+    WHEN tr.idName IS NULL THEN 'xxx'
+    ELSE tr.idName
+    END ) AS idName,
+    tr.level,
+    (CASE
+    WHEN tr.clientId IS NULL THEN 'xxx'
+    ELSE tr.clientId
+    END ) AS clientId,
+    (CASE
+    WHEN tr.ssoPassword IS NULL THEN 'xxx'
+    ELSE tr.ssoPassword
+    END ) AS ssoPassword
+    FROM
+      tbresource tr,
+      tbuserresource ture
+     <where>
+       tr.id = ture.resourceId
+      <if test="userId != null">
+        AND ture.userId = #{userId}
+      </if>
+     </where>
   </select>
 </mapper>

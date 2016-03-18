@@ -14,13 +14,14 @@ import java.util.List;
  * 主页图标Service类
  *
  */
+@SuppressWarnings("ALL")
 @Service
 public class IndexIcosService extends ApiBaseService{
     @Autowired
-    private ApiBaseService apiBaseService;
+    ApiBaseService apiBaseService;
 
     @Autowired
-    private IndexIcosMapper indexIcosMapper;
+    IndexIcosMapper indexIcosMapper;
 
     /**
      * @author : zga

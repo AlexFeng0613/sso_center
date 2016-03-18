@@ -6,12 +6,6 @@
  *
  */
 $(function(){
-    $('#invitation_manage').addClass('selected');
-
-    if($('input[name="inviteCode"]').val() == '0'){
-        $('input[name="inviteCode"]').val('');
-    }
-
     /**
      * @author : zga
      * @date : 2016-3-14
@@ -76,3 +70,18 @@ function returnInviteCodeManageURL(){
     return url;
 }
 
+
+/**
+ * @author : zga
+ * @date : 2016-3-18
+ *
+ * 页面载入时添加选中样式
+ *
+ */
+window.onload = function(){
+    $('#invitation_manage').addClass('selected');
+
+    if($('input[name="inviteCode"]').val() == '0'){
+        $('input[name="inviteCode"]').val('');
+    }
+};

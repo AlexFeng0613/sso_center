@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  *
  * 第三方接口控制类
  */
+@SuppressWarnings("ALL")
 @Controller
 @RequestMapping("/3rd/")
 public class ThirdSynDataController extends BaseController {

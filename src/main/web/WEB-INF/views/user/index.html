@@ -7,59 +7,16 @@
         <div class="container" layout:fragment="service">
             <div class="register_nav">
                 <nav>
-                    <a th:each="ico : ${icons}" href="javascript:void(0);">
-                        <input type="hidden" th:value="${ico.icoType}" name="icoType"/>
-                        <input type="hidden" th:value="${ico.accessUrl}" name="accessURL"/>
-                        <input type="hidden" th:value="${ico.clientId}" name="clientId"/>
-                        <input type="hidden" th:value="${ico.ssoPassword}" name="ssoPassword"/>
-                        <img th:src="@{${ico.icoPath}}"/>
+                    <a th:each="resource : ${resourceList}">
+                        <input type="hidden" th:value="${resource.resType}" name="resType"/>
+                        <input type="hidden" th:value="${resource.resUrl}" name="resUrl"/>
+                        <input type="hidden" th:value="${resource.clientId}" name="clientId"/>
+                        <input type="hidden" th:value="${resource.ssoPassword}" name="ssoPassword"/>
+                        <img th:src="@{${resource.resPath}}"/>
                     </a>
                 </nav>
             </div>
-            <script type="text/javascript">
-                $(function(){
-                    var comh= $('.container').height();
-                    var rh= $('.register_nav').height();
-                    var rrh=(comh-rh)/2;
-                    $('.register_nav').css('margin',rrh+ 'px auto 0');
-
-                    $(window).on('resize scroll',function(){
-                        var comh= $('.container').height();
-                        var rh= $('.register_nav').height();
-                        var rrh=(comh-rh)/2;
-                        $('.register_nav').css('margin',rrh+ 'px auto 0');
-                    });
-
-                    /**
-                     * a click事件
-                     */
-                    $('a').click(function(){
-                        var accessURL = $(this).find('input[name="accessURL"]').val();
-                        var icoType = $(this).find('input[name="icoType"]').val();
-                        var clientId = $(this).find('input[name="clientId"]').val();
-                        var ssoPassword = $(this).find('input[name="ssoPassword"]').val();
-                        if(icoType == '0'){
-                            var data = {
-                                'clientId' : clientId,
-                                'ssoPassword' : ssoPassword
-                            }
-                            $.ajax({
-                                url : '/sso/generateSSOAccessThirdURL.json',
-                                type : 'POST',
-                                data : JSON.stringify(data),
-                                contentType: 'application/json',
-                                dataType : 'json',
-                                success : function(data){
-                                    var targetURL = data.targetURL;
-                                    window.location.href = accessURL + targetURL;
-                                }
-                            });
-                        } else {
-                            window.location.href = accessURL;
-                        }
-                    });
-                });
-            </script>
+            <script type="text/javascript" th:src="@{/static/scripts/index.js}" src="/static/scripts/index.js"></script>
         </div>
     </body>
 </html>

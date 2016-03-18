@@ -31,18 +31,17 @@
         <div class="container">
             <div class="center">
                 <aside class="aside">
-                    <!--
-                        <dl class="menu_title">
-                            <dt th:text="${}">
-                                <input name="class_style" th:value="${className}"/>
-                            </dt>
-                            <dd>
-                                <input name="id_style" th:value="${idName}"/>
-                                <a th:href=@{resUrl}></a>
-                            </dd>
-                        </dl>
-                    -->
-                    <dl class="menu_title">
+                    <dl class="menu_title" th:each="firstMenu : ${session.firstMenuList}">
+                        <input name="class_style" type="hidden" th:value="${firstMenu.className}"/>
+                        <dt th:text="${firstMenu.resName}">
+                        </dt>
+                        <dd th:each="resource : ${session.resourceList}" th:if="${firstMenu.id == resource.parentId}">
+                            <input name="id_style" type="hidden" th:value="${resource.idName}"/>
+                            <a th:href="@{${resource.resUrl}}" th:text="${resource.resName}"></a>
+                        </dd>
+                    </dl>
+
+                    <!--<dl class="menu_title">
                         <dt class="d1">用户管理</dt>
                         <dd><a href="/page/sso/userList/1,10,0,0,0,0,0.html" id="user_list">用户列表</a></dd>
                         <dd><a href="/page/sso/newUser.html" id="new_user">新增用户</a></dd>
@@ -77,12 +76,14 @@
                         <dd><a href="/email/emailPort.html" id="email_port">邮件接口设置</a></dd>
                         <dd><a href="/sms/messPort.html" id="mess_port">短信接口设置</a></dd>
                         <dd><a href="/page/sso/siteLog.html" id="site_log">站点日志</a></dd>
-                    </dl>
+                    </dl>-->
                 </aside>
                 <section class="section">
                     <div id="content" layout:fragment="content"></div>
                 </section>
             </div>
+
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/backstage.js}" src="/static/scripts/backstage/backstage.js"></script>
         </div>
         <footer class="footer">
             <div class="center">

@@ -1,6 +1,7 @@
 package com.hsjc.ssoCenter.core.mapper;
 
 import com.hsjc.ssoCenter.core.domain.Role;
+import com.hsjc.ssoCenter.core.domain.UserRole;
 
 /**
  * @author : zga
@@ -21,4 +22,6 @@ public interface RoleMapper {
     int updateByPrimaryKey(Role record);
 
     Role selectByPrimaryKey(Long id);
+
+    Role selectRoleByUserId(UserRole userRole);
 }

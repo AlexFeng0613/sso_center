@@ -64,7 +64,7 @@
     </trim>
   </insert>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey">
     delete from tbrole
     where id = #{id}
   </delete>
@@ -97,10 +97,27 @@
     where id = #{id}
   </update>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tbrole
     where id = #{id}
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-3-18
+    根据userId查询角色
+  -->
+  <select id="selectRoleByUserId" resultType="Role">
+    SELECT DISTINCT tr.* FROM
+    tbrole tr,
+    tbuserrole tur
+    <where>
+      tr.id = tur.roleId
+      <if test="userId != null">
+        AND tur.userId = #{userId}
+      </if>
+    </where>
   </select>
 </mapper>
