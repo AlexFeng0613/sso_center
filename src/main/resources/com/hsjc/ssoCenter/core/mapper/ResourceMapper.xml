@@ -162,7 +162,7 @@
 
   <update id="updateByPrimaryKeySelective" parameterType="Resource">
     update tbresource
-    <set >
+    <set>
       <if test="resKey != null" >
         resKey = #{resKey},
       </if>
@@ -325,5 +325,59 @@
         AND ture.userId = #{userId}
       </if>
      </where>
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-3-21
+    根据相应的参数查询资源
+  -->
+  <select id="selectResourceByParam" resultType="java.util.HashMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    <where>
+      <if test="resKey != null" >
+        resKey = #{resKey},
+      </if>
+      <if test="resName != null" >
+        AND resName = #{resName},
+      </if>
+      <if test="resPath != null" >
+        AND resPath = #{resPath},
+      </if>
+      <if test="parentId != null" >
+        AND parentId = #{parentId},
+      </if>
+      <if test="resType != null" >
+        AND resType = #{resType},
+      </if>
+      <if test="resUrl != null" >
+        AND resUrl = #{resUrl},
+      </if>
+      <if test="state != null" >
+        AND state = #{state},
+      </if>
+      <if test="description != null" >
+        AND description = #{description},
+      </if>
+      <if test="createDate != null" >
+        AND createDate = #{createDate},
+      </if>
+      <if test="className != null" >
+        AND className = #{className},
+      </if>
+      <if test="idName != null" >
+        AND idName = #{idName},
+      </if>
+      <if test="level != null" >
+        AND level = #{level},
+      </if>
+      <if test="clientId != null" >
+        AND clientId = #{clientId},
+      </if>
+      <if test="ssoPassword != null" >
+        AND ssoPassword = #{ssoPassword},
+      </if>
+    </where>
   </select>
 </mapper>

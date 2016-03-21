@@ -4,6 +4,7 @@ import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.alibaba.fastjson.support.spring.FastJsonJsonView;
 import com.hsjc.ssoCenter.core.formatter.DateFormatter;
+import com.hsjc.ssoCenter.core.interceptor.LoginInterceptor;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +24,8 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -167,6 +170,35 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		multipartResolver.setMaxUploadSize(1000000000);
 		return multipartResolver;
 
+	}
+
+	@Bean
+	public BeanNameUrlHandlerMapping BeanNameUrlHandlerMapping(){
+		BeanNameUrlHandlerMapping beanNameUrlHandlerMapping = new BeanNameUrlHandlerMapping();
+		Object[] interceptors = {loginInterceptor()};
+
+		beanNameUrlHandlerMapping.setInterceptors(interceptors);
+		return beanNameUrlHandlerMapping;
+	}
+
+	@Bean
+	public LoginInterceptor loginInterceptor(){
+		LoginInterceptor loginInterceptor = new LoginInterceptor();
+		loginInterceptor.setLoginUrl("/user/login.html");
+		return loginInterceptor;
+	}
+
+	@Bean
+	public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
+		SimpleMappingExceptionResolver simpleMappingExceptionResolver = new SimpleMappingExceptionResolver();
+
+		simpleMappingExceptionResolver.setDefaultErrorView("/user/login");
+		Properties properties = new Properties();
+		properties.setProperty("org.thymeleaf.exceptions.TemplateProcessingException","/user/login");
+		simpleMappingExceptionResolver.setExceptionMappings(properties);
+
+		System.out.println("zga simp:" + simpleMappingExceptionResolver);
+		return simpleMappingExceptionResolver;
 	}
 
 	/*

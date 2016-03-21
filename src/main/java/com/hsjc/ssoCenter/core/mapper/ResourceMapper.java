@@ -1,5 +1,6 @@
 package com.hsjc.ssoCenter.core.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.domain.Resource;
 import com.hsjc.ssoCenter.core.domain.UserResource;
 import com.hsjc.ssoCenter.core.domain.UserRole;
@@ -30,4 +31,6 @@ public interface ResourceMapper {
     List<HashMap> selectResourcesByRoleId(UserRole userRole);
 
     List<HashMap> selectResourcesByUserId(UserResource userResource);
+
+    List<HashMap> selectResourceByParam(JSONObject paramJson);
 }

@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.hsjc.ssoCenter.core.annotation.SSOSystemLog;
 import com.hsjc.ssoCenter.core.constant.ThirdSynConstant;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
+import com.hsjc.ssoCenter.core.domain.UserResource;
 import com.hsjc.ssoCenter.core.mapper.SynMapper;
 import com.hsjc.ssoCenter.core.mapper.ThirdClientsMapper;
 import com.hsjc.ssoCenter.core.mapper.ThirdFilterMapper;
@@ -22,6 +23,7 @@ import java.util.List;
  * @author : zga
  * @date : 2016-01-28
  */
+@SuppressWarnings("ALL")
 @Service
 public class ThirdSynDataService extends ApiBaseService{
     private final static Logger logger = Logger.getLogger(ThirdSynDataService.class);
@@ -34,6 +36,12 @@ public class ThirdSynDataService extends ApiBaseService{
 
     @Autowired
     ThirdFilterMapper thirdFilterMapper;
+
+    @Autowired
+    ResourceService resourceService;
+
+    @Autowired
+    UserResourceService userResourceService;
 
     /**
      * @author : zga
@@ -341,6 +349,22 @@ public class ThirdSynDataService extends ApiBaseService{
              * 插入同步详情日志
              */
             insertSynUserDeailLog(paramJson,userId);
+
+            /**
+             * 更新用户的第三方资源
+             * 1、根据clientId查询资源id
+             * 2、更新资源到tbuserresource表中
+             */
+            JSONObject paramJson1 = new JSONObject();
+            paramJson1.put("clientId",paramJson.getString("clientId"));
+            List<HashMap> resourrceList = resourceService.selectResourceByParam(paramJson1);
+            Long resourceId = Long.parseLong(resourrceList.get(0).get("id").toString());
+
+            UserResource userResource = new UserResource();
+            userResource.setUserId(Long.parseLong(String.valueOf(userId)));
+            userResource.setResourceId(resourceId);
+
+            userResourceService.addNew(userResource);
         }
     }
 

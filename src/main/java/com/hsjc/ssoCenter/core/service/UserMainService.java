@@ -286,6 +286,9 @@ public class UserMainService extends ApiBaseService{
                     userStudentMapper.insert(userStudent);
                 }
 
+                /**
+                 * 为用户添加角色,默认是普通用户
+                 */
                 userRoleService.addNewUserRole(Long.parseLong(userMain.getId().toString()));
             }
         } catch (Exception e) {
@@ -762,8 +765,10 @@ public class UserMainService extends ApiBaseService{
 
         num = userMainMapper.adminAddNewUser(userMain);
 
+        /**
+         * 为用户添加角色,默认是普通用户
+         */
         userRoleService.addNewUserRole(Long.parseLong(userMain.getId().toString()));
         return num;
     }
-
 }

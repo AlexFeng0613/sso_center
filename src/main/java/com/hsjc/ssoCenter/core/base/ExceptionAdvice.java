@@ -32,7 +32,7 @@ public class ExceptionAdvice {
 		System.out.println(exceptionTrace);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setView(new RedirectView("/user/login"));
+		mav.setView(new RedirectView("/user/login.html"));
 
 		mav.addObject("errorMessage", e.getMessage());
 		mav.addObject("success", "false");

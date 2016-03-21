@@ -112,10 +112,14 @@ public class UserController extends BaseController {
                         @RequestParam(value = "openId",required = false) String openId,
                         String username,
                         String password,
+                        String rememberMe,
                         Model model) throws Exception {
         UsernamePasswordToken upToken = new UsernamePasswordToken(username, password, true);
         try{
             SecurityUtils.getSubject().login(upToken);
+            if(StringUtils.isNotEmpty(rememberMe)){
+                upToken.setRememberMe(true);
+            }
         } catch (AuthenticationException e) {
             logger.debug("用户名/密码不正确");
             model.addAttribute("errorMessage","用户名/密码不正确");
@@ -126,7 +130,7 @@ public class UserController extends BaseController {
         UserMain userMain = (UserMain) subject.getPrincipal();
 
         Session session = subject.getSession(true);
-        session.setTimeout(-1);
+        session.setTimeout(12000);
         session.setAttribute("user", userMain);
 
         if(subject.hasRole("admin") || subject.hasRole("superAdmin")){

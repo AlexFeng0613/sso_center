@@ -1,5 +1,6 @@
 package com.hsjc.ssoCenter.core.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.domain.UserResource;
 import com.hsjc.ssoCenter.core.domain.UserRole;
 import com.hsjc.ssoCenter.core.mapper.ResourceMapper;
@@ -53,5 +54,18 @@ public class ResourceService {
         userResource.setUserId(userId);
 
         return resourceMapper.selectResourcesByUserId(userResource);
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-21
+     *
+     * 根据相应参数查询资源
+     *
+     * @param userId
+     * @return
+     */
+    public List<HashMap> selectResourceByParam(JSONObject paramJson){
+        return resourceMapper.selectResourceByParam(paramJson);
     }
 }

@@ -10,13 +10,13 @@ import com.hsjc.ssoCenter.core.domain.UserResource;
  *
  */
 public interface UserResourceMapper {
-    int insert(UserResource record);
+    int insert(UserResource uerResource);
 
-    int insertSelective(UserResource record);
+    int insertSelective(UserResource uerResource);
 
     int deleteByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(UserResource record);
+    int updateByPrimaryKeySelective(UserResource uerResource);
 
     int updateByPrimaryKey(UserResource record);
 

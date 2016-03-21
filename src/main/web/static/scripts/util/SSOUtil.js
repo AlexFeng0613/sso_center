@@ -28,10 +28,10 @@ var SSOSystem = {
      *
      */
     exit : function(){
-        window.opener=null;
-        window.open('','_self');
+        window.opener = null;
+        window.open("", "_self");
         window.close();
-        window.open("/page/logout.html","_blank")
+        window.open("/page/logout.html",'_blank');
     },
 
     /**
