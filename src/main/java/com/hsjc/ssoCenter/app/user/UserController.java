@@ -130,7 +130,7 @@ public class UserController extends BaseController {
         UserMain userMain = (UserMain) subject.getPrincipal();
 
         Session session = subject.getSession(true);
-        session.setTimeout(12000);
+        session.setTimeout(-1);
         session.setAttribute("user", userMain);
 
         if(subject.hasRole("admin") || subject.hasRole("superAdmin")){
