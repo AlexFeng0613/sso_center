@@ -22,8 +22,24 @@ $(function(){
      */
     $('.del_clientFilter').click(function(){
         if(window.confirm('确定要删除吗?')){
-            console.log(1);
-            return true;
+            var filterId = $(this).parent().siblings().eq(0).find('input[name="filterId"]').val();
+            var paramData = {
+                'filterId' : filterId
+            };
+            $.ajax({
+                url : '/thirdClientFilter/deleteThirdClientFilter.json',
+                type : 'POST',
+                data : JSON.stringify(paramData),
+                contentType: 'application/json',
+                dataType : 'json',
+                success : function(data){
+                    if(data.success){
+                        window.location.reload();
+                    }else {
+                        SSOSystem.showAlertDialog(ErrorMessage[data.message],'','111');
+                    }
+                }
+            });
         }
         return false;
     })
@@ -69,7 +85,7 @@ $(function(){
                 if(data.success){
                     window.location.reload();
                 }else {
-                    if(data.message == 'S500000') alert('服务端异常');
+                    SSOSystem.showAlertDialog(ErrorMessage[data.message],'','111');
                 }
             }
         });

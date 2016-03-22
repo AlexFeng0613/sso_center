@@ -17,6 +17,7 @@ import java.util.List;
  * 第三方导入数据过滤列表
  *
  */
+@SuppressWarnings("ALL")
 @Service
 public class ThirdClientFilterService extends ApiBaseService{
     @Autowired
@@ -58,6 +59,25 @@ public class ThirdClientFilterService extends ApiBaseService{
             thirdFilterMapper.insert(thirdFilter);
             return validate(1);
         } catch (Exception e){
+            return validate(0);
+        }
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-22
+     *
+     * 新增第三方过滤
+     *
+     * @param paramJson
+     * @return
+     */
+    public JSONObject deleteThirdClientFilter(JSONObject paramJson){
+        Integer id = paramJson.getInteger("filterId");
+        try {
+            thirdFilterMapper.deleteByPrimaryKey(id);
+            return validate(1);
+        } catch (Exception e) {
             return validate(0);
         }
     }

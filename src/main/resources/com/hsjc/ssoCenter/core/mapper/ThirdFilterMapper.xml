@@ -108,9 +108,19 @@
     查询所有的第三方过滤规则列表
   -->
   <select id="selectAllThirdFilters" resultType="java.util.HashMap">
-    SELECT tc.description,tc.clientId,torg.organizationCode,torg.organizationName,tf.tstudent
-    FROM tb3rdfilter tf,tb3rdclients tc,tborganization torg
-    WHERE tf.organizationCode = torg.organizationCode
+    SELECT
+      tc.description,
+      tc.clientId,
+      torg.organizationCode,
+      torg.organizationName,
+      tf.id fid,
+      tf.tstudent
+    FROM
+    tb3rdfilter tf,
+    tb3rdclients tc,
+    tborganization torg
+    WHERE
+    tf.organizationCode = torg.organizationCode
     AND tf.trdClientId = tc.clientId
   </select>
 </mapper>
