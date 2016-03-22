@@ -129,10 +129,6 @@ public class UserController extends BaseController {
         Subject subject = SecurityUtils.getSubject();
         UserMain userMain = (UserMain) subject.getPrincipal();
 
-        Session session = subject.getSession(true);
-        session.setTimeout(-1);
-        session.setAttribute("user", userMain);
-
         if(subject.hasRole("admin") || subject.hasRole("superAdmin")){
             return "redirect:/page/sso/backstageIndex.html";
         }

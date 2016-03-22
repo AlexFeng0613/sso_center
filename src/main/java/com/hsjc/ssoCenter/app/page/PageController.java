@@ -307,6 +307,9 @@ public class PageController extends BaseController{
                            @PathVariable("createTime")String createTime,
                            @PathVariable("realName")String realName,
                            Model model) throws Exception{
+        if(getCurrentUser() == null){
+            return "/user/login";
+        }
         JSONObject paramJson = new JSONObject();
         paramJson.put("pageNum",pageNum);
         paramJson.put("pageSize",pageSize);

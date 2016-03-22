@@ -10,10 +10,8 @@ import com.hsjc.ssoCenter.core.util.PasswordUtil;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.context.ApplicationContext;
 
@@ -116,24 +114,31 @@ public class MyAuthRealm extends AuthorizingRealm {
         return info;
     }
 
-    /**
-     * 更新用户授权信息缓存.
-     */
-    public void clearCachedAuthorizationInfo(String principal) {
-        SimplePrincipalCollection principals = new SimplePrincipalCollection(
-                principal, getName());
-        clearCachedAuthorizationInfo(principals);
+    @Override
+    public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
+        super.clearCachedAuthorizationInfo(principals);
     }
 
-    /**
-     * 清除所有用户授权信息缓存.
-     */
+    @Override
+    public void clearCachedAuthenticationInfo(PrincipalCollection principals) {
+        super.clearCachedAuthenticationInfo(principals);
+    }
+
+    @Override
+    public void clearCache(PrincipalCollection principals) {
+        super.clearCache(principals);
+    }
+
     public void clearAllCachedAuthorizationInfo() {
-        Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
-        if (cache != null) {
-            for (Object key : cache.keys()) {
-                cache.remove(key);
-            }
-        }
+        getAuthorizationCache().clear();
+    }
+
+    public void clearAllCachedAuthenticationInfo() {
+        getAuthenticationCache().clear();
+    }
+
+    public void clearAllCache() {
+        clearAllCachedAuthenticationInfo();
+        clearAllCachedAuthorizationInfo();
     }
 }
