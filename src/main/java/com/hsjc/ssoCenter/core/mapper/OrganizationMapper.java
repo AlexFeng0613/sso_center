@@ -33,4 +33,6 @@ public interface OrganizationMapper {
     List<HashMap> selectAllOrganizationWithPage(JSONObject paramJson);
 
     Integer selectMaxOrganizationCode();
+
+    Integer selectOrganizationCode(String organizationName);
 }

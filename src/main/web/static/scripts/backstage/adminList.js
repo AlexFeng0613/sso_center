@@ -20,3 +20,31 @@ window.onload = function(){
     $('#admin_list').addClass('selected');
 };
 
+/**
+ * @author : wuyue
+ * @date : 2016-3-23
+ *
+ * 返回URL
+ *
+ * @returns {string}
+ */
+function returnUrl(){
+    var userName = $('input[name="userName"]').val();
+    if(SSOSystem.isEmpty(userName)) userName = "0";
+    userName = encodeURI(userName);
+
+    var url = '/page/sso/adminList/1,10,' + userName + '.html';
+    return url;
+}
+
+/**
+ * @author : wuyue
+ * @date : 2016-3-23
+ *
+ * 点击查询事件
+ *
+ */
+
+$('.tab_fnLi').click(function(){
+    window.location.href = returnUrl();
+});

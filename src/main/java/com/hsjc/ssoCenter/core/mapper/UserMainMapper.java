@@ -19,6 +19,8 @@ public interface UserMainMapper {
 
     int adminAddNewUser(UserMain userMain);
 
+    int adminAddNewAdmin(UserMain userMain);
+
     int deleteByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(UserMain userMain);
@@ -54,4 +56,6 @@ public interface UserMainMapper {
     List<UserMain> findUserByEmail(JSONObject paramJson);
 
     List<HashMap> findAllUser(JSONObject paramJson);
+
+    List<HashMap> findAllAdmin(JSONObject paramJson);
 }

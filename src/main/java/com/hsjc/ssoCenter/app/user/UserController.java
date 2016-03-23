@@ -58,6 +58,9 @@ public class UserController extends BaseController {
     @Autowired
     PasswordUtil passwordUtil;
 
+    @Autowired
+    OrganizationService organizationService;
+
     /**
      * @author : zga
      * @date : 2015-12-04
@@ -566,6 +569,39 @@ public class UserController extends BaseController {
         }
 
         int num = userMainService.adminAddNewUser(userMain);
+        if(num < 1){
+            return "redirect:/page/sso/newUser.html";
+        }
+        return "redirect:/page/backstage/adminAddUserSucc.html";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * 管理员新增管理员
+     *
+     * @param userName
+     * @param password
+     * @param role
+     * @return
+     */
+    @RequestMapping(value = "adminAddNewAdmin")
+    public String adminAddNewAdmin(@RequestParam("userName")String userName,
+                                  @RequestParam("password")String password,
+                                  @RequestParam("roleId")String roleId){
+
+        Integer organizationCode = organizationService.findOrganizationCode("总站");
+        System.out.println(organizationCode);
+
+        UserMain userMain = new UserMain();
+
+        userMain.setUserName(userName);
+        userMain.setPassword(password);
+        userMain.setOrganizationCode(organizationCode);
+        passwordUtil.encryptPassword(userMain);
+
+        int num = userMainService.adminAddNewAdmin(userMain,Long.parseLong(roleId));
         if(num < 1){
             return "redirect:/page/sso/newUser.html";
         }
