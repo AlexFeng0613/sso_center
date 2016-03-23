@@ -2,9 +2,11 @@ package com.hsjc.ssoCenter.core.config;
 
 
 import com.hsjc.ssoCenter.core.authrealm.MyAuthRealm;
-import com.hsjc.ssoCenter.core.filters.SessionFilter;
+import com.hsjc.ssoCenter.core.filter.KickoutSessionControlFilter;
+import com.hsjc.ssoCenter.core.filter.SysUserFilter;
+import com.hsjc.ssoCenter.core.spring.SpringCacheManagerWrapper;
+import net.sf.ehcache.CacheManager;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
@@ -13,15 +15,20 @@ import org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.io.PathResource;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
@@ -40,10 +47,30 @@ public class SecurityConfig {
 	 * @return
 	 */
 	@Bean
-	public EhCacheManager ehCacheManager() {
-		EhCacheManager ehCacheManager = new EhCacheManager();
-		ehCacheManager.setCacheManagerConfigFile("classpath:ehcache.xml");
-		return ehCacheManager;
+	public SpringCacheManagerWrapper cacheManager(){
+		SpringCacheManagerWrapper springCacheManagerWrapper = new SpringCacheManagerWrapper();
+		springCacheManagerWrapper.setCacheManager(springCacheManager());
+
+		return springCacheManagerWrapper;
+	}
+
+	@Bean
+	public EhCacheCacheManager springCacheManager() {
+		EhCacheCacheManager ehCacheCacheManager = new EhCacheCacheManager();
+		ehCacheCacheManager.setCacheManager(ehcacheManager());
+		return ehCacheCacheManager;
+	}
+
+	/**
+	 * ehcache
+	 * @return
+     */
+	@Bean
+	public CacheManager ehcacheManager(){
+		EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
+		ehCacheManagerFactoryBean.setConfigLocation(new PathResource("ehcache.xml"));
+
+		return ehCacheManagerFactoryBean.getObject();
 	}
 
 	/**
@@ -196,40 +223,65 @@ public class SecurityConfig {
 	public DefaultWebSecurityManager securityManager() {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(myAuthRealm());
-		securityManager.setCacheManager(ehCacheManager());
+		securityManager.setCacheManager(cacheManager());
 		securityManager.setSessionManager(defaultWebSessionManager());
 		securityManager.setRememberMeManager(rememberMeManager());
 		return securityManager;
 	}
 
-	/*@Bean
-	public KickoutSessionControlFilter kickoutFilter(){
-		KickoutSessionControlFilter kickoutSessionControlFilter = new KickoutSessionControlFilter();
-		kickoutSessionControlFilter.setKickoutUrl("/user/login.html");
-		kickoutSessionControlFilter.setSessionManager(defaultWebSessionManager());
-		kickoutSessionControlFilter.setKickoutAfter(false);
-		kickoutSessionControlFilter.setMaxSession(2);
+	/**
+	 * 相当于调用SecurityUtils.setSecurityManager(securityManager)
+	 * @return
+     */
+	@Bean
+	public MethodInvokingFactoryBean methodInvokingFactoryBean(){
+		MethodInvokingFactoryBean methodInvokingFactoryBean = new MethodInvokingFactoryBean();
+		methodInvokingFactoryBean.setStaticMethod("org.apache.shiro.SecurityUtils.setSecurityManager");
 
-		return kickoutSessionControlFilter;
-	}*/
+		Object[] objects = {securityManager()};
+		methodInvokingFactoryBean.setArguments(objects);
+
+		return methodInvokingFactoryBean;
+	}
 
 	/**
 	 * 基于Form表单的身份验证过滤器
 	 * @return
      */
-	/*@Bean
+	@Bean
 	public FormAuthenticationFilter formAuthenticationFilter(){
 		FormAuthenticationFilter formAuthenticationFilter = new FormAuthenticationFilter();
 		formAuthenticationFilter.setUsernameParam("username");
 		formAuthenticationFilter.setPasswordParam("password");
-		formAuthenticationFilter.setRememberMeParam("rememberMe");
+		formAuthenticationFilter.setRememberMeParam("remeberMe");
+		formAuthenticationFilter.setLoginUrl("/user/login.html");
 
 		return formAuthenticationFilter;
-	}*/
+	}
 
+	/**
+	 * 用户过滤器
+	 * @return
+     */
 	@Bean
-	public SessionFilter sessionFilter(){
-		return new SessionFilter();
+	public SysUserFilter sysUserFilter(){
+		return new SysUserFilter();
+	}
+
+	/**
+	 * 自定义拦截器
+	 * @return
+     */
+	@Bean
+	public KickoutSessionControlFilter kickoutSessionControlFilter(){
+		KickoutSessionControlFilter kickoutSessionControlFilter = new KickoutSessionControlFilter();
+		kickoutSessionControlFilter.setCacheManager(cacheManager());
+		kickoutSessionControlFilter.setSessionManager(defaultWebSessionManager());
+		kickoutSessionControlFilter.setKickoutAfter(false);
+		kickoutSessionControlFilter.setMaxSession(1);
+		kickoutSessionControlFilter.setKickoutUrl("/user/login.html");
+
+		return kickoutSessionControlFilter;
 	}
 
 	/**
@@ -244,23 +296,25 @@ public class SecurityConfig {
 		shiroFilterFactoryBean.setLoginUrl("/user/login.html");
 
 		Map<String,Filter> filterMap = new HashMap<>();
-		filterMap.put("sessionFilter",sessionFilter());
-
+		filterMap.put("authc",formAuthenticationFilter());
+		filterMap.put("sysUser",sysUserFilter());
+		filterMap.put("kickout",kickoutSessionControlFilter());
 		shiroFilterFactoryBean.setFilters(filterMap);
 
-		Map<String, String> filterChainDefinitionMap = new HashMap<String, String>();
-		filterChainDefinitionMap.put("/**", "user");
+		Map<String, String> filterChainDefinitionMap = new HashMap<>();
 		filterChainDefinitionMap.put("/static/**", "anon");
 		filterChainDefinitionMap.put("/code.html", "anon");
 		filterChainDefinitionMap.put("/page/register/*.html", "anon");
 		filterChainDefinitionMap.put("/page/serverError.html", "anon");
 		filterChainDefinitionMap.put("/sms/**", "anon");
-		filterChainDefinitionMap.put("/page/logout.html", "logout");
-
 		filterChainDefinitionMap.put("/user/register/*.html", "anon");
 		filterChainDefinitionMap.put("/user/register/*.json", "anon");
-
 		filterChainDefinitionMap.put("/3rd/**", "anon");
+
+		filterChainDefinitionMap.put("/user/login.html", "authc");
+		filterChainDefinitionMap.put("/page/logout.html", "logout");
+
+		filterChainDefinitionMap.put("/**", "user,sysUser");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;
 	}

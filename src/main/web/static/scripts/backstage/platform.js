@@ -62,7 +62,7 @@ $(function(){
                     if(data.success){
                         window.location.reload();
                     }else {
-                        if(data.message == 'S500000') alert('服务端异常');
+                        SSOSystem.showAlertDialog(ErrorMessage[data.message],'','111');
                     }
                 }
             });
@@ -106,7 +106,7 @@ $(function(){
                     $('.section').css('background-color','#ffffff');
                     window.location.reload();
                 }else {
-                    if(data.message == 'S500000') alert('服务端异常');
+                    SSOSystem.showAlertDialog(ErrorMessage[data.message],'','111');
                 }
             }
         });
@@ -163,7 +163,7 @@ $(function(){
                     $('.section').css('background-color','#ffffff');
                     window.location.reload();
                 }else {
-                    if(data.message == 'S500000') alert('服务端异常');
+                    SSOSystem.showAlertDialog(ErrorMessage[data.message],'','111');
                 }
             }
         });
