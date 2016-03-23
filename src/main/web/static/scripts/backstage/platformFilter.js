@@ -22,10 +22,11 @@ $(function(){
      */
     $('.del_clientFilter').click(function(){
         if(window.confirm('确定要删除吗?')){
-            var filterId = $(this).parent().siblings().eq(0).find('input[name="filterId"]').val();
+            var filterId = $(this).parent().siblings().eq(0).val();
             var paramData = {
                 'filterId' : filterId
             };
+
             $.ajax({
                 url : '/thirdClientFilter/deleteThirdClientFilter.json',
                 type : 'POST',
@@ -84,12 +85,27 @@ $(function(){
             success : function(data){
                 if(data.success){
                     window.location.reload();
+                    SSOSystem.showAlertDialog('新增成功','','111');
                 }else {
                     SSOSystem.showAlertDialog(ErrorMessage[data.message],'','111');
                 }
             }
         });
     });
+
+    /**
+     * 查询事件
+     */
+    $('.tab_fnLi').click(function(){
+        var pageNum = $('input[name="pageNum"]').val();
+        var pageSize = $('input[name="pageSize"]').val();
+        var description = $('input[name="description"]').val()
+
+        if(SSOSystem.isEmpty(description)){
+            description = 0;
+        }
+        window.location.href = '/page/sso/platformFilterList/' + pageNum + ',' + pageSize + ',' + description + '.html';
+    })
 });
 
 /**
@@ -101,4 +117,8 @@ $(function(){
  */
 window.onload = function(){
     $('#platformfilter_list').addClass('selected');
+
+    if($('input[name="description"]').val() == '0'){
+        $('input[name="description"]').val('');
+    }
 };

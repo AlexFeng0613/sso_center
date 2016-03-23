@@ -7,6 +7,7 @@
     <body>
         <div id="content" layout:fragment="content">
             <div class="index_title">新增邀请码</div>
+
             <div class="invitation_box">
                 <div class="users_message" style="margin-top:20px;">
                     <div class="users_message_l">*</div>
@@ -29,42 +30,8 @@
                     </li>
                 </ul>
             </div>
-            <script type="text/javascript">
-                $('#new_invitation').addClass('selected');
 
-                /**
-                 * 保存事件
-                 */
-                $('#but_addNew').click(function(){
-                    var organizationCode = $('select[name="organizationCode"]').val();
-                    var addNum = $('input[name="addNum"]').val();
-                    var testPattern = /\d+/;
-                    if(SSOSystem.isEmpty(addNum) || !testPattern.test(addNum)){
-                        SSOSystem.showAlertDialog('请输入正确的数量');
-                        return false;
-                    }
-
-                    var data = {
-                        'organizationCode' : organizationCode,
-                        'addNum' : addNum
-                    }
-                    $.ajax({
-                        url : '/schoolInvite/addNewSchoolInvite.json',
-                        type : 'POST',
-                        data : JSON.stringify(data),
-                        contentType: 'application/json',
-                        dataType : 'json',
-                        success : function(data){
-                            if(data.success){
-                                window.location.href = '/page/batchGenerateInviteCodeSucc.html';
-                            } else {
-                                alert(ErrorMessage[data.message]);
-                            }
-                        }
-                    });
-                });
-
-            </script>
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/newInvitation.js}" src="/static/scripts/backstage/newInvitation.js"></script>
         </div>
     </body>
 </html>

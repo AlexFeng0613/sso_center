@@ -168,6 +168,20 @@ $(function(){
             }
         });
     });
+
+    /**
+     * 查询事件
+     */
+    $('.tab_fnLi').click(function(){
+        var pageNum = $('input[name="pageNum"]').val();
+        var pageSize = $('input[name="pageSize"]').val();
+        var description = $('input[name="query_description"]').val()
+
+        if(SSOSystem.isEmpty(description)){
+            description = 0;
+        }
+        window.location.href = '/page/sso/platformList/' + pageNum + ',' + pageSize + ',' + description + '.html';
+    })
 })
 
 /**
@@ -179,4 +193,8 @@ $(function(){
  */
 window.onload = function(){
     $('#platform_list').addClass('selected');
+
+    if($('input[name="query_description"]').val() == '0'){
+        $('input[name="query_description"]').val('');
+    }
 };

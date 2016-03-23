@@ -2,11 +2,16 @@ package com.hsjc.ssoCenter.core.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.hsjc.ssoCenter.core.constant.Constant;
 import com.hsjc.ssoCenter.core.domain.ThirdFilter;
 import com.hsjc.ssoCenter.core.mapper.ThirdFilterMapper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,9 +35,31 @@ public class ThirdClientFilterService extends ApiBaseService{
      * 查询所有的第三方导入数据过滤列表
      *
      */
-    public List<HashMap> selectAllThirdFilters(String description,Integer currentPage,Integer pageSize){
-        PageHelper.startPage(currentPage,pageSize);
-        return thirdFilterMapper.selectAllThirdFilters();
+    public PageInfo selectAllThirdFilters(JSONObject paramJson){
+        Integer pageNum = paramJson.getInteger("pageNum");
+        Integer pageSize = paramJson.getInteger("pageSize");
+        String description = paramJson.getString("description");
+        try {
+            description = URLDecoder.decode(description,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        if(pageNum == null || pageNum == 0) {
+            pageNum = Constant.PAGENUM;
+            paramJson.put("pageNum", pageNum);
+        }
+        if(pageSize == null || pageSize == 0) {
+            pageSize = Constant.PAGESIZE;
+            paramJson.put("pageSize",pageSize);
+        }
+
+        if(StringUtils.isEmpty(description) || "0".equals(description)) paramJson.put("description",null);
+        paramJson.put("uname","zhuzi");
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<HashMap> list = thirdFilterMapper.selectAllThirdFilters(paramJson);
+        PageInfo pageInfo = new PageInfo(list);
+        return pageInfo;
     }
 
 

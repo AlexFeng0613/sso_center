@@ -1,5 +1,6 @@
 package com.hsjc.ssoCenter.core.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.domain.ThirdFilter;
 
 import java.util.HashMap;
@@ -20,5 +21,5 @@ public interface ThirdFilterMapper {
 
     List<ThirdFilter> selectByClientId(ThirdFilter thirdFilter);
 
-    List<HashMap> selectAllThirdFilters();
+    List<HashMap> selectAllThirdFilters(JSONObject paramJson);
 }

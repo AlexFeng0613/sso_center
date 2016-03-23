@@ -6,9 +6,10 @@
     <result column="trdClientId" property="trdclientid" jdbcType="VARCHAR" />
     <result column="organizationCode" property="organizationcode" jdbcType="INTEGER" />
     <result column="tstudent" property="tstudent" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, trdClientId, organizationCode, tstudent
+    id, trdClientId, organizationCode, tstudent,createTime
   </sql>
 
   <insert id="insert" parameterType="com.hsjc.ssoCenter.core.domain.ThirdFilter" >
@@ -114,13 +115,23 @@
       torg.organizationCode,
       torg.organizationName,
       tf.id fid,
+      tf.createTime,
       tf.tstudent
     FROM
     tb3rdfilter tf,
     tb3rdclients tc,
     tborganization torg
-    WHERE
-    tf.organizationCode = torg.organizationCode
-    AND tf.trdClientId = tc.clientId
+    <where>
+      <if test="uname != null">
+        tf.organizationCode = torg.organizationCode
+        AND tf.trdClientId = tc.clientId
+      </if>
+
+      <if test="description != null">
+        AND tc.description like CONCAT('%','${description}','%')
+      </if>
+    </where>
+
+    ORDER BY tf.createTime DESC
   </select>
 </mapper>

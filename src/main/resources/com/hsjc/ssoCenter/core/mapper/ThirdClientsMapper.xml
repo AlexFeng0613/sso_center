@@ -227,4 +227,41 @@
       </if>
     </where>
   </select>
+
+  <!--
+    @author : zga
+    @date : 2015-12-11
+    根据平台名称查询所有的ThirdClient记录
+  -->
+  <select id="selectAllThirdClientWithPage" resultType="java.util.HashMap">
+    SELECT
+    id,
+    clientId,
+    clientSecret,
+    (CASE
+    WHEN contactorName IS NULL THEN 'xxx'
+    ELSE contactorName
+    END ) AS contactorName,
+    (CASE
+    WHEN contactorPhone IS NULL THEN 'xxx'
+    ELSE contactorPhone
+    END ) AS contactorPhone,
+    briefName,
+    ssoPassword,
+    publicKey,
+    synCount,
+    (CASE
+    WHEN description IS NULL THEN 'xxx'
+    ELSE description
+    END ) AS description,
+    callbackUrl,
+    status
+    FROM tb3rdclients
+    <where>
+      status = '1'
+      <if test="description != null">
+        AND description like CONCAT('%','${description}','%')
+      </if>
+    </where>
+  </select>
 </mapper>

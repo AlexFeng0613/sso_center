@@ -403,19 +403,24 @@ public class PageController extends BaseController{
      *
      * @return
      */
-    @RequestMapping("sso/platformList/{currentPage},{pageSize}")
-    public String platformList(@PathVariable("currentPage") Integer currentPage,
-                               @PathVariable("pageSize") Integer pageSize,
-                               @RequestParam(value = "description",required = false)String description,Model model){
-        List<ThirdClients> list = thirdClientsService.selectAllThirdClients(description,currentPage,pageSize);
+    @RequestMapping("sso/platformList/{pageNum},{pageSize},{description}")
+    public String platformList(@PathVariable("pageNum")Integer pageNum,
+                               @PathVariable("pageSize")Integer pageSize,
+                               @PathVariable("description")String description,
+                               Model model){
 
-        model.addAttribute("thirdClientsList",list);
+        if(getCurrentUser() == null) return "/user/login";
+
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("description",description);
+
+        PageInfo pageInfo = thirdClientsService.selectAllThirdClientsWithPage(paramJson);
+
+        modalAddAttributes(model, pageInfo);
+        model.addAttribute("thirdClientsList",pageInfo.getList());
         model.addAttribute("description",description);
-
-        model.addAttribute("count",(list == null ? 0 : list.size()));
-        model.addAttribute("currentPage",currentPage);
-        model.addAttribute("pageSize",pageSize);
-        model.addAttribute("pageCount",5);
 
         return "/backstage/platformList";
     }
@@ -428,21 +433,27 @@ public class PageController extends BaseController{
      *
      * @return
      */
-    @RequestMapping("sso/platformFilterList/{currentPage},{pageSize}")
-    public String platformFilterList(@PathVariable("currentPage") Integer currentPage,
-                                     @PathVariable("pageSize") Integer pageSize,
-                                     @RequestParam(value = "description",required = false)String description,Model model){
-        List<HashMap> list = thirdFilterService.selectAllThirdFilters(description,currentPage,pageSize);
-        model.addAttribute("thirdFilterList",list);
-        model.addAttribute("description",description);
+    @RequestMapping("sso/platformFilterList/{pageNum},{pageSize},{description}")
+    public String platformFilterList(@PathVariable("pageNum")Integer pageNum,
+                                     @PathVariable("pageSize")Integer pageSize,
+                                     @PathVariable("description")String description,
+                                     Model model) throws Exception{
+        if(getCurrentUser() == null){
+            return "/user/login";
+        }
 
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("description",description);
+
+        PageInfo pageInfo = thirdFilterService.selectAllThirdFilters(paramJson);
         List<Organization> organizationList = organizationService.getAllOrganization();
         List<ThirdClients> thirdClientsList = thirdClientsService.selectAllThirdClients();
 
-        model.addAttribute("count",(list == null ? 0 : list.size()));
-        model.addAttribute("currentPage",currentPage);
-        model.addAttribute("pageSize",pageSize);
-        model.addAttribute("pageCount",5);
+        modalAddAttributes(model, pageInfo);
+        model.addAttribute("thirdFilterList",pageInfo.getList());
+        model.addAttribute("description",description);
         model.addAttribute("organizationList",organizationList);
         model.addAttribute("thirdClientsList",thirdClientsList);
 
