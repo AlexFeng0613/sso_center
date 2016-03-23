@@ -359,6 +359,39 @@ public class PageController extends BaseController{
     }
 
     /**
+     * @author : wuuyue
+     * @date : 2016-3-22
+     *
+     * SSO后台>>管理员列表
+     *
+     * @return
+     */
+    @RequestMapping("sso/adminList/{pageNum},{pageSize},{userName}")
+    public String adminList(@PathVariable("pageNum")Integer pageNum,
+                           @PathVariable("pageSize")Integer pageSize,
+                            @PathVariable("userName")String userName,
+                           Model model) throws Exception{
+
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("userName",userName);
+
+        PageInfo pageInfo = userMainService.getAllAdminList(paramJson);
+
+        modalAddAttributes(model, pageInfo);
+        model.addAttribute("adminList", pageInfo.getList());
+
+        if(StringUtils.isEmpty(userName)){
+            userName = "0";
+        }
+        model.addAttribute("userName",userName);
+
+        return "/backstage/adminList";
+    }
+
+
+    /**
      * @author : zga
      * @date : 2016-1-18
      *
@@ -713,18 +746,18 @@ public class PageController extends BaseController{
         return "/backstage/newInvitation";
     }
 
-    /**
-     * @author : zga
-     * @date : 2016-1-18
-     *
-     * SSO后台>>管理员列表
-     *
-     * @return
-     */
-    @RequestMapping("sso/adminList")
-    public String adminList(){
-        return "/backstage/adminList";
-    }
+//    /**
+//     * @author : zga
+//     * @date : 2016-1-18
+//     *
+//     * SSO后台>>管理员列表
+//     *
+//     * @return
+//     */
+//    @RequestMapping("sso/adminList")
+//    public String adminList(){
+//        return "/backstage/adminList";
+//    }
 
     /**
      * @author : zga

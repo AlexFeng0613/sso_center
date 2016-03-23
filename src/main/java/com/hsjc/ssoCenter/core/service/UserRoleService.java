@@ -33,4 +33,21 @@ public class UserRoleService {
 
         userRoleMapper.insert(userRole);
     }
+
+    /**
+     * @author : wuyue
+     * @date : 2016-3-23
+     *
+     * 新增管理员的UserRole信息
+     *
+     */
+
+    public void addNewAdminRole(UserRole userRole){
+        /**
+         * 为管理员添加角色信息
+         */
+
+        userRoleMapper.insert(userRole);
+    }
+
 }

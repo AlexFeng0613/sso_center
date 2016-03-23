@@ -341,7 +341,7 @@ public class UserMainService extends ApiBaseService{
      */
     public void sendResetPwdCodeWithEmail(JSONObject paramJson){
         String email = paramJson.getString("email");
-        String code = SSOStringUtil.getRandomString(1,4);
+        String code = SSOStringUtil.getRandomString(1, 4);
         if(!StringUtils.isEmpty(email)){
             String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REST_PASSWORD_MESSAGE,"%",code);
 
@@ -681,6 +681,43 @@ public class UserMainService extends ApiBaseService{
     }
 
     /**
+     *@author : wuyue
+     *@date : 2016-3-22
+     *
+     * 后台管理获取管理员列表
+     *
+     * @return
+     */
+
+    public PageInfo getAllAdminList(JSONObject paramJson){
+
+        //分页内容
+        Integer pageNum = paramJson.getInteger("pageNum");
+        Integer pageSize = paramJson.getInteger("pageSize");
+        String userName = paramJson.getString("userName");
+
+
+        if(pageNum == null || pageNum == 0) {
+            pageNum = Constant.PAGENUM;
+            paramJson.put("pageNum", pageNum);
+        }
+        if(pageSize == null || pageSize == 0) {
+            pageSize = Constant.PAGESIZE;
+            paramJson.put("pageSize",pageSize);
+        }
+        if(StringUtils.isEmpty(userName) || "0".equals(userName)) paramJson.put("userName",null);
+
+         paramJson.put("uname","zhuzi");
+
+        PageHelper.startPage(pageNum,pageSize);
+        List adminList = userMainMapper.findAllAdmin(paramJson);
+        PageInfo pageInfo = new PageInfo(adminList);
+        return pageInfo;
+    }
+
+
+
+    /**
      * @author : zga
      * @date : 2016-3-10
      *
@@ -769,6 +806,34 @@ public class UserMainService extends ApiBaseService{
          * 为用户添加角色,默认是普通用户
          */
         userRoleService.addNewUserRole(Long.parseLong(userMain.getId().toString()));
+        return num;
+    }
+
+    /**
+     * @author : wuyue
+     * @date : 2016-3-23
+     *
+     * 管理员新增管理员
+     *
+     * @param userName
+     * @param password
+     * @param organizationCode
+     * @return
+     */
+    @Transactional(rollbackFor = RuntimeException.class)
+    public Integer adminAddNewAdmin(UserMain userMain, Long roleId) throws RuntimeException{
+        Integer num = 0;
+
+        num = userMainMapper.adminAddNewAdmin(userMain);
+
+        /**
+         * 为用户添加角色,默认是普通用户
+         */
+       // userRoleService.addNewUserRole(Long.parseLong(userMain.getId().toString()));
+        UserRole userRole = new UserRole();
+        userRole.setUserId(Long.parseLong(userMain.getId().toString()));
+        userRole.setRoleId(roleId);
+        userRoleService.addNewAdminRole(userRole);
         return num;
     }
 }

@@ -162,5 +162,19 @@ public class OrganizationService extends ApiBaseService{
         return resultJson;
     }
 
+    /**
+     * @author : wuyue
+     * @date : 2016-3-23
+     *
+     * 管理员根据组织机构的名称来查找对应得组织机构Code
+     *
+     * @return
+     */
 
+    public Integer findOrganizationCode(String organizationName){
+
+        Integer organizationCode = organizationMapper.selectOrganizationCode(organizationName);
+
+        return organizationCode;
+    }
 }

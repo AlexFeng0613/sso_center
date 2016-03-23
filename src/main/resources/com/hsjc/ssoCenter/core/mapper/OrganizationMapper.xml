@@ -195,4 +195,10 @@
   <select id="selectMaxOrganizationCode" resultType="java.lang.Integer">
     SELECT MAX(organizationCode) FROM tborganization
   </select>
+
+
+  <!-- 根据组织机构名称查询组织机构Code-->
+  <select id="selectOrganizationCode" resultType="java.lang.Integer">
+    SELECT organizationCode FROM tborganization WHERE organizationName=#{organizationName}
+  </select>
 </mapper>
