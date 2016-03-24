@@ -57,7 +57,8 @@
                 <div class="tab_fn">
                     <input type="button" value="查询" class="tab_fnLi"/>
                 </div>
-                <input type="search" name="realName" placeholder="输入姓名…"/>
+                <input type="search" name="realName" th:if="${realName == '0'}" placeholder="输入姓名…"/>
+                <input type="search" name="realName" th:unless="${realName == '0'}" th:value="${realName}" placeholder="输入姓名…"/>
             </div>
 
             <table class="user_tab">
