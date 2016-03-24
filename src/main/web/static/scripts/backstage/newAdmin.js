@@ -8,6 +8,7 @@
 
 $(function(){
 
+    $('#new_admin').addClass('selected');
 });
 
 /**
@@ -29,11 +30,11 @@ $('.selected').click(function(){
     window.location.href ='/user/adminAddNewAdmin.html?userName=' + userName + '&password=' + password + '&roleId=' + roleId;
 });
 
-$('#new_admin').addClass('selected');
+
 
 /**
- * @author : zga
- * @date : 2016-3-18
+ * @author : wuyue
+ * @date : 2016-3-24
  *
  * 页面载入时添加选中样式
  *

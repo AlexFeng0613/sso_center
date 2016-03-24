@@ -12,7 +12,9 @@
                 <div class="tab_fn">
                     <input type="button" value="查询" class="tab_fnLi"/>
                 </div>
-                <input type="search" name="userName" placeholder="输入用户名…"/>
+                <input type="search" name="userName" th:if="${userName=='0'}" placeholder="输入用户名…"/>
+                <input type="search" name="userName" th:unless="${userName=='0'}" th:value="${userName}" placeholder="输入用户名…"/>
+
             </div>
 
             <table class="admin_tab">
