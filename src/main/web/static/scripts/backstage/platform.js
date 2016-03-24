@@ -87,6 +87,7 @@ $(function(){
      * 弹出窗保存事件
      */
     $('.butL').click(function(){
+
         var data = {
             'clientId' : $('.platform_clientId').html(),
             'contactorName' : $('form[name="modifyForm"] input[name="contactorName"]').val(),
@@ -135,11 +136,13 @@ $(function(){
             ||SSOSystem.isEmpty(contactorName) || SSOSystem.isEmpty(contactorPhone)
             || SSOSystem.isEmpty(callbackUrl)){
 
-            console.log('description:' + SSOSystem.isEmpty(description));
-            console.log('briefName:' + SSOSystem.isEmpty(briefName));
-            console.log('contactorName:' + SSOSystem.isEmpty(contactorName));
-            console.log('contactorPhone:' + SSOSystem.isEmpty(contactorPhone));
-            console.log('callbackUrl:' + SSOSystem.isEmpty(callbackUrl));
+            //console.log('description:' + SSOSystem.isEmpty(description));
+            //console.log('briefName:' + SSOSystem.isEmpty(briefName));
+            //console.log('contactorName:' + SSOSystem.isEmpty(contactorName));
+            //console.log('contactorPhone:' + SSOSystem.isEmpty(contactorPhone));
+            //console.log('callbackUrl:' + SSOSystem.isEmpty(callbackUrl));
+
+            SSOSystem.showAlertDialog("请输入完整信息！");
             return false;
         }
 
