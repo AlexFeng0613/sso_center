@@ -521,6 +521,8 @@ public class UserController extends BaseController {
         return resultJson;
     }
 
+
+
     /**
      * @author : zga
      * @date : 2016-3-10
@@ -597,10 +599,27 @@ public class UserController extends BaseController {
         userMain.setOrganizationCode(organizationCode);
         passwordUtil.encryptPassword(userMain);
 
-        int num = userMainService.adminAddNewAdmin(userMain,Long.parseLong(roleId));
+        int num = userMainService.adminAddNewAdmin(userMain, Long.parseLong(roleId));
         if(num < 1){
             return "redirect:/page/sso/newUser.html";
         }
         return "redirect:/page/backstage/adminAddUserSucc.html";
+    }
+
+
+    /**
+     * @author : wuyue
+     * @date : 2016-03-24
+     *
+     * 校验管理员名是否存在
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "isExistsAdminName",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject isExistsAdminName(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = userMainService.isExistsAdminName(paramJson);
+        return resultJson;
     }
 }

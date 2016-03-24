@@ -21,7 +21,27 @@ $(function(){
             SSOSystem.showAlertDialog("请输入完整信息！");
             return false;
         }
-        window.location.href ='/user/adminAddNewAdmin.html?userName=' + userName + '&password=' + password + '&roleId=' + roleId;
+        /**
+         * Ajax请求,判断管理员名是否存在
+         * @type {string}
+         */
+        var paramData = {
+            'userName' : userName
+        };
+        $.ajax({
+            url : '/user/isExistsAdminName.json',
+            type : 'POST',
+            data : JSON.stringify(paramData),
+            contentType: 'application/json',
+            dataType : 'json',
+            success : function(data){
+                if(data.success){
+                    window.location.href ='/user/adminAddNewAdmin.html?userName=' + userName + '&password=' + password + '&roleId=' + roleId;
+                } else {
+                    SSOSystem.showAlertDialog("管理员已存在！");
+                }
+            }
+        });
     });
 
     /**

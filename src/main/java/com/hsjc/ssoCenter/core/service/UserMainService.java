@@ -185,6 +185,29 @@ public class UserMainService extends ApiBaseService{
     }
 
     /**
+     * @author : wuyue
+     * @date : 2016-03-24
+     *
+     * 校验管理员名是否存在
+     *
+     * @param paramJson
+     * @return
+     */
+    public JSONObject isExistsAdminName(JSONObject paramJson){
+        JSONObject resultJson = getResultJson();
+
+        List<UserMain> userMainList = userMainMapper.findUserByUserName(paramJson);
+
+        if(userMainList != null && userMainList .size() > 0){
+            resultJson.put("success",false);
+            resultJson.put("message", Constant.EXISTS_USERNAME);
+            return resultJson;
+        }
+
+        return resultJson;
+    }
+
+    /**
      * @author : zga
      * @date : 2016-2-18
      *

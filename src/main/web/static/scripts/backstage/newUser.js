@@ -34,7 +34,28 @@ $(function(){
             SSOSystem.showAlertDialog("密码不能为空！");
             return false;
         }
-        $('form').submit();
+
+        /**
+         * 判断用户名是否存在（利用注册用户时判断的controller来判断）
+         * @type {{userName: (*|jQuery)}}
+         */
+        var paramData = {
+            'userName' : userName
+        };
+        $.ajax({
+            url : '/user/register/isExistsUserName.json',
+            type : 'POST',
+            data : JSON.stringify(paramData),
+            contentType: 'application/json',
+            dataType : 'json',
+            success : function(data){
+                if(data.success){
+                    $('form').submit();
+                } else {
+                    SSOSystem.showAlertDialog("用户名已存在！");
+                }
+            }
+        });
     });
 
     $('.cancel').click(function(){
