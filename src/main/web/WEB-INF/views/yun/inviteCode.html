@@ -35,7 +35,7 @@
                         label:".label",
                         showAllError:true,
                         datatype:{
-                            "s10":/^[\w\s]{10}$/
+                            "s6":/^[\w\s]{6}$/
                         },
                         callback : function(form){
                             /**
@@ -66,10 +66,10 @@
                         }
                     });
 
-                    inviteCodeForm.tipmsg.w["s10"]=" ";
+                    inviteCodeForm.tipmsg.w["s6"]=" ";
                     inviteCodeForm.addRule([{
                         ele : "#input_font",
-                        datatype : "s10"
+                        datatype : "s6"
                     }]);
                 });
            </script>
