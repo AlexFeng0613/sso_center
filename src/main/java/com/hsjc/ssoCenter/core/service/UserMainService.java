@@ -128,8 +128,9 @@ public class UserMainService extends ApiBaseService{
             }
         }
 
-        UserTemp userTemp = new UserTemp();
-
+        /**
+         * User相关参数
+         */
         String userName = paramJson.getString("userName");
         String type = paramJson.getString("type");
         String password = paramJson.getString("password");
@@ -137,27 +138,35 @@ public class UserMainService extends ApiBaseService{
         String realName = paramJson.getString("realName");
         String gender = paramJson.getString("gender");
 
-        userTemp.setUserName(userName);
-        userTemp.setPassword(password);
-        //设置salt和password
-        passwordUtil.encryptPassword(userTemp);
-        userTemp.setType(type);
-        userTemp.setEmail(email);
-        userTemp.setRealName(realName);
-        userTemp.setGender(gender);
+        try {
+            /**
+             *调用Email发送接口发送Email
+             */
+            resultJson = insertSendEmail(email,apiBaseService,"0");
+            logger.debug("send email resultjson is:" + resultJson);
+            if(!resultJson.getBoolean("success")) return resultJson;
 
-        int res = userTempMapper.insert(userTemp);
-        if(res > 0){
-            //调用Email发送接口发送Email
-            try {
-                resultJson = insertSendEmail(email,apiBaseService,"0");
-            } catch (Exception e) {
-                logger.debug("发送Email异常!");
-                resultJson.put("success",false);
-                resultJson.put("message", Constant.SEND_MAIL_FAIL);
-                return resultJson;
-            }
+            /**
+             * 注册用户
+             */
+            UserTemp userTemp = new UserTemp();
+            userTemp.setUserName(userName);
+            userTemp.setPassword(password);
+            //设置salt和password
+            passwordUtil.encryptPassword(userTemp);
+            userTemp.setType(type);
+            userTemp.setEmail(email);
+            userTemp.setRealName(realName);
+            userTemp.setGender(gender);
+
+            userTempMapper.insert(userTemp);
+        } catch (Exception e) {
+            resultJson.put("success",false);
+            resultJson.put("message", Constant.REG_FAIL);
+            return resultJson;
         }
+
+        resultJson.put("message", Constant.REG_SUCCESS);
         return resultJson;
     }
 
