@@ -30,6 +30,8 @@ import java.util.concurrent.TimeUnit;
 @SuppressWarnings("ALL")
 @Service
 public class ApiBaseService {
+    final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ApiBaseService.class);
+
     @Autowired
     RedisTemplate redisTemplate;
 
@@ -83,6 +85,7 @@ public class ApiBaseService {
             redisTemplate.opsForValue().set(key, obj, 0);
             redisTemplate.expire(key, Constant.REDIS_FETCH_TIME_OUT,TimeUnit.SECONDS);
         } catch (Exception e) {
+            logger.debug("插入Redis Exception");
             throw new RuntimeException("插入Redis Exception");
         }
     }
@@ -179,7 +182,9 @@ public class ApiBaseService {
 
             emailSendMapper.insert(emailSend);
         } catch (Exception e) {
+            logger.debug("发送Email异常!");
             resultJson.put("success",false);
+            resultJson.put("message", Constant.SEND_MAIL_FAIL);
             return resultJson;
         }
         return resultJson;
