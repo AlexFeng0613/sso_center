@@ -80,8 +80,4 @@ function returnInviteCodeManageURL(){
  */
 window.onload = function(){
     $('#invitation_manage').addClass('selected');
-
-    if($('input[name="inviteCode"]').val() == '0'){
-        $('input[name="inviteCode"]').val('');
-    }
 };

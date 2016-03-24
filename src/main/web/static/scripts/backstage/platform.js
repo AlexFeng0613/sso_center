@@ -193,8 +193,4 @@ $(function(){
  */
 window.onload = function(){
     $('#platform_list').addClass('selected');
-
-    if($('input[name="query_description"]').val() == '0'){
-        $('input[name="query_description"]').val('');
-    }
 };

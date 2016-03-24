@@ -47,7 +47,8 @@
                 <div class="tab_fn">
                     <input type="button" value="查询" class="tab_fnLi"/>
                 </div>
-                <input type="search" name="inviteCode" th:value="${inviteCode}" placeholder="邀请码…"/>
+                <input type="search" name="inviteCode" th:if="${inviteCode == '0'}" placeholder="邀请码…"/>
+                <input type="search" name="inviteCode" th:unless="${inviteCode == '0'}" th:value="${inviteCode}" placeholder="邀请码…"/>
             </div>
 
             <table class="invitation_manage_tab">

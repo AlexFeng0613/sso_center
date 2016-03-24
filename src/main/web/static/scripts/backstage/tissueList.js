@@ -210,7 +210,4 @@ $(function(){
  */
 window.onload = function(){
     $('#tissue_list').addClass('selected');
-    if($('input[name="queryOrganizationName"]').val() == '0'){
-        $('input[name="queryOrganizationName"]').val('');
-    }
 };

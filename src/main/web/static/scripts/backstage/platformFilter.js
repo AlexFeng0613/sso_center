@@ -117,8 +117,4 @@ $(function(){
  */
 window.onload = function(){
     $('#platformfilter_list').addClass('selected');
-
-    if($('input[name="description"]').val() == '0'){
-        $('input[name="description"]').val('');
-    }
 };

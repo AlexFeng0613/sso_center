@@ -58,7 +58,9 @@
                     <input type="hidden" name="pageSize" th:value="${pageSize}"/>
                     <input type="button" value="查询" class="tab_fnLi"/>
                 </div>
-                <input type="text" name="description" th:value="${description}" placeholder="输入平台名称…"/>
+
+                <input type="text" name="description" th:if="${description == '0'}" placeholder="输入平台名称…"/>
+                <input type="text" name="description" th:unless="${description == '0'}" th:value="${description}" placeholder="输入平台名称…"/>
             </div>
 
             <table class="platform_tab">

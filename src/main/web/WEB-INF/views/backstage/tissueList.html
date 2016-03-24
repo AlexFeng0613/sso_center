@@ -37,7 +37,9 @@
                 <div class="tab_fn">
                     <input type="button" value="查询" class="tab_fnLi"/>
                 </div>
-                <input type="search" name="queryOrganizationName" th:value="${organizationName}" placeholder="输入站点名称或者邀请码…"/>
+                <input type="search" name="queryOrganizationName" th:if="${organizationName == '0'}" placeholder="输入组织机构名…"/>
+                <input type="search" name="queryOrganizationName" th:unless="${organizationName == '0'}" th:value="${organizationName}" placeholder="输入组织机构名…"/>
+
             </div>
             <table class="tissue_tab">
                 <thead>
