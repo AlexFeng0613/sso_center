@@ -181,5 +181,5 @@ $(function(){
  *
  */
 window.onload = function(){
-    $('#user_list').addClass('selected');;
+    $('#user_list').addClass('selected');
 };

@@ -359,7 +359,7 @@ public class PageController extends BaseController{
     }
 
     /**
-     * @author : wuuyue
+     * @author : wuyue
      * @date : 2016-3-22
      *
      * SSO后台>>管理员列表

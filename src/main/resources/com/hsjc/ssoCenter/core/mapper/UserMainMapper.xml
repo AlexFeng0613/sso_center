@@ -672,7 +672,6 @@
        SELECT
          tu.id,
          tu.userName,
---     防止组织机构和资源名称为空
          (DATE_FORMAT(tu.createTime,'%Y-%m-%d')) AS createTime,
          (CASE
          WHEN trs.resName IS NULL THEN 'xxx'

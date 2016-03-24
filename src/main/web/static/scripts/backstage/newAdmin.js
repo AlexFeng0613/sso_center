@@ -9,26 +9,6 @@
 $(function(){
 
 });
-///**
-// * @author : wuyue
-// * @date : 2016/3/22
-// *
-// * @return{string}
-// *
-// */
-//function returnUrl(){
-//    var userName =$('input[name="userName"]').val();
-//    var organization = $('select[name="organization"]').val();
-//    var type = $('select[name="type"]').val();
-//    var status = $('select[name="status"]').val();
-//    var createTime = $('select[name="createTime"]').val();
-//    var realName = $('input[name="realName"]').val();
-//    if(SSOSystem.isEmpty(userName)) userName = "0";
-//     userName = encodeURI(userName);
-//
-//    var url = '/page/sso/adminList/' + userName + ',' + type + ',' + status + ',' + createTime + "," + realName + '.html';
-//    return url;
-//}
 
 /**
  * @author : wuyue
@@ -50,3 +30,14 @@ $('.selected').click(function(){
 });
 
 $('#new_admin').addClass('selected');
+
+/**
+ * @author : zga
+ * @date : 2016-3-18
+ *
+ * 页面载入时添加选中样式
+ *
+ */
+window.onload = function(){
+    $('#new_admin').addClass('selected');
+};

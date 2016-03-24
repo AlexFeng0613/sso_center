@@ -6,6 +6,17 @@
  *
  */
 $(function(){
+    /**
+     * @author : wuyue
+     * @date : 2016-3-23
+     *
+     * 点击查询事件
+     *
+     */
+    $('.tab_fnLi').click(function(){
+        window.location.href = returnUrl();
+    });
+
 
 });
 
@@ -37,14 +48,4 @@ function returnUrl(){
     return url;
 }
 
-/**
- * @author : wuyue
- * @date : 2016-3-23
- *
- * 点击查询事件
- *
- */
 
-$('.tab_fnLi').click(function(){
-    window.location.href = returnUrl();
-});

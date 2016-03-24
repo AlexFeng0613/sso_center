@@ -46,18 +46,18 @@
             <div class="tab_foot">
                 <div class="pages">
                     <div class="jil">共<font th:text="${total}"></font>条记录</div>
-                    <a th:href="@{'/page/sso/adminList/1,' + ${pageSize}+'.html'}" class="page">首页</a>
+                    <a th:href="@{'/page/sso/adminList/1,' + ${pageSize}+','+ ${userName}+'.html'}" class="page">首页</a>
 
                     <a th:if="${hasPrevioisPage == true}"
-                       th:href="@{'/page/sso/adminList/' + ${prePage} + ',' + ${pageSize} + '.html'}" class="page">上一页</a>
+                       th:href="@{'/page/sso/adminList/' + ${prePage} + ',' + ${pageSize} + ','+ ${userName}+'.html'}" class="page">上一页</a>
 
                     <a th:each="pageN : ${navigatepageNums}"
-                       th:href="@{'/page/sso/adminList/' + ${pageN} + ',' + ${pageSize} + '.html'}" th:text="${pageN}" class="page"></a>
+                       th:href="@{'/page/sso/adminList/' + ${pageN} + ',' + ${pageSize} + ','+ ${userName}+ '.html'}" th:text="${pageN}" class="page"></a>
 
                     <a th:if="${hastNextPage == true}"
-                       th:href="@{'/page/sso/adminList/' + ${nextPage} + ',' + ${pageSize} + '.html'}" class="page">下一页</a>
+                       th:href="@{'/page/sso/adminList/' + ${nextPage} + ',' + ${pageSize} + ','+ ${userName}+'.html'}" class="page">下一页</a>
 
-                    <a th:href="@{'/page/sso/adminList/' + ${pages} + ',' + ${pageSize} +'.html'}" class="page">尾页</a>
+                    <a th:href="@{'/page/sso/adminList/' + ${pages} + ',' + ${pageSize} + ','+ ${userName}+'.html'}" class="page">尾页</a>
                 </div>
             </div>
             <script type="text/javascript" th:src="@{/static/scripts/backstage/adminList.js}" src="/static/scripts/backstage/adminList.js"></script>
