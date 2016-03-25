@@ -50,12 +50,12 @@ $(function(){
      */
     $('.handle li').eq(0).click(function(){
         $('.addBox').show();
-
+        $('.mask').show();
     });
 
     $('.cancel').click(function(){
         $('.addBox').hide();
-        $('.section').css('background-color','#ffffff');
+        $('.mask').hide();
     });
 
     /**

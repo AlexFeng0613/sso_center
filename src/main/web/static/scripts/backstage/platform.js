@@ -21,7 +21,7 @@ $(function(){
      * 修改基本信息
      */
     $('.modify_info').click(function(){
-        $('.section').css('background-color','#e5e5e5');
+
         $('.modifiedBox').show();
 
         var platform_name = $(this).parent().siblings().eq(1).html();
@@ -75,12 +75,12 @@ $(function(){
      */
     $('.butR').click(function(){
         $('.modifiedBox').hide();
-        $('.section').css('background-color','#ffffff');
+        $('.mask').hide();
     });
 
     $('.cancel').click(function(){
         $('.addBox').hide();
-        $('.section').css('background-color','#ffffff');
+        $('.mask').hide();
     });
 
     /**
@@ -119,7 +119,8 @@ $(function(){
      */
     $('.handle li').eq(0).click(function(){
         $('.addBox').show();
-        $('.section').css('background-color','#e5e5e5');
+        $('.mask').show();
+
     });
 
     /**
