@@ -106,70 +106,72 @@
             </div>
             <!--add third client info end-->
 
-                <div class="index_title">平台列表</div>
-                <div class="tab_search">
-                    <div class="tab_fn">
-                        <input type="hidden" name="pageNum" th:value="${pageNum}"/>
-                        <input type="hidden" name="pageSize" th:value="${pageSize}"/>
-                        <input type="submit" value="查询" class="tab_fnLi"/>
-                    </div>
-
-                    <input type="text" name="query_description" th:if="${description == '0'}" placeholder="输入平台名称…"/>
-                    <input type="text" name="query_description" th:unless="${description == '0'}" th:value="${description}" placeholder="输入平台名称…"/>
+            <div class="index_title">平台列表</div>
+            <div class="tab_search">
+                <div class="tab_fn">
+                    <input type="hidden" name="pageNum" th:value="${pageNum}"/>
+                    <input type="hidden" name="pageSize" th:value="${pageSize}"/>
+                    <input type="submit" value="查询" class="tab_fnLi"/>
                 </div>
-                <table class="platform_tab">
-                    <thead>
-                        <tr>
-                            <th>平台</th>
-                            <th>联系人</th>
-                            <th>联系电话</th>
-                            <th>公钥</th>
-                            <th>clientId</th>
-                            <th>clientSecret</th>
-                            <th>ssoPassword</th>
-                            <th>回调地址</th>
-                            <th>编辑</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="tc : ${thirdClientsList}">
-                            <td th:if="${tc.description != 'xxx'}" th:text="${tc.description}"></td>
-                            <td th:if="${tc.description == 'xxx'}"></td>
 
-                            <td th:if="${tc.contactorName != 'xxx'}" th:text="${tc.contactorName}"></td>
-                            <td th:if="${tc.contactorName == 'xxx'}"></td>
+                <input type="text" name="query_description" th:if="${description == '0'}" placeholder="输入平台名称…"/>
+                <input type="text" name="query_description" th:unless="${description == '0'}" th:value="${description}" placeholder="输入平台名称…"/>
+            </div>
 
-                            <td th:if="${tc.contactorPhone != 'xxx'}" th:text="${tc.contactorPhone}"></td>
-                            <td th:if="${tc.contactorPhone == 'xxx'}"></td>
+            <table class="platform_tab">
+                <thead>
+                    <tr>
+                        <th>平台</th>
+                        <th>联系人</th>
+                        <th>联系电话</th>
+                        <th>公钥</th>
+                        <th>clientId</th>
+                        <th>clientSecret</th>
+                        <th>ssoPassword</th>
+                        <th>回调地址</th>
+                        <th>编辑</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="tc : ${thirdClientsList}">
+                        <td th:if="${tc.description != 'xxx'}" th:text="${tc.description}"></td>
+                        <td th:if="${tc.description == 'xxx'}"></td>
 
-                            <td th:text="${tc.publicKey}"></td>
-                            <td th:text="${tc.clientId}"></td>
-                            <td th:text="${tc.clientSecret}"></td>
-                            <td th:text="${tc.ssoPassword}"></td>
-                            <td th:text="${tc.callbackUrl}"></td>
-                            <td><a href="javascript:void(0);" class="modify_info">修改</a> | <a href="javascript:void(0);" class="del_record">删除</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="tab_foot">
-                    <ul class="handle">
-                        <li>新增</li>
-                    </ul>
-                    <div class="pages">
-                        <div class="jil">共<font th:text="${total}"></font>条记录</div>
-                        <a th:href="@{'/page/sso/platformList/1,' + ${pageSize} + ',' + ${description} +'.html'}" class="page">首页</a>
-                        <a th:if="${hasPrevioisPage == true}"
-                           th:href="@{'/page/sso/platformList/' + ${prePage} + ',' + ${pageSize} + ',' + ${description} + '.html'}" class="page">上一页</a>
+                        <td th:if="${tc.contactorName != 'xxx'}" th:text="${tc.contactorName}"></td>
+                        <td th:if="${tc.contactorName == 'xxx'}"></td>
 
-                        <a th:each="pageN : ${navigatepageNums}"
-                           th:href="@{'/page/sso/platformList/' + ${pageN} + ',' + ${pageSize} + ',' + ${description} + '.html'}" th:text="${pageN}" class="page"></a>
+                        <td th:if="${tc.contactorPhone != 'xxx'}" th:text="${tc.contactorPhone}"></td>
+                        <td th:if="${tc.contactorPhone == 'xxx'}"></td>
 
-                        <a th:if="${hastNextPage == true}"
-                           th:href="@{'/page/sso/platformList/' + ${nextPage} + ',' + ${pageSize} + ',' + ${description} + '.html'}" class="page">下一页</a>
+                        <td th:text="${tc.publicKey}"></td>
+                        <td th:text="${tc.clientId}"></td>
+                        <td th:text="${tc.clientSecret}"></td>
+                        <td th:text="${tc.ssoPassword}"></td>
+                        <td th:text="${tc.callbackUrl}"></td>
+                        <td><a href="javascript:void(0);" class="modify_info">修改</a> | <a href="javascript:void(0);" class="del_record">删除</a></td>
+                    </tr>
+                </tbody>
+            </table>
 
-                        <a th:href="@{'/page/sso/platformList/' + ${pages} + ',' + ${pageSize} + ',' + ${description}+ '.html'}" class="page">尾页</a>
-                    </div>
+            <div class="tab_foot">
+                <ul class="handle">
+                    <li>新增</li>
+                </ul>
+                <div class="pages">
+                    <div class="jil">共<font th:text="${total}"></font>条记录</div>
+                    <a th:href="@{'/page/sso/platformList/1,' + ${pageSize} + ',' + ${description} +'.html'}" class="page">首页</a>
+                    <a th:if="${hasPrevioisPage == true}"
+                       th:href="@{'/page/sso/platformList/' + ${prePage} + ',' + ${pageSize} + ',' + ${description} + '.html'}" class="page">上一页</a>
+
+                    <a th:each="pageN : ${navigatepageNums}"
+                       th:href="@{'/page/sso/platformList/' + ${pageN} + ',' + ${pageSize} + ',' + ${description} + '.html'}" th:text="${pageN}" class="page"></a>
+
+                    <a th:if="${hastNextPage == true}"
+                       th:href="@{'/page/sso/platformList/' + ${nextPage} + ',' + ${pageSize} + ',' + ${description} + '.html'}" class="page">下一页</a>
+
+                    <a th:href="@{'/page/sso/platformList/' + ${pages} + ',' + ${pageSize} + ',' + ${description}+ '.html'}" class="page">尾页</a>
                 </div>
+            </div>
 
             <script text="text/javascript" th:src="@{/static/scripts/backstage/platform.js}" src="/static/scripts/backstage/platform.js"></script>
         </div>

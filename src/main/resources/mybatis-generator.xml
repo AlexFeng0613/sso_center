@@ -102,7 +102,7 @@
                enableUpdateByExample="false"/>
 
         <table tableName="tb3rdsynuserdetaillog" domainObjectName="ThirdSynUserDetailLog" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--enableUpdateByExample="false"/>-->
+               <!--enableUpdateByExample="false"/>
 
         <table tableName="tbrole" domainObjectName="Role" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
@@ -117,6 +117,8 @@
                enableUpdateByExample="false"/>
 
         <table tableName="tbuserresource" domainObjectName="UserResource" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>-->
+        <table tableName="test" domainObjectName="Test" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>

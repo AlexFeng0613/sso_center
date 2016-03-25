@@ -31,6 +31,7 @@
         <typeAlias type="com.hsjc.ssoCenter.core.domain.UserRole" alias="UserRole"/>
         <typeAlias type="com.hsjc.ssoCenter.core.domain.UserResource" alias="UserResource"/>
         <typeAlias type="com.hsjc.ssoCenter.core.domain.RoleResource" alias="RoleResource"/>
+        <typeAlias type="com.hsjc.ssoCenter.core.domain.Test" alias="Test"/>
     </typeAliases>
 
     <!--
@@ -94,5 +95,6 @@
        <mapper resource="com/hsjc/ssoCenter/core/mapper/ThirdFilterMapper.xml"/>
        <mapper resource="com/hsjc/ssoCenter/core/mapper/ThirdSynUserDetailLogMapper.xml"/>
        <mapper resource="com/hsjc/ssoCenter/core/mapper/SystemPropertiesMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/TestMapper.xml"/>
    </mappers>
 </configuration>
