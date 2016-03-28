@@ -652,17 +652,27 @@
           AND tu.organizationCode = #{organization}
         </if>
 
-        <if test="type != null">
-          AND tu.type = #{type}
+      <if test="type != null">
+        AND tu.type = #{type}
+      </if>
 
-          AND tu.status = #{status}
-        </if>
+      <if test="status != null">
+        AND tu.status = #{status}
+      </if>
 
-        <if test="createTime == 3">
-          AND DATE_SUB(CURDATE(), INTERVAL 2 DAY) <![CDATA[<=]]> DATE(tu.createTime)
-        </if>
-   </where>
+      <if test="createTime == 3">
+        AND DATE_SUB(CURDATE(), INTERVAL 2 DAY) <![CDATA[<=]]> DATE(tu.createTime)
+      </if>
+      <if test="createTime == 7">
+        AND DATE_SUB(CURDATE(), INTERVAL 6 DAY) <![CDATA[<=]]> DATE(tu.createTime)
+      </if>
+      <if test="createTime == 30">
+        AND DATE_SUB(CURDATE(), INTERVAL 29 DAY) <![CDATA[<=]]> DATE(tu.createTime)
+      </if>
+    </where>
+    ORDER BY tu.createTime desc
   </select>
+
   <!--
   @author:wuyue
   @data:2016-3-22

@@ -23,6 +23,8 @@ function returnUrl(){
     if(SSOSystem.isEmpty(realName)) realName = "0";
     realName = encodeURI(realName);
 
+    console.log('realName is :' + realName);
+
     var url = '/page/sso/userList/1,10,' + organization + ',' + type + ',' + status + ',' + createTime + "," + realName + '.html';
     return url;
 }
@@ -182,4 +184,15 @@ $(function(){
  */
 window.onload = function(){
     $('#user_list').addClass('selected');
+
+    /**
+     * realName做转码处理
+     * @type {*|jQuery}
+     */
+    var realName = $('input[name="realName"]').val();
+    if(realName == '0' || SSOSystem.isEmpty(realName)){
+        $('input[name="realName"]').val('');
+    } else {
+        $('input[name="realName"]').val(decodeURI(realName));
+    }
 };

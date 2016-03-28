@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 
@@ -352,8 +353,8 @@ public class PageController extends BaseController{
         if(StringUtils.isEmpty(realName)){
             realName = "0";
         }
-        model.addAttribute("realName",realName);
 
+        model.addAttribute("realName", URLEncoder.encode(realName,"utf-8"));
         model.addAttribute("organizationList",organizationList);
         return "/backstage/userList";
     }
