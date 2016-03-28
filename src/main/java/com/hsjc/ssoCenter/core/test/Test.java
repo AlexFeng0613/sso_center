@@ -1,5 +1,6 @@
 package com.hsjc.ssoCenter.core.test;
 
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -167,5 +168,7 @@ public class Test {
                 }
             }
         }*/
+
+        System.out.println(URLDecoder.decode("%E7%8E%8B%E5%AD%90%E8%BD%A9"));
     }
 }

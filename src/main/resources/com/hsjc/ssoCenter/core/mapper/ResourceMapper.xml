@@ -335,48 +335,49 @@
   <select id="selectResourceByParam" resultType="java.util.HashMap">
     SELECT
     <include refid="Base_Column_List"/>
+    FROM tbresource
     <where>
       <if test="resKey != null" >
-        resKey = #{resKey},
+        resKey = #{resKey}
       </if>
       <if test="resName != null" >
-        AND resName = #{resName},
+        AND resName = #{resName}
       </if>
       <if test="resPath != null" >
-        AND resPath = #{resPath},
+        AND resPath = #{resPath}
       </if>
       <if test="parentId != null" >
-        AND parentId = #{parentId},
+        AND parentId = #{parentId}
       </if>
       <if test="resType != null" >
-        AND resType = #{resType},
+        AND resType = #{resType}
       </if>
       <if test="resUrl != null" >
-        AND resUrl = #{resUrl},
+        AND resUrl = #{resUrl}
       </if>
       <if test="state != null" >
-        AND state = #{state},
+        AND state = #{state}
       </if>
       <if test="description != null" >
-        AND description = #{description},
+        AND description = #{description}
       </if>
       <if test="createDate != null" >
-        AND createDate = #{createDate},
+        AND createDate = #{createDate}
       </if>
       <if test="className != null" >
-        AND className = #{className},
+        AND className = #{className}
       </if>
       <if test="idName != null" >
-        AND idName = #{idName},
+        AND idName = #{idName}
       </if>
       <if test="level != null" >
-        AND level = #{level},
+        AND level = #{level}
       </if>
       <if test="clientId != null" >
-        AND clientId = #{clientId},
+        AND clientId = #{clientId}
       </if>
       <if test="ssoPassword != null" >
-        AND ssoPassword = #{ssoPassword},
+        AND ssoPassword = #{ssoPassword}
       </if>
     </where>
   </select>

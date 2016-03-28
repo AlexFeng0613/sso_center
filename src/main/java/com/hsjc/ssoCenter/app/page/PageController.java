@@ -32,6 +32,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/page/")
 public class PageController extends BaseController{
+    final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PageController.class);
 
     @Autowired
     IndexIcosService indexIcosService;

@@ -24,14 +24,14 @@ $(function(){
 
         $('.modifiedBox').show();
 
-        var platform_name = $(this).parent().siblings().eq(1).html();
-        var contactorName = $(this).parent().siblings().eq(2).html();
-        var contactorPhone = $(this).parent().siblings().eq(3).html();
-        var platform_publicKey = $(this).parent().siblings().eq(4).html();
-        var platform_clientId = $(this).parent().siblings().eq(5).html();
-        var platform_clientSecret = $(this).parent().siblings().eq(6).html();
-        var platform_ssoPassword = $(this).parent().siblings().eq(7).html();
-        var platform_callbackUrl = $(this).parent().siblings().eq(8).html();
+        var platform_name = $(this).parent().siblings().eq(0).html();
+        var contactorName = $(this).parent().siblings().eq(1).html();
+        var contactorPhone = $(this).parent().siblings().eq(2).html();
+        var platform_publicKey = $(this).parent().siblings().eq(3).html();
+        var platform_clientId = $(this).parent().siblings().eq(4).html();
+        var platform_clientSecret = $(this).parent().siblings().eq(5).html();
+        var platform_ssoPassword = $(this).parent().siblings().eq(6).html();
+        var platform_callbackUrl = $(this).parent().siblings().eq(7).html();
 
         $('.platform_name').html(platform_name);
         $('input[name="contactorName"]').val(contactorName);
@@ -84,7 +84,7 @@ $(function(){
     });
 
     /**
-     * 弹出窗保存事件
+     * 弹出窗修改->保存事件
      */
     $('.butL').click(function(){
 
@@ -136,12 +136,6 @@ $(function(){
         if(SSOSystem.isEmpty(description) || SSOSystem.isEmpty(briefName)
             ||SSOSystem.isEmpty(contactorName) || SSOSystem.isEmpty(contactorPhone)
             || SSOSystem.isEmpty(callbackUrl)){
-
-            //console.log('description:' + SSOSystem.isEmpty(description));
-            //console.log('briefName:' + SSOSystem.isEmpty(briefName));
-            //console.log('contactorName:' + SSOSystem.isEmpty(contactorName));
-            //console.log('contactorPhone:' + SSOSystem.isEmpty(contactorPhone));
-            //console.log('callbackUrl:' + SSOSystem.isEmpty(callbackUrl));
 
             SSOSystem.showAlertDialog("请输入完整信息！");
             return false;

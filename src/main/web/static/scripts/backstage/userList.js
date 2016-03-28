@@ -23,8 +23,6 @@ function returnUrl(){
     if(SSOSystem.isEmpty(realName)) realName = "0";
     realName = encodeURI(realName);
 
-    console.log('realName is :' + realName);
-
     var url = '/page/sso/userList/1,10,' + organization + ',' + type + ',' + status + ',' + createTime + "," + realName + '.html';
     return url;
 }
