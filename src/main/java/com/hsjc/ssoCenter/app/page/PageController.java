@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLEncoder;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -94,6 +96,23 @@ public class PageController extends BaseController{
                 list.addAll(list1);
             }
         }
+
+        Collections.sort(list, new Comparator<HashMap>() {
+            @Override
+            public int compare(HashMap o1, HashMap o2) {
+                Integer type1 = Integer.parseInt(o1.get("resType").toString());
+                Integer type2 = Integer.parseInt(o2.get("resType").toString());
+
+                if(type1 > type2){
+                    return 1;
+                }
+
+                if(type1 < type2){
+                    return -1;
+                }
+                return 0;
+            }
+        });
 
         model.addAttribute("resourceList",list);
         return "/user/index";
