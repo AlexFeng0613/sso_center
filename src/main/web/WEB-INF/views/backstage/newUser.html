@@ -65,7 +65,7 @@
                             <img src="/static/images/SSO/users_img.png" id="user_img"/>
                         </div>
                         <div class="files">浏览
-                            <input type="file" name="imgFile"/>
+                            <input id="up" type="file" name="imgFile"/>
                         </div>
                     </div>
                     <ul class="build_submit">
@@ -74,8 +74,16 @@
                     </ul>
                 </form>
             </div>
-
             <script type="text/javascript" th:src="@{/static/scripts/backstage/newUser.js}" src="/static/scripts/backstage/newUser.js"></script>
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/uploadPreview.js}" src="/static/scripts/backstage/uploadPreview.js"></script>
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/upImg.js}" src="/static/scripts/backstage/upImg.js"></script>
+            <script type="text/javascript">
+                $(function () {
+                    $("#up").uploadPreview({
+                        Img: "user_img", Width: 100, Height: 100
+                    });
+                });
+            </script>
         </div>
     </body>
 </html>
