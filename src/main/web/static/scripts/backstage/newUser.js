@@ -54,8 +54,15 @@ $(function(){
         });
     });
 
+    /**
+     * 取消按钮事件
+     */
     $('.cancel').click(function(){
         window.location.href='/page/sso/userList/1,10,0,0,0,0,0.html';
+    });
+
+    $("#up").uploadPreview({
+        Img: "user_img", Width: 100, Height: 100
     });
 });
 
