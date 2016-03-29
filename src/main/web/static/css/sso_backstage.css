@@ -1969,3 +1969,20 @@ text-indent: 20px;
     z-index:9999;
     display: none;
 }
+
+.sexSex{
+    height:25px;
+    float: left;
+}
+.sexSex li{
+    width:100px;
+    height:25px;
+    line-height: 25px;
+    float: left;
+}
+.sexSex li input{
+    width:20px;
+    height:20px;
+    float:left;
+    margin-right:10px;
+}

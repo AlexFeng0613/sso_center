@@ -849,6 +849,8 @@ public class UserMainService extends ApiBaseService{
      *
      * @param userName
      * @param password
+     * @param realName
+     * @param roleId
      * @param organizationCode
      * @return
      */
@@ -859,9 +861,8 @@ public class UserMainService extends ApiBaseService{
         num = userMainMapper.adminAddNewAdmin(userMain);
 
         /**
-         * 为用户添加角色,默认是普通用户
+         * 为管理员添加角色
          */
-       // userRoleService.addNewUserRole(Long.parseLong(userMain.getId().toString()));
         UserRole userRole = new UserRole();
         userRole.setUserId(Long.parseLong(userMain.getId().toString()));
         userRole.setRoleId(roleId);

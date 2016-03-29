@@ -951,6 +951,19 @@ public class PageController extends BaseController{
     }
 
     /**
+     * @author : wuyue
+     * @date : 2016-3-29
+     *
+     * SSO后台>>管理员新增管理员成功
+     *
+     * @return
+     */
+    @RequestMapping("/backstage/adminAddAdminSucc")
+    public String adminAddAdminSucc(){
+        return "/page/adminAddAdminSucc";
+    }
+
+    /**
      * @author : zga
      * @date : 2016-3-10
      *

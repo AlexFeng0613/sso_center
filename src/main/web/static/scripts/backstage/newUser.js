@@ -13,23 +13,6 @@ $(function(){
         var userName =$('input[name="userName"]').val();
         var realName =$('input[name="realName"]').val();
         var password =$('input[name="password"]').val();
-        if((SSOSystem.isEmpty(userName)&&SSOSystem.isEmpty(password))
-            ||(SSOSystem.isEmpty(userName)&&SSOSystem.isEmpty(realName))
-            ||(SSOSystem.isEmpty(realName)&&SSOSystem.isEmpty(password))
-            ||(SSOSystem.isEmpty(userName)&&SSOSystem.isEmpty(realName)&&SSOSystem.isEmpty(password))
-        ){
-            SSOSystem.showAlertDialog("请将重要信息填写完整！");
-            return false;
-        } else if(SSOSystem.isEmpty(userName)){
-            SSOSystem.showAlertDialog("用户名不能为空！");
-            return false;
-        } else if(SSOSystem.isEmpty(realName)){
-            SSOSystem.showAlertDialog("真实姓名不能为空！");
-            return false;
-        } else if(SSOSystem.isEmpty(password)){
-            SSOSystem.showAlertDialog("密码不能为空！");
-            return false;
-        }
 
         /**
          * 判断用户名是否存在（利用注册用户时判断的controller来判断）
@@ -52,6 +35,26 @@ $(function(){
                 }
             }
         });
+      /*判断重要信息是否为空
+      * */
+        if((SSOSystem.isEmpty(userName)&&SSOSystem.isEmpty(password))
+            ||(SSOSystem.isEmpty(userName)&&SSOSystem.isEmpty(realName))
+            ||(SSOSystem.isEmpty(realName)&&SSOSystem.isEmpty(password))
+            ||(SSOSystem.isEmpty(userName)&&SSOSystem.isEmpty(realName)&&SSOSystem.isEmpty(password))
+        ){
+            SSOSystem.showAlertDialog("请将重要信息填写完整！");
+            return false;
+        } else if(SSOSystem.isEmpty(userName)){
+            SSOSystem.showAlertDialog("用户名不能为空！");
+            return false;
+        } else if(SSOSystem.isEmpty(realName)){
+            SSOSystem.showAlertDialog("真实姓名不能为空！");
+            return false;
+        } else if(SSOSystem.isEmpty(password)){
+            SSOSystem.showAlertDialog("密码不能为空！");
+            return false;
+        }
+
     });
 
     /**

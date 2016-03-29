@@ -14,13 +14,20 @@ $(function(){
      *
      */
     $('.selected').click(function(){
+
         var userName =$('input[name="userName"]').val();
+        var realName =$('input[name="realName"]').val();
+        var gender =$('input[name="gender"]:checked').val();
         var password =$('input[name="password"]').val();
         var roleId = $('select[name="roleId"]').val();
-        if(SSOSystem.isEmpty(userName)||SSOSystem.isEmpty(password)){
+
+        //console.log(gender);
+        //return false;
+        if(SSOSystem.isEmpty(userName)||SSOSystem.isEmpty(password)||SSOSystem.isEmpty(realName)){
             SSOSystem.showAlertDialog("请输入完整信息！");
             return false;
         }
+
         /**
          * Ajax请求,判断管理员名是否存在
          * @type {string}
@@ -36,7 +43,7 @@ $(function(){
             dataType : 'json',
             success : function(data){
                 if(data.success){
-                    window.location.href ='/user/adminAddNewAdmin.html?userName=' + userName + '&password=' + password + '&roleId=' + roleId;
+                    window.location.href ='/user/adminAddNewAdmin.html?userName=' + userName + '&realName=' + realName +'&gender=' + gender +'&password=' + password + '&roleId=' + roleId;
                 } else {
                     SSOSystem.showAlertDialog("管理员已存在！");
                 }
