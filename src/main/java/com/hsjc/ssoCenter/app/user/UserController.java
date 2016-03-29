@@ -628,4 +628,20 @@ public class UserController extends BaseController {
         JSONObject resultJson = userMainService.isExistsAdminName(paramJson);
         return resultJson;
     }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-29
+     *
+     * 后台管理员添加用户>>校验用户名、Email、Phone、邀请码
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "validateUserNameEmailPhoneAndInviteCode",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject validateUserNameEmailPhoneAndInviteCode(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = userMainService.validateUserNameEmailPhoneAndInviteCode(paramJson);
+        return resultJson;
+    }
 }

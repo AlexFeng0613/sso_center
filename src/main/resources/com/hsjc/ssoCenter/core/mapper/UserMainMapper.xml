@@ -614,6 +614,36 @@
 
   <!--
     @author : zga
+    @date : 2016-3-29
+    根据Phone查询用户
+  -->
+  <select id="findUserByPhone" resultType="UserMain">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbusermain
+    <where>
+      <if test="phone != null">
+        phone = #{phone}
+      </if>
+      <if test="status != null">
+        and status = #{status}
+      </if>
+    </where>
+
+    UNION All
+
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbusertemp
+    <where>
+      <if test="phone != null">
+        phone = #{phone}
+      </if>
+    </where>
+  </select>
+
+  <!--
+    @author : zga
     @date : 2016-3-9
     获取所有的用户
   -->

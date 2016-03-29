@@ -10,33 +10,18 @@ $(function(){
      * 新增用户
      */
     $('.build_submit li').eq(0).click(function(){
-        var userName =$('input[name="userName"]').val();
-        var realName =$('input[name="realName"]').val();
-        var password =$('input[name="password"]').val();
+        var userName = $('input[name="userName"]').val();
+        var realName = $('input[name="realName"]').val();
+        var password = $('input[name="password"]').val();
+
+        var email = $('input[name="email"]').val();
+        var phone = $('input[name="phone"]').val();
+        var inviteCode = $('input[name="inviteCode"]').val();
+
 
         /**
-         * 判断用户名是否存在（利用注册用户时判断的controller来判断）
-         * @type {{userName: (*|jQuery)}}
+         * 判断重要信息是否为空
          */
-        var paramData = {
-            'userName' : userName
-        };
-        $.ajax({
-            url : '/user/register/isExistsUserName.json',
-            type : 'POST',
-            data : JSON.stringify(paramData),
-            contentType: 'application/json',
-            dataType : 'json',
-            success : function(data){
-                if(data.success){
-                    $('form').submit();
-                } else {
-                    SSOSystem.showAlertDialog("用户名已存在！");
-                }
-            }
-        });
-      /*判断重要信息是否为空
-      * */
         if((SSOSystem.isEmpty(userName)&&SSOSystem.isEmpty(password))
             ||(SSOSystem.isEmpty(userName)&&SSOSystem.isEmpty(realName))
             ||(SSOSystem.isEmpty(realName)&&SSOSystem.isEmpty(password))
@@ -55,6 +40,63 @@ $(function(){
             return false;
         }
 
+        if(!SSOSystem.isEmpty(email) && !Constant.emailPattern.test(email)){
+            SSOSystem.showAlertDialog("邮箱格式不正确！");
+            return false;
+        }
+
+        if(!SSOSystem.isEmpty(phone) && !Constant.phonePattern.test(phone)){
+            SSOSystem.showAlertDialog("手机格式不正确！");
+            return false;
+        }
+
+        if(!SSOSystem.isEmpty(inviteCode) && inviteCode.length != 6){
+            SSOSystem.showAlertDialog("邀请码格式不正确！");
+            return false;
+        }
+
+        /**
+         * 判断用户名是否存在（利用注册用户时判断的controller来判断）
+         * @type {{userName: (*|jQuery)}}
+         */
+        var paramData = {
+            'userName' : userName,
+            'email' : email,
+            'phone' : phone,
+            'inviteCode' : inviteCode
+        };
+        $.ajax({
+        url : '/user/validateUserNameEmailPhoneAndInviteCode.json',
+        type : 'POST',
+        data : JSON.stringify(paramData),
+        contentType: 'application/json',
+        dataType : 'json',
+        success : function(data){
+                if(data.success&&data.userNameSuccess&&data.emailSuccess&&data.phoneSuccess&&data.inviteCodeSuccess){
+                    $('form').submit();
+                } else {
+                    if(!data.userNameSuccess){
+                        SSOSystem.showAlertDialog(ErrorMessage[data.userNameMessage]);
+                        return false;
+                    }
+
+                    if(!data.emailSuccess){
+                        SSOSystem.showAlertDialog(ErrorMessage[data.emailMessage]);
+                        return false;
+                    }
+
+                    if(!data.phoneSuccess){
+                        SSOSystem.showAlertDialog(ErrorMessage[data.phoneMessage]);
+                        return false;
+                    }
+
+                    if(!data.inviteCodeSuccess){
+                        SSOSystem.showAlertDialog(ErrorMessage[data.inviteCodeMessage]);
+                        return false;
+                    }
+                }
+            }
+        });
     });
 
     /**

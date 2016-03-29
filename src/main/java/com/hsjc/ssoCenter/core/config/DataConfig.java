@@ -64,22 +64,16 @@ public class DataConfig {
 	}
 
 	@Bean
-	public DataSourceTransactionManager dataSourceTransactionManager(@Value("${db.driver}") String driver,
-																	 @Value("${db.url}") String url,
-																	 @Value("${db.username}") String username,
-																	 @Value("${db.password}") String password){
+	public DataSourceTransactionManager dataSourceTransactionManager(DruidDataSource druidDataSource){
 		DataSourceTransactionManager dataSourceTransactionManager  = new DataSourceTransactionManager();
-		dataSourceTransactionManager.setDataSource(druidDataSource(driver, url, username, password));
+		dataSourceTransactionManager.setDataSource(druidDataSource);
 		return dataSourceTransactionManager;
 	}
 
 	@Bean(name = "sqlSessionFactory")
-	public SqlSessionFactoryBean sqlSessionFactoryBean(@Value("${db.driver}") String driver,
-											   @Value("${db.url}") String url,
-											   @Value("${db.username}") String username,
-											   @Value("${db.password}") String password) throws Exception {
+	public SqlSessionFactoryBean sqlSessionFactoryBean(DruidDataSource druidDataSource) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-		sqlSessionFactoryBean.setDataSource(druidDataSource(driver, url, username, password));
+		sqlSessionFactoryBean.setDataSource(druidDataSource);
 		sqlSessionFactoryBean.setTypeAliasesPackage("com.hsjc.ssoCenter.core.domain");
 		final Resource configLocation = new ClassPathResource("mybatis-config.xml");
 		sqlSessionFactoryBean.setConfigLocation(configLocation);
