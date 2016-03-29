@@ -18,6 +18,8 @@ public interface RestfulLogMapper {
 
     int updateByPrimaryKeySelective(RestfulLog restfulLog);
 
+    int updateSynCountByLogId(RestfulLog restfulLog);
+
     int updateByPrimaryKey(RestfulLog restfulLog);
 
     RestfulLog selectByPrimaryKey(Long restlogid);

@@ -68,7 +68,7 @@ public class ThirdSynDataService extends ApiBaseService{
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
 
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
-        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
+
         if(!resultJson.getBoolean("flag")) return resultJson;
 
         List<HashMap> list = new ArrayList<>();
@@ -89,7 +89,6 @@ public class ThirdSynDataService extends ApiBaseService{
             List<HashMap> organizationList = synMapper.selectAllOrganization(paramMap);
             PageInfo pageInfo = new PageInfo(organizationList);
             if(pageInfo.getList() == null || (pageInfo.getList() != null && pageInfo.getList().size() < 1)){
-                System.out.println("getAllOrganization No syn data!");
                 resultJson.put("flag",false);
                 resultJson.put("leftNum",0);
                 resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
@@ -115,6 +114,7 @@ public class ThirdSynDataService extends ApiBaseService{
             return resultJson;
         }
 
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
         return resultJson;
     }
@@ -142,7 +142,7 @@ public class ThirdSynDataService extends ApiBaseService{
          */
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
-        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
+
         if(!resultJson.getBoolean("flag")) return resultJson;
 
         List<HashMap> list = new ArrayList<>();
@@ -175,6 +175,7 @@ public class ThirdSynDataService extends ApiBaseService{
             return resultJson;
         }
 
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
         return resultJson;
     }
@@ -193,7 +194,7 @@ public class ThirdSynDataService extends ApiBaseService{
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
 
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
-        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
+
         if(!resultJson.getBoolean("flag")) return resultJson;
 
         List<HashMap> list = new ArrayList<>();
@@ -213,7 +214,6 @@ public class ThirdSynDataService extends ApiBaseService{
             PageInfo pageInfo = new PageInfo(userList);
 
             if(pageInfo.getList() == null || (pageInfo.getList() != null && pageInfo.getList().size() < 1)){
-                System.out.println("getAllUser No syn data!");
                 resultJson.put("flag",false);
                 resultJson.put("leftNum",0);
                 resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
@@ -242,6 +242,7 @@ public class ThirdSynDataService extends ApiBaseService{
             return resultJson;
         }
 
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
         return resultJson;
     }
@@ -269,7 +270,7 @@ public class ThirdSynDataService extends ApiBaseService{
          */
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
-        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
+
         if(!resultJson.getBoolean("flag")) return resultJson;
 
         List<HashMap> list = new ArrayList<>();
@@ -302,6 +303,7 @@ public class ThirdSynDataService extends ApiBaseService{
             return resultJson;
         }
 
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
         return resultJson;
     }

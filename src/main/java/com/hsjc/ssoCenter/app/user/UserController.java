@@ -26,6 +26,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -99,6 +100,37 @@ public class UserController extends BaseController {
     }
 
     /**
+     * @author : zga
+     * @date : 2015-12-03
+     *
+     * 注册用户
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "register/addNew",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject register(@RequestBody JSONObject paramJson, HttpSession session){
+        JSONObject result = userMainService.register(paramJson,session);
+        return result;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-8
+     *
+     * 注册用户,重新发送Email
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping(value = "register/reSendEmail",method = RequestMethod.POST)
+    public JSONObject reSendEmail(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = emailService.sendEmail(paramJson);
+        return resultJson;
+    }
+
+    /**
      * @author:zga
      * @date:2015-12-02
      *
@@ -110,11 +142,12 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "login",method = RequestMethod.POST)
     @SSOSystemLog(actionId = 1,description = "用户登录",module = "登录")
-    public String login(@RequestParam(value = "clientId",required = false) String clientId,
-                        @RequestParam(value = "openId",required = false) String openId,
+    public String login(HttpServletRequest request,
                         String username,
                         String password,
                         String rememberMe,
+                        @RequestParam(value = "clientId",required = false) String clientId,
+                        @RequestParam(value = "openId",required = false) String openId,
                         Model model) throws Exception {
         UsernamePasswordToken upToken = new UsernamePasswordToken(username, password, true);
         try{
@@ -151,37 +184,6 @@ public class UserController extends BaseController {
         }
 
         return "redirect:/page/index.html";
-    }
-
-    /**
-     * @author : zga
-     * @date : 2015-12-03
-     *
-     * 注册用户
-     *
-     * @param paramJson
-     * @return
-     */
-    @RequestMapping(value = "register/addNew",method = RequestMethod.POST)
-    @ResponseBody
-    public JSONObject register(@RequestBody JSONObject paramJson, HttpSession session){
-        JSONObject result = userMainService.register(paramJson,session);
-        return result;
-    }
-
-    /**
-     * @author : zga
-     * @date : 2016-3-8
-     *
-     * 注册用户,重新发送Email
-     *
-     * @param paramJson
-     * @return
-     */
-    @RequestMapping(value = "register/reSendEmail",method = RequestMethod.POST)
-    public JSONObject reSendEmail(@RequestBody JSONObject paramJson){
-        JSONObject resultJson = emailService.sendEmail(paramJson);
-        return resultJson;
     }
 
     /**

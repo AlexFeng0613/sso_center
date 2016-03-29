@@ -68,7 +68,7 @@
     where restLogId = #{restLogId}
   </delete>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.ssoCenter.core.domain.RestfulLog" >
+  <update id="updateByPrimaryKeySelective" parameterType="RestfulLog" >
     update tbrestfullog
     <set >
       <if test="clientId != null" >
@@ -84,7 +84,18 @@
     where restLogId = #{restLogId}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.hsjc.ssoCenter.core.domain.RestfulLog" >
+  <!--
+    @author : zga
+    @date : 2016-3-29
+    更新同步数量
+  -->
+  <update id="updateSynCountByLogId" parameterType="RestfulLog">
+    UPDATE tbrestfullog
+    SET synCount = #{synCount}
+    WHERE restLogId = #{restLogId}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="RestfulLog" >
     update tbrestfullog
     set clientId = #{clientId},
       actionId = #{actionId},

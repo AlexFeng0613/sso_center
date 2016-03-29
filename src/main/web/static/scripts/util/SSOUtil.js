@@ -67,9 +67,9 @@ var SSOSystem = {
             content: content
         });
         if(SSOSystem.isEmpty(modalType)){
-            d.show();
+            d.show({zIndex: 1000});
         } else {
-            d.showModal();
+            d.showModal({zIndex: 1000});
         }
     }
 };

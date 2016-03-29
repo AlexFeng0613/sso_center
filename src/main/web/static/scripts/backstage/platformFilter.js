@@ -85,9 +85,8 @@ $(function(){
             success : function(data){
                 if(data.success){
                     window.location.reload();
-                    SSOSystem.showAlertDialog('新增成功','','111');
                 }else {
-                    SSOSystem.showAlertDialog(ErrorMessage[data.message],'','111');
+                    alert(ErrorMessage[data.message]);
                 }
             }
         });
