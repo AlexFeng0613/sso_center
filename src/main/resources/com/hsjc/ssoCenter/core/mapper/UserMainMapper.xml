@@ -621,7 +621,10 @@
     SELECT
     tu.id,
     tu.userName,
-    tu.realName,
+    (CASE
+    WHEN tu.realName IS NULL THEN 'xxx'
+    ELSE tu.realName
+    END ) AS realName,
     tu.gender,
     (CASE
       WHEN torg.organizationName IS NULL THEN 'xxx'

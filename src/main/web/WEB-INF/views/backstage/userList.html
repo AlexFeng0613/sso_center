@@ -78,7 +78,9 @@
                     <tr th:each="user : ${userMainList}">
                         <input type="hidden" name="userName" th:value="${user.userName}"/>
                         <input type="hidden" name="id" th:value="${user.id}"/>
-                        <td th:text="${user.realName}"></td>
+
+                        <td th:if="${user.realName != 'xxx'}" th:text="${user.realName}"></td>
+                        <td th:if="${user.realName == 'xxx'}" th:text=""></td>
 
                         <td th:if="${user.gender == '1'}">男</td>
                         <td th:if="${user.gender == '0'}">女</td>
