@@ -84,14 +84,13 @@ public class UserController extends BaseController {
         }
 
         UserMain currentUserMain = getCurrentUser();
-        Session session = SecurityUtils.getSubject().getSession(true);
+        Subject subject = SecurityUtils.getSubject();
+        Session session = subject.getSession(true);
         if(session.getAttribute("user") != null){
             if(currentUserMain != null){
-                if("admin".equals(currentUserMain.getUserName())){
+                if(subject.hasRole("admin") || subject.hasRole("superAdmin")){
                     return "redirect:/page/sso/backstageIndex.html";
-                }
-
-                if(!"admin".equals(currentUserMain.getUserName())){
+                } else {
                     return "redirect:/page/index.html";
                 }
             }
