@@ -71,7 +71,7 @@ public class LogInterCeptor {
          * 保存日志
          */
         Object object = map.get("clientId");
-        JSONObject resultJson = null;
+        JSONObject resultJson;
         if(object == null){
             //系统日志保存
             com.hsjc.ssoCenter.core.domain.SystemLog systemLog = new com.hsjc.ssoCenter.core.domain.SystemLog();
@@ -96,8 +96,10 @@ public class LogInterCeptor {
             /**
              * 返回数据中插入requestSynId字段
              */
-            returnResultJson(joinPoint);
-
+            resultJson = returnResultJson(joinPoint);
+            if(resultJson == null){
+                return;
+            }
             resultJson.put("requestSynId",restfulLog.getRestLogId());
         }
     }

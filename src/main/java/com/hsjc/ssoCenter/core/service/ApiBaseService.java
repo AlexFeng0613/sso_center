@@ -85,6 +85,7 @@ public class ApiBaseService {
             redisTemplate.opsForValue().set(key, obj, 0);
             redisTemplate.expire(key, Constant.REDIS_FETCH_TIME_OUT,TimeUnit.SECONDS);
         } catch (Exception e) {
+            System.out.println(e);
             logger.debug("插入Redis Exception");
             throw new RuntimeException("插入Redis Exception");
         }

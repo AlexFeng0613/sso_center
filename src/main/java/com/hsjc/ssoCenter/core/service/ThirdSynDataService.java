@@ -68,7 +68,7 @@ public class ThirdSynDataService extends ApiBaseService{
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
 
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
-
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         if(!resultJson.getBoolean("flag")) return resultJson;
 
         List<HashMap> list = new ArrayList<>();
@@ -114,7 +114,6 @@ public class ThirdSynDataService extends ApiBaseService{
             return resultJson;
         }
 
-        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
         return resultJson;
     }
@@ -142,7 +141,7 @@ public class ThirdSynDataService extends ApiBaseService{
          */
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
-
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         if(!resultJson.getBoolean("flag")) return resultJson;
 
         List<HashMap> list = new ArrayList<>();
@@ -175,7 +174,6 @@ public class ThirdSynDataService extends ApiBaseService{
             return resultJson;
         }
 
-        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
         return resultJson;
     }
@@ -194,7 +192,7 @@ public class ThirdSynDataService extends ApiBaseService{
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
 
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
-
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         if(!resultJson.getBoolean("flag")) return resultJson;
 
         List<HashMap> list = new ArrayList<>();
@@ -242,7 +240,6 @@ public class ThirdSynDataService extends ApiBaseService{
             return resultJson;
         }
 
-        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
         return resultJson;
     }
@@ -270,7 +267,7 @@ public class ThirdSynDataService extends ApiBaseService{
          */
         ThirdClients thirdClients = getThirdClientsByClientId(paramJson);
         JSONObject resultJson = validateClientIdAndPassword(paramJson,thirdClients);
-
+        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         if(!resultJson.getBoolean("flag")) return resultJson;
 
         List<HashMap> list = new ArrayList<>();
@@ -303,7 +300,6 @@ public class ThirdSynDataService extends ApiBaseService{
             return resultJson;
         }
 
-        resultJson.put("requestSynId",paramJson.getString("requestSynId"));
         resultJson.put("respCode",ThirdSynConstant.SYN_SUCCESS);
         return resultJson;
     }
