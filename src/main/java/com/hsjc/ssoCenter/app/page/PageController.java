@@ -69,6 +69,9 @@ public class PageController extends BaseController{
     @Autowired
     ResourceService resourceService;
 
+    @Autowired
+    RestfulService restfulService;
+
     /**
      * @author : zga
      * @date : 2015-12-04
@@ -853,7 +856,7 @@ public class PageController extends BaseController{
         paramJson.put("pageSize",pageSize);
         paramJson.put("c_description", c_description);
 
-        PageInfo pageInfo = userMainService.getSiteLog(paramJson);
+        PageInfo pageInfo = restfulService.getSiteLog(paramJson);
 
         modalAddAttributes(model, pageInfo);
         model.addAttribute("siteLog", pageInfo.getList());

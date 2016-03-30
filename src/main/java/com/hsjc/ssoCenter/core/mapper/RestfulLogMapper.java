@@ -1,6 +1,10 @@
 package com.hsjc.ssoCenter.core.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.domain.RestfulLog;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author : zga
@@ -23,4 +27,6 @@ public interface RestfulLogMapper {
     int updateByPrimaryKey(RestfulLog restfulLog);
 
     RestfulLog selectByPrimaryKey(Long restlogid);
+
+    List<HashMap> findSiteLog(JSONObject paramJson);
 }
