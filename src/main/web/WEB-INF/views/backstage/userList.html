@@ -86,7 +86,7 @@
                         <td th:if="${user.gender == '0'}">女</td>
 
                         <td th:if="${user.organizationName != 'xxx'}" th:text="${user.organizationName}"></td>
-                        <td th:if="${user.organizationName == 'xxx'}" th:text=""></td>
+                        <td th:if="${user.organizationName == 'xxx'}"></td>
 
                         <td th:if="${user.type == 'teacher'}">老师</td>
                         <td th:if="${user.type == 'student'}">学生</td>

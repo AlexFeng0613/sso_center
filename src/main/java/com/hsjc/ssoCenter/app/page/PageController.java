@@ -834,15 +834,35 @@ public class PageController extends BaseController{
     }
 
     /**
-     * @author : zga
-     * @date : 2016-1-18
+     * @author : wuyue
+     * @date : 2016-3-30
      *
      * SSO后台>>站点日志
      *
      * @return
      */
-    @RequestMapping("sso/siteLog")
-    public String siteLog(){
+
+    @RequestMapping("sso/siteLog/{pageNum},{pageSize},{c_description}")
+    public String siteLog(@PathVariable("pageNum")Integer pageNum,
+                            @PathVariable("pageSize")Integer pageSize,
+                            @PathVariable("c_description")String c_description,
+                            Model model) throws Exception{
+
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("c_description", c_description);
+
+        PageInfo pageInfo = userMainService.getSiteLog(paramJson);
+
+        modalAddAttributes(model, pageInfo);
+        model.addAttribute("siteLog", pageInfo.getList());
+
+        if(StringUtils.isEmpty(c_description)){
+            c_description = "0";
+        }
+        model.addAttribute("c_description",c_description);
+
         return "/backstage/siteLog";
     }
 

@@ -58,4 +58,7 @@ public interface UserMainMapper {
     List<HashMap> findAllUser(JSONObject paramJson);
 
     List<HashMap> findAllAdmin(JSONObject paramJson);
+
+    List<HashMap> findSiteLog(JSONObject paramJson);
+
 }

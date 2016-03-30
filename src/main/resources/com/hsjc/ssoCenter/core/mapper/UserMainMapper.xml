@@ -682,25 +682,25 @@
   @目的：查询到所有的管理员以及权限
   -->
   <select id="findAllAdmin" resultType="java.util.HashMap">
-       SELECT
-         tu.id,
-         tu.userName,
-         (DATE_FORMAT(tu.createTime,'%Y-%m-%d')) AS createTime,
-         (CASE
-         WHEN trs.resName IS NULL THEN 'xxx'
-         ELSE trs.resName
-         END ) AS resName,
-          (CASE
-          WHEN tog.organizationName IS NULL THEN 'xxx'
-          ELSE tog.organizationName
-          END ) AS organizationName
-       FROM
-          tbusermain tu,
-          tbresource trs,
-          tborganization tog,
-          tbuserrole tur,
-          tbrole tr,
-          tbroleresource trrs
+    SELECT
+    tu.id,
+    tu.userName,
+    (DATE_FORMAT(tu.createTime,'%Y-%m-%d')) AS createTime,
+    (CASE
+    WHEN trs.resName IS NULL THEN 'xxx'
+    ELSE trs.resName
+    END ) AS resName,
+    (CASE
+    WHEN tog.organizationName IS NULL THEN 'xxx'
+    ELSE tog.organizationName
+    END ) AS organizationName
+    FROM
+    tbusermain tu,
+    tbresource trs,
+    tborganization tog,
+    tbuserrole tur,
+    tbrole tr,
+    tbroleresource trrs
     <where>
       <if test="uname != null">
         tu.organizationCode=tog.organizationCode
@@ -715,4 +715,5 @@
       </if>
     </where>
   </select>
+
 </mapper>
