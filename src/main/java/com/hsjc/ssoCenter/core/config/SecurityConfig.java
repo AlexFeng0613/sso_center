@@ -4,8 +4,6 @@ package com.hsjc.ssoCenter.core.config;
 import com.hsjc.ssoCenter.core.authrealm.MyAuthRealm;
 import com.hsjc.ssoCenter.core.filter.KickoutSessionControlFilter;
 import com.hsjc.ssoCenter.core.filter.SysUserFilter;
-import com.hsjc.ssoCenter.core.spring.SpringCacheManagerWrapper;
-import net.sf.ehcache.CacheManager;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.RememberMeManager;
@@ -23,12 +21,9 @@ import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.core.io.PathResource;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
@@ -46,7 +41,7 @@ public class SecurityConfig {
 	 * 缓存管理器(ehcache实现)
 	 * @return
 	 */
-	@Bean
+	/*@Bean
 	public SpringCacheManagerWrapper cacheManager(){
 		SpringCacheManagerWrapper springCacheManagerWrapper = new SpringCacheManagerWrapper();
 		springCacheManagerWrapper.setCacheManager(springCacheManager());
@@ -61,17 +56,17 @@ public class SecurityConfig {
 		return ehCacheCacheManager;
 	}
 
-	/**
+	*//**
 	 * ehcache
 	 * @return
-     */
+     *//*
 	@Bean
 	public CacheManager ehcacheManager(){
 		EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
 		ehCacheManagerFactoryBean.setConfigLocation(new PathResource("ehcache.xml"));
 
 		return ehCacheManagerFactoryBean.getObject();
-	}
+	}*/
 
 	/**
 	 * 凭证匹配器
@@ -223,7 +218,7 @@ public class SecurityConfig {
 	public DefaultWebSecurityManager securityManager() {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(myAuthRealm());
-		securityManager.setCacheManager(cacheManager());
+		//securityManager.setCacheManager(cacheManager());
 		securityManager.setSessionManager(defaultWebSessionManager());
 		securityManager.setRememberMeManager(rememberMeManager());
 		return securityManager;
@@ -275,7 +270,7 @@ public class SecurityConfig {
 	@Bean
 	public KickoutSessionControlFilter kickoutSessionControlFilter(){
 		KickoutSessionControlFilter kickoutSessionControlFilter = new KickoutSessionControlFilter();
-		kickoutSessionControlFilter.setCacheManager(cacheManager());
+		//kickoutSessionControlFilter.setCacheManager(cacheManager());
 		kickoutSessionControlFilter.setSessionManager(defaultWebSessionManager());
 		kickoutSessionControlFilter.setKickoutAfter(false);
 		kickoutSessionControlFilter.setMaxSession(1);
@@ -298,7 +293,6 @@ public class SecurityConfig {
 		Map<String,Filter> filterMap = new HashMap<>();
 		filterMap.put("authc",formAuthenticationFilter());
 		filterMap.put("sysUser",sysUserFilter());
-		filterMap.put("kickout",kickoutSessionControlFilter());
 		shiroFilterFactoryBean.setFilters(filterMap);
 
 		Map<String, String> filterChainDefinitionMap = new HashMap<>();

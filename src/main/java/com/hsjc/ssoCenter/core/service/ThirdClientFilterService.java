@@ -78,14 +78,15 @@ public class ThirdClientFilterService extends ApiBaseService{
         String teacherOrStudent = paramJson.getString("tstudent");
 
         ThirdFilter thirdFilter = new ThirdFilter();
-        thirdFilter.setTrdclientid(clientId);
-        thirdFilter.setOrganizationcode(organizatinCode);
+        thirdFilter.setTrdClientId(clientId);
+        thirdFilter.setOrganizationCode(organizatinCode);
         thirdFilter.setTstudent(teacherOrStudent);
 
         try{
             thirdFilterMapper.insert(thirdFilter);
             return validate(1);
         } catch (Exception e){
+            logger.debug("add new third filter exception:" + e);
             return validate(0);
         }
     }

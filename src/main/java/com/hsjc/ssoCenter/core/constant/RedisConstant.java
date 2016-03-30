@@ -8,4 +8,10 @@ package com.hsjc.ssoCenter.core.constant;
  */
 public class RedisConstant {
     public static int DB_DICT;
+
+    public static String DB_HOST;
+
+    public static int DB_PORT;
+
+    public static String DB_PASSWORD;
 }

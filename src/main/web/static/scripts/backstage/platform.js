@@ -107,7 +107,7 @@ $(function(){
                     $('.section').css('background-color','#ffffff');
                     window.location.reload();
                 }else {
-                    SSOSystem.showAlertDialog(ErrorMessage[data.message],'','111');
+                    window.alert(ErrorMessage[data.message]);
                 }
             }
         });
@@ -137,7 +137,7 @@ $(function(){
             ||SSOSystem.isEmpty(contactorName) || SSOSystem.isEmpty(contactorPhone)
             || SSOSystem.isEmpty(callbackUrl)){
 
-            SSOSystem.showAlertDialog("请输入完整信息！");
+            window.alert("请输入完整信息！");
             return false;
         }
 
@@ -161,7 +161,7 @@ $(function(){
                     $('.section').css('background-color','#ffffff');
                     window.location.reload();
                 }else {
-                    SSOSystem.showAlertDialog(ErrorMessage[data.message],'','111');
+                    window.alert(ErrorMessage[data.message]);
                 }
             }
         });

@@ -28,9 +28,16 @@ public class AppConfig {
 
 	@Bean
 	public RedisConstant redisConstant(
+			@Value("${redis.host}") String HOST,
+			@Value("${redis.port}") Integer PORT,
+			@Value("${redis.password}") String PASSWORD,
 			@Value("${redis.dictDatabase}") Integer DB_DICT
 	) {
+		RedisConstant.DB_HOST = HOST;
+		RedisConstant.DB_PORT = PORT;
+		RedisConstant.DB_PASSWORD = PASSWORD;
 		RedisConstant.DB_DICT = DB_DICT;
+
 		return null;
 	}
 

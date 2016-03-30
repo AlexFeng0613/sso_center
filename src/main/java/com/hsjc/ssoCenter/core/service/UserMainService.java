@@ -904,4 +904,75 @@ public class UserMainService extends ApiBaseService{
         userRoleService.addNewAdminRole(userRole);
         return num;
     }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-29
+     *
+     * 后台管理员添加用户>>校验用户名、Email、Phone、邀请码
+     *
+     * @param paramJson
+     * @return
+     */
+    public JSONObject validateUserNameEmailPhoneAndInviteCode(JSONObject paramJson){
+        JSONObject resultJson = getResultJson();
+        resultJson.put("userNameSuccess",true);
+        resultJson.put("emailSuccess",true);
+        resultJson.put("phoneSuccess",true);
+        resultJson.put("inviteCodeSuccess",true);
+
+        /**
+         * 校验用户名是否存在
+         */
+        List<UserMain> userMainList = userMainMapper.findUserByUserName(paramJson);
+        if(userMainList != null && userMainList .size() > 0){
+            resultJson.put("userNameSuccess",false);
+            resultJson.put("userNameMessage", Constant.EXISTS_USERNAME);
+            return resultJson;
+        }
+
+        /**
+         * 校验email是否已经绑定
+         */
+        if(StringUtils.isNotEmpty(paramJson.getString("email"))){
+            List<UserMain> emailUserMainList = userMainMapper.findUserByEmail(paramJson);
+            if(emailUserMainList != null && emailUserMainList .size() > 0){
+                resultJson.put("emailSuccess",false);
+                resultJson.put("emailMessage", Constant.EXISTS_BIND_EMAIL);
+                return resultJson;
+            }
+        }
+
+        /**
+         * 校验手机是否绑定
+         */
+        if(StringUtils.isNotEmpty(paramJson.getString("phone"))){
+            List<UserMain> phoneUserMainList = userMainMapper.findUserByPhone(paramJson);
+            if(phoneUserMainList != null && phoneUserMainList .size() > 0){
+                resultJson.put("phoneSuccess",false);
+                resultJson.put("phoneMessage", Constant.EXISTS_BIND_PHONE);
+                return resultJson;
+            }
+        }
+
+        /**
+         * 校验邀请码
+         */
+        if(StringUtils.isNotEmpty(paramJson.getString("inviteCode"))) {
+            SchoolInvite schoolInvite = schoolInviteMapper.selectByInviteCode(paramJson);
+            if (schoolInvite == null) {
+                resultJson.put("inviteCodeSuccess", false);
+                resultJson.put("inviteCodeMessage", Constant.ERROR_INVITE_CODE);
+                return resultJson;
+            } else {
+                if ("used".equals(schoolInvite.getState())) {
+                    resultJson.put("inviteCodeSuccess", false);
+                    resultJson.put("inviteCodeMessage", Constant.EXISTS_BIND_INVITE_CODE);
+                    return resultJson;
+                }
+            }
+        }
+
+        return resultJson;
+    }
 }

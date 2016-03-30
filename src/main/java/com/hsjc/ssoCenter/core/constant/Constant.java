@@ -95,8 +95,6 @@ public class Constant {
     public static final String ADMIN_ADD_ORGANIZATION_SUCCESS = "100028";
 
 
-
-
     /**
      * 公共的常量
      */

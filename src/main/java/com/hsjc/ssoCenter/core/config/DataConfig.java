@@ -1,7 +1,6 @@
 package com.hsjc.ssoCenter.core.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.hsjc.ssoCenter.core.base.FastJsonRedisSerializer;
 import com.hsjc.ssoCenter.core.constant.RedisConstant;
 import org.apache.commons.lang.StringUtils;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -13,7 +12,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -66,22 +64,16 @@ public class DataConfig {
 	}
 
 	@Bean
-	public DataSourceTransactionManager dataSourceTransactionManager(@Value("${db.driver}") String driver,
-																	 @Value("${db.url}") String url,
-																	 @Value("${db.username}") String username,
-																	 @Value("${db.password}") String password){
+	public DataSourceTransactionManager dataSourceTransactionManager(DruidDataSource druidDataSource){
 		DataSourceTransactionManager dataSourceTransactionManager  = new DataSourceTransactionManager();
-		dataSourceTransactionManager.setDataSource(druidDataSource(driver, url, username, password));
+		dataSourceTransactionManager.setDataSource(druidDataSource);
 		return dataSourceTransactionManager;
 	}
 
 	@Bean(name = "sqlSessionFactory")
-	public SqlSessionFactoryBean sqlSessionFactoryBean(@Value("${db.driver}") String driver,
-											   @Value("${db.url}") String url,
-											   @Value("${db.username}") String username,
-											   @Value("${db.password}") String password) throws Exception {
+	public SqlSessionFactoryBean sqlSessionFactoryBean(DruidDataSource druidDataSource) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-		sqlSessionFactoryBean.setDataSource(druidDataSource(driver, url, username, password));
+		sqlSessionFactoryBean.setDataSource(druidDataSource);
 		sqlSessionFactoryBean.setTypeAliasesPackage("com.hsjc.ssoCenter.core.domain");
 		final Resource configLocation = new ClassPathResource("mybatis-config.xml");
 		sqlSessionFactoryBean.setConfigLocation(configLocation);
@@ -98,17 +90,18 @@ public class DataConfig {
 
 	@Bean
 	public JedisConnectionFactory dictJedisConnectionFactory(
-			@Value("${redis.host}") String host,
-			@Value("${redis.port}") int port,
-			@Value("${redis.password}") String password
-	) {
+            @Value("${redis.host}") String host,
+            @Value("${redis.port}") int port,
+            @Value("${redis.password}") String password,
+            @Value("${redis.dictDatabase}") Integer dataBase
+    ) {
 		JedisConnectionFactory factory = new JedisConnectionFactory();
 
 		factory.setHostName(host);
 		factory.setPort(port);
-		if (!StringUtils.isEmpty(password)) {
-			factory.setPassword(password);
-		}
+        if(StringUtils.isNotEmpty(password)){
+            factory.setPassword(password);
+        }
 		factory.setDatabase(RedisConstant.DB_DICT);
 
 		return factory;
@@ -116,17 +109,10 @@ public class DataConfig {
 
 	@Bean
 	public RedisTemplate redisTemplate(
-			JedisConnectionFactory dictJedisConnectionFactory
-	) {
+            JedisConnectionFactory dictJedisConnectionFactory) {
 		RedisTemplate redisTemplate = new RedisTemplate<>();
 		redisTemplate.setConnectionFactory(dictJedisConnectionFactory);
 
 		return redisTemplate;
-	}
-
-	private void fillRedisTemplateSerializers(RedisTemplate redisTemplate, Class redisClass) {
-		redisTemplate.setKeySerializer(new StringRedisSerializer());
-		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-		redisTemplate.setDefaultSerializer(new FastJsonRedisSerializer<>(redisClass));
 	}
 }

@@ -5,9 +5,9 @@ import java.util.Date;
 public class ThirdFilter {
     private Integer id;
 
-    private String trdclientid;
+    private String trdClientId;
 
-    private Integer organizationcode;
+    private Integer organizationCode;
 
     private String tstudent;
 
@@ -21,20 +21,20 @@ public class ThirdFilter {
         this.id = id;
     }
 
-    public String getTrdclientid() {
-        return trdclientid;
+    public String getTrdClientId() {
+        return trdClientId;
     }
 
-    public void setTrdclientid(String trdclientid) {
-        this.trdclientid = trdclientid;
+    public void setTrdClientId(String trdClientId) {
+        this.trdClientId = trdClientId;
     }
 
-    public Integer getOrganizationcode() {
-        return organizationcode;
+    public Integer getOrganizationCode() {
+        return organizationCode;
     }
 
-    public void setOrganizationcode(Integer organizationcode) {
-        this.organizationcode = organizationcode;
+    public void setOrganizationCode(Integer organizationCode) {
+        this.organizationCode = organizationCode;
     }
 
     public String getTstudent() {

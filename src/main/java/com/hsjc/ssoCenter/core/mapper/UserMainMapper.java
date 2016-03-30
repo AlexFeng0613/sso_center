@@ -55,6 +55,8 @@ public interface UserMainMapper {
 
     List<UserMain> findUserByEmail(JSONObject paramJson);
 
+    List<UserMain> findUserByPhone(JSONObject paramJson);
+
     List<HashMap> findAllUser(JSONObject paramJson);
 
     List<HashMap> findAllAdmin(JSONObject paramJson);

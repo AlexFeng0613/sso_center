@@ -89,7 +89,6 @@ public class ThirdSynDataService extends ApiBaseService{
             List<HashMap> organizationList = synMapper.selectAllOrganization(paramMap);
             PageInfo pageInfo = new PageInfo(organizationList);
             if(pageInfo.getList() == null || (pageInfo.getList() != null && pageInfo.getList().size() < 1)){
-                System.out.println("getAllOrganization No syn data!");
                 resultJson.put("flag",false);
                 resultJson.put("leftNum",0);
                 resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
@@ -213,7 +212,6 @@ public class ThirdSynDataService extends ApiBaseService{
             PageInfo pageInfo = new PageInfo(userList);
 
             if(pageInfo.getList() == null || (pageInfo.getList() != null && pageInfo.getList().size() < 1)){
-                System.out.println("getAllUser No syn data!");
                 resultJson.put("flag",false);
                 resultJson.put("leftNum",0);
                 resultJson.put("respCode", ThirdSynConstant.NO_SYN_DATA);
