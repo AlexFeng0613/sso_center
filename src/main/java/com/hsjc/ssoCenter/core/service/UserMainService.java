@@ -821,13 +821,15 @@ public class UserMainService extends ApiBaseService{
     public Integer adminAddNewUser(UserMain userMain) throws RuntimeException{
         String inviteCode = userMain.getInviteCode();
         Integer num = 0;
+        SchoolInvite schoolInvite = null;
         if(StringUtils.isNotEmpty(inviteCode)){
             JSONObject paramJson = new JSONObject();
             paramJson.put("inviteCode",inviteCode);
-            SchoolInvite schoolInvite = schoolInviteMapper.selectByInviteCode(paramJson);
+            schoolInvite = schoolInviteMapper.selectByInviteCode(paramJson);
 
-            if(schoolInvite == null)return num;
-            userMain.setOrganizationCode(schoolInvite.getSchoolId());
+            if(schoolInvite != null) {
+                userMain.setOrganizationCode(schoolInvite.getSchoolId());
+            }
         }
 
         num = userMainMapper.adminAddNewUser(userMain);
@@ -836,6 +838,10 @@ public class UserMainService extends ApiBaseService{
          * 为用户添加角色,默认是普通用户
          */
         userRoleService.addNewUserRole(Long.parseLong(userMain.getId().toString()));
+
+        if(schoolInvite != null){
+            schoolInviteMapper.updateByPrimaryKey(schoolInvite);
+        }
         return num;
     }
 
