@@ -73,6 +73,7 @@ public class UserController extends BaseController {
         Subject subject = SecurityUtils.getSubject();
         UserMain userMain = (UserMain) subject.getPrincipal();
 
+
         if("admin".equals(userMain.getUserName())){
             return "redirect:/page/sso/backstageIndex.html";
         }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>restful接口测试</title>
+        <style type="text/css">
+            *{padding:0;margin:0}
+            div{overflow: hidden}
+            ul,ol{overflow: hidden;list-style:none}
+            .wrap{width:1200px;height:1000px;}
+            .menu{float:left;box-sizing: border-box;width:25%;background: #f0ad4e;height:1000px;}
+            .section{float:left;box-sizing: border-box;width:75%;}
+            .tab{width:100%;background: #ff0000;border: 1px solid #000;height:600px;}
+            .resoulte{width:100%;background: #31708f;height:400px;}
+        </style>
+        <script text="text/javascript" th:src="@{/static/scripts/jquery/jquery-1.11.3.min.js}" src="../../static/scripts/jquery/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                var h=$(window).height();
+                var wh=$('.wrap').height();
+                var mh=(h-wh)/2;
+                $('.wrap').css('margin',mh+'px auto');
+
+            })
+
+
+
+
+
+
+
+
+        </script>
+    </head>
+    <body>
+        <div class="wrap">
+            <aside class="menu">
+                <ul>
+                    <li>点击事件1</li>
+                    <li>点击事件2</li>
+                    <li>点击事件3</li>
+                    <li>点击事件4</li>
+                </ul>
+            </aside>
+            <section class="section">
+                <div class="tab"></div>
+                <div class="resoulte"></div>
+            </section>
+        </div>
+    </body>
+</html>
