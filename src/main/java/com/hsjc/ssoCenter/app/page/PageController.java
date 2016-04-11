@@ -9,6 +9,8 @@ import com.hsjc.ssoCenter.core.service.*;
 import com.hsjc.ssoCenter.core.util.MenuUtil;
 import com.hsjc.ssoCenter.core.util.SSOStringUtil;
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -120,6 +122,35 @@ public class PageController extends BaseController{
         model.addAttribute("resourceList",list);
         return "/user/index";
     }
+
+    /**
+     * @author : zga
+     * @date : 2016-4-11
+     *
+     * 404错误页面
+     *
+     * @return
+     */
+    @RequestMapping("notFoundPage")
+    public String notFoundPage(){
+        Subject subject = SecurityUtils.getSubject();
+        UserMain currentUserMain = (UserMain) subject.getPrincipal();
+
+        if(currentUserMain == null){
+            return "redirect:/user/login.html";
+        }
+
+        if(subject.hasRole("admin") || subject.hasRole("superAdmin")){
+            return "redirect:/page/sso/backstageIndex.html";
+        }
+
+        if(subject.hasRole("user")){
+            return "redirect:/page/index.html";
+        }
+
+        return "/user/login";
+    }
+
 
     /**
      * @author : zga
