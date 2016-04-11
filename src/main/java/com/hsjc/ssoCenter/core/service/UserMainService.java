@@ -62,7 +62,7 @@ public class UserMainService extends ApiBaseService{
 
     @Autowired
     UserRoleService userRoleService;
-
+    
     /**
      * @author : zga
      * @date : 2015-12-03
@@ -746,6 +746,7 @@ public class UserMainService extends ApiBaseService{
         PageInfo pageInfo = new PageInfo(adminList);
         return pageInfo;
     }
+
 
     /**
      * @author : zga
