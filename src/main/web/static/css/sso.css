@@ -144,28 +144,32 @@ label{
     color: #000;
     font-family: \5FAE\8F6F\96C5\9ED1;
     border-radius: 5px;
-
 }
 
-.register_input.text{
+.registerImg1{
+    left:25px;
+    width:40px;
+    height:38px;
+    line-height: 38px;
+    position: absolute;
     background: url(../images/yun/text1.png) no-repeat 15px center;
 }
 
-.register_input.password2{
+.registerImg2{
+    left:25px;
+    width:40px;
+    height:38px;
+    line-height: 38px;
+    position: absolute;
     background: url(../images/yun/password1.png) no-repeat 15px center;
 }
 
-.register_input.fillout{
-    border:1px solid #ffad00;
+.registerImg1.fillout{
+
     background: url(../images/yun/text2.png) no-repeat 15px center;
 }
 
-.register_input.text.fillout{
-    border:1px solid #ffad00;
-    background: url(../images/yun/text2.png) no-repeat 15px center;
-}
-
-.register_input.password2.fillout{
+.registerImg2.fillout{
     background: url(../images/yun/password2.png) no-repeat 15px center;
 }
 

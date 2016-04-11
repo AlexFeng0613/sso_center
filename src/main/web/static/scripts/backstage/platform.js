@@ -23,7 +23,6 @@ $(function(){
     $('.modify_info').click(function(){
 
         $('.modifiedBox').show();
-
         var platform_name = $(this).parent().siblings().eq(0).html();
         var contactorName = $(this).parent().siblings().eq(1).html();
         var contactorPhone = $(this).parent().siblings().eq(2).html();

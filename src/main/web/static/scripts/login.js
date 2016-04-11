@@ -9,12 +9,18 @@ $(function(){
     alertErrorMessage();
 
     $('.register_input').focus(function(){
-        $(this).addClass('fillout');
+        $(this).siblings('.registerImg1').addClass('fillout');
+        $(this).siblings('.registerImg2').addClass('fillout');
     });
 
     $('.register_input').blur(function(){
-        $(this).removeClass('fillout');
+        $(this).siblings('.registerImg1').removeClass('fillout');
+        $(this).siblings('.registerImg2').addClass('fillout');
     });
+
+
+
+
 
     $('.remember li').click(function(){
         $(this).toggleClass('checked');
