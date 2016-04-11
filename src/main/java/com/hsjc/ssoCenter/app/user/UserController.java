@@ -3,6 +3,7 @@ package com.hsjc.ssoCenter.app.user;
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.annotation.SSOSystemLog;
+import com.hsjc.ssoCenter.core.constant.Constant;
 import com.hsjc.ssoCenter.core.domain.ActivateEmailMess;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.domain.UserMain;
@@ -541,14 +542,14 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "adminAddNewUser",method = RequestMethod.POST)
     public String adminAddNewUser(@RequestParam("userName")String userName,
-                @RequestParam("realName")String realName,
-                @RequestParam("type")String type,
-                @RequestParam("gender")String gender,
-                @RequestParam("password")String password,
-                @RequestParam("email")String email,
-                @RequestParam("phone")String phone,
-                @RequestParam("inviteCode")String inviteCode,
-                @RequestParam(value = "imgFile",required = false) MultipartFile file){
+                                  @RequestParam("realName")String realName,
+                                  @RequestParam("type")String type,
+                                  @RequestParam("gender")String gender,
+                                  @RequestParam("password")String password,
+                                  @RequestParam("email")String email,
+                                  @RequestParam("phone")String phone,
+                                  @RequestParam("inviteCode")String inviteCode,
+                                  @RequestParam(value = "imgFile",required = false) MultipartFile file){
 
         UserMain userMain = new UserMain();
 
@@ -588,10 +589,10 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "adminAddNewAdmin")
     public String adminAddNewAdmin(@RequestParam("userName")String userName,
-                                  @RequestParam("realName")String realName,
+                                   @RequestParam("realName")String realName,
                                    @RequestParam("gender")String gender,
                                    @RequestParam("password")String password,
-                                  @RequestParam("roleId")String roleId){
+                                   @RequestParam("roleId")String roleId){
 
         Integer organizationCode = organizationService.findOrganizationCode("总站");
         System.out.println(organizationCode);
