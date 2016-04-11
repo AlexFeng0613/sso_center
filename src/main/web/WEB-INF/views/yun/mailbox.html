@@ -19,57 +19,11 @@
                       <input type="text" name="email" placeholder="用于绑定账号以及验证" class="email"/>
                       <input type="submit" class="email_submit" value="下一步"/>
                   </div>
-                  <span></span>
                   <div class="long_input_bot">用于接收来自平台的通知和找回密码，非常重要!</div>
               </form>
           </div>
-          <script type="text/javascript">
-              $(function(){
-                  var demo = $(".bindMailForm").Validform({
-                      tiptype:2,
-                      label:".label",
-                      showAllError:true,
-                      datatype:{
-                          "s6-18":/^[\w\.\s]{6,18}$/,
-                          "s2-10":/^\s{2,10}/,
-                          "e":/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-                      },
-                      callback : function(form){
-                          var email = $('input[name="email"]').val();
-                          var data = {
-                              'email' : email
-                          }
 
-                          $.ajax({
-                              url : '/sso/updateEmail.json',
-                              type : 'POST',
-                              data : JSON.stringify(data),
-                              contentType: 'application/json',
-                              dataType : 'json',
-                              success : function(data){
-                                  if(data.success){
-                                      window.location.href = '/page/sso/bindEmailSucc.html?email=' + email;
-                                  }else {
-                                      if(data.message == '100005') alert('绑定失败');
-                                  }
-                              }
-                          });
-                          return false;
-                      }
-                  });
-
-                  demo.tipmsg.w["s6-18"]="请输入6到18位英文和数字";
-
-                  demo.addRule([{
-                      ele : ".email:eq(0)",
-                      datatype : "e"
-                  }]);
-
-
-                  $('#mailbox').addClass('selected');
-                  $('#mailbox').children('#mailbox a').addClass('selected');
-              });
-          </script>
+          <script type="text/javascript" th:src="@{/static/scripts/yun/mailbox.js}" src="/static/scripts/yun/mailbox.js"></script>
       </div>
     </body>
 </html>

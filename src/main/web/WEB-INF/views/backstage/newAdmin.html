@@ -5,82 +5,52 @@
       layout:decorator="../../public/backstage">
     <head></head>
     <body>
+        <div id="content" layout:fragment="content">
+            <div class="index_title">新增管理员</div>
 
+            <div class="admin_box">
+                <div class="tissue_message" style="margin-top:20px;">
+                    <div class="tissue_message">
+                        <div class="tissue_box_l">*</div>
+                        <div class="tissue_box_name">管理员用户名：</div>
+                        <input name="userName" type="text"/>
+                    </div>
 
-
-                <div id="content" layout:fragment="content">
-                    <div class="index_title">新增管理员</div>
-                    <div class="admin_box">
-                        <div class="tissue_message" style="margin-top:20px;">
-                            <div class="tissue_box_l">*</div>
-                            <div class="tissue_box_name">所属组织机构：</div>
-                            <input type="text"/>
-                        </div>
-                        <div class="tissue_message">
-                            <div class="tissue_box_l">*</div>
-                            <div class="tissue_box_name">管理员用户名：</div>
-                            <input type="text"/>
-                        </div>
-                        <div class="tissue_message">
-                            <div class="tissue_box_l"></div>
-                            <div class="tissue_box_name">登录密码：</div>
-                            <input type="text"/>
-                        </div>
-                        <div class="tissue_message">
-                            <div class="tissue_box_l"></div>
-                            <div class="tissue_box_name">确认密码：</div>
-                            <input type="text"/>
-                        </div>
-                        <div class="tissue_message">
-                            <div class="tissue_box_l"></div>
-                            <div class="tissue_box_name">设置管理权限：</div>
-                            <ul class="tissue_select">
-                                <li>
-                                    <input type="checkbox"/>
-                                    所有权限
-                                </li>
-                                <li>
-                                    <input type="checkbox"/>
-                                    用户管理
-                                </li>
-                                <li>
-                                    <input type="checkbox"/>
-                                    第三方平台管理
-                                </li>
-                                <li>
-                                    <input type="checkbox"/>
-                                    客服管理
-                                </li>
-                                <li>
-                                    <input type="checkbox"/>
-                                    组织机构管理
-                                </li>
-                                <li>
-                                    <input type="checkbox"/>
-                                    站点管理
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tissue_message">
-                            <div class="tissue_box_l"></div>
-                            <div class="tissue_box_name">头像：</div>
-                            <div class="users_img">
-                                <img src="../../static/images/SSO/users_img.png"/>
-                            </div>
-                            <div class="files">浏览
-                                <input type="file" />
-                            </div>
-                        </div>
-                        <ul class="build_submit">
-                            <li class="selected">保存</li>
-                            <li>取消</li>
+                    <div class="tissue_message">
+                        <div class="tissue_box_l">*</div>
+                        <div class="tissue_box_name">真实姓名：</div>
+                        <input name="realName" type="text"/>
+                    </div>
+                    <div class="tissue_message">
+                        <div class="tissue_box_l">*</div>
+                        <div class="tissue_box_name">性别：</div>
+                        <ul class="user_status">
+                            <li><input type="radio" name="gender" value="1" checked="checked"/>男</li>
+                            <li><input type="radio" name="gender" value="0"/>女</li>
                         </ul>
                     </div>
-                    <script type="text/javascript">
-                        $('#new_admin').addClass('selected');
-                    </script>
+                   <div class="tissue_message">
+                        <div class="tissue_box_l">*</div>
+                        <div class="tissue_box_name">登录密码：</div>
+                        <input name="password" type="password"/>
+                    </div>
+                    <div class="tissue_message">
+                        <div class="tissue_box_l">*</div>
+                        <div class="tissue_box_name">角色：</div>
+                        <div class="unnamed" style="margin-left:20px;">
+                           <select name="roleId">
+                               <option value="2">普通管理员</option>
+                               <option value="3">超级管理员</option>
+                           </select>
+                        </div>
+                    </div>
+                    <ul class="build_submit">
+                        <li class="selected">保存</li>
+                        <li class="cancel">取消</li>
+                    </ul>
                 </div>
-
-
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/newAdmin.js}" src="/static/scripts/backstage/newAdmin.js"></script>
+            </div>
+        </div>
     </body>
 </html>

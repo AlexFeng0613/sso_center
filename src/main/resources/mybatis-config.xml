@@ -24,6 +24,14 @@
        <typeAlias type="com.hsjc.ssoCenter.core.domain.ThirdFilter" alias="ThirdFilter"/>
        <typeAlias type="com.hsjc.ssoCenter.core.domain.ThirdSynUserDetailLog" alias="ThirdSynUserDetailLog"/>
        <typeAlias type="com.hsjc.ssoCenter.core.domain.SystemProperties" alias="SystemProperties"/>
+       <typeAlias type="com.hsjc.ssoCenter.core.domain.IndexIcos" alias="IndexIcos"/>
+
+        <typeAlias type="com.hsjc.ssoCenter.core.domain.Role" alias="Role"/>
+        <typeAlias type="com.hsjc.ssoCenter.core.domain.Resource" alias="Resource"/>
+        <typeAlias type="com.hsjc.ssoCenter.core.domain.UserRole" alias="UserRole"/>
+        <typeAlias type="com.hsjc.ssoCenter.core.domain.UserResource" alias="UserResource"/>
+        <typeAlias type="com.hsjc.ssoCenter.core.domain.RoleResource" alias="RoleResource"/>
+        <typeAlias type="com.hsjc.ssoCenter.core.domain.Test" alias="Test"/>
     </typeAliases>
 
     <!--
@@ -87,5 +95,6 @@
        <mapper resource="com/hsjc/ssoCenter/core/mapper/ThirdFilterMapper.xml"/>
        <mapper resource="com/hsjc/ssoCenter/core/mapper/ThirdSynUserDetailLogMapper.xml"/>
        <mapper resource="com/hsjc/ssoCenter/core/mapper/SystemPropertiesMapper.xml"/>
+       <mapper resource="com/hsjc/ssoCenter/core/mapper/TestMapper.xml"/>
    </mappers>
 </configuration>

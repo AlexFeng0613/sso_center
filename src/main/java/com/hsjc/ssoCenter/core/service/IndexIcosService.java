@@ -1,10 +1,10 @@
 package com.hsjc.ssoCenter.core.service;
 
+import com.hsjc.ssoCenter.core.domain.IndexIcos;
 import com.hsjc.ssoCenter.core.mapper.IndexIcosMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,13 +14,14 @@ import java.util.List;
  * 主页图标Service类
  *
  */
+@SuppressWarnings("ALL")
 @Service
 public class IndexIcosService extends ApiBaseService{
     @Autowired
-    private ApiBaseService apiBaseService;
+    ApiBaseService apiBaseService;
 
     @Autowired
-    private IndexIcosMapper indexIcosMapper;
+    IndexIcosMapper indexIcosMapper;
 
     /**
      * @author : zga
@@ -30,8 +31,8 @@ public class IndexIcosService extends ApiBaseService{
      *
      * @return
      */
-    public List<HashMap> getAllIcos(){
-        List<HashMap> list = indexIcosMapper.selectAllIcos();
+    public List<IndexIcos> getAllIcos(){
+        List<IndexIcos> list = indexIcosMapper.selectAllIcos();
 
         return list;
     }

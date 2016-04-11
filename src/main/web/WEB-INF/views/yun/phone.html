@@ -3,89 +3,32 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="../../public/yun">
-    <head></head>
+    <head>
+        <style type="text/css">
+            .Validform_wrong{margin-left:-50px;margin-top:-2px;}
+            .Validform_checktip{margin-left:-50px;margin-top:-2px;}
+        </style>
+    </head>
     <body>
         <div id="content" layout:fragment="content">
            <div class="password_box">
                <form class="phoneForm" action="/sso/bindPhone.json" method="post">
                    <div class="phone_label">
                        <div class="phone_font">手机号</div>
-                       <input type="text" pattern="13[0-9]\d{8}" id="phone_input" name="phone"/>
+                       <input type="text"  id="phone_input" name="phone"/>
                        <input type="button" class="get_phone" value="免费获取验证码"/>
                    </div>
                    <div class="phone_strong">用于接收来自平台的通知和找回密码，非常重要!</div>
                    <div class="phone_label">
                        <div class="phone_font">验证码</div>
-                       <input type="text" pattern="\d{6}" id="code" name="code"/>
+                       <input type="text" id="code" name="code"/>
                        <div class="second"><!--180秒后可重新获取--></div>
                    </div>
                    <input type="submit" value="确定" class="phone_submit"/>
                </form>
            </div>
-           <script type="text/javascript">
-               $(function(){
-                    $('#phone').addClass('selected');
-                    $('#phone a').addClass('selected');
 
-                   /**
-                    *表单校验
-                    */
-                   $('.phoneForm').Validform({
-
-                   });
-
-                   /**
-                    * 获取验证码
-                    */
-                   $('.get_phone').click(function () {
-                       var phone = $('input[name="phone"]').val();
-                       if(phone == null || phone == '') {
-                           alert('请输入手机号!');
-                           return false;
-                       }
-
-                       if(!Constant.phonePattern.test(phone)) {
-                           alert('请输入正确的手机号!');
-                           return false;
-                       }
-
-                       /**
-                        * 获取验证码倒计时
-                        */
-                       SSOSystem.time($(this),5,"免费获取验证码");
-                   });
-
-                   /**
-                    * 绑定手机
-                    */
-                   $('.phone_submit').click(function(){
-                       var phone = $('input[name="phone"]').val();
-                       var code = $('input[name="code"]').val();
-                       var data = {
-                           'phone' : phone,
-                           'code' : code
-                       }
-                       $.ajax({
-                           url : '/sso/bindPhone.json',
-                           type : 'post',
-                           data : JSON.stringify(data),
-                           dataType : 'json',
-                           contentType : 'application/json',
-                           success : function(data){
-                               if(data.success){
-                                   window.location.href = '/page/sso/bindInviteCodeSucc.html';
-                               }else {
-                                   if(data.message == '100007') window.location.href = "/user/login.html";
-
-                                   if(data.message == '100011') alert("邀请码不存在,请核对你的邀请码是否正确");
-
-                                   if(data.message == '100012') alert('绑定邀请码失败');
-                               }
-                           }
-                       });
-                   })
-                });
-           </script>
+           <script type="text/javascript" th:src="@{/static/scripts/yun/phone.js}" src="/static/scripts/yun/phone.js"></script>
         </div>
     </body>
 </html>

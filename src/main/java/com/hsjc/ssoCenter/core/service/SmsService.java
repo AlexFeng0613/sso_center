@@ -9,7 +9,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,6 +32,13 @@ public class SmsService extends ApiBaseService{
     public JSONObject sendSmsCode(JSONObject paramJson){
         JSONObject resultJson = getResultJson();
         String phone = paramJson.getString("phone");
+
+        Integer sendNum = smsSendMapper.selectTodaySendNum(phone);
+        if(sendNum >= 3){
+            resultJson.put("success",false);
+            resultJson.put("message",SMSConstant.BEYOND_LIMIT);
+            return resultJson;
+        }
 
         /**
          * 把验证码放入到Redis缓存中

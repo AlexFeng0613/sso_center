@@ -20,4 +20,6 @@ public interface SmsSendMapper {
     SmsSend selectByPrimaryKey(Long id);
 
     List<SmsSend> selectSmsSendBysendFlag();
+
+    Integer selectTodaySendNum(String phone);
 }

@@ -1,11 +1,12 @@
 package com.hsjc.ssoCenter.core.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.domain.EmailSend;
 import com.hsjc.ssoCenter.core.domain.SystemProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,6 +15,9 @@ import java.util.List;
  */
 @Service
 public class EmailService extends ApiBaseService{
+
+    @Autowired
+    ApiBaseService apiBaseService;
 
     /**
      * @author : zga
@@ -59,5 +63,25 @@ public class EmailService extends ApiBaseService{
     public int updateEmail(SystemProperties systemProperties){
         int result = systemPropertiesMapper.updateByPrimaryKey(systemProperties);
         return result;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-8
+     *
+     * 发送Email
+     *
+     * @param paramJson
+     * @return
+     */
+    public JSONObject sendEmail(JSONObject paramJson){
+        String email = paramJson.getString("email");
+        JSONObject resultJson = null;
+        try {
+            resultJson = insertSendEmail(email,apiBaseService,"0");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultJson;
     }
 }

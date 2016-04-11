@@ -1,8 +1,11 @@
 package com.hsjc.ssoCenter.core.base;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -20,7 +23,8 @@ import java.text.ParseException;
 @ControllerAdvice
 public class ExceptionAdvice {
 
-	@org.springframework.web.bind.annotation.ExceptionHandler(value = Exception.class)
+	@ExceptionHandler(value = Exception.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public ModelAndView defaultErrorHandler(HttpServletRequest request, Exception e) throws IOException, ParseException {
 		StringWriter writer = new StringWriter();
 		PrintWriter pw = new PrintWriter(writer);
@@ -29,14 +33,20 @@ public class ExceptionAdvice {
 		pw.close();
 		writer.close();
 
-		System.out.println(exceptionTrace);
+		System.out.println("出现异常了:"+exceptionTrace);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setView(new RedirectView("/user/login"));
-
-		mav.addObject("errorMessage", e.getMessage());
-		mav.addObject("success", "false");
+		mav.setViewName("/user/login");
 		return mav;
 	}
 
+	@ExceptionHandler(NoHandlerFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ModelAndView doFaultNotFoundHandler(HttpServletRequest request, Exception e){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("exception", e);
+		mav.addObject("url", request.getRequestURL());
+		mav.setViewName("/user/login");
+		return mav;
+	}
 }

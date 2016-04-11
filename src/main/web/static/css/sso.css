@@ -144,28 +144,32 @@ label{
     color: #000;
     font-family: \5FAE\8F6F\96C5\9ED1;
     border-radius: 5px;
-
 }
 
-.register_input.text{
+.registerImg1{
+    left:25px;
+    width:40px;
+    height:38px;
+    line-height: 38px;
+    position: absolute;
     background: url(../images/yun/text1.png) no-repeat 15px center;
 }
 
-.register_input.password2{
+.registerImg2{
+    left:25px;
+    width:40px;
+    height:38px;
+    line-height: 38px;
+    position: absolute;
     background: url(../images/yun/password1.png) no-repeat 15px center;
 }
 
-.register_input.fillout{
-    border:1px solid #ffad00;
+.registerImg1.fillout{
+
     background: url(../images/yun/text2.png) no-repeat 15px center;
 }
 
-.register_input.text.fillout{
-    border:1px solid #ffad00;
-    background: url(../images/yun/text2.png) no-repeat 15px center;
-}
-
-.register_input.password2.fillout{
+.registerImg2.fillout{
     background: url(../images/yun/password2.png) no-repeat 15px center;
 }
 
@@ -176,6 +180,7 @@ label{
 }
 
 .remember li{
+    width:100px;
     height:16px;
     line-height: 16px;
     cursor:pointer;
@@ -183,8 +188,9 @@ label{
     font-family: \5FAE\8F6F\96C5\9ED1;
     color:#8f8f8f;
     font-size: 14px;
-    background: url(../images/yun/checked1.png) no-repeat;
     position: relative;
+    float:left;
+    background: url(../images/yun/checked1.png) no-repeat;
 }
 
 .remember li.checked{
@@ -198,6 +204,7 @@ label{
     top:0;
     left:0;
     opacity: 0;
+
 }
 
 .remember li.left{
@@ -417,6 +424,33 @@ label{
     padding:10px 50px;
 }
 
+#content1{
+    position: relative;
+    overflow: hidden;
+}
+
+a.edit{
+    position: absolute;
+    width:100px;
+    height:34px;
+    display:block;
+    right:0;
+    top:0;
+}
+
+a.edit:link{
+    background: url('../../static/images/yun/edit1.png') no-repeat;
+}
+
+a.edit:hover{
+    background: url('../../static/images/yun/edit2.png') no-repeat;
+}
+
+a.edit:active{
+    background: url('../../static/images/yun/edit3.png') no-repeat;
+}
+
+
 .long_input_box{
     width:564px;
     margin:0px auto 0;
@@ -446,7 +480,7 @@ label{
 }
 
 .email{
-    width:358px;
+    width:320px;
     height:32px;
     line-height: 32px;
     border:1px solid #444444;
@@ -470,6 +504,7 @@ label{
     border-radius: 5px;
     border:none;
     text-align: center;
+    float:left;
 }
 
 .message{
@@ -477,7 +512,7 @@ label{
 }
 
 .password_box{
-    width:380px;
+    width:430px;
     margin:0px auto 0;
 }
 
@@ -533,20 +568,20 @@ label{
     font-family: \5FAE\8F6F\96C5\9ED1;
     color:#364049;
     font-size: 14px;
-    text-align: center;
+    text-indent:20px;
     border:1px solid #444444;
     margin-right:15px;
 }
 
 #code{
-    width:108px;
+    width:120px;
     height:34px;
     line-height: 34px;
     float:left;
     font-family: \5FAE\8F6F\96C5\9ED1;
     color:#364049;
     font-size: 14px;
-    text-align: center;
+    text-indent:20px;
     border:1px solid #444444;
     margin-right:15px;
 }
@@ -563,6 +598,7 @@ label{
     margin-top:40px;
     border:none;
     border-radius: 5px;
+    margin-right:45px;
 }
 
 .message_submit{
@@ -591,19 +627,21 @@ label{
     width:108px;
     height:34px;
     line-height: 34px;
-    float:left;
+    float:right;
     font-family: \5FAE\8F6F\96C5\9ED1;
     color:#fff;
+    margin-right:50px;
     font-size: 14px;
     text-align: center;
     background-color: #72bcc5;
     border-radius:5px;
     cursor:pointer;
+    border:none;
 }
 
 .password{
     width:294px;
-    float:right;
+    float:left;
     height:32px;
     line-height: 32px;
     border:1px solid #444444;
@@ -611,6 +649,7 @@ label{
     color:#364049;
     font-size: 14px;
     text-indent: 20px;
+    margin-left:20px;
 }
 
 .password_r{
@@ -689,20 +728,22 @@ label{
     font-size: 14px;
     color: #fff;
     text-align: center;
-    float:right;
+
     background-color: #ffad00;
     border:none;
     border-radius: 5px;
-    margin-top:30px;
+    margin:30px auto 0;
 }
 
 .message_l{
-    width:95px;
+    width:80px;
     float:left;
-    line-height:30px;
+    line-height:35px;
     font-family: \5FAE\8F6F\96C5\9ED1;
     font-size: 14px;
     color: #444444;
+    text-align: left;
+    margin-right:10px;
 }
 
 .message_r{
@@ -710,12 +751,112 @@ label{
     font-family: \5FAE\8F6F\96C5\9ED1;
     font-size: 14px;
     color: #444444;
+    line-height:35px;
+}
+
+.message_rr{
+    width:400px;
+    float:left;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    font-size: 14px;
+    color: #444444;
     line-height:30px;
+    height:30px;
+    border: 1px solid #333;
+    margin-top:2px;
+    text-indent: 20px;
+}
+
+.up-img{
+    width:100px;
+    height:100px;
+    position: relative;
+    background: url('../../static/images/yun/peop.png') no-repeat;
+}
+
+.up-img input{
+    position: absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    opacity: 0;
+}
+
+.select{
+    width:135px;
+    height:34px;
+    line-height:34px ;
+    float:left;
+    border:1px solid #444444;
+    position: relative;
+    overflow: visible;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    cursor: pointer;
+
+}
+
+.select dt{
+    width:100%;
+    position: relative;
+    z-index:10;
+    top:0;
+    left:0;
+    height:34px;
+    line-height:34px;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    font-size: 14px;
+    color:#444444;
+    font-weight:normal;
+    background: url('../../static/images/yun/sele.png') no-repeat 110px center;
+    text-indent: 20px;
+}
+
+.select dd{
+    width:105px;
+    display:none;
+    position: absolute;
+    top:0;
+    border-top: 1px solid #ffad00;
+    border-left: 1px solid #ffad00;
+    border-right: 1px solid #ffad00;
+}
+
+.select ul{
+    width:100%;
+}
+
+.select ul li{
+    height:34px;
+    line-height:34px ;
+    color:#444444;
+    font-size: 14px;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    background: #fff;
+    text-align: center;
+    border-bottom: 1px solid #ffad00;
+}
+
+.select ul li:hover{
+    background: #ffad00;
+    color:#fff;
+}
+
+.message_text{
+    width:400px;
+    height:100px;
+    float:left;
+    border:1px solid #000;
+    overflow-y:scroll;
+    word-break:break-all;
+    text-indent: 20px;
+    font-size: 14px;
+    color:#000;
 }
 
 .viewInfo{
     display: block;
-    line-height: 30px;
+    line-height: 35px;
 }
 
 #user_name{
@@ -782,7 +923,7 @@ label{
 }
 
 .papers{
-    width:224px;
+    width:250px;
     height:34px;
     line-height: 34px;
     float:left;
@@ -791,7 +932,7 @@ label{
     font-size: 14px;
     color:#444444;
     margin-left:12px;
-    text-align: center;
+    text-indent:20px;
 }
 
 .sex li input{
@@ -806,7 +947,7 @@ label{
 
 .bound{
     float:left;
-    line-height:30px;
+    line-height:35px;
     display:block;
     font-family: \5FAE\8F6F\96C5\9ED1;
     font-size: 14px;

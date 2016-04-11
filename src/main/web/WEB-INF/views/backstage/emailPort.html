@@ -4,78 +4,24 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="../../public/backstage">
     <head>
-        <style>
-            input.Wdate{
-                border:none;
-
-            }
+        <style type="text/css">
+            input.Wdate{border:none;}
         </style>
-        <script text="text/javascript" th:src="@{/static/scripts/WdatePicker.js}"  src="../../../static/scripts/WdatePicker.js"></script>
     </head>
     <body>
-            <div id="content" layout:fragment="content">
-                   <div class="index_title">邮件接口设置</div>
-                <!--    <div class="tab_search">
-                       <ul class="email_sel">
-                           <li class="selected">邮件接口</li>
-                           <li>邮件测试</li>
-                       </ul>
-                   </div>
-                   <div class="email_box" style="display:block;">
-                       <div class="email_input" style="margin-top:20px;">
-                           <div class="email_input_l">邮件服务器地址：</div>
-                           <input type="text"/>
-                       </div>
-                       <div class="email_input">
-                           <div class="email_input_l">邮箱帐号：</div>
-                           <input type="text"/>
-                       </div>
-                       <div class="email_input">
-                           <div class="email_input_l">邮箱密码：</div>
-                           <input type="text"/>
-                       </div>
-                       <ul class="build_submit" style="margin-left:145px;">
-                           <li class="selected">保存</li>
-                           <li>取消</li>
-                       </ul>
-                   </div>
-                   <div class="email_box">
-                       <div class="email_input" style="margin-top:20px;">
-                           <div class="email_input_l">发送给：</div>
-                           <input type="text"/>
-                           <div class="email_input_r">仅支持单个邮箱</div>
-                       </div>
-                       <div class="email_input">
-                           <div class="email_input_l">编辑内容：</div>
-                           <textarea></textarea>
-                       </div>
-                       <ul class="build_submit" style="margin-left:145px;">
-                           <li class="selected">发送</li>
-                           <li>取消</li>
-                       </ul>
-                   </div>
-                   <script type="text/javascript">
-                       $(function(){
-                           $('#email_port').addClass('selected');
+        <div id="content" layout:fragment="content">
+            <div class="index_title">邮件接口设置</div>
 
-                           var _index=0;
-                           $('.email_sel li').click(function(){
-                               _index=$(this).index();
-                               $(this).addClass('selected').siblings('.email_sel li').removeClass('selected');
-                               $('.email_box').eq(_index).show().siblings('.email_box').hide();
-                           });
-                       });
-                   </script>
--->             <table class="emailTab">
-                    <thead>
-                        <tr>
-                            <th>proKey</th>
-                            <th>proValue</th>
-                            <th>createTime</th>
-                            <th>modifyTime</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
+            <table class="emailTab">
+                <thead>
+                    <tr>
+                        <th>proKey</th>
+                        <th>proValue</th>
+                        <th>createTime</th>
+                        <th>modifyTime</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr th:each="email:${emailList}">
                         <input type="hidden" th:value="${email.id}" class="eid"/>
@@ -103,75 +49,9 @@
                     </tr>
                 </tbody>
             </table>
-                <script type="text/javascript">
-                    $(function(){
-                        var id = "";
-                        var prokey= "";
-                        var provalue= "";
-                        var createtime= "";
-                        $('#email_port').addClass('selected');
-                        $('.update').click(function(){
-                            prokey= $(this).parent().siblings().children('.prokey').val();
-                            provalue= $(this).parent().siblings().children('.provalue').val();
-                            createtime= $(this).parent().siblings().children('.createtime').val();
-                            $(this).parent().siblings().children('.emailIn2').css('color','#ff0000').attr('disabled',false);
-                            $(this).hide();
-                            $(this).siblings('.emailBut').show();
 
-                        });
-
-                        $('.updateL').click(function(){
-                            $(this).parents().siblings().children('.emailIn2').css('color','#333333').attr('disabled',true);
-                            id = $(this).parents().siblings('.eid').val();
-                            prokey= $(this).parents().siblings().children('.prokey').val();
-                            provalue= $(this).parents().siblings().children('.provalue').val();
-                            createtime= $(this).parents().siblings().children('.createtime').val();
-                            $.ajax({
-                                url: "/email/updateEmail.json",
-                                dataType: "json",
-                                data: {
-                                    id:id,
-                                    prokey:prokey,
-                                    provalue:provalue,
-                                    createtime:createtime,
-                                },
-                            });
-                            $(this).parent().siblings('.update').show();
-                            $(this).parent('.emailBut').hide();
-
-                        });
-
-                        $('.updateR').click(function(){
-                            $(this).parents().siblings().children('.emailIn2').css('color','#333333').attr('disabled',true);
-                            $(this).parents().siblings().children('.prokey').val(prokey);
-                            $(this).parents().siblings().children('.provalue').val(provalue);
-                            $(this).parents().siblings().children('.createtime').val(createtime);
-                            $(this).parents('.emailBut').hide();
-                            $(this).parent().siblings('.update').show();
-
-                        });
-
-                        $('.fromDate').focus(function(){
-                            WdatePicker({
-                                /*  isShowToday:false,
-                                 isShowOK:false,*/
-                                isShowClear:false,
-
-                                /*  onpicked:function(){
-                                 $('.toDate').focus();
-                                 }*/
-                            });
-                        });
-
-                        $('.toDate').focus(function(){
-                            WdatePicker({
-                                // minDate:"#F{$dp.$D('fromDate')}"
-                                isShowClear:false,
-                            });
-                        });
-                    });
-                </script>
+            <script text="text/javascript" th:src="@{/static/scripts/WdatePicker.js}"  src="../../../static/scripts/WdatePicker.js"></script>
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/emailPort.js}" src="/static/scripts/backstage/emailPort.js"></script>
         </div>
-
     </body>
 </html>

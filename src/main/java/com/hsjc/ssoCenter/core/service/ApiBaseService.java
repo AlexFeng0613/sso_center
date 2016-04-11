@@ -7,10 +7,7 @@ import com.hsjc.ssoCenter.core.constant.MailTemplate;
 import com.hsjc.ssoCenter.core.constant.ThirdSynConstant;
 import com.hsjc.ssoCenter.core.domain.*;
 import com.hsjc.ssoCenter.core.mapper.*;
-import com.hsjc.ssoCenter.core.util.DesUtil;
-import com.hsjc.ssoCenter.core.util.MD5Util;
-import com.hsjc.ssoCenter.core.util.MailUtil;
-import com.hsjc.ssoCenter.core.util.SSOStringUtil;
+import com.hsjc.ssoCenter.core.util.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -20,6 +17,8 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -28,8 +27,11 @@ import java.util.concurrent.TimeUnit;
  *
  * 基本Service类
  */
+@SuppressWarnings("ALL")
 @Service
 public class ApiBaseService {
+    final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ApiBaseService.class);
+
     @Autowired
     RedisTemplate redisTemplate;
 
@@ -76,11 +78,17 @@ public class ApiBaseService {
      * @param obj
      * @param clazz
      */
-    public void insertIntoRedis(String key, Object obj, Class clazz) {
-        redisTemplate.setKeySerializer(new GenericToStringSerializer<>(String.class));
-        redisTemplate.setValueSerializer(new FastJsonRedisSerializer<>(clazz));
-        redisTemplate.opsForValue().set(key, obj, 0);
-        redisTemplate.expire(key, Constant.REDIS_FETCH_TIME_OUT,TimeUnit.SECONDS);
+    public void insertIntoRedis(String key, Object obj, Class clazz) throws RuntimeException{
+        try {
+            redisTemplate.setKeySerializer(new GenericToStringSerializer<>(String.class));
+            redisTemplate.setValueSerializer(new FastJsonRedisSerializer<>(clazz));
+            redisTemplate.opsForValue().set(key, obj, 0);
+            redisTemplate.expire(key, Constant.REDIS_FETCH_TIME_OUT,TimeUnit.SECONDS);
+        } catch (Exception e) {
+            System.out.println(e);
+            logger.debug("插入Redis Exception");
+            throw new RuntimeException("插入Redis Exception");
+        }
     }
 
     /**
@@ -147,35 +155,39 @@ public class ApiBaseService {
      * @return
      * @throws Exception
      */
-    public JSONObject insertSendEmail(String email, ApiBaseService apiBaseService, String type) throws Exception {
+    public JSONObject insertSendEmail(String email, ApiBaseService apiBaseService, String type){
         JSONObject resultJson = getResultJson();
 
         ActivateEmailMess activateEmailMess = new ActivateEmailMess();
         activateEmailMess.setEmail(email);
         activateEmailMess.setTicket(MD5Util.encode(Calendar.getInstance().getTime().toString()));
 
-        apiBaseService.insertIntoRedis(email,activateEmailMess,ActivateEmailMess.class);
+        try {
+            apiBaseService.insertIntoRedis(email,activateEmailMess,ActivateEmailMess.class);
 
-        String activateURL = null;
-        if("0".equals(type)){
-            activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
-                    activateEmailMess.getTicket()+"&type="+type;
-        } else {
-            activateURL = Constant.websiteAddress + "/user/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
-                    activateEmailMess.getTicket()+"&type="+type;
+            String activateURL = null;
+            if("0".equals(type)){
+                activateURL = Constant.websiteAddress + "/user/register/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
+                        activateEmailMess.getTicket()+"&type="+type;
+            } else {
+                activateURL = Constant.websiteAddress + "/user/register/activateEmail.html?email=" + activateEmailMess.getEmail() + "&ticket=" +
+                        activateEmailMess.getTicket()+"&type="+type;
+            }
+
+            String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%",email,activateURL,activateURL);
+            EmailSend emailSend = new EmailSend();
+            emailSend.setContent(content);
+            emailSend.setByModule("");
+            emailSend.setEmail(email);
+            emailSend.setSubject(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT);
+
+            emailSendMapper.insert(emailSend);
+        } catch (Exception e) {
+            logger.debug("发送Email异常!");
+            resultJson.put("success",false);
+            resultJson.put("message", Constant.SEND_MAIL_FAIL);
+            return resultJson;
         }
-
-        String content = SSOStringUtil.replaceAllWithSplitStr(MailTemplate.MAIL_SEND_REG_MESSAGE,"%",email,activateURL,activateURL);
-        //MailUtil.sendMail(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT, content, email);
-
-        EmailSend emailSend = new EmailSend();
-        emailSend.setContent(content);
-        emailSend.setByModule("");
-        emailSend.setEmail(email);
-        emailSend.setSubject(MailTemplate.MAIL_SEND_ACTIVATE_SUBJECT);
-
-        emailSendMapper.insert(emailSend);
-
         return resultJson;
     }
 
@@ -240,7 +252,16 @@ public class ApiBaseService {
      * @return
      */
     public JSONObject validateClientIdAndPassword(JSONObject paramJson,ThirdClients thirdClients) {
-        JSONObject resultJson = getResultJson();
+        /**
+         * 1、校验clientId
+         *  1)、clientId不存在,返回错误信息
+         *  2)、clientId存在,校验password
+         *
+         * 2、校验password
+         *  1)、password不正确,返回错误信息
+         *  2)、password正确,返回正确
+         */
+        JSONObject resultJson = new JSONObject();
 
         if(thirdClients == null) {
             resultJson.put("flag",false);
@@ -296,5 +317,52 @@ public class ApiBaseService {
         }
         resultJson.put("message",Constant.RETURN_SUCCESS);
         return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
+     * 生成访问第三方的URL参数
+     *
+     * @return
+     */
+    public JSONObject generateSSOAccessThirdURL(JSONObject paramJson){
+        JSONObject resultJson = new JSONObject();
+
+        String ssoPassword = paramJson.getString("ssoPassword");
+
+        UserMain currentUserMain = getCurrentUser();
+        if(currentUserMain != null){
+            resultJson.put("openId",currentUserMain.getId());
+            String time = DateUtil.getCurrentDate("yyyyMMddHHmm");
+            String password = MD5Util.encode(ssoPassword + MD5Util.encode(Constant.publicKey) + time);
+
+            resultJson.put("targetURL","?openid=" + currentUserMain.getId() + "&password=" + password + "&time=" + time);
+        }
+        return resultJson;
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-14
+     *
+     * 生成邀请码
+     *
+     * @param set
+     * @param organizationCode
+     * @param num
+     */
+    public void getSchoolInviteCodeList(Set set,String organizationCode,int num){
+        for(int i = 0;i < num;i ++ ){
+            HashMap hashMap = new HashMap();
+            hashMap.put("schoolId",organizationCode);
+            hashMap.put("inviteCode",SSOStringUtil.getRandamInviteCode(1,6));
+            set.add(hashMap);
+        }
+
+        if(set.size() != num){
+            getSchoolInviteCodeList(set,organizationCode,(num - set.size()));
+        }
     }
 }

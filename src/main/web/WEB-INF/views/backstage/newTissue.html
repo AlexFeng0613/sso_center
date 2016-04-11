@@ -3,58 +3,38 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="../../public/backstage">
-    <head></head>
+    <head>
+        <title>新增组织机构</title>
+    </head>
     <body>
+        <div id="content" layout:fragment="content">
+            <div class="index_title">新增组织机构</div>
 
-
-                <div id="content" layout:fragment="content">
-                    <div class="index_title">新增组织机构</div>
-                    <div class="tissue_box">
-                        <div class="tissue_message" style="margin-top:20px;">
-                            <div class="tissue_box_l">*</div>
-                            <div class="tissue_box_name">所属区域：</div>
-                            <select>
-                                <option>所属区域</option>
-                                <option>上海</option>
-                                <option>北京</option>
-                            </select>
-                            <select>
-                                <option>所属区域</option>
-                                <option>上海市</option>
-                                <option></option>
-                            </select>
-                            <select>
-                                <option>所属区域</option>
-                                <option>静安区</option>
-                                <option>徐汇区</option>
-                                <option>虹口区</option>
-                                <option>普陀区</option>
-                            </select>
-                        </div>
-                        <div class="tissue_message">
-                            <div class="tissue_box_l">*</div>
-                            <div class="tissue_box_name">组织机构名称：</div>
-                            <input type="text"/>
-                        </div>
-                        <div class="tissue_message">
-                            <div class="tissue_box_l"></div>
-                            <div class="tissue_box_name">组织机构介绍：</div>
-                            <textarea></textarea>
-                        </div>
-                        <ul class="build_submit">
-                            <li class="selected">
-                                <a href="createTissue.html" class="selected">保存</a>
-                            </li>
-                            <li>
-                                <a href="tissueList.html"> 取消</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <script type="text/javascript">
-                        $('#new_tissue').addClass('selected');
-                    </script>
+            <div class="tissue_box">
+                <div class="tissue_message" style="margin-top:20px;">
+                    <div class="tissue_box_l">*</div>
+                    <div class="tissue_box_name">所属区域：</div>
+                    <select name="parentId">
+                        <option value="ss">所属区域</option>
+                        <option th:each="organization : ${organizationList}" th:value="${organization.getId()}" th:text="${organization.getOrganizationName()}"></option>
+                    </select>
                 </div>
+                <div class="tissue_message">
+                    <div class="tissue_box_l">*</div>
+                    <div class="tissue_box_name">组织机构名称：</div>
+                    <input type="text" name="organizationName"/>
+                </div>
+                <ul class="build_submit">
+                    <li class="selected">
+                        <a href="javascript:void(0);" class="selected">保存</a>
+                    </li>
+                    <li>
+                        <a href="/page/sso/tissueList/1,10,s,0,0.html"> 取消</a>
+                    </li>
+                </ul>
+            </div>
 
-
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/newTissue.js}" src="/static/scripts/backstage/newTissue.js"></script>
+        </div>
     </body>
 </html>

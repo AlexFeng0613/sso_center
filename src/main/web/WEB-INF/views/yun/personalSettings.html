@@ -22,47 +22,42 @@
     </head>
     <body>
         <div id="content1" layout:fragment="content">
+            <a href="/page/sso/personalEdit.html" class="edit"></a>
            <div class="message">
                <div class="message_l">云账号：</div>
-               <!--<div class="message_r" th:text="${session.user.starBeldId}"></div>-->
            </div>
            <div class="message">
                <div class="message_l">用户名：</div>
                <div class="message_r" th:text="${session.user.userName}"></div>
            </div>
            <div class="message">
-               <div class="message_l">绑定邮箱：</div>
+               <div class="message_l">邮箱：</div>
                <a th:if="${session.user.email} == null" href="/sso/bindEmail.html" class="bound">未绑定</a>
                <span th:if="${session.user.email} != null" th:text="${session.user.email}" class="viewInfo"></span>
            </div>
            <div class="message">
-               <div class="message_l">绑定手机： </div>
+               <div class="message_l">手机： </div>
                <a th:if="${session.user.phone} == null" href="/sso/bindPhone.html" class="bound">未绑定</a>
-               <span th:if="${session.user.phone} != null" th:text="${session.user.phone}"></span>
+               <span th:if="${session.user.phone} != null" th:text="${session.user.phone}" style="line-height: 35px;"></span>
            </div>
            <div class="message">
-               <div class="message_l">绑定邀请码：</div>
+               <div class="message_l">邀请码：</div>
                <a th:if="${session.user.inviteCode} == null" href="/sso/bindInviteCode.html" class="bound">未绑定</a>
                <span th:if="${session.user.inviteCode} != null" th:text="${session.user.inviteCode}"></span>
            </div>
            <form action="/sso/modifyPersonalInfo.html" method="post" enctype="multipart/form-data">
-               <div class="message">
-                   <div class="message_l">头像：</div>
+               <div class="message" style="margin-top:10px;">
+                   <div class="message_l" style="line-height: 100px;">头像：</div>
                    <div class="up-img">
                        <img th:src="@{${session.user.userIcon}}" th:if="${session.user.userIcon} != null" width="100px" height="100px"  class="viewInfo"/>
                        <div class="file-box modifyInfo" style="display: none;">
-                           <!--<input type='text' name='textfield' id='textfield' class='txt'
-                                  readonly="readonly"/>
-                           <input type='button' class='btn' value='浏览...'/>
-                           <input type="file" name="imgFile" class="file modifyInfo" id="imgFile"
-                                  size="28" onchange="document.getElementById('textfield').value=this.value"/>-->
                            <input type="file" name="imgFile"/>
                        </div>
                    </div>
                    <div class="head_img_strong">(支持Jpg、Png或bmp格式的图片，建议文件小于20M)</div>
                </div>
                <div class="message">
-                   <div class="message_l">真实姓名：</div>
+                   <div class="message_l">姓名：</div>
                    <span th:text="${session.user.realName}" class="viewInfo"></span>
                    <input type="text" name="realName" th:value="${session.user.realName}" class="modifyInfo" style="display: none;"/>
                </div>
@@ -86,41 +81,9 @@
                        </li>
                    </ul>
                </div>
-               <!--<div class="message">
-                   <div class="message_l">证件号码：</div>
-                   <select>
-                       <option>证件类型</option>
-                   </select>
-                   <input type="text" class="papers" />
-               </div>-->
-
-                   <!--<div class="message_l">个人介绍：</div>-->
-               <div class="inputSubnmit">
-                       <!--<textarea class="peo_text"></textarea>-->
-                   <!--<input type="button" value="修改" name="modifyInfo" class="message_submit"/>-->
-                   <input type="submit" class="submitL" value="保 存"/>
-                   <input type="reset" class="resetR" value="取 消"/>
-               </div>
-
            </form>
-           <script type="text/javascript">
-                $(function(){
-                    $('#basic_message').addClass('selected');
-                    $('#basic_message a').addClass('selected');
 
-
-                    /**
-                     * 修改信息
-                     */
-
-                    $('input[name="modifyInfo"]').click(function(){
-                        $('.viewInfo').css('display','none');
-                        $('.modifyInfo').css('display','block');
-                    });
-
-
-                });
-           </script>
+           <script type="text/javascript" th:src="@{/static/scripts/yun/personalSettings.js}" src="/static/scripts/yun/personalSettings.js"></script>
         </div>
     </body>
 </html>

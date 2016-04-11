@@ -2,6 +2,7 @@ package com.hsjc.ssoCenter.core.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.annotation.SSOSystemLog;
+import com.hsjc.ssoCenter.core.domain.RestfulLog;
 import com.hsjc.ssoCenter.core.mapper.RestfulLogMapper;
 import com.hsjc.ssoCenter.core.mapper.SystemLogMapper;
 import org.apache.commons.lang.StringUtils;
@@ -28,7 +29,7 @@ import java.util.Map;
 @Component
 @Aspect
 public class LogInterCeptor {
-    private Logger logger = Logger.getLogger(LogInterCeptor.class);
+    private final static Logger logger = Logger.getLogger(LogInterCeptor.class);
 
     @Autowired
     private RestfulLogMapper restfulLogMapper;
@@ -70,7 +71,7 @@ public class LogInterCeptor {
          * 保存日志
          */
         Object object = map.get("clientId");
-        JSONObject resultJson = null;
+        JSONObject resultJson;
         if(object == null){
             //系统日志保存
             com.hsjc.ssoCenter.core.domain.SystemLog systemLog = new com.hsjc.ssoCenter.core.domain.SystemLog();
@@ -88,40 +89,60 @@ public class LogInterCeptor {
             restfulLog.setActionId(Integer.parseInt(map.get("actionId").toString()));
             restfulLog.setActionTime(new Date());
             restfulLog.setDescription(map.get("description").toString());
-            restfulLog.setSynCount(Integer.parseInt((map.get("synCount") == null ? "0" : map.get("synCount").toString())));
+            restfulLog.setSynCount(0);
 
             restfulLogMapper.insert(restfulLog);
 
             /**
              * 返回数据中插入requestSynId字段
              */
-            Object target = (joinPoint == null ? null : joinPoint.getTarget());
-            Signature signature = (joinPoint == null ? null : joinPoint.getSignature());
-
-            if (target == null) return;
-            if (signature == null) return;
-
-            Object[] args = joinPoint.getArgs();
-            for(Object o : args){
-                if(o instanceof JSONObject){
-                    resultJson = (JSONObject)o;
-                }
+            resultJson = returnResultJson(joinPoint);
+            if(resultJson == null){
+                return;
             }
             resultJson.put("requestSynId",restfulLog.getRestLogId());
         }
     }
 
+    /**
+     * @author : zga
+     * @date : 2016-3-29
+     *
+     * 更新同步的数据
+     *
+     * @param joinPoint
+     */
     @AfterReturning("controllerAspect()")
     public void doAfterReturning(JoinPoint joinPoint){
+        JSONObject resultJson = returnResultJson(joinPoint);
+        if(resultJson == null) return;
 
+        Long logId = resultJson.getLong("requestSynId");
+        Integer synCount = resultJson.getInteger("synCount");
+
+        RestfulLog restfulLog = new RestfulLog();
+        restfulLog.setRestLogId(logId);
+        restfulLog.setSynCount(synCount);
+
+        restfulLogMapper.updateSynCountByLogId(restfulLog);
     }
 
-    @After("controllerAspect()")
-    public void doAfter(JoinPoint joinPoint){
-    }
+    public JSONObject returnResultJson(JoinPoint joinPoint){
+        JSONObject resultJson = null;
+        Object target = (joinPoint == null ? null : joinPoint.getTarget());
+        Signature signature = (joinPoint == null ? null : joinPoint.getSignature());
 
-    @After("controllerAspect()")
-    public void doAroundInvoke(JoinPoint joinPoint){
+        if (target == null) return null;
+        if (signature == null) return null;
+
+        Object[] args = joinPoint.getArgs();
+        for(Object o : args){
+            if(o instanceof JSONObject){
+                resultJson = (JSONObject)o;
+            }
+        }
+
+        return resultJson;
     }
 
     /**
@@ -151,7 +172,6 @@ public class LogInterCeptor {
                     if(arguments[0] instanceof JSONObject) {
                         paramJson = (JSONObject) arguments[0];
                         map.put("clientId", paramJson.getString("clientId"));
-                        map.put("synCount", paramJson.getInteger("synCount"));
                         String de = method.getAnnotation(SSOSystemLog.class).description();
                         if(StringUtils.isEmpty(de)) de = method.getAnnotation(SSOSystemLog.class).module() + ","
                                 + method.getAnnotation(SSOSystemLog.class).description()
@@ -165,11 +185,6 @@ public class LogInterCeptor {
 
                         map.put("host",host);
                         map.put("userName",arguments[1]);
-                        String de = method.getAnnotation(SSOSystemLog.class).description();
-                        if(StringUtils.isEmpty(de)) de = method.getAnnotation(SSOSystemLog.class).module() + ","
-                                + method.getAnnotation(SSOSystemLog.class).description()
-                                +"同步成功!";
-                        map.put("description", de);
                     }
                 }
             }

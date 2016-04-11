@@ -68,7 +68,7 @@
     where restLogId = #{restLogId}
   </delete>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.ssoCenter.core.domain.RestfulLog" >
+  <update id="updateByPrimaryKeySelective" parameterType="RestfulLog" >
     update tbrestfullog
     <set >
       <if test="clientId != null" >
@@ -84,7 +84,18 @@
     where restLogId = #{restLogId}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.hsjc.ssoCenter.core.domain.RestfulLog" >
+  <!--
+    @author : zga
+    @date : 2016-3-29
+    更新同步数量
+  -->
+  <update id="updateSynCountByLogId" parameterType="RestfulLog">
+    UPDATE tbrestfullog
+    SET synCount = #{synCount}
+    WHERE restLogId = #{restLogId}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="RestfulLog" >
     update tbrestfullog
     set clientId = #{clientId},
       actionId = #{actionId},
@@ -97,5 +108,36 @@
     <include refid="Base_Column_List" />
     from tbrestfullog
     where restLogId = #{restLogId}
+  </select>
+
+  <!--
+    @author:wuyue
+    @data:2016-3-30
+    @目的：查询站点日志相关内容
+  -->
+  <select id="findSiteLog" resultType="java.util.HashMap">
+    SELECT
+    trl.restLogId,
+    (CASE
+    WHEN t3c.description IS NULL THEN 'xxx'
+    ELSE t3c.description
+    END ) AS c_description,
+    (CASE
+    WHEN trl.description IS NULL THEN 'xxx'
+    ELSE trl.description
+    END ) AS l_description,
+    (CASE
+    WHEN trl.synCount IS NULL THEN 'xxx'
+    ELSE trl.synCount
+    END ) AS synCount
+    FROM
+    tbrestfullog trl,
+    tb3rdclients t3c
+    <where>
+      trl.clientId = t3c.clientId
+      <if test="c_description != null">
+        AND t3c.description like CONCAT('%','${c_description}','%')
+      </if>
+    </where>
   </select>
 </mapper>

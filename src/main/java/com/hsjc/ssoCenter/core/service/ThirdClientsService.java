@@ -2,6 +2,7 @@ package com.hsjc.ssoCenter.core.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hsjc.ssoCenter.core.constant.Constant;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import com.hsjc.ssoCenter.core.mapper.ThirdClientsMapper;
@@ -11,6 +12,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -59,6 +63,41 @@ public class ThirdClientsService extends ApiBaseService{
 
     /**
      * @author : zga
+     * @date : 2016-3-23
+     *
+     * 查询所有的第三方平台列表(使用分页)
+     *
+     * @return
+     */
+    public PageInfo selectAllThirdClientsWithPage(JSONObject paramJson){
+        Integer pageNum = paramJson.getInteger("pageNum");
+        Integer pageSize = paramJson.getInteger("pageSize");
+
+        String description = paramJson.getString("description");
+        try {
+            description = URLDecoder.decode(description,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        if(pageNum == null || pageNum == 0) {
+            pageNum = Constant.PAGENUM;
+            paramJson.put("pageNum", pageNum);
+        }
+        if(pageSize == null || pageSize == 0) {
+            pageSize = Constant.PAGESIZE;
+            paramJson.put("pageSize",pageSize);
+        }
+        if(StringUtils.isEmpty(description) || "0".equals(description)) paramJson.put("description",null);
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<HashMap> list = thirdClientsMapper.selectAllThirdClientWithPage(paramJson);
+        PageInfo pageInfo = new PageInfo(list);
+        return pageInfo;
+    }
+
+    /**
+     * @author : zga
      * @date : 2016-1-26
      *
      * 查询所有的ThirdClietnt记录
@@ -84,6 +123,7 @@ public class ThirdClientsService extends ApiBaseService{
         String clientId = paramJson.getString("clientId");
         String contactorName = paramJson.getString("contactorName");
         String contactorPhone = paramJson.getString("contactorPhone");
+        String callbackUrl = paramJson.getString("callbackUrl");
 
         if(StringUtils.isEmpty(contactorName) || StringUtils.isEmpty(contactorPhone)) return resultJson;
 
@@ -97,6 +137,7 @@ public class ThirdClientsService extends ApiBaseService{
         thirdClients.setClientId(clientId);
         thirdClients.setContactorName(contactorName);
         thirdClients.setContactorPhone(contactorPhone);
+        thirdClients.setCallbackUrl(callbackUrl);
 
         int num = thirdClientsMapper.updateThirdClientInfoByClientId(thirdClients);
 

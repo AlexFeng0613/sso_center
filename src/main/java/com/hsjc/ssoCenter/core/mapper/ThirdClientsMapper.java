@@ -1,8 +1,10 @@
 package com.hsjc.ssoCenter.core.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hsjc.ssoCenter.core.domain.ThirdClients;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,4 +35,6 @@ public interface ThirdClientsMapper {
     List<ThirdClients> selectAllThirdClients();
 
     List<ThirdClients> selectThirdClientByName(@Param("description") String description);
+
+    List<HashMap> selectAllThirdClientWithPage(JSONObject paramJson);
 }

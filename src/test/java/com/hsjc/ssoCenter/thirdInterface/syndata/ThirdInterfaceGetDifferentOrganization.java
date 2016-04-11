@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class ThirdInterfaceGetDifferentOrganization {
     public static void main(String[] args) {
-        String url = Constant.websiteAddress + "/3rd/getDifferentOrganizatio.json";
+        String url = Constant.websiteAddress + "/3rd/getDifferentOrganization.json";
 
         HashMap<String,Object> paramMap = new HashMap<>();
         paramMap.put("client_id","6NqlFnLG");

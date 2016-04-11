@@ -20,7 +20,7 @@
    @date : 2015-12-04
    新增
   -->
-  <insert id="insert" parameterType="com.hsjc.ssoCenter.core.domain.Organization" >
+  <insert id="insert" parameterType="Organization" >
     insert into tborganization (id, organizationCode, organizationName,
       parentId, status, createTime, 
       isDelete)
@@ -29,7 +29,7 @@
       #{isDelete})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.hsjc.ssoCenter.core.domain.Organization" >
+  <insert id="insertSelective" parameterType="Organization" >
     insert into tborganization
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -84,7 +84,12 @@
     where id = #{id}
   </delete>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.hsjc.ssoCenter.core.domain.Organization" >
+  <!--
+    @author : zga
+    @date : 2016-3-11
+    更新用户
+  -->
+  <update id="updateByPrimaryKeySelective" parameterType="Organization" >
     update tborganization
     <set >
       <if test="organizationCode != null" >
@@ -109,7 +114,7 @@
     where id = #{id}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.hsjc.ssoCenter.core.domain.Organization" >
+  <update id="updateByPrimaryKey" parameterType="Organization" >
     update tborganization
     set organizationCode = #{organizationCode},
       organizationName = #{organizationName},
@@ -118,6 +123,17 @@
       createTime = #{createTime},
       isDelete = #{isDelete}
     where id = #{id}
+  </update>
+
+  <!--
+    @author : zga
+    @date : 2016-3-11
+    删除组织机构(更新状态为0>删除,isDelete:1>删除)
+  -->
+  <update id="adminUpdateStatus" parameterType="Organization">
+    UPDATE tborganization
+    SET status = '0',isDelete = '1'
+    WHERE id = #{id}
   </update>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -136,5 +152,53 @@
     SELECT
     <include refid="Base_Column_List"/>
     FROM tborganization
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-3-11
+    查询所有的组织机构
+  -->
+  <select id="selectAllOrganizationWithPage" resultType="java.util.HashMap">
+    SELECT
+    id,
+    organizationCode,
+    organizationName,
+    parentId,
+    status,
+    (DATE_FORMAT(createTime,'%Y-%m-%d')) AS createTime,
+    isDelete
+    FROM tborganization
+    <where>
+      <if test="status != null">
+        status = #{status}
+      </if>
+
+      <if test="organizationName != null">
+        AND organizationName LIKE  CONCAT('%','${organizationName}','%')
+      </if>
+
+      <if test="createTime == 3">
+        AND DATE_SUB(CURDATE(), INTERVAL 2 DAY) <![CDATA[<=]]> DATE(createTime)
+      </if>
+      <if test="createTime == 7">
+        AND DATE_SUB(CURDATE(), INTERVAL 6 DAY) <![CDATA[<=]]> DATE(createTime)
+      </if>
+      <if test="createTime == 30">
+        AND DATE_SUB(CURDATE(), INTERVAL 29 DAY) <![CDATA[<=]]> DATE(createTime)
+      </if>
+    </where>
+
+    ORDER BY createTime DESC
+  </select>
+
+  <select id="selectMaxOrganizationCode" resultType="java.lang.Integer">
+    SELECT MAX(organizationCode) FROM tborganization
+  </select>
+
+
+  <!-- 根据组织机构名称查询组织机构Code-->
+  <select id="selectOrganizationCode" resultType="java.lang.Integer">
+    SELECT organizationCode FROM tborganization WHERE organizationName=#{organizationName}
   </select>
 </mapper>

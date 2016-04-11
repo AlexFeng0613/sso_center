@@ -10,7 +10,7 @@
             <div class="addBox" style="display: none;">
                 <form name="addForm">
                     <div class="examine_box_aside">
-                        <div class="examine_title">新增平台</div>
+                        <div class="examine_title">新增数据权限过滤</div>
                     </div>
                     <div class="modifiedBox_center">
                         <table class="modifiedBoxListTab">
@@ -18,7 +18,7 @@
                                 <td>平台名称</td>
                                 <td>
                                     <select name="clientId">
-                                        <option th:each="tc : ${thirdClientsList}" th:value="${tc.clientId}" th:text="${tc.description}"></option>
+                                        <option th:each="tc : ${thirdClientsList}" th:value="${tc.getClientId()}" th:text="${tc.getDescription()}"></option>
                                     </select>
                                 </td>
                             </tr>
@@ -53,19 +53,19 @@
 
             <div class="index_title">导入数据权限过滤列表</div>
             <div class="tab_search">
-                <form th:action="@{/page/sso/platformFilterList/${currentPage},10.html}" method="get">
-                    <div class="tab_fn">
-                        <input type="submit" value="查询" class="tab_fnLi"/>
-                        <input type="reset" value="重置" class="tab_fnLi"/>
-                    </div>
-                    <input type="text" name="description" th:value="${description}" placeholder="输入平台名称…"/>
-                </form>
+                <div class="tab_fn">
+                    <input type="hidden" name="pageNum" th:value="${pageNum}"/>
+                    <input type="hidden" name="pageSize" th:value="${pageSize}"/>
+                    <input type="button" value="查询" class="tab_fnLi"/>
+                </div>
+
+                <input type="text" name="description" th:if="${description == '0'}" placeholder="输入平台名称…"/>
+                <input type="text" name="description" th:unless="${description == '0'}" th:value="${description}" placeholder="输入平台名称…"/>
             </div>
+
             <table class="platform_tab">
                 <thead>
                     <tr>
-                        <th>
-                        </th>
                         <th>平台名称</th>
                         <th>client_id</th>
                         <th>机构代码</th>
@@ -76,7 +76,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="tf : ${thirdFilterList}">
-                        <td><input type="checkbox" class="filterList"/></td>
+                        <input type="hidden" name="filterId" th:value="${tf.fid}"/>
                         <td th:text="${tf.description}"></td>
                         <td th:text="${tf.clientId}"></td>
                         <td th:text="${tf.organizationCode}"></td>
@@ -87,29 +87,29 @@
                     </tr>
                 </tbody>
             </table>
+
             <div class="tab_foot">
-                <div class="all_select"><input type="checkbox" class="checkAll" />全选</div>
                 <ul class="handle">
                     <li>新增</li>
                 </ul>
                 <div class="pages">
-                    <div class="jil">共<font th:text="${count}"></font>条记录</div>
-                    <a th:href="@{/page/sso/platformFilterList/1,10.html}" class="page">首页</a>
-                    <a th:if="${currentPage > 1}" th:href="@{'/page/sso/platformFilterList/' + ${currentPage - 1} +',10.html'}" class="page">上一页</a>
-                    <a th:if="${currentPage } lt ${pageCount}" th:href="@{'/page/sso/platformFilterList/' + ${currentPage + 1} + ',10.html'}" class="page">下一页</a>
-                    <a th:href="@{'/page/sso/platformFilterList/' + ${pageCount} + ',10.html'}" class="page">尾页</a>
-                    <select>
-                        <option>1/20</option>
-                        <option>2/20</option>
-                        <option>3/20</option>
-                        <option>4/20</option>
-                        <option>5/20</option>
-                    </select>
+                    <div class="jil">共<font th:text="${total}"></font>条记录</div>
+                    <a th:href="@{'/page/sso/platformFilterList/1,' + ${pageSize} + ',' + ${description} + '.html'}" class="page">首页</a>
+
+                    <a th:if="${hasPrevioisPage == true}"
+                       th:href="@{'/page/sso/platformFilterList/' + ${prePage} + ',' + ${pageSize} + ',' + ${description} + '.html'}" class="page">上一页</a>
+
+                    <a th:each="pageN : ${navigatepageNums}"
+                       th:href="@{'/page/sso/platformFilterList/' + ${pageN} + ',' + ${pageSize} + ',' + ${description} + '.html'}" th:text="${pageN}" class="page"></a>
+
+                    <a th:if="${hastNextPage == true}"
+                       th:href="@{'/page/sso/platformFilterList/' + ${nextPage} + ',' + ${pageSize} + ',' + ${description} + '.html'}" class="page">下一页</a>
+
+                    <a th:href="@{'/page/sso/platformFilterList/' + ${pages} + ',' + ${pageSize} + ',' + ${description}+ '.html'}" class="page">尾页</a>
                 </div>
             </div>
-            <script type="text/javascript" th:src="@{/static/scripts/backstage/platformFilter.js}"
-                    src="../../../static/scripts/backstage/platformFilter.js"></script>
 
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/platformFilter.js}" src="/static/scripts/backstage/platformFilter.js"></script>
         </div>
     </body>
 </html>

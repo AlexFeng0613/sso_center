@@ -1,19 +1,28 @@
 package com.hsjc.ssoCenter.app.page;
 
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.hsjc.ssoCenter.app.base.BaseController;
-import com.hsjc.ssoCenter.core.domain.Organization;
-import com.hsjc.ssoCenter.core.domain.ThirdClients;
-import com.hsjc.ssoCenter.core.service.IndexIcosService;
-import com.hsjc.ssoCenter.core.service.OrganizationService;
-import com.hsjc.ssoCenter.core.service.ThirdClientsService;
-import com.hsjc.ssoCenter.core.service.ThirdClientFilterService;
+import com.hsjc.ssoCenter.core.domain.*;
+import com.hsjc.ssoCenter.core.helper.RedisHelper;
+import com.hsjc.ssoCenter.core.service.*;
+import com.hsjc.ssoCenter.core.util.MenuUtil;
+import com.hsjc.ssoCenter.core.util.SSOStringUtil;
+import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,9 +32,11 @@ import java.util.List;
  *
  * 页面跳转控制类
  */
+@SuppressWarnings("ALL")
 @Controller
 @RequestMapping("/page/")
 public class PageController extends BaseController{
+    final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PageController.class);
 
     @Autowired
     IndexIcosService indexIcosService;
@@ -39,6 +50,30 @@ public class PageController extends BaseController{
     @Autowired
     OrganizationService organizationService;
 
+    @Autowired
+    UserMainService userMainService;
+
+    @Autowired
+    UserTempService userTempService;
+
+    @Autowired
+    ApiBaseService apiBaseService;
+
+    @Autowired
+    RedisHelper redisHelper;
+
+    @Autowired
+    SchoolInviteService schoolInviteService;
+
+    @Autowired
+    RoleService roleService;
+
+    @Autowired
+    ResourceService resourceService;
+
+    @Autowired
+    RestfulService restfulService;
+
     /**
      * @author : zga
      * @date : 2015-12-04
@@ -47,12 +82,75 @@ public class PageController extends BaseController{
      */
     @RequestMapping("index")
     public String index(Model model){
+        UserMain userMain = getCurrentUser();
+        if(userMain == null){
+            return "redirect:/user/login.html";
+        }
 
-        List<HashMap> list = indexIcosService.getAllIcos();
-        model.addAttribute("icons",list);
+        List<HashMap> list = null;
+        Long userId = Long.parseLong(userMain.getId().toString());
+        Role role = roleService.selectRoleByUserId(userId);
+        if(role != null){
+            /**
+             * 添加用户的资源
+             */
+            list = resourceService.selectResourcesByRoleId(userId);
 
+            if("user".equals(role.getRoleKey())){
+                List<HashMap> list1 = resourceService.selectResourcesByUserId(userId);
+                list.addAll(list1);
+            }
+        }
+
+        Collections.sort(list, new Comparator<HashMap>() {
+            @Override
+            public int compare(HashMap o1, HashMap o2) {
+                Integer type1 = Integer.parseInt(o1.get("resType").toString());
+                Integer type2 = Integer.parseInt(o2.get("resType").toString());
+
+                if(type1 > type2){
+                    return 1;
+                }
+
+                if(type1 < type2){
+                    return -1;
+                }
+                return 0;
+            }
+        });
+
+        model.addAttribute("resourceList",list);
         return "/user/index";
     }
+
+    /**
+     * @author : zga
+     * @date : 2016-4-11
+     *
+     * 404错误页面
+     *
+     * @return
+     */
+    @RequestMapping("notFoundPage")
+    public String notFoundPage(){
+        Subject subject = SecurityUtils.getSubject();
+        UserMain currentUserMain = (UserMain) subject.getPrincipal();
+
+        if(currentUserMain == null){
+            return "redirect:/user/login.html";
+        }
+
+        if(subject.hasRole("admin") || subject.hasRole("superAdmin")){
+            return "redirect:/page/sso/backstageIndex.html";
+        }
+
+        if(subject.hasRole("user")){
+            return "redirect:/page/index.html";
+        }
+
+        return "/user/login";
+    }
+
 
     /**
      * @author : zga
@@ -86,6 +184,33 @@ public class PageController extends BaseController{
                 break;
 
             case 3:
+                /**
+                 * 1、判断数据库中有没有相应的记录(根据emial和state查询数据)
+                 * 1)、有就跳转到第3步
+                 * 2)、没有跳转到第1步
+                 *
+                 * 2、通过去redis中取的结果来说明是否过期
+                 * 1)、过期提示重新发送
+                 */
+                JSONObject paramJson = new JSONObject();
+                paramJson.put("email",email);
+                UserTemp userTemp = userTempService.findByEmail(paramJson);
+                if(userTemp != null){
+                    String state = userTemp.getStatus();
+                    if("activated".equals(state)){
+                        return "redirect:/page/register/" + (num + 1) + ".html?email=" + email;
+                    }
+
+                    Object object = apiBaseService.fetchObject(email, ActivateEmailMess.class);
+                    if(object == null){
+                        model.addAttribute("expiredTicket" , "0");
+                    } else {
+                        model.addAttribute("expiredTicket" , "1");
+                    }
+                } else {
+                    return "redirect:/page/register/1.html";
+                }
+
                 model.addAttribute("email", email);
                 break;
 
@@ -117,8 +242,9 @@ public class PageController extends BaseController{
      * @return
      */
     @RequestMapping("authorizeFailed")
-    public String authorizeFailed(){
-        return "/authorizeFailed";
+    public String authorizeFailed(@RequestParam("reqParam")String reqParam,Model model){
+        model.addAttribute("reqParam",reqParam);
+        return "/page/authorizeFailed";
     }
 
     /**
@@ -136,6 +262,19 @@ public class PageController extends BaseController{
         model.addAttribute("email",email);
         model.addAttribute("targetWebsite","http://mail."+email.substring(email.lastIndexOf("@")+1));
         return "/page/bindEmailSucc";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
+     * 绑定手机成功
+     *
+     * @return
+     */
+    @RequestMapping("sso/bindPhonelSucc")
+    public String bindPhonelSucc(){
+        return "/page/bindPhonelSucc";
     }
 
     /**
@@ -169,6 +308,11 @@ public class PageController extends BaseController{
         return "/yun/mailbox";
     }
 
+    @RequestMapping("sso/personalEdit")
+    public String personalEdit(){
+        return "/yun/personalEdit";
+    }
+
     /**
      * @author : zga
      * @date : 2016-1-18
@@ -178,7 +322,26 @@ public class PageController extends BaseController{
      * @return
      */
     @RequestMapping("sso/backstageIndex")
-    public String backstageIndex(){
+    public String backstageIndex(Model model, HttpServletRequest request){
+        UserMain userMain = getCurrentUser();
+        if(userMain == null){
+            return "redirect:/user/login.html";
+        }
+
+        List<HashMap> list = null;
+        Long userId = Long.parseLong(userMain.getId().toString());
+        Role role = roleService.selectRoleByUserId(userId);
+        if(role != null){
+            /**
+             * 添加用户的资源
+             */
+            list = resourceService.selectResourcesByRoleId(userId);
+        }
+
+        List<HashMap> firstMenuList = MenuUtil.getMenuList(list);
+
+        request.getSession().setAttribute("firstMenuList",firstMenuList);
+        request.getSession().setAttribute("resourceList",list);
         return "/backstage/backstageIndex";
     }
 
@@ -190,10 +353,98 @@ public class PageController extends BaseController{
      *
      * @return
      */
-    @RequestMapping("sso/userList")
-    public String userList(){
+    @RequestMapping("sso/userList/{pageNum},{pageSize},{organization},{type},{status},{createTime},{realName}")
+    public String userList(@PathVariable("pageNum")Integer pageNum,
+                           @PathVariable("pageSize")Integer pageSize,
+                           @PathVariable("organization")String organization,
+                           @PathVariable("type")String type,
+                           @PathVariable("status")String status,
+                           @PathVariable("createTime")String createTime,
+                           @PathVariable("realName")String realName,
+                           Model model) throws Exception{
+        if(getCurrentUser() == null){
+            return "/user/login";
+        }
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("organization",organization);
+        paramJson.put("type",type);
+        paramJson.put("status",status);
+        paramJson.put("createTime",createTime);
+        paramJson.put("realName",realName);
+
+        PageInfo pageInfo = userMainService.getAllUserMainList(paramJson);
+
+        List<Organization> organizationList = organizationService.getAllOrganization();
+        /**
+            endRow 结束的行数
+            firstPage 当前导航页码的第一个页码
+            hastNextPage 是否有下一页
+            hasPrevioisPage 是否有上一页
+            isFirstPage 是否是第一页
+            isLastPage 是否是最后一页
+            lastPage 当前导航页码的最后一个页码
+            list 所有的记录
+            navigatePages 导航页码数量
+            navigatepageNums 导航页码(数组)
+            nextPage 下一页码
+            pageNum 当前页数
+            pageSize 每一页显示的记录数
+            pages 总页数
+            prePage 前一页码
+            size 当前页面的记录数
+            startRow 开始的行数(从第几行记录开始)
+            total 记录总数
+        */
+
+        modalAddAttributes(model, pageInfo);
+        model.addAttribute("userMainList",pageInfo.getList());
+        model.addAttribute("organization",organization);
+        model.addAttribute("type",type);
+        model.addAttribute("status",status);
+        model.addAttribute("createTime",createTime);
+        if(StringUtils.isEmpty(realName)){
+            realName = "0";
+        }
+
+        model.addAttribute("realName", URLEncoder.encode(realName,"utf-8"));
+        model.addAttribute("organizationList",organizationList);
         return "/backstage/userList";
     }
+
+    /**
+     * @author : wuyue
+     * @date : 2016-3-22
+     *
+     * SSO后台>>管理员列表
+     *
+     * @return
+     */
+    @RequestMapping("sso/adminList/{pageNum},{pageSize},{userName}")
+    public String adminList(@PathVariable("pageNum")Integer pageNum,
+                           @PathVariable("pageSize")Integer pageSize,
+                            @PathVariable("userName")String userName,
+                           Model model) throws Exception{
+
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("userName",userName);
+
+        PageInfo pageInfo = userMainService.getAllAdminList(paramJson);
+
+        modalAddAttributes(model, pageInfo);
+        model.addAttribute("adminList", pageInfo.getList());
+
+        if(StringUtils.isEmpty(userName)){
+            userName = "0";
+        }
+        model.addAttribute("userName",userName);
+
+        return "/backstage/adminList";
+    }
+
 
     /**
      * @author : zga
@@ -240,19 +491,24 @@ public class PageController extends BaseController{
      *
      * @return
      */
-    @RequestMapping("sso/platformList/{currentPage},{pageSize}")
-    public String platformList(@PathVariable("currentPage") Integer currentPage,
-                               @PathVariable("pageSize") Integer pageSize,
-                               @RequestParam(value = "description",required = false)String description,Model model){
-        List<ThirdClients> list = thirdClientsService.selectAllThirdClients(description,currentPage,pageSize);
+    @RequestMapping("sso/platformList/{pageNum},{pageSize},{description}")
+    public String platformList(@PathVariable("pageNum")Integer pageNum,
+                               @PathVariable("pageSize")Integer pageSize,
+                               @PathVariable("description")String description,
+                               Model model){
 
-        model.addAttribute("thirdClientsList",list);
+        if(getCurrentUser() == null) return "/user/login";
+
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("description",description);
+
+        PageInfo pageInfo = thirdClientsService.selectAllThirdClientsWithPage(paramJson);
+
+        modalAddAttributes(model, pageInfo);
+        model.addAttribute("thirdClientsList",pageInfo.getList());
         model.addAttribute("description",description);
-
-        model.addAttribute("count",(list == null ? 0 : list.size()));
-        model.addAttribute("currentPage",currentPage);
-        model.addAttribute("pageSize",pageSize);
-        model.addAttribute("pageCount",5);
 
         return "/backstage/platformList";
     }
@@ -265,28 +521,32 @@ public class PageController extends BaseController{
      *
      * @return
      */
-    @RequestMapping("sso/platformFilterList/{currentPage},{pageSize}")
-    public String platformFilterList(@PathVariable("currentPage") Integer currentPage,
-                                     @PathVariable("pageSize") Integer pageSize,
-                                     @RequestParam(value = "description",required = false)String description,Model model){
-        List<HashMap> list = thirdFilterService.selectAllThirdFilters(description,currentPage,pageSize);
-        model.addAttribute("thirdFilterList",list);
-        model.addAttribute("description",description);
+    @RequestMapping("sso/platformFilterList/{pageNum},{pageSize},{description}")
+    public String platformFilterList(@PathVariable("pageNum")Integer pageNum,
+                                     @PathVariable("pageSize")Integer pageSize,
+                                     @PathVariable("description")String description,
+                                     Model model) throws Exception{
+        if(getCurrentUser() == null){
+            return "/user/login";
+        }
 
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("description",description);
+
+        PageInfo pageInfo = thirdFilterService.selectAllThirdFilters(paramJson);
         List<Organization> organizationList = organizationService.getAllOrganization();
         List<ThirdClients> thirdClientsList = thirdClientsService.selectAllThirdClients();
 
-        model.addAttribute("count",(list == null ? 0 : list.size()));
-        model.addAttribute("currentPage",currentPage);
-        model.addAttribute("pageSize",pageSize);
-        model.addAttribute("pageCount",5);
+        modalAddAttributes(model, pageInfo);
+        model.addAttribute("thirdFilterList",pageInfo.getList());
+        model.addAttribute("description",description);
         model.addAttribute("organizationList",organizationList);
         model.addAttribute("thirdClientsList",thirdClientsList);
 
         return "/backstage/platformFilterList";
     }
-
-
 
     /**
      *
@@ -421,12 +681,36 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 组织机构列表
+     * SSO后台>>组织机构列表
      *
      * @return
      */
-    @RequestMapping("sso/tissueList")
-    public String tissueList(){
+    @RequestMapping("sso/tissueList/{pageNum},{pageSize},{status},{organizationName},{createTime}")
+    public String tissueList(@PathVariable("pageNum")Integer pageNum,
+                             @PathVariable("pageSize")Integer pageSize,
+                             @PathVariable("status")String status,
+                             @PathVariable("organizationName")String organizationName,
+                             @PathVariable("createTime")String createTime,
+                             Model model){
+
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("status",status);
+        paramJson.put("organizationName",organizationName);
+        paramJson.put("createTime",createTime);
+
+        PageInfo pageInfo = organizationService.getAllOrganizationWithPage(paramJson);
+        modalAddAttributes(model,pageInfo);
+
+        model.addAttribute("status",status);
+        if(StringUtils.isEmpty(organizationName)){
+            organizationName = "0";
+        }
+        model.addAttribute("organizationName",organizationName);
+        model.addAttribute("createTime",createTime);
+        model.addAttribute("organizationList",pageInfo.getList());
+
         return "/backstage/tissueList";
     }
 
@@ -445,11 +729,13 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 新增组织机构
+     * SSO后台>>新增组织机构
      * @return
      */
     @RequestMapping("sso/newTissue")
-    public String newTissue(){
+    public String newTissue(Model model){
+        List<Organization> list = organizationService.getAllOrganization();
+        model.addAttribute("organizationList",list);
         return "/backstage/newTissue";
     }
 
@@ -457,12 +743,46 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 邀请码管理
+     * SSO后台>>邀请码管理
      *
      * @return
      */
-    @RequestMapping("sso/invitationManage")
-    public String invitationManage(){
+    @RequestMapping("sso/invitationManage/{pageNum},{pageSize},{organization},{status},{createTime},{inviteCode}")
+    public String invitationManage(@PathVariable("pageNum")Integer pageNum,
+                                   @PathVariable("pageSize")Integer pageSize,
+                                   @PathVariable("organization")String organization,
+                                   @PathVariable("status")String status,
+                                   @PathVariable("createTime")String createTime,
+                                   @PathVariable("inviteCode")String inviteCode,
+                                   Model model){
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("organization",organization);
+        paramJson.put("status",status);
+        paramJson.put("createTime",createTime);
+        paramJson.put("inviteCode",inviteCode);
+
+        PageInfo pageInfo = schoolInviteService.selectAllSchoolInviteWithPage(paramJson);
+        List<Organization> organizationList = organizationService.getAllOrganization();
+
+        /**
+         * Model添加页面属性
+         */
+        modalAddAttributes(model, pageInfo);
+        model.addAttribute("organization",organization);
+        model.addAttribute("status",status);
+        model.addAttribute("createTime",createTime);
+        if(StringUtils.isEmpty(inviteCode)){
+            inviteCode = "0";
+        }
+        model.addAttribute("inviteCode",inviteCode);
+
+        /**
+         * Model添加页面列表
+         */
+        model.addAttribute("organizationList",organizationList);
+        model.addAttribute("schoolInviteList",pageInfo.getList());
         return "/backstage/invitationManage";
     }
 
@@ -470,33 +790,35 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 新增邀请码
+     * SSO后台>>新增邀请码
      *
      * @return
      */
     @RequestMapping("sso/newInvitation")
-    public String newInvitation(){
+    public String newInvitation(Model model){
+        List<Organization> organizationList = organizationService.getAllOrganization();
+        model.addAttribute("organizationList",organizationList);
         return "/backstage/newInvitation";
     }
 
-    /**
-     * @author : zga
-     * @date : 2016-1-18
-     *
-     * 管理员列表
-     *
-     * @return
-     */
-    @RequestMapping("sso/adminList")
-    public String adminList(){
-        return "/backstage/adminList";
-    }
+//    /**
+//     * @author : zga
+//     * @date : 2016-1-18
+//     *
+//     * SSO后台>>管理员列表
+//     *
+//     * @return
+//     */
+//    @RequestMapping("sso/adminList")
+//    public String adminList(){
+//        return "/backstage/adminList";
+//    }
 
     /**
      * @author : zga
      * @date : 2016-1-18
      *
-     * 新增管理员
+     * SSO后台>>新增管理员
      *
      * @return
      */
@@ -510,7 +832,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 站点基本设置
+     * SSO后台>>站点基本设置
      *
      * @return
      */
@@ -523,7 +845,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 邮件接口设置
+     * SSO后台>>邮件接口设置
      *
      * @return
      */
@@ -536,7 +858,7 @@ public class PageController extends BaseController{
      * @author : zga
      * @date : 2016-1-18
      *
-     * 短信接口设置
+     * SSO后台>>短信接口设置
      *
      * @return
      */
@@ -546,15 +868,199 @@ public class PageController extends BaseController{
     }
 
     /**
-     * @author : zga
-     * @date : 2016-1-18
+     * @author : wuyue
+     * @date : 2016-3-30
      *
-     * 站点日志
+     * SSO后台>>站点日志
      *
      * @return
      */
-    @RequestMapping("sso/siteLog")
-    public String siteLog(){
+
+    @RequestMapping("sso/siteLog/{pageNum},{pageSize},{c_description}")
+    public String siteLog(@PathVariable("pageNum")Integer pageNum,
+                            @PathVariable("pageSize")Integer pageSize,
+                            @PathVariable("c_description")String c_description,
+                            Model model) throws Exception{
+
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+        paramJson.put("c_description", c_description);
+
+        PageInfo pageInfo = restfulService.getSiteLog(paramJson);
+
+        modalAddAttributes(model, pageInfo);
+        model.addAttribute("siteLog", pageInfo.getList());
+
+        if(StringUtils.isEmpty(c_description)){
+            c_description = "0";
+        }
+        model.addAttribute("c_description",c_description);
+
         return "/backstage/siteLog";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
+     * 访问第三方
+     *
+     * @param accessURL
+     * @param openId
+     * @param password
+     * @param time
+     * @param model
+     * @return
+     */
+    @RequestMapping("toThird")
+    public String toThird(@RequestParam("accessURL") String accessURL,
+                          @RequestParam("openid") String openId,
+                          @RequestParam("pwd") String password,
+                          @RequestParam("time") String time,
+                          Model model){
+        /**
+         * accessURL中参数值用*代替,到需要传递时用具体值替换
+         */
+        accessURL = accessURL + "?openid=%&password=%&time=%";
+
+        String targetURL = SSOStringUtil.replaceAllWithSplitStr(accessURL,"%",openId,password,time);
+        model.addAttribute("targetURL",targetURL);
+
+        return "/page/toThird";
+    }
+
+    /**
+     * 激活Email成功页面
+     * @return
+     */
+    @RequestMapping("register/activatedEmail")
+    public String activatedEmail(){
+        return "/page/activatedEmail";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
+     * 激活Email失败页面
+     *
+     * @return
+     */
+    @RequestMapping("register/errorEmailActivateCode")
+    public String errorEmailActivateCode(@RequestParam("type")String type,Model model){
+        model.addAttribute("type",type);
+        return "/page/errorEmailActivateCode";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
+     * 服务器异常页面
+     *
+     * @return
+     */
+    @RequestMapping("serverError")
+    public String serverError(){
+       return "500";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-7
+     *
+     * SSO后台>>邀请码生成成功页面
+     *
+     * @return
+     */
+    @RequestMapping("batchGenerateInviteCodeSucc")
+    public String batchGenerateInviteCodeSucc(){
+        return "/page/batchGenerateInviteCodeSucc";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * 测试Mybatis PageInfo对象
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("sso/testPageHelper")
+    @ResponseBody
+    public JSONObject testPageHelper(@RequestParam("pageNum")Integer pageNum,
+                                     @RequestParam("pageSize")Integer pageSize){
+
+        JSONObject paramJson = new JSONObject();
+        paramJson.put("pageNum",pageNum);
+        paramJson.put("pageSize",pageSize);
+
+        JSONObject resultJson = new JSONObject();
+        PageInfo pageInfo = userMainService.getAllUserMainList(paramJson);
+        resultJson.put("pageInfo",pageInfo);
+        return resultJson;
+    }
+
+    /**
+     * @author : wuyue
+     * @date : 2016-3-29
+     *
+     * SSO后台>>管理员新增管理员成功
+     *
+     * @return
+     */
+    @RequestMapping("/backstage/adminAddAdminSucc")
+    public String adminAddAdminSucc(){
+        return "/page/adminAddAdminSucc";
+    }
+
+    /**
+     * @author : zga
+     * @date : 2016-3-10
+     *
+     * SSO后台>>管理员新增用户成功
+     *
+     * @return
+     */
+    @RequestMapping("/backstage/adminAddUserSucc")
+    public String adminAddUserSucc(){
+        return "/page/adminAddUserSucc";
+    }
+
+
+
+    /*-----------------------------------------------------*/
+
+    /**
+     * @author : zga
+     * @date : 2016-3-11
+     *
+     * 返回页面的分页信息
+     *
+     * @param model
+     * @param pageInfo
+     */
+    public void modalAddAttributes(Model model, PageInfo pageInfo) {
+        model.addAttribute("endRow",pageInfo.getEndRow());
+        model.addAttribute("firstPage",pageInfo.getFirstPage());
+        model.addAttribute("hastNextPage",pageInfo.isHasNextPage());
+        model.addAttribute("hasPrevioisPage",pageInfo.isHasPreviousPage());
+        model.addAttribute("isFirstPage",pageInfo.isIsFirstPage());
+        model.addAttribute("isLastPage",pageInfo.isIsLastPage());
+        model.addAttribute("lastPage",pageInfo.getLastPage());
+        model.addAttribute("navigatePages",pageInfo.getNavigatePages());
+        model.addAttribute("navigatepageNums",pageInfo.getNavigatepageNums());
+
+        model.addAttribute("nextPage",pageInfo.getNextPage());
+        model.addAttribute("pageNum",pageInfo.getPageNum());
+        model.addAttribute("pageSize",pageInfo.getPageSize());
+        model.addAttribute("pages",pageInfo.getPages());
+        model.addAttribute("prePage",pageInfo.getPrePage());
+        model.addAttribute("size",pageInfo.getSize());
+        model.addAttribute("startRow",pageInfo.getStartRow());
+        model.addAttribute("total",pageInfo.getTotal());
     }
 }

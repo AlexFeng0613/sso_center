@@ -208,4 +208,16 @@
     FROM tbsmssend
     WHERE sendFlag = 0
   </select>
+
+  <!--
+    @author : zga
+    @date : 2016-3-7
+    查询当天发送短信的数量
+  -->
+  <select id="selectTodaySendNum" resultType="java.lang.Integer">
+    SELECT COUNT(1) FROM tbsmssend
+    WHERE TO_DAYS(sendTime) = TO_DAYS(NOW())
+     AND
+    phoneNum = #{phone}
+  </select>
 </mapper>

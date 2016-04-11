@@ -40,4 +40,20 @@ public class ThirdClientFilterController extends BaseController{
         return resultJson;
     }
 
+    /**
+     * @author : zga
+     * @date : 2016-3-22
+     *
+     * 删除第三方过滤
+     *
+     * @param paramJson
+     * @return
+     */
+    @RequestMapping("deleteThirdClientFilter")
+    @ResponseBody
+    public JSONObject deleteThirdClientFilter(@RequestBody JSONObject paramJson){
+        JSONObject resultJson = thirdClientFilterService.deleteThirdClientFilter(paramJson);
+        return resultJson;
+    }
+
 }

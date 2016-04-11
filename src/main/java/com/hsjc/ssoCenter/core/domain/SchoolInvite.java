@@ -78,4 +78,17 @@ public class SchoolInvite {
     public void setUseTime(Date useTime) {
         this.useTime = useTime;
     }
+
+    @Override
+    public String toString() {
+        return "SchoolInvite{" +
+                "inviteId=" + inviteId +
+                ", inviteCode='" + inviteCode + '\'' +
+                ", schoolId=" + schoolId +
+                ", byUserId=" + byUserId +
+                ", state='" + state + '\'' +
+                ", createTime=" + createTime +
+                ", useTime=" + useTime +
+                '}';
+    }
 }

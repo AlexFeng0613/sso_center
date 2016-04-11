@@ -6,7 +6,6 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
@@ -19,7 +18,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ComponentScan({"com.hsjc"})
 @EnableWebMvc
 @EnableScheduling
-@EnableTransactionManagement
 @EnableSpringDataWebSupport
 public class AppConfig {
 
@@ -30,9 +28,16 @@ public class AppConfig {
 
 	@Bean
 	public RedisConstant redisConstant(
+			@Value("${redis.host}") String HOST,
+			@Value("${redis.port}") Integer PORT,
+			@Value("${redis.password}") String PASSWORD,
 			@Value("${redis.dictDatabase}") Integer DB_DICT
 	) {
+		RedisConstant.DB_HOST = HOST;
+		RedisConstant.DB_PORT = PORT;
+		RedisConstant.DB_PASSWORD = PASSWORD;
 		RedisConstant.DB_DICT = DB_DICT;
+
 		return null;
 	}
 
@@ -53,14 +58,25 @@ public class AppConfig {
 
 	@Configuration
 	@Profile("development")
-	@PropertySource("classpath:application.development.properties")
-	static class Development {}
-
-	@Configuration
-	@Profile("log4j")
 	@PropertySources({
 			@PropertySource("classpath:application.development.properties"),
 			@PropertySource("classpath:log4j.properties")
 	})
-	static class Log4j{}
+	static class Development{}
+
+	@Configuration
+	@Profile("production")
+	@PropertySources({
+			@PropertySource("classpath:application.production.properties"),
+			@PropertySource("classpath:log4j.properties")
+	})
+	static class Production{}
+
+	@Configuration
+	@Profile("online")
+	@PropertySources({
+			@PropertySource("classpath:application.online.properties"),
+			@PropertySource("classpath:log4j.properties")
+	})
+	static class Online{}
 }

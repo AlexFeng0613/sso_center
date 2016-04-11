@@ -1,5 +1,9 @@
 /**
- * Created by Administrator on 2015/12/30.
+ * @author : zga
+ * @date : 2015-12-30
+ *
+ * 密码强度类
+ *
  */
 $(function(){
     var ch=$(window).height()-$('.header').outerHeight()-$('.footer').outerHeight();

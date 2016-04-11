@@ -9,60 +9,24 @@
         <script text="text/javascript" th:src="@{/static/scripts/ie/html5shiv.js}" src="../../../static/scripts/ie/html5shiv.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/ie/placeholder.js}"  src="../../../static/scripts/ie/placeholder.js"></script>
         <script text="text/javascript" th:src="@{/static/scripts/validform/Validform_v5.3.2_min.js}" src="../../../static/scripts/validform/Validform_v5.3.2_min.js"></script>
+        <style type="text/css">
+            .Validform_checktip{margin-left:-167px;margin-top:-2px;}
+            .Validform_checktip{margin-left:-167px;margin-top:-2px;}
+        </style>
     </head>
     <body>
         <div id="content" layout:fragment="content">
            <div class="long_input_box">
                <form class="inviteCodeForm" action="/sso/bindInviteCode.json" method="post">
                    <div class="long_input_top">
-                       <div class="input_font">邀请码</div>
-                       <input type="text" class="email" name="inviteCode"/>
-                       <input type="button" class="email_submit" value="下一步"/>
+                       <div  class="input_font">邀请码</div>
+                       <input id="input_font" type="text" class="email" name="inviteCode"/>
+                       <input type="submit" class="email_submit" value="下一步"/>
                    </div>
                </form>
            </div>
-            <script type="text/javascript">
-                $(function(){
-                    $('#bindInviteCode').addClass('selected');
-                    $('#bindInviteCode a').addClass('selected');
 
-                    var inviteCodeForm = $('.inviteCodeForm').Validform({
-
-
-                    });
-
-                    /**
-                     * 绑定邀请码
-                     */
-                    $('.email_submit').click(function(){
-                        var inviteCode = $('input[name="inviteCode"]').val();
-                        var data = {
-                            'inviteCode' : inviteCode
-                        }
-                        $.ajax({
-                            url : '/sso/bindInviteCode.json',
-                            type : 'POST',
-                            data : JSON.stringify(data),
-                            contentType: 'application/json',
-                            dataType : 'json',
-                            success : function(data){
-                                if(data.success){
-                                    window.location.href = '/page/sso/bindInviteCodeSucc.html';
-                                }else {
-                                    if(data.message == '100007') window.location.href = "/user/login.html";
-
-                                    if(data.message == '100011') alert("邀请码不存在,请核对你的邀请码是否正确");
-
-                                    if(data.message == '100012') alert('绑定邀请码失败');
-                                }
-                            }
-                        });
-                    })
-
-
-                });
-           </script>
+           <script type="text/javascript" th:src="@{/static/scripts/yun/inviteCode.js}" src="/static/scripts/yun/inviteCode.js"></script>
         </div>
-
     </body>
 </html>

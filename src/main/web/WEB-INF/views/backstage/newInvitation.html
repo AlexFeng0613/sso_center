@@ -5,36 +5,33 @@
       layout:decorator="../../public/backstage">
     <head></head>
     <body>
+        <div id="content" layout:fragment="content">
+            <div class="index_title">新增邀请码</div>
 
-
-
-                <div id="content" layout:fragment="content">
-                    <div class="index_title">新增邀请码</div>
-                    <div class="invitation_box">
-                        <div class="users_message" style="margin-top:20px;">
-                            <div class="users_message_l">*</div>
-                            <div class="users_message_name">所属组织机构：</div>
-                            <input type="text" />
-                        </div>
-                        <div class="users_message">
-                            <div class="users_message_l">*</div>
-                            <div class="users_message_name">添加数量：</div>
-                            <input type="number" />
-                        </div>
-                        <ul class="build_submit">
-                            <li class="selected">
-                                <a href="invitationManage.html" class="selected">保存</a>
-                            </li>
-                            <li>
-                                <a href="invitationManage.html">取消</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <script type="text/javascript">
-                        $('#new_invitation').addClass('selected');
-                    </script>
+            <div class="invitation_box">
+                <div class="users_message" style="margin-top:20px;">
+                    <div class="users_message_l">*</div>
+                    <div class="users_message_name">所属组织机构：</div>
+                    <select name="organizationCode">
+                        <option th:each="organization : ${organizationList}" th:text="${organization.getOrganizationName()}" th:value="${organization.getOrganizationCode()}"></option>
+                    </select>
                 </div>
+                <div class="users_message">
+                    <div class="users_message_l">*</div>
+                    <div class="users_message_name">添加数量：</div>
+                    <input type="text" name="addNum"/>
+                </div>
+                <ul class="build_submit">
+                    <li class="selected">
+                        <a href="javascript:void(0);" class="selected" id="but_addNew">新增</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">取消</a>
+                    </li>
+                </ul>
+            </div>
 
-
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/newInvitation.js}" src="/static/scripts/backstage/newInvitation.js"></script>
+        </div>
     </body>
 </html>

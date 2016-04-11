@@ -3,88 +3,82 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="../../public/backstage">
-    <head></head>
+    <head>
+        <title>新增用户</title>
+    </head>
     <body>
+        <div id="content" layout:fragment="content">
+            <div class="index_title">新增用户</div>
 
-            <div id="content" layout:fragment="content">
-                    <div class="index_title">新增用户</div>
-                    <div class="users_div">
-                        <ul class="users">
-                            <li>
-                                <a href="newUser.html" class="selected">添加用户</a>
-                            </li>
-                            <li>
-                                <a href="templateTo.html">批量导入用户</a>
-                            </li>
+            <div class="users_box">
+                <form action="/user/adminAddNewUser.html" method="post" enctype="multipart/form-data">
+                    <div class="users_message" style="margin-top:25px;">
+                        <div class="users_message_l">*</div>
+                        <div class="users_message_name">用户类型：</div>
+                        <ul class="user_status">
+                            <li><input type="radio" name="type" value="teacher" checked="checked"/>老师</li>
+                            <li><input type="radio" name="type" value="student"/>学生</li>
                         </ul>
                     </div>
-                    <div class="users_box">
-                        <div class="users_message" style="margin-top:25px;">
-                            <div class="users_message_l">*</div>
-                            <div class="users_message_name">用户角色：</div>
-                            <ul class="user_status">
-                                <li>
-                                    <input type="radio" name="user_status"/>
-                                    老师
-                                </li>
-                                <li>
-                                    <input type="radio" name="user_status"/>
-                                    学生
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="users_message">
-                            <div class="users_message_l">*</div>
-                            <div class="users_message_name">用户名：</div>
-                            <input type="text" />
-                        </div>
-                        <div class="users_message">
-                            <div class="users_message_l"></div>
-                            <div class="users_message_name">初始密码：</div>
-                            <input type="password"/>
-                        </div>
-                        <div class="users_message">
-                            <div class="users_message_l"></div>
-                            <div class="users_message_name">邮箱：</div>
-                            <input type="email" />
-                        </div>
-                        <div class="users_message">
-                            <div class="users_message_l"></div>
-                            <div class="users_message_name">手机：</div>
-                            <input type="text" />
-                        </div>
-                        <div class="users_message">
-                            <div class="users_message_l"></div>
-                            <div class="users_message_name">激情码：</div>
-                            <input type="text" />
-                        </div>
-                        <div class="users_message">
-                            <div class="users_message_l"></div>
-                            <div class="users_message_name">证件号码：</div>
-                            <input type="text" />
-                        </div>
-                        <div class="users_message">
-                            <div class="users_message_l"></div>
-                            <div class="users_message_name">头像：</div>
-                            <div class="users_img">
-                                <img src="../../static/images/SSO/users_img.png"/>
-                            </div>
-                            <div class="files">浏览
-                                <input type="file" />
-                            </div>
-                        </div>
-                        <ul class="build_submit">
-                            <li class="selected">
-                                保存
-                            </li>
-                            <li>取消</li>
+                    <div class="users_message">
+                        <div class="users_message_l">*</div>
+                        <div class="users_message_name">用户名：</div>
+                        <input type="text" name="userName"/>
+                    </div>
+                    <div class="users_message">
+                        <div class="users_message_l">*</div>
+                        <div class="users_message_name">真实姓名：</div>
+                        <input type="text" name="realName"/>
+                    </div>
+                    <div class="users_message" style="margin-top:25px;">
+                        <div class="users_message_l"></div>
+                        <div class="users_message_name">性别：</div>
+                        <ul class="user_status">
+                            <li><input type="radio" name="gender" value="1" checked="checked"/>男</li>
+                            <li><input type="radio" name="gender" value="0"/>女</li>
                         </ul>
                     </div>
-                    <script type="text/javascript">
-                        $('#new_user').addClass('selected');
-                    </script>
+                    <div class="users_message">
+                        <div class="users_message_l">*</div>
+                        <div class="users_message_name">初始密码：</div>
+                        <input type="password" name="password"/>
+                    </div>
+                    <div class="users_message" style="display: none;">
+                        <div class="users_message_l"></div>
+                        <div class="users_message_name">邮箱：</div>
+                        <input type="email" name="email" />
+                    </div>
+                    <div class="users_message" style="display: none;">
+                        <div class="users_message_l"></div>
+                        <div class="users_message_name">手机：</div>
+                        <input type="text" name="phone"/>
+                    </div>
+                    <div class="users_message" style="display: none;">
+                        <div class="users_message_l"></div>
+                        <div class="users_message_name">邀请码：</div>
+                        <input type="text" name="inviteCode"/>
+                    </div>
+                    <div class="users_message">
+                        <div class="users_message_l"></div>
+                        <div class="users_message_name">头像：</div>
+                        <div class="users_img">
+                            <img src="/static/images/SSO/users_img.png" id="user_img"/>
+                        </div>
+                        <div class="files">浏览
+                            <input id="up" type="file" name="imgFile"/>
+                        </div>
+                    </div>
+                    <ul class="build_submit">
+                        <li class="selected">保存</li>
+                        <li class="cancel
+                        ">取消</li>
+                    </ul>
+                </form>
             </div>
 
-
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/uploadPreview.js}" src="/static/scripts/backstage/uploadPreview.js"></script>
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/upImg.js}" src="/static/scripts/backstage/upImg.js"></script>
+            <script type="text/javascript" th:src="@{/static/scripts/backstage/newUser.js}" src="/static/scripts/backstage/newUser.js"></script>
+        </div>
     </body>
 </html>

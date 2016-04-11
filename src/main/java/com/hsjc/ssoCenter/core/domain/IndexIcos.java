@@ -10,15 +10,19 @@ package com.hsjc.ssoCenter.core.domain;
 public class IndexIcos {
     private Integer id;
 
-    private String iconame;
+    private String icoName;
 
-    private String icopath;
+    private String icoPath;
 
-    private String accessurl;
+    private String accessUrl;
 
-    private String icotype;
+    private String icoType;
 
-    private String icodescription;
+    private String icoDescription;
+
+    private String clientId;
+
+    private String ssoPassword;
 
     public Integer getId() {
         return id;
@@ -28,43 +32,59 @@ public class IndexIcos {
         this.id = id;
     }
 
-    public String getIconame() {
-        return iconame;
+    public String getIcoName() {
+        return icoName;
     }
 
-    public void setIconame(String iconame) {
-        this.iconame = iconame;
+    public void setIcoName(String icoName) {
+        this.icoName = icoName;
     }
 
-    public String getIcopath() {
-        return icopath;
+    public String getIcoPath() {
+        return icoPath;
     }
 
-    public void setIcopath(String icopath) {
-        this.icopath = icopath;
+    public void setIcoPath(String icoPath) {
+        this.icoPath = icoPath;
     }
 
-    public String getAccessurl() {
-        return accessurl;
+    public String getAccessUrl() {
+        return accessUrl;
     }
 
-    public void setAccessurl(String accessurl) {
-        this.accessurl = accessurl;
+    public void setAccessUrl(String accessUrl) {
+        this.accessUrl = accessUrl;
     }
 
-    public String getIcotype() {
-        return icotype;
+    public String getIcoType() {
+        return icoType;
     }
 
-    public void setIcotype(String icotype) {
-        this.icotype = icotype;
+    public void setIcoType(String icoType) {
+        this.icoType = icoType;
     }
 
-    public String getIcodescription() {
-        return icodescription;
+    public String getIcoDescription() {
+        return icoDescription;
     }
 
-    public void setIcodescription(String icodescription) {
-        this.icodescription = icodescription;
+    public void setIcoDescription(String icoDescription) {
+        this.icoDescription = icoDescription;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getSsoPassword() {
+        return ssoPassword;
+    }
+
+    public void setSsoPassword(String ssoPassword) {
+        this.ssoPassword = ssoPassword;
     }
 }

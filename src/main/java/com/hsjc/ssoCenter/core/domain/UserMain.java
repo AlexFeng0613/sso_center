@@ -164,4 +164,20 @@ public class UserMain implements Serializable{
     public void setUserIcon(String userIcon) {
         this.userIcon = userIcon;
     }
+
+    @Override
+    public String toString() {
+        return "UserMain{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", type='" + type + '\'' +
+                ", status='" + status + '\'' +
+                ", inviteCode='" + inviteCode + '\'' +
+                ", email='" + email + '\'' +
+                ", organizationCode=" + organizationCode +
+                ", gender='" + gender + '\'' +
+                ", realName='" + realName + '\'' +
+                '}';
+    }
 }

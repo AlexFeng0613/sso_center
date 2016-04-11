@@ -7,6 +7,9 @@ import java.util.Properties;
 /**
  * @author : zga
  * @date : 2016-02-16
+ *
+ * 数据库JDBC连接工具类
+ *
  */
 public class DBUtil {
 
@@ -20,9 +23,20 @@ public class DBUtil {
 
     public static Connection connection;
 
+
+    /**
+     * @author : zga
+     * @date : 2016-3-18
+     *
+     * 获取Connection
+     *
+     * @return
+     */
     public static Connection getConn(){
         try {
             Properties properties = new Properties();
+//            properties.load(DBUtil.class.getResourceAsStream("/application.online.properties"));
+            //properties.load(DBUtil.class.getResourceAsStream("/application.production.properties"));
             properties.load(DBUtil.class.getResourceAsStream("/application.development.properties"));
 
             driverClass = properties.get("db.driver").toString();
@@ -43,6 +57,16 @@ public class DBUtil {
         return connection;
     }
 
+    /**
+     * @author : zga
+     * @date : 2016-3-18
+     *
+     * 释放数据库连接资源
+     *
+     * @param connection
+     * @param resultSet
+     * @param statement
+     */
     public static void freeConn(Connection connection, ResultSet resultSet, Statement statement){
         try {
             if(resultSet != null){

@@ -37,13 +37,14 @@ public class AppInitializer implements WebApplicationInitializer {
 
 		servletContext.addFilter("shiroFilter", new DelegatingFilterProxy("shiroFilter", context))
 				.addMappingForUrlPatterns(null, false, "/*");
-
 	}
 
 	private AnnotationConfigWebApplicationContext getContext() {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		context.setConfigLocation("com.hsjc.ssoCenter.core.config");
-		context.getEnvironment().setActiveProfiles("log4j");
+//		context.getEnvironment().setActiveProfiles("online");
+		//context.getEnvironment().setActiveProfiles("production");
+		context.getEnvironment().setActiveProfiles("development");
 		return context;
 	}
 

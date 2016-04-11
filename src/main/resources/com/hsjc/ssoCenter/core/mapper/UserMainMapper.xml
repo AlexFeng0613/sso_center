@@ -11,6 +11,8 @@
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="inviteCode" jdbcType="VARCHAR" property="inviteCode" />
     <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="isDelete" jdbcType="INTEGER" property="isDelete"/>
     <result column="organizationCode" jdbcType="VARCHAR" property="organizationCode"/>
     <result column="gender" jdbcType="VARCHAR" property="gender"/>
     <result column="realName" jdbcType="VARCHAR" property="realName"/>
@@ -33,20 +35,22 @@
     salt,
     phone,
     type,
-    status,
     inviteCode,
     email,
-    organizationCode)
+    organizationCode,
+    gender,
+    realName)
     values (
     #{userName},
     #{password},
     #{salt},
     #{phone},
     #{type},
-    #{status},
     #{inviteCode},
     #{email},
-    #{organizationCode}
+    #{organizationCode},
+    #{gender},
+    #{realName}
     )
   </insert>
 
@@ -113,6 +117,165 @@
       </if>
       <if test="email != null">
         #{email},
+      </if>
+    </trim>
+  </insert>
+
+  <!--
+    @author : zga
+    @date : 2016-3-10
+    管理员新增用户
+  -->
+  <insert id="adminAddNewUser" parameterType="UserMain" useGeneratedKeys="true" keyProperty="id">
+    insert into tbusermain
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="inviteCode != null">
+        inviteCode,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="organizationCode != null">
+        organizationCode,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="realName != null">
+        realName,
+      </if>
+      <if test="userIcon != null">
+        userIcon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName},
+      </if>
+      <if test="password != null">
+        #{password},
+      </if>
+      <if test="salt != null">
+        #{salt},
+      </if>
+      <if test="phone != null">
+        #{phone},
+      </if>
+      <if test="type != null">
+        #{type},
+      </if>
+      <if test="inviteCode != null">
+        #{inviteCode},
+      </if>
+      <if test="email != null">
+        #{email},
+      </if>
+      <if test="organizationCode != null">
+        #{organizationCode},
+      </if>
+      <if test="gender != null">
+        #{gender},
+      </if>
+      <if test="realName != null">
+        #{realName},
+      </if>
+      <if test="userIcon != null">
+        #{userIcon},
+      </if>
+    </trim>
+  </insert>
+
+  <!--
+    @author : wuyue
+    @date : 2016-3-23
+    管理员新增管理员
+    @knowledge: useGeneratedKeys="true" keyProperty="id" 自增id
+  -->
+  <insert id="adminAddNewAdmin" parameterType="UserMain" useGeneratedKeys="true" keyProperty="id">
+    insert into tbusermain
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="inviteCode != null">
+        inviteCode,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="organizationCode != null">
+        organizationCode,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="realName != null">
+        realName,
+      </if>
+      <if test="userIcon != null">
+        userIcon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName},
+      </if>
+      <if test="password != null">
+        #{password},
+      </if>
+      <if test="salt != null">
+        #{salt},
+      </if>
+      <if test="phone != null">
+        #{phone},
+      </if>
+      <if test="type != null">
+        #{type},
+      </if>
+      <if test="inviteCode != null">
+        #{inviteCode},
+      </if>
+      <if test="email != null">
+        #{email},
+      </if>
+      <if test="organizationCode != null">
+        #{organizationCode},
+      </if>
+      <if test="gender != null">
+        #{gender},
+      </if>
+      <if test="realName != null">
+        #{realName},
+      </if>
+      <if test="userIcon != null">
+        #{userIcon},
       </if>
     </trim>
   </insert>
@@ -285,6 +448,40 @@
     </set>
     WHERE userName = #{userName}
   </update>
+
+  <!--
+    @author : zga
+    @date : 2016-3-10
+    管理员重置用户密码
+  -->
+  <update id="adminResetPassword">
+    UPDATE tbusermain
+    <set>
+      <if test="password != null">
+        password = #{password},
+      </if>
+      <if test="salt != null">
+        salt = #{salt}
+      </if>
+    </set>
+    WHERE userName = #{userName}
+  </update>
+
+  <!--
+    @author : zga
+    @date : 2016-3-10
+    管理员重置用户密码
+  -->
+  <update id="adminModifyStatus">
+    UPDATE tbusermain
+    <set>
+      <if test="status != null">
+        status = #{status}
+      </if>
+    </set>
+    WHERE userName = #{userName}
+  </update>
+
   <!--
     @author : zga
     @date : 2015-12-04
@@ -302,21 +499,25 @@
     @date : 2015-12-04
     根据email、userName、phone查询用户信息(登录的时候不知道用户输入的是email、phone、username那一个)
   -->
-  <select id="findByEmailOrPhoneOrUserName" parameterType="UserMain" resultType="UserMain">
+  <select id="findByEmailOrPhoneOrUserName" parameterType="UserMain" resultType="UserMain" useCache="false">
     select
     <include refid="Base_Column_List" />
     from tbusermain
     <where>
       <if test="email != null">
-        email = #{email},
+        email = #{email}
       </if>
 
       <if test="phone != null">
-        and phone = #{phone},
+        and phone = #{phone}
       </if>
 
       <if test="userName != null">
         and userName = #{userName}
+      </if>
+
+      <if test="status != null">
+        and status = #{status}
       </if>
     </where>
   </select>
@@ -341,11 +542,206 @@
     FROM tbusermain
     <where>
       <if test="email != null">
-        email = #{email},
+        email = #{email}
       </if>
 
       <if test="phone != null">
         and phone = #{phone}
+      </if>
+
+      <if test="status != null">
+        and status = #{status}
+      </if>
+    </where>
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-2-18
+    忘记密码时,查询Email、phone是否是绑定的用户
+  -->
+  <select id="findUserByUserName" resultType="UserMain">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbusermain
+    <where>
+      <if test="userName != null">
+        userName = #{userName}
+      </if>
+    </where>
+
+    UNION All
+
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbusertemp
+    <where>
+      <if test="userName != null">
+        userName = #{userName}
+      </if>
+    </where>
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-2-18
+    根据Email查询用户
+  -->
+  <select id="findUserByEmail" resultType="UserMain">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbusermain
+    <where>
+      <if test="email != null">
+        email = #{email}
+      </if>
+      <if test="status != null">
+        and status = #{status}
+      </if>
+    </where>
+
+    UNION All
+
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbusertemp
+    <where>
+      <if test="email != null">
+        email = #{email}
+      </if>
+    </where>
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-3-29
+    根据Phone查询用户
+  -->
+  <select id="findUserByPhone" resultType="UserMain">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbusermain
+    <where>
+      <if test="phone != null">
+        phone = #{phone}
+      </if>
+      <if test="status != null">
+        and status = #{status}
+      </if>
+    </where>
+
+    UNION All
+
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tbusertemp
+    <where>
+      <if test="phone != null">
+        phone = #{phone}
+      </if>
+    </where>
+  </select>
+
+  <!--
+    @author : zga
+    @date : 2016-3-9
+    获取所有的用户
+  -->
+  <select id="findAllUser" resultType="java.util.HashMap">
+    SELECT
+    tu.id,
+    tu.userName,
+    (CASE
+    WHEN tu.realName IS NULL THEN 'xxx'
+    ELSE tu.realName
+    END ) AS realName,
+    tu.gender,
+    (CASE
+      WHEN torg.organizationName IS NULL THEN 'xxx'
+      ELSE torg.organizationName
+    END ) AS organizationName,
+    tu.type,
+    tu.status,
+    (DATE_FORMAT(tu.createTime,'%Y-%m-%d')) AS createTime,
+    (CASE
+      WHEN tu.email IS NULL THEN 'xxx'
+      ELSE tu.email
+      END ) AS email,
+    (CASE
+      WHEN tu.phone IS NULL THEN 'xxx'
+      ELSE tu.phone
+    END ) AS phone
+    FROM tbusermain tu,tborganization torg
+    <where>
+        <if test="uname != null">
+          tu.organizationCode = torg.organizationCode
+        </if>
+
+        <if test="realName != null">
+          AND tu.realName like CONCAT('%','${realName}','%')
+        </if>
+
+        <if test="organization != null">
+          AND tu.organizationCode = #{organization}
+        </if>
+
+      <if test="type != null">
+        AND tu.type = #{type}
+      </if>
+
+      <if test="status != null">
+        AND tu.status = #{status}
+      </if>
+
+      <if test="createTime == 3">
+        AND DATE_SUB(CURDATE(), INTERVAL 2 DAY) <![CDATA[<=]]> DATE(tu.createTime)
+      </if>
+      <if test="createTime == 7">
+        AND DATE_SUB(CURDATE(), INTERVAL 6 DAY) <![CDATA[<=]]> DATE(tu.createTime)
+      </if>
+      <if test="createTime == 30">
+        AND DATE_SUB(CURDATE(), INTERVAL 29 DAY) <![CDATA[<=]]> DATE(tu.createTime)
+      </if>
+    </where>
+    ORDER BY tu.createTime desc
+  </select>
+
+  <!--
+  @author:wuyue
+  @data:2016-3-22
+  @目的：查询到所有的管理员以及权限
+  -->
+  <select id="findAllAdmin" resultType="java.util.HashMap">
+    SELECT
+    tu.id,
+    tu.userName,
+    (DATE_FORMAT(tu.createTime,'%Y-%m-%d')) AS createTime,
+    (CASE
+    WHEN trs.resName IS NULL THEN 'xxx'
+    ELSE trs.resName
+    END ) AS resName,
+    (CASE
+    WHEN tog.organizationName IS NULL THEN 'xxx'
+    ELSE tog.organizationName
+    END ) AS organizationName
+    FROM
+    tbusermain tu,
+    tbresource trs,
+    tborganization tog,
+    tbuserrole tur,
+    tbrole tr,
+    tbroleresource trrs
+    <where>
+      <if test="uname != null">
+        tu.organizationCode=tog.organizationCode
+        AND tu.id= tur.userId
+        AND tur.roleId=tr.id
+        AND tr.id=trrs.roleId
+        AND trrs.resourceId=trs.id
+        AND tur.roleId IN (2,3)
+      </if>
+      <if test="userName != null">
+        AND tu.userName like CONCAT('%','${userName}','%')
       </if>
     </where>
   </select>
