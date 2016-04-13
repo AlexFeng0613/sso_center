@@ -19,11 +19,20 @@ $(function(){
     var cenm=(conh-cenh)/2;
     $('.container-fluid .center').css('margin',cenm+'px auto 0');
 
+    var sh=$('.section').height();
+    var ash1=$('.aside1').height();
+    var ash2=$('.aside2').height();
+
+    $('.aside1').css('margin',(sh-ash1)/2+'px auto');
+    $('.aside2').css('margin',(sh-ash2)/2+'px auto');
+
     $(window).on('resize scroll',function(){
         var conh=$('.container-fluid').height();
         var cenh=$('.container-fluid .center').height();
         var cenm=(conh-cenh)/2;
         $('.container-fluid .center').css('margin',cenm+'px auto 0');
+
+
     });
 
     $('.sex li').click(function(){

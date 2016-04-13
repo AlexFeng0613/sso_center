@@ -15,11 +15,8 @@ $(function(){
 
     $('.register_input').blur(function(){
         $(this).siblings('.registerImg1').removeClass('fillout');
-        $(this).siblings('.registerImg2').addClass('fillout');
+        $(this).siblings('.registerImg2').removeClass('fillout');
     });
-
-
-
 
 
     $('.remember li').click(function(){

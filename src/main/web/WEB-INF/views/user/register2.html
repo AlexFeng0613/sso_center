@@ -17,27 +17,27 @@
 				<section class="section">
 					<form class="regForm" action="/user/register.json" method="post">
 						<input type="hidden" th:value="${type}" name="type"/>
+						<div class="input_box">
+							<div class="input_box_l">请输入您的邮箱或手机号</div>
+							<input type="text" name="email" placeholder="请输入您的邮箱或手机号" class="inputxt"/>
+							<div class="mistake"></div>
+							<div class="correct"></div>
+						</div>
+						<div class="input_box">
+							<label><div class="input_box_l">请输入您的用户名</div></label>
+							<input type="text" name="username" placeholder="起个霸气的用户名,支持输入8到20位英文和数字" class="inputxt" />
+							<div class="mistake"></div>
+							<div class="correct"></div>
+						</div>
 
-						<div class="input_box">
-							<label><div class="input_box_l">用户名</div></label>
-							<input type="text" name="username" placeholder="请输入8到20位英文和数字" class="inputxt" />
-							<div class="mistake"></div>
-							<div class="correct"></div>
-						</div>
-						<div class="input_box">
-							<div class="input_box_l">邮箱</div>
-							<input type="text" name="email" placeholder="用于绑定账号以及验证" class="inputxt"/>
-							<div class="mistake"></div>
-							<div class="correct"></div>
-						</div>
 						<!--姓名、性别-->
-						<div class="input_box">
+						<!--<div class="input_box">
 							<div class="input_box_l">姓名</div>
 							<input type="text" name="realName" placeholder="姓名" class="inputxt"/>
 							<div class="mistake"></div>
 							<div class="correct"></div>
-						</div>
-						<div class="input_box">
+						</div>-->
+						<!--<div class="input_box">
 							<div class="input_box_l">性别</div>
 							<ul class="sex">
 								<li class="selected">男
@@ -49,28 +49,29 @@
 							</ul>
 							<div class="mistake"></div>
 							<div class="correct"></div>
-						</div>
+						</div>-->
 						<div class="input_box">
 							<div class="input_box_l" >密码</div>
-							<input type="password" placeholder="6~10个英文和数字,区分大小写" name="password" class="inputxt"/>
+							<input type="password" placeholder="填写密码,支持6~10个英文和数字,区分大小写" name="password" class="inputxt"/>
 							<div class="mistake"></div>
 							<div class="correct"></div>
 						</div>
 						<div class="input_box">
 							<div class="input_box_l">确认密码</div>
-							<input type="password" placeholder="6~10个英文和数字,区分大小写"  name="password2" class="inputxt"/>
+							<input type="password" placeholder="填写密码,支持6~10个英文和数字,区分大小写"  name="password2" class="inputxt"/>
 							<div class="mistake"></div>
 							<div class="correct"></div>
 						</div>
 						<div class="input_box">
 							<div class="input_box_l" style="background: none;">验证码</div>
-							<input type="text" name="code" placeholder="请输入右侧验证码" style="width:128px;text-indent:0;text-align: center" class="inputxt"/>
+							<input type="text" name="code" placeholder="" style="width:250px;text-indent:0;text-align: center" class="inputxt"/>
 							<img id="vimg" src="/code.html"/>
 						</div>
-						<div class="context">
+						<!--<div class="context">
 							<a href="/page/register/1.html" class="prev">上一步</a>
 							<input type="submit" class="next" value="下一步"/>
-						</div>
+						</div>-->
+						<input type="submit" class="submit" th:value="同意服务协助并注册"/>
 					</form>
 				</section>
 			</div>

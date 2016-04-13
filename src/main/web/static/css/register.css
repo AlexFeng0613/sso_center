@@ -2,14 +2,20 @@
   padding: 0;
   margin: 0; }
 
+body{
+  font-family: \5FAE\8F6F\96C5\9ED1;
+}
+
 ul, ol {
   list-style: none;
   overflow: hidden;
+  font-family: \5FAE\8F6F\96C5\9ED1;
 }
 
 
 div{
   overflow: hidden;
+  font-family: \5FAE\8F6F\96C5\9ED1;
 }
 
 a:link {
@@ -27,7 +33,7 @@ a:hover {
   margin: 0px auto 0; }
 
 .input_box {
-  margin-bottom: 20px; }
+  margin-bottom: 10px; }
 
 .h_title{
   font-size: 22px;
@@ -174,32 +180,30 @@ color: #323232;
 
 .section {
   float:left;
-  border-left: 1px solid #768089; }
+  }
 
 .input_box {
   width: 650px;
-  height: 36px;
+  overflow: hidden;
 }
 
 .input_box_l {
-  width: 120px;
-  height:36px;
-  line-height: 36px;
+
+  height:25px;
+  line-height: 25px;
   margin-right: 10px;
   font-size: 14px;
   color:#323232;
-  text-align: right;
-  float:left;
-  background: url(../images/register/xi.png) no-repeat 10px center;
+  text-align: left;
 }
 
 .input_box input {
-  height: 34px;
-  line-height: 34px;
-  width: 318px;
+  height: 40px;
+  line-height: 40px;
+  width: 450px;
   background: none;
-  border: 1px solid #717679;
-  border-radius: 5px;
+  border: 1px solid #000;
+
   color: #768089;
   float:left;
   text-indent: 20px;
@@ -640,8 +644,22 @@ background: none;
   color: #74bc41; }
 
 #vimg {
-  height: 36px;
-  margin-left: 40px; }
+  height: 40px;
+  margin-left: 35px; }
+
+.submit{
+  width:450px;
+  height:40px;
+  line-height:40px;
+  background: #d5d5d5;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  border:0;
+  text-align: center;
+  color: #323232;
+  font-size: 14px;
+  margin-top:20px;
+}
+
 
 .footer {
   background-color: #353535; }
