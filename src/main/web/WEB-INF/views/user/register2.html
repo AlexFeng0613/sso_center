@@ -6,6 +6,7 @@
 	<head>
 		<style type="text/css">
 			.Validform_checktip{margin-left:-35px;}
+			input.Validform_error{border:0;}
 		</style>
 	</head>
 	<body>
@@ -15,16 +16,17 @@
 				<aside class="aside2" th:if="${type eq 'teacher'}" style="display: block;">我是老师</aside>
 
 				<section class="section">
-					<form class="regForm" action="/user/register.json" method="post">
+					<form class="regForm" action="/user/login.html" method="post">
+						<a href="/user/login.html" class="titleHead">已有账号，直接登录</a>
 						<input type="hidden" th:value="${type}" name="type"/>
 						<div class="input_box">
-							<div class="input_box_l">请输入您的邮箱或手机号</div>
+							<!--<div class="input_box_l">请输入您的邮箱或手机号</div>-->
 							<input type="text" name="email" placeholder="请输入您的邮箱或手机号" class="inputxt"/>
 							<div class="mistake"></div>
 							<div class="correct"></div>
 						</div>
 						<div class="input_box">
-							<label><div class="input_box_l">请输入您的用户名</div></label>
+							<!--<label><div class="input_box_l">请输入您的用户名</div></label>-->
 							<input type="text" name="username" placeholder="起个霸气的用户名,支持输入8到20位英文和数字" class="inputxt" />
 							<div class="mistake"></div>
 							<div class="correct"></div>
@@ -51,20 +53,20 @@
 							<div class="correct"></div>
 						</div>-->
 						<div class="input_box">
-							<div class="input_box_l" >密码</div>
+							<!--<div class="input_box_l" >密码</div>-->
 							<input type="password" placeholder="填写密码,支持6~10个英文和数字,区分大小写" name="password" class="inputxt"/>
 							<div class="mistake"></div>
 							<div class="correct"></div>
 						</div>
 						<div class="input_box">
-							<div class="input_box_l">确认密码</div>
+							<!--<div class="input_box_l">确认密码</div>-->
 							<input type="password" placeholder="填写密码,支持6~10个英文和数字,区分大小写"  name="password2" class="inputxt"/>
 							<div class="mistake"></div>
 							<div class="correct"></div>
 						</div>
 						<div class="input_box">
-							<div class="input_box_l" style="background: none;">验证码</div>
-							<input type="text" name="code" placeholder="" style="width:250px;text-indent:0;text-align: center" class="inputxt"/>
+							<!--<div class="input_box_l" style="background: none;">验证码</div>-->
+							<input type="text" name="code" placeholder="请填写验证码" style="width:250px;text-indent:0;text-align: center" class="inputxt"/>
 							<img id="vimg" src="/code.html"/>
 						</div>
 						<!--<div class="context">
@@ -72,6 +74,7 @@
 							<input type="submit" class="next" value="下一步"/>
 						</div>-->
 						<input type="submit" class="submit" th:value="同意服务协助并注册"/>
+						<div class="titleFoot">华师教育云平台<a href="#javascript:">《服务协议》</a></div>
 					</form>
 				</section>
 			</div>
