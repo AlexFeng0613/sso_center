@@ -13,6 +13,7 @@ $(function(){
     $('.checkAll').click(function(){
         $(".clientList").prop("checked",$(this).prop("checked"));
     });
+
     $(".clientList").click(function(){
         $('.checkAll').prop('checked',($(".clientList").length == $(".clientList:checked").length));
     })
