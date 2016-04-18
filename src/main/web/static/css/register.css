@@ -46,6 +46,8 @@ a:hover {
   font-family: \5FAE\8F6F\96C5\9ED1;
 }
 
+
+
 .center, .container-fluid .center {
   width: 960px;
   margin: 0 auto; }
@@ -70,7 +72,9 @@ a:hover {
   background: url(../images/password/headPic.png) no-repeat center 100%;
 }
 
-
+.iponeCode{
+  display:none;
+}
 
 .step_mark {
   width: 1098px;
@@ -741,4 +745,4 @@ background: none;
   right: 140px;
   top: 20px; }
 
-/*# sourceMappingURL=register.css.map */
+

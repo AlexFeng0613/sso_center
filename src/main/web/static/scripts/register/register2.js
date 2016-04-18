@@ -35,6 +35,17 @@ $(function(){
 
     });
 
+    $('.iponeNum').on('blur',function(){
+        var iponeVal=$(this).val();
+        if((!isNaN(iponeVal))&&(iponeVal.length==11)){
+            $('.input_box.iponeCode').show();
+        }else{
+            $('.input_box.iponeCode').hide();
+        }
+    });
+
+
+
     $('.sex li').click(function(){
         index=$(this).index();
         $(this).addClass('selected').siblings('.sex li').removeClass('selected');

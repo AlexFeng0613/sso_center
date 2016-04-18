@@ -21,7 +21,7 @@
 						<input type="hidden" th:value="${type}" name="type"/>
 						<div class="input_box">
 							<!--<div class="input_box_l">请输入您的邮箱或手机号</div>-->
-							<input type="text" name="email" placeholder="请输入您的邮箱或手机号" class="inputxt"/>
+							<input type="text" name="email" placeholder="请输入您的邮箱或手机号" class="inputxt iponeNum"/>
 							<div class="mistake"></div>
 							<div class="correct"></div>
 						</div>
@@ -60,7 +60,7 @@
 						</div>
 						<div class="input_box">
 							<!--<div class="input_box_l">确认密码</div>-->
-							<input type="password" placeholder="填写密码,支持6~10个英文和数字,区分大小写"  name="password2" class="inputxt"/>
+							<input type="password" placeholder="确认密码"  name="password2" class="inputxt"/>
 							<div class="mistake"></div>
 							<div class="correct"></div>
 						</div>
@@ -68,6 +68,11 @@
 							<!--<div class="input_box_l" style="background: none;">验证码</div>-->
 							<input type="text" name="code" placeholder="请填写验证码" style="width:250px;text-indent:0;text-align: center" class="inputxt"/>
 							<img id="vimg" src="/code.html"/>
+						</div>
+						<div class="input_box iponeCode">
+							<!--<div class="input_box_l" style="background: none;">验证码</div>-->
+							<input type="text"  placeholder="请填写手机验证码"  class="inputxt"/>
+
 						</div>
 						<!--<div class="context">
 							<a href="/page/register/1.html" class="prev">上一步</a>
