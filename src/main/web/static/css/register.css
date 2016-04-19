@@ -672,13 +672,16 @@ background: none;
   width:450px;
   height:40px;
   line-height:40px;
-  background: #eaeaea;
+  background: #ffc000;
   font-family: \5FAE\8F6F\96C5\9ED1;
   border:0;
   text-align: center;
-  color: #d2d2d2;
+  color: #ffffff;
   font-size: 14px;
+}
 
+.submit.disable{
+  background: #eaeaea;
 }
 
 .titleHead{
