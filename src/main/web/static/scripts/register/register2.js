@@ -158,16 +158,17 @@ $(function(){
         datatype:"s5"
     }]);
 
+
     /**
      * @author : zga
      * @date : 2016-3-18
      *
      * 验证码
      *
+     *
      */
     $('#vimg').click(function(){
-        //时间戳
-        //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
+
         var timestamp = (new Date()).valueOf();
         $(this).attr('src',"/code.html?timestamp=" + timestamp);
     });
