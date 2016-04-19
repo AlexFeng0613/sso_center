@@ -680,7 +680,7 @@ background: none;
   font-size: 14px;
 }
 
-.submit.disable{
+.submit.disabled{
   background: #eaeaea;
 }
 
