@@ -6,13 +6,7 @@
  *
  */
 $(function(){
-    $('.step_mark1').html('');
 
-    $('.step_mark1').addClass('selected2');
-    $('.step_mark2').addClass('selected1');
-
-    $('.step_step1').addClass('selected2');
-    $('.step_step2').addClass('selected1');
 
     var conh=$('.container-fluid').height();
     var cenh=$('.container-fluid .center').height();
@@ -35,6 +29,11 @@ $(function(){
 
     });
 
+    var reg1=/^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
+    var reg2=/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,10}$/;
+    var reg3=/^[A-Z0-9]{6,10}$/;
+    var reg4=/^[A-Z0-9]{6,10}$/;
+
     $('.iponeNum').on('blur',function(){
         var iponeVal=$(this).val();
         if((!isNaN(iponeVal))&&(iponeVal.length==11)){
@@ -42,9 +41,39 @@ $(function(){
         }else{
             $('.input_box.iponeCode').hide();
         }
+        if(reg1.test(iponeVal)){
+            $('.submit').removeClass('disabled');
+            $('.submit').prop('disabled',false);
+        }
+
+    });
+
+    $('.username').on('blur',function(){
+        var userName=$(this).val();
+        if(reg2.test(userName)){
+            alert(1);
+        }
+    });
+
+    $('.password').on('blur',function(){
+        var passWord=$(this).val();
+        if(reg3.test(passWord)){
+            alert(2);
+        }
     });
 
 
+    $('.password2').on('blur',function(){
+        var passWord2=$(this).val();
+        if(reg4.test(passWord2)){
+            alert(3);
+        }
+    });
+
+    if(reg1.test($('.iponeNum').val()) && reg2.test($('.username').val()) && reg3.test($('.password').val()) && reg4.test($('.password2').val())){
+        $('.submit').removeClass('disabled');
+        $('.submit').prop('disabled',false);
+    }
 
     $('.sex li').click(function(){
         index=$(this).index();
@@ -52,6 +81,8 @@ $(function(){
         $(this).find('input').attr('checked',true).end().siblings('.sex li').find('input').attr('checked',false);
 
     });
+
+
 
     var demo = $(".regForm").Validform({
         tiptype:3,
@@ -64,6 +95,10 @@ $(function(){
             "s4" : /^\d{4}$/
             //"e" : const
         },
+
+
+
+
         callback : function(form){
             var username = $('input[name="username"]').val();
             var password = $('input[name="password"]').val();
@@ -94,6 +129,7 @@ $(function(){
                 dataType : 'json',
                 success : function(data){
                     if(data.success){
+
                         $.ajax({
                             url : '/user/register/isBindEmail.json',
                             type : 'POST',
@@ -127,6 +163,8 @@ $(function(){
                 }
             });
             return false;
+
+
         }
     });
 
@@ -162,6 +200,7 @@ $(function(){
     }]);
 
 
+
     /**
      * @author : zga
      * @date : 2016-3-18
@@ -182,7 +221,10 @@ $(function(){
     $('.note').click(function(){
         $('input[name="phone"]').blur();
         var phone = $('input[name="phone"]').val();
-        if(phone == null || phone == '' || !Constant.phonePattern.test(phone)) return false;
+        if(phone == null || phone == '' || !Constant.phonePattern.test(phone)){
+
+            return false;
+        }
 
         SSOSystem.time($(this),5,"获取验证码");
         var data = {
