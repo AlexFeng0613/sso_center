@@ -60,7 +60,8 @@ $(function(){
         datatype:{
             "s6-18":/^[\w\.\s]{6,18}$/,
             "s2-10":/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,10}$/,
-            "s5" : /^[\w]{5}$/
+            "s5" : /^[\w]{5}$/,
+            "s4" : /^\d{4}$/
             //"e" : const
         },
         callback : function(form){
@@ -134,28 +135,30 @@ $(function(){
         's2-10' : ' ',//姓名为2到10位中文字符
         '*6-10' : ' ',//密码为6到10位
         's5' : ' ',//验证码为5位
-        'e' : ' '//邮箱格式不正确
+        'e' : ' ',//邮箱格式不正确
+        'm':' ',
+        "s4":' '
     };
 
     demo.addRule([{
         ele:".inputxt:eq(0)",
-        datatype:"s6-18"
+        datatype:"m|e"
     },{
         ele:".inputxt:eq(1)",
-        datatype:"e"
-    },{
-        ele:".inputxt:eq(2)",
         datatype:"s2-10"
     },{
-        ele:".inputxt:eq(3)",
+        ele:".inputxt:eq(2)",
         datatype:"*6-10"
     },{
-        ele:".inputxt:eq(4)",
+        ele:".inputxt:eq(3)",
         datatype:"*",
         recheck:"password"
     },{
+        ele:".inputxt:eq(4)",
+        datatype:"s5",
+    },{
         ele:".inputxt:eq(5)",
-        datatype:"s5"
+        datatype:"s4"
     }]);
 
 
@@ -171,5 +174,35 @@ $(function(){
 
         var timestamp = (new Date()).valueOf();
         $(this).attr('src',"/code.html?timestamp=" + timestamp);
+    });
+
+    /**
+     * 短信获取click函数
+     */
+    $('.note').click(function(){
+        $('input[name="phone"]').blur();
+        var phone = $('input[name="phone"]').val();
+        if(phone == null || phone == '' || !Constant.phonePattern.test(phone)) return false;
+
+        SSOSystem.time($(this),5,"获取验证码");
+        var data = {
+            'phone' : phone
+        }
+
+        /**
+         * 发送短信
+         */
+        $.ajax({
+            url : '/sms/sendSmsCode.json',
+            type : 'POST',
+            data : JSON.stringify(data),
+            contentType: 'application/json',
+            dataType : 'json',
+            success : function(data){
+                if(data.success){
+                } else {
+                }
+            }
+        });
     });
 });
