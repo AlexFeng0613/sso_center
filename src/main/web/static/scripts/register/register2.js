@@ -29,6 +29,7 @@ $(function(){
 
     });
 
+    var reg=/^1[3|4|5|7|8]\d{9}$/;
     var reg1=/^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
     var reg2=/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,10}$/;
     var reg3=/^[A-Z0-9]{6,10}$/;
@@ -39,11 +40,14 @@ $(function(){
 
     $('.iponeNum').on('blur',function(){
         var iponeVal=$(this).val();
-        if((!isNaN(iponeVal))&&(iponeVal.length==11)||reg1.test(iponeVal)){
+        if((reg.test(iponeVal))) {
             $('.input_box.iponeCode').show();
             $('.submit').removeClass('disabled');
-            $('.submit').prop('disabled',false);
-
+            $('.submit').prop('disabled', false);
+        }else if(reg1.test(iponeVal)){
+            $('.input_box.iponeCode').hide();
+            $('.submit').removeClass('disabled');
+            $('.submit').prop('disabled', false);
         }else{
             $('.input_box.iponeCode').hide();
             $('.submit').addClass('disabled');
@@ -61,6 +65,7 @@ $(function(){
         $(this).find('input').attr('checked',true).end().siblings('.sex li').find('input').attr('checked',false);
 
     });
+
 
 
 
