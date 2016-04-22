@@ -312,6 +312,10 @@ label{
     white-space: pre;
 }
 
+.container_title .center a{
+    color:#fff;
+}
+
 .container_title .center span{
     color:#ffad00;
 }
