@@ -34,15 +34,17 @@ $(function(){
     var reg2=/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,10}$/;
     var reg3=/^[A-Z0-9]{6,10}$/;
     var reg4=/^[\w]{5}$/;
+    var reg5=/^\d{4}$/;
 
     var iphoneNumValid, userNameValid, pwdValid, PwdConfirmValid, vcodeValid, smsValid;
 
     function agreeAndRegisValid(){
-        return iphoneNumValid && userNameValid && pwdValid && PwdConfirmValid && vcodeValid;
-
+        if($('.iponeCode').is(":hidden")){
+            return iphoneNumValid && userNameValid && pwdValid && PwdConfirmValid && vcodeValid;
+        }else{
+            return iphoneNumValid && userNameValid && pwdValid && PwdConfirmValid && vcodeValid && smsValid;
+        }
     }
-
-
 
     function next(){
         if(agreeAndRegisValid()) {
@@ -126,7 +128,16 @@ $(function(){
             vcodeValid = false;
         }
         next();
-    })
+    });
+
+    $('.verify_code').on('change',function(){
+        if(reg5.test($(this).val())){
+            smsValid = true;
+        } else {
+            smsValid = false;
+        }
+        next();
+    });
 
 
     $('.sex li').click(function(){
