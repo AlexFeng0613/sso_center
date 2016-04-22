@@ -6,19 +6,7 @@
  *
  */
 $(function(){
-    $('.step_mark1').html('');
-    $('.step_mark2').html('');
-    $('.step_mark3').html('');
 
-    $('.step_mark1').addClass('selected2');
-    $('.step_mark2').addClass('selected2');
-    $('.step_mark3').addClass('selected2');
-    $('.step_mark4').addClass('selected1');
-
-    $('.step_step1').addClass('selected2');
-    $('.step_step2').addClass('selected2');
-    $('.step_step3').addClass('selected2');
-    $('.step_step4').addClass('selected1');
 
 
     var conh=$('.container-fluid').height();

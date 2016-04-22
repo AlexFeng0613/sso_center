@@ -33,30 +33,100 @@ $(function(){
     var reg1=/^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
     var reg2=/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,10}$/;
     var reg3=/^[A-Z0-9]{6,10}$/;
-    var reg4=/^[A-Z0-9]{6,10}$/;
+    var reg4=/^[\w]{5}$/;
+
+    var iphoneNumValid, userNameValid, pwdValid, PwdConfirmValid, vcodeValid, smsValid;
+
+    function agreeAndRegisValid(){
+        return iphoneNumValid && userNameValid && pwdValid && PwdConfirmValid && vcodeValid;
+
+    }
 
 
 
+    function next(){
+        if(agreeAndRegisValid()) {
+            $('.submit').removeClass('disabled');
+            $('.submit').prop('disabled', false);
+        } else {
+            $('.submit').addClass('disabled');
+            $('.submit').prop('disabled', false);
+        }
+    }
 
-    $('.iponeNum').on('blur',function(){
+    $('.iponeNum').on('change',function(){
         var iponeVal=$(this).val();
+        /*var userName=$('.username').val();
+        var passWord=$('.password').val();
+        var passWord2=$('.password2').val();*/
+
         if((reg.test(iponeVal))) {
             $('.input_box.iponeCode').show();
-            $('.submit').removeClass('disabled');
-            $('.submit').prop('disabled', false);
-        }else if(reg1.test(iponeVal)){
-            $('.input_box.iponeCode').hide();
-            $('.submit').removeClass('disabled');
-            $('.submit').prop('disabled', false);
-        }else{
-            $('.input_box.iponeCode').hide();
-            $('.submit').addClass('disabled');
-            $('.submit').prop('disabled',true);
-        }
+            iphoneNumValid = true;
 
+        }else if(reg1.test(iponeVal)  ){
+            iphoneNumValid = true;
+
+            /*$('.submit').removeClass('disabled');
+            $('.submit').prop('disabled', false);*/
+            $('.input_box.iponeCode').hide();
+        }else{
+            iphoneNumValid = false;
+
+            /*$('.submit').addClass('disabled');
+            $('.submit').prop('disabled',true);*/
+            $('.input_box.iponeCode').hide();
+        }
+        next();
 
     });
 
+    $('.username').on('change',function(){
+
+        if(reg2.test($(this).val())){
+            userNameValid = true;
+        } else {
+            userNameValid = false;
+        }
+        next();
+    })
+
+    $('.password').on('change',function(){
+
+        if(reg3.test($(this).val())){
+            pwdValid = true;
+        } else {
+            pwdValid = false;
+        }
+        next();
+    });
+
+    $('.password').on('change',function(){
+
+        if(reg3.test($(this).val())){
+            pwdValid = true;
+        } else {
+            pwdValid = false;
+        }
+        next();
+    });
+
+
+
+    $('.password2').on('change',function(){
+
+        PwdConfirmValid = ($(this).val() === $('.password').val());
+        next();
+    })
+
+    $('.vcodeValid').on('change',function(){
+        if(reg4.test($(this).val())){
+            vcodeValid = true;
+        } else {
+            vcodeValid = false;
+        }
+        next();
+    })
 
 
     $('.sex li').click(function(){

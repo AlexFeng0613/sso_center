@@ -6,22 +6,7 @@
  *
  */
 $(function(){
-    $('.step_mark li').html('');
-    $('.step_mark6').html('6');
 
-    $('.step_mark1').addClass('selected2');
-    $('.step_mark2').addClass('selected2');
-    $('.step_mark3').addClass('selected2');
-    $('.step_mark4').addClass('selected2');
-    $('.step_mark5').addClass('selected2');
-    $('.step_mark6').addClass('selected1');
-
-    $('.step_step1').addClass('selected2');
-    $('.step_step2').addClass('selected2');
-    $('.step_step3').addClass('selected2');
-    $('.step_step4').addClass('selected2');
-    $('.step_step5').addClass('selected2');
-    $('.step_step6').addClass('selected1');
 
     var conh=$('.container-fluid').height();
     var cenh=$('.container-fluid .center').height();
