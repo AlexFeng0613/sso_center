@@ -183,54 +183,74 @@ $(function(){
                 'realName' : realName,
                 'gender' : gender
             }
+                /**
+                 * 校验用户名与Email是否已经注册或存在
+                 */
+                $.ajax({
+                    url : '/user/register/isExistsUserName.json',
+                    type : 'POST',
+                    data : JSON.stringify(parmData),
+                    contentType: 'application/json',
+                    dataType : 'json',
+                    success : function(data){
+                        if(data.success){
 
-            /**
-             * 校验用户名与Email是否已经注册或存在
-             */
-            $.ajax({
-                url : '/user/register/isExistsUserName.json',
-                type : 'POST',
-                data : JSON.stringify(parmData),
-                contentType: 'application/json',
-                dataType : 'json',
-                success : function(data){
-                    if(data.success){
-
-                        $.ajax({
-                            url : '/user/register/isBindEmail.json',
-                            type : 'POST',
-                            data : JSON.stringify(parmData),
-                            contentType: 'application/json',
-                            dataType : 'json',
-                            success : function(data){
-                                if(data.success){
-                                    $.ajax({
-                                        url : '/user/register/addNew.json',
-                                        type : 'POST',
-                                        data : JSON.stringify(parmData),
-                                        contentType: 'application/json',
-                                        dataType : 'json',
-                                        success : function(data){
-                                            if(data.success){
-                                                window.location.href = '/page/register/3.html?email=' + email;
-                                            }else {
-                                                SSOSystem.showAlertDialog(ErrorMessage[data.message])
+                            $.ajax({
+                                url : '/user/register/isBindEmail.json',
+                                type : 'POST',
+                                data : JSON.stringify(parmData),
+                                contentType: 'application/json',
+                                dataType : 'json',
+                                success : function(data){
+                                    if(data.success){
+                                        $.ajax({
+                                            url : '/user/register/addNew.json',
+                                            type : 'POST',
+                                            data : JSON.stringify(parmData),
+                                            contentType: 'application/json',
+                                            dataType : 'json',
+                                            success : function(data){
+                                                if(data.success){
+                                                    if($('.iponeCode').is(":hidden")){
+                                                        window.location.href = '/page/register/3.html?email=' + email;
+                                                    }else{
+                                                        var data = {
+                                                            'phone' : $('input[name="email"]').val(),
+                                                            'smsInputCode' : $('.verify_code').val()
+                                                        }
+                                                        $.ajax({
+                                                            url : '/sms/validateSmsCode.json',
+                                                            type : 'POST',
+                                                            data : JSON.stringify(data),
+                                                            contentType: 'application/json',
+                                                            dataType : 'json',
+                                                            success : function(data){
+                                                                if(data.success){
+                                                                    //成功跳转
+                                                                    window.location.href = '/page/register/5.html?email=' + $('input[name="email"]').val();
+                                                                } else {
+                                                                    //否则提示错误
+                                                                    alert(ErrorMessage[data.message])
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                }else {
+                                                    SSOSystem.showAlertDialog(ErrorMessage[data.message])
+                                                }
                                             }
-                                        }
-                                    });
-                                }else {
-                                    SSOSystem.showAlertDialog(ErrorMessage[data.message]);
+                                        });
+                                    }else {
+                                        SSOSystem.showAlertDialog(ErrorMessage[data.message]);
+                                    }
                                 }
-                            }
-                        });
-                    }else {
-                        SSOSystem.showAlertDialog(ErrorMessage[data.message])
+                            });
+                        }else {
+                            SSOSystem.showAlertDialog(ErrorMessage[data.message])
+                        }
                     }
-                }
-            });
+                });
             return false;
-
-
         }
     });
 
@@ -276,7 +296,6 @@ $(function(){
      *
      */
     $('#vimg').click(function(){
-
         var timestamp = (new Date()).valueOf();
         $(this).attr('src',"/code.html?timestamp=" + timestamp);
     });
@@ -284,9 +303,10 @@ $(function(){
     /**
      * 短信获取click函数
      */
-    $('.note').click(function(){
-        $('input[name="phone"]').blur();
-        var phone = $('input[name="phone"]').val();
+    $('#note').click(function(){
+        $('input[name="email"]').blur();
+        var phone = $('input[name="email"]').val();
+        alert(phone);
         if(phone == null || phone == '' || !Constant.phonePattern.test(phone)){
 
             return false;
