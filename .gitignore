@@ -11,5 +11,6 @@ target
 .DS_Store*
 ._*
 .Spotlight*
+.properties
 ehthumbs.db
 Thumbs.db

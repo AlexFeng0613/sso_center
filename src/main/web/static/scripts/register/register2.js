@@ -95,7 +95,6 @@ $(function(){
                                         contentType: 'application/json',
                                         dataType : 'json',
                                         success : function(data){
-                                            console.log(data);
                                             if(data.success){
                                                 if($('.iponeCode').is(":hidden")){
                                                     window.location.href = '/page/register/3.html?email=' + email;
@@ -116,27 +115,22 @@ $(function(){
                                                                 window.location.href = '/page/register/5.html?email=' + $('input[name="email"]').val();
                                                             } else {
                                                                 //否则提示错误
-                                                                console.log('SMSCODEVALIDATION');
-                                                                console.log(data);
                                                                 alert(ErrorMessage[data.message])
                                                             }
                                                         }
                                                     });
                                                 }
                                             }else {
-                                                console.log('SECOND');
                                                 SSOSystem.showAlertDialog(ErrorMessage[data.message])
                                             }
                                         }
                                     });
                                 }else {
-                                    console.log('THIRD');
                                     SSOSystem.showAlertDialog(ErrorMessage[data.message]);
                                 }
                             }
                         });
                     }else {
-                        console.log('FOUTH');
                         SSOSystem.showAlertDialog(ErrorMessage[data.message])
                     }
                 }
