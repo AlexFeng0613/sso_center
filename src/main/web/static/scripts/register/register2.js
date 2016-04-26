@@ -38,118 +38,6 @@ $(function(){
 
     var iphoneNumValid, userNameValid, pwdValid, PwdConfirmValid, vcodeValid, smsValid;
 
-    function agreeAndRegisValid(){
-        if($('.iponeCode').is(":hidden")){
-            return iphoneNumValid && userNameValid && pwdValid && PwdConfirmValid && vcodeValid;
-        }else{
-            return iphoneNumValid && userNameValid && pwdValid && PwdConfirmValid && vcodeValid && smsValid;
-        }
-    }
-
-    function next(){
-        if(agreeAndRegisValid()) {
-            $('.submit').removeClass('disabled');
-            $('.submit').prop('disabled', false);
-        } else {
-            $('.submit').addClass('disabled');
-            $('.submit').prop('disabled', false);
-        }
-    }
-
-    $('.iponeNum').on('change',function(){
-        var iponeVal=$(this).val();
-        /*var userName=$('.username').val();
-        var passWord=$('.password').val();
-        var passWord2=$('.password2').val();*/
-
-        if((reg.test(iponeVal))) {
-            $('.input_box.iponeCode').show();
-            iphoneNumValid = true;
-
-        }else if(reg1.test(iponeVal)  ){
-            iphoneNumValid = true;
-
-            /*$('.submit').removeClass('disabled');
-            $('.submit').prop('disabled', false);*/
-            $('.input_box.iponeCode').hide();
-        }else{
-            iphoneNumValid = false;
-
-            /*$('.submit').addClass('disabled');
-            $('.submit').prop('disabled',true);*/
-            $('.input_box.iponeCode').hide();
-        }
-        next();
-
-    });
-
-    $('.username').on('change',function(){
-
-        if(reg2.test($(this).val())){
-            userNameValid = true;
-        } else {
-            userNameValid = false;
-        }
-        next();
-    })
-
-    $('.password').on('change',function(){
-
-        if(reg3.test($(this).val())){
-            pwdValid = true;
-        } else {
-            pwdValid = false;
-        }
-        next();
-    });
-
-    $('.password').on('change',function(){
-
-        if(reg3.test($(this).val())){
-            pwdValid = true;
-        } else {
-            pwdValid = false;
-        }
-        next();
-    });
-
-
-
-    $('.password2').on('change',function(){
-
-        PwdConfirmValid = ($(this).val() === $('.password').val());
-        next();
-    })
-
-    $('.vcodeValid').on('change',function(){
-        if(reg4.test($(this).val())){
-            vcodeValid = true;
-        } else {
-            vcodeValid = false;
-        }
-        next();
-    });
-
-    $('.verify_code').on('change',function(){
-        if(reg5.test($(this).val())){
-            smsValid = true;
-        } else {
-            smsValid = false;
-        }
-        next();
-    });
-
-
-    $('.sex li').click(function(){
-        index=$(this).index();
-        $(this).addClass('selected').siblings('.sex li').removeClass('selected');
-        $(this).find('input').attr('checked',true).end().siblings('.sex li').find('input').attr('checked',false);
-
-    });
-
-
-
-
     var demo = $(".regForm").Validform({
         tiptype:3,
         label:".label",
@@ -161,9 +49,6 @@ $(function(){
             "s4" : /^\d{4}$/
             //"e" : const
         },
-
-
-
 
         callback : function(form){
             var username = $('input[name="username"]').val();
@@ -183,73 +68,79 @@ $(function(){
                 'realName' : realName,
                 'gender' : gender
             }
-                /**
-                 * 校验用户名与Email是否已经注册或存在
-                 */
-                $.ajax({
-                    url : '/user/register/isExistsUserName.json',
-                    type : 'POST',
-                    data : JSON.stringify(parmData),
-                    contentType: 'application/json',
-                    dataType : 'json',
-                    success : function(data){
-                        if(data.success){
+            /**
+             * 校验用户名与Email是否已经注册或存在
+             */
+            $.ajax({
+                url : '/user/register/isExistsUserName.json',
+                type : 'POST',
+                data : JSON.stringify(parmData),
+                contentType: 'application/json',
+                dataType : 'json',
+                success : function(data){
+                    if(data.success){
 
-                            $.ajax({
-                                url : '/user/register/isBindEmail.json',
-                                type : 'POST',
-                                data : JSON.stringify(parmData),
-                                contentType: 'application/json',
-                                dataType : 'json',
-                                success : function(data){
-                                    if(data.success){
-                                        $.ajax({
-                                            url : '/user/register/addNew.json',
-                                            type : 'POST',
-                                            data : JSON.stringify(parmData),
-                                            contentType: 'application/json',
-                                            dataType : 'json',
-                                            success : function(data){
-                                                if(data.success){
-                                                    if($('.iponeCode').is(":hidden")){
-                                                        window.location.href = '/page/register/3.html?email=' + email;
-                                                    }else{
-                                                        var data = {
-                                                            'phone' : $('input[name="email"]').val(),
-                                                            'smsInputCode' : $('.verify_code').val()
-                                                        }
-                                                        $.ajax({
-                                                            url : '/sms/validateSmsCode.json',
-                                                            type : 'POST',
-                                                            data : JSON.stringify(data),
-                                                            contentType: 'application/json',
-                                                            dataType : 'json',
-                                                            success : function(data){
-                                                                if(data.success){
-                                                                    //成功跳转
-                                                                    window.location.href = '/page/register/5.html?email=' + $('input[name="email"]').val();
-                                                                } else {
-                                                                    //否则提示错误
-                                                                    alert(ErrorMessage[data.message])
-                                                                }
-                                                            }
-                                                        });
+                        $.ajax({
+                            url : '/user/register/isBindEmail.json',
+                            type : 'POST',
+                            data : JSON.stringify(parmData),
+                            contentType: 'application/json',
+                            dataType : 'json',
+                            success : function(data){
+                                if(data.success){
+                                    $.ajax({
+                                        url : '/user/register/addNew.json',
+                                        type : 'POST',
+                                        data : JSON.stringify(parmData),
+                                        contentType: 'application/json',
+                                        dataType : 'json',
+                                        success : function(data){
+                                            console.log(data);
+                                            if(data.success){
+                                                if($('.iponeCode').is(":hidden")){
+                                                    window.location.href = '/page/register/3.html?email=' + email;
+                                                }else{
+                                                    var data = {
+                                                        'phone' : $('input[name="email"]').val(),
+                                                        'smsInputCode' : $('.verify_code').val()
                                                     }
-                                                }else {
-                                                    SSOSystem.showAlertDialog(ErrorMessage[data.message])
+                                                    $.ajax({
+                                                        url : '/sms/validateSmsCode.json',
+                                                        type : 'POST',
+                                                        data : JSON.stringify(data),
+                                                        contentType: 'application/json',
+                                                        dataType : 'json',
+                                                        success : function(data){
+                                                            if(data.success){
+                                                                //成功跳转
+                                                                window.location.href = '/page/register/5.html?email=' + $('input[name="email"]').val();
+                                                            } else {
+                                                                //否则提示错误
+                                                                console.log('SMSCODEVALIDATION');
+                                                                console.log(data);
+                                                                alert(ErrorMessage[data.message])
+                                                            }
+                                                        }
+                                                    });
                                                 }
+                                            }else {
+                                                console.log('SECOND');
+                                                SSOSystem.showAlertDialog(ErrorMessage[data.message])
                                             }
-                                        });
-                                    }else {
-                                        SSOSystem.showAlertDialog(ErrorMessage[data.message]);
-                                    }
+                                        }
+                                    });
+                                }else {
+                                    console.log('THIRD');
+                                    SSOSystem.showAlertDialog(ErrorMessage[data.message]);
                                 }
-                            });
-                        }else {
-                            SSOSystem.showAlertDialog(ErrorMessage[data.message])
-                        }
+                            }
+                        });
+                    }else {
+                        console.log('FOUTH');
+                        SSOSystem.showAlertDialog(ErrorMessage[data.message])
                     }
-                });
+                }
+            });
             return false;
         }
     });
@@ -283,9 +174,90 @@ $(function(){
     },{
         ele:".inputxt:eq(5)",
         datatype:"s4"
-    }]);
+    }
+    ]);
 
+    function agreeAndRegisValid(){
+        return iphoneNumValid && userNameValid && pwdValid && PwdConfirmValid && vcodeValid && ($('.iponeCode').is(":hidden") || smsValid);
+    }
 
+    function next(){
+        if(agreeAndRegisValid()) {
+            $('.submit').removeClass('disabled');
+            $('.submit').prop('disabled', false);
+        } else {
+            $('.submit').addClass('disabled');
+            $('.submit').prop('disabled', false);
+        }
+    }
+
+    $('.iponeNum').on('change',function(){
+        var iponeVal=$(this).val();
+
+        if((reg.test(iponeVal))) {
+            $('.input_box.iponeCode').show();
+            iphoneNumValid = true;
+            demo.unignore('.inputxt.verify_code');
+        }else if(reg1.test(iponeVal)  ){
+            iphoneNumValid = true;
+            $('.input_box.iponeCode').hide();
+            demo.ignore('.inputxt.verify_code');
+        }else{
+            iphoneNumValid = false;
+            $('.input_box.iponeCode').hide();
+        }
+        next();
+    });
+
+    $('.username').on('change',function(){
+        if(reg2.test($(this).val())){
+            userNameValid = true;
+        } else {
+            userNameValid = false;
+        }
+        next();
+    })
+
+    $('.password').on('change',function(){
+
+        if(reg3.test($(this).val())){
+            pwdValid = true;
+        } else {
+            pwdValid = false;
+        }
+        next();
+    });
+
+    $('.password2').on('change',function(){
+
+        PwdConfirmValid = ($(this).val() === $('.password').val());
+        next();
+    })
+
+    $('.vcodeValid').on('change',function(){
+        if(reg4.test($(this).val())){
+            vcodeValid = true;
+        } else {
+            vcodeValid = false;
+        }
+        next();
+    });
+
+    $('.verify_code').on('change',function(){
+        if(reg5.test($(this).val())){
+            smsValid = true;
+        } else {
+            smsValid = false;
+        }
+        next();
+    });
+
+    $('.sex li').click(function(){
+        index=$(this).index();
+        $(this).addClass('selected').siblings('.sex li').removeClass('selected');
+        $(this).find('input').attr('checked',true).end().siblings('.sex li').find('input').attr('checked',false);
+
+    });
 
     /**
      * @author : zga
