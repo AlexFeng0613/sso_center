@@ -21,8 +21,6 @@ $(function(){
         var password =$('input[name="password"]').val();
         var roleId = $('select[name="roleId"]').val();
 
-        //console.log(gender);
-        //return false;
         if(SSOSystem.isEmpty(userName)||SSOSystem.isEmpty(password)||SSOSystem.isEmpty(realName)){
             SSOSystem.showAlertDialog("请输入完整信息！");
             return false;
