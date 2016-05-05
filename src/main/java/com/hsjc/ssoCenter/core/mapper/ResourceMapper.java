@@ -26,11 +26,13 @@ public interface ResourceMapper {
 
     int updateByPrimaryKey(Resource record);
 
-    Resource selectByPrimaryKey(Long id);
+    List<HashMap> selectByPrimaryKey(int id);
 
     List<HashMap> selectResourcesByRoleId(UserRole userRole);
 
     List<HashMap> selectResourcesByUserId(UserResource userResource);
 
     List<HashMap> selectResourceByParam(JSONObject paramJson);
+
+    List<HashMap> selectByOrganizationAndRole(JSONObject jsonObject);
 }

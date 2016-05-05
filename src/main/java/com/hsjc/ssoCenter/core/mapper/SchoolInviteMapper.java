@@ -32,6 +32,8 @@ public interface SchoolInviteMapper {
 
     SchoolInvite selectByInviteCode(JSONObject paramJson);
 
+    SchoolInvite selectByInviteCodeString(String inviteCodeString);
+
     List<HashMap> selectAllSchoolInvite();
 
     List<HashMap> selectAllSchoolInviteWithPage(JSONObject paramJson);

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.domain.*;
 import com.hsjc.ssoCenter.core.helper.RedisHelper;
+import com.hsjc.ssoCenter.core.mapper.SchoolInviteMapper;
 import com.hsjc.ssoCenter.core.service.*;
 import com.hsjc.ssoCenter.core.util.MenuUtil;
 import com.hsjc.ssoCenter.core.util.SSOStringUtil;
@@ -74,6 +75,9 @@ public class PageController extends BaseController{
     @Autowired
     RestfulService restfulService;
 
+    @Autowired
+    SchoolInviteMapper schoolInviteMapper;
+
     /**
      * @author : zga
      * @date : 2015-12-04
@@ -98,7 +102,19 @@ public class PageController extends BaseController{
 
             if("user".equals(role.getRoleKey())){
                 List<HashMap> list1 = resourceService.selectResourcesByUserId(userId);
+                //List<HashMap> list2 = resourceService.selectByPrimaryKey(1);
                 list.addAll(list1);
+                /**
+                 * 添加邀请码对应的组织机构的资源
+                 */
+                if(userMain.getInviteCode() != null){
+                    JSONObject paramJson = new JSONObject();
+                    int organizationCode = userMain.getOrganizationCode();
+                    String type = userMain.getType();
+                    paramJson.put("organization", organizationCode);
+                    paramJson.put("type", type);
+                    list.addAll(resourceService.selectByOrganizationAndRole(paramJson));
+                }
             }
         }
 

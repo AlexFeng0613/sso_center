@@ -228,9 +228,10 @@
     where id = #{id}
   </update>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultType="java.util.HashMap">
     select
-    <include refid="Base_Column_List" />
+      id, resKey, resName, resPath, parentId, className, resType, resUrl, state, description, createDate,
+      className, idName, level, clientId,ssoPassword, idName
     from tbresource
     where id = #{id}
   </select>
@@ -380,5 +381,14 @@
         AND ssoPassword = #{ssoPassword}
       </if>
     </where>
+  </select>
+
+  <select id="selectByOrganizationAndRole" resultType="java.util.HashMap">
+    SELECT tbresource.id, resKey, resName,resPath,parentId, resType, resUrl, state,description, createDate, className,
+      idName, tbresource.level, tbresource.clientId, tbresource.ssoPassword
+    FROM tb3rdfilter, tbresource
+    WHERE tb3rdfilter.trdClientId = tbresource.clientId
+      AND organizationCode = #{organization}
+      AND tstudent = #{type}
   </select>
 </mapper>

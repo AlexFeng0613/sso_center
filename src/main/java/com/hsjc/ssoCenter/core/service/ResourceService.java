@@ -68,4 +68,12 @@ public class ResourceService {
     public List<HashMap> selectResourceByParam(JSONObject paramJson){
         return resourceMapper.selectResourceByParam(paramJson);
     }
+
+    public List<HashMap> selectByPrimaryKey(int id){
+        return resourceMapper.selectByPrimaryKey(id);
+    }
+
+    public List<HashMap> selectByOrganizationAndRole(JSONObject jsonObject){
+        return resourceMapper.selectByOrganizationAndRole(jsonObject);
+    }
 }
