@@ -34,7 +34,8 @@ $(function(){
     demo.tipmsg.w["s4-18"] = "";
     demo.addRule([{
         ele:".inputxt:eq(0)",
-        datatype:"s4-18"
+            datatype:"*"
+/*        datatype:"s4-18"*/
     },{
         ele:".inputxt:eq(1)",
         datatype:"*",
