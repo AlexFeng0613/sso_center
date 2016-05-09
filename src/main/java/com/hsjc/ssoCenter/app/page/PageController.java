@@ -102,8 +102,6 @@ public class PageController extends BaseController{
 
             if("user".equals(role.getRoleKey())){
                 List<HashMap> list1 = resourceService.selectResourcesByUserId(userId);
-                //List<HashMap> list2 = resourceService.selectByPrimaryKey(1);
-                list.addAll(list1);
                 /**
                  * 添加邀请码对应的组织机构的资源
                  */
@@ -113,7 +111,22 @@ public class PageController extends BaseController{
                     String type = userMain.getType();
                     paramJson.put("organization", organizationCode);
                     paramJson.put("type", type);
-                    list.addAll(resourceService.selectByOrganizationAndRole(paramJson));
+                    List<HashMap> list2 = resourceService.selectByOrganizationAndRole(paramJson);
+                    int listSize = list2.size();
+                    list.addAll(list1);
+                    //检查是否有重复资源，如果有则不添加
+                    for(int i = 0; i < listSize; i++){
+                        HashMap currentEle = list2.get(i);
+                        int j = 0, loopSize = list.size();
+                        String resNameToBeAdded = currentEle.get("resName").toString();
+                        for(; j < loopSize;j++){
+                            String resName = list.get(j).get("resName").toString();
+                            if(resName.equals(resNameToBeAdded)) {
+                                break;
+                            }
+                        }
+                        if(j == loopSize) list.add(currentEle);
+                    }
                 }
             }
         }
