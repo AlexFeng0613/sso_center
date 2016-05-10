@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.hsjc.ssoCenter.app.base.BaseController;
 import com.hsjc.ssoCenter.core.domain.*;
 import com.hsjc.ssoCenter.core.helper.RedisHelper;
+import com.hsjc.ssoCenter.core.mapper.SynMapper;
 import com.hsjc.ssoCenter.core.mapper.SchoolInviteMapper;
 import com.hsjc.ssoCenter.core.service.*;
 import com.hsjc.ssoCenter.core.util.MenuUtil;
@@ -73,10 +74,25 @@ public class PageController extends BaseController{
     ResourceService resourceService;
 
     @Autowired
+    SynMapper synMapper;
+
+    @Autowired
     RestfulService restfulService;
 
     @Autowired
     SchoolInviteMapper schoolInviteMapper;
+
+    private boolean resourceExistsInList(HashMap resource, List<HashMap> list){
+        int j = 0, loopSize = list.size();
+        String resNameToBeAdded = resource.get("resName").toString();
+        for(; j < loopSize;j++){
+            String resName = list.get(j).get("resName").toString();
+            if(resName.equals(resNameToBeAdded)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * @author : zga
@@ -102,30 +118,44 @@ public class PageController extends BaseController{
 
             if("user".equals(role.getRoleKey())){
                 List<HashMap> list1 = resourceService.selectResourcesByUserId(userId);
+                list.addAll(list1);
+                /**
+                 * 添加旧有的组织机构对应的资源,若未查到数据则不抛出异常，直接跳过
+                 */
+                int organizationCode = 0;
+                try{
+                    organizationCode = userMain.getOrganizationCode();
+                    try{
+                        int bbRes = synMapper.checkFromBB(organizationCode);
+                        if(bbRes > 0){
+                            HashMap BB = synMapper.selectFromBB().get(0);
+                            if(resourceExistsInList(BB, list))  list.addAll(synMapper.selectFromBB());
+                        }
+                    }catch (Exception e){}
+                    try{
+                        int jclassRes = synMapper.checkFromJClass(organizationCode);
+                        if(jclassRes > 0){
+                            HashMap JClass = synMapper.selectFromJClass().get(0);
+                            if(resourceExistsInList(JClass, list))  list.addAll(synMapper.selectFromJClass());
+                        }
+                    }catch (Exception e){}
+                }catch (Exception e){};
                 /**
                  * 添加邀请码对应的组织机构的资源
                  */
-                if(userMain.getInviteCode() != null){
+                if(userMain.getInviteCode() != null || organizationCode !=0){
                     JSONObject paramJson = new JSONObject();
-                    int organizationCode = userMain.getOrganizationCode();
                     String type = userMain.getType();
                     paramJson.put("organization", organizationCode);
                     paramJson.put("type", type);
                     List<HashMap> list2 = resourceService.selectByOrganizationAndRole(paramJson);
                     int listSize = list2.size();
-                    list.addAll(list1);
                     //检查是否有重复资源，如果有则不添加
                     for(int i = 0; i < listSize; i++){
                         HashMap currentEle = list2.get(i);
-                        int j = 0, loopSize = list.size();
-                        String resNameToBeAdded = currentEle.get("resName").toString();
-                        for(; j < loopSize;j++){
-                            String resName = list.get(j).get("resName").toString();
-                            if(resName.equals(resNameToBeAdded)) {
-                                break;
-                            }
+                        if(!resourceExistsInList(currentEle, list)){
+                            list.add(currentEle);
                         }
-                        if(j == loopSize) list.add(currentEle);
                     }
                 }
             }

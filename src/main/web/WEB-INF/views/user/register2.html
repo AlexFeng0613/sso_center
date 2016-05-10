@@ -26,11 +26,10 @@
 							<div class="correct"></div>
 						</div>
 						<div class="input_box">
-							<input type="text" name="username" placeholder="起个霸气的用户名,支持输入2到10位中文字符" class="inputxt username" />
+							<input type="text" name="username" placeholder="请输入2到20位的用户名，只含英文和数字" class="inputxt username" />
 							<div class="mistake"></div>
 							<div class="correct"></div>
 						</div>
-
 						<div class="input_box">
 							<input type="password" placeholder="填写密码,支持6~10个英文和数字,区分大小写" name="password" class="inputxt password"/>
 							<div class="mistake"></div>
@@ -48,6 +47,15 @@
 						<div class="input_box iponeCode">
 							<input type="text"  placeholder="请填写手机验证码"  class="inputxt verify_code"/>
 							<input type="button" class="note" id="note" value="获取验证码"/>
+						</div>
+						<div class="input_box">
+							<input type="text" name="realName" placeholder="请输入您的中文姓名" class="inputxt realname"/>
+							<div class="mistake"></div>
+							<div class="correct"></div>
+						</div>
+						<div class="input_box">
+							<input type="radio" name="gender" value="1" class="radio" th:checked="1"/>男
+							<input type="radio" name="gender" value="0" class="radio"/>女
 						</div>
 
 						<input type="submit" class="submit disabled" th:value="同意服务协助并注册" disabled="true"/>

@@ -44,7 +44,7 @@ $(function(){
         showAllError:true,
         datatype:{
             "s6-18":/^[\w\.\s]{6,18}$/,
-            /*"s2-10":/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,10}$/,*/
+            "s2-10":/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,10}$/,
             "s2-20":/^[a-zA-Z0-9]{2,20}$/,
             "s5" : /^[\w]{5}$/,
             "s4" : /^\d{4}$/
@@ -147,7 +147,8 @@ $(function(){
         's5' : ' ',//验证码为5位
         'e' : ' ',//邮箱格式不正确
         'm':' ',
-        "s4":' '
+        "s4":' ',
+        "s2-10" : ' '
     };
 
     demo.addRule([{
@@ -169,6 +170,9 @@ $(function(){
     },{
         ele:".inputxt:eq(5)",
         datatype:"s4"
+    },{
+        ele:"inputxt:eq(6)",
+        datatype:"s2-10"
     }
     ]);
 

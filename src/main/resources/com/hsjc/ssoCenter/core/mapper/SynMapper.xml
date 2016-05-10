@@ -240,4 +240,30 @@
       AND tf.tstudent = tu.type
     ) t
   </select>
+
+  <select id="checkFromBB" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT organizationCode from tbsynorganizationbb
+    WHERE tbsynorganizationbb.organizationCode = #{organizationCode}
+  </select>
+
+  <select id="selectFromBB" resultType="java.util.HashMap">
+    select
+      id, resKey, resName, resPath, parentId, className, resType, resUrl, state, description, createDate,
+      className, idName, level, clientId,ssoPassword, idName
+    from tbresource
+    where id = 2
+  </select>
+
+  <select id="checkFromJClass" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT organizationCode from tbsynorganizationjclass
+    WHERE tbsynorganizationjclass.organizationCode = #{organizationCode}
+  </select>
+
+  <select id="selectFromJClass" resultType="java.util.HashMap">
+    select
+    id, resKey, resName, resPath, parentId, className, resType, resUrl, state, description, createDate,
+    className, idName, level, clientId,ssoPassword, idName
+    from tbresource
+    where id = 2
+  </select>
 </mapper>

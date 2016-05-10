@@ -48,7 +48,13 @@ a:hover {
   font-family: \5FAE\8F6F\96C5\9ED1;
 }
 
-
+.input_box input.radio{
+  display: inline;
+  color: #ffc03b;
+  font-size: 14px;
+  font-family: \5FAE\8F6F\96C5\9ED1;
+  margin-left: 125px;
+}
 
 .center, .container-fluid .center {
   width: 960px;

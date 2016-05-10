@@ -38,4 +38,12 @@ public interface SynMapper {
     Integer countAllOrganization(HashMap paramMap);
 
     Integer countAllUser(HashMap paramMap);
+
+    Integer checkFromBB(Integer organizationCode);
+
+    Integer checkFromJClass(Integer organizationCode);
+
+    List<HashMap> selectFromBB();
+
+    List<HashMap> selectFromJClass();
 }
