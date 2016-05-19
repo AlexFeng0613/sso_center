@@ -29,8 +29,8 @@ public class InitService {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 //            connection = DriverManager.getConnection("jdbc:mysql://10.16.1.127:3306/sso_center?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8","mmysql","m12345");
-            //connection = DriverManager.getConnection("jdbc:mysql://192.168.18.201:3323/sso_center?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8","root","123456");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sso_center","root","000000");
+            connection = DriverManager.getConnection("jdbc:mysql://192.168.18.201:3323/sso_center?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8","root","123456");
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sso_center","root","000000");
             stmt = connection.createStatement();
             String sql = "SELECT\n" +
                     "    MAX(CASE proKey WHEN 'mailHost' THEN proValue END) mailHost,\n" +
