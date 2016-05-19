@@ -39,11 +39,15 @@ public interface SynMapper {
 
     Integer countAllUser(HashMap paramMap);
 
+    int insertUserIntoBB(Integer userId);
+
     Integer checkFromBB(Integer organizationCode);
 
     Integer checkFromJClass(Integer organizationCode);
 
     List<HashMap> selectFromBB();
+
+    int insertUserIntoJClass(Integer userId);
 
     List<HashMap> selectFromJClass();
 }

@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,6 +36,12 @@ import java.util.regex.Pattern;
 @Service
 public class UserMainService extends ApiBaseService{
     final static Logger logger = Logger.getLogger(UserMainService.class);
+
+    @Autowired
+    SynMapper synMapper;
+
+    @Autowired
+    ResourceService resourceService;
 
     @Autowired
     UserMainMapper userMainMapper;
@@ -227,7 +234,7 @@ public class UserMainService extends ApiBaseService{
      */
     public JSONObject isBindEmail(JSONObject paramJson){
         JSONObject resultJson = getResultJson();
-        paramJson.put("status","activated");
+        paramJson.put("status", "activated");
         List<UserMain> userMainList = userMainMapper.findUserByEmail(paramJson);
 
         if(userMainList != null && userMainList.size() > 0){
@@ -386,7 +393,7 @@ public class UserMainService extends ApiBaseService{
 
             emailResetPwdMapper.insert(emailResetPwd);
 
-            MailUtil.sendMail(MailTemplate.MAIL_SEND_RESET_PASSWORD,content,email);
+            MailUtil.sendMail(MailTemplate.MAIL_SEND_RESET_PASSWORD, content, email);
         }
     }
 
@@ -577,13 +584,26 @@ public class UserMainService extends ApiBaseService{
 
                         if(num1 > 0){
                             resultJson.put("message", Constant.BIND_INVITE_CODE_SUCCESS);
+                            //将用户添加到对应的缓存表
+                            JSONObject paramJsonQuery = new JSONObject();
+                            paramJsonQuery.put("organization", userMain.getOrganizationCode());
+                            paramJsonQuery.put("type", userMain.getType());
+                            List<HashMap> resourceList = resourceService.selectByOrganizationAndRole(paramJsonQuery);
+                            for( HashMap resource:resourceList){
+                                if(resource.get("resName").equals("华师BB")){
+                                    synMapper.insertUserIntoBB(userMain.getId());
+                                }
+                                if(resource.get("resName").equals("金课堂")){
+                                    synMapper.insertUserIntoJClass(userMain.getId());
+                                }
+                            }
                         }else{
                             resultJson.put("success",false);
                             resultJson.put("message", Constant.BIND_INVITE_CODE_FAIL);
                             return resultJson;
                         }
                     } else {
-                        resultJson.put("success",false);
+                        resultJson.put("success", false);
                         resultJson.put("message", Constant.BIND_INVITE_CODE_FAIL);
                         return resultJson;
                     }

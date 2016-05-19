@@ -241,6 +241,11 @@
     ) t
   </select>
 
+  <insert id="insertUserIntoBB" parameterType="java.lang.Integer">
+    insert into tbsynuserbb(userId)
+    values(#{userId})
+  </insert>
+
   <select id="checkFromBB" parameterType="java.lang.Integer" resultType="java.lang.Integer">
     SELECT organizationCode from tbsynorganizationbb
     WHERE tbsynorganizationbb.organizationCode = #{organizationCode}
@@ -253,6 +258,11 @@
     from tbresource
     where id = 2
   </select>
+
+  <insert id="insertUserIntoJClass" parameterType="java.lang.Integer">
+    insert into tbsynuserjclass(userId)
+    values(#{userId})
+  </insert>
 
   <select id="checkFromJClass" parameterType="java.lang.Integer" resultType="java.lang.Integer">
     SELECT organizationCode from tbsynorganizationjclass
