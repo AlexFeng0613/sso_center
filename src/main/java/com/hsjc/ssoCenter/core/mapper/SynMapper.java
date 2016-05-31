@@ -41,6 +41,8 @@ public interface SynMapper {
 
     int insertUserIntoBB(Integer userId);
 
+    int insertOrganizationIntoBBCache(Integer organizationCode);
+
     Integer checkFromBB(Integer organizationCode);
 
     Integer checkFromJClass(Integer organizationCode);
@@ -48,6 +50,8 @@ public interface SynMapper {
     List<HashMap> selectFromBB();
 
     int insertUserIntoJClass(Integer userId);
+
+    int insertOrganizationIntoJClassCache(Integer organizationCode);
 
     List<HashMap> selectFromJClass();
 }

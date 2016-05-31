@@ -246,6 +246,11 @@
     values(#{userId})
   </insert>
 
+  <insert id="insertOrganizationIntoBBCache" parameterType="java.lang.Integer">
+    insert into tbsynorganizationbb(organizationCode)
+    values(#{organizationCode})
+  </insert>
+
   <select id="checkFromBB" parameterType="java.lang.Integer" resultType="java.lang.Integer">
     SELECT organizationCode from tbsynorganizationbb
     WHERE tbsynorganizationbb.organizationCode = #{organizationCode}
@@ -262,6 +267,11 @@
   <insert id="insertUserIntoJClass" parameterType="java.lang.Integer">
     insert into tbsynuserjclass(userId)
     values(#{userId})
+  </insert>
+
+  <insert id="insertOrganizationIntoJClassCache" parameterType="java.lang.Integer">
+    insert into tbsynorganizationjclass(organizationCode)
+    values(#{organizationCode})
   </insert>
 
   <select id="checkFromJClass" parameterType="java.lang.Integer" resultType="java.lang.Integer">

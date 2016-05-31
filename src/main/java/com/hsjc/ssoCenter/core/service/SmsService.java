@@ -47,7 +47,7 @@ public class SmsService extends ApiBaseService{
         insertIntoRedis(phone,smsSendCode,String.class);
 
         JSONObject sendParamJson = new JSONObject();
-        sendParamJson.put("code",smsSendCode);
+        sendParamJson.put("smsCode",smsSendCode);
         sendParamJson.put("product","华师京城云平台");
         SmsSend smsSend = new SmsSend();
         smsSend.setPhoneNum(phone);

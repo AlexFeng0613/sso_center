@@ -592,9 +592,11 @@ public class UserMainService extends ApiBaseService{
                             for( HashMap resource:resourceList){
                                 if(resource.get("resName").equals("华师BB")){
                                     synMapper.insertUserIntoBB(userMain.getId());
+                                    synMapper.insertOrganizationIntoBBCache(schoolInvite.getSchoolId());
                                 }
                                 if(resource.get("resName").equals("金课堂")){
                                     synMapper.insertUserIntoJClass(userMain.getId());
+                                    synMapper.insertOrganizationIntoJClassCache(schoolInvite.getSchoolId());
                                 }
                             }
                         }else{
